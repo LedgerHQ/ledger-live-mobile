@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import styled from "styled-components/native";
 import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";

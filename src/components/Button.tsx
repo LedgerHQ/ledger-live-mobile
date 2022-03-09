@@ -21,7 +21,7 @@ const inferType = (type?: string): ButtonProps["type"] => {
     case "tertiary":
       return "main";
     default:
-      return undefined;
+      return type;
   }
 };
 
@@ -73,6 +73,7 @@ export function BaseButton({
   type,
   outline = true,
   containerStyle,
+  children,
   ...otherProps
 }: Props) {
   const onPressHandler = useCallback(async () => {
@@ -123,7 +124,7 @@ export function BaseButton({
       style={containerStyle}
       disabled={isDisabled}
     >
-      {title || null}
+      {title || children || null}
     </Button>
   );
 }

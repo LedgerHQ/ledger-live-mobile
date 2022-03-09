@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useMemo } from "react";
 
-import { Text, Flex, Button } from "@ledgerhq/native-ui";
-import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
+import { Text, Flex, Button, BaseModal } from "@ledgerhq/native-ui";
 import { FlatList } from "react-native";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action } from "@ledgerhq/live-common/lib/apps";
@@ -11,7 +10,6 @@ import AppIcon from "../AppsList/AppIcon";
 import ByteSize from "../../../components/ByteSize";
 import AppUninstallButton from "../AppsList/AppUninstallButton";
 import AppProgressButton from "../AppsList/AppProgressButton";
-import { useApps } from "../shared";
 
 type HeaderProps = {
     illustration: any,
@@ -117,25 +115,45 @@ type RouteParams = {
     deviceInfo: any,
     deviceId: string,
     setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
-};  
-
-type Props = {
-    route: { params: RouteParams },
 };
 
-const MyApps = ({
-  route,
+const modalStyleOverrides = {
+  modal: {
+    flex: 1,
+    justifyContent: "flex-end",
+    margin: 0,
+  },
+  container: {
+    minHeight: "100%",
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
+    maxHeight: "100%",
+  },
+};
+
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  state: State;
+  dispatch: (action: Action) => void;
+  appList: ListAppsResult;
+  setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void;
+  illustration: any;
+  deviceInfo: any;
+};
+
+const InstalledAppsModal = ({
+  isOpen,
+  onClose,
+  state, 
+  dispatch, 
+  appList,
+  setAppUninstallWithDependencies,
+  illustration,
+  deviceInfo,
 }: Props) => {
-    const { result, illustration, deviceInfo, deviceId, setAppUninstallWithDependencies } = route.params;
-    const [state, dispatch] = useApps(result, deviceId);
-    const { device } = useAppsSections(state, {
-        query: "",
-        appFilter: "all",
-        sort: {
-            type: "marketcap",
-            order: "desc",
-        },
-    });
 
     const onUninstallAll = useCallback(() => dispatch({ type: "wipe" }), [
         dispatch,
@@ -143,35 +161,39 @@ const MyApps = ({
 
     const renderItem = useCallback(
         ({ item }: { item: App }) => (
-            <Row
+           
+                <Row
                 app={item}
                 state={state}
                 dispatch={dispatch}
                 setAppUninstallWithDependencies={setAppUninstallWithDependencies}
                 deviceInfo={deviceInfo}
             />
+            
         ),
         [deviceInfo, dispatch, setAppUninstallWithDependencies, state],
     );
     
     return (
-        <Flex flex={1}>
+        <BaseModal isOpen={isOpen} onClose={onClose} 
+        modalStyle={modalStyleOverrides.modal}
+      containerStyle={modalStyleOverrides.container}
+      propagateSwipe={true}
+        >
+  
             <Flex flex={1}>
                 <FlatList
-                    data={device}
+                    data={appList}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                     ListHeaderComponent={<Header illustration={illustration} />}
-                    style={{ paddingHorizontal: 16 }}
                 />
             </Flex>
-            <Flex m={6}>
-                <Button size="large" type="error" onPress={onUninstallAll}>
+                <Button mt={6} size="large" type="error" onPress={onUninstallAll}>
                     <Trans i18nKey={"v3.manager.uninstall.uninstallAll"} />
                 </Button>
-            </Flex>
-        </Flex>
+        </BaseModal>
     );
 };
 
-export default memo(MyApps);
+export default memo(InstalledAppsModal);

@@ -5,34 +5,29 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
+import { Flex, Text, ScrollContainerHeader } from "@ledgerhq/native-ui";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "styled-components/native";
 import { useBanner } from "../../components/banners/hooks";
 import TrackScreen from "../../analytics/TrackScreen";
 import { ScreenName } from "../../const";
 
 import CatalogTwitterBanner from "./CatalogTwitterBanner";
-import DAppDisclaimer from "./DAppDisclaimer";
-import { Props as DisclaimerProps } from "./DAppDisclaimer";
+import DAppDisclaimer, { Props as DisclaimerProps } from "./DAppDisclaimer";
 import CatalogBanner from "./CatalogBanner";
 import AppCard from "./AppCard";
-import {
-  Flex,
-  Text,
-  ScrollContainerHeader,
-} from "@ledgerhq/native-ui";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme } from "styled-components/native";
 
 type RouteParams = {
-  defaultAccount: AccountLike | undefined,
-  defaultParentAccount?: Account | undefined,
-  platform?: string,
+  defaultAccount: AccountLike | undefined;
+  defaultParentAccount?: Account | undefined;
+  platform?: string;
 };
 
-type DisclaimerOpts = Omit<DisclaimerProps, { isOpened: boolean }> | null;
+type DisclaimerOpts = (DisclaimerProps & { isOpened: boolean }) | null;
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
@@ -108,8 +103,8 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
+      <TrackScreen category="Platform" name="Catalog" />
       <ScrollContainerHeader
-        bg="background.main"
         MiddleSection={
           <Flex
             height={48}
@@ -120,33 +115,32 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
             <Text variant="h1">{t("platform.catalog.title")}</Text>
           </Flex>
         }
+        containerProps={{ bg: "background.main", px: 6 }}
       >
-        <Flex p={6} mb={40}>
-        <TrackScreen category="Platform" name="Catalog" />
-      {disclaimerOpts && (
-        <DAppDisclaimer
-          disableDisclaimer={disclaimerOpts.disableDisclaimer}
-          closeDisclaimer={disclaimerOpts.closeDisclaimer}
-          onContinue={disclaimerOpts.onContinue}
-          isOpened={disclaimerOpened}
-          icon={disclaimerOpts.icon}
-          name={disclaimerOpts.name}
-        />
-      )}
+        <Flex flex={1}>
+          {disclaimerOpts && (
+            <DAppDisclaimer
+              disableDisclaimer={disclaimerOpts.disableDisclaimer}
+              closeDisclaimer={disclaimerOpts.closeDisclaimer}
+              onContinue={disclaimerOpts.onContinue}
+              isOpened={disclaimerOpened}
+              icon={disclaimerOpts.icon}
+              name={disclaimerOpts.name}
+            />
+          )}
 
-      <CatalogBanner />
-      <CatalogTwitterBanner />
-      {filteredManifests.map(manifest => (
-        <AppCard
-          key={manifest.id}
-          manifest={manifest}
-          onPress={handlePressCard}
-        />
-      ))}
+          <CatalogBanner />
+          <CatalogTwitterBanner />
+          {filteredManifests.map((manifest, i) => (
+            <AppCard
+              key={manifest.id + i}
+              manifest={manifest}
+              onPress={handlePressCard}
+            />
+          ))}
         </Flex>
-        
       </ScrollContainerHeader>
-  </SafeAreaView>
+    </SafeAreaView>
   );
 };
 

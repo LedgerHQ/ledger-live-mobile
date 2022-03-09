@@ -1,8 +1,8 @@
 import React, { memo, useCallback } from "react";
-import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
+import { TouchableOpacity, FlatList } from "react-native";
 import { Trans } from "react-i18next";
-import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
-import type { State, App } from "@ledgerhq/live-common/lib/types/manager";
+import { InstalledItem } from "@ledgerhq/live-common/lib/apps";
+import { State, App } from "@ledgerhq/live-common/lib/types/manager";
 import styled from "styled-components/native";
 import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 
@@ -14,12 +14,12 @@ import ByteSize from "../../../components/ByteSize";
 const keyExtractor = (item: App, index: number) => String(item.id) + index;
 
 type Props = {
-  isOpened: boolean,
-  apps: App[],
-  installed: InstalledItem[],
-  onClose: () => void,
-  onConfirm: () => void,
-  state: State,
+  isOpened: boolean;
+  apps: App[];
+  installed: InstalledItem[];
+  onClose: () => void;
+  onConfirm: () => void;
+  state: State;
 };
 
 const AppLine = styled(Flex).attrs({
@@ -89,36 +89,61 @@ const UpdateAllModal = ({
   apps,
   installed,
   state,
- }: Props) => {
+}: Props) => {
   const { deviceInfo } = state;
 
   const data = apps.map(app => ({
     ...app,
     installed: installed.find(({ name }) => name === app.name),
   }));
-  
+
   const renderAppLine = useCallback(
     ({
       item: { name, bytes, version: appVersion, installed },
       item,
     }: {
-      item: App & { installed: InstalledItem | null | undefined },
+      item: App & { installed: InstalledItem | null | undefined };
     }) => {
       const version = (installed && installed.version) || appVersion;
 
       return (
         <AppLine>
-          <Flex flexDirection="row" alignItems="center" style={{ width: "60%" }}>
+          <Flex
+            flexDirection="row"
+            alignItems="center"
+            style={{ width: "60%" }}
+          >
             <AppIcon size={32} radius={10} app={item} />
-            <AppName color="neutral.c100" fontWeight="semiBold" variant="body" numberOfLines={1}>
+            <AppName
+              color="neutral.c100"
+              fontWeight="semiBold"
+              variant="body"
+              numberOfLines={1}
+            >
               {name}
             </AppName>
           </Flex>
-          <Flex flexDirection="row" justifyContent="space-between" style={{ width: "35%" }}>
-            <AppVersion color="neutral.c80" fontWeight="semiBold" variant="tiny" numberOfLines={1} borderColor="neutral.c40">
+          <Flex
+            flexDirection="row"
+            justifyContent="space-between"
+            style={{ width: "35%" }}
+          >
+            <AppVersion
+              color="neutral.c80"
+              fontWeight="semiBold"
+              variant="tiny"
+              numberOfLines={1}
+              borderColor="neutral.c40"
+            >
               {version}
             </AppVersion>
-            <Text textAlign="right" color="neutral.c70" fontWeight="medium" variant="body" numberOfLines={1}>
+            <Text
+              textAlign="right"
+              color="neutral.c70"
+              fontWeight="medium"
+              variant="body"
+              numberOfLines={1}
+            >
               <ByteSize
                 value={bytes}
                 deviceModel={state.deviceModel}
@@ -138,11 +163,7 @@ const UpdateAllModal = ({
         <Icons.RefreshMedium size={24} color="neutral.c100" />
       </IconContainer>
       <TextContainer>
-        <ModalText
-          color="neutral.c100"
-          fontWeight="medium"
-          variant="h2"
-        >
+        <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
           <Trans i18nKey="v3.manager.update.subtitle" />
         </ModalText>
       </TextContainer>
@@ -167,34 +188,5 @@ const UpdateAllModal = ({
     </ActionModal>
   );
 };
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    marginVertical: 20,
-    padding: 22,
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-  text: {
-    textAlign: "center",
-    marginTop: 16,
-  },
-  textContainer: {
-    marginTop: 4,
-    marginBottom: 32,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonsContainer: {
-    marginBottom: 24,
-    width: "100%",
-  },
-  cancelButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 25,
-  },
-});
 
 export default memo(UpdateAllModal);

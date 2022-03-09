@@ -1,21 +1,20 @@
-import React, { memo, useMemo, useCallback } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React, { memo, useCallback } from "react";
+import { View, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 
-import type { Action } from "@ledgerhq/live-common/lib/apps";
-import type { App } from "@ledgerhq/live-common/lib/types/manager";
+import { Action } from "@ledgerhq/live-common/lib/apps";
+import { App } from "@ledgerhq/live-common/lib/types/manager";
 
-import { useTheme } from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
+import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import AppTree from "../../../icons/AppTree";
 
 import ActionModal from "./ActionModal";
-import styled from "styled-components/native";
-import { Flex, Text, Button } from "@ledgerhq/native-ui";
 
 type Props = {
-  appUninstallWithDependencies: { app: App, dependents: App[] },
-  dispatch: (action: Action) => void,
-  onClose: () => void,
+  appUninstallWithDependencies: { app: App; dependents: App[] };
+  dispatch: (action: Action) => void;
+  onClose: () => void;
 };
 
 const ImageContainer = styled(Flex).attrs({
@@ -71,24 +70,21 @@ const UninstallDependenciesModal = ({
       {app && dependents.length && (
         <View style={{ width: "100%" }}>
           <ImageContainer>
-            <AppTree size={160} color={colors.neutral.c40} icon={app.icon} app={app} />
+            <AppTree
+              size={160}
+              color={colors.neutral.c40}
+              icon={app.icon}
+              app={app}
+            />
           </ImageContainer>
           <TextContainer>
-            <ModalText
-              color="neutral.c100"
-              fontWeight="medium"
-              variant="h2"
-            >
+            <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
               <Trans
                 i18nKey="v3.AppAction.uninstall.dependency.title"
                 values={{ app: name }}
               />
             </ModalText>
-            <ModalText
-              color="neutral.c70"
-              fontWeight="medium"
-              variant="body"
-            >
+            <ModalText color="neutral.c70" fontWeight="medium" variant="body">
               <Trans
                 i18nKey="v3.AppAction.uninstall.dependency.description_two"
                 values={{ app: name }}
