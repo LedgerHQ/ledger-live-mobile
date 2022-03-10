@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useMemo, ReactNode } from "react";
 import { useTheme } from "styled-components/native";
-import { useTranslation } from "react-i18next";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { BigNumber } from "bignumber.js";
 import {
   getAccountCurrency,
   getAccountUnit,
@@ -14,23 +12,15 @@ import {
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { counterValueFormatter } from "../screens/Market/utils";
-import { useLocale } from "../context/Locale";
 
 import { ensureContrast } from "../colors";
-import getWindowDimensions from "../logic/getWindowDimensions";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
 import FormatDate from "./FormatDate";
-import Pills from "./Pills";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
-import Chart from "./chart";
-import { discreetModeSelector } from "../reducers/settings";
-import { useSelector } from "react-redux";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
 import ChartCard from "./chart/ChartCard";
 
@@ -101,15 +91,13 @@ export default function AccountGraphCard({
   account,
   countervalueAvailable,
   history,
-  range,
   counterValueCurrency,
   useCounterValue,
-  valueChange,
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
   const [rangeRequest, setRangeRequest] = useState("24h");
-  const [timeRange, setTimeRange, timeRangeItems] = useTimeRange();
+  const [timeRange, setTimeRange] = useTimeRange();
   const { countervalueChange } = useBalanceHistoryWithCountervalue({
     account,
     range: timeRange,
