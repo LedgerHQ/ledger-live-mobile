@@ -78,6 +78,7 @@ const TouchHintCircle = ({ stopAnimation, ...props }: Props) => {
         alignItems="center"
         justifyContent="center"
         opacity={0.7}
+        height="100%"
         {...props}
       >
         <Flex
