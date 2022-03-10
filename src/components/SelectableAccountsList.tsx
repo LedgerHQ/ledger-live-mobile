@@ -239,11 +239,13 @@ const SelectableAccount = ({
       marginRight={6}
       paddingLeft={6}
       paddingRight={6}
+      paddingTop={3}
+      paddingBottom={3}
       flexDirection="row"
       alignItems="center"
       borderRadius={4}
       opacity={isDisabled ? 0.4 : 1}
-      backgroundColor="neutral.c40"
+      backgroundColor="neutral.c30"
     >
       <Flex flex={1}>
         <AccountCard
