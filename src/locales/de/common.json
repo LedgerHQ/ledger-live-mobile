@@ -239,8 +239,8 @@
       "description": "Bitte kehren Sie zum Dashboard auf Ihrem Gerät zurück."
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Ihr Gerät kann noch nicht verwendet werden",
+      "description": "Richten Sie Ihr Gerät ein, bevor Sie es mit Ledger Live verwenden."
     },
     "DeviceSocketFail": {
       "title": "Entschuldigung, Verbindung fehlgeschlagen",
