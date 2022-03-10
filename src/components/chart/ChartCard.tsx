@@ -5,31 +5,31 @@ import { useTheme } from "styled-components/native";
 import { Flex, GraphTabs, InfiniteLoader } from "@ledgerhq/native-ui";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import * as Animatable from "react-native-animatable";
+import { useTranslation } from "react-i18next";
 import Chart from ".";
 import { useLocale } from "../../context/Locale";
 import { counterValueFormatter } from "../../screens/Market/utils";
 
-// @ts-expect-error impot issue
-import getWindowDimensions from "../../logic/getWindowDimensions";
-import { track } from "../../analytics";
-import { useTranslation } from "react-i18next";
-
-const { width } = getWindowDimensions();
-
 export default function ChartCard({
-  setHoverItem,
-  chartRequestParams,
+  Header,
+  Footer,
+  range,
   loading,
   loadingChart,
   refreshChart,
   chartData,
+  currencyColor,
+  margin = 0,
 }: {
-  setHoverItem: (data: any) => void;
-  chartRequestParams: any;
+  Header: React.ReactNode,
+  Footer: React.ReactNode,
+  range: string;
   loading?: boolean;
   loadingChart?: boolean;
   refreshChart: (request: any) => void;
-  chartData: Record<string, number[]>;
+  chartData: any;
+  currencyColor: string;
+  margin: number;
 }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -43,18 +43,13 @@ export default function ChartCard({
 
   const isLoading = loading || loadingChart;
 
-  const { range } = chartRequestParams;
-
   const activeRangeIndex = ranges.findIndex(r => r.value === range);
   const data = useMemo(
     () =>
-      chartData?.[range]
-        ? chartData[range].map(d => ({
-            date: new Date(d[0]),
-            value: d[1],
-          }))
+      chartData
+        ? chartData
         : [],
-    [chartData, range],
+    [chartData],
   );
 
   const setRange = useCallback(
@@ -84,47 +79,30 @@ export default function ChartCard({
     }
   }, [ranges, activeRangeIndex]);
 
-  // const graphColor = ensureContrast(
-  //   getCurrencyColor(currency),
-  //   colors.neutral.c30,
-  // );
-  console.log("DATA", data);
-
   return (
-    <Flex flexDirection="column" mt={20} p={16}>
-      <Flex height={100} alignItems="center" justifyContent="center">
+    <Flex margin={margin} padding={6} borderRadius={2} bg={"neutral.c30"}>
+      {Header}
+      <Flex mt={6} height={100} alignItems="center" justifyContent="center">
         {data && data.length > 0 ? (
           <Animatable.View animation="fadeIn" duration={400} useNativeDriver>
-            {/** @ts-expect-error import js issue */}
-            {/* <Graph
-              isInteractive
-              isLoading={loadingChart}
-              height={100}
-              width={width - 32}
-              color={colors.primary.c80}
-              data={data}
-              mapValue={mapGraphValue}
-              onItemHover={setHoverItem}
-              verticalRangeRatio={10}
-            /> */}
             <Chart
               data={data}
               backgroundColor={colors.neutral.c30}
-              color={"#fff"}
+              color={currencyColor}
               tickFormat={tickFormat}
               valueKey={"value"}
-              yAxisFormatter={counterValue =>
+              yAxisFormatter={value =>
                 counterValueFormatter({
-                  value: counterValue,
+                  value,
                   shorten: true,
                   locale,
                   allowZeroValue: true,
                   t,
                 })
               }
-              valueFormatter={counterValue =>
+              valueFormatter={value =>
                 counterValueFormatter({
-                  value: counterValue,
+                  value,
                   currency: "usd", // counterValueCurrency.ticker,
                   locale,
                   allowZeroValue: true,
@@ -137,7 +115,7 @@ export default function ChartCard({
           <InfiniteLoader size={32} />
         )}
       </Flex>
-      <Flex mt={25}>
+      <Flex mt={70}>
         <GraphTabs
           activeIndex={activeRangeIndex}
           activeBg="neutral.c30"
@@ -145,6 +123,7 @@ export default function ChartCard({
           labels={rangesLabels}
         />
       </Flex>
+      {Footer}
     </Flex>
   );
 }

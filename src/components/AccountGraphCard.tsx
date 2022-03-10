@@ -1,7 +1,8 @@
-import React, { useState, useCallback, useEffect, ReactNode } from "react";
+import React, { useState, useCallback, useMemo, ReactNode } from "react";
 import { useTheme } from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { BigNumber } from "bignumber.js";
 import {
   getAccountCurrency,
   getAccountUnit,
@@ -13,6 +14,7 @@ import {
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { counterValueFormatter } from "../screens/Market/utils";
 import { useLocale } from "../context/Locale";
 
@@ -21,7 +23,6 @@ import getWindowDimensions from "../logic/getWindowDimensions";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
 import FormatDate from "./FormatDate";
-import Graph from "./Graph";
 import Pills from "./Pills";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
@@ -31,6 +32,59 @@ import Chart from "./chart";
 import { discreetModeSelector } from "../reducers/settings";
 import { useSelector } from "react-redux";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
+import ChartCard from "./chart/ChartCard";
+
+type HeaderProps = {
+  account: AccountLike;
+  isAvailable: boolean;
+  history: BalanceHistoryWithCountervalue;
+  unit: Unit;
+  counterValueCurrency: Currency;
+  useCounterValue?: boolean;
+  countervalueChange: ValueChange;
+};
+
+const Header = ({
+  account,
+  isAvailable,
+  history,
+  unit,
+  counterValueCurrency,
+  useCounterValue,
+  countervalueChange,
+}: HeaderProps) => (
+  <GraphCardHeader
+    account={account}
+    isLoading={!isAvailable}
+    to={history[history.length - 1]}
+    cryptoCurrencyUnit={unit}
+    counterValueUnit={counterValueCurrency.units[0]}
+    useCounterValue={useCounterValue}
+    valueChange={countervalueChange}
+  />
+);
+
+type FooterProps = {
+  renderAccountSummary: () => ReactNode;
+};
+
+const Footer = ({ renderAccountSummary }: FooterProps) => {
+  const accountSummary = renderAccountSummary && renderAccountSummary();
+  return (
+    <Box>
+      {accountSummary && (
+        <Box
+          flexDirection={"row"}
+          alignItemps={"center"}
+          marginTop={5}
+          overflow={"hidden"}
+        >
+          {accountSummary}
+        </Box>
+      )}
+    </Box>
+  );
+};
 
 type Props = {
   account: AccountLike;
@@ -54,14 +108,21 @@ export default function AccountGraphCard({
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
-  const { t } = useTranslation();
-  const discreet = useSelector(discreetModeSelector);
+  const [rangeRequest, setRangeRequest] = useState("24h");
   const [timeRange, setTimeRange, timeRangeItems] = useTimeRange();
-  const { countervalueChange } = useBalanceHistoryWithCountervalue({ account, range: timeRange });
+  const { countervalueChange } = useBalanceHistoryWithCountervalue({
+    account,
+    range: timeRange,
+  });
+  const [timeRangeMapped] = useState({
+    "24h": "day",
+    "7d": "week",
+    "30d": "month",
+    "1y": "year",
+  });
 
   const isAvailable = !useCounterValue || countervalueAvailable;
 
-  const { locale } = useLocale();
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const graphColor = ensureContrast(
@@ -69,82 +130,49 @@ export default function AccountGraphCard({
     colors.neutral.c30,
   );
 
-  const accountSummary = renderAccountSummary && renderAccountSummary();
+  const refreshChart = useCallback(
+    request => {
+      if (request && request.range && timeRangeMapped[request.range]) {
+        const { range } = request;
+        setTimeRange(timeRangeMapped[range]);
+        setRangeRequest(range);
+      }
+    },
+    [timeRangeMapped, setTimeRange, setRangeRequest],
+  );
 
-  const [tickFormat, setTickFormat] = useState("MMM");
-  useEffect(() => {
-    switch (timeRange) {
-      case "day":
-        setTickFormat("h:mm a");
-        break;
-      case "week":
-        setTickFormat("ddd");
-        break;
-      case "month":
-        setTickFormat("MMM Do");
-        break;
-      default:
-        setTickFormat("MMM");
-        break;
-    }
-  }, [timeRange]);
+  const dataFormatted = useMemo(
+    () =>
+      history
+        ? history.map(d => ({
+            date: d.date,
+            value: d.countervalue / 100,
+          }))
+        : [],
+    [history],
+  );
 
   return (
-    <Box padding={6} borderRadius={2} bg={"neutral.c30"}>
-      <GraphCardHeader
-        account={account}
-        isLoading={!isAvailable}
-        to={history[history.length - 1]}
-        cryptoCurrencyUnit={unit}
-        counterValueUnit={counterValueCurrency.units[0]}
-        useCounterValue={useCounterValue}
-        valueChange={countervalueChange}
-      />
-      <Chart
-        data={history}
-        backgroundColor={colors.neutral.c30}
-        color={isAvailable ? graphColor : colors.neutral.c70}
-        tickFormat={tickFormat}
-        valueKey={"countervalue"}
-        disableTooltips={discreet}
-        yAxisFormatter={counterValue =>
-          counterValueFormatter({
-            value: counterValue / 100,
-            shorten: true,
-            locale,
-            allowZeroValue: true,
-            t,
-          })
-        }
-        valueFormatter={counterValue =>
-          counterValueFormatter({
-            value: counterValue / 100,
-            currency: counterValueCurrency.ticker,
-            locale,
-            allowZeroValue: true,
-            t,
-          })
-        }
-      />
-      <Box>
-        <Pills
-          isDisabled={!isAvailable}
-          value={range}
-          onChange={setTimeRange}
-          items={timeRangeItems}
+    <ChartCard
+      Header={
+        <Header
+          account={account}
+          isAvailable={isAvailable}
+          history={history}
+          unit={unit}
+          counterValueCurrency={counterValueCurrency}
+          useCounterValue={useCounterValue}
+          countervalueChange={countervalueChange}
         />
-      </Box>
-      {accountSummary && (
-        <Box
-          flexDirection={"row"}
-          alignItemps={"center"}
-          marginTop={5}
-          overflow={"hidden"}
-        >
-          {accountSummary}
-        </Box>
-      )}
-    </Box>
+      }
+      Footer={<Footer renderAccountSummary={renderAccountSummary} />}
+      range={rangeRequest}
+      loading={false}
+      loadingChart={!dataFormatted}
+      refreshChart={refreshChart}
+      chartData={dataFormatted}
+      currencyColor={graphColor}
+    />
   );
 }
 

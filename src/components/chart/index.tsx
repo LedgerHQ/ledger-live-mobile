@@ -60,7 +60,7 @@ const Chart = ({
   const [counterValues, setCounterValues] = useState(data.map(d => d[valueKey]));
   useEffect(() => {
     setCounterValues(data.map(d => d[valueKey]));
-  }, [data]);
+  }, [data, valueKey]);
 
   return (
     <Container justifyContent="center" alignItems="center">
@@ -76,7 +76,7 @@ const Chart = ({
             disable={disableTooltips}
             voronoiBlacklist={['victory-area']}
             labels={({ datum }) => {
-              const valueFormatted = valueFormatter(datum.countervalue);
+              const valueFormatted = valueFormatter(datum[valueKey]);
               return valueFormatted === "-" ? "0" : valueFormatted;
             }}
             labelComponent={

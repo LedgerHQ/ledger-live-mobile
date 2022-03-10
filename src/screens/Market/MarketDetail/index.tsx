@@ -31,7 +31,7 @@ import {
   removeStarredMarketCoins,
 } from "../../../actions/settings";
 import MarketStats from "./MarketStats";
-import MarketGraph from "../../../components/chart/ChartCard";
+import ChartCard from "../../../components/chart/ChartCard";
 import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accounts";
 // import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
@@ -201,6 +201,17 @@ export default function MarketDetail({
     if (refreshControlVisible && !loading) setRefreshControlVisible(false);
   }, [refreshControlVisible, loading]);
 
+  const chartDataFormatted = useMemo(
+    () =>
+      chartData?.[chartRequestParams.range]
+        ? chartData?.[chartRequestParams.range].map(d => ({
+            date: new Date(d[0]),
+            value: d[1],
+          }))
+        : [],
+    [chartData, chartRequestParams.range],
+  );
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
       <ScrollContainerHeader
@@ -281,13 +292,14 @@ export default function MarketDetail({
           />
         }
       >
-        <MarketGraph
-          setHoverItem={setHoverItem}
-          chartRequestParams={chartRequestParams}
+        <ChartCard
+          range={chartRequestParams.range}
           loading={loading}
           loadingChart={loadingChart}
           refreshChart={refreshChart}
-          chartData={chartData}
+          chartData={chartDataFormatted}
+          currencyColor={internalCurrency && internalCurrency.color}
+          margin={16}
         />
         {isLiveSupported ? (
           <Flex
