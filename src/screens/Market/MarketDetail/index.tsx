@@ -294,8 +294,7 @@ export default function MarketDetail({
       >
         <ChartCard
           range={chartRequestParams.range}
-          loading={loading}
-          loadingChart={loadingChart}
+          isLoading={loading || loadingChart}
           refreshChart={refreshChart}
           chartData={chartDataFormatted}
           currencyColor={internalCurrency && internalCurrency.color}

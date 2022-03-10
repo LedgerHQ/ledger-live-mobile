@@ -14,8 +14,7 @@ export default function ChartCard({
   Header,
   Footer,
   range,
-  loading,
-  loadingChart,
+  isLoading,
   refreshChart,
   chartData,
   currencyColor,
@@ -24,8 +23,7 @@ export default function ChartCard({
   Header: React.ReactNode,
   Footer: React.ReactNode,
   range: string;
-  loading?: boolean;
-  loadingChart?: boolean;
+  isLoading?: boolean;
   refreshChart: (request: any) => void;
   chartData: any;
   currencyColor: string;
@@ -41,16 +39,7 @@ export default function ChartCard({
 
   const rangesLabels = ranges.map(({ label }) => label);
 
-  const isLoading = loading || loadingChart;
-
   const activeRangeIndex = ranges.findIndex(r => r.value === range);
-  const data = useMemo(
-    () =>
-      chartData
-        ? chartData
-        : [],
-    [chartData],
-  );
 
   const setRange = useCallback(
     index => {
@@ -83,10 +72,10 @@ export default function ChartCard({
     <Flex margin={margin} padding={6} borderRadius={2} bg={"neutral.c30"}>
       {Header}
       <Flex mt={6} height={100} alignItems="center" justifyContent="center">
-        {data && data.length > 0 ? (
+        {chartData && chartData.length > 0 ? (
           <Animatable.View animation="fadeIn" duration={400} useNativeDriver>
             <Chart
-              data={data}
+              data={chartData}
               backgroundColor={colors.neutral.c30}
               color={currencyColor}
               tickFormat={tickFormat}

@@ -167,8 +167,6 @@ export default function AccountGraphCard({
       }
       Footer={<Footer renderAccountSummary={renderAccountSummary} />}
       range={rangeRequest}
-      loading={false}
-      loadingChart={!dataFormatted}
       refreshChart={refreshChart}
       chartData={dataFormatted}
       currencyColor={graphColor}
