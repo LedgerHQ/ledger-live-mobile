@@ -198,13 +198,13 @@ const SelectableAccount = ({
     });
 
     return (
-      <Animated.View style={[{ transform: [{ translateX }] }]}>
-        <Flex
-          width="auto"
-          flexDirection="row"
-          alignItems="center"
-          marginLeft={12}
-        >
+      <Flex
+        width="auto"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Animated.View style={[{ transform: [{ translateX }] }]}>
           <Button
             event="EditAccountNameFromSlideAction"
             type="primary"
@@ -213,8 +213,8 @@ const SelectableAccount = ({
             paddingLeft={0}
             paddingRight={0}
           />
-        </Flex>
-      </Animated.View>
+        </Animated.View>
+      </Flex>
     );
   };
 
@@ -237,15 +237,15 @@ const SelectableAccount = ({
       marginBottom={3}
       marginLeft={6}
       marginRight={6}
-      flexDirection="column"
-      alignItems="flex-start"
       paddingLeft={6}
       paddingRight={6}
+      flexDirection="row"
+      alignItems="center"
       borderRadius={4}
       opacity={isDisabled ? 0.4 : 1}
       backgroundColor="neutral.c40"
     >
-      <Flex flexDirection="row" alignItems="center" justifyContent="flex-start">
+      <Flex flex={1}>
         <AccountCard
           useFullBalance={useFullBalance}
           account={account}
@@ -269,12 +269,12 @@ const SelectableAccount = ({
             ) : null
           }
         />
-        {!isDisabled && (
-          <Flex marginLeft={6}>
-            <CheckBox onChange={handlePress} isChecked={!!isSelected} />
-          </Flex>
-        )}
       </Flex>
+      {!isDisabled && (
+        <Flex marginLeft={6}>
+          <CheckBox onChange={handlePress} isChecked={!!isSelected} />
+        </Flex>
+      )}
     </Flex>
   );
 
@@ -290,13 +290,9 @@ const SelectableAccount = ({
       >
         {inner}
         {showHint && (
-          <TouchHintCircle
-            stopAnimation={stopAnimation}
-            position="absolute"
-            left={3}
-            top={0}
-            bottom={0}
-          />
+          <Flex position="absolute" margin="auto" left={3} top={0} bottom={0}>
+            <TouchHintCircle stopAnimation={stopAnimation} />
+          </Flex>
         )}
       </Swipeable>
     </View>
