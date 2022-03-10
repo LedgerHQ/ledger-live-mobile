@@ -1956,6 +1956,9 @@
     }
   },
   "transfer": {
+    "recipient": {
+      "input": "Enter address"
+    },
     "send": {
       "title": "Send"
     },
