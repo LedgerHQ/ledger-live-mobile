@@ -28,8 +28,6 @@ const AccountList = ({
   const renderItem = ({ item: result }: { item: SearchResult }) => {
     const { account } = result;
 
-    console.log(result.account.id);
-
     return (
       <Flex>
         <Flex
