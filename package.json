@@ -17,6 +17,7 @@
     "e2e:test": "yarn detox test",
     "prebeta": "bundle install",
     "beta": "bundle exec fastlane beta --env production",
+    "ios:debug": "ENVFILE=.env.mock react-native run-ios",
     "ios:staging": "ENVFILE=.env.staging react-native run-ios --configuration Staging",
     "ios:test": "wdio ./tests/config/wdio.ios.app.conf.js",
     "preios:local:adhoc": "bundle install",

@@ -4,17 +4,17 @@ describe("WebdriverIO and Appium, when setup is fine,", () => {
     const getStartedButton = await $("~get-started-button");
     await getStartedButton.touchAction("tap");
 
-    await delay(500);
+    await delay(250);
 
     const termsCheckbox = await $("~terms-checkbox");
     termsCheckbox.touchAction("tap");
 
-    await delay(500);
+    await delay(250);
 
     const enterAppButton = await $("~enter-app-button");
     enterAppButton.touchAction("tap");
 
-    await delay(500);
+    await delay(5000);
 
     const deviceSelectionButton = await $(
       "~Onboarding Device - Selection|nanoX",
@@ -85,7 +85,7 @@ describe("WebdriverIO and Appium, when setup is fine,", () => {
 
     const newPairContinue = await $("~OnboardingStemPairNewContinue");
     await newPairContinue.touchAction("tap");
-    await delay(1000);
+    await delay(500);
   });
 });
 
