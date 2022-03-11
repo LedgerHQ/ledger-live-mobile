@@ -16,7 +16,6 @@ import { Button, Flex, Text } from "@ledgerhq/native-ui";
 import { DropdownMedium, DropupMedium } from "@ledgerhq/native-ui/assets/icons";
 import { NavigatorName, ScreenName } from "../../const";
 import SubAccountRow from "../../components/SubAccountRow";
-import LText from "../../components/LText";
 import Touchable from "../../components/Touchable";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 import perFamilySubAccountList from "../../generated/SubAccountList";
@@ -141,17 +140,21 @@ export default function SubAccountsList({
           >
             <Icon color={colors.live} size={26} name="plus" />
             <View style={styles.footerText}>
-              <LText style={{ fontSize: 16 }}>
+              <Text variant={"large"}>
                 <Trans
                   i18nKey={`account.tokens${
                     hasSpecificTokenWording ? `.${family}` : ""
                   }.howTo`}
                   values={{ currency: parentAccount.currency.family }}
                 >
-                  <LText semiBold>text</LText>
-                  <LText semiBold>text</LText>
+                  <Text variant={"large"} fontWeight={"semiBold"}>
+                    text
+                  </Text>
+                  <Text variant={"large"} fontWeight={"semiBold"}>
+                    text
+                  </Text>
                 </Trans>
-              </LText>
+              </Text>
             </View>
           </View>
         </Touchable>

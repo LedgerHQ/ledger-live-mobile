@@ -1,19 +1,19 @@
 import React, { useCallback } from "react";
-import { ButtonProps } from "@ledgerhq/native-ui/components/cta/Button";
-import { Button as UiButton } from "@ledgerhq/native-ui";
+import { Link as UiLink } from "@ledgerhq/native-ui";
+import { LinkProps } from "@ledgerhq/native-ui/components/cta/Link";
 import { track } from "../../analytics";
 
-export type WrappedButtonProps = ButtonProps & {
+export type WrappedLinkProps = LinkProps & {
   event?: string;
   eventProperties?: Object;
 };
 
-export default function Button({
+export default function Link({
   onPress,
   event,
   eventProperties,
   ...othersProps
-}: WrappedButtonProps) {
+}: WrappedLinkProps) {
   const onPressHandler = useCallback(
     async pressEvent => {
       if (!onPress) return;
@@ -25,5 +25,5 @@ export default function Button({
     [event, eventProperties, onPress],
   );
 
-  return <UiButton onPress={onPressHandler} {...othersProps} />;
+  return <UiLink onPress={onPressHandler} {...othersProps} />;
 }
