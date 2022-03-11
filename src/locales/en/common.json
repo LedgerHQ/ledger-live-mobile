@@ -238,6 +238,10 @@
       "title": "Device not on Dashboard",
       "description": "Please return to the Dashboard on your device."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Sorry, connection failed",
       "description": "Please try again."
@@ -1289,7 +1293,17 @@
     "settings": "Settings",
     "platform": "Discover",
     "nanoX": "Nano X",
-    "market": "Market"
+    "market": "Market",
+    "learn": "Learn"
+  },
+  "learn": {
+    "pageTitle": "learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "portfolio": {
     "totalBalance": "Total balance",
@@ -1680,6 +1694,7 @@
       "theme": "Theme",
       "themeDesc": "Set the app UI theme",
       "themes": {
+        "system": "System",
         "dark": "Dark",
         "light": "Light"
       },
@@ -2609,7 +2624,8 @@
       "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "button": {
-      "openManager": "Open Manager"
+      "openManager": "Open Manager",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}} App installation {{percentage}}",
     "installAppDescription": "Please wait until the installation is finished",
