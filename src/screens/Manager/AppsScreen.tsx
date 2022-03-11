@@ -218,15 +218,17 @@ const AppsScreen = ({
 
   const renderRow = useCallback(
     ({ item }: { item: any }) => (
-      <AppRow
-        app={item}
-        state={state}
-        dispatch={dispatch}
-        setAppInstallWithDependencies={setAppInstallWithDependencies}
-        setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-        setStorageWarning={setStorageWarning}
-        optimisticState={optimisticState}
-      />
+      <Flex px={6}>
+        <AppRow
+          app={item}
+          state={state}
+          dispatch={dispatch}
+          setAppInstallWithDependencies={setAppInstallWithDependencies}
+          setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+          setStorageWarning={setStorageWarning}
+          optimisticState={optimisticState}
+        />
+      </Flex>
     ),
     [
       state,
@@ -243,7 +245,7 @@ const AppsScreen = ({
       <FlatList
         data={items}
         ListHeaderComponent={
-          <>
+          <Flex px={6}>
             <Flex mt={6} mb={8}>
               <Text
                 variant={"h1"}
@@ -293,7 +295,7 @@ const AppsScreen = ({
                 />
               </Flex>
             </Flex>
-          </>
+          </Flex>
         }
         renderItem={renderRow}
         ListEmptyComponent={renderNoResults}
@@ -323,7 +325,7 @@ const AppsScreen = ({
   );
 
   return (
-    <Flex flex={1} bg="background.main" px={6}>
+    <Flex flex={1} bg="background.main">
       <Search
         fuseOptions={{
           threshold: 0.1,
