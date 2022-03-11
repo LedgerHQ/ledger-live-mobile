@@ -21,19 +21,14 @@ export default class FeatureSwitch extends PureComponent<Props, State> {
     valueOn: true,
     valueOff: false,
   };
-  state = {
-    checked: this.props.checked || false,
-  };
 
   onChange = (evt: boolean) => {
     const { onChange, valueOn, valueOff, name } = this.props;
     onChange(name, evt ? valueOn : valueOff);
-    this.setState({ checked: evt });
   };
 
   render() {
-    const { name, readOnly } = this.props;
-    const { checked } = this.state;
+    const { checked = false, name, readOnly } = this.props;
     return (
       <>
         <Track
