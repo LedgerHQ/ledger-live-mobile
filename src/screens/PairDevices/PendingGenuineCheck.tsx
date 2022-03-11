@@ -18,7 +18,7 @@ const PendingGenuineCheck = () => {
         color={"warning.c100"}
       />
       <Text variant={"h2"} textAlign={"center"} mb={5} mt={7}>
-        <Trans i18nKey="PairDevices.GenuineCheck.title" />
+        <Trans i18nKey="v3.PairDevices.GenuineCheck.title" />
       </Text>
       <Text
         variant={"bodyLineHeight"}
@@ -27,12 +27,12 @@ const PendingGenuineCheck = () => {
         color={"neutral.c80"}
         mb={8}
       >
-        <Trans i18nKey="PairDevices.GenuineCheck.accept">
+        <Trans i18nKey="v3.PairDevices.GenuineCheck.accept">
           {""}
           {""}
         </Trans>
       </Text>
-      <Alert type={"info"} title={t("PairDevices.GenuineCheck.info")} />
+      <Alert type={"info"} title={t("v3.PairDevices.GenuineCheck.info")} />
     </Flex>
   );
 };
