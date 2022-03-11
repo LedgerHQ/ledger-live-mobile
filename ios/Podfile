@@ -22,7 +22,7 @@ target 'ledgerlivemobile' do
 
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
 
-  pod 'RNSecp256k1', :path => '../node_modules/@ledgerhq/react-native-secp256k1'
+  pod 'RNSecp256k1', :path => '../node_modules/@ledgerhq/react-native-secp256k1/ios'
 
   target 'ledgerlivemobileTests' do
     inherit! :search_paths
