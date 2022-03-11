@@ -81,7 +81,7 @@ const Row = ({
     setAppUninstallWithDependencies,
     deviceInfo,
 }: RowProps) => (
-        <Flex flexDirection="row" py={4} alignItems="center" justifyContent="space-between">
+        <Flex flexDirection="row" mx={6} py={4} alignItems="center" justifyContent="space-between">
             <Flex flexDirection="row" alignItems="center">
                 <AppIcon app={app} size={24} radius={8} />
                 <Text variant="large" fontWeight="semiBold" color="neutral.c100" ml={4}>{app.name}</Text>
@@ -125,8 +125,8 @@ const modalStyleOverrides = {
   },
   container: {
     minHeight: "100%",
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 0,
+    paddingRight: 0,
     paddingTop: 16,
     paddingBottom: 16,
     maxHeight: "100%",
