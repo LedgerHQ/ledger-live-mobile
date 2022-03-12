@@ -64,7 +64,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalGeneralInformation,
+      route: ScreenName.OnboardingGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
     },
   },
@@ -78,7 +78,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalGeneralInformation,
+      route: ScreenName.OnboardingGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
     },
   },
@@ -103,7 +103,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalSetupSteps,
+      route: ScreenName.OnboardingSetupDeviceInformation,
       screen: ScreenName.OnboardingSetupDeviceInformation,
     },
   },
@@ -117,7 +117,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalGeneralInformation,
+      route: ScreenName.OnboardingGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
     },
   },
@@ -131,7 +131,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalGeneralInformation,
+      route: ScreenName.OnboardingGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
     },
   },
@@ -145,7 +145,7 @@ const metadata: Array<Metadata> = [
       />
     ),
     drawer: {
-      route: ScreenName.OnboardingModalGeneralInformation,
+      route: ScreenName.OnboardingGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
     },
   },

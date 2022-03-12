@@ -152,7 +152,7 @@ function OnboardingStepPairNew() {
         />
       ),
       drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
+        route: ScreenName.OnboardingBluetoothInformation,
         screen: ScreenName.OnboardingBluetoothInformation,
       },
     },
@@ -161,7 +161,7 @@ function OnboardingStepPairNew() {
       // @TODO: Replace this placeholder with the correct illustration asap
       illustration: <LottieIllustration lottie={lottieAnims[deviceModelId]} />,
       drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
+        route: ScreenName.OnboardingBluetoothInformation,
         screen: ScreenName.OnboardingBluetoothInformation,
       },
     },

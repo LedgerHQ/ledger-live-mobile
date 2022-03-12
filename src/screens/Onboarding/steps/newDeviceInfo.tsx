@@ -7,7 +7,7 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
 import Illustration from "../../../images/illustration/Illustration";
 
-import type { DeviceNames } from "../types";
+import { DeviceNames } from "../types";
 
 // @TODO Replace
 const images = {
@@ -27,18 +27,17 @@ const images = {
   ],
 };
 
-type CardType = { index: number, deviceModelId: DeviceNames };
+type CardType = { index: number; deviceModelId: DeviceNames };
 const Card = ({ index /*, deviceModelId */ }: CardType) => {
   const { t } = useTranslation();
-
-  console.log(images.dark[index])
-
-
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" px={20}>
       <Flex mb={10}>
-        <Illustration size={174} darkSource={images.dark[index]} lightSource={images.light[index]} />
-        
+        <Illustration
+          size={174}
+          darkSource={images.dark[index]}
+          lightSource={images.light[index]}
+        />
       </Flex>
       <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>
         {t(`v3.onboarding.stepNewDevice.${index}.title`)}
@@ -67,10 +66,11 @@ const FooterNextButton = ({ label }: { label: string }) => {
   }, [navigation, route.params]);
 
   return (
-  <Button type="main" size="large" onPress={next}>
-    {label}
-  </Button>
-)};
+    <Button type="main" size="large" onPress={next}>
+      {label}
+    </Button>
+  );
+};
 
 const FooterActions = new Map();
 FooterActions.set(0, FooterDiscoveryLink);
