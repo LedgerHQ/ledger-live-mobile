@@ -41,7 +41,7 @@ const ModalText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
 

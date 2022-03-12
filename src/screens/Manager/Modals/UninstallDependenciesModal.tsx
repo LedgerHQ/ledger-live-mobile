@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Trans } from "react-i18next";
 
 import { Action } from "@ledgerhq/live-common/lib/apps";
@@ -8,14 +8,24 @@ import { App } from "@ledgerhq/live-common/lib/types/manager";
 import styled, { useTheme } from "styled-components/native";
 import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import AppTree from "../../../icons/AppTree";
+import AppIcon from "../AppsList/AppIcon";
 
-import ActionModal from "./ActionModal";
+import BottomModal from "../../../components/BottomModal";
+import CollapsibleList from "../../../components/CollapsibleList";
+import ListTreeLine from "../../../icons/ListTreeLine";
+
+import getWindowDimensions from "../../../logic/getWindowDimensions";
+
+const { height } = getWindowDimensions();
 
 type Props = {
   appUninstallWithDependencies: { app: App; dependents: App[] };
   dispatch: (action: Action) => void;
   onClose: () => void;
 };
+
+const LIST_HEIGHT = height - 420;
+const LINE_HEIGHT = 46;
 
 const ImageContainer = styled(Flex).attrs({
   width: "100%",
@@ -41,15 +51,9 @@ const ModalText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
-
-const CancelButton = styled(TouchableOpacity)`
-  align-items: center;
-  justify-content: center;
-  margin-top: 25;
-`;
 
 const UninstallDependenciesModal = ({
   appUninstallWithDependencies,
@@ -65,48 +69,75 @@ const UninstallDependenciesModal = ({
     onClose();
   }, [dispatch, onClose, name]);
 
+  const renderDepLine = useCallback(
+    ({ item }: any) => (
+      <Flex
+        flexDirection="row"
+        position="relative"
+        pl="23px"
+        alignItems="center"
+        height={LINE_HEIGHT}
+      >
+        <Flex position="absolute" bottom="20px" left="0">
+          <ListTreeLine color={colors.grey} />
+        </Flex>
+        <AppIcon app={item} size={22} />
+        <Text variant="body" pl={5} fontWeight="semiBold">
+          {item.name}
+        </Text>
+      </Flex>
+    ),
+    [colors.grey],
+  );
   return (
-    <ActionModal isOpened={!!app} onClose={onClose} actions={[]}>
-      {app && dependents.length && (
-        <View style={{ width: "100%" }}>
-          <ImageContainer>
-            <AppTree
-              size={160}
-              color={colors.neutral.c40}
-              icon={app.icon}
-              app={app}
+    <BottomModal isOpened={!!app} onClose={onClose}>
+      <Flex alignItems="center">
+        {app && dependents.length && (
+          <View style={{ width: "100%" }}>
+            <ImageContainer>
+              <AppTree
+                size={160}
+                color={colors.neutral.c40}
+                icon={app.icon}
+                app={app}
+              />
+            </ImageContainer>
+            <TextContainer>
+              <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+                <Trans
+                  i18nKey="v3.AppAction.uninstall.dependency.title"
+                  values={{ app: name }}
+                />
+              </ModalText>
+              <ModalText color="neutral.c70" fontWeight="medium" variant="body">
+                <Trans
+                  i18nKey="v3.AppAction.uninstall.dependency.description_two"
+                  values={{ app: name }}
+                />
+              </ModalText>
+            </TextContainer>
+            <CollapsibleList
+              title={<Trans i18nKey="AppAction.uninstall.dependency.showAll" />}
+              data={[app, ...dependents]}
+              renderItem={renderDepLine}
+              itemHeight={LINE_HEIGHT}
+              containerStyle={{
+                maxHeight:
+                  LIST_HEIGHT - (LIST_HEIGHT % LINE_HEIGHT) - LINE_HEIGHT / 2, // max height available but still cutting the list mid items for UX
+              }}
             />
-          </ImageContainer>
-          <TextContainer>
-            <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-              <Trans
-                i18nKey="v3.AppAction.uninstall.dependency.title"
-                values={{ app: name }}
-              />
-            </ModalText>
-            <ModalText color="neutral.c70" fontWeight="medium" variant="body">
-              <Trans
-                i18nKey="v3.AppAction.uninstall.dependency.description_two"
-                values={{ app: name }}
-              />
-            </ModalText>
-          </TextContainer>
-          <ButtonsContainer>
-            <Button size="large" type="error" onPress={unInstallApp}>
-              <Trans
-                i18nKey="AppAction.uninstall.continueUninstall"
-                values={{ app: name }}
-              />
-            </Button>
-            <CancelButton onPress={onClose}>
-              <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-                <Trans i18nKey="common.cancel" />
-              </Text>
-            </CancelButton>
-          </ButtonsContainer>
-        </View>
-      )}
-    </ActionModal>
+            <ButtonsContainer>
+              <Button size="large" type="error" onPress={unInstallApp}>
+                <Trans
+                  i18nKey="AppAction.uninstall.continueUninstall"
+                  values={{ app: name }}
+                />
+              </Button>
+            </ButtonsContainer>
+          </View>
+        )}
+      </Flex>
+    </BottomModal>
   );
 };
 

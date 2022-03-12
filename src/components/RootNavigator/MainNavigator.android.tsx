@@ -1,18 +1,18 @@
 // @flow
 import React from "react";
-import { Platform } from "react-native";
 import { useTheme } from "styled-components/native";
 import { Icons } from "@ledgerhq/native-ui";
 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
-import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import PlatformNavigator from "./PlatformNavigator";
 import TabIcon from "../TabIcon";
 import MarketNavigator from "./MarketNavigator";
-import Tab from "./CustomBlockRouterNavigator";
+
+const Tab = createBottomTabNavigator();
 
 type RouteParams = {
   hideTabNavigation?: boolean;
@@ -71,23 +71,21 @@ export default function MainNavigator({
           tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
         }}
       />
-      {Platform.OS === "android" ? (
-        <Tab.Screen
-          name={NavigatorName.Platform}
-          component={PlatformNavigator}
-          options={{
-            headerShown: false,
-            unmountOnBlur: true,
-            tabBarIcon: (props: any) => (
-              <TabIcon
-                Icon={Icons.ManagerMedium}
-                i18nKey="tabs.platform"
-                {...props}
-              />
-            ),
-          }}
-        />
-      ) : null}
+      <Tab.Screen
+        name={NavigatorName.Platform}
+        component={PlatformNavigator}
+        options={{
+          headerShown: false,
+          unmountOnBlur: true,
+          tabBarIcon: (props: any) => (
+            <TabIcon
+              Icon={Icons.ManagerMedium}
+              i18nKey="tabs.platform"
+              {...props}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name={NavigatorName.Market}
         component={MarketNavigator}
@@ -114,32 +112,6 @@ export default function MainNavigator({
           },
         })}
       />
-      {Platform.OS === "ios" ? (
-        <Tab.Screen
-          name={NavigatorName.Manager}
-          component={ManagerNavigator}
-          options={{
-            tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
-            tabBarTestID: "TabBarManager",
-          }}
-          listeners={({ navigation }) => ({
-            tabPress: (e: any) => {
-              e.preventDefault();
-              // NB The default behaviour is not reset route params, leading to always having the same
-              // search query or preselected tab after the first time (ie from Swap/Sell)
-              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
-              navigation.navigate(NavigatorName.Manager, {
-                screen: ScreenName.Manager,
-                params: {
-                  tab: undefined,
-                  searchQuery: undefined,
-                  updateModalOpened: undefined,
-                },
-              });
-            },
-          })}
-        />
-      ) : null}
     </Tab.Navigator>
   );
 }

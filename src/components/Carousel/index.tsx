@@ -226,6 +226,7 @@ const Carousel = ({ cardsVisibility }: Props) => {
       ref={scrollViewRef}
       onMomentumScrollEnd={onScrollEnd}
       onContentSizeChange={onScrollViewContentChange}
+      showsHorizontalScrollIndicator={false}
     >
       {slides.map(({ id, Component }) => (
         <CarouselCardContainer key={id} id={id} onHide={onHide}>

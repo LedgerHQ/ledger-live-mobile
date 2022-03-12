@@ -51,11 +51,11 @@ function BottomModalChoice({
         ) : null}
       </Flex>
       <Flex flex={1}>
-        <Text variant="h3" fontWeight="semiBold" color="colors.neutral.c100">
+        <Text variant="h3" fontWeight="semiBold" color="neutral.c100">
           {title}
         </Text>
         {!!description && (
-          <Text variant="body" color="colors.neutral.c70">
+          <Text variant="body" color="neutral.c70">
             {description}
           </Text>
         )}

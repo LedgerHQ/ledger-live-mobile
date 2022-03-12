@@ -11,8 +11,7 @@ import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
 import { installAppFirstTime } from "../../../actions/settings";
 import AppIcon from "../AppsList/AppIcon";
-
-import ActionModal from "./ActionModal";
+import BottomModal from "../../../components/BottomModal";
 
 type Props = {
   appInstallWithDependencies: { app: App; dependencies: App[] };
@@ -56,7 +55,7 @@ const SeparatorText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
 
@@ -86,45 +85,51 @@ function AppDependenciesModal({
   }, [dispatch, dispatchProps, onClose, name, hasInstalledAnyApp]);
 
   return (
-    <ActionModal isOpened={!!app} onClose={onClose} actions={[]}>
-      {!!dependencies.length && (
-        <>
-          <IconContainer borderColor="neutral.c40">
-            <AppIcon app={app} size={40} />
-            <SeparatorText color="neutral.c40">- - -</SeparatorText>
-            <LinkIconContainer backgroundColor="neutral.c30">
-              <Icons.LinkMedium size={16} color="neutral.c80" />
-            </LinkIconContainer>
-            <SeparatorText color="neutral.c40">- - -</SeparatorText>
-            <AppIcon app={dependencies[0]} size={40} />
-          </IconContainer>
-          <TextContainer>
-            <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-              <Trans
-                i18nKey="v3.AppAction.install.dependency.title"
-                values={{ dependency: dependencies[0].name }}
-              />
-            </ModalText>
-            <ModalText color="neutral.c70" fontWeight="medium" variant="body">
-              <Trans
-                i18nKey="v3.AppAction.install.dependency.description_one"
-                values={{ dependency: dependencies[0].name, app: name }}
-              />
-            </ModalText>
-          </TextContainer>
-          <ButtonsContainer>
-            <Button size="large" type="main" onPress={installAppDependencies}>
-              <Trans i18nKey="v3.AppAction.install.continueInstall" />
-            </Button>
-            <CancelButton onPress={onClose}>
-              <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-                <Trans i18nKey="common.cancel" />
-              </Text>
-            </CancelButton>
-          </ButtonsContainer>
-        </>
-      )}
-    </ActionModal>
+    <BottomModal isOpened={!!app} onClose={onClose} actions={[]}>
+      <Flex alignItems="center">
+        {!!dependencies.length && (
+          <>
+            <IconContainer borderColor="neutral.c40">
+              <AppIcon app={app} size={40} />
+              <SeparatorText color="neutral.c40">- - -</SeparatorText>
+              <LinkIconContainer backgroundColor="neutral.c30">
+                <Icons.LinkMedium size={16} color="neutral.c80" />
+              </LinkIconContainer>
+              <SeparatorText color="neutral.c40">- - -</SeparatorText>
+              <AppIcon app={dependencies[0]} size={40} />
+            </IconContainer>
+            <TextContainer>
+              <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+                <Trans
+                  i18nKey="v3.AppAction.install.dependency.title"
+                  values={{ dependency: dependencies[0].name }}
+                />
+              </ModalText>
+              <ModalText color="neutral.c70" fontWeight="medium" variant="body">
+                <Trans
+                  i18nKey="v3.AppAction.install.dependency.description_one"
+                  values={{ dependency: dependencies[0].name, app: name }}
+                />
+              </ModalText>
+            </TextContainer>
+            <ButtonsContainer>
+              <Button size="large" type="main" onPress={installAppDependencies}>
+                <Trans i18nKey="v3.AppAction.install.continueInstall" />
+              </Button>
+              <CancelButton onPress={onClose}>
+                <Text
+                  variant="large"
+                  fontWeight="semiBold"
+                  color="neutral.c100"
+                >
+                  <Trans i18nKey="common.cancel" />
+                </Text>
+              </CancelButton>
+            </ButtonsContainer>
+          </>
+        )}
+      </Flex>
+    </BottomModal>
   );
 }
 

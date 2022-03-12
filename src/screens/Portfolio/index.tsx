@@ -14,10 +14,11 @@ import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
-import { discreetModeSelector } from "../../reducers/settings";
 import {
+  discreetModeSelector,
   counterValueCurrencySelector,
   carouselVisibilitySelector,
 } from "../../reducers/settings";
@@ -54,10 +55,9 @@ type Props = {
   navigation: any;
 };
 
-const ContentContainer = styled.SafeAreaView`
+const ContentContainer = styled(SafeAreaView)`
   flex: 1;
   background-color: ${p => p.theme.colors.palette.background.main};
-  padding-top: ${() => extraStatusBarPadding}px;
 `;
 
 const SectionTitle = ({
@@ -181,13 +181,15 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      <Flex mx={6} mt={9}>
+      <Flex mx={6} mt={10}>
         <SectionTitle
-          title={<Trans i18nKey={"tabs.platform"} />}
+          title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
           navigation={navigation}
-          navigatorName={NavigatorName.Platform}
+          navigatorName={NavigatorName.Market}
+          seeMoreText={<Trans i18nKey={"v3.portfolio.topGainers.seeMarket"} />}
+          containerProps={{ mb: 5 }}
         />
-        <DiscoverSection />
+        <MarketSection />
       </Flex>,
       ...(Object.values(carouselVisibility).some(Boolean)
         ? [
@@ -199,26 +201,28 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      <Flex mx={6} mt={10}>
+      <Flex mx={6} mt={9}>
         <SectionTitle
-          title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
+          title={<Trans i18nKey={"tabs.platform"} />}
           navigation={navigation}
-          navigatorName={NavigatorName.Market}
-          seeMoreText={<Trans i18nKey={"v3.portfolio.topGainers.seeMarket"} />}
-          containerProps={{ mb: 5 }}
+          navigatorName={NavigatorName.Platform}
         />
-        <MarketSection />
+        <DiscoverSection />
       </Flex>,
+
       <Box mt={24} />,
     ],
     [
-      accounts.length,
-      areAccountsEmpty,
-      assetsToDisplay,
       counterValueCurrency,
-      navigation,
       portfolio,
+      currentPositionY,
+      graphCardEndPosition,
+      areAccountsEmpty,
       showAssets,
+      onPortfolioCardLayout,
+      accounts.length,
+      navigation,
+      assetsToDisplay,
       carouselVisibility,
     ],
   );

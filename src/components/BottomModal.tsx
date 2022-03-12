@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { BottomDrawer } from "@ledgerhq/native-ui";
 import { useSelector } from "react-redux";
-import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import { isModalLockedSelector } from "../reducers/appstate";
 
 let isModalOpenedref: boolean | undefined = false;
@@ -56,19 +55,17 @@ const BottomModal = ({
   }, [modalLock, onClose, onModalHide]);
 
   return (
-    <ButtonUseTouchable.Provider value={true}>
-      <BottomDrawer
-        preventBackdropClick={modalLock || preventBackdropClick}
-        isOpen={open}
-        onClose={handleClose}
-        noCloseButton={modalLock}
-        modalStyle={style}
-        containerStyle={containerStyle}
-        {...rest}
-      >
-        {children}
-      </BottomDrawer>
-    </ButtonUseTouchable.Provider>
+    <BottomDrawer
+      preventBackdropClick={modalLock || preventBackdropClick}
+      isOpen={open}
+      onClose={handleClose}
+      noCloseButton={modalLock}
+      modalStyle={style}
+      containerStyle={containerStyle}
+      {...rest}
+    >
+      {children}
+    </BottomDrawer>
   );
 };
 

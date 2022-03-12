@@ -83,7 +83,7 @@ export default function BaseNavigator() {
     <Stack.Navigator
       screenOptions={{
         ...stackNavigationConfig,
-        ...TransitionPresets.ModalTransition,
+        ...TransitionPresets.ModalPresentation,
       }}
     >
       <Stack.Screen
@@ -364,6 +364,7 @@ export default function BaseNavigator() {
         options={{
           title: t("EditDeviceName.title"),
           headerLeft: null,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
       />
       <Stack.Screen
