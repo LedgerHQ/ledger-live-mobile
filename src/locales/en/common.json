@@ -754,13 +754,67 @@
       }
     }
   },
+  "buyDevice": {
+    "title": "Ledger Hardware",
+    "desc": "Protect your crypto assets with industry-leading security. Ledger offers the best product for keeping your crypto safe.",
+    "cta": "Get Started",
+    "0": {
+      "title": "Gain financial freedom",
+      "desc": "Unlock the freedom to manage your crypto on your own. The Ledger hardware paired with this app enables you to be the only one in charge of your money."
+    },
+    "1": {
+      "title": "Access a world of Defi",
+      "desc": "When storing your crypto on Ledger hardware you can securely interact directly with DeFi services directly from the app."
+    },
+    "2": {
+      "title": "Your one stop shop for crypto",
+      "desc": "You can buy Bitcoin, Ethereum, Bitcoin Cash, Dash, USDT and Stellar directly through the app from our partners. Sell your Bitcoin for fiat currencies whenever you need to."
+    },
+    "3": {
+      "title": "Peace of mind with certified security ",
+      "desc": "Our wallets are the only hardware wallets on the market certified for their security by ANSSI, the French cyber security agency."
+    }
+  },
   "onboarding": {
     "stepWelcome": {
       "title": "Welcome to Ledger",
       "subtitle": "Safely manage your cryptos from your smartphone.",
       "start": "Get started",
       "noDevice": "No device?",
-      "buy": "Buy a {{fullDeviceName}}"
+      "buy": "Buy a {{fullDeviceName}}",
+      "terms": "By tapping “Get Started” you consent and agree to our",
+      "termsLink": "Terms of Service",
+      "privacyLink": "Privacy Policy",
+      "and": "and"
+    },
+    "postWelcomeStep": {
+      "title": "It’s your choice",
+      "subtitle": "You can choose to set up your Ledger now or take a look around the ledger live app first.",
+      "noLedgerLink": "I don’t have a Ledger and I would like to buy one",
+      "setupLedger": {
+        "title": "Set up my Ledger",
+        "subtitle": "Secure your crypto now",
+        "label": "30 mins"
+      },
+      "discoverLedger": {
+        "title": "Discover Ledger Live",
+        "subtitle": "Explore the app"
+      }
+    },
+    "discoverLive": {
+      "0": {
+        "title": "One place for all your crypto needs",
+        "desc": "Monitor, buy, sell, swap, grow and manage your assets securely and get the best crypto insights"
+      },
+      "1": {
+        "title": "Not your keys, not your crypto",
+        "desc": "Securing your assets with a Hardware wallet is the best and only way to own and secure your crypto assets"
+      },
+      "2": {
+        "title": "Reclaim power over your money",
+        "desc": "The Ledger Nano X keeps your coins offline and protected. Combine it to Ledger Live app for maximum security and control over your crypto",
+        "cta": "Begin your Journey"
+      }
     },
     "stepLanguage": {
       "title": "Select your language",
@@ -772,9 +826,9 @@
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "Select your device",
       "nanoS": "Nano S",
-      "nanoSP": "Nano S Plus",
+      "nanoSP": "Nano S+",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
@@ -4743,7 +4797,7 @@
       "stepSelectDevice": {
         "title": "Select your device",
         "nanoS": "Nano S",
-        "nanoSP": "Nano S Plus",
+        "nanoSP": "Nano S+",
         "nanoX": "Nano X",
         "chooseDevice": "Choose your device"
       },

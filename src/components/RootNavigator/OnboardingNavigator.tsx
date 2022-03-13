@@ -5,19 +5,18 @@ import {
   TransitionPresets,
   StackNavigationOptions,
   StackScreenProps,
-  TransitionSpecs,
 } from "@react-navigation/stack";
 import { Flex } from "@ledgerhq/native-ui";
+import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
-import OnboardingLanguage, {
-  OnboardingStepLanguageGetStarted,
-} from "../../screens/Onboarding/steps/language";
+import OnboardingLanguage from "../../screens/Onboarding/steps/language";
 import OnboardingTerms from "../../screens/Onboarding/steps/terms";
 import OnboardingDeviceSelection from "../../screens/Onboarding/steps/deviceSelection";
 import OnboardingUseCase from "../../screens/Onboarding/steps/useCaseSelection";
 import OnboardingNewDeviceInfo from "../../screens/Onboarding/steps/newDeviceInfo";
+import OnboardingNewDiscoverLiveInfo from "../../screens/Onboarding/steps/discoverLiveInfo";
 import OnboardingNewDevice from "../../screens/Onboarding/steps/setupDevice";
 import OnboardingRecoveryPhrase from "../../screens/Onboarding/steps/recoveryPhrase";
 import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
@@ -38,45 +37,11 @@ import OnboardingBluetoothInformation from "../../screens/Onboarding/steps/setup
 import OnboardingWarning from "../../screens/Onboarding/steps/setupDevice/drawers/Warning";
 import OnboardingSyncDesktopInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SyncDesktopInformation";
 import OnboardingRecoveryPhraseWarning from "../../screens/Onboarding/steps/setupDevice/drawers/RecoveryPhraseWarning";
+import PostWelcomeSelection from "../../screens/Onboarding/steps/postWelcomeSelection";
 
 const Stack = createStackNavigator();
-const LanguageModalStack = createStackNavigator();
 const OnboardingCarefulWarningStack = createStackNavigator();
 const OnboardingPreQuizModalStack = createStackNavigator();
-
-function LanguageModalNavigator(props: StackScreenProps<{}>) {
-  const options: Partial<StackNavigationOptions> = {
-    header: props => <NavigationHeader {...props} hideBack />,
-    headerStyle: { backgroundColor: "transparent" },
-    transitionSpec: {
-      open: TransitionSpecs.TransitionIOSSpec,
-      close: TransitionSpecs.TransitionIOSSpec,
-    },
-  };
-
-  return (
-    <NavigationModalContainer {...props} backgroundColor="background.main">
-      <LanguageModalStack.Navigator>
-        <LanguageModalStack.Screen
-          name={ScreenName.OnboardingLanguage}
-          component={OnboardingLanguage}
-          options={{
-            title: "v3.onboarding.stepLanguage.title",
-            ...options,
-          }}
-        />
-        <LanguageModalStack.Screen
-          name={ScreenName.OnboardingStepLanguageGetStarted}
-          component={OnboardingStepLanguageGetStarted}
-          options={{
-            title: "v3.onboarding.stepLanguage.title",
-            ...options,
-          }}
-        />
-      </LanguageModalStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
 
 function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
@@ -162,7 +127,7 @@ const modalOptions: Partial<StackNavigationOptions> = {
   cardOverlayEnabled: true,
   cardOverlay: () => <NavigationOverlay />,
   headerShown: false,
-  ...TransitionPresets.ModalPresentationIOS,
+  ...TransitionPresets.ModalTransition,
 };
 
 const infoModalOptions: Partial<StackNavigationOptions> = {
@@ -171,6 +136,7 @@ const infoModalOptions: Partial<StackNavigationOptions> = {
 };
 
 export default function OnboardingNavigator() {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -184,9 +150,16 @@ export default function OnboardingNavigator() {
         component={OnboardingWelcome}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingLanguageModal}
-        component={LanguageModalNavigator}
-        options={modalOptions}
+        name={ScreenName.OnboardingPostWelcomeSelection}
+        component={PostWelcomeSelection}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingLanguage}
+        component={OnboardingLanguage}
+        options={{
+          ...infoModalOptions,
+          headerTitle: t("v3.onboarding.stepLanguage.title"),
+        }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingTermsOfUse}
@@ -209,6 +182,10 @@ export default function OnboardingNavigator() {
         name={ScreenName.OnboardingPreQuizModal}
         component={OnboardingPreQuizModalNavigator}
         options={modalOptions}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingModalDiscoverLive}
+        component={OnboardingNewDiscoverLiveInfo}
       />
       <Stack.Screen
         name={ScreenName.OnboardingModalSetupNewDevice}

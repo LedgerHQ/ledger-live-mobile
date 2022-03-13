@@ -8,6 +8,8 @@ import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import Illustration from "../../images/illustration/Illustration";
 import NanoXFolded from "../../images/devices/NanoXFolded";
 
+import ChoiceCard from "../../components/ChoiceCard";
+
 const images = {
   light: {
     withYourLedger: require("../../images/illustration/Light/_067.png"),
@@ -24,47 +26,6 @@ type Props = {
   isOpened: boolean;
   onClose: () => void;
 };
-
-const Card = ({
-  title,
-  subtitle,
-  onPress,
-  Image,
-}: {
-  title: string;
-  subtitle: string;
-  Image: React.ReactNode;
-  onPress: TouchableOpacityProps["onPress"];
-}) => (
-  <TouchableOpacity onPress={onPress}>
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      alignItems={"center"}
-      borderWidth={"1px"}
-      borderColor={"neutral.c40"}
-      borderRadius={2}
-      mb={9}
-    >
-      <Box py={7} pl={7} flexShrink={1}>
-        <Text variant={"large"} fontWeight={"semiBold"} color={"neutral.c100"}>
-          {title}
-        </Text>
-        <Text
-          variant={"body"}
-          fontWeight={"medium"}
-          color={"neutral.c70"}
-          mt={2}
-        >
-          {subtitle}
-        </Text>
-      </Box>
-      <Box py={3} pl={3} pr={6}>
-        {Image}
-      </Box>
-    </Flex>
-  </TouchableOpacity>
-);
 
 export default function AddAccountsModal({
   navigation,
@@ -86,23 +47,23 @@ export default function AddAccountsModal({
 
   return (
     <BottomDrawer
-      id="AddAccountsModal"
+      testId="AddAccountsModal"
       isOpen={isOpened}
       onClose={onClose}
       title={t("v3.portfolio.emptyState.addAccounts.title")}
     >
       {!readOnlyModeEnabled && (
-        <Card
+        <ChoiceCard
           title={t("v3.addAccountsModal.add.title")}
-          subtitle={t("v3.addAccountsModal.add.description")}
+          subTitle={t("v3.addAccountsModal.add.description")}
           Image={<NanoXFolded size={96} />}
           onPress={onClickAdd}
         />
       )}
 
-      <Card
+      <ChoiceCard
         title={t("v3.addAccountsModal.import.title")}
-        subtitle={t("v3.addAccountsModal.import.description")}
+        subTitle={t("v3.addAccountsModal.import.description")}
         Image={
           <Illustration
             lightSource={images.light.withYourLedger}

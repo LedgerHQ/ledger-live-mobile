@@ -27,6 +27,8 @@ import { scrollToTop } from "../../navigation/utils";
 import LiveLogo from "../../icons/LiveLogo";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Placeholder from "../../components/Placeholder";
+import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import { useSelector } from "react-redux";
 
 export default function PortfolioHeader({
   currentPositionY,
@@ -43,13 +45,14 @@ export default function PortfolioHeader({
 }) {
   const navigation = useNavigation();
   const { colors, space } = useTheme();
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const { allIds, seenIds } = useAnnouncements();
   const { incidents } = useFilteredServiceStatus();
 
   const onManagerButtonPress = useCallback(() => {
     navigation.navigate(NavigatorName.Manager);
-  }, [navigation]);
+  }, [navigation, readOnlyModeEnabled]);
 
   const onNotificationButtonPress = useCallback(() => {
     navigation.navigate(NavigatorName.NotificationCenter);

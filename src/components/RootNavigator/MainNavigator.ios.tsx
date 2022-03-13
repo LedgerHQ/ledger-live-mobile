@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { Icons } from "@ledgerhq/native-ui";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useSelector } from "react-redux";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
@@ -11,6 +12,7 @@ import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import TabIcon from "../TabIcon";
 import MarketNavigator from "./MarketNavigator";
+import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +25,7 @@ export default function MainNavigator({
   route: { params: RouteParams };
 }) {
   const { colors } = useTheme();
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const { hideTabNavigation } = params || {};
   return (
@@ -62,6 +65,19 @@ export default function MainNavigator({
           ),
           tabBarTestID: "TabBarAccounts",
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            if (readOnlyModeEnabled) {
+              e.preventDefault();
+              // NB The default behaviour is not reset route params, leading to always having the same
+              // search query or preselected tab after the first time (ie from Swap/Sell)
+              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+              navigation.navigate(ScreenName.BuyDeviceScreen, {
+                from: NavigatorName.Accounts,
+              });
+            }
+          },
+        })}
       />
       <Tab.Screen
         name={ScreenName.Transfer}
@@ -107,17 +123,26 @@ export default function MainNavigator({
         listeners={({ navigation }) => ({
           tabPress: (e: any) => {
             e.preventDefault();
-            // NB The default behaviour is not reset route params, leading to always having the same
-            // search query or preselected tab after the first time (ie from Swap/Sell)
-            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
-            navigation.navigate(NavigatorName.Manager, {
-              screen: ScreenName.Manager,
-              params: {
-                tab: undefined,
-                searchQuery: undefined,
-                updateModalOpened: undefined,
-              },
-            });
+            if (readOnlyModeEnabled) {
+              // NB The default behaviour is not reset route params, leading to always having the same
+              // search query or preselected tab after the first time (ie from Swap/Sell)
+              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+              navigation.navigate(ScreenName.BuyDeviceScreen, {
+                from: NavigatorName.Manager,
+              });
+            } else {
+              // NB The default behaviour is not reset route params, leading to always having the same
+              // search query or preselected tab after the first time (ie from Swap/Sell)
+              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+              navigation.navigate(NavigatorName.Manager, {
+                screen: ScreenName.Manager,
+                params: {
+                  tab: undefined,
+                  searchQuery: undefined,
+                  updateModalOpened: undefined,
+                },
+              });
+            }
           },
         })}
       />

@@ -32,12 +32,7 @@ export default function LanguageSettingsRow() {
   const { locale } = useLocale();
   const { navigate } = useNavigation();
   const onNavigate = useCallback(() => {
-    navigate(NavigatorName.BaseOnboarding, {
-      screen: NavigatorName.Onboarding,
-      params: {
-        screen: ScreenName.OnboardingLanguageModal,
-      },
-    });
+    navigate(ScreenName.OnboardingLanguage);
   }, [navigate]);
 
   return (

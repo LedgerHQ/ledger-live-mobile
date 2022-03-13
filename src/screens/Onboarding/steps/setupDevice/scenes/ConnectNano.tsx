@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Button, Text } from "@ledgerhq/native-ui";
-import { TrackScreen } from "../../../../../analytics";
-import SelectDevice from "../../../../../components/SelectDevice";
-import DeviceActionModal from "../../../../../components/DeviceActionModal";
+import { Flex, Button } from "@ledgerhq/native-ui";
 import { useDispatch } from "react-redux";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
+import DeviceActionModal from "../../../../../components/DeviceActionModal";
+import SelectDevice from "../../../../../components/SelectDevice";
+import { TrackScreen } from "../../../../../analytics";
 
 import {
   installAppFirstTime,
@@ -56,7 +56,7 @@ const ConnectNanoScene = ({
           info.result.installed.length > 0;
 
         dispatch(installAppFirstTime(hasAnyAppinstalled));
-        setDevice();
+        setDevice(undefined);
         dispatch(setReadOnlyMode(false));
         onNext();
       }
@@ -67,7 +67,15 @@ const ConnectNanoScene = ({
   const usbOnly = ["nanoS", "nanoSP", "blue"].includes(deviceModelId);
 
   const Footer = __DEV__ ? (
-    <Button mt={7} type="color" outline onPress={onNext}>
+    <Button
+      mt={7}
+      type="color"
+      outline
+      onPress={() => {
+        dispatch(setReadOnlyMode(false));
+        onNext();
+      }}
+    >
       (DEV) skip this step
     </Button>
   ) : null;
@@ -75,7 +83,7 @@ const ConnectNanoScene = ({
   return (
     <>
       <TrackScreen category="Onboarding" name="PairNew" />
-      <Flex>
+      <Flex flex={1}>
         <SelectDevice
           withArrows
           usbOnly={usbOnly}

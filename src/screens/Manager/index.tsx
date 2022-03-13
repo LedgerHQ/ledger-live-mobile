@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
@@ -23,13 +23,11 @@ import Trash from "../../icons/Trash";
 import BottomModal from "../../components/BottomModal";
 import ModalBottomAction from "../../components/ModalBottomAction";
 import NavigationScrollView from "../../components/NavigationScrollView";
-import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
-import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import DeviceActionModal from "../../components/DeviceActionModal";
 import Illustration from "../../images/illustration/Illustration";
 
-const darkImg = require("../../images/illustration/Dark/_076.png");
-const lightImg = require("../../images/illustration/Light/_076.png");
+const darkImg = require("../../images/illustration/Dark/_079.png");
+const lightImg = require("../../images/illustration/Light/_079.png");
 
 const action = createAction(connectManager);
 
@@ -80,7 +78,6 @@ type Props = {
 
 type ChooseDeviceProps = Props & {
   isFocused: boolean;
-  readOnlyModeEnabled: boolean;
   removeKnownDevice: (d: string) => void;
 };
 
@@ -152,26 +149,14 @@ class ChooseDevice extends Component<
   };
 
   componentDidMount() {
-    const { readOnlyModeEnabled } = this.props;
     this.setState(state => ({ ...state, device: undefined }));
-
-    if (readOnlyModeEnabled) {
-      this.props.navigation.setParams({
-        title: "manager.readOnly.title",
-        headerRight: null,
-      });
-    }
   }
 
   render() {
-    const { isFocused, readOnlyModeEnabled } = this.props;
+    const { isFocused } = this.props;
     const { showMenu, device } = this.state;
 
     if (!isFocused) return null;
-
-    if (readOnlyModeEnabled) {
-      return <ReadOnlyNanoX navigation={this.props.navigation} />;
-    }
 
     return (
       <NavigationScrollView
@@ -233,13 +218,11 @@ const styles = StyleSheet.create({
 export default function Screen(props: Props) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   return (
     <ChooseDevice
       {...props}
       isFocused={isFocused}
-      readOnlyModeEnabled={readOnlyModeEnabled}
       removeKnownDevice={(...args) => dispatch(removeKnownDevice(...args))}
     />
   );

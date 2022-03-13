@@ -1,7 +1,6 @@
 // @flow
 /* eslint import/no-cycle: 0 */
 import { handleActions } from "redux-actions";
-import { Platform } from "react-native";
 import merge from "lodash/merge";
 import {
   findCurrencyByTicker,
@@ -479,7 +478,7 @@ export const countervalueFirstSelector = (state: State) =>
   state.settings.countervalueFirst;
 
 export const readOnlyModeEnabledSelector = (state: State) =>
-  Platform.OS !== "android" && state.settings.readOnlyModeEnabled;
+  state.settings.readOnlyModeEnabled;
 
 export const blacklistedTokenIdsSelector = (state: State) =>
   state.settings.blacklistedTokenIds;

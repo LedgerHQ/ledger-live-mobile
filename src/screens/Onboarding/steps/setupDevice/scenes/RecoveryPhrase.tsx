@@ -10,7 +10,7 @@ const RecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <Flex>
+      <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={4} uppercase>
           {t("v3.onboarding.stepSetupDevice.recoveryPhrase.title")}
         </Text>

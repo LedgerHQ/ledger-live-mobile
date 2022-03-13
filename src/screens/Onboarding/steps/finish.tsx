@@ -1,31 +1,55 @@
 // @flow
 
 import React from "react";
-import { Trans } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import Video from "react-native-video";
-import { Flex } from "@ledgerhq/native-ui";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { Flex, Icons, IconBoxList } from "@ledgerhq/native-ui";
 import { LedgerLiveRegular } from "@ledgerhq/native-ui/assets/logos";
+import styled from "styled-components/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
 import { useNavigationInterceptor } from "../onboardingContext";
 import { NavigatorName } from "../../../const";
 
-import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import Button from "../../../components/wrappedUi/Button";
-import * as Animatable from "react-native-animatable";
 
-const source = require("../../../../assets/videos/onboarding.mp4");
-const poster = require("../../../../assets/videos/onboarding-poster.jpg");
+const StyledSafeAreaView = styled(SafeAreaView)`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.primary.c60};
+`;
+
+const items = [
+  {
+    title: "buyDevice.0.title",
+    desc: "buyDevice.0.desc",
+    Icon: Icons.CrownMedium,
+  },
+  {
+    title: "buyDevice.1.title",
+    desc: "buyDevice.1.desc",
+    Icon: Icons.LendMedium,
+  },
+  {
+    title: "buyDevice.2.title",
+    desc: "buyDevice.2.desc",
+    Icon: Icons.ClaimRewardsMedium,
+  },
+  {
+    title: "buyDevice.3.title",
+    desc: "buyDevice.3.desc",
+    Icon: Icons.NanoXAltMedium,
+  },
+];
 
 type Props = {
   navigation: any;
 };
 
 export default function OnboardingStepFinish({ navigation }: Props) {
-  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const dispatch = useDispatch();
   const { resetCurrentStep } = useNavigationInterceptor();
+  const { t } = useTranslation();
 
   function onFinish(): void {
     dispatch(completeOnboarding());
@@ -42,56 +66,31 @@ export default function OnboardingStepFinish({ navigation }: Props) {
   }
 
   return (
-    <Flex flex={1} bg="primary.c60">
-      <Animatable.View
-        style={{
-          height: "100%",
-          width: "100%",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          alignItems: "stretch",
-          bottom: 0,
-          right: 0,
-        }}
-        animation="fadeIn"
-        delay={1000}
-        duration={500}
-      >
-        <Video
-          source={source}
-          style={{
-            height: "100%",
-            width: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            alignItems: "stretch",
-            bottom: 0,
-            right: 0,
-            backgroundColor: "transparent",
-          }}
-          poster={poster?.uri}
-          posterResizeMode={"cover"}
-          repeat
-          resizeMode={"cover"}
-        />
-      </Animatable.View>
-
-      <Flex p={6} flex={1}>
-        <TrackScreen category="Onboarding" name="Finish" />
-        <Flex flex={1} justifyContent="center" alignItems="center">
-          <LedgerLiveRegular width={"70%"} height={"20%"} color="white" />
+    <StyledSafeAreaView>
+      <TrackScreen category="Onboarding" name="Finish" />
+      <Flex flex={1} p={6} alignItems="center" justifyContent="center">
+        <Flex flex={1} alignItems="center" justifyContent="center">
+          <LedgerLiveRegular width={300} height={200} color="white" />
         </Flex>
-        <Button
-          event="OnboardingFinish"
-          testID="OnboardingFinish"
-          type="main"
-          onPress={onFinish}
-        >
-          <Trans i18nKey="onboarding.stepFinish.cta" />
-        </Button>
+        <IconBoxList
+          flex={1}
+          items={items.map(item => ({
+            ...item,
+            title: t(item.title),
+            description: t(item.desc),
+          }))}
+        />
       </Flex>
-    </Flex>
+      <Button
+        m={6}
+        type="main"
+        outline={false}
+        event="BuyDeviceScreen - Buy Ledger"
+        onPress={onFinish}
+        size="large"
+      >
+        {t("onboarding.stepFinish.cta")}
+      </Button>
+    </StyledSafeAreaView>
   );
 }

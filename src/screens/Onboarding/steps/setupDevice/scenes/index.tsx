@@ -21,10 +21,4 @@ export { default as ExistingRecovery } from "./ExistingRecoveryPhrase";
 export { default as ExistingRecoveryStep1 } from "./ExistingRecoveryPhraseStep1";
 export { default as ExistingRecoveryStep2 } from "./ExistingRecoveryPhraseStep2";
 
-const Scene = ({ children }: { children: React.ReactNode }) => (
-  <Flex flex={1} justifyContent="space-between" my={8} mx={6}>
-    {children}
-  </Flex>
-);
-
-export default Scene;
+export { default, type Metadata } from "./BaseStepperView";
