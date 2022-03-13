@@ -3907,14 +3907,14 @@
       "view": {
         "label": "查看",
         "all": "所有代币",
-        "liveCompatible": "Live Compatible",
+        "liveCompatible": "Live 兼容",
         "all_label": "所有加密货币",
-        "liveCompatible_label": "Only Live Supported"
+        "liveCompatible_label": "仅支持 Live"
       },
       "order": {
         "market_cap": "排名",
-        "market_cap_asc": "Rank (Market cap) asc.",
-        "market_cap_desc": "Rank (Market cap) desc."
+        "market_cap_asc": "排名（市值）上升",
+        "market_cap_desc": "排名（市值）下降"
       },
       "currency": "币种",
       "time": "时间",
@@ -3923,12 +3923,12 @@
     "marketList": {
       "crypto": "加密货币",
       "price": "价格",
-      "change": "Change",
+      "change": "更改",
       "marketCap": "市值",
       "last7d": "过去 7 天"
     },
     "detailsPage": {
-      "holding": "Your Holdings",
+      "holding": "您的持有",
       "priceStatistics": "价格统计数据",
       "price": "价格",
       "tradingVolume": "交易量",
