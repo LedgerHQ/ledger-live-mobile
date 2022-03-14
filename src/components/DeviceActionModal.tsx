@@ -1,11 +1,15 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
-import { Alert } from "@ledgerhq/native-ui";
+import styled from "styled-components/native";
+import { Alert, Flex } from "@ledgerhq/native-ui";
 import { useTranslation } from "react-i18next";
 import DeviceAction from "./DeviceAction";
 import BottomModal from "./BottomModal";
+
+const DeviceActionContainer = styled(Flex).attrs({
+  flexDirection: "row",
+})``;
 
 type Props = {
   // TODO: fix action type
@@ -33,6 +37,7 @@ export default function DeviceActionModal({
   analyticsPropertyFlow,
 }: Props) {
   const { t } = useTranslation();
+  const showAlert = !device?.wired;
   return (
     <BottomModal
       id="DeviceActionModal"
@@ -41,8 +46,8 @@ export default function DeviceActionModal({
       onModalHide={onModalHide}
     >
       {device && (
-        <View>
-          <View style={styles.footerContainer}>
+        <Flex>
+          <DeviceActionContainer marginBottom={showAlert ? "16px" : 0}>
             <DeviceAction
               action={action}
               device={device}
@@ -53,20 +58,13 @@ export default function DeviceActionModal({
               onSelectDeviceLink={onSelectDeviceLink}
               analyticsPropertyFlow={analyticsPropertyFlow}
             />
-          </View>
-          {!device.wired ? (
+          </DeviceActionContainer>
+          {showAlert && (
             <Alert type="info" title={t("DeviceAction.stayInTheAppPlz")} />
-          ) : null}
-        </View>
+          )}
+        </Flex>
       )}
       {device && <SyncSkipUnderPriority priority={100} />}
     </BottomModal>
   );
 }
-
-const styles = StyleSheet.create({
-  footerContainer: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-});
