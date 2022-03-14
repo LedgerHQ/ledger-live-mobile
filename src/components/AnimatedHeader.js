@@ -169,7 +169,12 @@ export default function AnimatedHeaderView({
           ]}
           onLayout={onLayoutText}
         >
-          <LText bold style={[styles.title, titleStyle]} numberOfLines={4}>
+          <LText
+            variant="h1"
+            bold
+            style={[styles.title, titleStyle]}
+            numberOfLines={4}
+          >
             {title}
           </LText>
         </Animated.View>
@@ -212,7 +217,6 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   title: {
-    fontSize: normalize(34),
     lineHeight: 45,
   },
   buttons: {

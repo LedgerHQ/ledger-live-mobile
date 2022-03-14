@@ -3,8 +3,8 @@ import {
   Flex,
   Icons,
   Text,
-  Button as BaseButton,
   IconBoxList,
+  Link as TextLink,
 } from "@ledgerhq/native-ui";
 import Video from "react-native-video";
 import styled, { useTheme } from "styled-components/native";
@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { Linking } from "react-native";
 import Button from "../components/wrappedUi/Button";
 import { urls } from "../config/urls";
+import { useNavigationInterceptor } from "./Onboarding/onboardingContext";
+import { NavigatorName, ScreenName } from "../const";
 
 const StyledSafeAreaView = styled(SafeAreaView)`
   flex: 1;
@@ -50,8 +52,20 @@ export default function BuyDeviceScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { theme, colors } = useTheme();
+  const { setShowWelcome, setFirstTimeOnboarding } = useNavigationInterceptor();
 
   const handleBack = useCallback(() => navigation.goBack(), [navigation]);
+
+  const setupDevice = useCallback(() => {
+    setShowWelcome(false);
+    setFirstTimeOnboarding(false);
+    navigation.navigate(NavigatorName.BaseOnboarding, {
+      screen: NavigatorName.Onboarding,
+      params: {
+        screen: ScreenName.OnboardingDeviceSelection,
+      },
+    });
+  }, [navigation, setFirstTimeOnboarding, setShowWelcome]);
 
   const buyLedger = useCallback(() => {
     Linking.openURL(urls.buyNanoX);
@@ -87,7 +101,7 @@ export default function BuyDeviceScreen() {
         />
       </Flex>
       <Flex flex={1} p={6}>
-        <Flex mt={10} mb={10} justifyContent="center" alignItems="stretch">
+        <Flex mt={8} mb={10} justifyContent="center" alignItems="stretch">
           <Text textAlign="center" variant="h2">
             {t("buyDevice.title")}
           </Text>
@@ -114,6 +128,11 @@ export default function BuyDeviceScreen() {
       >
         {t("buyDevice.cta")}
       </Button>
+      <Flex p={6} pb={8}>
+        <TextLink type="color" onPress={setupDevice}>
+          {t("buyDevice.footer")}
+        </TextLink>
+      </Flex>
     </StyledSafeAreaView>
   );
 }

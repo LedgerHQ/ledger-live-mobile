@@ -759,24 +759,25 @@
     }
   },
   "buyDevice": {
-    "title": "Ledger Hardware",
-    "desc": "Protect your crypto assets with industry-leading security. Ledger offers the best product for keeping your crypto safe.",
-    "cta": "Get Started",
+    "title": "GET YOUR LEDGER",
+    "desc": "Protect your cryptocurrencies with industry-leading security",
+    "cta": "Buy your Ledger now",
+    "footer": "I already have a device, set it up now",
     "0": {
       "title": "Gain financial freedom",
-      "desc": "Unlock the freedom to manage your crypto on your own. The Ledger hardware paired with this app enables you to be the only one in charge of your money."
+      "desc": "Take charge and unlock the freedom to manage your crypto on your own."
     },
     "1": {
       "title": "Access a world of Defi",
-      "desc": "When storing your crypto on Ledger hardware you can securely interact directly with DeFi services directly from the app."
+      "desc": "Securely interact with our trusted DeFi applications directly from the app."
     },
     "2": {
       "title": "Your one stop shop for crypto",
-      "desc": "You can buy Bitcoin, Ethereum, Bitcoin Cash, Dash, USDT and Stellar directly through the app from our partners. Sell your Bitcoin for fiat currencies whenever you need to."
+      "desc": "You can buy, sell and swap major cryptocurrencies from our partners safely with your Ledger."
     },
     "3": {
-      "title": "Peace of mind with certified security ",
-      "desc": "Our wallets are the only hardware wallets on the market certified for their security by ANSSI, the French cyber security agency."
+      "title": "Peace of mind with certified security",
+      "desc": "Our products are the only hardware wallets certified for their security by national cyber security agencies."
     }
   },
   "onboarding": {

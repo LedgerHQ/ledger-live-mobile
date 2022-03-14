@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { useDispatch } from "react-redux";
-import { completeOnboarding, setReadOnlyMode } from "../../../actions/settings";
+import { completeOnboarding } from "../../../actions/settings";
 import { useNavigationInterceptor } from "../onboardingContext";
 
 import { NavigatorName } from "../../../const";
@@ -61,7 +61,6 @@ const FooterNextButton = ({ label }: { label: string }) => {
   const { resetCurrentStep } = useNavigationInterceptor();
 
   function next(): void {
-    dispatch(setReadOnlyMode(true));
     dispatch(completeOnboarding());
     resetCurrentStep();
 

@@ -29,6 +29,7 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Placeholder from "../../components/Placeholder";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import { useSelector } from "react-redux";
+import { useNavigationInterceptor } from "../Onboarding/onboardingContext";
 
 export default function PortfolioHeader({
   currentPositionY,
@@ -46,13 +47,26 @@ export default function PortfolioHeader({
   const navigation = useNavigation();
   const { colors, space } = useTheme();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+  const { setShowWelcome, setFirstTimeOnboarding } = useNavigationInterceptor();
 
   const { allIds, seenIds } = useAnnouncements();
   const { incidents } = useFilteredServiceStatus();
 
+  const setupDevice = useCallback(() => {
+    setShowWelcome(false);
+    setFirstTimeOnboarding(false);
+    navigation.navigate(NavigatorName.BaseOnboarding, {
+      screen: NavigatorName.Onboarding,
+      params: {
+        screen: ScreenName.OnboardingDeviceSelection,
+      },
+    });
+  }, [navigation, setFirstTimeOnboarding, setShowWelcome]);
+
   const onManagerButtonPress = useCallback(() => {
-    navigation.navigate(NavigatorName.Manager);
-  }, [navigation, readOnlyModeEnabled]);
+    if (readOnlyModeEnabled) setupDevice();
+    else navigation.navigate(NavigatorName.Manager);
+  }, [navigation, readOnlyModeEnabled, setupDevice]);
 
   const onNotificationButtonPress = useCallback(() => {
     navigation.navigate(NavigatorName.NotificationCenter);
