@@ -7,7 +7,11 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import {
+  Account,
+  Currency,
+  TokenAccount,
+} from "@ledgerhq/live-common/lib/types";
 import { Flex, ProgressLoader, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import { useSelector } from "react-redux";
@@ -50,7 +54,9 @@ const AccountRow = ({
     [colors, currency],
   );
 
-  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const counterValueCurrency: Currency = useSelector(
+    counterValueCurrencySelector,
+  );
 
   const countervalue = useCalculate({
     from: currency,
@@ -84,7 +90,7 @@ const AccountRow = ({
         accountId: account.id,
       });
     }
-  }, [account.id, account, accountId, navigation]);
+  }, [account, accountId, navigation]);
 
   return (
     <TouchableOpacity onPress={onAccountPress}>
