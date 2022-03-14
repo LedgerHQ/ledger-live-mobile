@@ -4,12 +4,11 @@ import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/Announ
 import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 
 import { Trans } from "react-i18next";
-import NewsRow from "./NewsRow";
-import FormatDate from "../../components/FormatDate";
 import { Flex, Text } from "@ledgerhq/native-ui";
 
-import styled from "styled-components/native";
-import { useTheme } from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
+import FormatDate from "../../components/FormatDate";
+import NewsRow from "./NewsRow";
 
 const viewabilityConfig = {
   viewAreaCoveragePercentThreshold: 95,
@@ -45,10 +44,7 @@ export default function NotificationCenter() {
 
   return (
     <SectionList
-      style={[
-        styles.sectionList,
-        { backgroundColor: colors.palette.neutral.c00 },
-      ]}
+      style={[styles.sectionList, { backgroundColor: colors.background.main }]}
       contentContainerStyle={styles.root}
       sections={sections}
       stickySectionHeadersEnabled
