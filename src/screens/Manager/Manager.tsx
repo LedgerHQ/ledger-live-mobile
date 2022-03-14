@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { CommonActions } from "@react-navigation/native";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
@@ -15,7 +14,6 @@ import StorageWarningModal from "./Modals/StorageWarningModal";
 import AppDependenciesModal from "./Modals/AppDependenciesModal";
 import UninstallDependenciesModal from "./Modals/UninstallDependenciesModal";
 import { useLockNavigation } from "../../components/RootNavigator/CustomBlockRouterNavigator";
-import { defaultNavigationOptions } from "../../navigation/navigatorConfig";
 import { setLastSeenDeviceInfo } from "../../actions/settings";
 
 export const MANAGER_TABS = {
@@ -85,16 +83,7 @@ const Manager = ({
   }, [setError, currentError]);
 
   // send informations to main router in order to lock navigation
-  useLockNavigation(blockNavigation, setQuitManagerAction);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerBackImage: blockNavigation
-        ? () => null
-        : defaultNavigationOptions.headerBackImage,
-      gestureEnabled: !blockNavigation,
-    });
-  }, [navigation, blockNavigation]);
+  useLockNavigation(blockNavigation, setQuitManagerAction, navigation);
 
   // Save last seen device
   useEffect(() => {
@@ -114,13 +103,7 @@ const Manager = ({
    * then trigger caught navigation action
    */
   const quitManager = useCallback(() => {
-    navigation.dispatch({
-      ...CommonActions.navigate(
-        quitManagerAction.payload.name,
-        quitManagerAction.payload.params,
-      ),
-      force: true, // custom navigation option to force redirect
-    });
+    navigation.dispatch(quitManagerAction);
     setQuitManagerAction(null);
   }, [quitManagerAction, setQuitManagerAction, navigation]);
 

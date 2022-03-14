@@ -32,6 +32,7 @@ const ExistingRecoveryPhraseStep2Scene = ({
   return (
     <>
       <NumberedList
+        flex={1}
         items={items.map(item => ({
           title: t(item.title),
           description: item.desc ? t(item.desc) : undefined,

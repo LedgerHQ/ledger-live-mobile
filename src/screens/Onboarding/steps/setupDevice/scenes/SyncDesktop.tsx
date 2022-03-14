@@ -22,7 +22,7 @@ const SyncDesktopScene = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <Flex>
+      <Flex flex={1}>
         <Text variant="h2">{t("v3.onboarding.stepImportAccounts.title")}</Text>
         <Text variant="body" color="neutral.c80" mt={5} mb={8}>
           {t("v3.onboarding.stepImportAccounts.desc")}

@@ -20,6 +20,8 @@ import {
   getAccountCapabilities,
   makeCompoundSummaryForAccount,
 } from "@ledgerhq/live-common/lib/compound/logic";
+import { Trans } from "react-i18next";
+import { Text } from "@ledgerhq/native-ui";
 import { switchCountervalueFirst } from "../../actions/settings";
 import { useBalanceHistoryWithCountervalue } from "../../actions/portfolio";
 import {
@@ -219,6 +221,11 @@ function AccountScreenInner({
       sections={sections}
       style={[styles.sectionList]}
       contentContainerStyle={styles.contentContainer}
+      ListHeaderComponent={() => (
+        <Text variant={"h3"} mt={8}>
+          <Trans i18nKey="account.lastOperations" />
+        </Text>
+      )}
       ListFooterComponent={
         !completed ? (
           <LoadingFooter />

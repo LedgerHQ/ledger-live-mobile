@@ -33,7 +33,7 @@ const IntroScene = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <Flex>
+      <Flex flex={1}>
         <Text variant="h2" mb={10} uppercase>
           {t("v3.onboarding.stepSetupDevice.start.title")}
         </Text>

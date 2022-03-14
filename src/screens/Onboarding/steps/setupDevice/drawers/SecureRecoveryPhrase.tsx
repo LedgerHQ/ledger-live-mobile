@@ -24,6 +24,7 @@ const OnboardingSetupRecoveryPhrase = () => {
   return (
     <Flex
       flex={1}
+      p={6}
       justifyContent="space-between"
       backgroundColor="background.main"
     >

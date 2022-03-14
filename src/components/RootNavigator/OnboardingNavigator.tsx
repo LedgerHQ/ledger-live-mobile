@@ -5,20 +5,18 @@ import {
   TransitionPresets,
   StackNavigationOptions,
   StackScreenProps,
-  TransitionSpecs,
 } from "@react-navigation/stack";
-import { useRoute } from "@react-navigation/native";
 import { Flex } from "@ledgerhq/native-ui";
+import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
-import OnboardingLanguage, {
-  OnboardingStepLanguageGetStarted,
-} from "../../screens/Onboarding/steps/language";
+import OnboardingLanguage from "../../screens/Onboarding/steps/language";
 import OnboardingTerms from "../../screens/Onboarding/steps/terms";
 import OnboardingDeviceSelection from "../../screens/Onboarding/steps/deviceSelection";
 import OnboardingUseCase from "../../screens/Onboarding/steps/useCaseSelection";
 import OnboardingNewDeviceInfo from "../../screens/Onboarding/steps/newDeviceInfo";
+import OnboardingNewDiscoverLiveInfo from "../../screens/Onboarding/steps/discoverLiveInfo";
 import OnboardingNewDevice from "../../screens/Onboarding/steps/setupDevice";
 import OnboardingRecoveryPhrase from "../../screens/Onboarding/steps/recoveryPhrase";
 import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
@@ -39,173 +37,11 @@ import OnboardingBluetoothInformation from "../../screens/Onboarding/steps/setup
 import OnboardingWarning from "../../screens/Onboarding/steps/setupDevice/drawers/Warning";
 import OnboardingSyncDesktopInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SyncDesktopInformation";
 import OnboardingRecoveryPhraseWarning from "../../screens/Onboarding/steps/setupDevice/drawers/RecoveryPhraseWarning";
+import PostWelcomeSelection from "../../screens/Onboarding/steps/postWelcomeSelection";
 
 const Stack = createStackNavigator();
-const LanguageModalStack = createStackNavigator();
-const SetupNewDeviceModalStack = createStackNavigator();
-const SetupDeviceStepStack = createStackNavigator();
-const GeneralInformationStack = createStackNavigator();
 const OnboardingCarefulWarningStack = createStackNavigator();
 const OnboardingPreQuizModalStack = createStackNavigator();
-
-function LanguageModalNavigator(props: StackScreenProps<{}>) {
-  const options: Partial<StackNavigationOptions> = {
-    header: props => <NavigationHeader {...props} hideBack />,
-    headerStyle: { backgroundColor: "transparent" },
-    transitionSpec: {
-      open: TransitionSpecs.TransitionIOSSpec,
-      close: TransitionSpecs.TransitionIOSSpec,
-    },
-  };
-
-  return (
-    <NavigationModalContainer {...props} backgroundColor="background.main">
-      <LanguageModalStack.Navigator>
-        <LanguageModalStack.Screen
-          name={ScreenName.OnboardingLanguage}
-          component={OnboardingLanguage}
-          options={{
-            title: "v3.onboarding.stepLanguage.title",
-            ...options,
-          }}
-        />
-        <LanguageModalStack.Screen
-          name={ScreenName.OnboardingStepLanguageGetStarted}
-          component={OnboardingStepLanguageGetStarted}
-          options={{
-            title: "v3.onboarding.stepLanguage.title",
-            ...options,
-          }}
-        />
-      </LanguageModalStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
-
-function SetupDeviceStepSecureRecoveryNavigator(props: StackScreenProps<{}>) {
-  const options: Partial<StackNavigationOptions> = {
-    header: props => (
-      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-      <Flex backgroundColor="background.main">
-        <NavigationHeader
-          {...props}
-          hideBack
-          containerProps={{ backgroundColor: "transparent" }}
-        />
-      </Flex>
-    ),
-    headerStyle: { backgroundColor: "transparent" },
-  };
-
-  return (
-    <NavigationModalContainer {...props} backgroundColor="background.main">
-      <SetupDeviceStepStack.Navigator>
-        <SetupDeviceStepStack.Screen
-          name={ScreenName.OnboardingSetupDeviceRecoveryPhrase}
-          component={OnboardingSetupDeviceRecoveryPhrase}
-          options={{ title: "", ...options }}
-        />
-      </SetupDeviceStepStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
-
-function OnboardingGeneralInformationNavigator(props: StackScreenProps<{}>) {
-  const options: Partial<StackNavigationOptions> = {
-    header: props => (
-      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-      <Flex backgroundColor="background.main">
-        <NavigationHeader
-          {...props}
-          hideBack
-          containerProps={{ backgroundColor: "transparent" }}
-        />
-      </Flex>
-    ),
-    headerStyle: { backgroundColor: "transparent" },
-  };
-
-  return (
-    <NavigationModalContainer {...props} backgroundColor="background.main">
-      <GeneralInformationStack.Navigator>
-        <GeneralInformationStack.Screen
-          name={ScreenName.OnboardingGeneralInformation}
-          component={OnboardingGeneralInformation}
-          options={{ title: "", ...options }}
-        />
-        <GeneralInformationStack.Screen
-          name={ScreenName.OnboardingBluetoothInformation}
-          component={OnboardingBluetoothInformation}
-          options={{ title: "", ...options }}
-        />
-      </GeneralInformationStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
-
-function SetupDeviceStepNavigator(props: StackScreenProps<{}>) {
-  const options: Partial<StackNavigationOptions> = {
-    header: props => (
-      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-      <Flex backgroundColor="background.main">
-        <NavigationHeader
-          {...props}
-          hideBack
-          containerProps={{ backgroundColor: "transparent" }}
-        />
-      </Flex>
-    ),
-    headerStyle: { backgroundColor: "transparent" },
-  };
-
-  return (
-    <NavigationModalContainer {...props} backgroundColor="background.main">
-      <SetupDeviceStepStack.Navigator>
-        <SetupDeviceStepStack.Screen
-          name={ScreenName.OnboardingSetupDeviceInformation}
-          component={OnboardingSetupDeviceInformation}
-          options={{
-            title: "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.title",
-            ...options,
-          }}
-        />
-      </SetupDeviceStepStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
-
-function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
-  const route = useRoute();
-  const options: Partial<StackNavigationOptions> = {
-    header: props => (
-      <Flex bg="primary.c60">
-        <NavigationHeader
-          {...props}
-          hideBack
-          containerProps={{ backgroundColor: "transparent" }}
-        />
-      </Flex>
-    ),
-    headerStyle: { backgroundColor: "transparent" },
-  };
-
-  return (
-    // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-    <NavigationModalContainer {...props} backgroundColor="primary.c60">
-      <SetupNewDeviceModalStack.Navigator>
-        <SetupNewDeviceModalStack.Screen
-          name={ScreenName.OnboardingSetNewDeviceInfo}
-          component={OnboardingNewDeviceInfo}
-          initialParams={route.params}
-          options={{
-            title: "v3.onboarding.stepNewDevice.title",
-            ...options,
-          }}
-        />
-      </SetupNewDeviceModalStack.Navigator>
-    </NavigationModalContainer>
-  );
-}
 
 function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
@@ -290,10 +126,17 @@ const modalOptions: Partial<StackNavigationOptions> = {
   presentation: "transparentModal",
   cardOverlayEnabled: true,
   cardOverlay: () => <NavigationOverlay />,
-  ...TransitionPresets.ModalPresentationIOS,
+  headerShown: false,
+  ...TransitionPresets.ModalTransition,
+};
+
+const infoModalOptions: Partial<StackNavigationOptions> = {
+  ...TransitionPresets.ModalTransition,
+  headerShown: true,
 };
 
 export default function OnboardingNavigator() {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -307,9 +150,16 @@ export default function OnboardingNavigator() {
         component={OnboardingWelcome}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingLanguageModal}
-        component={LanguageModalNavigator}
-        options={modalOptions}
+        name={ScreenName.OnboardingPostWelcomeSelection}
+        component={PostWelcomeSelection}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingLanguage}
+        component={OnboardingLanguage}
+        options={{
+          ...infoModalOptions,
+          headerTitle: t("v3.onboarding.stepLanguage.title"),
+        }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingTermsOfUse}
@@ -334,26 +184,33 @@ export default function OnboardingNavigator() {
         options={modalOptions}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingModalSetupNewDevice}
-        component={SetupNewDeviceModalNavigator}
-        options={modalOptions}
+        name={ScreenName.OnboardingModalDiscoverLive}
+        component={OnboardingNewDiscoverLiveInfo}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingModalSetupSteps}
-        component={SetupDeviceStepNavigator}
-        options={modalOptions}
+        name={ScreenName.OnboardingModalSetupNewDevice}
+        component={OnboardingNewDeviceInfo}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingSetupDeviceInformation}
+        component={OnboardingSetupDeviceInformation}
+        options={infoModalOptions}
       />
       <Stack.Screen
         name={ScreenName.OnboardingModalSetupSecureRecovery}
-        component={SetupDeviceStepSecureRecoveryNavigator}
-        options={modalOptions}
+        component={OnboardingSetupDeviceRecoveryPhrase}
+        options={infoModalOptions}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingModalGeneralInformation}
-        component={OnboardingGeneralInformationNavigator}
-        options={modalOptions}
+        name={ScreenName.OnboardingGeneralInformation}
+        component={OnboardingGeneralInformation}
+        options={infoModalOptions}
       />
-
+      <Stack.Screen
+        name={ScreenName.OnboardingBluetoothInformation}
+        component={OnboardingBluetoothInformation}
+        options={infoModalOptions}
+      />
       <Stack.Screen
         name={ScreenName.OnboardingSetNewDevice}
         component={OnboardingNewDevice}

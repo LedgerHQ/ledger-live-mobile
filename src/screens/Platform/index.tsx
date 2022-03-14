@@ -115,9 +115,9 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
             <Text variant="h1">{t("platform.catalog.title")}</Text>
           </Flex>
         }
-        containerProps={{ bg: "background.main", px: 6 }}
+        containerProps={{ bg: "background.main" }}
       >
-        <Flex flex={1}>
+        <Flex flex={1} px={6}>
           {disclaimerOpts && (
             <DAppDisclaimer
               disableDisclaimer={disclaimerOpts.disableDisclaimer}

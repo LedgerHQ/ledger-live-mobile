@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components/native";
 import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 
-import ActionModal from "./ActionModal";
+import BottomModal from "../../../components/BottomModal";
 
 type Props = {
   isOpened: boolean;
@@ -33,7 +33,7 @@ const ModalText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
 
@@ -44,29 +44,31 @@ const CancelButton = styled(TouchableOpacity)`
 `;
 
 const UninstallAllModal = ({ isOpened, onClose, onConfirm }: Props) => (
-  <ActionModal isOpened={!!isOpened} onClose={onClose} actions={[]}>
-    <IconContainer borderColor="neutral.c40">
-      <Icons.TrashMedium size={24} color="error.c100" />
-    </IconContainer>
-    <TextContainer>
-      <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-        <Trans i18nKey="v3.manager.uninstall.subtitle" />
-      </ModalText>
-      <ModalText color="neutral.c70" fontWeight="medium" variant="body">
-        <Trans i18nKey="v3.manager.uninstall.description" />
-      </ModalText>
-    </TextContainer>
-    <ButtonsContainer>
-      <Button size="large" type="error" onPress={onConfirm}>
-        <Trans i18nKey="v3.manager.uninstall.uninstallAll" />
-      </Button>
-      <CancelButton onPress={onClose}>
-        <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-          <Trans i18nKey="common.cancel" />
-        </Text>
-      </CancelButton>
-    </ButtonsContainer>
-  </ActionModal>
+  <BottomModal isOpened={!!isOpened} onClose={onClose}>
+    <Flex alignItems="center">
+      <IconContainer borderColor="neutral.c40">
+        <Icons.TrashMedium size={24} color="error.c100" />
+      </IconContainer>
+      <TextContainer>
+        <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+          <Trans i18nKey="v3.manager.uninstall.subtitle" />
+        </ModalText>
+        <ModalText color="neutral.c70" fontWeight="medium" variant="body">
+          <Trans i18nKey="v3.manager.uninstall.description" />
+        </ModalText>
+      </TextContainer>
+      <ButtonsContainer>
+        <Button size="large" type="error" onPress={onConfirm}>
+          <Trans i18nKey="v3.manager.uninstall.uninstallAll" />
+        </Button>
+        <CancelButton onPress={onClose}>
+          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
+            <Trans i18nKey="common.cancel" />
+          </Text>
+        </CancelButton>
+      </ButtonsContainer>
+    </Flex>
+  </BottomModal>
 );
 
 export default memo(UninstallAllModal);

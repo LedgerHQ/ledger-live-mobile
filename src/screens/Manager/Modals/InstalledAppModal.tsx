@@ -1,24 +1,24 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { TouchableOpacity, Linking } from "react-native";
+import { Linking } from "react-native";
 import { Trans } from "react-i18next";
 
-import type { State } from "@ledgerhq/live-common/lib/apps";
+import { State } from "@ledgerhq/live-common/lib/apps";
 import { isLiveSupportedApp } from "@ledgerhq/live-common/lib/apps/logic";
 
+import styled from "styled-components/native";
+import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import { urls } from "../../../config/urls";
 
 import { NavigatorName } from "../../../const";
 
 import AppIcon from "../AppsList/AppIcon";
 
-import styled from "styled-components/native";
-import ActionModal from "./ActionModal";
-import { Flex, Text, Button } from "@ledgerhq/native-ui";
+import BottomModal from "../../../components/BottomModal";
 
 type Props = {
-  state: State,
-  navigation: any,
-  disable: boolean,
+  state: State;
+  navigation: any;
+  disable: boolean;
 };
 
 const TextContainer = styled(Flex).attrs({
@@ -35,15 +35,9 @@ const ModalText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
-
-const CancelButton = styled(TouchableOpacity)`
-  align-items: center;
-  justify-content: center;
-  margin-top: 25;
-`;
 
 const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const [hasBeenShown, setHasBeenShown] = useState(disable);
@@ -88,61 +82,46 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   );
 
   const app = useMemo(
-    () => (successInstalls && successInstalls.length > 0 && successInstalls[0]) || {},
+    () =>
+      (successInstalls && successInstalls.length > 0 && successInstalls[0]) ||
+      {},
     [successInstalls],
   );
 
   const onClose = useCallback(() => setHasBeenShown(true), []);
 
   return (
-    <ActionModal isOpened={successInstalls.length >= 1} onClose={onClose} actions={[]}>
+    <BottomModal isOpened={successInstalls.length >= 1} onClose={onClose}>
+      <Flex alignItems="center">
         <AppIcon app={app} size={48} radius={14} />
         <TextContainer>
-          <ModalText
-            color="neutral.c100"
-            fontWeight="medium"
-            variant="h2"
-          >
-            <Trans
-              i18nKey="v3.AppAction.install.done.title"
-            />
+          <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+            <Trans i18nKey="v3.AppAction.install.done.title" />
           </ModalText>
-          <ModalText
-            color="neutral.c70"
-            fontWeight="medium"
-            variant="body"
-          >
-            {hasLiveSupported
-              ? (
-                <Trans
-                  i18nKey="v3.AppAction.install.done.description"
-                  values={{ app: app.name }}
-                />
-              ) : (
+          <ModalText color="neutral.c70" fontWeight="medium" variant="body">
+            {hasLiveSupported ? (
               <Trans
-                i18nKey="manager.installSuccess.notSupported"
+                i18nKey="v3.AppAction.install.done.description"
+                values={{ app: app.name }}
               />
+            ) : (
+              <Trans i18nKey="manager.installSuccess.notSupported" />
             )}
           </ModalText>
         </TextContainer>
         <ButtonsContainer>
-          {hasLiveSupported
-            ? (
-              <Button size="large" type="main" onPress={onAddAccount}>
-                <Trans i18nKey="v3.AppAction.install.done.accounts" />
-              </Button>
-            ) : (
+          {hasLiveSupported ? (
+            <Button size="large" type="main" onPress={onAddAccount}>
+              <Trans i18nKey="v3.AppAction.install.done.accounts" />
+            </Button>
+          ) : (
             <Button size="large" type="main" onPress={onSupportLink}>
               <Trans i18nKey="manager.installSuccess.learnMore" />
             </Button>
           )}
-          <CancelButton onPress={onClose}>
-            <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-              <Trans i18nKey="common.cancel" />
-            </Text>
-          </CancelButton>
         </ButtonsContainer>
-  </ActionModal>
+      </Flex>
+    </BottomModal>
   );
 };
 

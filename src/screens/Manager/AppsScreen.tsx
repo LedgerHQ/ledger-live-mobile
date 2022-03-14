@@ -300,6 +300,7 @@ const AppsScreen = ({
         renderItem={renderRow}
         ListEmptyComponent={renderNoResults}
         keyExtractor={item => item.name}
+        showsVerticalScrollIndicator={false}
       />
     ),
     [
@@ -329,7 +330,7 @@ const AppsScreen = ({
       <Search
         fuseOptions={{
           threshold: 0.1,
-          keys: ["name", "id"],
+          keys: ["name"],
           shouldSort: false,
         }}
         value={query}

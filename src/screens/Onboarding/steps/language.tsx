@@ -55,7 +55,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
   );
 
   return (
-    <>
+    <Flex flex={1} p={6}>
       <ScrollView>
         <Flex mb={4}>
           <SelectableList
@@ -77,7 +77,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
         outline={false}
         title={<Trans i18nKey="v3.onboarding.stepLanguage.cta" />}
       />
-    </>
+    </Flex>
   );
 }
 

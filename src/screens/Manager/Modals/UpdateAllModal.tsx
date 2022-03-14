@@ -1,12 +1,12 @@
 import React, { memo, useCallback } from "react";
-import { TouchableOpacity, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { Trans } from "react-i18next";
 import { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import { State, App } from "@ledgerhq/live-common/lib/types/manager";
 import styled from "styled-components/native";
 import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 
-import ActionModal from "./ActionModal";
+import BottomModal from "../../../components/BottomModal";
 
 import AppIcon from "../AppsList/AppIcon";
 import ByteSize from "../../../components/ByteSize";
@@ -66,7 +66,7 @@ const ModalText = styled(Text).attrs({
 })``;
 
 const ButtonsContainer = styled(Flex).attrs({
-  marginBottom: 24,
+  marginTop: 24,
   width: "100%",
 })``;
 
@@ -75,12 +75,6 @@ const FlatListContainer = styled(FlatList).attrs({
   maxHeight: 250,
   marginBottom: 20,
 })``;
-
-const CancelButton = styled(TouchableOpacity)`
-  align-items: center;
-  justify-content: center;
-  margin-top: 25;
-`;
 
 const UpdateAllModal = ({
   isOpened,
@@ -158,34 +152,32 @@ const UpdateAllModal = ({
   );
 
   return (
-    <ActionModal isOpened={!!isOpened} onClose={onClose} actions={[]}>
-      <IconContainer borderColor="neutral.c40">
-        <Icons.RefreshMedium size={24} color="neutral.c100" />
-      </IconContainer>
-      <TextContainer>
-        <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-          <Trans i18nKey="v3.manager.update.subtitle" />
-        </ModalText>
-      </TextContainer>
-      <FlatListContainer
-        data={data}
-        renderItem={renderAppLine}
-        keyExtractor={keyExtractor}
-        bounces={false}
-        scrollEnabled
-        scrollEventThrottle={50}
-      />
-      <ButtonsContainer>
-        <Button size="large" type="main" onPress={onConfirm}>
-          <Trans i18nKey="v3.manager.update.updateAll" />
-        </Button>
-        <CancelButton onPress={onClose}>
-          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-            <Trans i18nKey="common.cancel" />
-          </Text>
-        </CancelButton>
-      </ButtonsContainer>
-    </ActionModal>
+    <BottomModal isOpened={!!isOpened} onClose={onClose}>
+      <Flex alignItems="center">
+        <IconContainer borderColor="neutral.c40">
+          <Icons.RefreshMedium size={24} color="neutral.c100" />
+        </IconContainer>
+        <TextContainer>
+          <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+            <Trans i18nKey="v3.manager.update.subtitle" />
+          </ModalText>
+        </TextContainer>
+        <FlatListContainer
+          data={data}
+          renderItem={renderAppLine}
+          keyExtractor={keyExtractor}
+          bounces={false}
+          scrollEnabled
+          scrollEventThrottle={50}
+          showsVerticalScrollIndicator={false}
+        />
+        <ButtonsContainer>
+          <Button size="large" type="main" onPress={onConfirm}>
+            <Trans i18nKey="v3.manager.update.updateAll" />
+          </Button>
+        </ButtonsContainer>
+      </Flex>
+    </BottomModal>
   );
 };
 

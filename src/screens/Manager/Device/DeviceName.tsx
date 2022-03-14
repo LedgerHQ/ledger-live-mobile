@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { PenMedium } from "@ledgerhq/native-ui/assets/icons";
 
+import { TouchableOpacity } from "react-native";
 import { deviceNameByDeviceIdSelectorCreator } from "../../../reducers/ble";
 import { ScreenName } from "../../../const";
-import { TouchableOpacity } from "react-native";
 
 type Props = {
   deviceId: string;
@@ -36,7 +36,12 @@ export default function DeviceNameRow({
 
   return (
     <Flex flexDirection={"row"} flexWrap={"nowrap"}>
-      <Text variant={"h2"} numberOfLines={1} ellipsizeMode="tail">
+      <Text
+        maxWidth="90%"
+        variant={"h2"}
+        numberOfLines={2}
+        ellipsizeMode="tail"
+      >
         {savedName || initialDeviceName || productName}
       </Text>
       {id !== "nanoS" && (
@@ -50,7 +55,7 @@ export default function DeviceNameRow({
           justifyContent="center"
         >
           <TouchableOpacity onPress={onPress} disabled={disabled}>
-            <PenMedium size={16} color={"palette.primary.c80"}/>
+            <PenMedium size={16} color={"palette.primary.c80"} />
           </TouchableOpacity>
         </Flex>
       )}

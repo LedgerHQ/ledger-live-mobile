@@ -3,7 +3,7 @@ import React from "react";
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import styled, { useTheme } from "styled-components/native";
 
-import { Box, ProgressLoader } from "@ledgerhq/native-ui";
+import { Box, ProgressLoader, Icons } from "@ledgerhq/native-ui";
 
 import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
 
@@ -18,7 +18,7 @@ type Props = {
 const ButtonCenter = styled(Box).attrs({
   width: 10,
   height: 10,
-  borderRadius: "1px",
+  borderRadius: "10px",
 })``;
 
 export default function AppProgressButton({
@@ -42,7 +42,8 @@ export default function AppProgressButton({
       strokeWidth={2}
       mainColor={color}
     >
-      <ButtonCenter bg={color} />
+      {installing || updating ? (<Icons.NanoFirmwareUpdateMedium size={size * 0.375} color={color} />) : <Icons.TrashMedium size={size * 0.375} color={color} /> }
+      
     </ProgressLoader>
   );
 }
