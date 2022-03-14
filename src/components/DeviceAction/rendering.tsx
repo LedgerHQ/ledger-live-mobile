@@ -6,7 +6,7 @@ import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { AppRequest } from "@ledgerhq/live-common/lib/hw/actions/app";
-import { InfiniteLoader, Text, Flex } from "@ledgerhq/native-ui";
+import { InfiniteLoader, Text, Flex, Tag, Icons } from "@ledgerhq/native-ui";
 import { setModalLock } from "../../actions/appstate";
 import { urls } from "../../config/urls";
 import Alert from "../Alert";
@@ -68,9 +68,8 @@ const DescriptionText = styled(CenteredText).attrs({
   color: "neutral.c70",
 })``;
 
-const ConnectDeviceNameText = styled(CenteredText).attrs({
-  marginBottom: "8px",
-  fontSize: "15px",
+const ConnectDeviceNameText = styled(Tag).attrs({
+  my: "8",
 })``;
 
 const ConnectDeviceLabelText = styled(CenteredText).attrs({
@@ -434,6 +433,7 @@ export function renderConnectYourDevice({
         <ConnectDeviceExtraContentWrapper>
           <ExternalLink
             text={t("DeviceAction.useAnotherDevice")}
+            Icon={Icons.ArrowRightMedium}
             onPress={onSelectDeviceLink}
           />
         </ConnectDeviceExtraContentWrapper>
