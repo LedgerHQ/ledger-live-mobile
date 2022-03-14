@@ -1,12 +1,10 @@
 import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet, View, Linking } from "react-native";
+import { Linking, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
-import { Icons, Text, Alert as BaseAlert } from "@ledgerhq/native-ui";
-import OldAlert from "./Alert.js";
+import { Icons, Text, Alert as BaseAlert, Flex } from "@ledgerhq/native-ui";
+import styled from "styled-components/native";
 import { dismissedBannersSelector } from "../reducers/settings";
-
-import IconExternalLink from "../icons/ExternalLink";
 
 type AlertType =
   | "primary"
@@ -30,52 +28,108 @@ type Props = {
   learnMoreKey?: string;
   learnMoreUrl?: string;
   learnMoreIsInternal?: boolean;
+  learnMoreIcon?: IconType;
 };
 
 function getAlertProps(type: AlertType) {
   return {
     primary: {
       type: "info",
-      icon: Icons.InfoMedium,
+      Icon: Icons.InfoMedium,
     },
     secondary: {
       type: "info",
-      icon: Icons.InfoMedium,
+      Icon: Icons.InfoMedium,
     },
     success: {
       type: "info",
-      icon: Icons.CircledCheckMedium,
+      Icon: Icons.CircledCheckMedium,
     },
     warning: {
       type: "warning",
-      icon: Icons.CircledAlertMedium,
+      Icon: Icons.CircledAlertMedium,
     },
     error: {
       type: "error",
-      icon: Icons.CircledCrossMedium,
+      Icon: Icons.CircledCrossMedium,
     },
     hint: {
       type: "info",
-      icon: Icons.LightbulbMedium,
+      Icon: Icons.LightbulbMedium,
     },
     security: {
       type: "warning",
-      icon: Icons.ShieldSecurityMedium,
+      Icon: Icons.ShieldSecurityMedium,
     },
     help: {
       type: "info",
-      icon: Icons.ShieldSecurityMedium,
+      Icon: Icons.ShieldSecurityMedium,
     },
     danger: {
       type: "error",
-      icon: Icons.ShieldSecurityMedium,
+      Icon: Icons.ShieldSecurityMedium,
     },
     update: {
       type: "warning",
-      icon: Icons.WarningMedium,
+      Icon: Icons.WarningMedium,
     },
   }[type];
 }
+
+type IconType = React.ComponentType<{ size: number; color: string }>;
+
+type LearnMoreLinkProps = {
+  color: string;
+  onPress?: () => void;
+  learnMoreIsInternal?: boolean;
+  learnMoreKey?: string;
+  Icon?: IconType;
+};
+
+const StyledText = styled(Text).attrs({
+  variant: "bodyLineHeight",
+  fontWeight: "medium",
+})``;
+
+const UnderlinedText = styled(StyledText)`
+  text-decoration-line: underline;
+`;
+
+const LinkTouchable = styled(TouchableOpacity).attrs({
+  activeOpacity: 0.5,
+})`
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LearnMoreLink = ({
+  onPress,
+  learnMoreIsInternal,
+  learnMoreKey,
+  color,
+  Icon,
+}: LearnMoreLinkProps) => {
+  const IconComponent = Icon || Icons.ExternalLinkMedium;
+  return (
+    <LinkTouchable onPress={onPress}>
+      <UnderlinedText mr="5px" color={color}>
+        <Trans i18nKey={learnMoreKey || "common.learnMore"} />
+      </UnderlinedText>
+      {(Icon || !learnMoreIsInternal) && (
+        <IconComponent size={16} color={color} />
+      )}
+    </LinkTouchable>
+  );
+};
+
+const Container = styled(Flex).attrs({
+  width: "100%",
+  flexDirection: "column",
+  flex: 1,
+  alignItems: "flex-start",
+})``;
 
 export default function Alert(props: Props) {
   const {
@@ -88,6 +142,7 @@ export default function Alert(props: Props) {
     learnMoreUrl,
     learnMoreKey,
     learnMoreIsInternal = false,
+    learnMoreIcon,
   } = props;
 
   const dismissedBanners = useSelector(dismissedBannersSelector);
@@ -111,53 +166,39 @@ export default function Alert(props: Props) {
     [onLearnMore, learnMoreUrl],
   );
 
-  const learnMore = hasLearnMore && (
-    <Text onPress={handleLearnMore}>
-      <Text style={[styles.learnMore]} fontSize={3}>
-        <Trans i18nKey={learnMoreKey || "common.learnMore"} />
-      </Text>
-      {!learnMoreIsInternal && (
-        <>
-          {" "}
-          <IconExternalLink size={12} />
-        </>
-      )}
-    </Text>
-  );
-
   const isDismissed = useMemo(() => dismissedBanners.includes(id), [
     dismissedBanners,
     id,
   ]);
 
-  /** TODO:
-   * - cleanup styles
-   * - use latest version of lib UI with customizable icon
-   * - implement proper design for learnMore link using UI lib https://www.figma.com/file/wGzwuUVo0rkCJ3sM8cpbDY/LLM-%2F-Library?node-id=5913%3A67123
-   */
-
   return (
     !isDismissed && (
-      <BaseAlert {...alertProps}>
-        <View style={[styles.root]}>
-          {title ? <Text>{title}</Text> : null}
-          <Text fontSize={3}>{description}</Text>
-          <Text>{learnMore}</Text>
-        </View>
-      </BaseAlert>
+      <BaseAlert
+        {...alertProps}
+        renderContent={({ textColor }) => (
+          <Container>
+            {title && <StyledText color={textColor}>{title}</StyledText>}
+            {description && (
+              <StyledText
+                mt={title ? "6px" : undefined}
+                mb={hasLearnMore ? "6px" : undefined}
+                color={textColor}
+              >
+                {description}
+              </StyledText>
+            )}
+            {hasLearnMore && (
+              <LearnMoreLink
+                color={textColor}
+                onPress={handleLearnMore}
+                learnMoreKey={learnMoreKey}
+                learnMoreIsInternal={learnMoreIsInternal}
+                Icon={learnMoreIcon}
+              />
+            )}
+          </Container>
+        )}
+      />
     )
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    width: "100%",
-    flexDirection: "column",
-    flex: 1,
-    alignItems: "flex-start",
-  },
-  learnMore: {
-    textDecorationLine: "underline",
-    marginTop: 8,
-  },
-});
