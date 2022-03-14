@@ -6,8 +6,7 @@ import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import Button from "../Button";
 
-import PairLight from "../../screens/Onboarding/assets/nanoX/pairDevice/light.json";
-import PairDark from "../../screens/Onboarding/assets/nanoX/pairDevice/dark.json";
+import lottie from "../../screens/Onboarding/assets/nanoX/pairDevice/data.json";
 
 import LText from "../LText";
 import Animation from "../Animation";
@@ -18,12 +17,11 @@ type Props = {
 };
 
 function BluetoothEmpty({ onPairNewDevice }: Props) {
-  const { dark, colors } = useTheme();
-
+  const { colors } = useTheme();
   return (
     <>
       <View style={styles.imageContainer}>
-        <Animation source={dark ? PairDark : PairLight} style={styles.image} />
+        <Animation source={lottie} style={styles.image} />
       </View>
       <View style={styles.bulletLine}>
         <View

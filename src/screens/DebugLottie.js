@@ -43,9 +43,9 @@ const DebugLottie = () => {
     [],
   );
 
-  const [modelId, setModelId] = useState(Config.OVERRIDE_MODEL_ID || "nanoS");
+  const [modelId, setModelId] = useState(Config.OVERRIDE_MODEL_ID);
   const [wired, setWired] = useState(false);
-  const [key, setKey] = useState<any>("plugAndPinCode");
+  const [key, setKey] = useState<any>("enterPinCode");
   const [keyModalVisible, setKeyModalVisible] = useState(false);
   const animation = useMemo(() => {
     if (keys.includes(key)) {
@@ -94,30 +94,30 @@ const DebugLottie = () => {
         {!key ? "Select Animation" : `Showing '${key}'`}
       </LText>
       <View style={{ borderWidth: 1 }}>
-        {animation && <Animation source={animation} />}
+        <Animation source={animation} />
       </View>
       <View style={{ backgroundColor: "#121212" }}>
-        {animation2 && <Animation source={animation2} />}
+        <Animation source={animation2} />
       </View>
       <View style={styles.select}>
         <Button
-          type={modelId === "nanoS" ? "primary" : "secondary"}
+          type="primary"
           title="nanoS"
-          disabled={Config.OVERRIDE_MODEL_ID || key === "pairDevice"}
+          disabled={Config.OVERRIDE_MODEL_ID}
           onPress={() => {
             setModelId("nanoS");
           }}
         />
         <Button
-          type={modelId === "nanoSP" ? "primary" : "secondary"}
+          type="primary"
           title="nanoSP"
-          disabled={Config.OVERRIDE_MODEL_ID || key === "pairDevice"}
+          disabled={Config.OVERRIDE_MODEL_ID}
           onPress={() => {
             setModelId("nanoSP");
           }}
         />
         <Button
-          type={modelId === "nanoX" ? "primary" : "secondary"}
+          type="primary"
           title="nanoX"
           disabled={Config.OVERRIDE_MODEL_ID}
           onPress={() => {
@@ -136,8 +136,8 @@ const DebugLottie = () => {
       <Button
         containerStyle={{ marginTop: 8 }}
         type="primary"
-        title={`Show ${wired ? "Bluetooth" : "Wired"}`}
-        disabled={modelId !== "nanoX" || !keys.includes(key)}
+        title="Toggle wired"
+        disabled={modelId !== "nanoX"}
         onPress={() => setWired(wired => !wired)}
       />
       <Button
@@ -152,10 +152,6 @@ const DebugLottie = () => {
             <Touchable
               key={_key + i}
               onPress={() => {
-                if (_key === "pairDevice") {
-                  setModelId("nanoX");
-                  setWired(false);
-                }
                 setKey(_key);
                 setKeyModalVisible(false);
               }}

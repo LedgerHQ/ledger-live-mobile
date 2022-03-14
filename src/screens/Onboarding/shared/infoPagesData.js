@@ -11,45 +11,33 @@ import recoveryPhrase from "../assets/recoveryPhrase.png";
 import recoverySheet from "../assets/recoverySheet.png";
 import hideRecoveryPhrase from "../assets/hideRecoveryPhrase.png";
 
-import pinCodeNanoXLight from "../assets/nanoX/pinCode/light.json";
-import pinCodeNanoXDark from "../assets/nanoX/pinCode/dark.json";
-import pinCodeNanoSLight from "../assets/nanoS/pinCode/light.json";
-import pinCodeNanoSDark from "../assets/nanoS/pinCode/dark.json";
+import pinCodeNanoX from "../assets/nanoX/pinCode/data.json";
+import pinCodeNanoS from "../assets/nanoS/pinCode/data.json";
 import pinCodeNanoSPLight from "../assets/nanoSP/pinCode/light.json";
 import pinCodeNanoSPDark from "../assets/nanoSP/pinCode/dark.json";
 
-import recoverNanoXLight from "../assets/nanoX/recover/light.json";
-import recoverNanoXDark from "../assets/nanoX/recover/dark.json";
-import recoverNanoSLight from "../assets/nanoS/recover/light.json";
-import recoverNanoSDark from "../assets/nanoS/recover/dark.json";
+import recoverNanoX from "../assets/nanoX/recover/data.json";
+import recoverNanoS from "../assets/nanoS/recover/data.json";
 import recoverNanoSPLight from "../assets/nanoSP/recover/light.json";
 import recoverNanoSPDark from "../assets/nanoSP/recover/dark.json";
 
-import confirmWordsNanoXLight from "../assets/nanoX/confirmWords/light.json";
-import confirmWordsNanoXDark from "../assets/nanoX/confirmWords/dark.json";
-import confirmWordsNanoSLight from "../assets/nanoS/confirmWords/light.json";
-import confirmWordsNanoSDark from "../assets/nanoS/confirmWords/dark.json";
+import confirmWordsNanoX from "../assets/nanoX/confirmWords/data.json";
+import confirmWordsNanoS from "../assets/nanoS/confirmWords/data.json";
 import confirmWordsNanoSPLight from "../assets/nanoSP/confirmWords/light.json";
 import confirmWordsNanoSPDark from "../assets/nanoSP/confirmWords/dark.json";
 
-import numberOfWordsNanoXLight from "../assets/nanoX/numberOfWords/light.json";
-import numberOfWordsNanoXDark from "../assets/nanoX/numberOfWords/dark.json";
-import numberOfWordsNanoSLight from "../assets/nanoS/numberOfWords/light.json";
-import numberOfWordsNanoSDark from "../assets/nanoS/numberOfWords/dark.json";
+import numberOfWordsNanoX from "../assets/nanoX/numberOfWords/data.json";
+import numberOfWordsNanoS from "../assets/nanoS/numberOfWords/data.json";
 import numberOfWordsNanoSPLight from "../assets/nanoSP/numberOfWords/light.json";
 import numberOfWordsNanoSPDark from "../assets/nanoSP/numberOfWords/dark.json";
 
-import powerOnNanoXLight from "../assets/nanoX/powerOn/light.json";
-import powerOnNanoXDark from "../assets/nanoX/powerOn/dark.json";
-import powerOnNanoSLight from "../assets/nanoS/powerOn/light.json";
-import powerOnNanoSDark from "../assets/nanoS/powerOn/dark.json";
+import powerOnNanoX from "../assets/nanoX/powerOn/data.json";
+import powerOnNanoS from "../assets/nanoS/powerOn/data.json";
 import powerOnNanoSPLight from "../assets/nanoSP/powerOn/light.json";
 import powerOnNanoSPDark from "../assets/nanoSP/powerOn/dark.json";
 
-import powerOnRecoveryNanoXLight from "../assets/nanoX/powerOnRecovery/light.json";
-import powerOnRecoveryNanoXDark from "../assets/nanoX/powerOnRecovery/dark.json";
-import powerOnRecoveryNanoSLight from "../assets/nanoS/powerOnRecovery/light.json";
-import powerOnRecoveryNanoSDark from "../assets/nanoS/powerOnRecovery/dark.json";
+import powerOnRecoveryNanoX from "../assets/nanoX/powerOnRecovery/data.json";
+import powerOnRecoveryNanoS from "../assets/nanoS/powerOnRecovery/data.json";
 import powerOnRecoveryNanoSPLight from "../assets/nanoSP/powerOnRecovery/light.json";
 import powerOnRecoveryNanoSPDark from "../assets/nanoSP/powerOnRecovery/dark.json";
 
@@ -76,28 +64,28 @@ import { urls } from "../../../config/urls";
 export const lottieAnimations = {
   nanoS: {
     pinCode: {
-      light: pinCodeNanoSLight,
-      dark: pinCodeNanoSDark,
+      light: pinCodeNanoS,
+      dark: pinCodeNanoS,
     },
     recover: {
-      light: recoverNanoSLight,
-      dark: recoverNanoSDark,
+      light: recoverNanoS,
+      dark: recoverNanoS,
     },
     confirmWords: {
-      light: confirmWordsNanoSLight,
-      dark: confirmWordsNanoSDark,
+      light: confirmWordsNanoS,
+      dark: confirmWordsNanoS,
     },
     numberOfWords: {
-      light: numberOfWordsNanoSLight,
-      dark: numberOfWordsNanoSDark,
+      light: numberOfWordsNanoS,
+      dark: numberOfWordsNanoS,
     },
     powerOn: {
-      light: powerOnNanoSLight,
-      dark: powerOnNanoSDark,
+      light: powerOnNanoS,
+      dark: powerOnNanoS,
     },
     powerOnRecovery: {
-      light: powerOnRecoveryNanoSLight,
-      dark: powerOnRecoveryNanoSDark,
+      light: powerOnRecoveryNanoS,
+      dark: powerOnRecoveryNanoS,
     },
     style: {},
   },
@@ -130,28 +118,28 @@ export const lottieAnimations = {
   },
   nanoX: {
     pinCode: {
-      light: pinCodeNanoXLight,
-      dark: pinCodeNanoXDark,
+      light: pinCodeNanoX,
+      dark: pinCodeNanoX,
     },
     recover: {
-      light: recoverNanoXLight,
-      dark: recoverNanoXDark,
+      light: recoverNanoX,
+      dark: recoverNanoX,
     },
     confirmWords: {
-      light: confirmWordsNanoXLight,
-      dark: confirmWordsNanoXDark,
+      light: confirmWordsNanoX,
+      dark: confirmWordsNanoX,
     },
     numberOfWords: {
-      light: numberOfWordsNanoXLight,
-      dark: numberOfWordsNanoXDark,
+      light: numberOfWordsNanoX,
+      dark: numberOfWordsNanoX,
     },
     powerOn: {
-      light: powerOnNanoXLight,
-      dark: powerOnNanoXDark,
+      light: powerOnNanoX,
+      dark: powerOnNanoX,
     },
     powerOnRecovery: {
-      light: powerOnRecoveryNanoXLight,
-      dark: powerOnRecoveryNanoXDark,
+      light: powerOnRecoveryNanoX,
+      dark: powerOnRecoveryNanoX,
     },
     style: { width: "110%", left: "5%" },
   },
