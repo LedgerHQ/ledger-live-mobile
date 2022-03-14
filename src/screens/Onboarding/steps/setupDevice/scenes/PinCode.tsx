@@ -10,7 +10,7 @@ const PinCodeScene = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <Flex>
+      <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
           {t("v3.onboarding.stepSetupDevice.pinCode.title")}
         </Text>

@@ -27,6 +27,7 @@ const RecoveryPhraseInstructionsScene = ({
   return (
     <>
       <NumberedList
+        flex={1}
         items={items.map(item => ({
           title: t(item.title),
           description: t(item.desc),

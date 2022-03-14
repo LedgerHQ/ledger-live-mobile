@@ -33,7 +33,7 @@ const BluetoothConnection = () => {
   }, []);
 
   return (
-    <Flex flex={1} justifyContent="space-between" bg="background.main">
+    <Flex flex={1} p={6} justifyContent="space-between" bg="background.main">
       <FlatList
         data={[
           <Flex>

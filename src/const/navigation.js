@@ -277,11 +277,13 @@ export const ScreenName = {
   LendingWithdrawValidationSuccess: "Lend WithdrawValidationSuccess",
 
   OnboardingWelcome: "OnboardingWelcome",
+  OnboardingPostWelcomeSelection: "OnboardingPostWelcomeSelection",
   OnboardingLanguage: "OnboardingLanguage",
   OnboardingStepLanguageGetStarted: "OnboardingStepLanguageGetStarted",
   OnboardingTermsOfUse: "OnboardingTermsOfUse",
   OnboardingDeviceSelection: "OnboardingDeviceSelection",
   OnboardingUseCase: "OnboardingUseCase",
+  OnboardingModalDiscoverLive: "OnboardingModalDiscoverLive",
 
   OnboardingSetNewDeviceInfo: "OnboardingSetNewDeviceInfo",
   OnboardingSetNewDevice: "OnboardingSetNewDevice",
@@ -344,6 +346,8 @@ export const ScreenName = {
 
   // solana
   SolanaEditMemo: "SolanaEditMemo",
+
+  BuyDeviceScreen: "BuyDeviceScreen",
 };
 
 export const NavigatorName = {

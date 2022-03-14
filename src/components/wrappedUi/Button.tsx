@@ -3,7 +3,7 @@ import { ButtonProps } from "@ledgerhq/native-ui/components/cta/Button";
 import { Button as UiButton } from "@ledgerhq/native-ui";
 import { track } from "../../analytics";
 
-export type WrapperButtonProps = ButtonProps & {
+export type WrappedButtonProps = ButtonProps & {
   event?: string;
   eventProperties?: Object;
 };
@@ -13,7 +13,7 @@ export default function Button({
   event,
   eventProperties,
   ...othersProps
-}: WrapperButtonProps) {
+}: WrappedButtonProps) {
   const onPressHandler = useCallback(
     async pressEvent => {
       if (!onPress) return;

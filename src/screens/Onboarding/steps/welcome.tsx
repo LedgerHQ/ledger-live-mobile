@@ -2,15 +2,19 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { Flex, Text, Link as TextLink } from "@ledgerhq/native-ui";
 import { ChevronBottomMedium } from "@ledgerhq/native-ui/assets/icons";
 import Video from "react-native-video";
-
+import { Linking } from "react-native";
 import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
+import { useDispatch } from "react-redux";
 import Button from "../../../components/Button";
 import { useLocale } from "../../../context/Locale";
 import { ScreenName } from "../../../const";
 import StyledStatusBar from "../../../components/StyledStatusBar";
+import { urls } from "../../../config/urls";
+import { useTermsAccept } from "../../../logic/terms";
+import { setAnalytics } from "../../../actions/settings";
 
 const source = require("../../../../assets/videos/onboarding.mp4");
 
@@ -27,16 +31,34 @@ const SafeFlex = styled(SafeAreaView)`
 `;
 
 function OnboardingStepWelcome({ navigation }: any) {
-  const next = useCallback(() => {
-    navigation.navigate(ScreenName.OnboardingTermsOfUse);
-  }, [navigation]);
+  const dispatch = useDispatch();
+  const [, setAccepted] = useTermsAccept();
 
   const onLanguageSelect = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingLanguageModal),
+    () => navigation.navigate(ScreenName.OnboardingLanguage),
     [navigation],
   );
 
   const { locale } = useLocale();
+
+  const onTermsLink = useCallback(() => Linking.openURL(urls.terms[locale]), [
+    locale,
+  ]);
+
+  const onPrivacyLink = useCallback(
+    () => Linking.openURL(urls.privacyPolicy[locale]),
+    [locale],
+  );
+
+  const next = useCallback(() => {
+    // TODO: Remove this stupid type check as soon as we convert useTermsAccept to TS
+    if (typeof setAccepted !== "boolean") setAccepted();
+    dispatch(setAnalytics(true));
+
+    // TODO: FIX @react-navigation/native using Typescript
+    // @ts-ignore next-line
+    navigation.navigate({ name: ScreenName.OnboardingPostWelcomeSelection });
+  }, [setAccepted, dispatch, navigation]);
 
   return (
     <Flex flex={1} position="relative" bg="constant.black">
@@ -92,7 +114,7 @@ function OnboardingStepWelcome({ navigation }: any) {
         <Text
           variant="h1"
           color="constant.white"
-          pb={5}
+          pb={2}
           style={{ textTransform: "uppercase" }}
         >
           <Trans i18nKey="v3.onboarding.stepWelcome.title" />
@@ -101,12 +123,49 @@ function OnboardingStepWelcome({ navigation }: any) {
           <Trans i18nKey="v3.onboarding.stepWelcome.subtitle" />
         </Text>
         <Button
-          type="primary"
+          type="default"
+          containerStyle={{ backgroundColor: "white" }}
           outline={false}
+          size="large"
           event="Onboarding - Start"
           onPress={next}
-          title={<Trans i18nKey="v3.onboarding.stepWelcome.start" />}
-        />
+          mb={8}
+        >
+          <Text
+            variant="large"
+            color="constant.black"
+            flex={1}
+            textAlign="center"
+            fontWeight="semiBold"
+          >
+            <Trans i18nKey="v3.onboarding.stepWelcome.start" />
+          </Text>
+        </Button>
+
+        <Text
+          variant="body"
+          textAlign="center"
+          lineHeight="22px"
+          color="constant.white"
+        >
+          <Trans i18nKey="onboarding.stepWelcome.terms" />
+        </Text>
+        <Flex
+          flexDirection="row"
+          alignItems="baseline"
+          justifyContent="center"
+          pb={6}
+        >
+          <TextLink type="color" onPress={onTermsLink}>
+            <Trans i18nKey="onboarding.stepWelcome.termsLink" />
+          </TextLink>
+          <Text mx={2} variant="body" color="constant.white">
+            <Trans i18nKey="onboarding.stepWelcome.and" />
+          </Text>
+          <TextLink type="color" onPress={onPrivacyLink}>
+            <Trans i18nKey="onboarding.stepWelcome.privacyLink" />
+          </TextLink>
+        </Flex>
       </Flex>
     </Flex>
   );

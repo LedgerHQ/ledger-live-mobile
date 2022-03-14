@@ -43,31 +43,37 @@ const AppUpdateAll = ({
           borderRadius={4}
           p={6}
         >
-          <Text variant="large" fontWeight="semiBold">
+          <Text
+            flex={1}
+            variant="large"
+            fontWeight="semiBold"
+            numberOfLines={2}
+          >
             <Trans
               i18nKey="AppAction.update.title"
               count={appsToUpdate.length}
               values={{ number: appsToUpdate.length }}
             />
           </Text>
-          <Flex flex={1} />
-          <Button
-            outline
-            type="main"
-            onPress={openModal}
-            event="ManagerAppUpdateModalOpen"
-            iconName="Info"
-            mr={3}
-          />
-          <Button
-            type="color"
-            onPress={updateAll}
-            event="ManagerAppUpdateAll"
-            eventProperties={{ appName: appsList }}
-            outline={false}
-          >
-            <Trans i18nKey="AppAction.update.button" />
-          </Button>
+          <Flex ml={6} flex={1} flexDirection="row" justifyContent="flex-end">
+            <Button
+              outline
+              type="main"
+              onPress={openModal}
+              event="ManagerAppUpdateModalOpen"
+              iconName="Info"
+              mr={3}
+            />
+            <Button
+              type="color"
+              onPress={updateAll}
+              event="ManagerAppUpdateAll"
+              eventProperties={{ appName: appsList }}
+              outline={false}
+            >
+              <Trans i18nKey="AppAction.update.button" />
+            </Button>
+          </Flex>
           <UpdateAllModal
             isOpened={modalOpen}
             installed={state.installed}

@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Button, List, Icons } from "@ledgerhq/native-ui";
-import { View } from "react-native";
+import { Flex, Button, List, Icons, Text } from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 
 const content = [
@@ -22,10 +21,14 @@ const OnboardingSetupDeviceInformation = () => {
   return (
     <Flex
       flex={1}
+      p={6}
       justifyContent="space-between"
       backgroundColor="background.main"
     >
-      <View>
+      <Flex>
+        <Text variant="h1" mb={6}>
+          {t("v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.title")}
+        </Text>
         <List
           items={[...content].slice(0, 4).map(item => ({
             title: t(item),
@@ -41,7 +44,7 @@ const OnboardingSetupDeviceInformation = () => {
           }))}
           itemSeparatorProps={{ mb: 7 }}
         />
-      </View>
+      </Flex>
       <Button type="main" size="large" onPress={navigation.goBack}>
         {t("v3.onboarding.stepSetupDevice.pinCodeSetup.cta")}
       </Button>

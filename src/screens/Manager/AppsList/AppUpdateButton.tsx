@@ -15,7 +15,6 @@ type Props = {
 const ButtonContainer = styled(Box).attrs({
   width: 48,
   height: 48,
-  borderWidth: 1,
   borderRadius: 50,
   alignItems: "center",
   justifyContent: "center",

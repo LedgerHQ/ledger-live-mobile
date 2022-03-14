@@ -1,12 +1,25 @@
 import React, { useCallback } from "react";
-import { ScrollView } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { ModalHeader } from "@ledgerhq/native-ui/components/Layout/Modals/BaseModal";
-import { PlusMedium, DevicesAltMedium } from "@ledgerhq/native-ui/assets/icons";
-import { BottomDrawer, Box, Button } from "@ledgerhq/native-ui";
+import { BottomDrawer, Box, Flex, Text } from "@ledgerhq/native-ui";
 import { NavigatorName } from "../../const";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import Illustration from "../../images/illustration/Illustration";
+import NanoXFolded from "../../images/devices/NanoXFolded";
+
+import ChoiceCard from "../../components/ChoiceCard";
+
+const images = {
+  light: {
+    withYourLedger: require("../../images/illustration/Light/_067.png"),
+    importFromYourDesktop: require("../../images/illustration/Light/_074.png"),
+  },
+  dark: {
+    withYourLedger: require("../../images/illustration/Dark/_067.png"),
+    importFromYourDesktop: require("../../images/illustration/Dark/_074.png"),
+  },
+};
 
 type Props = {
   navigation: any;
@@ -34,45 +47,32 @@ export default function AddAccountsModal({
 
   return (
     <BottomDrawer
-      id="AddAccountsModal"
+      testId="AddAccountsModal"
       isOpen={isOpened}
       onClose={onClose}
       title={t("v3.portfolio.emptyState.addAccounts.title")}
     >
-      <ScrollView>
-        {!readOnlyModeEnabled && (
-          <Box bg={"neutral.c30"} p={8} borderRadius={2} mb={9}>
-            <ModalHeader
-              title={t("addAccountsModal.ctaAdd")}
-              Icon={PlusMedium}
-              iconColor={"neutral.c100"}
-            />
-            <Button
-              event="AddAccountWithDevice"
-              onPress={onClickAdd}
-              type={"color"}
-            >
-              {t("addAccountsModal.ctaAdd")}
-            </Button>
-          </Box>
-        )}
+      {!readOnlyModeEnabled && (
+        <ChoiceCard
+          title={t("v3.addAccountsModal.add.title")}
+          subTitle={t("v3.addAccountsModal.add.description")}
+          Image={<NanoXFolded size={96} />}
+          onPress={onClickAdd}
+        />
+      )}
 
-        <Box bg={"neutral.c30"} p={8} borderRadius={2} mb={9}>
-          <ModalHeader
-            title={t("addAccountsModal.ctaImport")}
-            Icon={DevicesAltMedium}
-            iconColor={"neutral.c100"}
+      <ChoiceCard
+        title={t("v3.addAccountsModal.import.title")}
+        subTitle={t("v3.addAccountsModal.import.description")}
+        Image={
+          <Illustration
+            lightSource={images.light.withYourLedger}
+            darkSource={images.dark.withYourLedger}
+            size={96}
           />
-
-          <Button
-            event="AddAccountWithQR"
-            type={"color"}
-            onPress={onClickImport}
-          >
-            {t("addAccountsModal.ctaImport")}
-          </Button>
-        </Box>
-      </ScrollView>
+        }
+        onPress={onClickImport}
+      />
     </BottomDrawer>
   );
 }

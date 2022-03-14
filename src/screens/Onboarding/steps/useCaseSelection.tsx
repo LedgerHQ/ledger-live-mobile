@@ -74,15 +74,19 @@ const Card = ({ item }: { item: Card }) => {
       eventProperties={{ deviceId: deviceModelId }}
       testID={`${item.event}|${deviceModelId}`}
       onPress={() => next(item)}
+      style={{
+        width: cardMaxWidth,
+        marginRight: 16,
+        flex: 1,
+      }}
     >
       <Flex
         p={6}
         justifyContent="flex-start"
-        maxWidth={cardMaxWidth}
-        minHeight={368}
         border="1px solid"
         borderColor="palette.neutral.c30"
         borderRadius="4px"
+        height="100%"
       >
         <Flex alignItems="center">{item.Illustration}</Flex>
         <Text variant="h4" mt={7}>
@@ -92,7 +96,7 @@ const Card = ({ item }: { item: Card }) => {
           {t(item.subTitle)}
         </Text>
         <Flex flex={1} />
-        <Flex flexDirection="row" justifyContent="flex-end" mt={10}>
+        <Flex flexDirection="row" justifyContent="flex-end" mt={3}>
           <Icons.ArrowRightMedium size={16} />
         </Flex>
       </Flex>
@@ -108,8 +112,8 @@ const Item = ({ cards }: { cards: Array<Card> }) => {
       slideIndicatorContainerProps={{ style: { display: "none" } }}
       scrollViewProps={{
         contentContainerStyle: {
-          width: `${66 * cards.length}%`,
           marginBottom: 16,
+          alignItems: "flex-end",
         },
         pagingEnabled: false,
       }}
@@ -203,21 +207,6 @@ const OnboardingStepUseCaseSelection = () => {
                       showRecoveryWarning: true,
                     },
                     {
-                      route: ScreenName.OnboardingImportAccounts,
-                      Illustration: (
-                        <Illustration
-                          size={150}
-                          darkSource={images.dark.syncCrypto}
-                          lightSource={images.light.syncCrypto}
-                        />
-                      ),
-                      title:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
-                      subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
-                      event: "Onboarding - Setup Import Accounts",
-                    },
-                    {
                       route: ScreenName.OnboardingRecoveryPhrase,
                       Illustration: (
                         <Illustration
@@ -231,6 +220,21 @@ const OnboardingStepUseCaseSelection = () => {
                       subTitle:
                         "v3.onboarding.stepUseCase.deviceActions.restore.subTitle",
                       event: "Onboarding - Restore",
+                    },
+                    {
+                      route: ScreenName.OnboardingImportAccounts,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.syncCrypto}
+                          lightSource={images.light.syncCrypto}
+                        />
+                      ),
+                      title:
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
+                      subTitle:
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                      event: "Onboarding - Setup Import Accounts",
                     },
                   ],
                 },
