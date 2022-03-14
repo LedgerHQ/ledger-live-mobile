@@ -8,6 +8,7 @@ type Props = {
   event?: string;
   eventProperties?: Object;
   Icon?: React.ComponentType<{ color: string; size: number }>;
+  /** deprecated, use `iconPosition` instead */
   iconFirst?: boolean;
   iconPosition?: LinkProps["iconPosition"];
   onPress?: LinkProps["onPress"];
