@@ -23,6 +23,7 @@ import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
 import ChartCard from "./chart/ChartCard";
+import { useLocale } from "../context/Locale";
 
 type HeaderProps = {
   account: AccountLike;
@@ -60,20 +61,16 @@ type FooterProps = {
 
 const Footer = ({ renderAccountSummary }: FooterProps) => {
   const accountSummary = renderAccountSummary && renderAccountSummary();
-  return (
-    <Box>
-      {accountSummary && (
-        <Box
-          flexDirection={"row"}
-          alignItemps={"center"}
-          marginTop={5}
-          overflow={"hidden"}
-        >
-          {accountSummary}
-        </Box>
-      )}
+  return accountSummary ? (
+    <Box
+      flexDirection={"row"}
+      alignItemps={"center"}
+      marginTop={5}
+      overflow={"hidden"}
+    >
+      {accountSummary}
     </Box>
-  );
+  ) : null;
 };
 
 type Props = {
@@ -87,6 +84,13 @@ type Props = {
   renderAccountSummary: () => ReactNode;
 };
 
+const timeRangeMapped: any = {
+  "24h": "day",
+  "7d": "week",
+  "30d": "month",
+  "1y": "year",
+};
+
 export default function AccountGraphCard({
   account,
   countervalueAvailable,
@@ -96,17 +100,12 @@ export default function AccountGraphCard({
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
+  const { locale } = useLocale();
   const [rangeRequest, setRangeRequest] = useState("24h");
   const [timeRange, setTimeRange] = useTimeRange();
   const { countervalueChange } = useBalanceHistoryWithCountervalue({
     account,
     range: timeRange,
-  });
-  const [timeRangeMapped] = useState({
-    "24h": "day",
-    "7d": "week",
-    "30d": "month",
-    "1y": "year",
   });
 
   const isAvailable = !useCounterValue || countervalueAvailable;
@@ -126,22 +125,23 @@ export default function AccountGraphCard({
         setRangeRequest(range);
       }
     },
-    [timeRangeMapped, setTimeRange, setRangeRequest],
+    [setTimeRange, setRangeRequest],
   );
 
-  const dataFormatted = useMemo(
-    () =>
-      history
-        ? history.map(d => ({
-            date: d.date,
-            value: d.countervalue / 100,
-          }))
-        : [],
-    [history],
-  );
+  const dataFormatted = useMemo(() => {
+    const counterValueCurrencyMagnitude =
+      10 ** counterValueCurrency.units[0].magnitude;
+    return history
+      ? history.map(d => ({
+          date: d.date,
+          value: d.countervalue / counterValueCurrencyMagnitude,
+        }))
+      : [];
+  }, [history, counterValueCurrency]);
 
   return (
     <ChartCard
+      locale={locale}
       Header={
         <Header
           account={account}
@@ -158,6 +158,7 @@ export default function AccountGraphCard({
       refreshChart={refreshChart}
       chartData={dataFormatted}
       currencyColor={graphColor}
+      counterCurrencyTicker={counterValueCurrency.ticker}
     />
   );
 }

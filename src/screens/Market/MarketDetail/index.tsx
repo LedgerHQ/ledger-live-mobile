@@ -293,11 +293,13 @@ export default function MarketDetail({
         }
       >
         <ChartCard
+          locale={locale}
           range={chartRequestParams.range}
           isLoading={loading || loadingChart}
           refreshChart={refreshChart}
           chartData={chartDataFormatted}
           currencyColor={internalCurrency && internalCurrency.color}
+          counterCurrencyTicker={counterCurrency}
           margin={16}
         />
         {isLiveSupported ? (

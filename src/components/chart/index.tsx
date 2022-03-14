@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import styled, { useTheme } from "styled-components/native";
-import moment from "moment";
 import { Defs, LinearGradient, Stop } from "react-native-svg";
 import {
   VictoryLine,
   VictoryChart,
   VictoryAxis,
   VictoryArea,
-  VictoryScatter,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from "victory-native";
@@ -32,35 +30,72 @@ export type ChartProps = {
   backgroundColor: string;
   color: string;
   /*
-   ** This prop is used to format the x-axis using time options from moment format
-   ** See https://momentjs.com/docs/#/displaying/format/
+   ** This prop is used to format the x-axis using time options from Intl.DateTimeFormat format
    */
-  tickFormat?: string;
+  timeFormat?: any;
   /* This prop is used to override the key that store the data */
   valueKey?: string;
   height?: number;
   yAxisFormatter: (n: number) => string,
   valueFormatter: (n: number) => string,
   disableTooltips: boolean,
+  locale: string,
 };
 
 const Chart = ({
   data,
   backgroundColor,
   color,
-  tickFormat = "MMM",
+  timeFormat = { month: "short" },
   valueKey = "value",
   height = 200,
   yAxisFormatter,
   valueFormatter,
   disableTooltips = false,
+  locale,
 }: ChartProps): JSX.Element => {
   const theme = useTheme();
   const sortData = useMemo(() => data.sort(sortByDate), [data]);
-  const [counterValues, setCounterValues] = useState(data.map(d => d[valueKey]));
-  useEffect(() => {
-    setCounterValues(data.map(d => d[valueKey]));
+
+  const labelFormatted = useCallback(({ datum }) => {
+    const valueFormatted = valueFormatter(datum[valueKey]);
+    return valueFormatted === "-" ? "0" : valueFormatted;
+  }, [valueKey, valueFormatter]);
+
+  const domainValues = useMemo(() => {
+    const counterValues = data.map(d => d[valueKey]);
+
+    return {
+      min: Math.min(...counterValues) * 0.8, // 0.8 So the minimum value of the yAxis is a bit smaller than the min value displayed
+      max: Math.max(...counterValues) * 1.2, // 1.2 So the maximum value of the yAxis is a bit bigger than the max value displayed
+    };
   }, [data, valueKey]);
+
+  const yAxisStyle = useMemo(() => ({
+    grid: {
+      stroke: theme.colors.neutral.c40,
+      strokeDasharray: "4 4",
+    },
+    axisLabel: { display: "none" },
+    axis: { display: "none" },
+    ticks: { display: "none" },
+    tickLabels: {
+      fill: theme.colors.neutral.c80,
+      fontSize: 12,
+    },
+  }), [theme]);
+
+  const xAxisStyle = useMemo(() => ({
+    axis: {
+      stroke: theme.colors.neutral.c40,
+      strokeDasharray: "4 4",
+    },
+    tickLabels: {
+      fill: theme.colors.neutral.c80,
+      fontSize: 12,
+    },
+    grid: { display: "none" },
+  }), [theme]);
 
   return (
     <Container justifyContent="center" alignItems="center">
@@ -69,16 +104,13 @@ const Chart = ({
         height={height}
         domainPadding={{ y: 5 }}
         padding={{ top: 30, left: 60, right: 35, bottom: 35 }}
-        maxDomain={{ y: Math.max(...counterValues) * 1.2 }}
-        minDomain={{ y: Math.min(...counterValues) * 0.8 }}
+        maxDomain={{ y: domainValues.max }}
+        minDomain={{ y: domainValues.min }}
         containerComponent={
           <VictoryVoronoiContainer
             disable={disableTooltips}
             voronoiBlacklist={['victory-area']}
-            labels={({ datum }) => {
-              const valueFormatted = valueFormatter(datum[valueKey]);
-              return valueFormatted === "-" ? "0" : valueFormatted;
-            }}
+            labels={labelFormatted}
             labelComponent={
               <VictoryTooltip
                 centerOffset={{ y: -10 }}
@@ -101,37 +133,15 @@ const Chart = ({
         <VictoryAxis
           dependentAxis
           crossAxis
-          tickFormat={price => yAxisFormatter(price)}
-          style={{
-            grid: {
-              stroke: theme.colors.neutral.c40,
-              strokeDasharray: "4 4",
-            },
-            axisLabel: { display: "none" },
-            axis: { display: "none" },
-            ticks: { display: "none" },
-            tickLabels: {
-              fill: theme.colors.neutral.c80,
-              fontSize: 12,
-            },
-          }}
+          tickFormat={yAxisFormatter}
+          style={yAxisStyle}
         />
 
         {/* x-axis */}
         <VictoryAxis
           crossAxis={false}
-          tickFormat={timestamp => moment(timestamp).format(tickFormat)}
-          style={{
-            axis: {
-              stroke: theme.colors.neutral.c40,
-              strokeDasharray: "4 4",
-            },
-            tickLabels: {
-              fill: theme.colors.neutral.c80,
-              fontSize: 12,
-            },
-            grid: { display: "none" },
-          }}
+          tickFormat={timestamp => new Intl.DateTimeFormat(locale, timeFormat).format(timestamp)}
+          style={xAxisStyle}
         />
 
         {/* gradient area */}
@@ -160,21 +170,6 @@ const Chart = ({
           y={valueKey}
           style={{ data: { stroke: color } }}
         />
-
-        {/* Rendered point */}
-        {/* <VictoryScatter
-          style={{
-            data: {
-              stroke: color,
-              strokeWidth: 3,
-              fill: theme.colors.background.main,
-            },
-          }}
-          size={5}
-          data={[sortData[sortData.length - 1]]}
-          x="date"
-          y={valueKey}
-        /> */}
       </VictoryChart>
     </Container>
   );
