@@ -2,8 +2,9 @@ import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import { Linking, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
-import { Icons, Text, Alert as BaseAlert, Flex } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
+import { Icons, Text, Alert as BaseAlert, Flex } from "@ledgerhq/native-ui";
+import { AlertProps as BaseAlertProps } from "@ledgerhq/native-ui/components/message/Alert";
 import { dismissedBannersSelector } from "../reducers/settings";
 
 type AlertType =
@@ -18,6 +19,8 @@ type AlertType =
   | "danger"
   | "update";
 
+type IconType = React.ComponentType<{ size: number; color: string }>;
+
 type Props = {
   id?: string;
   type: AlertType;
@@ -31,52 +34,54 @@ type Props = {
   learnMoreIcon?: IconType;
 };
 
-function getAlertProps(type: AlertType) {
-  return {
-    primary: {
-      type: "info",
-      Icon: Icons.InfoMedium,
-    },
-    secondary: {
-      type: "info",
-      Icon: Icons.InfoMedium,
-    },
-    success: {
-      type: "info",
-      Icon: Icons.CircledCheckMedium,
-    },
-    warning: {
-      type: "warning",
-      Icon: Icons.CircledAlertMedium,
-    },
-    error: {
-      type: "error",
-      Icon: Icons.CircledCrossMedium,
-    },
-    hint: {
-      type: "info",
-      Icon: Icons.LightbulbMedium,
-    },
-    security: {
-      type: "warning",
-      Icon: Icons.ShieldSecurityMedium,
-    },
-    help: {
-      type: "info",
-      Icon: Icons.ShieldSecurityMedium,
-    },
-    danger: {
-      type: "error",
-      Icon: Icons.ShieldSecurityMedium,
-    },
-    update: {
-      type: "warning",
-      Icon: Icons.WarningMedium,
-    },
-  }[type];
-}
-
-type IconType = React.ComponentType<{ size: number; color: string }>;
+const alertPropsByType: Record<
+  AlertType,
+  {
+    type: BaseAlertProps["type"];
+    Icon: BaseAlertProps["Icon"];
+  }
+> = {
+  primary: {
+    type: "info",
+    Icon: Icons.InfoMedium,
+  },
+  secondary: {
+    type: "info",
+    Icon: Icons.InfoMedium,
+  },
+  success: {
+    type: "info",
+    Icon: Icons.CircledCheckMedium,
+  },
+  warning: {
+    type: "warning",
+    Icon: Icons.CircledAlertMedium,
+  },
+  error: {
+    type: "error",
+    Icon: Icons.CircledCrossMedium,
+  },
+  hint: {
+    type: "info",
+    Icon: Icons.LightbulbMedium,
+  },
+  security: {
+    type: "warning",
+    Icon: Icons.ShieldSecurityMedium,
+  },
+  help: {
+    type: "info",
+    Icon: Icons.ShieldSecurityMedium,
+  },
+  danger: {
+    type: "error",
+    Icon: Icons.ShieldSecurityMedium,
+  },
+  update: {
+    type: "warning",
+    Icon: Icons.WarningMedium,
+  },
+};
 
 type LearnMoreLinkProps = {
   color: string;
@@ -149,7 +154,7 @@ export default function Alert(props: Props) {
 
   const alertProps = useMemo(
     () => ({
-      ...getAlertProps(type),
+      ...alertPropsByType[type],
       showIcon: !noIcon,
     }),
     [type, noIcon],
