@@ -4,7 +4,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useTheme } from "styled-components/native";
-import { Flex, Text, ScrollContainerHeader, Icons } from "@ledgerhq/native-ui";
+import { Flex, Text, ScrollContainerHeader, Icons, ChartCard } from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
@@ -31,7 +31,6 @@ import {
   removeStarredMarketCoins,
 } from "../../../actions/settings";
 import MarketStats from "./MarketStats";
-import ChartCard from "../../../components/chart/ChartCard";
 import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accounts";
 // import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
@@ -82,6 +81,14 @@ export default function MarketDetail({
   const dispatch = useDispatch();
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);
+
+  const ranges = useMemo(
+    () =>
+      Object.keys(rangeDataTable)
+        .filter(key => key !== "1h")
+        .map(r => ({ label: t(`market.range.${r}`), value: r })),
+    [t],
+  );
 
   const { refresh, selectCurrency } = useMarketData();
 
@@ -294,13 +301,31 @@ export default function MarketDetail({
       >
         <ChartCard
           locale={locale}
+          ranges={ranges}
           range={chartRequestParams.range}
           isLoading={loading || loadingChart}
           refreshChart={refreshChart}
           chartData={chartDataFormatted}
           currencyColor={internalCurrency && internalCurrency.color}
-          counterCurrencyTicker={counterCurrency}
           margin={16}
+          yAxisFormatter={(value: number) =>
+            counterValueFormatter({
+              value,
+              shorten: true,
+              locale,
+              allowZeroValue: true,
+              t,
+            })
+          }
+          valueFormatter={(value: number) =>
+            counterValueFormatter({
+              value,
+              currency: counterCurrency,
+              locale,
+              allowZeroValue: true,
+              t,
+            })
+          }
         />
         {isLiveSupported ? (
           <Flex

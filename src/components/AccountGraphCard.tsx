@@ -11,8 +11,10 @@ import {
   PortfolioRange,
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import { Box, Flex, Text } from "@ledgerhq/native-ui";
+import { Box, Flex, Text, ChartCard } from "@ledgerhq/native-ui";
 
+import { useTranslation } from "react-i18next";
+import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import { ensureContrast } from "../colors";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
@@ -22,8 +24,8 @@ import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
-import ChartCard from "./chart/ChartCard";
 import { useLocale } from "../context/Locale";
+import { counterValueFormatter } from "../screens/Market/utils";
 
 type HeaderProps = {
   account: AccountLike;
@@ -101,12 +103,22 @@ export default function AccountGraphCard({
 }: Props) {
   const { colors } = useTheme();
   const { locale } = useLocale();
+  const { t } = useTranslation();
+
   const [rangeRequest, setRangeRequest] = useState("24h");
   const [timeRange, setTimeRange] = useTimeRange();
   const { countervalueChange } = useBalanceHistoryWithCountervalue({
     account,
     range: timeRange,
   });
+
+  const ranges = useMemo(
+    () =>
+      Object.keys(rangeDataTable)
+        .filter(key => key !== "1h")
+        .map(r => ({ label: t(`market.range.${r}`), value: r })),
+    [t],
+  );
 
   const isAvailable = !useCounterValue || countervalueAvailable;
 
@@ -142,6 +154,7 @@ export default function AccountGraphCard({
   return (
     <ChartCard
       locale={locale}
+      ranges={ranges}
       Header={
         <Header
           account={account}
@@ -158,7 +171,24 @@ export default function AccountGraphCard({
       refreshChart={refreshChart}
       chartData={dataFormatted}
       currencyColor={graphColor}
-      counterCurrencyTicker={counterValueCurrency.ticker}
+      yAxisFormatter={(value: number) =>
+        counterValueFormatter({
+          value,
+          shorten: true,
+          locale,
+          allowZeroValue: true,
+          t,
+        })
+      }
+      valueFormatter={(value: number) =>
+        counterValueFormatter({
+          value,
+          currency: counterValueCurrency.ticker,
+          locale,
+          allowZeroValue: true,
+          t,
+        })
+      }
     />
   );
 }
