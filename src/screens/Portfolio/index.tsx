@@ -28,7 +28,6 @@ import globalSyncRefreshControl from "../../components/globalSyncRefreshControl"
 import GraphCardContainer from "./GraphCardContainer";
 import Carousel from "../../components/Carousel";
 import Header from "./Header";
-import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
@@ -181,6 +180,18 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
+      ...(Object.values(carouselVisibility).some(Boolean)
+        ? [
+            <Flex mt={10}>
+              <Flex mx={6}>
+                <SectionTitle
+                  title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
+                />
+              </Flex>
+              <Carousel cardsVisibility={carouselVisibility} />
+            </Flex>,
+          ]
+        : []),
       <Flex mx={6} mt={10}>
         <SectionTitle
           title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
@@ -191,22 +202,16 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <MarketSection />
       </Flex>,
-      ...(Object.values(carouselVisibility).some(Boolean)
-        ? [
-            <Flex mx={6} mt={10}>
-              <SectionTitle
-                title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
-              />
-              <Carousel cardsVisibility={carouselVisibility} />
-            </Flex>,
-          ]
-        : []),
-      <Flex mx={6} mt={9}>
-        <SectionTitle
-          title={<Trans i18nKey={"tabs.platform"} />}
-          navigation={navigation}
-          navigatorName={NavigatorName.Platform}
-        />
+
+      <Flex mt={9}>
+        <Flex mx={6}>
+          <SectionTitle
+            title={<Trans i18nKey={"tabs.platform"} />}
+            navigation={navigation}
+            navigatorName={NavigatorName.Platform}
+          />
+        </Flex>
+
         <DiscoverSection />
       </Flex>,
 
@@ -243,8 +248,8 @@ export default function PortfolioScreen({ navigation }: Props) {
           ref={ref}
           data={data}
           style={{ flex: 1, position: "relative" }}
-          renderItem={({ item }) => item}
-          keyExtractor={(item, index) => String(index)}
+          renderItem={({ item }: { item: React.ReactNode }) => item}
+          keyExtractor={(_: any, index: number) => String(index)}
           showsVerticalScrollIndicator={false}
           stickyHeaderIndices={[0]}
           onScroll={handleScroll}

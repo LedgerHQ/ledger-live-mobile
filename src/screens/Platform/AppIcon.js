@@ -1,7 +1,7 @@
 // @flow
 import React, { memo, useState, useCallback } from "react";
 import { Image, View, StyleSheet } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 
 import LText from "../../components/LText";
 
@@ -27,8 +27,8 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
         {
           width: size,
           height: size,
-          borderColor: colors.fog,
-          backgroundColor: colors.card,
+          borderColor: colors.neutral.c30,
+          backgroundColor: "transparent",
         },
       ]}
     >
@@ -82,11 +82,6 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   image: {
-    position: "absolute",
-    top: -1,
-    left: -1,
-    right: -1,
-    bottom: -1,
     borderRadius: 8,
     overflow: "hidden",
   },

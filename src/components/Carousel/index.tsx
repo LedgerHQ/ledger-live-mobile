@@ -139,10 +139,11 @@ type CarouselCardProps = {
   id: string;
   children: React.ReactNode;
   onHide: (cardId: string) => void;
+  index?: number;
 };
 
-const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
-  <Box key={`container_${id}`} mr={6}>
+const CarouselCard = ({ id, children, onHide, index }: CarouselCardProps) => (
+  <Box key={`container_${id}`} mr={6} ml={index === 0 ? 6 : 0}>
     {children}
     <DismissCarousel hitSlop={hitSlop} onPress={() => onHide(id)}>
       <CloseMedium size={16} color="neutral.c70" />
@@ -151,9 +152,14 @@ const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
 );
 
 // TODO : make it generic in the ui
-const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => (
+const CarouselCardContainer = ({
+  id,
+  children,
+  onHide,
+  index,
+}: CarouselCardProps) => (
   <Animated.View exiting={FadeOut} layout={Layout.delay(200)}>
-    <CarouselCard id={id} onHide={onHide}>
+    <CarouselCard id={id} index={index} onHide={onHide}>
       {children}
     </CarouselCard>
   </Animated.View>
@@ -228,8 +234,13 @@ const Carousel = ({ cardsVisibility }: Props) => {
       onContentSizeChange={onScrollViewContentChange}
       showsHorizontalScrollIndicator={false}
     >
-      {slides.map(({ id, Component }) => (
-        <CarouselCardContainer key={id} id={id} onHide={onHide}>
+      {slides.map(({ id, Component }, index) => (
+        <CarouselCardContainer
+          key={id + index}
+          id={id}
+          index={index}
+          onHide={onHide}
+        >
           <Component key={id} />
         </CarouselCardContainer>
       ))}

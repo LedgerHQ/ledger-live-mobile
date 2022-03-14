@@ -459,7 +459,9 @@ export default class Root extends Component<
                 <HookAnalytics store={store} />
                 <WalletConnectProvider>
                   <PlatformAppProvider
-                    platformAppsServerURL={getProvider("production").url}
+                    platformAppsServerURL={
+                      getProvider(__DEV__ ? "staging" : "production").url
+                    }
                   >
                     <FirebaseRemoteConfigProvider>
                       <FirebaseFeatureFlagsProvider>

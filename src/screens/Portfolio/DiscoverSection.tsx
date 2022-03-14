@@ -65,7 +65,7 @@ export default function DiscoverSection() {
             key={manifest.id + i}
             onPress={() => handlePressCard(manifest)}
           >
-            <Flex mr={3} alignItems={"center"} width={"72px"}>
+            <Flex ml={3} alignItems={"center"} width={"72px"}>
               <AppIcon size={58} name={manifest.name} icon={manifest.icon} />
               <Text
                 variant={"paragraph"}
