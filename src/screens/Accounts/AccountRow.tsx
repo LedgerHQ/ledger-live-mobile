@@ -23,7 +23,7 @@ import { useBalanceHistoryWithCountervalue } from "../../actions/portfolio";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 
 type Props = {
-  account: Account;
+  account: Account | TokenAccount;
   accountId: string;
   navigation: any;
   isLast: boolean;
@@ -63,7 +63,7 @@ const AccountRow = ({
   });
 
   const portfolioPercentage = useMemo(
-    () => (countervalue ? countervalue / portfolioValue : 0),
+    () => (countervalue ? countervalue / Math.max(1, portfolioValue) : 0), // never divide by potential zero, we dont want to go towards infinity
     [countervalue, portfolioValue],
   );
 
@@ -78,14 +78,13 @@ const AccountRow = ({
         accountId,
         isForwardedFromAccounts: true,
       });
-    }
-    if (account.type === "TokenAccount") {
+    } else if (account.type === "TokenAccount") {
       navigation.navigate(ScreenName.Account, {
-        parentId: account.parentId,
+        parentId: account?.parentId,
         accountId: account.id,
       });
     }
-  }, [accountId, navigation]);
+  }, [account.id, account, accountId, navigation]);
 
   return (
     <TouchableOpacity onPress={onAccountPress}>
