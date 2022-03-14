@@ -1543,11 +1543,11 @@
         "desc": "Le nœud d'API à utiliser"
       },
       "delete": {
-        "title": "Supprimer le compte du Portefeuille",
+        "title": "Retirer le compte du Portefeuille",
         "desc": "Les données enregistrées seront supprimées.",
         "confirmationTitle": "Êtes-vous sûr(e) ?",
         "confirmationDesc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-        "confirmationWarn": "La suppression de ce compte effacera l'historique de vos transactions de swap avec ce dernier."
+        "confirmationWarn": "L'historique de vos transactions de swap en lien avec ce compte sera effacé."
       },
       "archive": {
         "title": "Archiver le compte",
