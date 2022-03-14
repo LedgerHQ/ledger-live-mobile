@@ -4,7 +4,13 @@
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useTheme } from "styled-components/native";
-import { Flex, Text, ScrollContainerHeader, Icons, ChartCard } from "@ledgerhq/native-ui";
+import {
+  Flex,
+  Text,
+  ScrollContainerHeader,
+  Icons,
+  ChartCard,
+} from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
