@@ -8,8 +8,8 @@ import { TrackScreen } from "../../../analytics";
 import SeedWarning from "../shared/SeedWarning";
 import Illustration from "../../../images/illustration/Illustration";
 
-import nanoX from "../assets/nanoX/pairDevice/data.json";
-import nanoS from "../assets/nanoS/plugDevice/data.json";
+import nanoX from "../assets/nanoX/pairDevice/dark.json";
+import nanoS from "../assets/nanoS/plugDevice/dark.json";
 import nanoSP from "../assets/nanoSP/plugDevice/dark.json";
 
 const images = {
