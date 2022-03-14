@@ -6,7 +6,14 @@ import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { AppRequest } from "@ledgerhq/live-common/lib/hw/actions/app";
-import { InfiniteLoader, Text, Flex, Tag, Icons } from "@ledgerhq/native-ui";
+import {
+  InfiniteLoader,
+  Text,
+  Flex,
+  Tag,
+  Icons,
+  Log,
+} from "@ledgerhq/native-ui";
 import { setModalLock } from "../../actions/appstate";
 import { urls } from "../../config/urls";
 import Alert from "../Alert";
@@ -20,6 +27,8 @@ import Circle from "../Circle";
 import { MANAGER_TABS } from "../../screens/Manager/Manager";
 import ExternalLink from "../ExternalLink";
 import { track } from "../../analytics";
+
+// const Animation = () => null;
 
 const Wrapper = styled(Flex).attrs({
   flex: 1,
@@ -56,10 +65,15 @@ const CenteredText = styled(Text).attrs({
   textAlign: "center",
 })``;
 
-const TitleText = styled(CenteredText).attrs({
-  py: "8px",
-  variant: "h2",
+const TitleContainer = styled(Flex).attrs({
+  py: 8,
 })``;
+
+const TitleText = ({ children }: { children: React.ReactNode }) => (
+  <TitleContainer>
+    <Log>{children}</Log>
+  </TitleContainer>
+);
 
 const DescriptionText = styled(CenteredText).attrs({
   variant: "bodyLineHeight",
@@ -72,17 +86,13 @@ const ConnectDeviceNameText = styled(Tag).attrs({
   my: "8",
 })``;
 
-const ConnectDeviceLabelText = styled(CenteredText).attrs({
-  variant: "h2",
-})``;
-
 const StyledButton = styled(Button).attrs({
   mt: 6,
   alignSelf: "stretch",
 })``;
 
 const ConnectDeviceExtraContentWrapper = styled(Flex).attrs({
-  marginTop: "36px",
+  mb: 8,
 })``;
 
 type RawProps = {
@@ -178,11 +188,7 @@ export function renderVerifyAddress({
             onPress={onPress}
           />
         )}
-        {address && (
-          <Flex marginTop="16px">
-            <TitleText fontWeight="bold">{address}</TitleText>
-          </Flex>
-        )}
+        {address && <TitleText fontWeight="bold">{address}</TitleText>}
       </ActionContainer>
     </Wrapper>
   );
@@ -290,9 +296,9 @@ const AllowOpeningApp = ({
           source={getDeviceAnimation({ device, key: "openApp", theme })}
         />
       </AnimationContainer>
-      <CenteredText>
+      <TitleText>
         {t("DeviceAction.allowAppPermission", { wording })}
-      </CenteredText>
+      </TitleText>
       {tokenContext ? (
         <CenteredText>
           {t("DeviceAction.allowAppPermissionSubtitleToken", {
@@ -420,7 +426,7 @@ export function renderConnectYourDevice({
       {device.deviceName && (
         <ConnectDeviceNameText>{device.deviceName}</ConnectDeviceNameText>
       )}
-      <ConnectDeviceLabelText>
+      <TitleText>
         {t(
           unresponsive
             ? "DeviceAction.unlockDevice"
@@ -428,7 +434,7 @@ export function renderConnectYourDevice({
             ? "DeviceAction.connectAndUnlockDevice"
             : "DeviceAction.turnOnAndUnlockDevice",
         )}
-      </ConnectDeviceLabelText>
+      </TitleText>
       {onSelectDeviceLink ? (
         <ConnectDeviceExtraContentWrapper>
           <ExternalLink
@@ -515,7 +521,6 @@ export function renderWarningOutdated({
           <Icon size={28} name="alert-triangle" color={colors.yellow} />
         </Circle>
       </IconContainer>
-
       <TitleText fontWeight="bold">{t("DeviceAction.outdated")}</TitleText>
       <DescriptionText>
         {t("DeviceAction.outdatedDesc", { appName })}
