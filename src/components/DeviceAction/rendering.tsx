@@ -48,7 +48,7 @@ const SpinnerContainer = styled(Flex).attrs({
 })``;
 
 const IconContainer = styled(Flex).attrs({
-  margin: "16px",
+  margin: 6,
 })``;
 
 const CenteredText = styled(Text).attrs({
@@ -78,10 +78,8 @@ const ConnectDeviceLabelText = styled(CenteredText).attrs({
 })``;
 
 const StyledButton = styled(Button).attrs({
-  containerStyle: {
-    marginVertical: 8,
-    alignSelf: "stretch",
-  },
+  mt: 6,
+  alignSelf: "stretch",
 })``;
 
 const ConnectDeviceExtraContentWrapper = styled(Flex).attrs({
@@ -182,7 +180,7 @@ export function renderVerifyAddress({
           />
         )}
         {address && (
-          <Flex>
+          <Flex marginTop="16px">
             <TitleText fontWeight="bold">{address}</TitleText>
           </Flex>
         )}
