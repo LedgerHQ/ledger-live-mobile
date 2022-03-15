@@ -63,7 +63,7 @@ const AccountRow = ({
   });
 
   const portfolioPercentage = useMemo(
-    () => (countervalue ? countervalue / portfolioValue : 0),
+    () => (countervalue && portfolioValue ? countervalue / portfolioValue : 0),
     [countervalue, portfolioValue],
   );
 
@@ -85,7 +85,7 @@ const AccountRow = ({
         accountId: account.id,
       });
     }
-  }, [accountId, navigation]);
+  }, [account.id, account.parentId, account.type, accountId, navigation]);
 
   return (
     <TouchableOpacity onPress={onAccountPress}>
