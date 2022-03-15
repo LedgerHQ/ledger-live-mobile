@@ -176,34 +176,32 @@ export default function Alert(props: Props) {
     id,
   ]);
 
-  return (
-    !isDismissed ? (
-      <BaseAlert
-        {...alertProps}
-        renderContent={({ textColor }) => (
-          <Container>
-            {title && <StyledText color={textColor}>{title}</StyledText>}
-            {description && (
-              <StyledText
-                mt={title ? "6px" : undefined}
-                mb={hasLearnMore ? "6px" : undefined}
-                color={textColor}
-              >
-                {description}
-              </StyledText>
-            )}
-            {hasLearnMore && (
-              <LearnMoreLink
-                color={textColor}
-                onPress={handleLearnMore}
-                learnMoreKey={learnMoreKey}
-                learnMoreIsInternal={learnMoreIsInternal}
-                Icon={learnMoreIcon}
-              />
-            )}
-          </Container>
-        )}
-      />
-    ): null 
-  );
+  return !isDismissed ? (
+    <BaseAlert
+      {...alertProps}
+      renderContent={({ textColor }) => (
+        <Container>
+          {title && <StyledText color={textColor}>{title}</StyledText>}
+          {description && (
+            <StyledText
+              mt={title ? "6px" : undefined}
+              mb={hasLearnMore ? "6px" : undefined}
+              color={textColor}
+            >
+              {description}
+            </StyledText>
+          )}
+          {hasLearnMore && (
+            <LearnMoreLink
+              color={textColor}
+              onPress={handleLearnMore}
+              learnMoreKey={learnMoreKey}
+              learnMoreIsInternal={learnMoreIsInternal}
+              Icon={learnMoreIcon}
+            />
+          )}
+        </Container>
+      )}
+    />
+  ) : null;
 }

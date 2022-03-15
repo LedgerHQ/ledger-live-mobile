@@ -28,8 +28,6 @@ import { MANAGER_TABS } from "../../screens/Manager/Manager";
 import ExternalLink from "../ExternalLink";
 import { track } from "../../analytics";
 
-// const Animation = () => null;
-
 const Wrapper = styled(Flex).attrs({
   flex: 1,
   alignItems: "center",
@@ -296,9 +294,7 @@ const AllowOpeningApp = ({
           source={getDeviceAnimation({ device, key: "openApp", theme })}
         />
       </AnimationContainer>
-      <TitleText>
-        {t("DeviceAction.allowAppPermission", { wording })}
-      </TitleText>
+      <TitleText>{t("DeviceAction.allowAppPermission", { wording })}</TitleText>
       {tokenContext ? (
         <CenteredText>
           {t("DeviceAction.allowAppPermissionSubtitleToken", {
