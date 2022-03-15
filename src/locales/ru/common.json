@@ -21,7 +21,7 @@
     "skip": "Пропустить",
     "noCryptoFound": "Криптоактивы не найдены",
     "needHelp": "Нужна помощь?",
-    "edit": "Редактировать",
+    "edit": "Изм.",
     "editName": "Изменить название",
     "close": "Закрыть",
     "confirm": "Подтвердить",
@@ -2080,7 +2080,7 @@
         "exportButton": "Экспортировать историю транзакций",
         "exportFilename": "Экспортировать историю обменов",
         "empty": {
-          "title": "Здесь будет показана история обменных операций",
+          "title": "Здесь будет история ваших обменов",
           "desc": "Вы ещё ничего не меняли, либо приложение Ledger Live было сброшено."
         }
       }
@@ -2598,7 +2598,7 @@
     "stayInTheAppPlz": "Оставайтесь в приложении и держите при себе Nano X",
     "allowAppPermission": "Откройте приложение {{wording}} на устройстве",
     "allowAppPermissionSubtitleToken": "для управления токенами {{token}}",
-    "allowManagerPermission": "Разрешить использование {{wording}} на устройстве",
+    "allowManagerPermission": "Разрешите использовать {{wording}} на устройстве",
     "loading": "Загружаем...",
     "turnOnAndUnlockDevice": "Включите и разблокируйте устройство",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
@@ -2736,7 +2736,7 @@
     "title": "Диспетчер",
     "connect": "Выберите устройство",
     "appsCatalog": "Каталог приложений",
-    "installedApps": "Установленные приложения",
+    "installedApps": "Установлено",
     "noAppNeededForToken": "Установить приложение {{appName}} для {{tokenName}}",
     "tokenAppDisclaimer": "{{tokenName}} — это токен {{tokenType}}, который использует приложение {{appName}}. Для управления {{tokenName}} <1>необходимо установить приложение {{appName}}</1> и отправить токены <3>на счёт {{appName}}</3>.",
     "tokenAppDisclaimerInstalled": "{{tokenName}} — это токен {{tokenType}}, который использует приложение {{appName}}. Для управления {{tokenName}} <1>необходимо открыть приложение {{appName}}</1> и отправить токены <3>на счёт {{appName}}</3>.",
@@ -2751,7 +2751,7 @@
       "buy": "Купите Ledger Nano X"
     },
     "appList": {
-      "title": "Каталог приложений",
+      "title": "Каталог",
       "loading": "Загружаем приложения...",
       "noApps": "Приложения не найдены",
       "searchAppsCatalog": "Поиск приложения в каталоге...",
@@ -3916,8 +3916,8 @@
         "market_cap_asc": "Рейтинг (капитализация) возр.",
         "market_cap_desc": "Рейтинг (капитализация) убыв."
       },
-      "currency": "Валюты",
-      "time": "Время",
+      "currency": "Эквивалент",
+      "time": "Срок",
       "apply": "Применить"
     },
     "marketList": {
