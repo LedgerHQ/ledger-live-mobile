@@ -40,7 +40,7 @@ const AnimationContainer = styled(Flex).attrs(p => ({
   alignItems: "center",
   justifyContent: "center",
   height: p.withConnectDeviceHeight
-    ? "100px"
+    ? "100px"<Ti
     : p.withVerifyAddressHeight
     ? "72px"
     : undefined,
@@ -186,7 +186,7 @@ export function renderVerifyAddress({
             onPress={onPress}
           />
         )}
-        {address && <TitleText fontWeight="bold">{address}</TitleText>}
+        {address && <TitleText>{address}</TitleText>}
       </ActionContainer>
     </Wrapper>
   );
@@ -517,7 +517,7 @@ export function renderWarningOutdated({
           <Icon size={28} name="alert-triangle" color={colors.yellow} />
         </Circle>
       </IconContainer>
-      <TitleText fontWeight="bold">{t("DeviceAction.outdated")}</TitleText>
+      <TitleText>{t("DeviceAction.outdated")}</TitleText>
       <DescriptionText>
         {t("DeviceAction.outdatedDesc", { appName })}
       </DescriptionText>
