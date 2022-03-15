@@ -19,11 +19,17 @@ const Tab = createMaterialTopTabNavigator();
 const TabBarContainer = styled(Flex)`
   border-bottom-width: 1px;
   border-bottom-color: ${p => p.theme.colors.palette.neutral.c40};
+  background-color: ${p => p.theme.colors.palette.background.main};
 `;
 
 function TabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
   return (
-    <TabBarContainer paddingLeft={4} paddingRight={4} paddingBottom={4}>
+    <TabBarContainer
+      paddingLeft={4}
+      paddingRight={4}
+      paddingBottom={4}
+      paddingTop={4}
+    >
       <TabsContainer>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
