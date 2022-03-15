@@ -22,7 +22,7 @@ export default function ImportAccountsNavigator() {
   );
   return (
     <Stack.Navigator
-      screenOptions={{ ...stackNavigationConfig, headerMode: "float" }}
+      screenOptions={{ ...stackNavigationConfig }}
     >
       <Stack.Screen
         name={ScreenName.ScanAccounts}
