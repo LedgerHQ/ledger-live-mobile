@@ -23,7 +23,6 @@ export default function ExchangeNavigator() {
       screenOptions={{
         ...stackNavigationConfig,
         headerRight: () => <AddAccountsHeaderRightClose />,
-        headerMode: "float",
       }}
     >
       <Stack.Screen
