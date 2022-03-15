@@ -3436,7 +3436,7 @@
       "nominators": "Номинаторы",
       "nominatorsCount": "Номинаторов: {{nominatorsCount}}",
       "nominatorsInfo": "Этого валидатора уже выбрали {{count}} номинанта(-ов).",
-      "oversubscribed": "Превышение лимита голосов ({{nominatorsCount}})",
+      "oversubscribed": "Превышен лимит голосов ({{nominatorsCount}})",
       "oversubscribedInfo": "Вознаграждения получают только ТОП-{{maxNominatorRewardedPerValidator}} номинатора(-ов) с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
       "externalControllerUnsupported": "Этот stash-счёт контролируется отдельным счётом с адресом <0>{{controllerAddress}}</0>. Чтобы стейкировать средства в Ledger Live, вам нужно назначить stash-счёт в качестве самостоятельного контроллера.",
@@ -3631,7 +3631,7 @@
     }
   },
   "delegation": {
-    "overdelegated": "Превышение лимита делегирования",
+    "overdelegated": "Превышен лимит делегаторов",
     "delegationSendWarnDesc": "Отправляемая сумма будет вычтена из делегированного счета.",
     "delegationReceiveWarnDesc": "Сумма, зачисленная на делегированный счёт, будет добавлена к общей стейкированной сумме. Чтобы избежать этого, выберите другой счёт.",
     "iDelegateMy": "Я делегирую свои",
