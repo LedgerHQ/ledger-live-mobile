@@ -177,7 +177,7 @@ export default function Alert(props: Props) {
   ]);
 
   return (
-    !isDismissed && (
+    !isDismissed ? (
       <BaseAlert
         {...alertProps}
         renderContent={({ textColor }) => (
@@ -204,6 +204,6 @@ export default function Alert(props: Props) {
           </Container>
         )}
       />
-    )
+    ): null 
   );
 }
