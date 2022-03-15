@@ -19,7 +19,7 @@ const Header = ({ illustration }: HeaderProps) => (
   <Flex alignItems="center">
     {illustration}
     <Text variant="h2" fontWeight="medium" color="neutral.c100" my={6}>
-      <Trans i18nKey={"v3.manager.myApps"} />
+      <Trans i18nKey={"manager.myApps"} />
     </Text>
   </Flex>
 );
@@ -203,7 +203,7 @@ const InstalledAppsModal = ({
         />
       </Flex>
       <Button mt={6} size="large" type="error" onPress={onUninstallAll}>
-        <Trans i18nKey={"v3.manager.uninstall.uninstallAll"} />
+        <Trans i18nKey={"manager.uninstall.uninstallAll"} />
       </Button>
     </BaseModal>
   );

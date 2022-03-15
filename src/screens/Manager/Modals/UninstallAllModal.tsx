@@ -51,15 +51,15 @@ const UninstallAllModal = ({ isOpened, onClose, onConfirm }: Props) => (
       </IconContainer>
       <TextContainer>
         <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-          <Trans i18nKey="v3.manager.uninstall.subtitle" />
+          <Trans i18nKey="manager.uninstall.subtitle" />
         </ModalText>
         <ModalText color="neutral.c70" fontWeight="medium" variant="body">
-          <Trans i18nKey="v3.manager.uninstall.description" />
+          <Trans i18nKey="manager.uninstall.description" />
         </ModalText>
       </TextContainer>
       <ButtonsContainer>
         <Button size="large" type="error" onPress={onConfirm}>
-          <Trans i18nKey="v3.manager.uninstall.uninstallAll" />
+          <Trans i18nKey="manager.uninstall.uninstallAll" />
         </Button>
         <CancelButton onPress={onClose}>
           <Text variant="large" fontWeight="semiBold" color="neutral.c100">

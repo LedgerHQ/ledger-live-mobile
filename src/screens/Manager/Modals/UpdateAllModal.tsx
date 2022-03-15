@@ -159,7 +159,7 @@ const UpdateAllModal = ({
         </IconContainer>
         <TextContainer>
           <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-            <Trans i18nKey="v3.manager.update.subtitle" />
+            <Trans i18nKey="manager.update.subtitle" />
           </ModalText>
         </TextContainer>
         <FlatListContainer
@@ -173,7 +173,7 @@ const UpdateAllModal = ({
         />
         <ButtonsContainer>
           <Button size="large" type="main" onPress={onConfirm}>
-            <Trans i18nKey="v3.manager.update.updateAll" />
+            <Trans i18nKey="manager.update.updateAll" />
           </Button>
         </ButtonsContainer>
       </Flex>

@@ -158,7 +158,7 @@ export default function OnboardingNavigator() {
         component={OnboardingLanguage}
         options={{
           ...infoModalOptions,
-          headerTitle: t("v3.onboarding.stepLanguage.title"),
+          headerTitle: t("onboarding.stepLanguage.title"),
         }}
       />
       <Stack.Screen

@@ -28,10 +28,10 @@ export const AddAssetsCard = () => {
         size={126}
       />
       <Text variant={"h2"} color={"neutral.c100"} mt={7}>
-        <Trans i18nKey="v3.portfolio.emptyState.addAccounts.title" />
+        <Trans i18nKey="portfolio.emptyState.addAccounts.title" />
       </Text>
       <Text variant={"bodyLineHeight"} color={"neutral.c70"} mt={4}>
-        <Trans i18nKey="v3.portfolio.emptyState.addAccounts.description" />
+        <Trans i18nKey="portfolio.emptyState.addAccounts.description" />
       </Text>
       <Button
         onPress={openAddModal}
@@ -42,7 +42,7 @@ export const AddAssetsCard = () => {
         mt={8}
         width={"100%"}
       >
-        <Trans i18nKey="v3.portfolio.emptyState.buttons.import" />
+        <Trans i18nKey="portfolio.emptyState.buttons.import" />
       </Button>
       <AddAccountsModal
         navigation={navigation}

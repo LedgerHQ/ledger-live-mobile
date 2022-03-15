@@ -38,10 +38,10 @@ const FirmwareUpdateModal = ({ isOpened, onClose }: Props) => (
       </IconContainer>
       <TextContainer>
         <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-          <Trans i18nKey="v3.manager.firmware.modalTitle" />
+          <Trans i18nKey="manager.firmware.modalTitle" />
         </ModalText>
         <ModalText color="neutral.c70" fontWeight="medium" variant="body">
-          <Trans i18nKey="v3.manager.firmware.modalDesc" />
+          <Trans i18nKey="manager.firmware.modalDesc" />
         </ModalText>
       </TextContainer>
     </Flex>

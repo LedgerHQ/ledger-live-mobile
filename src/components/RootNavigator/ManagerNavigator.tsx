@@ -74,7 +74,7 @@ export default function ManagerNavigator() {
         name={ScreenName.Manager}
         component={Manager}
         options={{
-          title: t("v3.manager.title"),
+          title: t("manager.title"),
           headerRight: null,
           gestureEnabled: false,
         }}
@@ -99,7 +99,7 @@ export function ManagerTabIcon(props: any) {
       OnIcon={NanoXIcon}
       oni18nKey="tabs.nanoX"
       OffIcon={hasAvailableUpdate ? ManagerIconWithUpate : NanoFoldedMedium}
-      offi18nKey="v3.tabs.manager"
+      offi18nKey="tabs.manager"
       {...props}
     />
   );

@@ -14,23 +14,23 @@ const RestoreRecoveryPhraseStep1Scene = ({
   const items = [
     {
       title:
-        "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.title",
-      desc: `v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.${deviceModelId}.label`,
+        "onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.title",
+      desc: `onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.${deviceModelId}.label`,
     },
     {
       title:
-        "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.title",
-      desc: `v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.label`,
+        "onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.title",
+      desc: `onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.label`,
     },
     {
       title:
-        "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.title",
-      desc: `v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.label`,
+        "onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.title",
+      desc: `onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.label`,
     },
     {
       title:
-        "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.title",
-      desc: `v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.label`,
+        "onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.title",
+      desc: `onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.label`,
     },
   ];
 
@@ -44,7 +44,7 @@ const RestoreRecoveryPhraseStep1Scene = ({
         }))}
       />
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep")}
       </Button>
     </>
   );

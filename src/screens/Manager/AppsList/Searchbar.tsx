@@ -1,9 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import {
-  Platform,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { Platform, TouchableOpacity, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components/native";
 import styled from "styled-components/native";
@@ -46,7 +42,7 @@ export default ({ searchQuery, onQueryUpdate }: Props) => {
         maxLength={50}
         onChangeText={onQueryUpdate}
         clearButtonMode="always"
-        placeholder={t("v3.manager.appList.searchApps")}
+        placeholder={t("manager.appList.searchApps")}
         placeholderTextColor={colors.neutral.c70}
         onInputCleared={clear}
         value={searchQuery}

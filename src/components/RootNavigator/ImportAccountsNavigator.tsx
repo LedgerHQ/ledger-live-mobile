@@ -31,7 +31,7 @@ export default function ImportAccountsNavigator() {
           headerShown: true,
           headerTitle: () => (
             <Text variant="h3" color="constant.white" uppercase>
-              {t("v3.account.import.scan.title")}
+              {t("account.import.scan.title")}
             </Text>
           ),
           headerRight: props => <HeaderRightClose {...props} color={"#fff"} />,
@@ -44,7 +44,7 @@ export default function ImportAccountsNavigator() {
         options={{
           headerTitle: (
             <Text variant="h3" color="constant.white" uppercase>
-              {t("v3.account.import.result.title")}
+              {t("account.import.result.title")}
             </Text>
           ),
           headerLeft: () => <BackButton />,
@@ -56,7 +56,7 @@ export default function ImportAccountsNavigator() {
         options={{
           headerTitle: (
             <Text variant="h3" color="constant.white" uppercase>
-              {t("v3.account.import.fallback.header")}
+              {t("account.import.fallback.header")}
             </Text>
           ),
         }}

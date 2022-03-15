@@ -35,8 +35,8 @@ export const SLIDES = [
   {
     url: urls.banners.ledgerAcademy,
     name: "LedgerAcademy",
-    title: <Trans i18nKey={`v3.carousel.banners.academy.title`} />,
-    description: <Trans i18nKey={`v3.carousel.banners.academy.description`} />,
+    title: <Trans i18nKey={`carousel.banners.academy.title`} />,
+    description: <Trans i18nKey={`carousel.banners.academy.description`} />,
     icon: (
       <Illustration
         lightSource={AcademyLight}
@@ -54,10 +54,8 @@ export const SLIDES = [
   {
     url: "ledgerlive://buy",
     name: "buyCrypto",
-    title: <Trans i18nKey={`v3.carousel.banners.buyCrypto.title`} />,
-    description: (
-      <Trans i18nKey={`v3.carousel.banners.buyCrypto.description`} />
-    ),
+    title: <Trans i18nKey={`carousel.banners.buyCrypto.title`} />,
+    description: <Trans i18nKey={`carousel.banners.buyCrypto.description`} />,
     icon: (
       <Illustration
         lightSource={BuyCryptoLight}
@@ -75,8 +73,8 @@ export const SLIDES = [
   {
     url: "ledgerlive://swap",
     name: "Swap",
-    title: <Trans i18nKey={`v3.carousel.banners.swap.title`} />,
-    description: <Trans i18nKey={`v3.carousel.banners.swap.description`} />,
+    title: <Trans i18nKey={`carousel.banners.swap.title`} />,
+    description: <Trans i18nKey={`carousel.banners.swap.description`} />,
     icon: (
       <Illustration lightSource={SwapLight} darkSource={SwapDark} size={84} />
     ),
@@ -90,10 +88,8 @@ export const SLIDES = [
   {
     url: urls.banners.familyPack,
     name: "FamilyPack",
-    title: <Trans i18nKey={`v3.carousel.banners.familyPack.title`} />,
-    description: (
-      <Trans i18nKey={`v3.carousel.banners.familyPack.description`} />
-    ),
+    title: <Trans i18nKey={`carousel.banners.familyPack.title`} />,
+    description: <Trans i18nKey={`carousel.banners.familyPack.description`} />,
     icon: (
       <Illustration
         lightSource={FamilyPackLight}

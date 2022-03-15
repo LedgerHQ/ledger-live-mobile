@@ -11,10 +11,10 @@ import { Icons, Box, Flex, Text } from "@ledgerhq/native-ui";
 
 const filterSections = [
   {
-    title: "v3.AppAction.filter.title",
+    title: "AppAction.filter.title",
     data: [
       {
-        label: "v3.AppAction.filter.all",
+        label: "AppAction.filter.all",
         value: "all",
         isFilter: true,
       },
@@ -24,17 +24,17 @@ const filterSections = [
       //   isFilter: true,
       // },
       {
-        label: "v3.AppAction.filter.not_installed",
+        label: "AppAction.filter.not_installed",
         value: "not_installed",
         isFilter: true,
       },
       {
-        label: "v3.AppAction.filter.supported",
+        label: "AppAction.filter.supported",
         value: "supported",
         isFilter: true,
       },
       // {
-      //   label: "v3.AppAction.filter.updatable",
+      //   label: "AppAction.filter.updatable",
       //   value: "updatable",
       //   isFilter: true,
       // },
@@ -42,18 +42,18 @@ const filterSections = [
     footerSeparator: true,
   },
   {
-    title: "v3.AppAction.sort.title",
+    title: "AppAction.sort.title",
     data: [
       // {
       //   label: "AppAction.sort.default",
       //   value: "default",
       // },
       {
-        label: "v3.AppAction.sort.name",
+        label: "AppAction.sort.name",
         value: "name",
       },
       {
-        label: "v3.AppAction.sort.marketcap",
+        label: "AppAction.sort.marketcap",
         value: "marketcap",
       },
     ],

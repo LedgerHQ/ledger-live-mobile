@@ -50,20 +50,20 @@ export default function AddAccountsModal({
       testId="AddAccountsModal"
       isOpen={isOpened}
       onClose={onClose}
-      title={t("v3.portfolio.emptyState.addAccounts.title")}
+      title={t("portfolio.emptyState.addAccounts.title")}
     >
       {!readOnlyModeEnabled && (
         <ChoiceCard
-          title={t("v3.addAccountsModal.add.title")}
-          subTitle={t("v3.addAccountsModal.add.description")}
+          title={t("addAccountsModal.add.title")}
+          subTitle={t("addAccountsModal.add.description")}
           Image={<NanoXFolded size={96} />}
           onPress={onClickAdd}
         />
       )}
 
       <ChoiceCard
-        title={t("v3.addAccountsModal.import.title")}
-        subTitle={t("v3.addAccountsModal.import.description")}
+        title={t("addAccountsModal.import.title")}
+        subTitle={t("addAccountsModal.import.description")}
         Image={
           <Illustration
             lightSource={images.light.withYourLedger}

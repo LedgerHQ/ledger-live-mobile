@@ -12,22 +12,22 @@ const RecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
     <>
       <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={4} uppercase>
-          {t("v3.onboarding.stepSetupDevice.recoveryPhrase.title")}
+          {t("onboarding.stepSetupDevice.recoveryPhrase.title")}
         </Text>
         <Text variant="paragraph" color="palette.neutral.c80" mb={4}>
-          {t("v3.onboarding.stepSetupDevice.recoveryPhrase.desc")}
+          {t("onboarding.stepSetupDevice.recoveryPhrase.desc")}
         </Text>
         <Text variant="paragraph" color="palette.neutral.c80" mb={10}>
-          {t("v3.onboarding.stepSetupDevice.recoveryPhrase.desc_1")}
+          {t("onboarding.stepSetupDevice.recoveryPhrase.desc_1")}
         </Text>
         <Switch
           checked={checked}
           onChange={onChange}
-          label={t("v3.onboarding.stepSetupDevice.recoveryPhrase.checkboxDesc")}
+          label={t("onboarding.stepSetupDevice.recoveryPhrase.checkboxDesc")}
         />
       </Flex>
       <Button disabled={!checked} type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepSetupDevice.recoveryPhrase.cta")}
+        {t("onboarding.stepSetupDevice.recoveryPhrase.cta")}
       </Button>
     </>
   );

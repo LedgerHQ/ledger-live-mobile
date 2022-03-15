@@ -5,24 +5,24 @@ import { useRoute, RouteProp } from "@react-navigation/native";
 
 const items = [
   {
-    title: "v3.onboarding.stepSetupDevice.setup.bullets.0.title",
+    title: "onboarding.stepSetupDevice.setup.bullets.0.title",
     label: {
-      nanoX: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoX",
-      nanoSP: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoSP",
-      nanoS: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoS",
+      nanoX: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoX",
+      nanoSP: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoSP",
+      nanoS: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoS",
     },
   },
   {
-    title: "v3.onboarding.stepSetupDevice.setup.bullets.1.title",
-    label: "v3.onboarding.stepSetupDevice.setup.bullets.1.label",
+    title: "onboarding.stepSetupDevice.setup.bullets.1.title",
+    label: "onboarding.stepSetupDevice.setup.bullets.1.label",
   },
   {
-    title: "v3.onboarding.stepSetupDevice.setup.bullets.2.title",
-    label: "v3.onboarding.stepSetupDevice.setup.bullets.2.label",
+    title: "onboarding.stepSetupDevice.setup.bullets.2.title",
+    label: "onboarding.stepSetupDevice.setup.bullets.2.label",
   },
   {
-    title: "v3.onboarding.stepSetupDevice.setup.bullets.3.title",
-    label: "v3.onboarding.stepSetupDevice.setup.bullets.3.label",
+    title: "onboarding.stepSetupDevice.setup.bullets.3.title",
+    label: "onboarding.stepSetupDevice.setup.bullets.3.label",
   },
 ];
 
@@ -48,7 +48,7 @@ const InstructionScene = ({ onNext }: { onNext: () => void }) => {
         }))}
       />
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepSetupDevice.setup.cta")}
+        {t("onboarding.stepSetupDevice.setup.cta")}
       </Button>
     </>
   );

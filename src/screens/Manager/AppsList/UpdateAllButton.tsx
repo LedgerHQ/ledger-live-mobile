@@ -24,7 +24,7 @@ const UpdateAllButton = ({ onUpdateAll, apps, state }: Props) => {
   return (
     <>
       <Button size="small" type="color" onPress={openModal}>
-        <Trans i18nKey="v3.manager.update.title" />
+        <Trans i18nKey="manager.update.title" />
       </Button>
       <UpdateAllModal
         isOpened={isOpened}

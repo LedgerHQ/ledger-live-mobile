@@ -96,12 +96,12 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
         <AppIcon app={app} size={48} radius={14} />
         <TextContainer>
           <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-            <Trans i18nKey="v3.AppAction.install.done.title" />
+            <Trans i18nKey="AppAction.install.done.title" />
           </ModalText>
           <ModalText color="neutral.c70" fontWeight="medium" variant="body">
             {hasLiveSupported ? (
               <Trans
-                i18nKey="v3.AppAction.install.done.description"
+                i18nKey="AppAction.install.done.description"
                 values={{ app: app.name }}
               />
             ) : (
@@ -112,7 +112,7 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
         <ButtonsContainer>
           {hasLiveSupported ? (
             <Button size="large" type="main" onPress={onAddAccount}>
-              <Trans i18nKey="v3.AppAction.install.done.accounts" />
+              <Trans i18nKey="AppAction.install.done.accounts" />
             </Button>
           ) : (
             <Button size="large" type="main" onPress={onSupportLink}>

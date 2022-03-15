@@ -38,14 +38,14 @@ const OnboardingSetupDeviceInformation = () => {
           uppercase
           textAlign="center"
         >
-          {t("v3.onboarding.stepSetupDevice.start.warning.title")}
+          {t("onboarding.stepSetupDevice.start.warning.title")}
         </Text>
         <Text variant="paragraph" color="neutral.c80" mt={6} textAlign="center">
-          {t("v3.onboarding.stepSetupDevice.start.warning.desc")}
+          {t("onboarding.stepSetupDevice.start.warning.desc")}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepSetupDevice.start.warning.ctaText")}
+        {t("onboarding.stepSetupDevice.start.warning.ctaText")}
       </Button>
     </Flex>
   );

@@ -109,7 +109,7 @@ const AppRow = ({
             color="neutral.c80"
             fontWeight="semiBold"
           >
-            <Trans i18nKey="v3.ApplicationVersion" values={{ version }} />
+            <Trans i18nKey="ApplicationVersion" values={{ version }} />
             {isInstalled && !isInstalled.updated && (
               <>
                 {" "}

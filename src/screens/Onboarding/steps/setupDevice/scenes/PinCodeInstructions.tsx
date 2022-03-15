@@ -6,12 +6,12 @@ import NanoDeviceCancelIcon from "../../../../../icons/NanoDeviceCancelIcon";
 
 const items = [
   {
-    title: "v3.onboarding.stepSetupDevice.pinCodeSetup.bullets.0.title",
-    desc: "v3.onboarding.stepSetupDevice.pinCodeSetup.bullets.0.desc",
+    title: "onboarding.stepSetupDevice.pinCodeSetup.bullets.0.title",
+    desc: "onboarding.stepSetupDevice.pinCodeSetup.bullets.0.desc",
   },
   {
-    title: "v3.onboarding.stepSetupDevice.pinCodeSetup.bullets.1.title",
-    desc: "v3.onboarding.stepSetupDevice.pinCodeSetup.bullets.1.desc",
+    title: "onboarding.stepSetupDevice.pinCodeSetup.bullets.1.title",
+    desc: "onboarding.stepSetupDevice.pinCodeSetup.bullets.1.desc",
   },
 ];
 
@@ -36,7 +36,7 @@ const PinCodeInstructionsScene = ({ onNext }: { onNext: () => void }) => {
         }))}
       />
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepSetupDevice.pinCode.cta")}
+        {t("onboarding.stepSetupDevice.pinCode.cta")}
       </Button>
     </>
   );

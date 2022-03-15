@@ -46,10 +46,10 @@ const Card = ({ index /* , deviceModelId */ }: CardType) => {
         />
       </Flex>
       <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>
-        {t(`v3.onboarding.stepNewDevice.${index}.title`)}
+        {t(`onboarding.stepNewDevice.${index}.title`)}
       </Text>
       <Text textAlign="center" variant="body">
-        {t(`v3.onboarding.stepNewDevice.${index}.desc`)}
+        {t(`onboarding.stepNewDevice.${index}.desc`)}
       </Text>
     </Flex>
   );
@@ -99,7 +99,7 @@ const Footer = ({ index }: { index: number }) => {
 
   return (
     <Animatable.View animation="fadeIn" useNativeDriver>
-      <Component label={t(`v3.onboarding.stepNewDevice.${index}.action`)} />
+      <Component label={t(`onboarding.stepNewDevice.${index}.action`)} />
     </Animatable.View>
   );
 };

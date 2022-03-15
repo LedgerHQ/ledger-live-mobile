@@ -38,14 +38,14 @@ const OnboardingSyncDesktopInformation = () => {
           uppercase
           textAlign="center"
         >
-          {t("v3.onboarding.stepImportAccounts.warning.title")}
+          {t("onboarding.stepImportAccounts.warning.title")}
         </Text>
         <Text variant="body" color="neutral.c80" mt={6} textAlign="center">
-          {t("v3.onboarding.stepImportAccounts.warning.desc")}
+          {t("onboarding.stepImportAccounts.warning.desc")}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepImportAccounts.warning.cta")}
+        {t("onboarding.stepImportAccounts.warning.cta")}
       </Button>
     </Flex>
   );

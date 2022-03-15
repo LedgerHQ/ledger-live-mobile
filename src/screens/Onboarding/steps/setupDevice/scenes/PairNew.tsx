@@ -15,14 +15,14 @@ const PairNewScene = ({
     <>
       <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
-          {t(`v3.onboarding.stepPairNew.${deviceModelId}.title`)}
+          {t(`onboarding.stepPairNew.${deviceModelId}.title`)}
         </Text>
         <Text variant="paragraph" color="palette.neutral.c80" mb={10}>
-          {t(`v3.onboarding.stepPairNew.${deviceModelId}.desc`)}
+          {t(`onboarding.stepPairNew.${deviceModelId}.desc`)}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={onNext}>
-        {t(`v3.onboarding.stepPairNew.${deviceModelId}.cta`)}
+        {t(`onboarding.stepPairNew.${deviceModelId}.cta`)}
       </Button>
     </>
   );

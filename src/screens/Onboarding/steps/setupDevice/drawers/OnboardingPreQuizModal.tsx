@@ -36,14 +36,14 @@ const OnboardingPreQuizModal = () => {
           uppercase
           textAlign="center"
         >
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title")}
+          {t("onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title")}
         </Text>
         <Text variant="body" color="neutral.c100" mt={6} textAlign="center">
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc")}
+          {t("onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc")}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.cta")}
+        {t("onboarding.stepSetupDevice.hideRecoveryPhrase.warning.cta")}
       </Button>
     </Flex>
   );

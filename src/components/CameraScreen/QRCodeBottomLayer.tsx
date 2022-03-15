@@ -27,8 +27,8 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
           <Trans
             i18nKey={
               liveQrCode
-                ? "v3.account.import.scan.descBottom"
-                : "v3.send.scan.descBottom"
+                ? "account.import.scan.descBottom"
+                : "send.scan.descBottom"
             }
           />
         </Text>
@@ -49,10 +49,10 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
           title={
             <Flex>
               <Text fontWeight="semiBold" variant="body">
-                <Trans i18nKey="v3.account.import.scan.descTop.line1" />
+                <Trans i18nKey="account.import.scan.descTop.line1" />
               </Text>
               <Text fontWeight="bold" variant="body">
-                <Trans i18nKey="v3.account.import.scan.descTop.line2" />
+                <Trans i18nKey="account.import.scan.descTop.line2" />
               </Text>
             </Flex>
           }

@@ -97,7 +97,7 @@ function AppInstalledModal({
         variant="h2"
       >
         <Trans
-          i18nKey="v3.AppAction.install.done.title"
+          i18nKey="AppAction.install.done.title"
         />
       </ModalText>
       <ModalText
@@ -106,14 +106,14 @@ function AppInstalledModal({
         variant="body"
       >
         <Trans
-          i18nKey="v3.AppAction.install.done.description"
+          i18nKey="AppAction.install.done.description"
           values={{ app: successInstalls[0].name }}
         />
       </ModalText>
     </TextContainer>
     <ButtonsContainer>
       <Button size="large" type="main" onPress={onAddAccount}>
-        <Trans i18nKey="v3.AppAction.install.done.accounts" />
+        <Trans i18nKey="AppAction.install.done.accounts" />
       </Button>
       <CancelButton onPress={onClose}>
         <Text variant="large" fontWeight="semiBold" color="neutral.c100">

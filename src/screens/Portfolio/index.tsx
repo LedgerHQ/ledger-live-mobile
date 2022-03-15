@@ -168,7 +168,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         ? [
             <Flex mx={6} mt={10}>
               <SectionTitle
-                title={<Trans i18nKey={"v3.distribution.title"} />}
+                title={<Trans i18nKey={"distribution.title"} />}
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
@@ -185,7 +185,7 @@ export default function PortfolioScreen({ navigation }: Props) {
             <Flex mt={10}>
               <Flex mx={6}>
                 <SectionTitle
-                  title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
+                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
                 />
               </Flex>
               <Carousel cardsVisibility={carouselVisibility} />
@@ -194,10 +194,10 @@ export default function PortfolioScreen({ navigation }: Props) {
         : []),
       <Flex mx={6} mt={10}>
         <SectionTitle
-          title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
+          title={<Trans i18nKey={"portfolio.topGainers.title"} />}
           navigation={navigation}
           navigatorName={NavigatorName.Market}
-          seeMoreText={<Trans i18nKey={"v3.portfolio.topGainers.seeMarket"} />}
+          seeMoreText={<Trans i18nKey={"portfolio.topGainers.seeMarket"} />}
           containerProps={{ mb: 5 }}
         />
         <MarketSection />

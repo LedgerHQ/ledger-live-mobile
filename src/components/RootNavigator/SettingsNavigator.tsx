@@ -279,7 +279,7 @@ export default function SettingsNavigator() {
         options={{
           ...TransitionPresets.ModalTransition,
           headerShown: true,
-          headerTitle: t("v3.onboarding.stepLanguage.title"),
+          headerTitle: t("onboarding.stepLanguage.title"),
         }}
       />
     </Stack.Navigator>

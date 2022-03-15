@@ -38,10 +38,10 @@ export default function AnalyticsNavigator() {
         name={ScreenName.AnalyticsAllocation}
         component={AnalyticsAllocation}
         options={{
-          title: t("v3.analytics.allocation.title"),
+          title: t("analytics.allocation.title"),
           tabBarLabel: (props: any) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("v3.analytics.allocation.title")}
+              {t("analytics.allocation.title")}
             </Text>
           ),
         }}
@@ -50,10 +50,10 @@ export default function AnalyticsNavigator() {
         name={ScreenName.AnalyticsOperations}
         component={AnalyticsOperations}
         options={{
-          title: t("v3.analytics.operations.title"),
+          title: t("analytics.operations.title"),
           tabBarLabel: (props: any) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("v3.analytics.operations.title")}
+              {t("analytics.operations.title")}
             </Text>
           ),
         }}

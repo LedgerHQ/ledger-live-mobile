@@ -135,7 +135,7 @@ const OnboardingStepUseCaseSelection = () => {
       Platform.OS === "ios" && deviceModelId !== "nanoX"
         ? [
             {
-              title: "v3.onboarding.stepUseCase.recovery",
+              title: "onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
@@ -149,9 +149,9 @@ const OnboardingStepUseCaseSelection = () => {
                         />
                       ),
                       title:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                       showRecoveryWarning: true,
                     },
@@ -162,7 +162,7 @@ const OnboardingStepUseCaseSelection = () => {
           ]
         : [
             {
-              title: t("v3.onboarding.stepUseCase.firstUse"),
+              title: t("onboarding.stepUseCase.firstUse"),
               data: [
                 {
                   cards: [
@@ -175,10 +175,9 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.setupNano}
                         />
                       ),
-                      title:
-                        "v3.onboarding.stepUseCase.deviceActions.setup.title",
+                      title: "onboarding.stepUseCase.deviceActions.setup.title",
                       subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.setup.subTitle",
+                        "onboarding.stepUseCase.deviceActions.setup.subTitle",
                       event: "Onboarding - Setup new",
                     },
                   ],
@@ -186,7 +185,7 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
             {
-              title: "v3.onboarding.stepUseCase.recovery",
+              title: "onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
@@ -200,9 +199,9 @@ const OnboardingStepUseCaseSelection = () => {
                         />
                       ),
                       title:
-                        "v3.onboarding.stepUseCase.deviceActions.pairing.title",
+                        "onboarding.stepUseCase.deviceActions.pairing.title",
                       subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.pairing.subTitle",
+                        "onboarding.stepUseCase.deviceActions.pairing.subTitle",
                       event: "Onboarding - Connect",
                       showRecoveryWarning: true,
                     },
@@ -216,9 +215,9 @@ const OnboardingStepUseCaseSelection = () => {
                         />
                       ),
                       title:
-                        "v3.onboarding.stepUseCase.deviceActions.restore.title",
+                        "onboarding.stepUseCase.deviceActions.restore.title",
                       subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.restore.subTitle",
+                        "onboarding.stepUseCase.deviceActions.restore.subTitle",
                       event: "Onboarding - Restore",
                     },
                     {
@@ -231,9 +230,9 @@ const OnboardingStepUseCaseSelection = () => {
                         />
                       ),
                       title:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                     },
                   ],

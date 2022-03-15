@@ -4,15 +4,15 @@ import { Text, Button, IconBoxList, Icons, Flex } from "@ledgerhq/native-ui";
 
 const items = [
   {
-    title: "v3.onboarding.stepImportAccounts.bullets.0.label",
+    title: "onboarding.stepImportAccounts.bullets.0.label",
     icon: Icons.ComputerMedium,
   },
   {
-    title: "v3.onboarding.stepImportAccounts.bullets.1.label",
+    title: "onboarding.stepImportAccounts.bullets.1.label",
     icon: Icons.QrCodeMedium,
   },
   {
-    title: "v3.onboarding.stepImportAccounts.bullets.2.label",
+    title: "onboarding.stepImportAccounts.bullets.2.label",
     icon: Icons.CheckAloneMedium,
   },
 ];
@@ -23,9 +23,9 @@ const SyncDesktopScene = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <Flex flex={1}>
-        <Text variant="h2">{t("v3.onboarding.stepImportAccounts.title")}</Text>
+        <Text variant="h2">{t("onboarding.stepImportAccounts.title")}</Text>
         <Text variant="body" color="neutral.c80" mt={5} mb={8}>
-          {t("v3.onboarding.stepImportAccounts.desc")}
+          {t("onboarding.stepImportAccounts.desc")}
         </Text>
         <IconBoxList
           items={items.map(item => ({
@@ -42,7 +42,7 @@ const SyncDesktopScene = ({ onNext }: { onNext: () => void }) => {
       </Flex>
 
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepImportAccounts.cta")}
+        {t("onboarding.stepImportAccounts.cta")}
       </Button>
     </>
   );

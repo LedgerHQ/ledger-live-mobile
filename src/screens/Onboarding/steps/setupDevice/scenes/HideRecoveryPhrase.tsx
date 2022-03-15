@@ -4,7 +4,7 @@ import { Flex, Button, Text, IconBoxList, Icons } from "@ledgerhq/native-ui";
 
 const items = [
   {
-    title: "v3.onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label",
+    title: "onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label",
     /*
      ** @TODO: Correct icon isn't included in the ui library yet.
      ** Replace this placeholder as soon as it's available.
@@ -12,7 +12,7 @@ const items = [
     Icon: Icons.MinusMedium,
   },
   {
-    title: "v3.onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label",
+    title: "onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label",
     Icon: Icons.EyeNoneMedium,
   },
 ];
@@ -24,17 +24,17 @@ const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
     <>
       <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.title")}
+          {t("onboarding.stepSetupDevice.hideRecoveryPhrase.title")}
         </Text>
         <Text variant="paragraph" color="palette.neutral.c80" mb={16}>
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.desc")}
+          {t("onboarding.stepSetupDevice.hideRecoveryPhrase.desc")}
         </Text>
         <IconBoxList
           items={items.map(item => ({ ...item, title: t(item.title) }))}
         />
       </Flex>
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
+        {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </>
   );

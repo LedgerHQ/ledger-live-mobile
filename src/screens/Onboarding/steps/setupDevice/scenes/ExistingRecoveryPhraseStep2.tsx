@@ -39,7 +39,7 @@ const ExistingRecoveryPhraseStep2Scene = ({
         }))}
       />
       <Button type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep")}
+        {t("onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep")}
       </Button>
     </>
   );

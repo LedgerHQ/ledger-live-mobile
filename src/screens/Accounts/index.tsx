@@ -134,7 +134,7 @@ function Accounts({ navigation, route }: Props) {
               mt={4}
               mb={3}
             >
-              <Text variant="h1">{t("v3.distribution.title")}</Text>
+              <Text variant="h1">{t("distribution.title")}</Text>
             </Flex>
           }
         >
