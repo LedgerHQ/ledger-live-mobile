@@ -14,8 +14,10 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
-import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
-import { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
+import {
+  getDeviceTransactionConfig,
+  DeviceTransactionField,
+} from "@ledgerhq/live-common/lib/transaction";
 import { getDeviceModel } from "@ledgerhq/devices";
 
 import { useTheme } from "@react-navigation/native";
@@ -93,11 +95,11 @@ const commonFieldComponents: { [key: any]: FieldComponent } = {
 };
 
 type Props = {
-  device: Device,
-  status: TransactionStatus,
-  transaction: Transaction,
-  account: AccountLike,
-  parentAccount: Account | null | undefined,
+  device: Device;
+  status: TransactionStatus;
+  transaction: Transaction;
+  account: AccountLike;
+  parentAccount: Account | null | undefined;
 };
 
 export default function ValidateOnDevice({
@@ -163,9 +165,7 @@ export default function ValidateOnDevice({
               status={status}
             />
           ) : (
-            <TitleText>
-              {titleWording}
-            </TitleText>
+            <TitleText>{titleWording}</TitleText>
           )}
 
           <DataRowsContainer>
