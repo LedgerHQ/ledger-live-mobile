@@ -94,11 +94,11 @@ const SectionTitle = ({
       <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
         {title}
       </Text>
-      {(onSeeAllPress || navigatorName) && (
+      {onSeeAllPress || navigatorName ? (
         <Link onPress={onLinkPress} type={"color"}>
           {seeMoreText || <Trans i18nKey={"common.seeAll"} />}
         </Link>
-      )}
+      ) : null}
     </Flex>
   );
 };
@@ -210,9 +210,8 @@ export default function PortfolioScreen({ navigation }: Props) {
             navigation={navigation}
             navigatorName={NavigatorName.Platform}
           />
+          <DiscoverSection />
         </Flex>
-
-        <DiscoverSection />
       </Flex>,
 
       <Box mt={24} />,

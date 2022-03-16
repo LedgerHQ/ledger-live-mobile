@@ -25,6 +25,7 @@ import SkipLock from "../../../components/behaviour/SkipLock";
 import AddMockAnnouncementButton from "./GenerateAnnouncementMockData";
 import ToggleMockServiceStatusButton from "./ToggleMockStatusIncident";
 import SettingsNavigationScrollView from "../SettingsNavigationScrollView";
+import MockModeRow from "../General/MockModeRow";
 
 export function DebugMocks() {
   const accounts = useSelector(accountsSelector);
@@ -48,6 +49,7 @@ export function DebugMocks() {
       <OpenLottie />
       <OpenDebugPlayground />
       <ReadOnlyModeRow />
+      <MockModeRow />
       <AnalyticsConsoleRow />
       <AddMockAnnouncementButton title="Mock a new announcement" />
       <ToggleMockServiceStatusButton title="Toggle Service status incident" />
