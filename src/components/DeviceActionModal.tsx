@@ -19,7 +19,7 @@ type Props = {
   request?: any;
   onClose?: () => void;
   onModalHide?: () => void;
-  onResult?: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">;
+  onResult?: (payload: any) => Promise<void> | void;
   renderOnResult?: (p: any) => React.ReactNode;
   onSelectDeviceLink?: () => void;
   analyticsPropertyFlow?: string;
@@ -52,7 +52,6 @@ export default function DeviceActionModal({
               action={action}
               device={device}
               request={request}
-              onClose={onClose}
               onResult={onResult}
               renderOnResult={renderOnResult}
               onSelectDeviceLink={onSelectDeviceLink}
