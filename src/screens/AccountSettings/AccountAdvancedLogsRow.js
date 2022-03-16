@@ -24,6 +24,7 @@ class AccountAdvancedLogsRow extends PureComponent<Props> {
             accountId: account.id,
           })
         }
+        style={{ paddingLeft: 10, paddingRight: 10 }}
       />
     );
   }

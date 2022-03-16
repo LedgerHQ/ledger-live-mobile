@@ -204,7 +204,7 @@ export function getListHeaderComponents({
       ),
       ...(!empty
         ? [
-            <Box bg={"background.main"} py={3} pl={6}>
+            <Box py={3} pl={6}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <FabActions account={account} parentAccount={parentAccount} />
               </ScrollView>

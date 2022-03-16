@@ -26,6 +26,7 @@ class AccountCurrencyRow extends PureComponent<Props> {
             fromAccount: true,
           })
         }
+        style={{ paddingLeft: 10, paddingRight: 10 }}
       />
     );
   }

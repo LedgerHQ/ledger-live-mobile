@@ -56,7 +56,7 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
               </Text>
             </Flex>
           }
-        ></Alert>
+        />
       </Flex>
     </Flex>
   );

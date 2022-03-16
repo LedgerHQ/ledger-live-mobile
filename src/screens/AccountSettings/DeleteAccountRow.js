@@ -24,6 +24,7 @@ function DeleteAccountRow({ onPress }: Props) {
       }
       onPress={onPress}
       titleStyle={{ color: colors.alert }}
+      style={{ paddingLeft: 10, paddingRight: 10 }}
     />
   );
 }
