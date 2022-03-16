@@ -100,11 +100,4 @@ function ValidateSuccess({
   );
 }
 
-// const styles = StyleSheet.create({
-//   button: {
-//     alignSelf: "stretch",
-//     marginTop: 24,
-//   },
-// });
-
 export default memo<Props>(ValidateSuccess);
