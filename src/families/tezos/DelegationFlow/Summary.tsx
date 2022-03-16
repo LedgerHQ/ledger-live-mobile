@@ -249,7 +249,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   useTransactionChangeFromNavigation(setTransaction);
 
   const onContinue = useCallback(async () => {
-    navigation.navigate(ScreenName.DelegationValidationSuccess, {
+    navigation.navigate(ScreenName.DelegationSelectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
