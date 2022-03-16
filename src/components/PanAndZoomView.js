@@ -7,7 +7,7 @@ import {
   PanGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import { Animated } from "react-native";
+import { Animated, Platform } from "react-native";
 
 const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // normal number used to store the current scale and update the corresponding animated value
@@ -34,7 +34,10 @@ const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // actual translate X of the image at any given moment (during the pan gesture and after)
   const translateX = Animated.add(
     animatedTranslateXOffset,
-    Animated.divide(panTranslateX, scale),
+    Platform.OS === "ios"
+      ? panTranslateX
+      : Animated.divide(panTranslateX, scale),
+    // on android the scale of the outer view impacts the translation so we need to compensate, not on ios
   );
 
   // normal number used to store the current translate Y and update the corresponding animated value
@@ -47,7 +50,10 @@ const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // actual translate Y of the image at any given moment (during the pan gesture and after)
   const translateY = Animated.add(
     animatedTranslateYOffset,
-    Animated.divide(panTranslateY, scale),
+    Platform.OS === "ios"
+      ? panTranslateY
+      : Animated.divide(panTranslateY, scale),
+    // on android the scale of the outer view impacts the translation so we need to compensate, not on ios
   );
 
   // binding of the panTranslateX and panTranslateY values to the pan gesture translations
@@ -100,14 +106,20 @@ const PanAndZoomView = ({ children }: { children: React$Node }) => {
             if (e.nativeEvent.state === State.END) {
               // stores the current translate X
               translateXOffset.current +=
-                e.nativeEvent.translationX / scaleOffset.current;
+                Platform.OS === "ios"
+                  ? e.nativeEvent.translationX
+                  : e.nativeEvent.translationX / scaleOffset.current;
+              // on android the scale of the outer view impacts the translation so we need to compensate, not on ios
               animatedTranslateXOffset.setValue(translateXOffset.current);
               // resets the pan translate X to 0 once the gesture is finished
               panTranslateX.setValue(0);
 
               // stores the current translate Y
               translateYOffset.current +=
-                e.nativeEvent.translationY / scaleOffset.current;
+                Platform.OS === "ios"
+                  ? e.nativeEvent.translationY
+                  : e.nativeEvent.translationY / scaleOffset.current;
+              // on android the scale of the outer view impacts the translation so we need to compensate, not on ios
               animatedTranslateYOffset.setValue(translateYOffset.current);
               // resets the pan translate Y to 0 once the gesture is finished
               panTranslateY.setValue(0);
