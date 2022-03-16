@@ -6,6 +6,9 @@ import { Flex, Text, Icons, List, Link, Button, Log, Box } from "@ledgerhq/nativ
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
+import Illustration from "../../../images/illustration/Illustration";
+import EarnLight from "../../../images/illustration/Earn.light.png";
+import EarnDark from "../../../images/illustration/Earn.dark.png";
 
 type Props = {
   navigation: any;
@@ -29,6 +32,13 @@ export default function DelegationStarted({ navigation, route }: Props) {
     <Flex flex={1} justifyContent="space-between" bg="background.main">
       <Flex m={6}>
         <TrackScreen category="DelegationFlow" name="Started" />
+        <Flex alignItems="center">
+          <Illustration
+            lightSource={EarnLight}
+            darkSource={EarnDark}
+            size={150}
+          />
+        </Flex>
         <Flex py={8} alignItems="center">
           <Log>
             <Trans i18nKey="delegation.started.title" />
