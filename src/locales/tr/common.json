@@ -2804,6 +2804,7 @@
         "title": "{{appName}} Yükleniyor",
         "desc": "Lütfen {{appName}} uygulamasının yüklenmesini bekleyin",
         "button": "Yükleniyor...",
+        "queued": "Queued",
         "button_plural": "Yükleniyor... %{{progressPercentage}}"
       },
       "done": {
