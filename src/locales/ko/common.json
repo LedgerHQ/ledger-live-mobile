@@ -2804,6 +2804,7 @@
         "title": "{{appName}} 설치 중",
         "desc": "{{appName}} 앱이 설치될 때까지 기다려 주세요",
         "button": "설치 중...",
+        "queued": "Queued",
         "button_plural": "설치 중... {{progressPercentage}}%"
       },
       "done": {
