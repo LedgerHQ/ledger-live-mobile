@@ -26,7 +26,6 @@ function AccountUnitsRow({ navigation, account }: Props) {
           accountId: account.id,
         })
       }
-      style={{ paddingLeft: 10, paddingRight: 10 }}
     >
       <LText semiBold style={{ color: colors.grey }}>
         {account.unit.code}

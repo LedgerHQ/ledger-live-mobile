@@ -1,15 +1,12 @@
 // @flow
 import React, { useCallback } from "react";
 import { Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useTheme } from "styled-components/native";
 import { Flex, Text, Icons, List, Link, Button } from "@ledgerhq/native-ui";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any;
@@ -31,12 +28,11 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, []);
 
   return (
-    <SafeAreaView
+    <Flex
       style={[
         { flex: 1, justifyContent: "space-between" },
         { backgroundColor: colors.background.main },
       ]}
-      forceInset={forceInset}
     >
       <Flex flex={1} m={6}>
         <TrackScreen category="DelegationFlow" name="Started" />
@@ -72,6 +68,6 @@ export default function DelegationStarted({ navigation, route }: Props) {
           <Trans i18nKey="delegation.started.cta" />
         </Button>
       </Flex>
-    </SafeAreaView>
+    </Flex>
   );
 }

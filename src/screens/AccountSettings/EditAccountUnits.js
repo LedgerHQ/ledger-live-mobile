@@ -59,7 +59,6 @@ export default function EditAccountUnits({ navigation, route }: Props) {
                 title={item.code}
                 selected={account.unit.code === item.code}
                 compact
-                style={{ paddingLeft: 16, paddingRight: 6 }}
               />
             </Touchable>
           )}
