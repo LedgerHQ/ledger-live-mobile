@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Trans } from "react-i18next";
-import { Icons, IconBox, Text, Flex, Button } from "@ledgerhq/native-ui";
+import { Icons, IconBox, Text, Flex, Button, Log } from "@ledgerhq/native-ui";
 
 import Alert from "./Alert";
 
@@ -47,15 +47,9 @@ function ValidateSuccess({
           boxSize={iconBoxSize}
           iconSize={iconSize}
         />
-        <Text
-          variant="h2"
-          fontWeight="medium"
-          color="neutral.c100"
-          mt={7}
-          textAlign="center"
-        >
-          {title || <Trans i18nKey="send.validation.sent" />}
-        </Text>
+        <Flex py={8}>
+          <Log>{title || <Trans i18nKey="send.validation.sent" />}</Log>
+        </Flex>
         <Text
           variant="body"
           fontWeight="medium"

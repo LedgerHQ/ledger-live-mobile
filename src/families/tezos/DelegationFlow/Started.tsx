@@ -2,8 +2,7 @@
 import React, { useCallback } from "react";
 import { Linking } from "react-native";
 import { Trans } from "react-i18next";
-import { useTheme } from "styled-components/native";
-import { Flex, Text, Icons, List, Link, Button } from "@ledgerhq/native-ui";
+import { Flex, Text, Icons, List, Link, Button, Log, Box } from "@ledgerhq/native-ui";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
@@ -16,7 +15,6 @@ type Props = {
 const Check = <Icons.CheckAloneMedium size={20} color={"success.c100"} />;
 
 export default function DelegationStarted({ navigation, route }: Props) {
-  const { colors } = useTheme();
   const onNext = useCallback(() => {
     navigation.navigate(ScreenName.DelegationSummary, {
       ...route.params,
@@ -28,17 +26,14 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, []);
 
   return (
-    <Flex
-      style={[
-        { flex: 1, justifyContent: "space-between" },
-        { backgroundColor: colors.background.main },
-      ]}
-    >
-      <Flex flex={1} m={6}>
+    <Flex flex={1} justifyContent="space-between" bg="background.main">
+      <Flex m={6}>
         <TrackScreen category="DelegationFlow" name="Started" />
-        <Text textAlign={"center"} variant="h2" fontWeight="semiBold" py={8}>
-          <Trans i18nKey="delegation.started.title" />
-        </Text>
+        <Flex py={8} alignItems="center">
+          <Log>
+            <Trans i18nKey="delegation.started.title" />
+          </Log>
+        </Flex>
         <Text variant="body" fontWeight="medium" textAlign="center" mb={6}>
           <Trans i18nKey="delegation.started.description" />
         </Text>
