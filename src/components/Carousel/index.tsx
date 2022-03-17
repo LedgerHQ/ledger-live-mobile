@@ -34,9 +34,9 @@ const DismissCarousel = styled(TouchableOpacity)`
 export const SLIDES = [
   {
     url: urls.banners.ledgerAcademy,
-    name: "LedgerAcademy",
-    title: <Trans i18nKey={`carousel.banners.academy.title`} />,
-    description: <Trans i18nKey={`carousel.banners.academy.description`} />,
+    name: "takeTour",
+    title: <Trans i18nKey={`carousel.banners.tour.title`} />,
+    description: <Trans i18nKey={`carousel.banners.tour.description`} />,
     icon: (
       <Illustration
         lightSource={AcademyLight}

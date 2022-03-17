@@ -7,7 +7,7 @@ import { track } from "../../analytics";
 type SlideProps = {
   url: string;
   name: string;
-  title: any;
+  title: string;
   description: any;
   image: any;
   icon: any;
@@ -17,6 +17,7 @@ type SlideProps = {
 const Slide = ({
   url,
   name,
+  title,
   description,
   image,
   icon,
@@ -31,22 +32,33 @@ const Slide = ({
   return (
     <Touchable event={`${name} Carousel`} onPress={onClick}>
       <Flex
-        width={"248px"}
-        height={"182px"}
+        width={"350px"}
+        height={"115px"}
         borderRadius={2}
         borderWidth={"1px"}
         borderColor={"neutral.c40"}
         justifyContent={"space-between"}
+        flexDirection={"row"}
         p={6}
       >
-        {image ? (
-          <Image style={[{ position: "absolute" }, position]} source={image} />
-        ) : icon ? (
-          <Flex>{icon}</Flex>
-        ) : null}
-        <Text variant={"bodyLineHeight"} fontWeight={"medium"}>
-          {description}
-        </Text>
+        <Flex width={"200px"}>
+          <Text variant={"subtitle"} fontSize={11} color={"neutral.c60"}>
+            {title}
+          </Text>
+          <Text variant="paragraph" fontSize={14}>
+            {description}
+          </Text>
+        </Flex>
+        <Flex justifyContent={"center"}>
+          {image ? (
+            <Image
+              style={[{ position: "absolute" }, position]}
+              source={image}
+            />
+          ) : icon ? (
+            <Flex width={"110px"}>{icon}</Flex>
+          ) : null}
+        </Flex>
       </Flex>
     </Touchable>
   );
