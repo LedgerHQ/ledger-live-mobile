@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 16,
-    width: 140,
+    width: 160,
   },
 });
 
