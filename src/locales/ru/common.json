@@ -2804,7 +2804,7 @@
         "title": "Установка {{appName}}",
         "desc": "Устанавливаем {{appName}}. Пожалуйста, подождите",
         "button": "Устанавливаем...",
-        "queued": "Queued",
+        "queued": "В очереди",
         "button_plural": "Устанавливаем...{{progressPercentage}}%"
       },
       "done": {
