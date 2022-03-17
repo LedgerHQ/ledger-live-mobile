@@ -2537,7 +2537,7 @@
 
 "@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#develop":
   version "21.34.1-cosmos.4"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#4709a08677fc0220c1b53c635bde7ef210093110"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#893c4a1a66b8d4147ccb1fce860f48d82d0af949"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
