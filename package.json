@@ -226,6 +226,7 @@
     "patch-package": "^6.4.7",
     "prettier": "^1.19.1",
     "react-native-debugger-open": "^0.3.25",
+    "react-native-flipper-performance-plugin": "^0.2.0",
     "rn-nodeify": "10.3.0",
     "typescript": "^4.4.4",
     "ws": "^7.5.2",
