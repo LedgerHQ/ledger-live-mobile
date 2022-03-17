@@ -13,9 +13,9 @@ import {
 import { urls } from "../../../../../config/urls";
 
 const bullets = [
-  "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.0.label",
-  "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.1.label",
-  "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.2.label",
+  "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.0.label",
+  "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.1.label",
+  "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.bullets.2.label",
 ];
 
 const OnboardingGeneralInformation = () => {
@@ -40,17 +40,17 @@ const OnboardingGeneralInformation = () => {
           <Flex backgroundColor="background.main">
             <Text variant="h1" color="neutral.c100" uppercase mb={6}>
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title",
+                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title",
               )}
             </Text>
             <Text variant="paragraph" color="neutral.c80" mb={6}>
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc",
+                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc",
               )}
             </Text>
             <Text variant="paragraph" color="neutral.c80" mb={6}>
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1",
+                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1",
               )}
             </Text>
             <Link
@@ -61,7 +61,7 @@ const OnboardingGeneralInformation = () => {
               style={{ justifyContent: "flex-start" }}
             >
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link",
+                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link",
               )}
             </Link>
             <Flex
@@ -71,7 +71,7 @@ const OnboardingGeneralInformation = () => {
             />
             <Text variant="h1" color="neutral.c100" uppercase mb={6}>
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1",
+                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1",
               )}
             </Text>
             <NumberedList items={bullets.map(item => ({ title: t(item) }))} />
@@ -79,7 +79,7 @@ const OnboardingGeneralInformation = () => {
         )}
       />
       <Button type="main" size="large" onPress={navigation.goBack}>
-        {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
+        {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </Flex>
   );

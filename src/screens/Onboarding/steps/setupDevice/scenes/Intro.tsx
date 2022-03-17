@@ -6,15 +6,15 @@ import { ScreenName } from "../../../../../const";
 
 const items = [
   {
-    title: "v3.onboarding.stepSetupDevice.start.bullets.0.label",
+    title: "onboarding.stepSetupDevice.start.bullets.0.label",
     Icon: Icons.ClockMedium,
   },
   {
-    title: "v3.onboarding.stepSetupDevice.start.bullets.1.label",
+    title: "onboarding.stepSetupDevice.start.bullets.1.label",
     Icon: Icons.PenMedium,
   },
   {
-    title: "v3.onboarding.stepSetupDevice.start.bullets.2.label",
+    title: "onboarding.stepSetupDevice.start.bullets.2.label",
     Icon: Icons.CoffeeMedium,
   },
 ];
@@ -35,14 +35,14 @@ const IntroScene = ({ onNext }: { onNext: () => void }) => {
     <>
       <Flex flex={1}>
         <Text variant="h2" mb={10} uppercase>
-          {t("v3.onboarding.stepSetupDevice.start.title")}
+          {t("onboarding.stepSetupDevice.start.title")}
         </Text>
         <IconBoxList
           items={items.map(item => ({ ...item, title: t(item.title) }))}
         />
       </Flex>
       <Button type="main" size="large" onPress={next}>
-        {t("v3.onboarding.stepSetupDevice.start.cta")}
+        {t("onboarding.stepSetupDevice.start.cta")}
       </Button>
     </>
   );

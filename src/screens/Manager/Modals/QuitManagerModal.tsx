@@ -69,23 +69,21 @@ const QuitManagerModal = ({
         </IconContainer>
         <TextContainer>
           <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-            <Trans
-              i18nKey={`v3.errors.ManagerQuitPage.${actionRunning}.title`}
-            />
+            <Trans i18nKey={`errors.ManagerQuitPage.${actionRunning}.title`} />
           </ModalText>
           <ModalText color="neutral.c70" fontWeight="medium" variant="body">
             <Trans
-              i18nKey={`v3.errors.ManagerQuitPage.${actionRunning}.description`}
+              i18nKey={`errors.ManagerQuitPage.${actionRunning}.description`}
             />
           </ModalText>
         </TextContainer>
         <ButtonsContainer>
           <Button size="large" type="main" onPress={onClose}>
-            <Trans i18nKey="v3.common.continue" />
+            <Trans i18nKey="common.continue" />
           </Button>
           <CancelButton onPress={onConfirm}>
             <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-              <Trans i18nKey="v3.errors.ManagerQuitPage.quit" />
+              <Trans i18nKey="errors.ManagerQuitPage.quit" />
             </Text>
           </CancelButton>
         </ButtonsContainer>

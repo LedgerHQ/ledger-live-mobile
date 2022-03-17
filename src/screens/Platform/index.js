@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 34,
     lineHeight: 40,
     textAlign: "left",
   },

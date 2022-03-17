@@ -154,7 +154,7 @@ const AppsScreen = ({
             textAlign="center"
           >
             <Trans
-              i18nKey="v3.manager.token.title"
+              i18nKey="manager.token.title"
               values={{
                 appName: parent.name,
               }}
@@ -170,7 +170,7 @@ const AppsScreen = ({
             >
               {parentInstalled ? (
                 <Trans
-                  i18nKey="v3.manager.token.noAppNeeded"
+                  i18nKey="manager.token.noAppNeeded"
                   values={{
                     appName: parent.name,
                     tokenName: found.name,
@@ -178,7 +178,7 @@ const AppsScreen = ({
                 />
               ) : (
                 <Trans
-                  i18nKey="v3.manager.token.installApp"
+                  i18nKey="manager.token.installApp"
                   values={{
                     appName: parent.name,
                     tokenName: found.name,

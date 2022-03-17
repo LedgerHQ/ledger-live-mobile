@@ -23,10 +23,10 @@ import { track } from "../../analytics";
 
 const DismissCarousel = styled(TouchableOpacity)`
   position: absolute;
-  top: 10;
-  right: 10;
-  width: 30;
-  height: 30;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   align-items: center;
   justify-content: center;
 `;
@@ -35,8 +35,8 @@ export const SLIDES = [
   {
     url: urls.banners.ledgerAcademy,
     name: "LedgerAcademy",
-    title: <Trans i18nKey={`v3.carousel.banners.academy.title`} />,
-    description: <Trans i18nKey={`v3.carousel.banners.academy.description`} />,
+    title: <Trans i18nKey={`carousel.banners.academy.title`} />,
+    description: <Trans i18nKey={`carousel.banners.academy.description`} />,
     icon: (
       <Illustration
         lightSource={AcademyLight}
@@ -54,10 +54,8 @@ export const SLIDES = [
   {
     url: "ledgerlive://buy",
     name: "buyCrypto",
-    title: <Trans i18nKey={`v3.carousel.banners.buyCrypto.title`} />,
-    description: (
-      <Trans i18nKey={`v3.carousel.banners.buyCrypto.description`} />
-    ),
+    title: <Trans i18nKey={`carousel.banners.buyCrypto.title`} />,
+    description: <Trans i18nKey={`carousel.banners.buyCrypto.description`} />,
     icon: (
       <Illustration
         lightSource={BuyCryptoLight}
@@ -75,8 +73,8 @@ export const SLIDES = [
   {
     url: "ledgerlive://swap",
     name: "Swap",
-    title: <Trans i18nKey={`v3.carousel.banners.swap.title`} />,
-    description: <Trans i18nKey={`v3.carousel.banners.swap.description`} />,
+    title: <Trans i18nKey={`carousel.banners.swap.title`} />,
+    description: <Trans i18nKey={`carousel.banners.swap.description`} />,
     icon: (
       <Illustration lightSource={SwapLight} darkSource={SwapDark} size={84} />
     ),
@@ -90,10 +88,8 @@ export const SLIDES = [
   {
     url: urls.banners.familyPack,
     name: "FamilyPack",
-    title: <Trans i18nKey={`v3.carousel.banners.familyPack.title`} />,
-    description: (
-      <Trans i18nKey={`v3.carousel.banners.familyPack.description`} />
-    ),
+    title: <Trans i18nKey={`carousel.banners.familyPack.title`} />,
+    description: <Trans i18nKey={`carousel.banners.familyPack.description`} />,
     icon: (
       <Illustration
         lightSource={FamilyPackLight}
@@ -139,10 +135,11 @@ type CarouselCardProps = {
   id: string;
   children: React.ReactNode;
   onHide: (cardId: string) => void;
+  index?: number;
 };
 
-const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
-  <Box key={`container_${id}`} mr={6}>
+const CarouselCard = ({ id, children, onHide, index }: CarouselCardProps) => (
+  <Box key={`container_${id}`} mr={6} ml={index === 0 ? 6 : 0}>
     {children}
     <DismissCarousel hitSlop={hitSlop} onPress={() => onHide(id)}>
       <CloseMedium size={16} color="neutral.c70" />
@@ -151,9 +148,14 @@ const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
 );
 
 // TODO : make it generic in the ui
-const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => (
+const CarouselCardContainer = ({
+  id,
+  children,
+  onHide,
+  index,
+}: CarouselCardProps) => (
   <Animated.View exiting={FadeOut} layout={Layout.delay(200)}>
-    <CarouselCard id={id} onHide={onHide}>
+    <CarouselCard id={id} index={index} onHide={onHide}>
       {children}
     </CarouselCard>
   </Animated.View>
@@ -228,8 +230,13 @@ const Carousel = ({ cardsVisibility }: Props) => {
       onContentSizeChange={onScrollViewContentChange}
       showsHorizontalScrollIndicator={false}
     >
-      {slides.map(({ id, Component }) => (
-        <CarouselCardContainer key={id} id={id} onHide={onHide}>
+      {slides.map(({ id, Component }, index) => (
+        <CarouselCardContainer
+          key={id + index}
+          id={id}
+          index={index}
+          onHide={onHide}
+        >
           <Component key={id} />
         </CarouselCardContainer>
       ))}

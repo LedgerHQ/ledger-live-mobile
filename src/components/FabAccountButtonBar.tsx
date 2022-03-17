@@ -6,13 +6,14 @@ import React, {
   ReactElement,
   ReactNode,
 } from "react";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
-import { Button, Flex } from "@ledgerhq/native-ui";
+import { Flex } from "@ledgerhq/native-ui";
 import ChoiceButton from "./ChoiceButton";
 import InfoModal from "./InfoModal";
+import Button from "./wrappedUi/Button";
 
 type ActionButtonEventProps = {
   navigationParams?: any[];
@@ -51,10 +52,7 @@ function FabAccountButtonBar({
   account,
   parentAccount,
 }: Props) {
-  const { colors } = useTheme();
   const navigation = useNavigation();
-  const [next, setNext] = useState();
-  const [displayedActions, setDisplayedActions] = useState();
 
   const [infoModalProps, setInfoModalProps] = useState<
     ActionButtonEventProps | undefined
@@ -65,7 +63,6 @@ function FabAccountButtonBar({
     (name: string, options?: any) => {
       const accountId = account ? account.id : undefined;
       const parentId = parentAccount ? parentAccount.id : undefined;
-      setNext();
       navigation.navigate(name, {
         ...options,
         params: {
@@ -80,11 +77,10 @@ function FabAccountButtonBar({
 
   const onPress = useCallback(
     (data: ActionButtonEventProps) => {
-      const { navigationParams, confirmModalProps, enableActions } = data;
+      const { navigationParams, confirmModalProps } = data;
       if (!confirmModalProps) {
         setInfoModalProps();
         if (navigationParams) onNavigate(...navigationParams);
-        if (enableActions) setDisplayedActions(enableActions);
       } else {
         setInfoModalProps(data);
         setIsModalInfoOpened(true);
@@ -92,13 +88,6 @@ function FabAccountButtonBar({
     },
     [onNavigate, setIsModalInfoOpened],
   );
-
-  const goToNext = useCallback(() => {
-    if (next) {
-      // workaround for bottom modal + text input autoFocus issue
-      setTimeout(() => onNavigate(...next), 0);
-    }
-  }, [onNavigate, next]);
 
   const onContinue = useCallback(() => {
     setIsModalInfoOpened(false);
@@ -109,13 +98,9 @@ function FabAccountButtonBar({
     setIsModalInfoOpened();
   }, []);
 
-  const onChoiceSelect = useCallback(({ navigationParams, enableActions }) => {
+  const onChoiceSelect = useCallback(({ navigationParams }) => {
     if (navigationParams) {
-      setNext(navigationParams);
-      setDisplayedActions();
-    }
-    if (enableActions) {
-      setDisplayedActions(enableActions);
+      onNavigate(...navigationParams);
     }
   }, []);
 
@@ -136,7 +121,6 @@ function FabAccountButtonBar({
             onPress={() => onPress(rest)}
             key={index}
             mr={3}
-            backgroundColor={"red"}
           >
             {label}
           </Button>

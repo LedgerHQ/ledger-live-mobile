@@ -29,7 +29,7 @@ const GenericErrorView = ({
   const subtitleError = outerError ? error : null;
 
   return (
-    <Flex flexDirection={"column"} alignItems={"center"}>
+    <Flex flexDirection={"column"} alignItems={"center"} alignSelf="stretch">
       {withIcon ? (
         <Box mb={7}>
           <IconBox
@@ -63,6 +63,7 @@ const GenericErrorView = ({
       {hasExportLogButton ? (
         <>
           <Button
+            alignSelf="stretch"
             type={"main"}
             outline={true}
             Icon={DownloadFileIcon}

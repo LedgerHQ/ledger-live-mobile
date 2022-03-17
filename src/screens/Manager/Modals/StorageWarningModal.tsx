@@ -43,18 +43,18 @@ const StorageWarningModal = ({ warning, onClose }: Props) => (
       </IconContainer>
       <TextContainer>
         <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
-          <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.title" />
+          <Trans i18nKey="errors.ManagerNotEnoughSpace.title" />
         </ModalText>
         <ModalText color="neutral.c70" fontWeight="medium" variant="body">
           <Trans
-            i18nKey="v3.errors.ManagerNotEnoughSpace.info"
+            i18nKey="errors.ManagerNotEnoughSpace.info"
             values={{ app: warning }}
           />
         </ModalText>
       </TextContainer>
       <ButtonsContainer>
         <Button size="large" type="main" onPress={onClose}>
-          <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.continue" />
+          <Trans i18nKey="errors.ManagerNotEnoughSpace.continue" />
         </Button>
       </ButtonsContainer>
     </Flex>

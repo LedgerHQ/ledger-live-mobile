@@ -117,10 +117,10 @@ function OnboardingStepWelcome({ navigation }: any) {
           pb={2}
           style={{ textTransform: "uppercase" }}
         >
-          <Trans i18nKey="v3.onboarding.stepWelcome.title" />
+          <Trans i18nKey="onboarding.stepWelcome.title" />
         </Text>
         <Text variant="body" color="constant.white" pb={10}>
-          <Trans i18nKey="v3.onboarding.stepWelcome.subtitle" />
+          <Trans i18nKey="onboarding.stepWelcome.subtitle" />
         </Text>
         <Button
           type="default"
@@ -138,7 +138,7 @@ function OnboardingStepWelcome({ navigation }: any) {
             textAlign="center"
             fontWeight="semiBold"
           >
-            <Trans i18nKey="v3.onboarding.stepWelcome.start" />
+            <Trans i18nKey="onboarding.stepWelcome.start" />
           </Text>
         </Button>
 

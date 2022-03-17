@@ -1,4 +1,3 @@
-// @flow
 import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
@@ -23,12 +22,12 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
       ]}
     >
       <Flex flex={1} alignItems="center" py={8} px={6}>
-        <Text fontWeight="semiBold" variant="h3" color="constant.white">
+        <Text fontWeight="semiBold" variant="h3" color="constant.white" mb={2}>
           <Trans
             i18nKey={
               liveQrCode
-                ? "v3.account.import.scan.descBottom"
-                : "v3.send.scan.descBottom"
+                ? "account.import.scan.descBottom"
+                : "send.scan.descBottom"
             }
           />
         </Text>
@@ -44,19 +43,16 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
           </Flex>
         )}
         <Flex flex={1} />
-        <Alert
-          type="info"
-          title={
-            <Flex>
-              <Text fontWeight="semiBold" variant="body">
-                <Trans i18nKey="v3.account.import.scan.descTop.line1" />
-              </Text>
-              <Text fontWeight="bold" variant="body">
-                <Trans i18nKey="v3.account.import.scan.descTop.line2" />
-              </Text>
-            </Flex>
-          }
-        />
+        <Alert type="info">
+          <Flex>
+            <Text fontWeight="semiBold" variant="body">
+              <Trans i18nKey="account.import.scan.descTop.line1" />
+            </Text>
+            <Text fontWeight="bold" variant="body">
+              <Trans i18nKey="account.import.scan.descTop.line2" />
+            </Text>
+          </Flex>
+        </Alert>
       </Flex>
     </Flex>
   );

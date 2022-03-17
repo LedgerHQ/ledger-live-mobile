@@ -7,7 +7,11 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import {
+  Account,
+  Currency,
+  TokenAccount,
+} from "@ledgerhq/live-common/lib/types";
 import { Flex, ProgressLoader, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import { useSelector } from "react-redux";
@@ -23,7 +27,7 @@ import { useBalanceHistoryWithCountervalue } from "../../actions/portfolio";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 
 type Props = {
-  account: Account;
+  account: Account | TokenAccount;
   accountId: string;
   navigation: any;
   isLast: boolean;
@@ -50,7 +54,9 @@ const AccountRow = ({
     [colors, currency],
   );
 
-  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const counterValueCurrency: Currency = useSelector(
+    counterValueCurrencySelector,
+  );
 
   const countervalue = useCalculate({
     from: currency,
@@ -63,7 +69,7 @@ const AccountRow = ({
   });
 
   const portfolioPercentage = useMemo(
-    () => (countervalue ? countervalue / portfolioValue : 0),
+    () => (countervalue ? countervalue / Math.max(1, portfolioValue) : 0), // never divide by potential zero, we dont want to go towards infinity
     [countervalue, portfolioValue],
   );
 
@@ -78,14 +84,13 @@ const AccountRow = ({
         accountId,
         isForwardedFromAccounts: true,
       });
-    }
-    if (account.type === "TokenAccount") {
+    } else if (account.type === "TokenAccount") {
       navigation.navigate(ScreenName.Account, {
-        parentId: account.parentId,
+        parentId: account?.parentId,
         accountId: account.id,
       });
     }
-  }, [accountId, navigation]);
+  }, [account, accountId, navigation]);
 
   return (
     <TouchableOpacity onPress={onAccountPress}>
@@ -94,6 +99,7 @@ const AccountRow = ({
           <ProgressLoader
             strokeWidth={2}
             mainColor={color}
+            secondaryColor={colors.neutral.c40}
             progress={portfolioPercentage}
             radius={22}
           >

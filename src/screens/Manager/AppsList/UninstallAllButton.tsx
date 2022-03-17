@@ -6,7 +6,7 @@ import UninstallAllModal from "../Modals/UninstallAllModal";
 import { Button } from "@ledgerhq/native-ui";
 
 type Props = {
-  onUninstallAll: () => void,
+  onUninstallAll: () => void;
 };
 
 const UninstallAllButton = ({ onUninstallAll }: Props) => {
@@ -21,7 +21,7 @@ const UninstallAllButton = ({ onUninstallAll }: Props) => {
   return (
     <>
       <Button size="small" type="error" outline onPress={openModal}>
-        <Trans i18nKey="v3.manager.uninstall.title" />
+        <Trans i18nKey="manager.uninstall.title" />
       </Button>
       <UninstallAllModal
         isOpened={isOpened}

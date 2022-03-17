@@ -101,20 +101,20 @@ function AppDependenciesModal({
             <TextContainer>
               <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
                 <Trans
-                  i18nKey="v3.AppAction.install.dependency.title"
+                  i18nKey="AppAction.install.dependency.title"
                   values={{ dependency: dependencies[0].name }}
                 />
               </ModalText>
               <ModalText color="neutral.c70" fontWeight="medium" variant="body">
                 <Trans
-                  i18nKey="v3.AppAction.install.dependency.description_one"
+                  i18nKey="AppAction.install.dependency.description_one"
                   values={{ dependency: dependencies[0].name, app: name }}
                 />
               </ModalText>
             </TextContainer>
             <ButtonsContainer>
               <Button size="large" type="main" onPress={installAppDependencies}>
-                <Trans i18nKey="v3.AppAction.install.continueInstall" />
+                <Trans i18nKey="AppAction.install.continueInstall" />
               </Button>
               <CancelButton onPress={onClose}>
                 <Text

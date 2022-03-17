@@ -4,14 +4,14 @@ import { Flex, Button, List, Icons, Text } from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 
 const content = [
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.0",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.1",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.2",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.3",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.4",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.5",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.6",
-  "v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.7",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.0",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.1",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.2",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.3",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.4",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.5",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.6",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.7",
 ];
 
 const OnboardingSetupDeviceInformation = () => {
@@ -27,7 +27,7 @@ const OnboardingSetupDeviceInformation = () => {
     >
       <Flex>
         <Text variant="h1" mb={6}>
-          {t("v3.onboarding.stepSetupDevice.pinCodeSetup.infoModal.title")}
+          {t("onboarding.stepSetupDevice.pinCodeSetup.infoModal.title")}
         </Text>
         <List
           items={[...content].slice(0, 4).map(item => ({
@@ -46,7 +46,7 @@ const OnboardingSetupDeviceInformation = () => {
         />
       </Flex>
       <Button type="main" size="large" onPress={navigation.goBack}>
-        {t("v3.onboarding.stepSetupDevice.pinCodeSetup.cta")}
+        {t("onboarding.stepSetupDevice.pinCodeSetup.cta")}
       </Button>
     </Flex>
   );

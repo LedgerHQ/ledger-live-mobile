@@ -28,7 +28,6 @@ import globalSyncRefreshControl from "../../components/globalSyncRefreshControl"
 import GraphCardContainer from "./GraphCardContainer";
 import Carousel from "../../components/Carousel";
 import Header from "./Header";
-import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
@@ -95,11 +94,11 @@ const SectionTitle = ({
       <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
         {title}
       </Text>
-      {(onSeeAllPress || navigatorName) && (
+      {onSeeAllPress || navigatorName ? (
         <Link onPress={onLinkPress} type={"color"}>
           {seeMoreText || <Trans i18nKey={"common.seeAll"} />}
         </Link>
-      )}
+      ) : null}
     </Flex>
   );
 };
@@ -169,7 +168,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         ? [
             <Flex mx={6} mt={10}>
               <SectionTitle
-                title={<Trans i18nKey={"v3.distribution.title"} />}
+                title={<Trans i18nKey={"distribution.title"} />}
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
@@ -181,33 +180,38 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      <Flex mx={6} mt={10}>
-        <SectionTitle
-          title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
-          navigation={navigation}
-          navigatorName={NavigatorName.Market}
-          seeMoreText={<Trans i18nKey={"v3.portfolio.topGainers.seeMarket"} />}
-          containerProps={{ mb: 5 }}
-        />
-        <MarketSection />
-      </Flex>,
       ...(Object.values(carouselVisibility).some(Boolean)
         ? [
-            <Flex mx={6} mt={10}>
-              <SectionTitle
-                title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
-              />
+            <Flex mt={10}>
+              <Flex mx={6}>
+                <SectionTitle
+                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
+                />
+              </Flex>
               <Carousel cardsVisibility={carouselVisibility} />
             </Flex>,
           ]
         : []),
-      <Flex mx={6} mt={9}>
+      <Flex mx={6} mt={10}>
         <SectionTitle
-          title={<Trans i18nKey={"tabs.platform"} />}
+          title={<Trans i18nKey={"portfolio.topGainers.title"} />}
           navigation={navigation}
-          navigatorName={NavigatorName.Platform}
+          navigatorName={NavigatorName.Market}
+          seeMoreText={<Trans i18nKey={"portfolio.topGainers.seeMarket"} />}
+          containerProps={{ mb: 5 }}
         />
-        <DiscoverSection />
+        <MarketSection />
+      </Flex>,
+
+      <Flex mt={9}>
+        <Flex mx={6}>
+          <SectionTitle
+            title={<Trans i18nKey={"tabs.platform"} />}
+            navigation={navigation}
+            navigatorName={NavigatorName.Platform}
+          />
+          <DiscoverSection />
+        </Flex>
       </Flex>,
 
       <Box mt={24} />,
@@ -243,8 +247,8 @@ export default function PortfolioScreen({ navigation }: Props) {
           ref={ref}
           data={data}
           style={{ flex: 1, position: "relative" }}
-          renderItem={({ item }) => item}
-          keyExtractor={(item, index) => String(index)}
+          renderItem={({ item }: { item: React.ReactNode }) => item}
+          keyExtractor={(_: any, index: number) => String(index)}
           showsVerticalScrollIndicator={false}
           stickyHeaderIndices={[0]}
           onScroll={handleScroll}

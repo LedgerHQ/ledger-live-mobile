@@ -90,6 +90,7 @@ import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags"
 import StyleProvider from "./StyleProvider";
 // $FlowFixMe
 import MarketDataProvider from "./screens/Market/MarketDataProviderWrapper";
+import AdjustProvider from "./components/AdjustProvider";
 
 const themes = {
   light: lightTheme,
@@ -456,10 +457,13 @@ export default class Root extends Component<
               <>
                 <SetEnvsFromSettings />
                 <HookSentry />
+                <AdjustProvider />
                 <HookAnalytics store={store} />
                 <WalletConnectProvider>
                   <PlatformAppProvider
-                    platformAppsServerURL={getProvider("production").url}
+                    platformAppsServerURL={
+                      getProvider(__DEV__ ? "staging" : "production").url
+                    }
                   >
                     <FirebaseRemoteConfigProvider>
                       <FirebaseFeatureFlagsProvider>

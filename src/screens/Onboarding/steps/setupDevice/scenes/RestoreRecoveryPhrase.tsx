@@ -20,17 +20,17 @@ const RestoreRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
   return (
     <Flex flex={1}>
       <Text variant="h2" uppercase mb={3}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.title")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.title")}
       </Text>
       <Text variant="body" color="neutral.c80" mb={3}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc")}
       </Text>
       <Text variant="body" color="neutral.c80" mb={3}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc")}
       </Text>
       <Flex flex={1} />
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.cta")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.cta")}
       </Button>
     </Flex>
   );

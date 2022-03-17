@@ -62,7 +62,7 @@ const Header = ({ step }: { step: number }) => {
             totalSteps: 3,
           })}
         </Text>
-        <Text variant="h3">{t("v3.onboarding.quizz.label")}</Text>
+        <Text variant="h3">{t("onboarding.quizz.label")}</Text>
       </Flex>
       <Button
         iconName="Close"
@@ -97,56 +97,56 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
     () =>
       [
         {
-          question: t("v3.onboarding.quizz.coins.title"),
+          question: t("onboarding.quizz.coins.title"),
           image: quizImage1,
           answers: [
             {
-              answer: t("v3.onboarding.quizz.coins.answers.correct"),
+              answer: t("onboarding.quizz.coins.answers.correct"),
               correct: true,
-              desc: t("v3.onboarding.quizz.coins.modal.text"),
-              title: t("v3.onboarding.quizz.modal.success"),
+              desc: t("onboarding.quizz.coins.modal.text"),
+              title: t("onboarding.quizz.modal.success"),
             },
             {
-              answer: t("v3.onboarding.quizz.coins.answers.wrong"),
+              answer: t("onboarding.quizz.coins.answers.wrong"),
               correct: false,
-              desc: t("v3.onboarding.quizz.coins.modal.text"),
-              title: t("v3.onboarding.quizz.modal.fail"),
+              desc: t("onboarding.quizz.coins.modal.text"),
+              title: t("onboarding.quizz.modal.fail"),
             },
           ].sort(() => 0.5 - Math.random()),
         },
         {
-          question: t("v3.onboarding.quizz.recoveryPhrase.title"),
+          question: t("onboarding.quizz.recoveryPhrase.title"),
           image: quizImage2,
           answers: [
             {
-              answer: t("v3.onboarding.quizz.recoveryPhrase.answers.correct"),
+              answer: t("onboarding.quizz.recoveryPhrase.answers.correct"),
               correct: true,
-              desc: t("v3.onboarding.quizz.recoveryPhrase.modal.text"),
-              title: t("v3.onboarding.quizz.modal.success"),
+              desc: t("onboarding.quizz.recoveryPhrase.modal.text"),
+              title: t("onboarding.quizz.modal.success"),
             },
             {
-              answer: t("v3.onboarding.quizz.recoveryPhrase.answers.wrong"),
+              answer: t("onboarding.quizz.recoveryPhrase.answers.wrong"),
               correct: false,
-              desc: t("v3.onboarding.quizz.recoveryPhrase.modal.text"),
-              title: t("v3.onboarding.quizz.modal.fail"),
+              desc: t("onboarding.quizz.recoveryPhrase.modal.text"),
+              title: t("onboarding.quizz.modal.fail"),
             },
           ].sort(() => 0.5 - Math.random()),
         },
         {
-          question: t("v3.onboarding.quizz.privateKey.title"),
+          question: t("onboarding.quizz.privateKey.title"),
           image: quizImage3,
           answers: [
             {
-              answer: t("v3.onboarding.quizz.privateKey.answers.correct"),
+              answer: t("onboarding.quizz.privateKey.answers.correct"),
               correct: true,
-              desc: t("v3.onboarding.quizz.privateKey.modal.text"),
-              title: t("v3.onboarding.quizz.modal.success"),
+              desc: t("onboarding.quizz.privateKey.modal.text"),
+              title: t("onboarding.quizz.modal.success"),
             },
             {
-              answer: t("v3.onboarding.quizz.privateKey.answers.wrong"),
+              answer: t("onboarding.quizz.privateKey.answers.wrong"),
               correct: false,
-              desc: t("v3.onboarding.quizz.privateKey.modal.text"),
-              title: t("v3.onboarding.quizz.modal.fail"),
+              desc: t("onboarding.quizz.privateKey.modal.text"),
+              title: t("onboarding.quizz.modal.fail"),
             },
           ].sort(() => 0.5 - Math.random()),
         },
@@ -189,8 +189,8 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
               setBg={setBg}
               cta={
                 i < quizData.length - 1
-                  ? t("v3.onboarding.quizz.nextQuestion")
-                  : t("v3.onboarding.quizz.finish")
+                  ? t("onboarding.quizz.nextQuestion")
+                  : t("onboarding.quizz.finish")
               }
             />
           ))}

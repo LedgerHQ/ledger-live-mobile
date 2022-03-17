@@ -39,17 +39,15 @@ const OnboardingRecoveryPhraseWarning = () => {
           textAlign="center"
         >
           {t(
-            "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title",
+            "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title",
           )}
         </Text>
         <Text variant="paragraph" color="neutral.c80" mt={6} textAlign="center">
-          {t(
-            "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc",
-          )}
+          {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc")}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta")}
+        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta")}
       </Button>
     </Flex>
   );

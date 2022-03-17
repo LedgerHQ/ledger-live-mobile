@@ -84,8 +84,8 @@ const animations = {
     },
     bluetooth: {
       plugAndPinCode: {
-        light: require("../../animations/nanoX/bluetooth/1PlugAndPinCode/light.json"),
-        dark: require("../../animations/nanoX/bluetooth/1PlugAndPinCode/dark.json"),
+        light: require("../../animations/nanoX/bluetooth/3EnterPinCode/light.json"),
+        dark: require("../../animations/nanoX/bluetooth/3EnterPinCode/dark.json"),
       },
       enterPinCode: {
         light: require("../../animations/nanoX/bluetooth/3EnterPinCode/light.json"),

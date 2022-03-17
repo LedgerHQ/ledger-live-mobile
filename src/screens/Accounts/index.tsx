@@ -43,6 +43,7 @@ function Accounts({ navigation, route }: Props) {
   const ref = useRef();
   useScrollToTop(ref);
   const portfolio = usePortfolio();
+  const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -100,7 +101,6 @@ function Accounts({ navigation, route }: Props) {
       </>
     );
   }
-  const { t } = useTranslation();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -134,7 +134,7 @@ function Accounts({ navigation, route }: Props) {
               mt={4}
               mb={3}
             >
-              <Text variant="h1">{t("v3.distribution.title")}</Text>
+              <Text variant="h1">{t("distribution.title")}</Text>
             </Flex>
           }
         >

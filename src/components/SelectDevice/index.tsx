@@ -17,7 +17,7 @@ import USBEmpty from "./USBEmpty";
 import LText from "../LText";
 import Animation from "../Animation";
 
-import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/data.json";
+import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/dark.json";
 import { track } from "../../analytics";
 
 type Props = {

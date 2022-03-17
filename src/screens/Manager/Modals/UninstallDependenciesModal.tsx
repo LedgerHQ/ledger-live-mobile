@@ -105,13 +105,13 @@ const UninstallDependenciesModal = ({
             <TextContainer>
               <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
                 <Trans
-                  i18nKey="v3.AppAction.uninstall.dependency.title"
+                  i18nKey="AppAction.uninstall.dependency.title"
                   values={{ app: name }}
                 />
               </ModalText>
               <ModalText color="neutral.c70" fontWeight="medium" variant="body">
                 <Trans
-                  i18nKey="v3.AppAction.uninstall.dependency.description_two"
+                  i18nKey="AppAction.uninstall.dependency.description_two"
                   values={{ app: name }}
                 />
               </ModalText>

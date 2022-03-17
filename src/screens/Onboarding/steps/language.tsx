@@ -75,7 +75,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
         type="primary"
         onPress={next}
         outline={false}
-        title={<Trans i18nKey="v3.onboarding.stepLanguage.cta" />}
+        title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
       />
     </Flex>
   );
@@ -95,17 +95,17 @@ export function OnboardingStepLanguageGetStarted({
           <IconBox Icon={Icons.WarningMedium} />
         </Flex>
         <Text variant="large" mb={5} fontWeight="semiBold">
-          <Trans i18nKey="v3.onboarding.stepLanguage.warning.title" />
+          <Trans i18nKey="onboarding.stepLanguage.warning.title" />
         </Text>
         <Text variant="body" color="palette.neutral.c80" textAlign="center">
-          <Trans i18nKey="v3.onboarding.stepLanguage.warning.desc" />
+          <Trans i18nKey="onboarding.stepLanguage.warning.desc" />
         </Text>
       </Flex>
       <Button
         type="primary"
         onPress={next}
         outline={false}
-        title={<Trans i18nKey="v3.onboarding.stepLanguage.cta" />}
+        title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
       />
     </>
   );

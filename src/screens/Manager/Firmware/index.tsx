@@ -85,7 +85,7 @@ const FirmwareManager = ({
         {firmware ? (
           <FirmwareUpdateContainer borderColor="neutral.c40">
             <Text color="neutral.c100" variant="large" fontWeight="semiBold">
-                <Trans i18nKey="v3.manager.firmware.latest"/>
+                <Trans i18nKey="manager.firmware.latest"/>
             </Text>
             <TouchableOpacity onPress={open}>
                 <FirmwareUpdateInfoButton borderColor="neutral.c40">
@@ -98,11 +98,11 @@ const FirmwareManager = ({
             <Icons.CircledAlertMedium size={18} color="warning.c100"/>
             <Flex flexDirection="column" ml={3}>
                 <Text color="warning.c100" variant="body" fontWeight="medium">
-                    <Trans i18nKey="v3.manager.firmware.outdated"/>
+                    <Trans i18nKey="manager.firmware.outdated"/>
                 </Text>
                 <TouchableOpacity onPress={openSupport} style={{ flexDirection: "row", alignItems: "center", marginTop: 8 }}>
                     <Text color="warning.c100" variant="body" fontWeight="medium" style={{ textDecorationLine: "underline" }} mr={3}>
-                        <Trans i18nKey="v3.manager.firmware.contactUs" />
+                        <Trans i18nKey="manager.firmware.contactUs" />
                     </Text>
                     <Icons.ExternalLinkMedium size={14} color="warning.c100" />
                 </TouchableOpacity>

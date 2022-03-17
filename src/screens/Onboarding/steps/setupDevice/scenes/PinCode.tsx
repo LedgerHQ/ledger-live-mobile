@@ -12,19 +12,19 @@ const PinCodeScene = ({ onNext }: { onNext: () => void }) => {
     <>
       <Flex flex={1}>
         <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
-          {t("v3.onboarding.stepSetupDevice.pinCode.title")}
+          {t("onboarding.stepSetupDevice.pinCode.title")}
         </Text>
         <Text variant="paragraph" color="palette.neutral.c80" mb={10}>
-          {t("v3.onboarding.stepSetupDevice.pinCode.desc")}
+          {t("onboarding.stepSetupDevice.pinCode.desc")}
         </Text>
         <Switch
           checked={checked}
           onChange={onChange}
-          label={t("v3.onboarding.stepSetupDevice.pinCode.checkboxDesc")}
+          label={t("onboarding.stepSetupDevice.pinCode.checkboxDesc")}
         />
       </Flex>
       <Button disabled={!checked} type="main" size="large" onPress={onNext}>
-        {t("v3.onboarding.stepSetupDevice.pinCode.cta")}
+        {t("onboarding.stepSetupDevice.pinCode.cta")}
       </Button>
     </>
   );

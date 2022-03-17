@@ -420,7 +420,7 @@ export default function BaseNavigator() {
         name={NavigatorName.Analytics}
         component={AnalyticsNavigator}
         options={{
-          title: t("v3.analytics.title"),
+          title: t("analytics.title"),
           headerStyle: styles.headerNoShadow,
           headerRight: null,
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,

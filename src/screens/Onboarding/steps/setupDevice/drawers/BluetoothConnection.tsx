@@ -13,9 +13,9 @@ import {
 import { urls } from "../../../../../config/urls";
 
 const bullets = [
-  "v3.onboarding.stepPairNew.infoModal.bullets.0.label",
-  "v3.onboarding.stepPairNew.infoModal.bullets.1.label",
-  "v3.onboarding.stepPairNew.infoModal.bullets.2.label",
+  "onboarding.stepPairNew.infoModal.bullets.0.label",
+  "onboarding.stepPairNew.infoModal.bullets.1.label",
+  "onboarding.stepPairNew.infoModal.bullets.2.label",
 ];
 
 const BluetoothConnection = () => {
@@ -38,7 +38,7 @@ const BluetoothConnection = () => {
         data={[
           <Flex>
             <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-              {t("v3.onboarding.stepPairNew.infoModal.title_1")}
+              {t("onboarding.stepPairNew.infoModal.title_1")}
             </Text>
             <IconBoxList
               items={bullets.map((item, i) => ({
@@ -56,7 +56,7 @@ const BluetoothConnection = () => {
               onPress={handlePress}
               Icon={Icons.ExternalLinkMedium}
             >
-              {t("v3.onboarding.stepPairNew.infoModal.bullets.2.link")}
+              {t("onboarding.stepPairNew.infoModal.bullets.2.link")}
             </UILink>
           </Flex>,
           ...(Platform.OS === "ios"
@@ -66,10 +66,10 @@ const BluetoothConnection = () => {
                 ,
                 <Flex>
                   <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-                    {t("v3.onboarding.stepPairNew.infoModal.title_2")}
+                    {t("onboarding.stepPairNew.infoModal.title_2")}
                   </Text>
                   <Text variant="body" color="neutral.c80" mb={6}>
-                    <Trans i18nKey="v3.onboarding.stepPairNew.infoModal.desc_1">
+                    <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
                       <Text />
                       <Text fontWeight="bold" />
                     </Trans>
@@ -80,7 +80,7 @@ const BluetoothConnection = () => {
         renderItem={({ item }) => <>{item}</>}
       />
       <Button type="main" size="large" onPress={navigation.goBack}>
-        {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
+        {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </Flex>
   );

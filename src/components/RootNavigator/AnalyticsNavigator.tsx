@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -7,41 +7,28 @@ import { Text } from "@ledgerhq/native-ui";
 import AnalyticsAllocation from "../../screens/Analytics/Allocation";
 import AnalyticsOperations from "../../screens/Analytics/Operations";
 import { ScreenName } from "../../const";
+import { getLineTabNavigatorConfig } from "../../navigation/tabNavigatorConfig";
 
 const Tab = createMaterialTopTabNavigator();
 
 export default function AnalyticsNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const tabNavigationConfig = useMemo(() => getLineTabNavigatorConfig(colors), [
+    colors,
+  ]);
 
   // Fixme Typescript: Update react-native-tab-view to 3.1.1 to remove Tab.navigator ts error
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: colors.neutral.c100,
-        tabBarInactiveTintColor: colors.neutral.c80,
-        tabBarIndicatorStyle: {
-          backgroundColor: colors.primary.c70,
-          height: 3,
-        },
-        tabBarStyle: {
-          backgroundColor: colors.background.main,
-          borderBottomWidth: 1,
-          borderColor: colors.neutral.c40,
-        },
-      }}
-      sceneContainerStyle={{
-        backgroundColor: colors.background.main,
-      }}
-    >
+    <Tab.Navigator {...tabNavigationConfig}>
       <Tab.Screen
         name={ScreenName.AnalyticsAllocation}
         component={AnalyticsAllocation}
         options={{
-          title: t("v3.analytics.allocation.title"),
+          title: t("analytics.allocation.title"),
           tabBarLabel: (props: any) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("v3.analytics.allocation.title")}
+              {t("analytics.allocation.title")}
             </Text>
           ),
         }}
@@ -50,10 +37,10 @@ export default function AnalyticsNavigator() {
         name={ScreenName.AnalyticsOperations}
         component={AnalyticsOperations}
         options={{
-          title: t("v3.analytics.operations.title"),
+          title: t("analytics.operations.title"),
           tabBarLabel: (props: any) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("v3.analytics.operations.title")}
+              {t("analytics.operations.title")}
             </Text>
           ),
         }}

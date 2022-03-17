@@ -113,7 +113,7 @@ const DeviceCard = ({
               color={"neutral.c20"}
             >
               <Trans
-                i18nKey="v3.FirmwareVersionRow.subtitle"
+                i18nKey="FirmwareVersionRow.subtitle"
                 values={{ version: deviceInfo.version }}
               />
             </Text>
@@ -129,7 +129,7 @@ const DeviceCard = ({
       {appList.length > 0 && (
         <Flex mx={6} mb={6}>
           <Button size="small" type="color" onPress={openAppsModal}>
-            <Trans i18nKey="v3.manager.myApps" />
+            <Trans i18nKey="manager.myApps" />
           </Button>
         </Flex>
       )}
