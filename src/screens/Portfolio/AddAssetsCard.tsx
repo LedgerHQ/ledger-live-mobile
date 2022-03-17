@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { Button, Flex, Text } from "@ledgerhq/native-ui";
 import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 import { Trans } from "react-i18next";
+import { Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import Illustration from "../../images/illustration/Illustration";
@@ -20,6 +21,10 @@ export const AddAssetsCard = () => {
     setAddModalOpened,
   ]);
 
+  const goToBuy = useCallback(() => {
+    Linking.openURL('ledgerlive://buy"');
+  }, []);
+
   return (
     <Flex bg={"neutral.c30"} alignItems={"center"} p={7} borderRadius={2}>
       <Illustration
@@ -34,11 +39,21 @@ export const AddAssetsCard = () => {
         <Trans i18nKey="portfolio.emptyState.addAccounts.description" />
       </Text>
       <Button
-        onPress={openAddModal}
+        onPress={goToBuy}
         size={"medium"}
         type={"color"}
         Icon={PlusMedium}
         iconPosition={"left"}
+        mt={8}
+        width={"100%"}
+      >
+        <Trans i18nKey="portfolio.emptyState.buttons.buy" />
+      </Button>
+      <Button
+        onPress={openAddModal}
+        size={"medium"}
+        type={"shade"}
+        outline
         mt={8}
         width={"100%"}
       >
