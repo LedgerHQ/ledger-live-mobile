@@ -99,6 +99,7 @@ const AccountRow = ({
           <ProgressLoader
             strokeWidth={2}
             mainColor={color}
+            secondaryColor={colors.neutral.c40}
             progress={portfolioPercentage}
             radius={22}
           >
