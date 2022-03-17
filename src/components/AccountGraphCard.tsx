@@ -120,6 +120,19 @@ export default function AccountGraphCard({
     [t],
   );
 
+  const timeFormat = useMemo(() => {
+    switch (rangeRequest) {
+      case "24h":
+        return { hour: "numeric", minute: "numeric" };
+      case "7d":
+        return { weekday: "short" };
+      case "30d":
+        return { month: "short", day: "numeric" };
+      default:
+        return { month: "short" };
+    }
+  }, [rangeRequest]);
+
   const isAvailable = !useCounterValue || countervalueAvailable;
 
   const currency = getAccountCurrency(account);
@@ -171,6 +184,9 @@ export default function AccountGraphCard({
       refreshChart={refreshChart}
       chartData={dataFormatted}
       currencyColor={graphColor}
+      xAxisFormatter={(timestamp: number) =>
+        new Intl.DateTimeFormat(locale, timeFormat).format(timestamp)
+      }
       yAxisFormatter={(value: number) =>
         counterValueFormatter({
           value,

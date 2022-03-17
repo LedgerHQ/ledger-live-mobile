@@ -18,6 +18,7 @@ import {
   useSingleCoinMarketData,
 } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
+import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { Image, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import { Account } from "@ledgerhq/live-common/lib/types";
@@ -41,6 +42,7 @@ import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accoun
 // import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
 import Button from "../../../components/wrappedUi/Button";
+import { ensureContrast } from "../../../colors";
 
 export const BackButton = ({ navigation }: { navigation: any }) => (
   <Button
@@ -214,6 +216,14 @@ export default function MarketDetail({
     if (refreshControlVisible && !loading) setRefreshControlVisible(false);
   }, [refreshControlVisible, loading]);
 
+  const currencyColor = useMemo(
+    () =>
+      internalCurrency
+        ? ensureContrast(getCurrencyColor(internalCurrency), colors.neutral.c30)
+        : colors.neutral.c100,
+    [internalCurrency, colors.neutral.c30, colors.neutral.c100],
+  );
+
   const chartDataFormatted = useMemo(
     () =>
       chartData?.[chartRequestParams.range]
@@ -224,6 +234,19 @@ export default function MarketDetail({
         : [],
     [chartData, chartRequestParams.range],
   );
+
+  const timeFormat = useMemo(() => {
+    switch (range) {
+      case "24h":
+        return { hour: "numeric", minute: "numeric" };
+      case "7d":
+        return { weekday: "short" };
+      case "30d":
+        return { month: "short", day: "numeric" };
+      default:
+        return { month: "short" };
+    }
+  }, [range]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
@@ -312,8 +335,11 @@ export default function MarketDetail({
           isLoading={loading || loadingChart}
           refreshChart={refreshChart}
           chartData={chartDataFormatted}
-          currencyColor={internalCurrency && internalCurrency.color}
+          currencyColor={currencyColor}
           margin={16}
+          xAxisFormatter={(timestamp: number) =>
+            new Intl.DateTimeFormat(locale, timeFormat).format(timestamp)
+          }
           yAxisFormatter={(value: number) =>
             counterValueFormatter({
               value,
