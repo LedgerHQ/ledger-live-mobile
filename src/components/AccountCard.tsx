@@ -43,10 +43,7 @@ const AccountCard = ({
     getTagDerivationMode(currency as CryptoCurrency, account.derivationMode);
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.6}
-      onPress={!disabled ? onPress : undefined}
-    >
+    <TouchableOpacity disabled={disabled} onPress={onPress}>
       <Card
         flexDirection="row"
         paddingY={4}

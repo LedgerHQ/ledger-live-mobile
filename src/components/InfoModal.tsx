@@ -1,10 +1,8 @@
-// @flow
-
 import React, { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { Icons, IconBox, Flex, Button } from "@ledgerhq/native-ui";
 import BottomModal from "./BottomModal";
 import LText from "./LText";
@@ -12,21 +10,21 @@ import IconArrowRight from "../icons/ArrowRight";
 import type { Props as ModalProps } from "./BottomModal";
 
 type BulletItem = {
-  key: string,
-  val: React.ReactNode,
+  key: string;
+  val: React.ReactNode;
 };
 
 type InfoModalProps = ModalProps & {
-  id?: string,
-  title?: React.ReactNode,
-  desc?: React.ReactNode,
-  bullets?: BulletItem[],
-  Icon?: React.ReactNode,
-  withCancel?: boolean,
-  onContinue?: () => void,
-  children?: React.ReactNode,
-  confirmLabel?: React.ReactNode,
-  confirmProps?: any,
+  id?: string;
+  title?: React.ReactNode;
+  desc?: React.ReactNode;
+  bullets?: BulletItem[];
+  Icon?: React.ReactNode;
+  withCancel?: boolean;
+  onContinue?: () => void;
+  children?: React.ReactNode;
+  confirmLabel?: React.ReactNode;
+  confirmProps?: any;
 };
 
 const InfoModal = ({
@@ -109,8 +107,8 @@ function BulletLine({ children }: { children: any }) {
   const { colors } = useTheme();
   return (
     <View style={styles.bulletLine}>
-      <IconArrowRight size={16} color={colors.smoke} />
-      <LText style={styles.bulletLineText} color="smoke">
+      <IconArrowRight size={16} color={colors.neutral.c70} />
+      <LText style={styles.bulletLineText} color={colors.neutral.c70}>
         {children}
       </LText>
     </View>
