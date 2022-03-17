@@ -101,60 +101,51 @@ export default function AddMockAnnouncementButton({
       <SettingsRow title={title} onPress={onOpen} />
       <BottomModal isOpened={open} onClose={onClose} style={styles.root}>
         <TextInput
-          mb={6}
           placeholder="platform separated by ','"
           value={notifPlatform}
           onChangeText={setNotifPlatform}
         />
         <TextInput
-          mb={6}
           placeholder="currencies separated by ','"
           value={notifCurrencies}
           onChangeText={setNotifCurrencies}
         />
         <TextInput
-          mb={6}
           placeholder="deviceVersion separated by ','"
           value={notifDeviceVersion}
           onChangeText={setNotifDeviceVersion}
         />
         <TextInput
-          mb={6}
           placeholder="deviceModelId separated by ','"
           value={notifDeviceModelId}
           onChangeText={setNotifDeviceModelId}
         />
 
         <TextInput
-          mb={6}
           placeholder="deviceApps separated by ','"
           value={notifDeviceApps}
           onChangeText={setNotifDeviceApps}
         />
 
         <TextInput
-          mb={6}
           placeholder="languages separated by ','"
           value={notifLanguages}
           onChangeText={setNotifLanguages}
         />
 
         <TextInput
-          mb={6}
           placeholder="app versions separated by ','"
           value={notifAppVersions}
           onChangeText={setNotifAppVersions}
         />
 
         <TextInput
-          mb={6}
           placeholder="live-common versions separated by ','"
           value={notifLiveCommonVersions}
           onChangeText={setNotifLiveCommonVersions}
         />
 
         <TextInput
-          mb={6}
           placeholder="link"
           value={announcementLink}
           onChangeText={setAnnouncementLink}
