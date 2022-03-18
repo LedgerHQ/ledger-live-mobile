@@ -151,6 +151,19 @@ export default function PortfolioScreen({ navigation }: Props) {
           <AddAssetsCard />
         </Box>
       ),
+
+      <Flex mt={9}>
+        <Flex mx={6}>
+          <SectionTitle
+            title={<Trans i18nKey={"tabs.platform"} />}
+            navigation={navigation}
+            navigatorName={NavigatorName.Platform}
+          />
+        </Flex>
+
+        <DiscoverSection />
+      </Flex>,
+
       <Box mx={6} mt={3} onLayout={onPortfolioCardLayout}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -202,19 +215,6 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <MarketSection />
       </Flex>,
-
-      <Flex mt={9}>
-        <Flex mx={6}>
-          <SectionTitle
-            title={<Trans i18nKey={"tabs.platform"} />}
-            navigation={navigation}
-            navigatorName={NavigatorName.Platform}
-          />
-          <DiscoverSection />
-        </Flex>
-      </Flex>,
-
-      <Box mt={24} />,
     ],
     [
       counterValueCurrency,

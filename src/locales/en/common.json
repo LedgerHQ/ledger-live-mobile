@@ -717,6 +717,10 @@
         "title": "Valentine’s day",
         "description": "Reduced fees on Buy and Sell"
       },
+      "tour": {
+        "title": "Take a tour",
+        "description": "Explore the ledger live app and learn how to buy, grow and secure your assets"
+      },
       "academy": {
         "title": "Ledger Academy",
         "description": "Everything you need to know about Blockchain"
@@ -1404,6 +1408,7 @@
       "noAccountsDesc": "Please add accounts to your Portfolio.",
       "buttons": {
         "import": "Add asset",
+        "buy": "Buy",
         "manager": "Install apps",
         "managerSecondary": "Install apps on my device"
       },
