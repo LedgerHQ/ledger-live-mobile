@@ -23,22 +23,21 @@ export default function AdjustProvider() {
     adjustConfig.setDelayStart(4.2);
     if (__DEV__) {
       adjustConfig.setLogLevel(AdjustConfig.LogLevelDebug);
+    }
+    if (Config.DEBUG_ADJUST_LOGS) {
+      adjustConfig.setEventTrackingSucceededCallbackListener(
+        (eventSuccess: AdjustEventTrackingSuccess) => {
+          // Printing all event success properties.
+          console.warn("Event tracking succeeded!", eventSuccess);
+        },
+      );
 
-      if (Config.DEBUG_ADJUST_LOGS) {
-        adjustConfig.setEventTrackingSucceededCallbackListener(
-          (eventSuccess: AdjustEventTrackingSuccess) => {
-            // Printing all event success properties.
-            console.warn("Event tracking succeeded!", eventSuccess);
-          },
-        );
-
-        adjustConfig.setEventTrackingFailedCallbackListener(
-          (eventFailure: AdjustEventTrackingFailure) => {
-            // Printing all event failure properties.
-            console.error("Event tracking failed!", eventFailure);
-          },
-        );
-      }
+      adjustConfig.setEventTrackingFailedCallbackListener(
+        (eventFailure: AdjustEventTrackingFailure) => {
+          // Printing all event failure properties.
+          console.error("Event tracking failed!", eventFailure);
+        },
+      );
     }
     Adjust.create(adjustConfig);
 

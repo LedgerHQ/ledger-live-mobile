@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import WebView from "react-native-webview";
-import { URLSearchParams } from 'react-native-url-polyfill';
+import { URLSearchParams } from "react-native-url-polyfill";
 import styled, { useTheme } from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import NetInfo from "@react-native-community/netinfo";
