@@ -2697,11 +2697,6 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-passcode-auth/-/react-native-passcode-auth-2.1.0.tgz#d2073e9d1b9d81c9782cf3e0f9d8796eb729295a"
   integrity sha512-K3SETlNUJAjU/bN6dNJf56gfpxOhGldmClezIU5puw1PcGDvNf4y8vmEouVz5Htc2a/0vetklf0eIQD8Wk3Hww==
 
-"@ledgerhq/react-native-secp256k1@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-secp256k1/-/react-native-secp256k1-1.0.6.tgz#e0eb0d26fe325dd783b37dffb8465a4cd0f0211b"
-  integrity sha512-8STVPFgaq38o65udmCTxGbkTI9unvB1tylv5+fvAB8CD/c6K8tSYbZtLaJU8ecEHvvxjpO8k2tWohJBDNTdD9Q==
-
 "@ledgerhq/ui-shared@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@ledgerhq/ui-shared/-/ui-shared-0.1.5.tgz#493d26639d7f17b2f5efe9c0e89ec9ba708ccbaa"
@@ -5846,7 +5841,7 @@ buffer@^4.9.1:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
-buffer@^5.0.0, buffer@^5.0.5, buffer@^5.1.0, buffer@^5.4.3, buffer@^5.5.0, buffer@^5.6.0:
+buffer@^5.0.0, buffer@^5.0.5, buffer@^5.0.8, buffer@^5.1.0, buffer@^5.4.3, buffer@^5.5.0, buffer@^5.6.0:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.7.1.tgz#ba62e7c13133053582197160851a8f648e99eed0"
   integrity sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==
@@ -14082,6 +14077,14 @@ react-native-extra-dimensions-android@^1.2.5:
   resolved "https://registry.yarnpkg.com/react-native-extra-dimensions-android/-/react-native-extra-dimensions-android-1.2.5.tgz#8ade91029aaac7519bf305116d39019e618a60f0"
   integrity sha512-eorFo9X1vEqAWUkgcZ300yKBG1wtgNeE7tdWAH2CE+P50FGTniJg5Sr6l1iPWG8ZskQOuF+KeiSTFlDa4vLfMw==
 
+react-native-fast-crypto@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-fast-crypto/-/react-native-fast-crypto-2.1.1.tgz#32c5d33f2ccaba003859bceddeb25fd165ba848a"
+  integrity sha512-ywL2Jh2mYSjEnac3e/rvP3hdgAhhlf3hgQQeaFLAb1cVHUFiMvIxxnMfcBvkTGHomKgjI3c2yOQZAKZAioZyBw==
+  dependencies:
+    buffer "^5.0.8"
+    rfc4648 "^1.0.0"
+
 react-native-fast-image@^8.5.11:
   version "8.5.11"
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.5.11.tgz#e3dc969d0e4e8df026646bf18194465aa55cbc2b"
@@ -14764,6 +14767,11 @@ reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
+
+rfc4648@^1.0.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.5.1.tgz#b0b16756e33d9de8c0c7833e94b28e627ec372a4"
+  integrity sha512-60e/YWs2/D3MV1ErdjhJHcmlgnyLUiG4X/14dgsfm9/zmCWLN16xI6YqJYSCd/OANM7bUNzJqPY5B8/02S9Ibw==
 
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.2, rimraf@^2.6.3:
   version "2.7.1"
