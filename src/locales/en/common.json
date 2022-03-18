@@ -2615,7 +2615,8 @@
       "voteFor": "Vote for",
       "validateVotes": "Validate votes",
       "votesRequired": "Votes required ",
-      "allVotesUsed": "All votes used"
+      "allVotesUsed": "All votes used",
+      "removeVotes": "Remove votes"
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
