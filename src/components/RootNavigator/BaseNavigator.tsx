@@ -65,6 +65,7 @@ import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
 import PlatformApp from "../../screens/Platform/App";
 import ManagerNavigator from "./ManagerNavigator";
+import AccountsNavigator from "./AccountsNavigator";
 
 import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccountScreen";
 import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurrencyScreen";
@@ -534,6 +535,11 @@ export default function BaseNavigator() {
                 headerShown: false,
               },
             })}
+      />
+      <Stack.Screen
+        name={NavigatorName.Accounts}
+        component={AccountsNavigator}
+        options={{ headerShown: false }}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];
