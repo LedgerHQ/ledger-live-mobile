@@ -1,46 +1,47 @@
 import React, { useMemo } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "styled-components/native";
 import { Text } from "@ledgerhq/native-ui";
-
-import AnalyticsAllocation from "../../screens/Analytics/Allocation";
-import AnalyticsOperations from "../../screens/Analytics/Operations";
 import { ScreenName } from "../../const";
+import Sell from "../../screens/Exchange/Sell";
+import BuyNavigator from "./BuyNavigator";
 import { getLineTabNavigatorConfig } from "../../navigation/tabNavigatorConfig";
 
-const Tab = createMaterialTopTabNavigator();
+type TabLabelProps = {
+  focused: boolean;
+  color: string;
+};
 
-export default function AnalyticsNavigator() {
+export default function ExchangeNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+
   const tabNavigationConfig = useMemo(() => getLineTabNavigatorConfig(colors), [
     colors,
   ]);
-
-  // Fixme Typescript: Update react-native-tab-view to 3.1.1 to remove Tab.navigator ts error
   return (
     <Tab.Navigator {...tabNavigationConfig}>
       <Tab.Screen
-        name={ScreenName.AnalyticsAllocation}
-        component={AnalyticsAllocation}
+        name={ScreenName.ExchangeBuy}
+        component={BuyNavigator}
         options={{
-          title: t("analytics.allocation.title"),
-          tabBarLabel: (props: any) => (
+          title: t("exchange.buy.tabTitle"),
+          tabBarLabel: (props: TabLabelProps) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("analytics.allocation.title")}
+              {t("exchange.buy.tabTitle")}
             </Text>
           ),
         }}
       />
       <Tab.Screen
-        name={ScreenName.AnalyticsOperations}
-        component={AnalyticsOperations}
+        name={ScreenName.ExchangeSell}
+        component={Sell}
         options={{
-          title: t("analytics.operations.title"),
-          tabBarLabel: (props: any) => (
+          title: t("exchange.sell.tabTitle"),
+          tabBarLabel: (props: TabLabelProps) => (
             <Text variant="body" fontWeight="semiBold" {...props}>
-              {t("analytics.operations.title")}
+              {t("exchange.sell.tabTitle")}
             </Text>
           ),
         }}
@@ -48,3 +49,5 @@ export default function AnalyticsNavigator() {
     </Tab.Navigator>
   );
 }
+
+const Tab = createMaterialTopTabNavigator();

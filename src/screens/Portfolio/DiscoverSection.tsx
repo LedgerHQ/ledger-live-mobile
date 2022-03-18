@@ -79,7 +79,7 @@ export default function DiscoverSection() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      {disclaimerOpts && (
+      {disclaimerOpts ? (
         <DAppDisclaimer
           disableDisclaimer={disclaimerOpts.disableDisclaimer}
           closeDisclaimer={disclaimerOpts.closeDisclaimer}
@@ -87,7 +87,7 @@ export default function DiscoverSection() {
           isOpened={disclaimerOpened}
           icon={disclaimerOpts.icon}
         />
-      )}
+      ) : null}
     </>
   );
 }

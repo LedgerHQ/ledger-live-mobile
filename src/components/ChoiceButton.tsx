@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
-
-import { Button } from "@ledgerhq/native-ui";
+import Button from "./wrappedUi/Button";
 
 type ChoiceButtonProps = {
   disabled?: boolean;
@@ -36,7 +35,6 @@ const ChoiceButton = ({
     event={event}
     eventProperties={eventProperties}
     mr={3}
-    backgroundColor={'red'}
   >
     {label}
   </Button>

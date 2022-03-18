@@ -41,14 +41,16 @@ export const counterValueFormatter = ({
   shorten,
   locale,
   t,
+  allowZeroValue = false,
 }: {
   currency?: string;
   value: number;
   shorten?: boolean;
   locale: string;
   t?: TFunction;
+  allowZeroValue?: boolean;
 }): string => {
-  if (!value) {
+  if (!value && !allowZeroValue) {
     return "-";
   }
 
@@ -67,7 +69,7 @@ export const counterValueFormatter = ({
   if (shorten && t) {
     const sign = value > 0 ? "" : "-";
     const v = Math.abs(value);
-    const index = Math.floor(Math.log(v) / Math.log(10) / 3);
+    const index = Math.floor(Math.log(v + 1) / Math.log(10) / 3);
 
     const [i, n] = indexes[index];
 

@@ -23,10 +23,10 @@ import { track } from "../../analytics";
 
 const DismissCarousel = styled(TouchableOpacity)`
   position: absolute;
-  top: 10;
-  right: 10;
-  width: 30;
-  height: 30;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   align-items: center;
   justify-content: center;
 `;

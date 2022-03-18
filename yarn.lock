@@ -2510,10 +2510,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.5.tgz#674f9191faa7aea7d5881363be595aea8efa5ee5"
-  integrity sha512-SFHPAe+WYFNmzCmfhzJCfBB8htzM5mQGGNW/u1qx8u+ybdzs04IBb/fxZXMSlIx8lfmOeUCyv1NKfEZK4YIBXQ==
+"@ledgerhq/native-ui@^0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.6.tgz#878892b324a434919d7aa2b448261c732eaf776f"
+  integrity sha512-SSb5x0yFJ18+Zq3A6/bfornRJac/J1xzzjMrDDxjLKlhMnLlXZoWlzmZzTtnBd8sS1P7FTwuH1OQKtbw6gX3Yg==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.3"
     "@ledgerhq/ui-shared" "^0.1.5"
@@ -13896,6 +13896,11 @@ react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-native-adjust@^4.29.6:
+  version "4.29.6"
+  resolved "https://registry.yarnpkg.com/react-native-adjust/-/react-native-adjust-4.29.6.tgz#cf7cc4fdfe516f10a4f42b9df73826c0898fd0c3"
+  integrity sha512-6XShRFrqx/kif0iPutaS4gj6LhZtzPIpH3MAxxKOoqwWWX0UPVQ9boQC4j2BtFjmerVQG1p2LGwsdylsGOiJ2g==
 
 react-native-android-location-services-dialog-box@^2.8.2:
   version "2.8.2"

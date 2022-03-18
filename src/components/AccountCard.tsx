@@ -11,6 +11,7 @@ import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
 import { Account, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import { Flex, Tag, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import Card, { Props as CardProps } from "./Card";
 import CurrencyIcon from "./CurrencyIcon";
@@ -42,56 +43,57 @@ const AccountCard = ({
     getTagDerivationMode(currency as CryptoCurrency, account.derivationMode);
 
   return (
-    <Card
-      onPress={!disabled ? onPress : undefined}
-      flexDirection="row"
-      paddingY={4}
-      alignItems="center"
-      backgroundColor="transparent"
-      style={style}
-      {...props}
-    >
-      <CurrencyIcon
-        currency={currency}
-        color={disabled ? colors.neutral.c40 : undefined}
-        size={32}
-        circle
-      />
-      <Flex
-        flexGrow={1}
-        flexShrink={1}
-        marginLeft={3}
+    <TouchableOpacity disabled={disabled} onPress={onPress}>
+      <Card
         flexDirection="row"
+        paddingY={4}
         alignItems="center"
+        backgroundColor="transparent"
+        style={style}
+        {...props}
       >
-        <Flex flexShrink={1}>
-          <Text
-            variant="paragraph"
-            fontWeight="semiBold"
-            numberOfLines={1}
-            color={disabled ? "neutral.c50" : "neutral.c100"}
-            flexShrink={1}
-          >
-            {getAccountName(account)}
-          </Text>
-          {AccountSubTitle}
+        <CurrencyIcon
+          currency={currency}
+          color={disabled ? colors.neutral.c40 : undefined}
+          size={32}
+          circle
+        />
+        <Flex
+          flexGrow={1}
+          flexShrink={1}
+          marginLeft={3}
+          flexDirection="row"
+          alignItems="center"
+        >
+          <Flex flexShrink={1}>
+            <Text
+              variant="paragraph"
+              fontWeight="semiBold"
+              numberOfLines={1}
+              color={disabled ? "neutral.c50" : "neutral.c100"}
+              flexShrink={1}
+            >
+              {getAccountName(account)}
+            </Text>
+            {AccountSubTitle}
+          </Flex>
+          {tag && <Tag marginLeft={5}>{tag}</Tag>}
         </Flex>
-        {tag && <Tag marginLeft={5}>{tag}</Tag>}
-      </Flex>
-      <Flex marginLeft={5} alignItems="flex-end">
-        <Text variant="small" fontWeight="medium" color="neutral.c70">
-          <CurrencyUnitValue
-            showCode
-            unit={unit}
-            value={
-              useFullBalance
-                ? account.balance
-                : getAccountSpendableBalance(account)
-            }
-          />
-        </Text>
-      </Flex>
-    </Card>
+        <Flex marginLeft={5} alignItems="flex-end">
+          <Text variant="small" fontWeight="medium" color="neutral.c70">
+            <CurrencyUnitValue
+              showCode
+              unit={unit}
+              value={
+                useFullBalance
+                  ? account.balance
+                  : getAccountSpendableBalance(account)
+              }
+            />
+          </Text>
+        </Flex>
+      </Card>
+    </TouchableOpacity>
   );
 };
 

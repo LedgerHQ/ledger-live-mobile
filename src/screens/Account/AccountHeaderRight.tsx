@@ -33,9 +33,13 @@ export default function AccountHeaderRight() {
   if (account.type === "TokenAccount" && parentAccount) {
     return (
       <>
-        <Touchable event="ShowContractAddress" onPress={toggleModal}>
-          <View style={{ marginRight: 16 }}>
-            <OthersMedium size={24} color={'neutral.c100'} />
+        <Touchable
+          event="ShowContractAddress"
+          onPress={toggleModal}
+          style={{ alignItems: "center", justifyContent: "center", margin: 16 }}
+        >
+          <View>
+            <OthersMedium size={24} color={"neutral.c100"} />
           </View>
         </Touchable>
         <TokenContextualModal
@@ -59,9 +63,10 @@ export default function AccountHeaderRight() {
             },
           });
         }}
+        style={{ alignItems: "center", justifyContent: "center", margin: 16 }}
       >
-        <View style={{ marginRight: 16 }}>
-          <FiltersMedium size={24} color={'neutral.c100'} />
+        <View>
+          <FiltersMedium size={24} color="neutral.c100" />
         </View>
       </Touchable>
     );

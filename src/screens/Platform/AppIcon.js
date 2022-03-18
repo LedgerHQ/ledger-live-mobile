@@ -37,8 +37,8 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
           {firstLetter}
         </LText>
       ) : null}
-      {icon &&
-        (isDisabled ? (
+      {icon ? (
+        isDisabled ? (
           <>
             <Image
               source={{ uri: icon }}
@@ -68,7 +68,8 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
             fadeDuration={200}
             onLoad={handleImageLoad}
           />
-        ))}
+        )
+      ) : null}
     </View>
   );
 }
