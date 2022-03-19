@@ -47,7 +47,6 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       screenOptions={{
         ...stackNavConfig,
         headerRight: () => <AddAccountsHeaderRightClose />,
-        headerMode: "float",
       }}
     >
       <Stack.Screen

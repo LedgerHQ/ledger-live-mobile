@@ -2,7 +2,6 @@
 
 import React, { useMemo, useCallback } from "react";
 import { StyleSheet, Image, View } from "react-native";
-import Config from "react-native-config";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
@@ -26,9 +25,7 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
   const deviceIds = useMemo(
     () => ({
       nanoS: { dark: nanoSLight, light: nanoSDark },
-      ...(Config.SHOW_NANOSP
-        ? { nanoSP: { dark: nanoSPLight, light: nanoSPDark } }
-        : {}),
+      nanoSP: { dark: nanoSPLight, light: nanoSPDark },
       nanoX: { dark: nanoXLight, light: nanoXDark },
     }),
     [],
@@ -56,18 +53,20 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
           style={[styles.deviceButton, { backgroundColor: colors.lightLive }]}
           onPress={() => next(deviceId)}
         >
-          <LText semiBold style={styles.label}>
-            <Trans i18nKey={`onboarding.stepSelectDevice.${deviceId}`} />
-          </LText>
-          <View style={styles.imageContainer}>
-            {deviceIds[deviceId] ? (
-              <Image
-                style={styles.bgImage}
-                resizeMode="contain"
-                source={deviceIds[deviceId][theme]}
-              />
-            ) : null}
-          </View>
+          <>
+            <LText semiBold style={styles.label}>
+              <Trans i18nKey={`onboarding.stepSelectDevice.${deviceId}`} />
+            </LText>
+            <View style={styles.imageContainer}>
+              {deviceIds[deviceId] ? (
+                <Image
+                  style={styles.bgImage}
+                  resizeMode="contain"
+                  source={deviceIds[deviceId][theme]}
+                />
+              ) : null}
+            </View>
+          </>
         </Touchable>
       ))}
     </AnimatedHeaderView>

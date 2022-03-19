@@ -140,6 +140,11 @@ def useIntlJsc = true
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+/**
+ * Architectures to build native code for in debug.
+ */
+def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -151,8 +156,8 @@ android {
         multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4194693
-        versionName "2.37.3"
+        versionCode 4195727
+        versionName "2.40.0"
         resValue "string", "build_config_package", "com.ledger.live"
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -185,6 +190,11 @@ android {
         debug {
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
+            if (nativeArchitectures) {
+                ndk {
+                    abiFilters nativeArchitectures.split(',')
+                }
+            }
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
@@ -236,6 +246,13 @@ dependencies {
         implementation jscFlavor
     }
     androidTestImplementation('com.wix:detox:+')
+
+    compile project(':react-native-video')
+    implementation "androidx.appcompat:appcompat:1.0.0"
+
+    // Adjust
+    compile 'com.google.android.gms:play-services-analytics:10.0.1'
+    compile 'com.android.installreferrer:installreferrer:1.0'
 }
 
 // Run this once to be able to run the application with BUCK

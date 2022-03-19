@@ -31,7 +31,7 @@ export default function AccountSettingsNavigator() {
         component={AccountSettingsMain}
         options={{
           title: t("account.settings.header"),
-          headerRight: closableNavconfig.headerRight,
+          headerRight: null,
         }}
       />
       <Stack.Screen

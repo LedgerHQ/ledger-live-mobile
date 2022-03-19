@@ -1,7 +1,6 @@
 // @flow
 /* eslint import/no-cycle: 0 */
 import { handleActions } from "redux-actions";
-import { Platform, Appearance } from "react-native";
 import merge from "lodash/merge";
 import {
   findCurrencyByTicker,
@@ -23,6 +22,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
+import { SLIDES } from "../components/Carousel";
 import { getDefaultLanguageLocale, getDefaultLocale } from "../languages";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");
@@ -56,9 +56,7 @@ export type Privacy = {
   biometricsEnabled: boolean,
 };
 
-const colorScheme = Appearance.getColorScheme();
-
-export type Theme = "light" | "dark";
+export type Theme = "system" | "light" | "dark";
 
 export type SettingsState = {
   counterValue: string,
@@ -85,9 +83,10 @@ export type SettingsState = {
   hasAvailableUpdate: boolean,
   theme: Theme,
   osTheme: ?string,
-  carouselVisibility: number,
+  carouselVisibility: any,
   discreetMode: boolean,
   language: string,
+  languageIsSetByUser: boolean,
   locale: ?string,
   swap: {
     hasAcceptedIPSharing: false,
@@ -119,11 +118,14 @@ export const INITIAL_STATE: SettingsState = {
   blacklistedTokenIds: [],
   dismissedBanners: [],
   hasAvailableUpdate: false,
-  theme: colorScheme === "dark" ? "dark" : "light",
+  theme: "system",
   osTheme: undefined,
-  carouselVisibility: 0,
+  carouselVisibility: Object.fromEntries(
+    SLIDES.map(slide => [slide.name, true]),
+  ),
   discreetMode: false,
   language: getDefaultLanguageLocale(),
+  languageIsSetByUser: false,
   locale: null,
   swap: {
     hasAcceptedIPSharing: false,
@@ -311,6 +313,7 @@ const handlers: Object = {
   SETTINGS_SET_LANGUAGE: (state: SettingsState, { payload }) => ({
     ...state,
     language: payload,
+    languageIsSetByUser: true,
   }),
   SETTINGS_SET_LOCALE: (state: SettingsState, { payload }) => ({
     ...state,
@@ -475,7 +478,7 @@ export const countervalueFirstSelector = (state: State) =>
   state.settings.countervalueFirst;
 
 export const readOnlyModeEnabledSelector = (state: State) =>
-  Platform.OS !== "android" && state.settings.readOnlyModeEnabled;
+  state.settings.readOnlyModeEnabled;
 
 export const blacklistedTokenIdsSelector = (state: State) =>
   state.settings.blacklistedTokenIds;
@@ -525,6 +528,9 @@ export const osThemeSelector = (state: State) => state.settings.osTheme;
 
 export const languageSelector = (state: State) =>
   state.settings.language || getDefaultLanguageLocale();
+
+export const languageIsSetByUserSelector = (state: State) =>
+  state.settings.languageIsSetByUser;
 
 export const localeSelector = (state: State) =>
   state.settings.locale || getDefaultLocale();

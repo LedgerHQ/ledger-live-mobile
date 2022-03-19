@@ -25,7 +25,6 @@ export default function ReceiveFundsNavigator() {
       screenOptions={{
         ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
-        headerMode: "float",
       }}
     >
       <Stack.Screen

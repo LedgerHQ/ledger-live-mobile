@@ -73,6 +73,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           disableDisclaimer: () => setDisclaimerDisabled(),
           closeDisclaimer: () => setDisclaimerOpened(false),
           icon: manifest.icon,
+          name: manifest.name,
           onContinue: openDApp,
         });
         setDisclaimerOpened(true);
@@ -111,6 +112,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           onContinue={disclaimerOpts.onContinue}
           isOpened={disclaimerOpened}
           icon={disclaimerOpts.icon}
+          name={disclaimerOpts.name}
         />
       )}
 
@@ -133,7 +135,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 34,
     lineHeight: 40,
     textAlign: "left",
   },

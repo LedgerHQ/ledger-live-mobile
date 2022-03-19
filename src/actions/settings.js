@@ -26,7 +26,7 @@ type SetExchangePairs = (
   }>,
 ) => *;
 
-export type Theme = "light" | "dark";
+export type Theme = "system" | "light" | "dark";
 
 export const setExchangePairsAction: SetExchangePairs = pairs => ({
   type: "SETTINGS_SET_PAIRS",
@@ -133,9 +133,9 @@ export const dismissBanner = (bannerId: string) => ({
   payload: bannerId,
 });
 
-export const setCarouselVisibility = (nonce: number) => ({
+export const setCarouselVisibility = (cardsVisibility: any) => ({
   type: "SETTINGS_SET_CAROUSEL_VISIBILITY",
-  payload: nonce,
+  payload: cardsVisibility,
 });
 
 export const setAvailableUpdate = (enabled: boolean) => ({
