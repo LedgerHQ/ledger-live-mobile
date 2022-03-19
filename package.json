@@ -11,6 +11,7 @@
     "start": "react-native start",
     "ios": "react-native run-ios",
     "android": "react-native run-android --appIdSuffix=debug",
+    "android:hermes": "export HERMES_ENABLED_ANDROID=true && yarn android",
     "detox": "./node_modules/.bin/detox",
     "e2e:build": "yarn detox build",
     "e2e:test": "yarn detox test",

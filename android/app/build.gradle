@@ -88,7 +88,11 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    /**
+     * Clean and rebuild if changing
+     * The following env var is not read from ../.env, you need to export this var like this: `export HERMES_ENABLED_ANDROID=true`
+     */
+    enableHermes: System.getenv("HERMES_ENABLED_ANDROID") == "true",
     // bundleInDebug: true, // Uncomment this to debug java without having to deal with JS dev server (metro)
 ]
 project.ext.sentryCli = [
