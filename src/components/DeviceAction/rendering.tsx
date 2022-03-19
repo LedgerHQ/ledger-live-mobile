@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components/native";
-import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -40,7 +39,7 @@ const AnimationContainer = styled(Flex).attrs(p => ({
   alignItems: "center",
   justifyContent: "center",
   height: p.withConnectDeviceHeight
-    ? "100px"<Ti
+    ? "100px"
     : p.withVerifyAddressHeight
     ? "72px"
     : undefined,
@@ -514,7 +513,7 @@ export function renderWarningOutdated({
     <Wrapper>
       <IconContainer>
         <Circle size={60} bg={lighten(colors.yellow, 0.4)}>
-          <Icon size={28} name="alert-triangle" color={colors.yellow} />
+          <Icons.WarningMedium size={28} color={colors.yellow} />
         </Circle>
       </IconContainer>
       <TitleText>{t("DeviceAction.outdated")}</TitleText>

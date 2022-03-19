@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/named */
 /* eslint-disable import/no-unresolved */
-import React, { useMemo, useCallback, useState, useEffect } from "react";
+import React, { useMemo, useCallback, useState, useEffect, memo } from "react";
 import { useTheme } from "styled-components/native";
 import {
   Flex,
@@ -74,7 +74,7 @@ const NoCoinSupport = ({ t }: { t: TFunction }) => (
 );
 */
 
-export default function MarketDetail({
+function MarketDetail({
   navigation,
   route,
 }: {
@@ -248,6 +248,36 @@ export default function MarketDetail({
     }
   }, [range]);
 
+  const xAxisFormatter = useCallback(
+    (timestamp: number) =>
+      new Intl.DateTimeFormat(locale, timeFormat).format(timestamp),
+    [locale, timeFormat],
+  );
+
+  const yAxisFormatter = useCallback(
+    (value: number) =>
+      counterValueFormatter({
+        value,
+        shorten: true,
+        locale,
+        allowZeroValue: true,
+        t,
+      }),
+    [locale, t],
+  );
+
+  const valueFormatter = useCallback(
+    (value: number) =>
+      counterValueFormatter({
+        value,
+        currency: counterCurrency,
+        locale,
+        allowZeroValue: true,
+        t,
+      }),
+    [counterCurrency, locale, t],
+  );
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
       <ScrollContainerHeader
@@ -337,27 +367,9 @@ export default function MarketDetail({
           chartData={chartDataFormatted}
           currencyColor={currencyColor}
           margin={16}
-          xAxisFormatter={(timestamp: number) =>
-            new Intl.DateTimeFormat(locale, timeFormat).format(timestamp)
-          }
-          yAxisFormatter={(value: number) =>
-            counterValueFormatter({
-              value,
-              shorten: true,
-              locale,
-              allowZeroValue: true,
-              t,
-            })
-          }
-          valueFormatter={(value: number) =>
-            counterValueFormatter({
-              value,
-              currency: counterCurrency,
-              locale,
-              allowZeroValue: true,
-              t,
-            })
-          }
+          xAxisFormatter={xAxisFormatter}
+          yAxisFormatter={yAxisFormatter}
+          valueFormatter={valueFormatter}
         />
         {isLiveSupported ? (
           <Flex
@@ -410,3 +422,5 @@ export default function MarketDetail({
     </SafeAreaView>
   );
 }
+
+export default memo(MarketDetail);

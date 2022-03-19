@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native";
 import WebView from "react-native-webview";
 import { URLSearchParams } from "react-native-url-polyfill";
@@ -6,6 +6,7 @@ import styled, { useTheme } from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import NetInfo from "@react-native-community/netinfo";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
+import { useNavigation } from "@react-navigation/native";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import LoadingView from "./LoadingScreen";
 import NoConnectionErrorScreen from "./NoConnectionErrorScreen";
@@ -26,13 +27,15 @@ const StyledWebview = styled(WebView)`
   background-color: transparent; // avoids white background before page loads
 `;
 
-export default function Learn() {
+export default function Learn({ navigation }) {
   const { i18n } = useTranslation();
+  // const navigation = useNavigation();
   const {
     colors: { type: themeType },
   } = useTheme();
 
   const useStagingURL = useEnv("USE_LEARN_STAGING_URL");
+  const ref = useRef<WebView>(null);
 
   const params = new URLSearchParams({
     theme: themeType,
@@ -77,10 +80,13 @@ export default function Learn() {
         <>
           {loading && <LoadingView />}
           <StyledWebview
+            ref={ref}
             style={loading && { height: 0 }}
             source={{ uri }}
             onLoadEnd={handleOnLoad}
             renderError={renderError}
+            allowsBackForwardNavigationGestures
+            sharedCookiesEnabled
           />
         </>
       ) : (

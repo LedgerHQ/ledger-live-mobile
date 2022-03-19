@@ -1,5 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo, memo } from "react";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
 import Illustration from "../../../images/illustration/Illustration";
@@ -13,6 +14,7 @@ import BaseStepperView, {
   ExistingRecoveryStep2,
 } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
+import StepLottieAnimation from "./setupDevice/scenes/StepLottieAnimation";
 
 // @TODO Replace
 const images = {
@@ -41,103 +43,6 @@ type Metadata = {
   illustration: JSX.Element;
   drawer: null | { route: string; screen: string };
 };
-const metadata: Array<Metadata> = [
-  {
-    id: RestoreRecovery.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.RestoreRecovery}
-        lightSource={images.light.RestoreRecovery}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingGeneralInformation,
-      screen: ScreenName.OnboardingGeneralInformation,
-    },
-  },
-  {
-    id: RestoreRecoveryStep1.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.RestoreRecoveryStep1}
-        lightSource={images.light.RestoreRecoveryStep1}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingGeneralInformation,
-      screen: ScreenName.OnboardingGeneralInformation,
-    },
-  },
-  {
-    id: PinCode.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.PinCode}
-        lightSource={images.light.PinCode}
-      />
-    ),
-    drawer: null,
-  },
-  {
-    id: PinCodeInstructions.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.PinCodeInstructions}
-        lightSource={images.light.PinCodeInstructions}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingSetupDeviceInformation,
-      screen: ScreenName.OnboardingSetupDeviceInformation,
-    },
-  },
-  {
-    id: ExistingRecovery.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.ExistingRecovery}
-        lightSource={images.light.ExistingRecovery}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingGeneralInformation,
-      screen: ScreenName.OnboardingGeneralInformation,
-    },
-  },
-  {
-    id: ExistingRecoveryStep1.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.ExistingRecoveryStep1}
-        lightSource={images.light.ExistingRecoveryStep1}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingGeneralInformation,
-      screen: ScreenName.OnboardingGeneralInformation,
-    },
-  },
-  {
-    id: ExistingRecoveryStep2.id,
-    illustration: (
-      <Illustration
-        size={150}
-        darkSource={images.dark.ExistingRecoveryStep2}
-        lightSource={images.light.ExistingRecoveryStep2}
-      />
-    ),
-    drawer: {
-      route: ScreenName.OnboardingGeneralInformation,
-      screen: ScreenName.OnboardingGeneralInformation,
-    },
-  },
-];
 
 const scenes = [
   RestoreRecovery,
@@ -151,11 +56,113 @@ const scenes = [
 
 function OnboardingStepRecoveryPhrase() {
   const navigation = useNavigation();
+  const { theme } = useTheme();
   const route = useRoute<
     RouteProp<{ params: { deviceModelId: DeviceNames } }, "params">
   >();
 
   const { deviceModelId } = route.params;
+
+  const metadata: Array<Metadata> = useMemo(
+    () => [
+      {
+        id: RestoreRecovery.id,
+        illustration: (
+          <Illustration
+            size={150}
+            darkSource={images.dark.RestoreRecovery}
+            lightSource={images.light.RestoreRecovery}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingGeneralInformation,
+          screen: ScreenName.OnboardingGeneralInformation,
+        },
+      },
+      {
+        id: RestoreRecoveryStep1.id,
+        illustration: (
+          <StepLottieAnimation
+            stepId="powerOnRecovery"
+            deviceModelId={deviceModelId}
+            theme={theme === "dark" ? "dark" : "light"}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingGeneralInformation,
+          screen: ScreenName.OnboardingGeneralInformation,
+        },
+      },
+      {
+        id: PinCode.id,
+        illustration: (
+          <Illustration
+            size={150}
+            darkSource={images.dark.PinCode}
+            lightSource={images.light.PinCode}
+          />
+        ),
+        drawer: null,
+      },
+      {
+        id: PinCodeInstructions.id,
+        illustration: (
+          <StepLottieAnimation
+            stepId="pinCode"
+            deviceModelId={deviceModelId}
+            theme={theme === "dark" ? "dark" : "light"}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingSetupDeviceInformation,
+          screen: ScreenName.OnboardingSetupDeviceInformation,
+        },
+      },
+      {
+        id: ExistingRecovery.id,
+        illustration: (
+          <Illustration
+            size={150}
+            darkSource={images.dark.ExistingRecovery}
+            lightSource={images.light.ExistingRecovery}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingGeneralInformation,
+          screen: ScreenName.OnboardingGeneralInformation,
+        },
+      },
+      {
+        id: ExistingRecoveryStep1.id,
+        illustration: (
+          <Illustration
+            size={150}
+            darkSource={images.dark.ExistingRecoveryStep1}
+            lightSource={images.light.ExistingRecoveryStep1}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingGeneralInformation,
+          screen: ScreenName.OnboardingGeneralInformation,
+        },
+      },
+      {
+        id: ExistingRecoveryStep2.id,
+        illustration: (
+          <StepLottieAnimation
+            stepId="recover"
+            deviceModelId={deviceModelId}
+            theme={theme === "dark" ? "dark" : "light"}
+          />
+        ),
+        drawer: {
+          route: ScreenName.OnboardingGeneralInformation,
+          screen: ScreenName.OnboardingGeneralInformation,
+        },
+      },
+    ],
+    [],
+  );
 
   const nextPage = useCallback(() => {
     // TODO: FIX @react-navigation/native using Typescript
@@ -179,4 +186,4 @@ function OnboardingStepRecoveryPhrase() {
   );
 }
 
-export default OnboardingStepRecoveryPhrase;
+export default memo(OnboardingStepRecoveryPhrase);

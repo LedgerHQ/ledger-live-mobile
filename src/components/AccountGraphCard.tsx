@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, ReactNode } from "react";
+import React, { useState, useCallback, useMemo, ReactNode, memo } from "react";
 import { useTheme } from "styled-components/native";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
@@ -93,7 +93,7 @@ const timeRangeMapped: any = {
   "1y": "year",
 };
 
-export default function AccountGraphCard({
+function AccountGraphCard({
   account,
   countervalueAvailable,
   history,
@@ -164,6 +164,12 @@ export default function AccountGraphCard({
       : [];
   }, [history, counterValueCurrency]);
 
+  const xAxisFormatter = useCallback(
+    (timestamp: number) =>
+      new Intl.DateTimeFormat(locale, timeFormat).format(timestamp),
+    [locale, timeFormat],
+  );
+
   return (
     <ChartCard
       locale={locale}
@@ -184,9 +190,7 @@ export default function AccountGraphCard({
       refreshChart={refreshChart}
       chartData={dataFormatted}
       currencyColor={graphColor}
-      xAxisFormatter={(timestamp: number) =>
-        new Intl.DateTimeFormat(locale, timeFormat).format(timestamp)
-      }
+      xAxisFormatter={xAxisFormatter}
       yAxisFormatter={(value: number) =>
         counterValueFormatter({
           value,
@@ -271,3 +275,5 @@ function GraphCardHeader({
     </Flex>
   );
 }
+
+export default memo(AccountGraphCard);

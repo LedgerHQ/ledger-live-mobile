@@ -1,6 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, memo } from "react";
 import { useTheme } from "styled-components/native";
 import { Flex, GraphTabs, InfiniteLoader } from "@ledgerhq/native-ui";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
@@ -8,12 +8,11 @@ import * as Animatable from "react-native-animatable";
 import Graph from "../../../components/Graph";
 // @ts-expect-error impot issue
 import getWindowDimensions from "../../../logic/getWindowDimensions";
-import { track } from "../../../analytics";
 import { useTranslation } from "react-i18next";
 
 const { width } = getWindowDimensions();
 
-export default function MarketGraph({
+function MarketGraph({
   setHoverItem,
   chartRequestParams,
   loading,
@@ -97,3 +96,5 @@ export default function MarketGraph({
     </Flex>
   );
 }
+
+export default memo(MarketGraph);

@@ -10,7 +10,7 @@ type ListProps = {
   assets: any;
 };
 
-const AssetsList = ({ balanceHistory, flatListRef, assets }: ListProps) => {
+const AssetsList = ({ balanceHistory, assets }: ListProps) => {
   const navigation = useNavigation();
   const portfolioValue = useMemo(
     () => balanceHistory[balanceHistory.length - 1].value,
@@ -25,12 +25,11 @@ const AssetsList = ({ balanceHistory, flatListRef, assets }: ListProps) => {
         portfolioValue={portfolioValue}
       />
     ),
-    [portfolioValue],
+    [navigation, portfolioValue],
   );
 
   return (
     <FlatList
-      ref={flatListRef}
       data={assets}
       renderItem={renderItem}
       keyExtractor={item => item.id}

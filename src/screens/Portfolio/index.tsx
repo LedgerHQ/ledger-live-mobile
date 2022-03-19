@@ -10,7 +10,7 @@ import { Trans } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
-import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
+import { Box, Flex, Link as TextLink, Text } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
@@ -69,7 +69,7 @@ const SectionTitle = ({
 }: {
   title: React.ReactElement;
   onSeeAllPress?: () => void;
-  navigatorName?: keyof typeof NavigatorName;
+  navigatorName?: string;
   navigation?: any;
   seeMoreText?: React.ReactElement;
   containerProps?: FlexBoxProps;
@@ -95,9 +95,9 @@ const SectionTitle = ({
         {title}
       </Text>
       {onSeeAllPress || navigatorName ? (
-        <Link onPress={onLinkPress} type={"color"}>
+        <TextLink onPress={onLinkPress} type={"color"}>
           {seeMoreText || <Trans i18nKey={"common.seeAll"} />}
-        </Link>
+        </TextLink>
       ) : null}
     </Flex>
   );
@@ -151,19 +151,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           <AddAssetsCard />
         </Box>
       ),
-
-      <Flex mt={9}>
-        <Flex mx={6}>
-          <SectionTitle
-            title={<Trans i18nKey={"tabs.platform"} />}
-            navigation={navigation}
-            navigatorName={NavigatorName.Platform}
-          />
-        </Flex>
-
-        <DiscoverSection />
-      </Flex>,
-
       <Box mx={6} mt={3} onLayout={onPortfolioCardLayout}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -172,11 +159,13 @@ export default function PortfolioScreen({ navigation }: Props) {
           showGraphCard={!areAccountsEmpty}
         />
       </Box>,
-      accounts.length > 0 && (
-        <Box mx={6} mt={6}>
-          <FabActions />
-        </Box>
-      ),
+      ...(accounts.length > 0
+        ? [
+            <Box mx={6} mt={6}>
+              <FabActions />
+            </Box>,
+          ]
+        : []),
       ...(showAssets
         ? [
             <Flex mx={6} mt={10}>

@@ -8,6 +8,7 @@ import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import Illustration from "../../images/illustration/Illustration";
 import PileOfBitcoinDark from "../../images/illustration/PileOfBitcoin.dark.png";
 import PileOfBitcoinLight from "../../images/illustration/PileOfBitcoin.light.png";
+import { NavigatorName } from "../../const";
 
 export const AddAssetsCard = () => {
   const navigation = useNavigation();
@@ -21,9 +22,10 @@ export const AddAssetsCard = () => {
     setAddModalOpened,
   ]);
 
-  const goToBuy = useCallback(() => {
-    Linking.openURL('ledgerlive://buy"');
-  }, []);
+  const goToBuy = useCallback(
+    () => navigation.navigate(NavigatorName.Exchange),
+    [navigation],
+  );
 
   return (
     <Flex bg={"neutral.c30"} alignItems={"center"} p={7} borderRadius={2}>
@@ -54,7 +56,7 @@ export const AddAssetsCard = () => {
         size={"medium"}
         type={"shade"}
         outline
-        mt={8}
+        mt={6}
         width={"100%"}
       >
         <Trans i18nKey="portfolio.emptyState.buttons.import" />

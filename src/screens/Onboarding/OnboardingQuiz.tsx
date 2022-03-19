@@ -43,6 +43,7 @@ const renderTransitionSlide = ({
 const Header = ({ step }: { step: number }) => {
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const route = useRoute();
 
   const onBack = useCallback(() => {
     navigation.goBack();
@@ -68,7 +69,11 @@ const Header = ({ step }: { step: number }) => {
         iconName="Close"
         size="large"
         onPress={() => {
-          // @TODO skip to pair nano
+          // TODO: FIX @react-navigation/native using Typescript
+          // @ts-ignore next-line
+          navigation.navigate(ScreenName.OnboardingPairNew, {
+            ...route.params,
+          });
         }}
       />
     </Flex>
