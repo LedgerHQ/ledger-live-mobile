@@ -43,19 +43,23 @@ export default ({
   type,
   confirmed,
   failed,
+  Badge,
   size = 24,
 }: {
   size?: number;
   type: OperationType;
   confirmed?: boolean;
+  Badge?: React.ComponentType<{ size: number }>;
   failed?: boolean;
 }) => {
   const Icon = iconsComponent[type] || iconsComponent.NONE;
-  const BadgeIcon = failed
-    ? Icons.CircledCrossSolidMedium
-    : confirmed
-    ? undefined
-    : Icons.CircledCrossSolidMedium;
+  const BadgeIcon =
+    Badge ||
+    (failed
+      ? Icons.CircledCrossSolidMedium
+      : confirmed
+      ? undefined
+      : Icons.CircledCrossSolidMedium);
   const borderColor = failed ? "error.c40" : "neutral.c40";
   const iconColor = failed
     ? "error.c100"

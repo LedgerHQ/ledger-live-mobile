@@ -4,21 +4,25 @@ import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { Image } from "react-native";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
+import { useNavigation } from "@react-navigation/native";
 import { hasInstalledAnyAppSelector } from "../../reducers/settings";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import Button from "../../components/Button";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
-import noAccountsImg from "../../images/noAccounts.png";
-import noAppsImg from "../../images/noApps.png";
+import noAccountsImgDark from "../../images/illustration/Dark/_048.png";
+import noAccountsImgLight from "../../images/illustration/Light/_048.png";
+import noAppsImgDark from "../../images/illustration/Dark/_056.png";
+import noAppsImgLight from "../../images/illustration/Light/_056.png";
 import HelpLink from "../../components/HelpLink";
 import { urls } from "../../config/urls";
+import Illustration from "../../images/illustration/Illustration";
 
 type Props = {
-  navigation: any;
   showHelp?: boolean;
 };
 
-function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
+function EmptyStatePortfolio({ showHelp = true }: Props) {
+  const navigation = useNavigation();
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
   const [isAddModalOpened, setAddModalOpened] = useState(false);
 
@@ -30,10 +34,13 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
     setAddModalOpened,
   ]);
 
-  const navigateToManager = useCallback(
-    () => navigation.navigate(ScreenName.Manager),
-    [navigation],
-  );
+  const navigateToManager = useCallback(() => {
+    navigation.navigate(NavigatorName.Manager);
+  }, [navigation]);
+
+  const [darkSource, lightSource] = hasInstalledAnyApp
+    ? [noAccountsImgDark, noAccountsImgLight]
+    : [noAppsImgDark, noAppsImgLight];
 
   return (
     <>
@@ -45,9 +52,13 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
           />
         </Flex>
       ) : null}
-      <Flex m={6} flex={1} flexDirection="column" justifyContent="center">
+      <Flex flex={1} flexDirection="column" justifyContent="center">
         <Box alignItems="center" mt={8}>
-          <Image source={hasInstalledAnyApp ? noAccountsImg : noAppsImg} />
+          <Illustration
+            size={150}
+            darkSource={darkSource}
+            lightSource={lightSource}
+          />
           <Text variant="body" fontWeight="bold" mt={9} mb={4}>
             <Trans
               i18nKey={`portfolio.emptyState.${
@@ -55,7 +66,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
               }`}
             />
           </Text>
-          <Text variant="body" mb={8} textAlign="center" color="neutral.c30">
+          <Text variant="body" mb={8} textAlign="center" color="neutral.c80">
             <Trans
               i18nKey={`portfolio.emptyState.${
                 hasInstalledAnyApp ? "noAccountsDesc" : "noAppsDesc"
@@ -68,7 +79,8 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
               <>
                 <Button
                   event="PortfolioEmptyToImport"
-                  type={"primary"}
+                  type={"main"}
+                  outline={false}
                   title={
                     <Trans i18nKey="portfolio.emptyState.buttons.import" />
                   }
@@ -77,7 +89,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
                 />
                 <Button
                   event="PortfolioEmptyToManager"
-                  type={"lightSecondary"}
+                  type={"main"}
                   title={
                     <Trans i18nKey="portfolio.emptyState.buttons.managerSecondary" />
                   }
@@ -87,7 +99,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
             ) : (
               <Button
                 event="PortfolioEmptyToManager"
-                type={"primary"}
+                type={"main"}
                 title={<Trans i18nKey="portfolio.emptyState.buttons.manager" />}
                 onPress={navigateToManager}
               />

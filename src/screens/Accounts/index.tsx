@@ -93,15 +93,6 @@ function Accounts({ navigation, route }: Props) {
     [navigation, accounts.length],
   );
 
-  if (accounts.length === 0) {
-    return (
-      <>
-        <TrackScreen category="Accounts" accountsLength={0} />
-        <NoAccounts navigation={navigation} />
-      </>
-    );
-  }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Flex flex={1} position="relative">
@@ -121,7 +112,7 @@ function Accounts({ navigation, route }: Props) {
           TopRightSection={
             <Flex flexDirection="row" alignItems={"center"}>
               <Box mr={7}>
-                <AccountOrder />
+                {!flattenedAccounts.length ? null : <AccountOrder />}
               </Box>
               <AddAccount />
             </Flex>
@@ -144,6 +135,7 @@ function Accounts({ navigation, route }: Props) {
               data={flattenedAccounts}
               renderItem={renderItem}
               keyExtractor={item => item.id}
+              ListEmptyComponent={<NoAccounts />}
             />
             <MigrateAccountsBanner />
             <TokenContextualModal

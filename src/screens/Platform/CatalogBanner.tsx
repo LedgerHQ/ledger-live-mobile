@@ -13,16 +13,16 @@ const Container = styled(Flex).attrs({
   mb: 6,
   overflow: "hidden",
   position: "relative",
-  bg: "primary.c100",
+  bg: "constant.purple",
 })``;
 
 const CatalogBanner = () => {
   return (
     <Container>
-      <Text variant="h3" fontWeight="semiBold" color="constant.white" mb="8px">
+      <Text variant="h3" fontWeight="semiBold" color="constant.black" mb="8px">
         <Trans i18nKey="platform.catalog.banner.title" />
       </Text>
-      <Text variant="body" color="constant.white" pr={50}>
+      <Text variant="body" color="constant.black" pr={50}>
         <Trans i18nKey="platform.catalog.banner.description" />
       </Text>
       <DAppsIcons

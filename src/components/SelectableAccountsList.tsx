@@ -28,6 +28,7 @@ import CheckBox from "./CheckBox";
 import swipedAccountSubject from "../screens/AddAccounts/swipedAccountSubject";
 import Button from "./Button";
 import TouchHintCircle from "./TouchHintCircle";
+import Touchable from "./Touchable";
 
 const selectAllHitSlop = {
   top: 16,
@@ -274,7 +275,7 @@ const SelectableAccount = ({
       </Flex>
       {!isDisabled && (
         <Flex marginLeft={6}>
-          <CheckBox onChange={handlePress} isChecked={!!isSelected} />
+          <CheckBox isChecked={!!isSelected} />
         </Flex>
       )}
     </Flex>
@@ -290,7 +291,8 @@ const SelectableAccount = ({
         leftThreshold={50}
         renderLeftActions={renderLeftActions}
       >
-        {inner}
+        <Touchable onPress={handlePress}>{inner}</Touchable>
+
         {showHint && (
           <Flex position="absolute" margin="auto" left={3} top={0} bottom={0}>
             <TouchHintCircle stopAnimation={stopAnimation} />

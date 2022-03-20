@@ -7,9 +7,9 @@ const items = [
   {
     title: "onboarding.stepSetupDevice.setup.bullets.0.title",
     label: {
-      nanoX: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoX",
-      nanoSP: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoSP",
-      nanoS: "onboarding.stepSetupDevice.setup.bullets.0.label.nanoS",
+      nanoX: "onboarding.stepSetupDevice.setup.bullets.0.nanoX.label",
+      nanoSP: "onboarding.stepSetupDevice.setup.bullets.0.nanoSP.label",
+      nanoS: "onboarding.stepSetupDevice.setup.bullets.0.nanoS.label",
     },
   },
   {

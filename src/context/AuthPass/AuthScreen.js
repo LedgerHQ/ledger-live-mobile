@@ -29,6 +29,8 @@ import FailBiometrics from "./FailBiometrics";
 import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
 import { VIBRATION_PATTERN_ERROR } from "../../constants";
 import { withTheme } from "../../colors";
+import { Flex, Logos } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
 
 type State = {
   passwordError: ?Error,
@@ -52,23 +54,25 @@ type Props = {
   colors: *,
 };
 
-class NormalHeader extends PureComponent<{}> {
-  render() {
-    return (
-      <View>
-        <Image
-          style={styles.logo}
-          source={require("../../images/logo_small.png")}
-        />
-        <LText semiBold secondary style={styles.title}>
-          <Trans i18nKey="auth.unlock.title" />
-        </LText>
-        <LText style={styles.description} color="grey">
-          <Trans i18nKey="auth.unlock.desc" />
-        </LText>
-      </View>
-    );
-  }
+function NormalHeader() {
+  const { colors } = useTheme();
+
+  return (
+    <Flex alignItems="center" justifyContent="center">
+      <Logos.LedgerLiveAltRegular
+        color={colors.neutral.c100}
+        style={styles.logo}
+        width={50}
+        height={50}
+      />
+      <LText semiBold secondary style={styles.title}>
+        <Trans i18nKey="auth.unlock.title" />
+      </LText>
+      <LText style={styles.description} color="grey">
+        <Trans i18nKey="auth.unlock.desc" />
+      </LText>
+    </Flex>
+  );
 }
 
 class FormFooter extends PureComponent<*> {

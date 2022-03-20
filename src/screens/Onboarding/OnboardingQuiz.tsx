@@ -184,7 +184,7 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
           renderTransition={renderTransitionSlide}
           transitionDuration={500}
           header={() => <Header step={index + 1} />}
-          progressBarProps={{ bg }}
+          progressBarProps={{ opacity: 0 }}
         >
           {quizData.map((data, i) => (
             <OnboardingQuizItem
@@ -194,8 +194,8 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
               setBg={setBg}
               cta={
                 i < quizData.length - 1
-                  ? t("onboarding.quizz.nextQuestion")
-                  : t("onboarding.quizz.finish")
+                  ? t("onboarding.quizz.coins.modal.cta")
+                  : t("onboarding.quizz.privateKey.modal.cta")
               }
             />
           ))}

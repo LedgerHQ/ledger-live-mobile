@@ -46,7 +46,6 @@ class PasswordForm extends PureComponent<Props, State> {
     const { secureTextEntry } = this.state;
     return (
       <SafeAreaView
-        forceInset={forceInset}
         style={[styles.root, { backgroundColor: colors.background }]}
       >
         <KeyboardView>
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-end",
-    paddingBottom: 16,
+    padding: 16,
   },
   errorStyle: {
     marginHorizontal: 16,

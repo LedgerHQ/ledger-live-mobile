@@ -69,13 +69,10 @@ export default function OnboardingStepFinish({ navigation }: Props) {
     <StyledSafeAreaView>
       <TrackScreen category="Onboarding" name="Finish" />
       <Flex flex={1} p={6} alignItems="center" justifyContent="center">
-        <Flex flex={1} alignItems="center" justifyContent="center">
-          <LedgerLiveRegular width={300} height={200} color="white" />
-        </Flex>
         <IconBoxList
           flex={1}
           items={items.map(item => ({
-            ...item,
+            Icon: item.Icon,
             title: t(item.title),
             description: t(item.desc),
           }))}

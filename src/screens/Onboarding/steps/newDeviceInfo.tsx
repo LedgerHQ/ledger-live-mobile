@@ -99,7 +99,7 @@ const Footer = ({ index }: { index: number }) => {
 
   return (
     <Animatable.View animation="fadeIn" useNativeDriver>
-      <Component label={t(`onboarding.stepNewDevice.${index}.action`)} />
+      <Component label={t(`onboarding.stepNewDevice.cta`)} />
     </Animatable.View>
   );
 };

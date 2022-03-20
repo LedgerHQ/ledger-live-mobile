@@ -148,10 +148,8 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.syncCrypto}
                         />
                       ),
-                      title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
-                      subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                      title: "onboarding.stepUseCase.desktopSync.title",
+                      subTitle: "onboarding.stepUseCase.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                       showRecoveryWarning: true,
                     },
@@ -162,7 +160,7 @@ const OnboardingStepUseCaseSelection = () => {
           ]
         : [
             {
-              title: t("onboarding.stepUseCase.firstUse"),
+              title: t("onboarding.stepUseCase.firstUse.title"),
               data: [
                 {
                   cards: [
@@ -175,9 +173,8 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.setupNano}
                         />
                       ),
-                      title: "onboarding.stepUseCase.deviceActions.setup.title",
-                      subTitle:
-                        "onboarding.stepUseCase.deviceActions.setup.subTitle",
+                      title: "onboarding.stepUseCase.firstUse.title",
+                      subTitle: "onboarding.stepUseCase.firstUse.subTitle",
                       event: "Onboarding - Setup new",
                     },
                   ],
@@ -185,7 +182,7 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
             {
-              title: "onboarding.stepUseCase.recovery",
+              title: "onboarding.stepUseCase.devicePairing.title",
               data: [
                 {
                   cards: [
@@ -198,10 +195,8 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.pairNew}
                         />
                       ),
-                      title:
-                        "onboarding.stepUseCase.deviceActions.pairing.title",
-                      subTitle:
-                        "onboarding.stepUseCase.deviceActions.pairing.subTitle",
+                      title: "onboarding.stepUseCase.devicePairing.title",
+                      subTitle: "onboarding.stepUseCase.devicePairing.subTitle",
                       event: "Onboarding - Connect",
                       showRecoveryWarning: true,
                     },
@@ -214,10 +209,8 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.restoreRecoveryPhrase}
                         />
                       ),
-                      title:
-                        "onboarding.stepUseCase.deviceActions.restore.title",
-                      subTitle:
-                        "onboarding.stepUseCase.deviceActions.restore.subTitle",
+                      title: "onboarding.stepUseCase.restoreDevice.label",
+                      subTitle: "onboarding.stepUseCase.restoreDevice.subTitle",
                       event: "Onboarding - Restore",
                     },
                     {
@@ -229,10 +222,8 @@ const OnboardingStepUseCaseSelection = () => {
                           lightSource={images.light.syncCrypto}
                         />
                       ),
-                      title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
-                      subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                      title: "onboarding.stepUseCase.desktopSync.title",
+                      subTitle: "onboarding.stepUseCase.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                     },
                   ],

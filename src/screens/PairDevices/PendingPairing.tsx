@@ -14,12 +14,12 @@ const PendingPairing = () => {
       <NumberedList
         items={[
           {
-            title: t("v3.PairDevices.Pairing.title1"),
-            description: t("v3.PairDevices.Pairing.step1", deviceWording),
+            title: t("PairDevices.Pairing.title1"),
+            description: t("PairDevices.Pairing.step1", deviceWording),
           },
           {
-            title: t("v3.PairDevices.Pairing.title2"),
-            description: t("v3.PairDevices.Pairing.step2", deviceWording),
+            title: t("PairDevices.Pairing.title2"),
+            description: t("PairDevices.Pairing.step2", deviceWording),
           },
         ]}
       />

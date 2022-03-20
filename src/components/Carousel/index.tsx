@@ -154,11 +154,9 @@ const CarouselCardContainer = ({
   onHide,
   index,
 }: CarouselCardProps) => (
-  <Animated.View exiting={FadeOut} layout={Layout.delay(200)}>
-    <CarouselCard id={id} index={index} onHide={onHide}>
-      {children}
-    </CarouselCard>
-  </Animated.View>
+  <CarouselCard id={id} index={index} onHide={onHide}>
+    {children}
+  </CarouselCard>
 );
 
 type Props = {
@@ -231,14 +229,11 @@ const Carousel = ({ cardsVisibility }: Props) => {
       showsHorizontalScrollIndicator={false}
     >
       {slides.map(({ id, Component }, index) => (
-        <CarouselCardContainer
-          key={id + index}
-          id={id}
-          index={index}
-          onHide={onHide}
-        >
-          <Component key={id} />
-        </CarouselCardContainer>
+        <Animated.View key={id + index} exiting={FadeOut} layout={Layout}>
+          <CarouselCardContainer id={id} index={index} onHide={onHide}>
+            <Component key={id} />
+          </CarouselCardContainer>
+        </Animated.View>
       ))}
     </ScrollView>
   );

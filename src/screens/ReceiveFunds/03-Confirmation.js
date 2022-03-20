@@ -192,10 +192,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
           <SkipLock />
         </>
       )}
-      <NavigationScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={styles.root}
-      >
+      <NavigationScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <Touchable event="QRZoom" onPress={onZoom}>
             {width < 350 ? (

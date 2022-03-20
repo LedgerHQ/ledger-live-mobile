@@ -4,14 +4,14 @@ import { Flex, Button, List, Icons, Text } from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 
 const content = [
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.0",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.1",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.2",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.3",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.4",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.5",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.6",
-  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.7",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.0.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.1.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.2.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.3.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.4.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.5.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.6.label",
+  "onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.7.label",
 ];
 
 const OnboardingSetupDeviceInformation = () => {

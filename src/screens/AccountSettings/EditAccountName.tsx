@@ -91,36 +91,27 @@ class EditAccountName extends PureComponent<Props, State> {
         style={[styles.safeArea, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
-        <KeyboardView style={styles.body}>
-          <NavigationScrollView
-            contentContainerStyle={styles.root}
-            keyboardShouldPersistTaps="handled"
-          >
-            <Box px={6}>
-              <TextInput
-                autoFocus
-                defaultValue={initialAccountName}
-                returnKeyType="done"
-                maxLength={MAX_ACCOUNT_NAME_LENGHT}
-                onChangeText={accountName => this.setState({ accountName })}
-                onSubmitEditing={this.onNameEndEditing}
-                clearButtonMode="while-editing"
-                placeholder={i18next.t(
-                  "account.settings.accountName.placeholder",
-                )}
-              />
-              <Button
-                event="EditAccountNameApply"
-                type="main"
-                onPress={this.onNameEndEditing}
-                disabled={!accountName.trim().length}
-                mt={6}
-              >
-                <Trans i18nKey="common.apply" />
-              </Button>
-            </Box>
-          </NavigationScrollView>
-        </KeyboardView>
+        <Box px={6} flex={1}>
+          <TextInput
+            autoFocus
+            defaultValue={initialAccountName}
+            returnKeyType="done"
+            maxLength={MAX_ACCOUNT_NAME_LENGHT}
+            onChangeText={accountName => this.setState({ accountName })}
+            onSubmitEditing={this.onNameEndEditing}
+            clearButtonMode="while-editing"
+            placeholder={i18next.t("account.settings.accountName.placeholder")}
+          />
+        </Box>
+        <Button
+          event="EditAccountNameApply"
+          type="main"
+          onPress={this.onNameEndEditing}
+          disabled={!accountName.trim().length}
+          m={6}
+        >
+          <Trans i18nKey="common.apply" />
+        </Button>
       </SafeAreaView>
     );
   }

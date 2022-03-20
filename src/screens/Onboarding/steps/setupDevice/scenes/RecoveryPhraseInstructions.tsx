@@ -4,14 +4,12 @@ import { Button, NumberedList } from "@ledgerhq/native-ui";
 
 const items = [
   {
-    title:
-      "onboarding.stepSetupDevice.recoverySheetInstructions.bullets.0.title",
-    desc: "onboarding.stepSetupDevice.recoverySheetInstructions.bullets.0.desc",
+    title: "onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.title",
+    desc: "onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.label",
   },
   {
-    title:
-      "onboarding.stepSetupDevice.recoverySheetInstructions.bullets.1.title",
-    desc: "onboarding.stepSetupDevice.recoverySheetInstructions.bullets.1.desc",
+    title: "onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.title",
+    desc: "onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label",
   },
 ];
 
@@ -32,7 +30,7 @@ const RecoveryPhraseInstructionsScene = ({
         }))}
       />
       <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepSetupDevice.pinCode.cta")}
+        {t("onboarding.stepSetupDevice.recoveryPhraseSetup.nextStep")}
       </Button>
     </>
   );

@@ -846,7 +846,11 @@
     "stepUseCase": {
       "title": "Hello!",
       "or": "Or",
-      "firstUse": "First time using your Nano?",
+      "firstUse": {
+        "title": "First time using your Nano?",
+        "subTitle": "Set up a new Nano",
+        "desc": "Let’s start and set up your device!"
+      },
       "devicePairing": {
         "title": "Already have a recovery phrase?",
         "label": "Device pairing",
@@ -864,25 +868,7 @@
         "subTitle": "Restore your recovery phrase on a new device",
         "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
       },
-      "recovery": "Already have a recovery phrase?",
-      "deviceActions": {
-        "setup": {
-          "title": "Set up a new Nano",
-          "subTitle": "Let’s start and set up your device!"
-        },
-        "pairing": {
-          "title": "Connect your Nano",
-          "subTitle": "Your device is already set up? Connect it to the app!"
-        },
-        "desktopSync": {
-          "title": "Sync crypto from your desktop app",
-          "subTitle": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
-        },
-        "restore": {
-          "title": "Restore your recovery phrase on a new device",
-          "subTitle": "Use an existing recovery phrase to restore your private keys on a new Nano!"
-        }
-      }
+      "recovery": "Already have a recovery phrase?"
     },
     "stepNewDevice": {
       "0": {
@@ -909,8 +895,7 @@
       "4": {
         "label": "Basics",
         "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security.",
-        "action": "Let’s do this!"
+        "desc": "We'll start by setting up your Nano security."
       },
       "cta": "Let’s do this!",
       "title": "BASICS"
@@ -951,11 +936,6 @@
             },
             "blue": {
               "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
-            },
-            "label": {
-              "nanoX": "Turn on your device by pressing the black button for 1 second.",
-              "nanoS": "Turn on your device by connecting it to the USB port of your phone.",
-              "nanoSP": "Turn on your device by connecting it to the USB port of your phone."
             }
           },
           "1": {
@@ -995,14 +975,30 @@
         "infoModal": {
           "title": "Secure your PIN code",
           "bullets": {
-            "0": "Always choose a PIN code by yourself.",
-            "1": "Always enter your PIN code out of sight.",
-            "2": "You can change your PIN code if needed.",
-            "3": "Three wrong PIN code entries in a row will reset the device.",
-            "4": "Never use an easy PIN code like 0000, 123456, or 55555555.",
-            "5": "Never share your PIN code with someone else. Not even with Ledger.",
-            "6": "Never use a PIN code you did not choose yourself.",
-            "7": "Never store your PIN code on a computer or phone."
+            "0": {
+              "label": "Always choose a PIN code by yourself."
+            },
+            "1": {
+              "label": "Always enter your PIN code out of sight."
+            },
+            "2": {
+              "label": "You can change your PIN code if needed."
+            },
+            "3": {
+              "label": "Three wrong PIN code entries in a row will reset the device."
+            },
+            "4": {
+              "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
+            },
+            "5": {
+              "label": "Never share your PIN code with someone else. Not even with Ledger."
+            },
+            "6": {
+              "label": "Never use a PIN code you did not choose yourself."
+            },
+            "7": {
+              "label": "Never store your PIN code on a computer or phone."
+            }
           }
         },
         "cta": "Next step"
@@ -1035,8 +1031,8 @@
         },
         "bullets": {
           "0": {
-            "title": "Confirm your recovery phrase",
-            "label": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+            "title": "Take your Recovery sheet",
+            "label": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
           },
           "1": {
             "title": "Repeat for all words!",
@@ -1092,19 +1088,6 @@
           "desc": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
           "cta": "Let’s take the quiz"
         }
-      },
-      "recoverySheetInstructions": {
-        "bullets": {
-          "0": {
-            "title": "Take your Recovery sheet",
-            "desc": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
-          },
-          "1": {
-            "title": "Confirm PIN code",
-            "desc": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
-          }
-        },
-        "cta": "Confirm recovery phrase"
       }
     },
     "stepRecoveryPhrase": {

@@ -124,7 +124,7 @@ export function BaseStepperView({
   }, [index, onNext, metadata.length]);
 
   const handleBack = useCallback(
-    () => (index === 0 ? navigation.goBack() : setIndex(index => index - 1)),
+    () => (index === 0 ? navigation.goBack() : setIndex(index - 1)),
     [index, navigation],
   );
 
@@ -139,7 +139,7 @@ export function BaseStepperView({
         extraProps={{ onBack: handleBack, metadata }}
       >
         {steps.map((Children, i) => (
-          <Scene key={Children.id}>
+          <Scene key={Children.id + i}>
             <Flex
               mb={30}
               mx={8}

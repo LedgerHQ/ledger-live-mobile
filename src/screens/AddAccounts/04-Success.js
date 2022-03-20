@@ -5,7 +5,6 @@ import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
-import Icon from "react-native-vector-icons/dist/Feather";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import { rgba } from "../../colors";
@@ -14,6 +13,7 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
+import { Icons } from "@ledgerhq/native-ui";
 
 type Props = {
   navigation: any,
@@ -23,11 +23,6 @@ type Props = {
 type RouteParams = {
   currency: CryptoCurrency,
   deviceId: string,
-};
-
-const IconPlus = () => {
-  const { colors } = useTheme();
-  return <Icon name="plus" color={colors.live} size={16} />;
 };
 
 export default function AddAccountsSuccess({ navigation, route }: Props) {
@@ -62,13 +57,14 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
           event="AddAccountsDone"
           containerStyle={styles.button}
           type="primary"
+          outline={false}
           title={<Trans i18nKey="addAccounts.success.cta" />}
           onPress={primaryCTA}
         />
         <Button
           event="AddAccountsAgain"
-          IconLeft={IconPlus}
           onPress={secondaryCTA}
+          IconLeft={Icons.WalletAddMedium}
           type="lightSecondary"
           title={<Trans i18nKey="addAccounts.success.secondaryCTA" />}
         />
