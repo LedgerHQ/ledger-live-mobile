@@ -46,7 +46,9 @@ export default function MainNavigator({
         tabBarInactiveTintColor: colors.palette.neutral.c70,
         headerShown: false,
       }}
-      sceneContainerStyle={[{ paddingBottom: 46 }]}
+      sceneContainerStyle={[
+        { paddingBottom: 56, backgroundColor: colors.background.main },
+      ]}
       tabBar={props => <CustomTabBar {...props} colors={colors} />}
     >
       <Tab.Screen

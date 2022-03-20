@@ -56,7 +56,6 @@ type Props = {
 
 const ContentContainer = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${p => p.theme.colors.palette.background.main};
 `;
 
 const SectionTitle = ({

@@ -114,7 +114,7 @@ export default function PortfolioHeader({
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          borderBottomColor: colors.neutral.c30,
+          borderBottomColor: colors.background.main,
           paddingHorizontal: space[6],
           paddingVertical: space[4],
         },
