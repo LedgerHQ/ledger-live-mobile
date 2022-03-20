@@ -29,7 +29,7 @@ function getSettingsScreen(pathname) {
       screen = ScreenName.DeveloperSettings;
       break;
     default:
-      screen = ScreenName.Settings;
+      screen = ScreenName.SettingsScreen;
   }
   return screen;
 }

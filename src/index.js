@@ -326,12 +326,12 @@ const linkingOptions = {
            */
           [NavigatorName.Swap]: "swap",
           [NavigatorName.Settings]: {
-            initialRouteName: [ScreenName.Settings],
+            initialRouteName: [ScreenName.SettingsScreen],
             screens: {
               /**
                * ie: "ledgerlive://settings/experimental" -> will redirect to the experimental settings panel
                */
-              [ScreenName.Settings]: "settings",
+              [ScreenName.SettingsScreen]: "settings",
               [ScreenName.GeneralSettings]: "settings/general",
               [ScreenName.AccountsSettings]: "settings/accounts",
               [ScreenName.AboutSettings]: "settings/about",

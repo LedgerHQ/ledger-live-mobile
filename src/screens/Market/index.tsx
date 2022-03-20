@@ -168,8 +168,8 @@ const BottomSection = ({
       />
       <SortBadge
         label={t("market.filters.time")}
-        value={timeRangeValue.value}
-        valueLabel={timeRangeValue.label}
+        value={timeRangeValue?.value}
+        valueLabel={timeRangeValue?.label}
         options={timeRanges}
         onChange={onChange}
       />
@@ -237,7 +237,7 @@ export default function Market({ navigation }: { navigation: any }) {
     selectCurrency,
   } = useMarketData();
 
-  const { limit, search } = requestParams;
+  const { limit, search, range } = requestParams;
   const [isLoading, setIsLoading] = useState(true);
   const [isSearchOpen, setSearchOpen] = useState(false);
 
@@ -250,7 +250,7 @@ export default function Market({ navigation }: { navigation: any }) {
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
-          selectCurrency(item.id);
+          selectCurrency(item.id, item, range);
           navigation.navigate(ScreenName.MarketDetail, {
             currencyId: item.id,
           });
@@ -265,7 +265,7 @@ export default function Market({ navigation }: { navigation: any }) {
         />
       </TouchableOpacity>
     ),
-    [counterCurrency, locale, navigation, selectCurrency, t],
+    [counterCurrency, locale, navigation, range, selectCurrency, t],
   );
 
   const renderEmptyComponent = useCallback(
@@ -307,15 +307,29 @@ export default function Market({ navigation }: { navigation: any }) {
     [colors.palette.type, loading, resetSearch, search, t],
   );
 
-  const onEndReached = useCallback(async () => {
-    if (page * limit > marketData.length) {
+  const onEndReached = useCallback(() => {
+    if (
+      !limit ||
+      isNaN(limit) ||
+      !marketData ||
+      page * limit > marketData.length ||
+      loading
+    ) {
       setIsLoading(false);
-      return;
+      return Promise.resolve();
     }
     setIsLoading(true);
-    await loadNextPage();
-    setIsLoading(false);
-  }, [limit, loadNextPage, marketData.length, page]);
+    return loadNextPage()
+      .then(
+        () => {
+          // do nothing
+        },
+        () => {
+          // do nothing
+        },
+      )
+      .finally(() => setIsLoading(false));
+  }, [limit, marketData, page, loading, loadNextPage]);
 
   const openSearch = useCallback(() => {
     track("Page Market Search", {
@@ -327,8 +341,8 @@ export default function Market({ navigation }: { navigation: any }) {
 
   const renderFooter = useCallback(
     () => (
-      <Flex py="5" height={40}>
-        {isLoading ? <InfiniteLoader size={40} /> : null}
+      <Flex height={40} mb={6}>
+        {isLoading ? <InfiniteLoader size={30} /> : null}
       </Flex>
     ),
     [isLoading],

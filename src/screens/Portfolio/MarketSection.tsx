@@ -46,9 +46,7 @@ export default function MarketSection() {
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
-          // @WARN: this is a hack to avoid issues in the market screen when the target data is not yet loaded
-          refresh({ ids: [item.id] });
-          selectCurrency(item.id);
+          selectCurrency(item.id, item, "24h");
           // @ts-ignore issue in react navigation types
           navigation.navigate(NavigatorName.Market, {
             screen: ScreenName.MarketDetail,
@@ -68,7 +66,7 @@ export default function MarketSection() {
         />
       </TouchableOpacity>
     ),
-    [counterCurrency, locale, navigation, refresh, selectCurrency, t],
+    [counterCurrency, locale, navigation, selectCurrency, t],
   );
 
   const renderEmptyComponent = useCallback(

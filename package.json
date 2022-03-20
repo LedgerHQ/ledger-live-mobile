@@ -68,7 +68,7 @@
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.24.1",
     "@ledgerhq/hw-transport-http": "6.24.1",
-    "@ledgerhq/live-common": "https://github.com/LedgerHQ/ledger-live-common.git#develop",
+    "@ledgerhq/live-common": "git+https://github.com/LedgerHQ/ledger-live-common.git#feat/LL-7742-marketprovider-updated",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/native-ui": "^0.7.6",
     "@ledgerhq/react-native-hid": "6.24.1",

@@ -49,7 +49,7 @@ export default function SettingsNavigator() {
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen
-        name={ScreenName.Settings}
+        name={ScreenName.SettingsScreen}
         component={Settings}
         options={{
           title: t("settings.header"),

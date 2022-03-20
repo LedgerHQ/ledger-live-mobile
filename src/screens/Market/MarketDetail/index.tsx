@@ -13,10 +13,7 @@ import {
 } from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  useMarketData,
-  useSingleCoinMarketData,
-} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import { useSingleCoinMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { Image, RefreshControl } from "react-native";
@@ -98,16 +95,17 @@ function MarketDetail({
     [t],
   );
 
-  const { refresh, selectCurrency } = useMarketData();
-
   const {
     selectedCoinData: currency,
+    selectCurrency,
     chartRequestParams,
     loading,
     loadingChart,
     refreshChart,
     counterCurrency,
   } = useSingleCoinMarketData(currencyId);
+
+  // console.log(loadingChart, currency?.chartData);
 
   const {
     name,
@@ -121,15 +119,13 @@ function MarketDetail({
 
   useEffect(() => {
     const resetState = () => {
-      selectCurrency(undefined);
-      refresh(resetSearchOnUmount ? { search: "", ids: [] } : {});
+      selectCurrency();
     };
     const sub = navigation.addListener("blur", resetState);
     return () => {
       sub();
-      resetState();
     };
-  }, [selectCurrency, refresh, resetSearchOnUmount, navigation]);
+  }, [selectCurrency, resetSearchOnUmount, navigation]);
 
   const allAccounts = useSelector(
     accountsByCryptoCurrencyScreenSelector(internalCurrency),
@@ -158,9 +154,7 @@ function MarketDetail({
     interval,
   ]);
 
-  const [hoveredItem, setHoverItem] = useState<
-    { date: Date; value: number } | undefined
-  >();
+  const [hoveredItem] = useState<{ date: Date; value: number } | undefined>();
 
   const navigateToBuy = useCallback(() => {
     navigation.navigate(NavigatorName.Exchange, {
@@ -324,21 +318,18 @@ function MarketDetail({
         BottomSection={
           <Flex justifyContent="center" alignItems="flex-start" pb={3}>
             <Text variant="h1" mb={1}>
-              {counterValueFormatter({
-                currency: counterCurrency,
-                value:
-                  hoveredItem && hoveredItem.value ? hoveredItem.value : price,
-                locale,
-                t,
-              })}
+              {price
+                ? counterValueFormatter({
+                    currency: counterCurrency,
+                    value: price,
+                    locale,
+                    t,
+                  })
+                : null}
             </Text>
             <Flex height={20}>
-              {hoveredItem && hoveredItem.date ? (
-                <Text variant="body" color="neutral.c70">
-                  {dateRangeFormatter.format(hoveredItem.date)}
-                </Text>
-              ) : priceChangePercentage !== null &&
-                !isNaN(priceChangePercentage) ? (
+              {priceChangePercentage !== null &&
+              !isNaN(priceChangePercentage) ? (
                 <DeltaVariation percent value={priceChangePercentage} />
               ) : (
                 <Text variant="body" color="neutral.c70">
@@ -361,8 +352,8 @@ function MarketDetail({
         <ChartCard
           locale={locale}
           ranges={ranges}
-          range={chartRequestParams.range}
-          isLoading={loading || loadingChart}
+          range={chartRequestParams.range || "24h"}
+          isLoading={loadingChart}
           refreshChart={refreshChart}
           chartData={chartDataFormatted}
           currencyColor={currencyColor}

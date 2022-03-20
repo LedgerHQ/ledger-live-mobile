@@ -24,7 +24,7 @@ export const IconContainer = styled(Flex).attrs({
 type Props = {
   index: number;
   item: CurrencyData;
-  counterCurrency: string;
+  counterCurrency?: string;
   locale: string;
   t: TFunction;
 };

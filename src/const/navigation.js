@@ -122,7 +122,7 @@ export const ScreenName = {
   SendSummary: "SendSummary",
   SendValidationError: "SendValidationError",
   SendValidationSuccess: "SendValidationSuccess",
-  Settings: "Settings",
+  SettingsScreen: "SettingsScreen",
   SignConnectDevice: "SignConnectDevice",
   SignSelectDevice: "SignSelectDevice",
   SignSummary: "SignSummary",
