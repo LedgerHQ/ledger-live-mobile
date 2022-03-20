@@ -3,17 +3,18 @@ import React from "react";
 import { useTheme } from "styled-components/native";
 import { Icons } from "@ledgerhq/native-ui";
 
-import useFeature from "@ledgerhq/live-common/lib/featureFlags/useFeature";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSelector } from "react-redux";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
-import AccountsNavigator from "./AccountsNavigator";
-import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import TabIcon from "../TabIcon";
 import MarketNavigator from "./MarketNavigator";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
+import Planet from "../../icons/Planet";
+import DiscoverNavigator from "./DiscoverNavigator";
+import CustomTabBar from "../../components/CustomTabBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,6 @@ export default function MainNavigator({
 }) {
   const { colors } = useTheme();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
-  const learnFeature = useFeature("learn");
 
   const { hideTabNavigation } = params || {};
   return (
@@ -35,59 +35,25 @@ export default function MainNavigator({
       screenOptions={{
         tabBarStyle: [
           {
-            borderTopColor: colors.palette.neutral.c40,
-            backgroundColor: colors.palette.background.main,
+            borderTopColor: "transparent",
+            backgroundColor: colors.background.main,
           },
           hideTabNavigation ? { display: "none" } : {},
         ],
+
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.palette.primary.c80,
         tabBarInactiveTintColor: colors.palette.neutral.c70,
         headerShown: false,
       }}
+      sceneContainerStyle={[{ paddingBottom: 46 }]}
+      tabBar={props => <CustomTabBar {...props} colors={colors} />}
     >
       <Tab.Screen
         name={ScreenName.Portfolio}
         component={Portfolio}
         options={{
           tabBarIcon: (props: any) => <PortfolioTabIcon {...props} />,
-        }}
-      />
-
-      <Tab.Screen
-        name={NavigatorName.Accounts}
-        component={AccountsNavigator}
-        options={{
-          unmountOnBlur: true,
-          tabBarIcon: (props: any) => (
-            <TabIcon
-              Icon={Icons.WalletMedium}
-              i18nKey="tabs.accounts"
-              {...props}
-            />
-          ),
-          tabBarTestID: "TabBarAccounts",
-        }}
-        listeners={({ navigation }) => ({
-          tabPress: e => {
-            if (readOnlyModeEnabled) {
-              e.preventDefault();
-              // NB The default behaviour is not reset route params, leading to always having the same
-              // search query or preselected tab after the first time (ie from Swap/Sell)
-              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
-              navigation.navigate(ScreenName.BuyDeviceScreen, {
-                from: NavigatorName.Accounts,
-              });
-            }
-          },
-        })}
-      />
-      <Tab.Screen
-        name={ScreenName.Transfer}
-        component={Transfer}
-        options={{
-          headerShown: false,
-          tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
         }}
       />
       <Tab.Screen
@@ -112,6 +78,36 @@ export default function MainNavigator({
             // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
             navigation.navigate(NavigatorName.Market, {
               screen: ScreenName.MarketList,
+            });
+          },
+        })}
+      />
+
+      <Tab.Screen
+        name={ScreenName.Transfer}
+        component={Transfer}
+        options={{
+          headerShown: false,
+          tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
+        }}
+      />
+      <Tab.Screen
+        name={NavigatorName.Discover}
+        component={DiscoverNavigator}
+        options={{
+          headerShown: false,
+          tabBarIcon: (props: any) => (
+            <TabIcon Icon={Planet} i18nKey="tabs.discover" {...props} />
+          ),
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: (e: any) => {
+            e.preventDefault();
+            // NB The default behaviour is not reset route params, leading to always having the same
+            // search query or preselected tab after the first time (ie from Swap/Sell)
+            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+            navigation.navigate(NavigatorName.Discover, {
+              screen: ScreenName.DiscoverScreen,
             });
           },
         })}

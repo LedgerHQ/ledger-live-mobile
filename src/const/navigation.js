@@ -348,6 +348,9 @@ export const ScreenName = {
   SolanaEditMemo: "SolanaEditMemo",
 
   BuyDeviceScreen: "BuyDeviceScreen",
+
+  DiscoverScreen: "DiscoverScreen",
+  Learn: "Learn",
 };
 
 export const NavigatorName = {
@@ -414,6 +417,5 @@ export const NavigatorName = {
 
   // Root
   RootNavigator: "RootNavigator",
-
-  Learn: "Learn",
+  Discover: "Discover",
 };

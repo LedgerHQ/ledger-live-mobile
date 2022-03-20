@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { FlatList, LayoutChangeEvent } from "react-native";
+import { FlatList, LayoutChangeEvent, Platform } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -32,7 +32,7 @@ import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
@@ -63,6 +63,7 @@ const SectionTitle = ({
   title,
   onSeeAllPress,
   navigatorName,
+  screenName,
   navigation,
   seeMoreText,
   containerProps,
@@ -70,6 +71,7 @@ const SectionTitle = ({
   title: React.ReactElement;
   onSeeAllPress?: () => void;
   navigatorName?: string;
+  screenName?: string;
   navigation?: any;
   seeMoreText?: React.ReactElement;
   containerProps?: FlexBoxProps;
@@ -79,9 +81,9 @@ const SectionTitle = ({
       onSeeAllPress();
     }
     if (navigation && navigatorName) {
-      navigation.navigate(navigatorName);
+      navigation.navigate(navigatorName, { screen: screenName });
     }
-  }, [navigation, onSeeAllPress, navigatorName]);
+  }, [onSeeAllPress, navigation, navigatorName, screenName]);
 
   return (
     <Flex
@@ -182,19 +184,7 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      ...(Object.values(carouselVisibility).some(Boolean)
-        ? [
-            <Flex mt={10}>
-              <Flex mx={6}>
-                <SectionTitle
-                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
-                />
-              </Flex>
-              <Carousel cardsVisibility={carouselVisibility} />
-            </Flex>,
-          ]
-        : []),
-      <Flex mx={6} mt={10}>
+      <Flex mx={6} my={10}>
         <SectionTitle
           title={<Trans i18nKey={"portfolio.topGainers.title"} />}
           navigation={navigation}
@@ -204,6 +194,34 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <MarketSection />
       </Flex>,
+      ...(Object.values(carouselVisibility).some(Boolean)
+        ? [
+            <Flex mb={10}>
+              <Flex mx={6}>
+                <SectionTitle
+                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
+                />
+              </Flex>
+              <Carousel cardsVisibility={carouselVisibility} />
+            </Flex>,
+          ]
+        : []),
+      ...(Platform.OS !== "ios"
+        ? [
+            <Flex mb={10}>
+              <Flex mx={6}>
+                <SectionTitle
+                  title={<Trans i18nKey={"tabs.platform"} />}
+                  navigation={navigation}
+                  navigatorName={NavigatorName.Discover}
+                  screenName={ScreenName.PlatformCatalog}
+                />
+              </Flex>
+
+              <DiscoverSection />
+            </Flex>,
+          ]
+        : []),
     ],
     [
       counterValueCurrency,

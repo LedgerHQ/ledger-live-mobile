@@ -13,8 +13,6 @@ const OnboardingPreQuizModal = () => {
   const navigation = useNavigation();
   const route = useRoute<WarningRouteProps>();
 
-  console.log(route.params);
-
   const handlePress = () => {
     navigation.goBack();
     if (route.params.onNext) route.params.onNext();

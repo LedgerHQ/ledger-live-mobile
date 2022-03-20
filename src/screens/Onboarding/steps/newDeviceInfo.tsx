@@ -12,7 +12,7 @@ import { DeviceNames } from "../types";
 
 const StyledSafeAreaView = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${p => p.theme.colors.primary.c60};
+  background-color: ${p => p.theme.colors.constant.purple};
   padding: 16px;
 `;
 

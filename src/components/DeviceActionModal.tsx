@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import styled from "styled-components/native";
@@ -38,31 +38,40 @@ export default function DeviceActionModal({
 }: Props) {
   const { t } = useTranslation();
   const showAlert = !device?.wired;
+  const [result, setResult] = useState<any[] | null>(null);
   return (
     <BottomModal
       id="DeviceActionModal"
-      isOpened={!!device}
+      isOpened={result ? false : !!device}
       onClose={onClose}
-      onModalHide={onModalHide}
+      onModalHide={() => {
+        if (onModalHide) onModalHide();
+        if (result) onResult(...result);
+        setResult(null);
+      }}
     >
-      {device && (
-        <Flex>
-          <DeviceActionContainer marginBottom={showAlert ? "16px" : 0}>
-            <DeviceAction
-              action={action}
-              device={device}
-              request={request}
-              onResult={onResult}
-              renderOnResult={renderOnResult}
-              onSelectDeviceLink={onSelectDeviceLink}
-              analyticsPropertyFlow={analyticsPropertyFlow}
-            />
-          </DeviceActionContainer>
-          {showAlert && (
-            <Alert type="info" title={t("DeviceAction.stayInTheAppPlz")} />
+      {result
+        ? null
+        : device && (
+            <Flex>
+              <DeviceActionContainer marginBottom={showAlert ? "16px" : 0}>
+                <DeviceAction
+                  action={action}
+                  device={device}
+                  request={request}
+                  onResult={(...props) => {
+                    setResult([...props]);
+                  }}
+                  renderOnResult={renderOnResult}
+                  onSelectDeviceLink={onSelectDeviceLink}
+                  analyticsPropertyFlow={analyticsPropertyFlow}
+                />
+              </DeviceActionContainer>
+              {showAlert && (
+                <Alert type="info" title={t("DeviceAction.stayInTheAppPlz")} />
+              )}
+            </Flex>
           )}
-        </Flex>
-      )}
       {device && <SyncSkipUnderPriority priority={100} />}
     </BottomModal>
   );

@@ -250,7 +250,7 @@ const linkingOptions = {
                   [ScreenName.Accounts]: "account",
                 },
               },
-              [NavigatorName.Platform]: {
+              [NavigatorName.Discover]: {
                 screens: {
                   /**
                    * @params ?platform: string

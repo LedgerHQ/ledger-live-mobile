@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState, memo } from "react";
 import { SafeAreaView } from "react-native";
 import WebView from "react-native-webview";
 import { URLSearchParams } from "react-native-url-polyfill";
@@ -27,9 +27,10 @@ const StyledWebview = styled(WebView)`
   background-color: transparent; // avoids white background before page loads
 `;
 
-export default function Learn({ navigation }) {
+function Learn() {
   const { i18n } = useTranslation();
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
+  const [canGoBack, setCanGoBack] = useState(true);
   const {
     colors: { type: themeType },
   } = useTheme();
@@ -65,6 +66,19 @@ export default function Learn({ navigation }) {
     });
   }, []);
 
+  useEffect(() => {
+    navigation.addListener("beforeRemove", e => {
+      if (canGoBack) return;
+      // Prevent default behavior of leaving the screen
+      e.preventDefault();
+      ref.current?.goBack();
+    });
+
+    return () => {
+      navigation.removeListener("beforeRemove");
+    };
+  }, [canGoBack, navigation]);
+
   const handleOnLoad = useCallback(() => {
     if (initialLoadingDone) return;
     setInitialLoadingDone(true);
@@ -85,8 +99,11 @@ export default function Learn({ navigation }) {
             source={{ uri }}
             onLoadEnd={handleOnLoad}
             renderError={renderError}
+            startInLoadingState
             allowsBackForwardNavigationGestures
-            sharedCookiesEnabled
+            onNavigationStateChange={navState => {
+              setCanGoBack(!navState.canGoBack);
+            }}
           />
         </>
       ) : (
@@ -95,3 +112,5 @@ export default function Learn({ navigation }) {
     </SafeContainer>
   );
 }
+
+export default memo(Learn);

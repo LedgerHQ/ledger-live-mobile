@@ -64,7 +64,6 @@ import PortfolioHistory from "../../screens/Portfolio/PortfolioHistory";
 import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
 import PlatformApp from "../../screens/Platform/App";
-import ManagerNavigator from "./ManagerNavigator";
 import AccountsNavigator from "./AccountsNavigator";
 
 import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccountScreen";
@@ -74,6 +73,9 @@ import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectP
 
 import BuyDeviceScreen from "../../screens/BuyDeviceScreen";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import useFeature from "@ledgerhq/live-common/lib/featureFlags/useFeature";
+import Learn from "../../screens/Learn";
+import ManagerMain from "../../screens/Manager/Manager";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -83,6 +85,7 @@ export default function BaseNavigator() {
     [colors],
   );
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+  const learn = useFeature("learn");
 
   return (
     <Stack.Navigator
@@ -129,6 +132,15 @@ export default function BaseNavigator() {
           title: route.params.name,
         })}
       />
+      {learn?.enabled ? (
+        <Stack.Screen
+          name={ScreenName.Learn}
+          component={Learn}
+          options={{
+            headerShown: false,
+          }}
+        />
+      ) : null}
       <Stack.Screen
         name={NavigatorName.SignMessage}
         component={SignMessageNavigator}
@@ -520,26 +532,14 @@ export default function BaseNavigator() {
         })}
       />
       <Stack.Screen
-        name={NavigatorName.Manager}
-        {...(readOnlyModeEnabled
-          ? {
-              component: BuyDeviceScreen,
-              options: {
-                ...TransitionPresets.ModalTransition,
-                headerShown: false,
-              },
-            }
-          : {
-              component: ManagerNavigator,
-              options: {
-                headerShown: false,
-              },
-            })}
-      />
-      <Stack.Screen
         name={NavigatorName.Accounts}
         component={AccountsNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={ScreenName.ManagerMain}
+        component={ManagerMain}
+        options={{ title: "" }}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];

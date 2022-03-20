@@ -103,6 +103,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     <AnimatedHeaderView
       titleStyle={styles.title}
       title={<Trans i18nKey={"platform.catalog.title"} />}
+      hasBackButton
     >
       <TrackScreen category="Platform" name="Catalog" />
       {disclaimerOpts && (

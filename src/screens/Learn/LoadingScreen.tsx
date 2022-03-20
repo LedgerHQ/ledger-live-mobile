@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import styled from "@ledgerhq/native-ui/components/styled";
 import { TouchableOpacity, ScrollView } from "react-native";
@@ -103,12 +103,17 @@ function Section({ title, children }: SectionProps) {
   return (
     <Flex mb="40px">
       {title && <SectionHeader title={title} />}
-      <ScrollContainer>{children}</ScrollContainer>
+      <ScrollContainer
+        scrollEnabled={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        {children}
+      </ScrollContainer>
     </Flex>
   );
 }
 
-export default function LearnSkeleton() {
+function LearnSkeleton() {
   const { t } = useTranslation();
   const emptyArray = useMemo(() => new Array(4).fill(undefined), []);
   return (
@@ -116,7 +121,7 @@ export default function LearnSkeleton() {
       <TitleContainer>
         <Text variant="h3">{t("learn.pageTitle")}</Text>
       </TitleContainer>
-      <ScrollView>
+      <ScrollView scrollEnabled={false} showsVerticalScrollIndicator={false}>
         <Section title={t("learn.sectionShows")}>
           {emptyArray.map((i, key) => (
             <PlaceholderShow key={key} />
@@ -144,3 +149,5 @@ export default function LearnSkeleton() {
     </Container>
   );
 }
+
+export default memo(LearnSkeleton);

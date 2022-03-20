@@ -155,4 +155,12 @@ export const urls = {
     github: "https://github.com/LedgerHQ",
     status: "https://status.ledger.com",
   },
+  discover: {
+    ledgerApps:
+      "https://support.ledger.com/hc/en-us/articles/4404599625233-Discover-Live-Apps?docs=true&utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
+    earn:
+      "https://www.ledger.com/grow-your-assets?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
+    academy:
+      "https://www.ledger.com/academy?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
+  },
 };

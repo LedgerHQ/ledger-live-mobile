@@ -8,11 +8,13 @@ import { lockSubject } from "../components/RootNavigator/CustomBlockRouterNaviga
 
 const TransferButton = styled(Touchable)`
   border-radius: 40px;
-  height: 40px;
-  width: 40px;
+  height: 64px;
+  width: 64px;
   align-items: center;
   justify-content: center;
+  bottom: 24px;
   background-color: ${p => p.theme.colors.palette.neutral.c100};
+  transform: rotate(90deg);
 `;
 
 const hitSlop = {
@@ -43,7 +45,7 @@ export function TransferTabIcon() {
         hitSlop={hitSlop}
         onPress={openModal}
       >
-        <Icons.Sort1Medium size={24} color={"palette.background.main"} />
+        <Icons.Sort1Medium size={28} color={"palette.background.main"} />
       </TransferButton>
       <CreateModal isOpened={isModalOpened} onClose={onModalClose} />
     </>

@@ -105,8 +105,6 @@ function MarketDetail({
     counterCurrency,
   } = useSingleCoinMarketData(currencyId);
 
-  // console.log(loadingChart, currency?.chartData);
-
   const {
     name,
     image,

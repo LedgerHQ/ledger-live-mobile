@@ -9,7 +9,6 @@ import { NanoFoldedMedium } from "@ledgerhq/native-ui/assets/icons";
 import { ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
-import ManagerMain from "../../screens/Manager/Manager";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
@@ -78,11 +77,6 @@ export default function ManagerNavigator() {
           headerRight: null,
           gestureEnabled: false,
         }}
-      />
-      <Stack.Screen
-        name={ScreenName.ManagerMain}
-        component={ManagerMain}
-        options={{ title: "" }}
       />
     </Stack.Navigator>
   );

@@ -11,18 +11,19 @@ const Card = ({
   labelBadge,
   onPress,
   Image,
+  disabled,
   ...props
 }: {
   title: string;
   titleProps?: any;
   subTitle?: string;
   subTitleProps?: any;
-  topLabel?: string;
   labelBadge?: string;
   Image: React.ReactNode;
   onPress: TouchableOpacityProps["onPress"];
+  disabled?: boolean;
 }) => (
-  <Touchable onPress={onPress} {...props}>
+  <Touchable onPress={onPress} disabled={disabled} {...props}>
     <Flex
       flexDirection={"row"}
       justifyContent={"space-between"}
@@ -32,6 +33,7 @@ const Card = ({
       borderRadius={2}
       mb={6}
       minHeight={112}
+      opacity={disabled ? 0.6 : 1}
     >
       <Flex
         py={7}
@@ -47,7 +49,7 @@ const Card = ({
             py={1}
             mb={2}
             borderRadius={1}
-            bg="primary.c80"
+            bg={disabled ? "neutral.c80" : "primary.c80"}
           >
             {labelBadge}
           </Text>

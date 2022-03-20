@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  topHeader: { flexDirection: "row", alignContent: "center", height: 50 },
+  topHeader: { flexDirection: "row", alignContent: "center", height: 55 },
   spacer: { flex: 1 },
   header: {
     ...Styles.headerNoShadow,

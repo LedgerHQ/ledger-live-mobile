@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Link as TextLink } from "@ledgerhq/native-ui";
 import { Linking } from "react-native";
+import useFeature from "@ledgerhq/live-common/lib/featureFlags/useFeature";
 import { track, TrackScreen } from "../../../analytics";
 import ChoiceCard from "../../../components/ChoiceCard";
 import { ScreenName } from "../../../const";
@@ -24,6 +25,8 @@ const discoverLedgerImg = {
 function PostWelcomeSelection() {
   const navigation = useNavigation();
   const { t } = useTranslation();
+
+  const onboardingWithoutNano = useFeature("onboardingWithoutNano");
 
   const setupLedger = useCallback(() => {
     // TODO: FIX @react-navigation/native using Typescript
@@ -65,8 +68,10 @@ function PostWelcomeSelection() {
         }
       />
       <ChoiceCard
+        disabled={!onboardingWithoutNano?.enabled}
         title={t("onboarding.postWelcomeStep.discoverLedger.title")}
         subTitle={t("onboarding.postWelcomeStep.discoverLedger.subtitle")}
+        labelBadge={t("platform.catalog.branch.soon")}
         event="Onboarding PostWelcome - Discover Ledger"
         testID={`Onboarding PostWelcome - Selection|DiscoverLedger`}
         onPress={discoverLedger}

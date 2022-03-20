@@ -8,7 +8,6 @@ import {
   NotificationsMedium,
   NotificationsOnMedium,
   SettingsMedium,
-  NanoFoldedMedium,
   WarningMedium,
 } from "@ledgerhq/native-ui/assets/icons";
 import { useTheme } from "styled-components/native";
@@ -27,9 +26,6 @@ import { scrollToTop } from "../../navigation/utils";
 import LiveLogo from "../../icons/LiveLogo";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Placeholder from "../../components/Placeholder";
-import { readOnlyModeEnabledSelector } from "../../reducers/settings";
-import { useSelector } from "react-redux";
-import { useNavigationInterceptor } from "../Onboarding/onboardingContext";
 
 export default function PortfolioHeader({
   currentPositionY,
@@ -46,27 +42,9 @@ export default function PortfolioHeader({
 }) {
   const navigation = useNavigation();
   const { colors, space } = useTheme();
-  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
-  const { setShowWelcome, setFirstTimeOnboarding } = useNavigationInterceptor();
 
   const { allIds, seenIds } = useAnnouncements();
   const { incidents } = useFilteredServiceStatus();
-
-  const setupDevice = useCallback(() => {
-    setShowWelcome(false);
-    setFirstTimeOnboarding(false);
-    navigation.navigate(NavigatorName.BaseOnboarding, {
-      screen: NavigatorName.Onboarding,
-      params: {
-        screen: ScreenName.OnboardingDeviceSelection,
-      },
-    });
-  }, [navigation, setFirstTimeOnboarding, setShowWelcome]);
-
-  const onManagerButtonPress = useCallback(() => {
-    if (readOnlyModeEnabled) setupDevice();
-    else navigation.navigate(NavigatorName.Manager);
-  }, [navigation, readOnlyModeEnabled, setupDevice]);
 
   const onNotificationButtonPress = useCallback(() => {
     navigation.navigate(NavigatorName.NotificationCenter);
@@ -188,11 +166,6 @@ export default function PortfolioHeader({
           </Animated.View>
         </Flex>
       </TouchableWithoutFeedback>
-      <Box mr={7}>
-        <Touchable onPress={onManagerButtonPress}>
-          <NanoFoldedMedium size={24} color={"neutral.c100"} />
-        </Touchable>
-      </Box>
       <Box mr={7}>
         <Touchable onPress={onNotificationButtonPress}>
           {notificationsCount > 0 ? (

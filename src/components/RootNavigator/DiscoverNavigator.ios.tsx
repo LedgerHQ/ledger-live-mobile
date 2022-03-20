@@ -4,20 +4,21 @@ import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import PlatformCatalog from "../../screens/Platform";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import Discover from "../../screens/Discover";
 
-export default function PlatformNavigator() {
+export default function DiscoverNavigator() {
   const { colors } = useTheme();
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
     [colors],
   );
+
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
-        name={ScreenName.PlatformCatalog}
-        component={PlatformCatalog}
+        name={ScreenName.DiscoverScreen}
+        component={Discover}
         options={{
           headerShown: false,
         }}

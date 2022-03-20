@@ -785,6 +785,27 @@
     "cta": "Buy your Ledger now",
     "footer": "I already have a device, set it up now"
   },
+  "discover": {
+    "title": "Discover",
+    "desc": "Explore the world of web3 included in Ledger Live",
+    "link": "Tell me more",
+    "sections": {
+      "learn": {
+        "title": "Learn",
+        "desc": "Educate yourself about web3 and stay informed"
+      },
+      "ledgerApps": {
+        "title": "Apps",
+        "desc": "Explore Ledger’s integrated apps all in one place"
+      },
+      "earn": {
+        "title": "Earn",
+        "desc": "Earn passive income and grow your crypto assets"
+      }
+    },
+    "comingSoon": "Coming soon",
+    "mostPopular": "Most popular"
+  },
   "onboarding": {
     "stepWelcome": {
       "title": "Welcome to Ledger",
@@ -1356,12 +1377,13 @@
     }
   },
   "tabs": {
-    "portfolio": "Portfolio",
+    "portfolio": "Wallet",
     "accounts": "Accounts",
     "transfer": "Transfer",
-    "manager": "Device",
+    "manager": "My Ledger",
     "settings": "Settings",
-    "platform": "Discover",
+    "platform": "Live Apps",
+    "discover": "Discover",
     "nanoX": "Nano X",
     "market": "Market",
     "learn": "Learn"

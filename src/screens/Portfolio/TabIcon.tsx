@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
-import { PortfolioMedium } from "@ledgerhq/native-ui/assets/icons";
+import { WalletMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import TabIcon from "../../components/TabIcon";
 import { scrollToTop } from "../../navigation/utils";
@@ -15,14 +15,12 @@ export default function PortfolioTabIcon(props: any) {
   const isFocused = useIsFocused();
 
   if (!isFocused || accounts.length === 0) {
-    return (
-      <TabIcon Icon={PortfolioMedium} i18nKey="tabs.portfolio" {...props} />
-    );
+    return <TabIcon Icon={WalletMedium} i18nKey="tabs.portfolio" {...props} />;
   }
 
   return (
     <TouchableOpacity onPress={scrollToTop}>
-      <TabIcon Icon={PortfolioMedium} i18nKey="tabs.portfolio" {...props} />
+      <TabIcon Icon={WalletMedium} i18nKey="tabs.portfolio" {...props} />
     </TouchableOpacity>
   );
 }
