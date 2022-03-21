@@ -41,9 +41,8 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, []);
 
   return (
-    <SafeAreaView
+    <View
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
     >
       <NavigationScrollView
         style={styles.scroll}
@@ -104,7 +103,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
           <Trans i18nKey="cosmos.delegation.flow.steps.starter.cta" />
         </Button>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
