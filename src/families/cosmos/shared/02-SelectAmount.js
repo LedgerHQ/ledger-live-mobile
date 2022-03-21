@@ -126,9 +126,7 @@ function DelegationAmount({ navigation, route }: Props) {
   );
 
   return (
-    <View
-      style={[styles.root, { backgroundColor: colors.background.main }]}
-    >
+    <View style={[styles.root, { backgroundColor: colors.background.main }]}>
       <KeyboardView>
         <View style={styles.main}>
           <CurrencyInput
@@ -137,7 +135,6 @@ function DelegationAmount({ navigation, route }: Props) {
             onChange={setValue}
             inputStyle={styles.inputStyle}
             hasError={error}
-            autoFocus
           />
           <View style={styles.ratioButtonContainer}>
             {ratioButtons.map(({ label, value: v }) => (
