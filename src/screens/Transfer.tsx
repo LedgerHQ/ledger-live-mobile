@@ -12,7 +12,7 @@ const TransferButton = styled(Touchable)`
   width: 64px;
   align-items: center;
   justify-content: center;
-  bottom: 24px;
+  bottom: 14px;
   background-color: ${p => p.theme.colors.palette.neutral.c100};
   transform: rotate(90deg);
 `;

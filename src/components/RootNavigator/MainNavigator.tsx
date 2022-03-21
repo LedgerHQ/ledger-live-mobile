@@ -14,7 +14,6 @@ import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import Planet from "../../icons/Planet";
 import DiscoverNavigator from "./DiscoverNavigator";
-import CustomTabBar from "../../components/CustomTabBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +34,10 @@ export default function MainNavigator({
       screenOptions={{
         tabBarStyle: [
           {
-            borderTopColor: "transparent",
+            borderTopColor: colors.neutral.c30,
+            borderTopWidth: 1,
+            elevation: 5,
+            shadowColor: colors.neutral.c30,
             backgroundColor: colors.background.main,
           },
           hideTabNavigation ? { display: "none" } : {},
@@ -46,10 +48,7 @@ export default function MainNavigator({
         tabBarInactiveTintColor: colors.palette.neutral.c70,
         headerShown: false,
       }}
-      sceneContainerStyle={[
-        { paddingBottom: 56, backgroundColor: colors.background.main },
-      ]}
-      tabBar={props => <CustomTabBar {...props} colors={colors} />}
+      sceneContainerStyle={[{ backgroundColor: colors.background.main }]}
     >
       <Tab.Screen
         name={ScreenName.Portfolio}
