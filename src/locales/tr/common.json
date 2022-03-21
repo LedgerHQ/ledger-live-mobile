@@ -1263,9 +1263,9 @@
         }
       },
       "final": {
-        "successTitle": "İşin uzmanı oldunuz bile!",
+        "successTitle": "İşin ustası oldunuz bile!",
         "successText": "Kriptolarınızı güvenli bir şekilde yönetmeye hazırsınız. Sadece küçük bir adım kaldı!",
-        "failTitle": "İşin uzmanı olmanıza az kaldı...",
+        "failTitle": "İşin ustası olmanıza az kaldı...",
         "failText": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz. Sadece küçük bir adım kaldı!",
         "cta": "Sonraki adım"
       }
