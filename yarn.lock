@@ -2536,8 +2536,8 @@
     json-rpc-2.0 "^0.2.16"
 
 "@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#develop":
-  version "21.34.1-cosmos.4"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#4709a08677fc0220c1b53c635bde7ef210093110"
+  version "21.35.0"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#7ec740b2beb1fc6ac63877a03fb80ab7c8d87434"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
