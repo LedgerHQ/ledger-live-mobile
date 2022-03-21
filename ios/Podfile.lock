@@ -370,7 +370,7 @@ PODS:
     - react-native-config/App (= 1.4.4)
   - react-native-config/App (1.4.4):
     - React-Core
-  - react-native-fast-crypto (2.1.1):
+  - react-native-fast-crypto (2.2.0):
     - React
   - react-native-fingerprint-scanner (6.0.0):
     - React
@@ -911,7 +911,7 @@ SPEC CHECKSUMS:
   React-logger: 1e10789cb84f99288479ba5f20822ce43ced6ffe
   react-native-ble-plx: f10240444452dfb2d2a13a0e4f58d7783e92d76e
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
-  react-native-fast-crypto: 99690405ac844cbd874a603e890559deb1f6ba30
+  react-native-fast-crypto: 5943c42466b86ad70be60d3a5f64bd22251e5d9e
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: 3d3769f0d65de15c83a9bf1346f8be71de5a24bf
