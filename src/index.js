@@ -318,7 +318,8 @@ const linkingOptions = {
           [NavigatorName.Exchange]: {
             initialRouteName: "buy",
             screens: {
-              [ScreenName.Coinify]: "coinify",
+              [ScreenName.ExchangeBuy]: "buy",
+              [ScreenName.Coinify]: "buy/coinify",
             },
           },
           /**
