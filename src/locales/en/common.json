@@ -1759,7 +1759,8 @@
     "assets_plural": "assets",
     "total": "Total balance:",
     "listAccount": "Account allocation ({{count}})",
-    "title": "Assets"
+    "title": "Assets",
+    "moreAssets": "Add more"
   },
   "help": {
     "gettingStarted": {
