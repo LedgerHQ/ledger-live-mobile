@@ -64,6 +64,7 @@
     }
   },
   "dependencies": {
+    "@babel/plugin-transform-named-capturing-groups-regex": "^7.16.8",
     "@ledgerhq/devices": "6.24.1",
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.24.1",

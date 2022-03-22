@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import config from "react-native-config";
-import { Box } from "@ledgerhq/native-ui";
+import { Box, Text } from "@ledgerhq/native-ui";
 import { accountsSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import SettingsRow from "../../../components/SettingsRow";
@@ -96,6 +96,11 @@ export default function DebugSettings({ navigation: { navigate } }: any) {
         title="Export accounts (LiveQR)"
         onPress={() => navigate(ScreenName.DebugExport)}
       />
+      <SettingsRow title={"JS Engine"}>
+        <Text variant={"body"} fontWeight={"medium"} color={"primary.c80"}>
+          {global.HermesInternal ? "Hermes" : "Jsc"}
+        </Text>
+      </SettingsRow>
     </SettingsNavigationScrollView>
   );
 }

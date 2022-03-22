@@ -92,7 +92,7 @@ project.ext.react = [
      * Clean and rebuild if changing
      * The following env var is not read from ../.env, you need to export this var like this: `export HERMES_ENABLED_ANDROID=true`
      */
-    enableHermes: System.getenv("HERMES_ENABLED_ANDROID") == "true",
+    enableHermes: true,
     // bundleInDebug: true, // Uncomment this to debug java without having to deal with JS dev server (metro)
 ]
 project.ext.sentryCli = [
@@ -129,7 +129,7 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc-intl:+'
 
-def useIntlJsc = true
+// def useIntlJsc = true
 
 /**
  * Whether to enable the Hermes VM.
@@ -208,12 +208,6 @@ android {
             matchingFallbacks = ['release']
         }
     }
-
-    // As required by https://github.com/react-native-community/jsc-android-buildscripts#for-react-native-version-059
-    packagingOptions {
-        pickFirst '**/libjsc.so'
-        pickFirst '**/libc++_shared.so'
-    }
 }
 
 dependencies {
@@ -238,13 +232,12 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
-    if (enableHermes) {
-        def hermesPath = "../../node_modules/hermes-engine/android/";
-        debugImplementation files(hermesPath + "hermes-debug.aar")
-        releaseImplementation files(hermesPath + "hermes-release.aar")
-    } else {
-        implementation jscFlavor
-    }
+
+    def hermesPath = "../../node_modules/hermes-engine/android/";
+    debugImplementation files(hermesPath + "hermes-debug.aar")
+    stagingReleaseImplementation files(hermesPath + "hermes-release.aar")
+    releaseImplementation files(hermesPath + "hermes-release.aar")
+    
     androidTestImplementation('com.wix:detox:+')
 
     compile project(':react-native-video')
