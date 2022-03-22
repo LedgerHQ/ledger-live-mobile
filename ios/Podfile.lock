@@ -141,6 +141,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.7.0)"
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - hermes-engine (0.9.0)
   - InputMask (6.1.0)
   - ledger-core-objc (4.19.1):
     - djinni_objc
@@ -179,6 +180,12 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
+  - RCT-Folly/Futures (2021.06.28.00-v2):
+    - boost
+    - DoubleConversion
+    - fmt (~> 6.2.1)
+    - glog
+    - libevent
   - RCTRequired (0.67.3)
   - RCTTypeSafety (0.67.3):
     - FBLazyVector (= 0.67.3)
@@ -345,6 +352,17 @@ PODS:
     - React-logger (= 0.67.3)
     - React-perflogger (= 0.67.3)
     - React-runtimeexecutor (= 0.67.3)
+  - React-hermes (0.67.3):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly/Futures (= 2021.06.28.00-v2)
+    - React-cxxreact (= 0.67.3)
+    - React-jsi (= 0.67.3)
+    - React-jsiexecutor (= 0.67.3)
+    - React-jsinspector (= 0.67.3)
+    - React-perflogger (= 0.67.3)
   - React-jsi (0.67.3):
     - boost (= 1.76.0)
     - DoubleConversion
@@ -606,7 +624,9 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.99.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - hermes-engine (~> 0.9.0)
   - "ledger-core-objc (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
+  - libevent (~> 2.1.12)
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
   - OpenSSL-Universal (= 1.1.180)
@@ -621,6 +641,7 @@ DEPENDENCIES:
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
+  - React-hermes (from `../node_modules/react-native/ReactCommon/hermes`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
@@ -697,6 +718,7 @@ SPEC REPOS:
     - fmt
     - GoogleDataTransport
     - GoogleUtilities
+    - hermes-engine
     - InputMask
     - libevent
     - libwebp
@@ -769,6 +791,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/CoreModules"
   React-cxxreact:
     :path: "../node_modules/react-native/ReactCommon/cxxreact"
+  React-hermes:
+    :path: "../node_modules/react-native/ReactCommon/hermes"
   React-jsi:
     :path: "../node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
@@ -913,6 +937,7 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  hermes-engine: bf7577d12ac6ccf53ab8b5af3c6ccf0dd8458c5c
   InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
   ledger-core-objc: cc0290f7cf787ddf1d6a8f8e086acf55f24523a4
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
@@ -932,6 +957,7 @@ SPEC CHECKSUMS:
   React-Core: 306cfdc1393bcf9481cc5de9807608db7661817b
   React-CoreModules: 2576a88d630899f3fcdf2cb79fcc0454d7b2a8bb
   React-cxxreact: a492f0de07d875419dcb9f463c63c22fe51c433b
+  React-hermes: 4321bcd6fce09f8c6d1be355da31e1cdae7bfac6
   React-jsi: bca092b0c38d5e3fd60bb491d4994ab4a8ac2ad3
   React-jsiexecutor: 15ea57ead631a11fad57634ff69f78e797113a39
   React-jsinspector: 1e1e03345cf6d47779e2061d679d0a87d9ae73d8
@@ -990,6 +1016,6 @@ SPEC CHECKSUMS:
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 60bbf8c5e3f2024a8e68e975181c461b2bf72a8e
+PODFILE CHECKSUM: c09c7e3d7b5d366d20e032f4d54708fe37de1e94
 
 COCOAPODS: 1.11.2
