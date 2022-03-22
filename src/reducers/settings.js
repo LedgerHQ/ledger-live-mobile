@@ -79,6 +79,7 @@ export type SettingsState = {
   countervalueFirst: boolean,
   hideEmptyTokenAccounts: boolean,
   blacklistedTokenIds: string[],
+  hiddenNftCollections: string[],
   dismissedBanners: string[],
   hasAvailableUpdate: boolean,
   theme: Theme,
@@ -116,6 +117,7 @@ export const INITIAL_STATE: SettingsState = {
   countervalueFirst: false,
   hideEmptyTokenAccounts: false,
   blacklistedTokenIds: [],
+  hiddenNftCollections: [],
   dismissedBanners: [],
   hasAvailableUpdate: false,
   theme: "system",
@@ -281,6 +283,20 @@ const handlers: Object = {
     return {
       ...state,
       blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
+  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: [...ids, collectionId],
+    };
+  },
+  UNHIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: ids.filter(id => id !== collectionId),
     };
   },
   SETTINGS_DISMISS_BANNER: (state, { payload }) => ({
@@ -482,6 +498,9 @@ export const readOnlyModeEnabledSelector = (state: State) =>
 
 export const blacklistedTokenIdsSelector = (state: State) =>
   state.settings.blacklistedTokenIds;
+
+export const hiddenNftCollectionsSelector = (state: State) =>
+  state.settings.hiddenNftCollections;
 
 // $FlowFixMe
 export const exportSettingsSelector = createSelector(

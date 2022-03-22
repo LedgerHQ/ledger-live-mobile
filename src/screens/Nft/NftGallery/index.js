@@ -23,6 +23,7 @@ import { NavigatorName, ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import SendIcon from "../../../icons/Send";
 import { withDiscreetMode } from "../../../context/DiscreetModeContext";
+import { hiddenNftCollectionsSelector } from "../../../reducers/settings";
 
 const MAX_COLLECTIONS_FIRST_RENDER = 12;
 const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 6;
@@ -47,6 +48,8 @@ const NftGallery = () => {
     accountSelector(state, { accountId: params.accountId }),
   );
 
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
+
   const scrollY = useRef(new Value(0)).current;
   const onScroll = event(
     [
@@ -62,9 +65,18 @@ const NftGallery = () => {
   const [collectionsCount, setCollectionsCount] = useState(
     MAX_COLLECTIONS_FIRST_RENDER,
   );
-  const collections = useMemo(() => nftsByCollections(account.nfts), [
-    account.nfts,
-  ]);
+
+  const collections = useMemo(
+    () =>
+      nftsByCollections(account.nfts).filter(
+        collection =>
+          !hiddenNftCollections.includes(
+            `${account.id}|${collection.contract}`,
+          ),
+      ),
+    [account.nfts, account.id, hiddenNftCollections],
+  );
+
   const collectionsSlice = useMemo(
     () => collections.slice(0, collectionsCount),
     [collections, collectionsCount],
