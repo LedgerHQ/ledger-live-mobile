@@ -2905,10 +2905,10 @@
     "action": "アップデートを続行"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "アプリの表示言語を変更しますか？",
     "description": {
       "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "advice": "表示言語は後からいつでも変更可能です。"
     },
     "switchButton": "Switch to {{language}}",
     "no": "I prefer not to",
@@ -3924,7 +3924,7 @@
     "marketList": {
       "crypto": "Crypto",
       "price": "Price",
-      "change": "Change",
+      "change": "前日比",
       "marketCap": "時価総額",
       "last7d": "過去7日間"
     },
