@@ -72,7 +72,6 @@ function PolkadotValidatorsField({ account, transaction, field }: FieldProps) {
 }
 
 const Info = ({ transaction }: FieldProps) => {
-  console.log('HELLLOOOOOOOO', transaction)
   invariant(transaction.family === "polkadot", "polkadot transaction");
   const { colors } = useTheme();
   const { t } = useTranslation();
