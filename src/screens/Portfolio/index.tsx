@@ -12,9 +12,10 @@ import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link as TextLink, Text } from "@ledgerhq/native-ui";
 
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
 import {
@@ -39,6 +40,8 @@ import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
 import MarketSection from "./MarketSection";
+import Link from "../../components/wrappedUi/Link";
+import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -110,7 +113,15 @@ export default function PortfolioScreen({ navigation }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
   const discreetMode = useSelector(discreetModeSelector);
+  const [isAddModalOpened, setAddModalOpened] = useState(false);
+  const { colors } = useTheme();
+  const openAddModal = useCallback(() => setAddModalOpened(true), [
+    setAddModalOpened,
+  ]);
 
+  const closeAddModal = useCallback(() => setAddModalOpened(false), [
+    setAddModalOpened,
+  ]);
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
@@ -180,6 +191,30 @@ export default function PortfolioScreen({ navigation }: Props) {
                 flatListRef={flatListRef}
                 assets={assetsToDisplay}
               />
+              {accounts.length < 3 && (
+                <>
+                  <Flex
+                    mt={6}
+                    p={4}
+                    border={`1px dashed ${colors.neutral.c40}`}
+                    borderRadius={4}
+                  >
+                    <Link
+                      onPress={openAddModal}
+                      Icon={PlusMedium}
+                      iconPosition={"left"}
+                      type={"color"}
+                    >
+                      <Trans i18nKey={"distribution.moreAssets"} />
+                    </Link>
+                  </Flex>
+                  <AddAccountsModal
+                    navigation={navigation}
+                    isOpened={isAddModalOpened}
+                    onClose={closeAddModal}
+                  />
+                </>
+              )}
             </Flex>,
           ]
         : []),
