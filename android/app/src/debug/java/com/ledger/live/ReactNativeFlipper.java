@@ -34,6 +34,7 @@ public class ReactNativeFlipper {
       client.addPlugin(new ReactFlipperPlugin());
       client.addPlugin(new DatabasesFlipperPlugin(context));
       client.addPlugin(new SharedPreferencesFlipperPlugin(context));
+      client.addPlugin(new RNPerfMonitorPlugin(reactInstanceManager));
       client.addPlugin(CrashReporterPlugin.getInstance());
       client.addPlugin(new RNPerfMonitorPlugin(reactInstanceManager));
 

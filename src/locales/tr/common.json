@@ -238,6 +238,10 @@
       "title": "Cihaz, Kontrol Panelinde değil",
       "description": "Lütfen cihazınızdaki Kontrol Paneline geri dönün."
     },
+    "DeviceNotOnboarded": {
+      "title": "Cihazınız henüz kullanıma hazır değil",
+      "description": "Ledger Live ile kullanmaya başlamadan önce cihazınızı kurun."
+    },
     "DeviceSocketFail": {
       "title": "Üzgünüz, bağlantı başarısız oldu",
       "description": "Lütfen tekrar deneyin."
@@ -519,7 +523,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Lütfen donanım cüzdanınızın, seçilen hesapla ilişkili kurtarma ifadesi veya passphrase ile kurulmuş olduğunu doğrulayın."
+      "description": "Lütfen cüzdanınızın seçilen hesapla bağlantılı kurtarma ifadesi veya passphrase ile kurulmuş olduğundan emin olun."
     },
     "UnexpectedBootloader": {
       "title": "Üzgünüz, cihazınız Bootloader modunda olmamalıdır",
@@ -816,7 +820,7 @@
       "2": {
         "label": "Temel Bilgiler",
         "title": "Çevrim dışı kalın",
-        "desc": "Nano'nuz \"soğuk saklama\" cüzdanı olarak çalışır. Bu, uygulamayı kullanırken bile özel anahtarınızı asla çevrim içi olarak açığa çıkarmayacağı anlamına gelir."
+        "desc": "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak açığa çıkmaz."
       },
       "3": {
         "label": "Temel Bilgiler",
@@ -826,7 +830,7 @@
       "4": {
         "label": "Temel Bilgiler",
         "title": "Nano'nuzu kuralım!",
-        "desc": "Nano güvenliğinizi kurarak başlayacağız."
+        "desc": "Nano cihazınızın güvenliğini sağlayarak başlayacağız."
       },
       "cta": "Haydi başlayalım!"
     },
@@ -878,7 +882,7 @@
           },
           "3": {
             "title": "Yönergeleri uygulayın",
-            "label": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+            "label": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
           }
         },
         "cta": "Sonraki adım"
@@ -1056,7 +1060,7 @@
           },
           "3": {
             "title": "Yönergeleri uygulayın",
-            "label": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+            "label": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
           }
         }
       },
@@ -1259,9 +1263,9 @@
         }
       },
       "final": {
-        "successTitle": "İşin uzmanı oldunuz bile!",
+        "successTitle": "İşin ustası oldunuz bile!",
         "successText": "Kriptolarınızı güvenli bir şekilde yönetmeye hazırsınız. Sadece küçük bir adım kaldı!",
-        "failTitle": "İşin uzmanı olmanıza az kaldı...",
+        "failTitle": "İşin ustası olmanıza az kaldı...",
         "failText": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz. Sadece küçük bir adım kaldı!",
         "cta": "Sonraki adım"
       }
@@ -1289,7 +1293,17 @@
     "settings": "Ayarlar",
     "platform": "Keşfet",
     "nanoX": "Nano X",
-    "market": "Piyasa"
+    "market": "Piyasa",
+    "learn": "Öğren"
+  },
+  "learn": {
+    "pageTitle": "öğren",
+    "noConnection": "Bağlantı yok",
+    "noConnectionDesc": "İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
+    "sectionShows": "Seriler",
+    "sectionVideo": "Videolar",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Makaleler"
   },
   "portfolio": {
     "totalBalance": "Toplam bakiye",
@@ -1442,9 +1456,9 @@
       "palletMethod": "Yöntem",
       "transferAmount": "Transfer Tutarı",
       "validatorsCount": "Doğrulayıcılar ({{number}})",
-      "storageLimit": "Storage Limit",
-      "gasLimit": "Gas Limit",
-      "id": "Id"
+      "storageLimit": "Depolama Sınırı",
+      "gasLimit": "Gas Limiti",
+      "id": "Kimlik"
     },
     "multipleAddresses": "Neden birden fazla adres var?",
     "tokenName": "Token Adı",
@@ -1680,6 +1694,7 @@
       "theme": "Tema",
       "themeDesc": "Uygulama arayüz temasını ayarla",
       "themes": {
+        "system": "Sistem",
         "dark": "Koyu",
         "light": "Açık"
       },
@@ -2607,7 +2622,8 @@
       "alert": "Göndermeden önce cihazınızdaki Satış bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız."
     },
     "button": {
-      "openManager": "Yöneticiyi Aç"
+      "openManager": "Yöneticiyi Aç",
+      "openOnboarding": "Cihazı kurun"
     },
     "installApp": "{{appName}} Uygulama kurulumu {{percentage}}",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
@@ -2788,6 +2804,7 @@
         "title": "{{appName}} Yükleniyor",
         "desc": "Lütfen {{appName}} uygulamasının yüklenmesini bekleyin",
         "button": "Yükleniyor...",
+        "queued": "Sıraya alındı",
         "button_plural": "Yükleniyor... %{{progressPercentage}}"
       },
       "done": {
