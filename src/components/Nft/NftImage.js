@@ -85,13 +85,7 @@ class NftImage extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const {
-      style,
-      status,
-      src,
-      colors,
-      resizeMode = "cover",
-    } = this.props;
+    const { style, status, src, colors, resizeMode = "cover" } = this.props;
     const { loadError } = this.state;
 
     return (
