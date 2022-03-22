@@ -13,7 +13,7 @@ import DAppDisclaimer from "../Platform/DAppDisclaimer";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
-export default function DiscoverSection() {
+export function DiscoverSection() {
   const navigation = useNavigation();
   const { manifests } = usePlatformApp();
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
@@ -91,3 +91,5 @@ export default function DiscoverSection() {
     </>
   );
 }
+
+export default React.memo(DiscoverSection)
