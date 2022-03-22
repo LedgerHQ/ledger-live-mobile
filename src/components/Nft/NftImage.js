@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import FastImage from "react-native-fast-image";
-import { Image, View, StyleSheet, Animated, Platform } from "react-native";
+import { Image, View, StyleSheet, Animated } from "react-native";
 import ImageNotFoundIcon from "../../icons/ImageNotFound";
 import { withTheme } from "../../colors";
 import Skeleton from "../Skeleton";
@@ -20,24 +20,15 @@ const ImageComponent = ({
   resizeMode: string,
   onLoadEnd: () => *,
   onLoad: () => *,
-}) =>
-  Platform.OS === "android" ? (
-    <Image
-      style={style}
-      resizeMode={resizeMode}
-      source={source}
-      onLoad={onLoad}
-      onLoadEnd={onLoadEnd}
-    />
-  ) : (
-    <FastImage
-      style={style}
-      resizeMode={FastImage.resizeMode[resizeMode]}
-      source={source}
-      onLoad={onLoad}
-      onLoadEnd={onLoadEnd}
-    />
-  );
+}) => (
+  <FastImage
+    style={style}
+    resizeMode={FastImage.resizeMode[resizeMode]}
+    source={source}
+    onLoad={onLoad}
+    onLoadEnd={onLoadEnd}
+  />
+);
 
 const NotFound = ({
   colors,
@@ -71,7 +62,6 @@ type Props = {
   status: string,
   src: string,
   resizeMode?: string,
-  hackWidth?: number,
   colors: any,
 };
 
@@ -80,10 +70,6 @@ type State = {
 };
 
 class NftImage extends React.PureComponent<Props, State> {
-  static defaultProps = {
-    hackWidth: 90,
-  };
-
   state = {
     loadError: false,
   };
@@ -103,18 +89,10 @@ class NftImage extends React.PureComponent<Props, State> {
       style,
       status,
       src,
-      hackWidth,
       colors,
       resizeMode = "cover",
     } = this.props;
     const { loadError } = this.state;
-
-    const hackSrc = (() => {
-      const isPreProcessedSrc = /^https:\/\/lh3.googleusercontent.com\/.*/g;
-      return isPreProcessedSrc.test(src) && hackWidth
-        ? `${src}=s${hackWidth}`
-        : src;
-    })();
 
     return (
       <View style={[style, styles.root]}>
@@ -142,7 +120,7 @@ class NftImage extends React.PureComponent<Props, State> {
               ]}
               resizeMode={resizeMode}
               source={{
-                uri: hackSrc,
+                uri: src,
               }}
               onLoad={({ nativeEvent }: Image.ImageLoadEvent) => {
                 if (!nativeEvent) {

@@ -238,6 +238,10 @@
       "title": "Gerät nicht auf dem Dashboard",
       "description": "Bitte kehren Sie zum Dashboard auf Ihrem Gerät zurück."
     },
+    "DeviceNotOnboarded": {
+      "title": "Ihr Gerät kann noch nicht verwendet werden",
+      "description": "Richten Sie Ihr Gerät ein, bevor Sie es mit Ledger Live verwenden."
+    },
     "DeviceSocketFail": {
       "title": "Entschuldigung, Verbindung fehlgeschlagen",
       "description": "Bitte versuchen Sie es erneut."
@@ -771,6 +775,7 @@
     "stepSelectDevice": {
       "title": "Was für ein Gerät haben Sie?",
       "nanoS": "Nano S",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "Blau"
     },
@@ -859,6 +864,9 @@
             },
             "nanoS": {
               "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen."
+            },
+            "nanoSP": {
+              "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Smartphones anschließen."
             },
             "blue": {
               "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen und die Einschalttaste drücken."
@@ -1035,6 +1043,9 @@
             "nanoS": {
               "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen."
             },
+            "nanoSP": {
+              "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Smartphones anschließen."
+            },
             "blue": {
               "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen und die Einschalttaste drücken."
             }
@@ -1090,6 +1101,11 @@
       "nanoS": {
         "title": "Verbinden Sie Ihren Nano",
         "desc": "Dies ist das erste Mal, dass Sie Ihren Nano mit diesem Telefon einrichten. Lassen Sie uns Ihr Gerät schnell anschließen.",
+        "cta": "Schließen wir meinen Nano an"
+      },
+      "nanoSP": {
+        "title": "Verbinden Sie Ihren Nano",
+        "desc": "Dies ist das erste Mal, dass Sie Ihren Nano mit diesem Smartphone einrichten. Lassen Sie uns Ihr Gerät schnell koppeln.",
         "cta": "Schließen wir meinen Nano an"
       },
       "blue": {
@@ -1276,7 +1292,18 @@
     "manager": "Manager",
     "settings": "Einstellungen",
     "platform": "Entdecken",
-    "nanoX": "Nano X"
+    "nanoX": "Nano X",
+    "market": "Markt",
+    "learn": "Lernen"
+  },
+  "learn": {
+    "pageTitle": "Lernen",
+    "noConnection": "Keine Verbindung",
+    "noConnectionDesc": "Es scheint, dass Sie keinen Zugriff auf das Internet haben. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Artikel"
   },
   "portfolio": {
     "totalBalance": "Gesamtguthaben",
@@ -1311,6 +1338,15 @@
     "bytes": "{{size}} Bytes",
     "kbUnit": "{{size}} KB",
     "mbUnit": "{{size}} MB"
+  },
+  "numberCompactNotation": {
+    "d": "",
+    "K": "Tsd.",
+    "M": "Mio.",
+    "B": "Mrd.",
+    "T": "Bio.",
+    "Q": "Brd.",
+    "Qn": "Trill."
   },
   "time": {
     "day": "1 T",
@@ -1419,7 +1455,10 @@
       "withdrawUnbondedAmount": "Ungebundenen Betrag abheben",
       "palletMethod": "Methode",
       "transferAmount": "Betrag übertragen",
-      "validatorsCount": "Validatoren ({{number}})"
+      "validatorsCount": "Validatoren ({{number}})",
+      "storageLimit": "Speicherlimit",
+      "gasLimit": "Gas Limit",
+      "id": "ID"
     },
     "multipleAddresses": "Warum mehrere Adressen?",
     "tokenName": "Token-Name",
@@ -1655,8 +1694,8 @@
       "theme": "Thema",
       "themeDesc": "App-UI-Thema festlegen",
       "themes": {
+        "system": "System",
         "dark": "Dunkel",
-        "dusk": "Mittel",
         "light": "Hell"
       },
       "counterValueDesc": "Wählen Sie die Währung für Salden und Aktionen.",
@@ -2569,6 +2608,7 @@
     "quitApp": "Beenden Sie die Anwendung auf Ihrem Gerät",
     "appNotInstalled": "Bitte installieren Sie die {{appName}} App",
     "appNotInstalled_plural": "Bitte installieren Sie die {{appName}} Apps",
+    "useAnotherDevice": "Anderes Gerät verwenden",
     "verifyAddress": {
       "title": "Adresse auf dem Gerät verifizieren",
       "description": "Bitte stellen Sie sicher, dass die {{currencyName}} Adresse, die in Ledger Live angezeigt wird, mit der auf Ihrem Ledger Gerät übereinstimmt."
@@ -2582,7 +2622,8 @@
       "alert": "Überprüfen Sie die Verkaufsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen."
     },
     "button": {
-      "openManager": "Manager öffnen"
+      "openManager": "Manager öffnen",
+      "openOnboarding": "Gerät einrichten"
     },
     "installApp": "{{appName}} App-Installation {{percentage}}",
     "installAppDescription": "Bitte warten Sie, bis die Installation beendet ist",
@@ -2763,6 +2804,7 @@
         "title": "Installieren {{App-Bezeichnung}}",
         "desc": "Bitte warten Sie, bis die {{appName}} App installiert ist",
         "button": "Installieren ...",
+        "queued": "In der Warteschlange",
         "button_plural": "Installiere... {{progressPercentage}}%"
       },
       "done": {
@@ -2976,8 +3018,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "CELO verfügbar",
+        "description": "Dieser Betrag ist verfügbar."
       }
     }
   },
@@ -3856,6 +3898,75 @@
       "infoPanel": {
         "website": "Webseite"
       }
+    }
+  },
+  "market": {
+    "title": "Markt",
+    "filters": {
+      "sort": "Sortieren",
+      "filter": "Filtern",
+      "view": {
+        "label": "Ansicht",
+        "all": "Alle Coins",
+        "liveCompatible": "Live kompatibel",
+        "all_label": "Alle Kryptowährungen",
+        "liveCompatible_label": "Nur Live unterstützt"
+      },
+      "order": {
+        "market_cap": "Rang",
+        "market_cap_asc": "Rang (Marktkap.) aufst.",
+        "market_cap_desc": "Rang (Marktkap.) abst."
+      },
+      "currency": "Währung",
+      "time": "Zeit",
+      "apply": "Anwenden"
+    },
+    "marketList": {
+      "crypto": "Krypto",
+      "price": "Preis",
+      "change": "Ändern",
+      "marketCap": "Marktkapitalisierung",
+      "last7d": "Letzte 7 Tage"
+    },
+    "detailsPage": {
+      "holding": "Ihre Bestände",
+      "priceStatistics": "Preisstatistik",
+      "price": "Preis",
+      "tradingVolume": "Handelsvolumen",
+      "24hLowHight": "24h Tief / 24h Hoch",
+      "7dLowHigh": "7T Tief / 7T Hoch",
+      "allTimeHigh": "Allzeithoch",
+      "allTimeLow": "Allzeittief",
+      "marketCapRank": "Rang Marktkapitalisierung",
+      "marketCapDominance": "Dominanz Marktkapitalisierung",
+      "supply": "Angebot",
+      "circulatingSupply": "Angebot im Umlauf",
+      "totalSupply": "Angebot gesamt",
+      "maxSupply": "Max. Angebot",
+      "assetNotSupportedOnLedgerLive": "Dieser Vermögenswert wird auf Ledger Live nicht unterstützt."
+    },
+    "range": {
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7T",
+      "30d": "30T",
+      "1y": "1J"
+    },
+    "warnings": {
+      "connectionError": "Verbindungsfehler",
+      "ledgerUnableToRetrieveData": "Ledger Live kann keine Daten abrufen.",
+      "checkInternetAndReload": "Bitte überprüfen Sie Ihre Internetverbindung und laden Sie diese Seite neu.",
+      "reload": "Aktualisieren",
+      "noCryptosFound": "Keine Coins gefunden",
+      "noCurrencyFound": "Keine Währung gefunden",
+      "noSearchResultsFor": "Leider haben wir keine Coins für <0>{{search}}</0> gefunden. Bitte versuchen Sie es erneut mit einem anderen Stichwort.",
+      "noCurrencySearchResultsFor": "Leider haben wir keine Währungen für <0>{{search}}</0> gefunden. Bitte versuchen Sie es erneut mit einem anderen Stichwort.",
+      "noSearchResults": "Sorry, wir haben wir keine Suchergebnisse gefunden.",
+      "retrySearchKeyword": "Bitte wiederholen Sie die Suche mit einem anderen Stichwort.",
+      "retrySearchParams": "Bitte versuchen Sie die Suche mit anderen Parametern erneut.",
+      "trackFavAssets": "Verfolgen Sie Ihre Favoriten",
+      "clickOnStarIcon": "Klicken Sie auf das Sternsymbol neben einem Wert, um ihn zu Ihren Favoriten hinzuzufügen.",
+      "browseAssets": "Werte durchsuchen"
     }
   },
   "nft": {

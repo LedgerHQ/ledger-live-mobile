@@ -392,4 +392,6 @@ export const NavigatorName = {
 
   // Root
   RootNavigator: "RootNavigator",
+
+  Learn: "Learn",
 };

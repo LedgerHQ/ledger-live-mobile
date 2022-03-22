@@ -238,6 +238,10 @@
       "title": "Cihaz, Kontrol Panelinde değil",
       "description": "Lütfen cihazınızdaki Kontrol Paneline geri dönün."
     },
+    "DeviceNotOnboarded": {
+      "title": "Cihazınız henüz kullanıma hazır değil",
+      "description": "Ledger Live ile kullanmaya başlamadan önce cihazınızı kurun."
+    },
     "DeviceSocketFail": {
       "title": "Üzgünüz, bağlantı başarısız oldu",
       "description": "Lütfen tekrar deneyin."
@@ -519,7 +523,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Lütfen donanım cüzdanınızın, seçilen hesapla ilişkili kurtarma ifadesi veya passphrase ile kurulmuş olduğunu doğrulayın."
+      "description": "Lütfen cüzdanınızın seçilen hesapla bağlantılı kurtarma ifadesi veya passphrase ile kurulmuş olduğundan emin olun."
     },
     "UnexpectedBootloader": {
       "title": "Üzgünüz, cihazınız Bootloader modunda olmamalıdır",
@@ -771,6 +775,7 @@
     "stepSelectDevice": {
       "title": "Hangi cihazı kullanıyorsunuz?",
       "nanoS": "Nano S",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
@@ -815,7 +820,7 @@
       "2": {
         "label": "Temel Bilgiler",
         "title": "Çevrim dışı kalın",
-        "desc": "Nano'nuz \"soğuk saklama\" cüzdanı olarak çalışır. Bu, uygulamayı kullanırken bile özel anahtarınızı asla çevrim içi olarak açığa çıkarmayacağı anlamına gelir."
+        "desc": "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak açığa çıkmaz."
       },
       "3": {
         "label": "Temel Bilgiler",
@@ -825,7 +830,7 @@
       "4": {
         "label": "Temel Bilgiler",
         "title": "Nano'nuzu kuralım!",
-        "desc": "Nano güvenliğinizi kurarak başlayacağız."
+        "desc": "Nano cihazınızın güvenliğini sağlayarak başlayacağız."
       },
       "cta": "Haydi başlayalım!"
     },
@@ -860,6 +865,9 @@
             "nanoS": {
               "label": "Cihazınızı açmak için onu telefonunuzun USB bağlantı noktasına bağlayın."
             },
+            "nanoSP": {
+              "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
+            },
             "blue": {
               "label": "Cihazınızı açmak için onu telefonunuzun USB bağlantı noktasına bağlayın ve çalıştırma tuşuna basın."
             }
@@ -874,7 +882,7 @@
           },
           "3": {
             "title": "Yönergeleri uygulayın",
-            "label": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+            "label": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
           }
         },
         "cta": "Sonraki adım"
@@ -1035,6 +1043,9 @@
             "nanoS": {
               "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
             },
+            "nanoSP": {
+              "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
+            },
             "blue": {
               "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın ve çalıştırma tuşuna basın."
             }
@@ -1049,7 +1060,7 @@
           },
           "3": {
             "title": "Yönergeleri uygulayın",
-            "label": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+            "label": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
           }
         }
       },
@@ -1088,6 +1099,11 @@
         "cta": "Nano'mu eşle"
       },
       "nanoS": {
+        "title": "Nano'nuzu bağlayın",
+        "desc": "Nano cihazınızı bu telefonla ilk kez kuruyorsunuz. Cihazınızı hızlı bir şekilde bağlayalım.",
+        "cta": "Nano'mu bağla"
+      },
+      "nanoSP": {
         "title": "Nano'nuzu bağlayın",
         "desc": "Nano cihazınızı bu telefonla ilk kez kuruyorsunuz. Cihazınızı hızlı bir şekilde bağlayalım.",
         "cta": "Nano'mu bağla"
@@ -1247,9 +1263,9 @@
         }
       },
       "final": {
-        "successTitle": "İşin uzmanı oldunuz bile!",
+        "successTitle": "İşin ustası oldunuz bile!",
         "successText": "Kriptolarınızı güvenli bir şekilde yönetmeye hazırsınız. Sadece küçük bir adım kaldı!",
-        "failTitle": "İşin uzmanı olmanıza az kaldı...",
+        "failTitle": "İşin ustası olmanıza az kaldı...",
         "failText": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz. Sadece küçük bir adım kaldı!",
         "cta": "Sonraki adım"
       }
@@ -1276,7 +1292,18 @@
     "manager": "Yönetici",
     "settings": "Ayarlar",
     "platform": "Keşfet",
-    "nanoX": "Nano X"
+    "nanoX": "Nano X",
+    "market": "Piyasa",
+    "learn": "Öğren"
+  },
+  "learn": {
+    "pageTitle": "öğren",
+    "noConnection": "Bağlantı yok",
+    "noConnectionDesc": "İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
+    "sectionShows": "Seriler",
+    "sectionVideo": "Videolar",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Makaleler"
   },
   "portfolio": {
     "totalBalance": "Toplam bakiye",
@@ -1309,8 +1336,17 @@
   },
   "byteSize": {
     "bytes": "{{size}} bayt",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
+  },
+  "numberCompactNotation": {
+    "d": "",
+    "K": "b",
+    "M": "mn",
+    "B": "mr",
+    "T": "tn",
+    "Q": "ka",
+    "Qn": "ke"
   },
   "time": {
     "day": "1G",
@@ -1419,7 +1455,10 @@
       "withdrawUnbondedAmount": "Çözülmüş Tutarı Çek",
       "palletMethod": "Yöntem",
       "transferAmount": "Transfer Tutarı",
-      "validatorsCount": "Doğrulayıcılar ({{number}})"
+      "validatorsCount": "Doğrulayıcılar ({{number}})",
+      "storageLimit": "Depolama Sınırı",
+      "gasLimit": "Gas Limiti",
+      "id": "Kimlik"
     },
     "multipleAddresses": "Neden birden fazla adres var?",
     "tokenName": "Token Adı",
@@ -1655,8 +1694,8 @@
       "theme": "Tema",
       "themeDesc": "Uygulama arayüz temasını ayarla",
       "themes": {
+        "system": "Sistem",
         "dark": "Koyu",
-        "dusk": "Loş",
         "light": "Açık"
       },
       "counterValueDesc": "Bakiyeler ve işlemler için para birimini seçin.",
@@ -2569,6 +2608,7 @@
     "quitApp": "Cihazınızdaki uygulamadan çıkın",
     "appNotInstalled": "Lütfen {{appName}} uygulamasını yükleyin",
     "appNotInstalled_plural": "Lütfen {{appName}} uygulamalarını yükleyin",
+    "useAnotherDevice": "Başka bir cihaz kullan",
     "verifyAddress": {
       "title": "Cihazda adresi doğrulayın",
       "description": "Ledger Live'da gösterilecek {{currencyName}} adresinin Ledger cihazınızdaki adresle eşleştiğini lütfen doğrulayın."
@@ -2582,7 +2622,8 @@
       "alert": "Göndermeden önce cihazınızdaki Satış bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız."
     },
     "button": {
-      "openManager": "Yöneticiyi Aç"
+      "openManager": "Yöneticiyi Aç",
+      "openOnboarding": "Cihazı kurun"
     },
     "installApp": "{{appName}} Uygulama kurulumu {{percentage}}",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
@@ -2647,7 +2688,7 @@
     }
   },
   "EditDeviceName": {
-    "title": "Cihazı yeniden adlandırın",
+    "title": "Cihazın adını değiştirin",
     "charactersRemaining": "{{remainingCount}} karakter kaldı",
     "action": "Onayla"
   },
@@ -2763,6 +2804,7 @@
         "title": "{{appName}} Yükleniyor",
         "desc": "Lütfen {{appName}} uygulamasının yüklenmesini bekleyin",
         "button": "Yükleniyor...",
+        "queued": "Sıraya alındı",
         "button_plural": "Yükleniyor... %{{progressPercentage}}"
       },
       "done": {
@@ -2976,8 +3018,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "CELO mevcut",
+        "description": "Bu tutarı işlemlerinizde kullanabilirsiniz."
       }
     }
   },
@@ -3711,8 +3753,8 @@
       "selectCurrency": "Bir para birimi seçin",
       "selectAccount": "Bir hesap seçin",
       "connectDevice": "Cihazınızı bağlayın",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "Kripto satın almak için bir sağlayıcı seçin",
+      "coinifyTitle": "Ortağımız üzerinden kripto satın alın",
       "description": "Kripto varlıklarını Coinify üzerinden satın alın ve doğrudan Ledger hesabınıza aktarın.",
       "CTAButton": "Şimdi satın al",
       "emptyState": {
@@ -3727,9 +3769,9 @@
         "warning": "Adresiniz Ledger cihazınızda doğrulanmadı. Güvenlik için lütfen doğrulayın."
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "İstediğiniz yerden satın alın",
+        "cryptoSupported": "kripto destekleniyor",
+        "payWith": "Kart veya SEPA ile ödeme yapın"
       }
     },
     "sell": {
@@ -3856,6 +3898,75 @@
       "infoPanel": {
         "website": "Web sitesi"
       }
+    }
+  },
+  "market": {
+    "title": "Piyasa",
+    "filters": {
+      "sort": "Sırala",
+      "filter": "Filtrele",
+      "view": {
+        "label": "Görüntüle",
+        "all": "Tüm paralar",
+        "liveCompatible": "Live ile Uyumlu",
+        "all_label": "Tüm kripto paralar",
+        "liveCompatible_label": "Yalnızca Live Destekli"
+      },
+      "order": {
+        "market_cap": "Sıralama",
+        "market_cap_asc": "Sıralama (Piyasa değ.) en yüks.",
+        "market_cap_desc": "Sıralama (Piyasa değ.) en düş."
+      },
+      "currency": "Para birimi",
+      "time": "Dönem",
+      "apply": "Uygula"
+    },
+    "marketList": {
+      "crypto": "Kripto",
+      "price": "Fiyat",
+      "change": "Değişim",
+      "marketCap": "Piyasa değeri",
+      "last7d": "Son 7 gün"
+    },
+    "detailsPage": {
+      "holding": "Varlıklarınız",
+      "priceStatistics": "Fiyat İstatistikleri",
+      "price": "Fiyat",
+      "tradingVolume": "İşlem hacmi",
+      "24hLowHight": "24sa Min. / 24sa Maks.",
+      "7dLowHigh": "7g Min. / 7g Maks.",
+      "allTimeHigh": "Tüm zamanlar maks.",
+      "allTimeLow": "Tüm zamanlar min.",
+      "marketCapRank": "Piyasa değeri sıralaması",
+      "marketCapDominance": "Piyasa değeri hakimiyeti",
+      "supply": "Arz",
+      "circulatingSupply": "Dolaşımdaki arz",
+      "totalSupply": "Toplam arz",
+      "maxSupply": "Maksimum arz",
+      "assetNotSupportedOnLedgerLive": "Bu varlık Ledger Live'da desteklenmiyor."
+    },
+    "range": {
+      "1h": "1S",
+      "24h": "24S",
+      "7d": "7G",
+      "30d": "30G",
+      "1y": "1Y"
+    },
+    "warnings": {
+      "connectionError": "Bağlantı Hatası",
+      "ledgerUnableToRetrieveData": "Ledger Live verilere ulaşamadı.",
+      "checkInternetAndReload": "Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.",
+      "reload": "Yenile",
+      "noCryptosFound": "Coin bulunamadı",
+      "noCurrencyFound": "Para birimi bulunamadı",
+      "noSearchResultsFor": "Üzgünüz, <0>{{search}}</0> için bir coin bulamadık. Lütfen başka bir anahtar kelimeyle yeniden aramayı deneyin.",
+      "noCurrencySearchResultsFor": "Üzgünüz, <0>{{search}}</0> için bir para birimi bulamadık. Lütfen başka bir anahtar kelimeyle yeniden aramayı deneyin.",
+      "noSearchResults": "Üzgünüz, herhangi bir arama sonucu bulamadık.",
+      "retrySearchKeyword": "Lütfen başka bir anahtar kelimeyle yeniden aramayı deneyin.",
+      "retrySearchParams": "Lütfen başka parametrelerle yeniden aramayı deneyin.",
+      "trackFavAssets": "Favorilerinizi takip edin",
+      "clickOnStarIcon": "Bir varlığın yanında bulunan yıldız sembolüne tıklayarak onu otomatik olarak favorilerinize ekleyebilirsiniz.",
+      "browseAssets": "Varlıklara göz atın"
     }
   },
   "nft": {
