@@ -22,7 +22,13 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
       ]}
     >
       <Flex flex={1} alignItems="center" py={8} px={6}>
-        <Text fontWeight="semiBold" variant="h3" color="constant.white" mb={2}>
+        <Text
+          fontWeight="semiBold"
+          variant="h3"
+          textAlign="center"
+          color="constant.white"
+          mb={2}
+        >
           <Trans
             i18nKey={
               liveQrCode
@@ -43,16 +49,18 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
           </Flex>
         )}
         <Flex flex={1} />
-        <Alert type="info">
-          <Flex>
-            <Text fontWeight="semiBold" variant="body">
-              <Trans i18nKey="account.import.scan.descTop.line1" />
-            </Text>
-            <Text fontWeight="bold" variant="body">
-              <Trans i18nKey="account.import.scan.descTop.line2" />
-            </Text>
-          </Flex>
-        </Alert>
+        {liveQrCode ? (
+          <Alert type="info">
+            <Flex>
+              <Text fontWeight="semiBold" variant="body">
+                <Trans i18nKey="account.import.scan.descTop.line1" />
+              </Text>
+              <Text fontWeight="bold" variant="body">
+                <Trans i18nKey="account.import.scan.descTop.line2" />
+              </Text>
+            </Flex>
+          </Alert>
+        ) : null}
       </Flex>
     </Flex>
   );

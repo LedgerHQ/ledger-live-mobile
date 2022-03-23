@@ -116,6 +116,7 @@ const Item = ({ cards }: { cards: Array<Card> }) => {
           alignItems: "flex-end",
         },
         pagingEnabled: false,
+        snapToInterval: cardMaxWidth + 16,
       }}
     >
       {cards.map(card => (
