@@ -44,10 +44,14 @@ export default function Buy() {
   }, []);
 
   const onContinue = useCallback(() => {
-    navigation.navigate(NavigatorName.ProviderList, {
-      account,
-      currency,
-    });
+    if (account) {
+      navigation.navigate(NavigatorName.ProviderList, {
+        accountId: account.id,
+        accountAddress: account.freshAddress,
+        currency,
+        type: "onRamp",
+      });
+    }
   }, [account, currency, navigation]);
 
   const onCurrencyChange = useCallback(

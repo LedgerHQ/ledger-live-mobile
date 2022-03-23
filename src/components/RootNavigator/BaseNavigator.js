@@ -69,6 +69,8 @@ import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurre
 import SwapFormSelectFees from "../../screens/Swap/FormSelection/SelectFeesScreen";
 import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectProviderRateScreen";
 import ProviderList from "../../screens/Exchange/ProviderList";
+import ProviderView from "../../screens/Exchange/ProviderView";
+import ScreenHeader from "../../screens/Exchange/ScreenHeader";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -280,10 +282,25 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.ProviderList}
         component={ProviderList}
-        options={({ navigation }) => ({
+        options={({ navigation, route }) => ({
           headerLeft: () => <BackButton navigation={navigation} />,
           headerRight: null,
-          headerTitle: t("exchange.buy.screenTitle"),
+          headerTitle:
+            route.params.type === "onRamp"
+              ? t("exchange.buy.screenTitle")
+              : t("exchange.sell.screenTitle"),
+          headerStyle: styles.headerNoShadow,
+        })}
+      />
+      <Stack.Screen
+        name={NavigatorName.ProviderView}
+        component={ProviderView}
+        options={({ navigation, route }) => ({
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+          headerTitle: () => (
+            <ScreenHeader icon={route.params.icon} name={route.params.name} />
+          ),
           headerStyle: styles.headerNoShadow,
         })}
       />

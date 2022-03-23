@@ -3779,6 +3779,7 @@
       }
     },
     "sell": {
+      "screenTitle": "SELL CRYPTO",
       "tabTitle": "Sell",
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",

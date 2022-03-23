@@ -1,26 +1,28 @@
 // @flow
 
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useCallback } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
+
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
-import {
-  filterRampCatalogEntries,
-  mapQueryParamsForProvider,
-} from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { useSelector } from "react-redux";
-import { RampLiveAppCatalogEntry } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
+import {
+  RampLiveAppCatalogEntry,
+  RampCatalogEntry,
+} from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
 import type {
-  Account,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import AppIcon from "../Platform/AppIcon";
 import LText from "../../components/LText";
+import { counterValueCurrencySelector } from "../../reducers/settings";
+import { NavigatorName } from "../../const";
 
 import ApplePay from "../../icons/ApplePay";
 import GooglePay from "../../icons/GooglePay";
@@ -29,11 +31,7 @@ import MasterCard from "../../icons/MasterCard";
 import PayPal from "../../icons/PayPal";
 import Sepa from "../../icons/Sepa";
 import Visa from "../../icons/Visa";
-import {
-  counterValueCurrencySelector,
-  languageSelector,
-} from "../../reducers/settings";
-import WebPlatformPlayer from "../../components/WebPlatformPlayer";
+import ArrowRight from "../../icons/ArrowRight";
 
 const forceInset = { bottom: "always" };
 
@@ -49,7 +47,11 @@ const assetMap = {
 
 type ProviderItemProps = {
   provider: RampLiveAppCatalogEntry,
-  onClick: () => void,
+  onClick: (
+    provider: RampLiveAppCatalogEntry,
+    icon: string,
+    name: string,
+  ) => void,
 };
 
 const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
@@ -59,78 +61,33 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
     return null;
   }
 
+  const onItemClick = useCallback(() => {
+    onClick(provider, manifest.icon, manifest.name);
+  }, [provider, manifest, onClick]);
+
   return (
-    <TouchableOpacity onPress={onClick}>
+    <TouchableOpacity onPress={onItemClick} style={styles.itemRoot}>
       <View>
-        <AppIcon icon={manifest.icon} name={manifest.name} size={48} />
-        <LText>{manifest.name}</LText>
+        <View style={styles.itemHeader}>
+          <AppIcon icon={manifest.icon} name={manifest.name} size={32} />
+          <LText style={styles.headerLabel}>{manifest.name}</LText>
+        </View>
+        <View style={styles.pmsRow}>
+          {provider.paymentProviders.map(paymentProvider => (
+            <View key={paymentProvider} style={styles.pm}>
+              {assetMap[paymentProvider] ? (
+                assetMap[paymentProvider]({})
+              ) : (
+                <LText>{paymentProvider}</LText>
+              )}
+            </View>
+          ))}
+        </View>
       </View>
-      <View>
-        {provider.paymentProviders.map(paymentProvider => (
-          <View key={paymentProvider}>
-            {assetMap[paymentProvider] ? (
-              <Image source={assetMap[paymentProvider]} />
-            ) : (
-              <LText>{paymentProvider}</LText>
-            )}
-          </View>
-        ))}
-      </View>
+      <ArrowRight size={16} color={"white"} />
     </TouchableOpacity>
   );
 };
-
-type TradeParams = {
-  type: "onRamp" | "offRamp",
-  cryptoCurrencyId: string,
-  fiatCurrencyId: string,
-  fiatAmount?: number,
-  cryptoAmount?: number,
-};
-
-type ProviderViewProps = {
-  provider: RampLiveAppCatalogEntry,
-  onClose: () => void,
-  account: AccountLike,
-  trade: TradeParams,
-};
-
-function ProviderView({
-  provider,
-  onClose,
-  trade,
-  account,
-}: ProviderViewProps) {
-  const manifest = useRemoteLiveAppManifest(provider.appId);
-  const { colors } = useTheme();
-  const language = useSelector(languageSelector);
-  const cryptoCurrency = provider.cryptoCurrencies.find(
-    crypto => crypto.id === trade.cryptoCurrencyId,
-  );
-  const inputs = mapQueryParamsForProvider(provider, {
-    accountId: account.id,
-    accountAddress: account.freshAddress,
-    cryptoCurrencyId: cryptoCurrency ? cryptoCurrency.providerId : undefined,
-    fiatCurrencyId: trade.fiatCurrencyId.toLocaleLowerCase(),
-    primaryColor: colors.grey,
-    mode: trade.type,
-    theme: colors.grey,
-    language,
-    fiatAmount: trade.fiatAmount,
-    cryptoAmount: trade.cryptoAmount,
-  });
-
-  return (
-    <>
-      <WebPlatformPlayer
-        onClose={onClose}
-        manifest={manifest}
-        inputs={inputs}
-      />
-      ;
-    </>
-  );
-}
 
 type Props = {
   navigation: any,
@@ -138,40 +95,48 @@ type Props = {
 };
 
 type RouteParams = {
-  account: Account | AccountLike,
+  accountId: string,
+  accountAddress: string,
   currency: CryptoCurrency | TokenCurrency,
+  type: "onRamp" | "offRamp",
 };
 
 export default function ProviderList({ route }: Props) {
-  const [selectedProvider, setSelectedProvider] = useState(null);
+  const navigation = useNavigation();
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
 
   const fiatCurrency = useSelector(counterValueCurrencySelector);
   const cryptoCurrencyId = route.params.currency.id;
 
-  const filteredProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
-    cryptoCurrencies: cryptoCurrencyId ? [cryptoCurrencyId] : undefined,
-    fiatCurrencies: fiatCurrency.ticker
-      ? [fiatCurrency.ticker.toLowerCase()]
-      : undefined,
-  });
+  const filteredProviders = filterRampCatalogEntries(
+    rampCatalog.value[route.params.type],
+    {
+      cryptoCurrencies: cryptoCurrencyId ? [cryptoCurrencyId] : undefined,
+      fiatCurrencies: fiatCurrency.ticker
+        ? [fiatCurrency.ticker.toLowerCase()]
+        : undefined,
+    },
+  );
 
-  if (selectedProvider) {
-    return (
-      <ProviderView
-        provider={selectedProvider}
-        onClose={() => setSelectedProvider(null)}
-        account={route.params.account}
-        trade={{
-          type: "onRamp",
+  const onProviderClick = useCallback(
+    (provider: RampCatalogEntry, icon: string, name: string) => {
+      navigation.navigate(NavigatorName.ProviderView, {
+        provider,
+        accountId: route.params.accountId,
+        accountAddress: route.params.accountAddress,
+        trade: {
+          type: route.params.type,
           cryptoCurrencyId,
           fiatCurrencyId: fiatCurrency.ticker,
           fiatAmount: 400,
-        }}
-      />
-    );
-  }
+        },
+        icon,
+        name,
+      });
+    },
+  );
 
   return (
     <SafeAreaView
@@ -184,12 +149,13 @@ export default function ProviderList({ route }: Props) {
       ]}
       forceInset={forceInset}
     >
+      <LText style={styles.title}>{t("exchange.providerList.title")}</LText>
       {filteredProviders.map(provider =>
         provider.type === "LIVE_APP" ? (
           <ProviderItem
             provider={provider}
             key={provider.name}
-            onClick={() => setSelectedProvider(provider)}
+            onClick={onProviderClick}
           />
         ) : null,
       )}
@@ -198,17 +164,52 @@ export default function ProviderList({ route }: Props) {
 }
 
 const styles = StyleSheet.create({
-  body: {
+  root: {
     flex: 1,
     minWidth: "100%",
     display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "center",
     flexDirection: "column",
     borderWidth: 1,
     borderRadius: 4,
-    backgroundColor: "transparent",
-    padding: 20,
-    marginTop: 16,
+    paddingHorizontal: 16,
+  },
+  title: {
+    marginTop: 24,
+    marginBottom: 16,
+    fontSize: 14,
+  },
+  itemRoot: {
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: "#272727",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    rowGap: 8,
+  },
+  itemHeader: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  headerLabel: {
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  pmsRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  pm: {
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#3C3C3C",
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    marginRight: 4,
   },
 });
