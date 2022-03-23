@@ -1,49 +1,72 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
+import type {
+  Account,
+  AccountLike,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
-import { ScreenName } from "../../const";
 import LText from "../../components/LText";
-import BuyOption from "./BuyOption";
-import MoonPay from "../../icons/providers/MoonPay";
-import Coinify from "../../icons/providers/Coinify";
+import DropdownArrow from "../../icons/DropdownArrow";
+import { NavigatorName, ScreenName } from "../../const";
+import CurrencyRow from "../../components/CurrencyRow";
+import AccountCard from "../../components/AccountCard";
 
 const forceInset = { bottom: "always" };
 
-type Provider = "moonpay" | "coinify" | null;
-
 export default function Buy() {
   const { t } = useTranslation();
-  const navigation = useNavigation();
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
-  const [provider, setProvider] = useState<Provider>(null);
+  const [currency, setCurrency] = useState<CryptoCurrency | TokenCurrency | null>(null);
+  const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
-  const moonPayManifest = useRemoteLiveAppManifest("moonpay");
-  const navigateToMoonPay = useCallback(() => {
-    navigation.navigate(ScreenName.PlatformApp, {
-      platform: moonPayManifest.id,
-      name: moonPayManifest.name,
+  const onContinue = useCallback(() => {}, []);
+
+  const onCurrencyChange = useCallback(
+    (selectedCurrency: CryptoCurrency | TokenCurrency) => {
+      setCurrency(selectedCurrency);
+    },
+    [],
+  );
+
+  const onAccountChange = useCallback(
+    (selectedAccount: Account | AccountLike) => {
+      setAccount(selectedAccount);
+    },
+    [],
+  );
+
+  const onSelectCurrency = useCallback(() => {
+    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      screen: ScreenName.ExchangeSelectCurrency,
+      params: {
+        // initialCurrencySelected: default currency,
+        mode: "buy",
+        onCurrencyChange,
+      },
     });
-  }, [navigation, moonPayManifest]);
+  }, [navigation, account]);
 
-  const navigateToCoinify = useCallback(() => {
-    navigation.navigate(ScreenName.Coinify);
-  }, [navigation]);
-
-  const onContinue = useCallback(() => {
-    provider === "moonpay" ? navigateToMoonPay() : navigateToCoinify();
-  }, [provider, navigateToMoonPay, navigateToCoinify]);
-
-  const moonPayIcon = <MoonPay size={40} />;
-  const coinifyIcon = <Coinify size={40} />;
+  const onSelectAccount = useCallback(() => {
+    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      screen: ScreenName.ExchangeSelectAccount,
+      params: {
+        currency,
+        mode: "buy",
+        onAccountChange,
+      },
+    });
+  }, [navigation, currency]);
 
   return (
     <SafeAreaView
@@ -58,22 +81,41 @@ export default function Buy() {
     >
       <TrackScreen category="Buy Crypto" />
       <View style={styles.body}>
-        <LText semiBold>{t("exchange.buy.title")}</LText>
-        <View style={styles.providers}>
-          <BuyOption
-            name={"MoonPay"}
-            icon={moonPayIcon}
-            supportedCoinsCount={40}
-            onPress={() => setProvider("moonpay")}
-            isActive={provider === "moonpay"}
-          />
-          <BuyOption
-            name={"Coinify"}
-            icon={coinifyIcon}
-            supportedCoinsCount={10}
-            onPress={() => setProvider("coinify")}
-            isActive={provider === "coinify"}
-          />
+        <View
+          style={[
+            styles.accountAndCurrencySelect,
+            { borderColor: colors.border },
+          ]}
+        >
+          <LText>{t("exchange.buy.wantToBuy")}</LText>
+          <TouchableOpacity onPress={() => onSelectCurrency()}>
+            <View style={[styles.select, { borderColor: colors.border }]}>
+              {currency ? (
+                <CurrencyRow currency={currency} onPress={() => {}} />
+              ) : (
+                <LText>{t("exchange.buy.selectCurrency")}</LText>
+              )}
+              <DropdownArrow size={10} color={colors.grey} />
+            </View>
+          </TouchableOpacity>
+          <LText style={styles.itemMargin}>
+            {t("exchange.buy.selectAccount")}
+          </LText>
+          <TouchableOpacity onPress={() => onSelectAccount()}>
+            <View style={[styles.select, { borderColor: colors.border }]}>
+              {account ? (
+                <AccountCard
+                  disabled={false}
+                  account={account}
+                  style={styles.card}
+                  onPress={() => {}}
+                />
+              ) : (
+                <LText>{t("exchange.buy.selectAccount")}</LText>
+              )}
+              <DropdownArrow size={10} color={colors.grey} />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
       <View
@@ -103,7 +145,7 @@ export default function Buy() {
           type={"primary"}
           title={t("common.continue")}
           onPress={() => onContinue()}
-          disabled={!provider}
+          disabled={true}
         />
       </View>
     </SafeAreaView>
@@ -118,12 +160,30 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    margin: 16,
+    justifyContent: "flex-start",
+    padding: 16,
   },
-  providers: {
-    flex: 1,
+  accountAndCurrencySelect: {
+    width: "100%",
     marginTop: 8,
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
+  },
+  select: {
+    height: 56,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderRadius: 120,
+    padding: 14,
+    marginTop: 12,
+  },
+  itemMargin: {
+    marginTop: 40,
   },
   footer: {
     marginTop: 40,
@@ -132,5 +192,9 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "stretch",
     minWidth: "100%",
+  },
+  card: {
+    paddingHorizontal: 16,
+    backgroundColor: "transparent",
   },
 });

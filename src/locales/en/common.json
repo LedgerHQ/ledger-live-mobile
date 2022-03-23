@@ -3754,6 +3754,7 @@
       "tabTitle": "Buy",
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
+      "wantToBuy": "I want to buy",
       "connectDevice": "Connect your device",
       "title": "Choose a provider to buy crypto",
       "coinifyTitle": "Buy crypto via our partner",
