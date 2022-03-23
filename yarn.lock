@@ -2537,7 +2537,7 @@
 
 "@ledgerhq/live-common@git+https://github.com/LedgerHQ/ledger-live-common.git#feat/LL-7742-marketprovider-updated":
   version "21.35.0"
-  resolved "git+https://github.com/LedgerHQ/ledger-live-common.git#bd5cddb1a2e69bb0cf6df9c6d27ddb0bd3205ff0"
+  resolved "git+https://github.com/LedgerHQ/ledger-live-common.git#2863240253ee9da2a7c8247d18ccc7459435fa59"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
