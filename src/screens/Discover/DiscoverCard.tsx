@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
-import { Flex, Logos, Text } from "@ledgerhq/native-ui";
+import { Flex, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import Touchable from "../../components/Touchable";
 import LedgerLogoRec from "../../icons/LedgerLogoRec";
