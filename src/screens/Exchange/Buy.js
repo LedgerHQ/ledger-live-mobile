@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,8 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
@@ -19,6 +21,7 @@ import DropdownArrow from "../../icons/DropdownArrow";
 import { NavigatorName, ScreenName } from "../../const";
 import CurrencyRow from "../../components/CurrencyRow";
 import AccountCard from "../../components/AccountCard";
+import { useRampCatalogCurrencies } from "./hooks";
 
 const forceInset = { bottom: "always" };
 
@@ -26,11 +29,19 @@ export default function Buy() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const rampCatalog = useRampCatalog();
+  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
 
   const [currency, setCurrency] = useState<
     CryptoCurrency | TokenCurrency | null,
   >(null);
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
+
+  useEffect(() => {
+    currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
+      setCurrency(sortedCurrencies[0]);
+    });
+  }, []);
 
   const onContinue = useCallback(() => {
     navigation.navigate(NavigatorName.ProviderList, {
@@ -41,6 +52,7 @@ export default function Buy() {
 
   const onCurrencyChange = useCallback(
     (selectedCurrency: CryptoCurrency | TokenCurrency) => {
+      setAccount(null);
       setCurrency(selectedCurrency);
     },
     [],
@@ -94,31 +106,43 @@ export default function Buy() {
             { borderColor: colors.border },
           ]}
         >
-          <LText>{t("exchange.buy.wantToBuy")}</LText>
+          <LText secondary semiBold>
+            {t("exchange.buy.wantToBuy")}
+          </LText>
           <TouchableOpacity onPress={() => onSelectCurrency()}>
             <View style={[styles.select, { borderColor: colors.border }]}>
               {currency ? (
-                <CurrencyRow currency={currency} onPress={() => {}} />
+                <View>
+                  <CurrencyRow
+                    currency={currency}
+                    onPress={() => {}}
+                    iconSize={32}
+                  />
+                </View>
               ) : (
-                <LText>{t("exchange.buy.selectCurrency")}</LText>
+                <LText style={styles.placeholder}>
+                  {t("exchange.buy.selectCurrency")}
+                </LText>
               )}
               <DropdownArrow size={10} color={colors.grey} />
             </View>
           </TouchableOpacity>
-          <LText style={styles.itemMargin}>
+          <LText secondary semiBold style={styles.itemMargin}>
             {t("exchange.buy.selectAccount")}
           </LText>
           <TouchableOpacity onPress={() => onSelectAccount()}>
             <View style={[styles.select, { borderColor: colors.border }]}>
               {account ? (
                 <AccountCard
+                  style={styles.card}
                   disabled={false}
                   account={account}
-                  style={styles.card}
                   onPress={() => {}}
                 />
               ) : (
-                <LText>{t("exchange.buy.selectAccount")}</LText>
+                <LText style={styles.placeholder}>
+                  {t("exchange.buy.selectAccount")}
+                </LText>
               )}
               <DropdownArrow size={10} color={colors.grey} />
             </View>
@@ -186,8 +210,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
     borderRadius: 120,
-    padding: 14,
+    paddingVertical: 14,
     marginTop: 12,
+    paddingRight: 16,
   },
   itemMargin: {
     marginTop: 40,
@@ -199,6 +224,9 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "stretch",
     minWidth: "100%",
+  },
+  placeholder: {
+    marginLeft: 16,
   },
   card: {
     paddingHorizontal: 16,
