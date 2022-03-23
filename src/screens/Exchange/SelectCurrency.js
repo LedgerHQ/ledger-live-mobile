@@ -87,7 +87,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   };
 
   const onPressToken = (token: TokenCurrency) => {
-    params.onCurrencyChange && params.onCurrencyChange(token);
+    params?.onCurrencyChange && params.onCurrencyChange(token);
     params?.mode === "buy"
       ? navigation.navigate(NavigatorName.Exchange, {
           screen: ScreenName.ExchangeBuy,
