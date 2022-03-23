@@ -8,7 +8,10 @@ import { Box } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { showToken } from "../../../actions/settings";
-import { blacklistedTokenIdsSelector } from "../../../reducers/settings";
+import {
+  blacklistedTokenIdsSelector,
+  hiddenNftCollectionsSelector,
+} from "../../../reducers/settings";
 import { cryptoCurrenciesSelector } from "../../../reducers/accounts";
 import LText from "../../../components/LText";
 import CurrencyIcon from "../../../components/CurrencyIcon";
@@ -22,6 +25,7 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
   const { t } = useTranslation();
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   const currencies = useSelector(cryptoCurrenciesSelector);
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
   const dispatch = useDispatch();
 
   const renderSectionHeader = useCallback(
@@ -73,6 +77,14 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
             desc={t("settings.accounts.cryptoAssets.desc")}
             arrowRight
             onPress={() => navigation.navigate(ScreenName.CryptoAssetsSettings)}
+          />
+        )}
+        {hiddenNftCollections.length > 0 && (
+          <SettingsRow
+            title={t("settings.accounts.hiddenNFTCollections")}
+            desc={t("settings.accounts.hiddenNFTCollectionsDesc")}
+            arrowRight
+            onPress={() => navigation.navigate(ScreenName.HiddenNftCollections)}
           />
         )}
         <HideEmptyTokenAccountsRow />
