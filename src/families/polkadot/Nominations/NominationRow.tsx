@@ -13,7 +13,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CounterValue from "../../../components/CounterValue";
@@ -64,30 +64,30 @@ export default function NominationRow({
 
           <View style={styles.statusWrapper}>
             {status === "active" && (
-              <LText color="success" numberOfLines={1}>
+              <LText color={colors.success.c100} numberOfLines={1}>
                 {t("polkadot.nomination.active")}
               </LText>
             )}
             {status === "inactive" && (
-              <LText color="grey" numberOfLines={1}>
+              <LText color={colors.neutral.c70} numberOfLines={1}>
                 {t("polkadot.nomination.inactive")}
               </LText>
             )}
             {status === "waiting" && (
-              <LText color="grey" numberOfLines={1}>
+              <LText color={colors.neutral.c70} numberOfLines={1}>
                 {t("polkadot.nomination.waiting")}
               </LText>
             )}
             {!status && (
-              <LText color="orange" numberOfLines={1}>
+              <LText color={colors.warning.c100} numberOfLines={1}>
                 {t("polkadot.nomination.notValidator")}
               </LText>
             )}
-            <View style={[styles.seeMore, { borderLeftColor: colors.grey }]}>
-              <LText style={styles.seeMoreText} color="live">
+            <View style={[styles.seeMore, { borderLeftColor: colors.neutral.c70 }]}>
+              <LText style={styles.seeMoreText} color={colors.primary.c80}>
                 {t("common.seeMore")}
               </LText>
-              <ArrowRight color={colors.live} size={14} />
+              <ArrowRight color={colors.primary.c80} size={14} />
             </View>
           </View>
         </View>
