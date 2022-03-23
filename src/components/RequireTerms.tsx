@@ -165,46 +165,32 @@ export const TermModals = ({
       iconColor={"neutral.c100"}
       title={t("Terms.title")}
     >
-      <View style={styles.root}>
-        <ScrollView style={[styles.body, { height }]}>
-          {markdown ? (
-            <SafeMarkdown markdown={markdown} />
-          ) : error ? (
-            <View>
-              <GenericErrorView
-                error={error}
-                withIcon={false}
-                withDescription={false}
-              />
-              <ExternalLink
-                text={<Trans i18nKey="Terms.read" />}
-                onPress={() => Linking.openURL(url)}
-                event="OpenTerms"
-              />
-              <View style={styles.retryButton}>
-                <RetryButton onPress={retry} />
-              </View>
+      <ScrollView>
+        {markdown ? (
+          <SafeMarkdown markdown={markdown} />
+        ) : error ? (
+          <View>
+            <GenericErrorView
+              error={error}
+              withIcon={false}
+              withDescription={false}
+            />
+            <ExternalLink
+              text={<Trans i18nKey="Terms.read" />}
+              onPress={() => Linking.openURL(url)}
+              event="OpenTerms"
+            />
+            <View style={styles.retryButton}>
+              <RetryButton onPress={retry} />
             </View>
-          ) : (
-            <ActivityIndicator />
-          )}
-        </ScrollView>
-
-        <View
-          style={[
-            styles.footer,
-            { borderTopColor: colors.lightFog },
-            styles.footerClose,
-          ]}
-        >
-          <Button
-            event="TermsClose"
-            type="primary"
-            onPress={onClose}
-            title={<Trans i18nKey="common.close" />}
-          />
-        </View>
-      </View>
+          </View>
+        ) : (
+          <ActivityIndicator />
+        )}
+      </ScrollView>
+      <Button event="TermsClose" type={"main"} mt={8} onPress={onClose}>
+        <Trans i18nKey="common.close" />
+      </Button>
     </BottomDrawer>
   );
 };

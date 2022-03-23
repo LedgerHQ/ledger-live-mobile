@@ -145,11 +145,11 @@ export const urls = {
   },
   resources: {
     gettingStarted:
-      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
-    helpCenter:
       "https://www.ledger.com/start?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
-    ledgerAcademy:
+    helpCenter:
       "https://support.ledger.com/hc/en-us?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
+    ledgerAcademy:
+      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",
     facebook: "https://facebook.com/Ledger",
     twitter: "https://twitter.com/Ledger",
     github: "https://github.com/LedgerHQ",

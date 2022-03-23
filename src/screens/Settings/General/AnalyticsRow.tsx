@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Alert, BottomDrawer, Button, Text, Switch } from "@ledgerhq/native-ui";
 import { GraphGrowAltMedium } from "@ledgerhq/native-ui/assets/icons";
 import { View } from "react-native";
@@ -96,7 +96,7 @@ const AnalyticsRow = () => {
           </View>
         </Alert>
         <Button type={"main"} mt={8} onPress={() => setIsOpened(false)}>
-          Got it!
+          <Trans i18nKey="common.close" />
         </Button>
       </BottomDrawer>
     </>
