@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Button, NumberedList } from "@ledgerhq/native-ui";
 
 const RestoreRecoveryPhraseStep1Scene = ({
-  onNext,
   deviceModelId,
 }: {
-  onNext: () => void;
   deviceModelId: string;
 }) => {
   const { t } = useTranslation();
@@ -35,21 +33,27 @@ const RestoreRecoveryPhraseStep1Scene = ({
   ];
 
   return (
-    <>
-      <NumberedList
-        flex={1}
-        items={items.map(item => ({
-          title: t(item.title),
-          description: item.desc ? t(item.desc) : undefined,
-        }))}
-      />
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep")}
-      </Button>
-    </>
+    <NumberedList
+      flex={1}
+      items={items.map(item => ({
+        title: t(item.title),
+        description: item.desc ? t(item.desc) : undefined,
+      }))}
+    />
   );
 };
 
 RestoreRecoveryPhraseStep1Scene.id = "RestoreRecoveryPhraseStep1Scene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep")}
+    </Button>
+  );
+};
+
+RestoreRecoveryPhraseStep1Scene.Next = Next;
 
 export default RestoreRecoveryPhraseStep1Scene;

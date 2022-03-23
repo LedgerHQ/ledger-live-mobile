@@ -14,30 +14,32 @@ const items = [
   },
 ];
 
-const ExistingRecoveryPhraseStep1Scene = ({
-  onNext,
-}: {
-  onNext: () => void;
-  deviceModelId: string;
-}) => {
+const ExistingRecoveryPhraseStep1Scene = () => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <NumberedList
-        flex={1}
-        items={items.map(item => ({
-          title: t(item.title),
-          description: item.desc ? t(item.desc) : undefined,
-        }))}
-      />
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep")}
-      </Button>
-    </>
+    <NumberedList
+      flex={1}
+      items={items.map(item => ({
+        title: t(item.title),
+        description: item.desc ? t(item.desc) : undefined,
+      }))}
+    />
   );
 };
 
 ExistingRecoveryPhraseStep1Scene.id = "ExistingRecoveryPhraseStep1Scene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep")}
+    </Button>
+  );
+};
+
+ExistingRecoveryPhraseStep1Scene.Next = Next;
 
 export default ExistingRecoveryPhraseStep1Scene;

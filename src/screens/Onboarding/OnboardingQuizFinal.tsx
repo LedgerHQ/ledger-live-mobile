@@ -9,8 +9,8 @@ import BaseStepperView, {
 } from "./steps/setupDevice/scenes";
 import { TrackScreen } from "../../analytics";
 
-import quizProSuccess from "../../images/illustration/Light/_053.png";
-import quizProFail from "../../images/illustration/Light/_054.png";
+import quizProSuccess from "../../images/illustration/Light/_065.png";
+import quizProFail from "../../images/illustration/Light/_063.png";
 
 const scenes = [QuizzFinal, QuizzFinal];
 

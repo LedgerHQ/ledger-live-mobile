@@ -9,6 +9,8 @@ import {
   Icons,
   Transitions,
   SlideIndicator,
+  ScrollListContainer,
+  Text,
 } from "@ledgerhq/native-ui";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,9 +20,7 @@ import { DeviceNames } from "../../../types";
 const transitionDuration = 500;
 
 const Scene = ({ children }: { children: React.ReactNode }) => (
-  <Flex flex={1} justifyContent="space-between" my={8} mx={6}>
-    {children}
-  </Flex>
+  <Flex flex={1}>{children}</Flex>
 );
 
 export type Metadata = {
@@ -72,11 +72,13 @@ const ImageHeader = ({
       height={48}
     >
       <Button Icon={Icons.ArrowLeftMedium} onPress={onBack} />
-      <SlideIndicator
-        slidesLength={metadata.length}
-        activeIndex={activeIndex}
-        onChange={() => {}}
-      />
+      {metadata.length <= 1 ? null : (
+        <SlideIndicator
+          slidesLength={metadata.length}
+          activeIndex={activeIndex}
+          onChange={() => {}}
+        />
+      )}
       <Flex width="48">
         <InfoButton target={stepData.drawer} />
       </Flex>
@@ -140,15 +142,25 @@ export function BaseStepperView({
       >
         {steps.map((Children, i) => (
           <Scene key={Children.id + i}>
-            <Flex
-              mb={30}
-              mx={8}
-              justifyContent="center"
-              alignItems="flex-start"
-            >
-              {metadata[i]?.illustration}
-            </Flex>
-            <Children onNext={nextPage} deviceModelId={deviceModelId} />
+            <ScrollListContainer contentContainerStyle={{ padding: 16 }}>
+              <Flex
+                mb={30}
+                mx={8}
+                justifyContent="center"
+                alignItems="flex-start"
+              >
+                {metadata[i]?.illustration}
+              </Flex>
+              <Children onNext={nextPage} deviceModelId={deviceModelId} />
+            </ScrollListContainer>
+            {Children.Next ? (
+              <Flex p={6}>
+                <Children.Next
+                  onNext={nextPage}
+                  deviceModelId={deviceModelId}
+                />
+              </Flex>
+            ) : null}
           </Scene>
         ))}
       </FlowStepper>

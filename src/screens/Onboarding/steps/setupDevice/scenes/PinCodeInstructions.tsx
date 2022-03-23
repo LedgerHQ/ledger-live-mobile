@@ -15,33 +15,39 @@ const items = [
   },
 ];
 
-const PinCodeInstructionsScene = ({ onNext }: { onNext: () => void }) => {
+const PinCodeInstructionsScene = () => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <NumberedList
-        flex={1}
-        items={items.map(item => ({
-          title: t(item.title),
-          description: (
-            <Trans
-              i18nKey={item.desc}
-              components={{
-                validIcon: <NanoDeviceCheckIcon size={12} />,
-                cancelIcon: <NanoDeviceCancelIcon size={12} />,
-              }}
-            />
-          ),
-        }))}
-      />
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepSetupDevice.pinCode.cta")}
-      </Button>
-    </>
+    <NumberedList
+      flex={1}
+      items={items.map(item => ({
+        title: t(item.title),
+        description: (
+          <Trans
+            i18nKey={item.desc}
+            components={{
+              validIcon: <NanoDeviceCheckIcon size={12} />,
+              cancelIcon: <NanoDeviceCancelIcon size={12} />,
+            }}
+          />
+        ),
+      }))}
+    />
   );
 };
 
 PinCodeInstructionsScene.id = "PinCodeInstructionsScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.stepSetupDevice.pinCode.cta")}
+    </Button>
+  );
+};
+
+PinCodeInstructionsScene.Next = Next;
 
 export default PinCodeInstructionsScene;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, Linking } from "react-native";
+import { Linking } from "react-native";
 import {
   Flex,
   Button,
@@ -9,6 +9,7 @@ import {
   NumberedList,
   Icons,
   Link,
+  ScrollListContainer,
 } from "@ledgerhq/native-ui";
 import { urls } from "../../../../../config/urls";
 
@@ -33,52 +34,41 @@ const OnboardingGeneralInformation = () => {
   }, [urls.recoveryPhraseInfo]);
 
   return (
-    <Flex flex={1} p={6} justifyContent="space-between" bg="background.main">
-      <FlatList
-        data={[{}]}
-        renderItem={() => (
-          <Flex backgroundColor="background.main">
-            <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-              {t(
-                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title",
-              )}
-            </Text>
-            <Text variant="paragraph" color="neutral.c80" mb={6}>
-              {t(
-                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc",
-              )}
-            </Text>
-            <Text variant="paragraph" color="neutral.c80" mb={6}>
-              {t(
-                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1",
-              )}
-            </Text>
-            <Link
-              onPress={handlePress}
-              Icon={Icons.ExternalLinkMedium}
-              iconPosition="right"
-              type="color"
-              style={{ justifyContent: "flex-start" }}
-            >
-              {t(
-                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link",
-              )}
-            </Link>
-            <Flex
-              my={10}
-              borderBottomColor="neutral.c40"
-              borderBottomWidth={1}
-            />
-            <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-              {t(
-                "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1",
-              )}
-            </Text>
-            <NumberedList items={bullets.map(item => ({ title: t(item) }))} />
-          </Flex>
-        )}
-      />
-      <Button type="main" size="large" onPress={navigation.goBack}>
+    <Flex flex={1} justifyContent="space-between">
+      <ScrollListContainer>
+        <Flex p={6} backgroundColor="background.main">
+          <Text variant="h1" color="neutral.c100" uppercase mb={6}>
+            {t(
+              "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title",
+            )}
+          </Text>
+          <Text variant="paragraph" color="neutral.c80" mb={6}>
+            {t("onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc")}
+          </Text>
+          <Text variant="paragraph" color="neutral.c80" mb={6}>
+            {t(
+              "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1",
+            )}
+          </Text>
+          <Link
+            onPress={handlePress}
+            Icon={Icons.ExternalLinkMedium}
+            iconPosition="right"
+            type="color"
+            style={{ justifyContent: "flex-start" }}
+          >
+            {t("onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link")}
+          </Link>
+          <Flex my={10} borderBottomColor="neutral.c40" borderBottomWidth={1} />
+          <Text variant="h1" color="neutral.c100" uppercase mb={6}>
+            {t(
+              "onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1",
+            )}
+          </Text>
+          <NumberedList items={bullets.map(item => ({ title: t(item) }))} />
+        </Flex>
+      </ScrollListContainer>
+      <Button m={6} type="main" size="large" onPress={navigation.goBack}>
         {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </Flex>

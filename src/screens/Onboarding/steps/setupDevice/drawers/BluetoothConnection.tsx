@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, Linking, Platform } from "react-native";
+import { Linking, Platform } from "react-native";
 import {
   Flex,
   Button,
@@ -9,6 +9,7 @@ import {
   IconBoxList,
   Icons,
   Link as UILink,
+  ScrollListContainer,
 } from "@ledgerhq/native-ui";
 import { urls } from "../../../../../config/urls";
 
@@ -33,53 +34,51 @@ const BluetoothConnection = () => {
   }, []);
 
   return (
-    <Flex flex={1} p={6} justifyContent="space-between" bg="background.main">
-      <FlatList
-        data={[
-          <Flex>
-            <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-              {t("onboarding.stepPairNew.infoModal.title_1")}
-            </Text>
-            <IconBoxList
-              items={bullets.map((item, i) => ({
-                title: (
+    <Flex flex={1} justifyContent="space-between" bg="background.main">
+      <ScrollListContainer contentContainerStyle={{ padding: 16 }}>
+        <Flex>
+          <Text variant="h1" color="neutral.c100" uppercase mb={6}>
+            {t("onboarding.stepPairNew.infoModal.title_1")}
+          </Text>
+          <IconBoxList
+            items={bullets.map((item, i) => ({
+              title: (
+                <Text variant="body" color="neutral.c80">
                   <Trans i18nKey={item} values={{ Os: Platform.OS }}>
                     <Text />
                     <Text uppercase fontWeight="bold" />
                   </Trans>
-                ),
-                Icon: Icons.ChevronRightMedium,
-              }))}
-            />
-            <UILink
-              type="color"
-              onPress={handlePress}
-              Icon={Icons.ExternalLinkMedium}
-            >
-              {t("onboarding.stepPairNew.infoModal.bullets.2.link")}
-            </UILink>
-          </Flex>,
-          ...(Platform.OS === "ios"
-            ? []
-            : [
-                <Flex height={1} width="100%" bg="neutral.c40" my={8} />,
-                ,
-                <Flex>
-                  <Text variant="h1" color="neutral.c100" uppercase mb={6}>
-                    {t("onboarding.stepPairNew.infoModal.title_2")}
-                  </Text>
-                  <Text variant="body" color="neutral.c80" mb={6}>
-                    <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
-                      <Text />
-                      <Text fontWeight="bold" />
-                    </Trans>
-                  </Text>
-                </Flex>,
-              ]),
-        ]}
-        renderItem={({ item }) => <>{item}</>}
-      />
-      <Button type="main" size="large" onPress={navigation.goBack}>
+                </Text>
+              ),
+              Icon: Icons.ChevronRightMedium,
+            }))}
+          />
+          <UILink
+            type="color"
+            onPress={handlePress}
+            Icon={Icons.ExternalLinkMedium}
+          >
+            {t("onboarding.stepPairNew.infoModal.bullets.2.link")}
+          </UILink>
+        </Flex>
+        {Platform.OS === "ios" ? null : (
+          <>
+            <Flex height={1} width="100%" bg="neutral.c40" my={8} />
+            <Flex>
+              <Text variant="h1" color="neutral.c100" uppercase mb={6}>
+                {t("onboarding.stepPairNew.infoModal.title_2")}
+              </Text>
+              <Text variant="body" color="neutral.c80" mb={6}>
+                <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
+                  <Text />
+                  <Text fontWeight="bold" />
+                </Trans>
+              </Text>
+            </Flex>
+          </>
+        )}
+      </ScrollListContainer>
+      <Button m={6} type="main" size="large" onPress={navigation.goBack}>
         {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </Flex>

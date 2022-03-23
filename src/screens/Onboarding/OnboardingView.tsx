@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useNavigation, StackActions } from "@react-navigation/native";
 import { Icons } from "@ledgerhq/native-ui/assets";
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { Flex, Text, ScrollListContainer } from "@ledgerhq/native-ui";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
@@ -54,63 +54,61 @@ function OnboardingView({
     <SafeAreaView
       style={[{ flex: 1 }, { backgroundColor: colors.palette.background.main }]}
     >
-      <Flex flex={1} px={6} pt={8} bg="palette.background.main">
-        {/* HEADER */}
-        <Flex mb={8}>
-          <Flex
-            flexDirection="row"
-            justifyContent="space-between"
-            mb={subTitle ? 9 : 6}
-          >
-            <View>
-              {hasBackButton ? (
-                <TouchableOpacity
-                  onPress={handlecustomBackAction}
-                  hitSlop={hitSlop}
-                >
-                  <Icons.ArrowLeftMedium size="24px" />
-                </TouchableOpacity>
-              ) : null}
-            </View>
-            <View>
-              {hasCloseButton ? (
-                <TouchableOpacity
-                  onPress={handlecustomCloseAction}
-                  hitSlop={hitSlop}
-                >
-                  <Icons.CloseMedium size="24px" />
-                </TouchableOpacity>
-              ) : null}
-            </View>
-          </Flex>
-
-          {/* HEADER TITLES */}
-          {title ? (
-            <Flex>
-              <Text
-                variant="h1"
-                fontSize={8}
-                mb={3}
-                textAlign={centerTitle ? "center" : null}
-                style={{ textTransform: "uppercase" }}
+      {/* HEADER */}
+      <Flex mb={8} px={6} pt={8}>
+        <Flex
+          flexDirection="row"
+          justifyContent="space-between"
+          mb={subTitle ? 9 : 6}
+        >
+          <View>
+            {hasBackButton ? (
+              <TouchableOpacity
+                onPress={handlecustomBackAction}
+                hitSlop={hitSlop}
               >
-                {title}
-              </Text>
-              {subTitle ? (
-                <Text variant="body" fontSize={4}>
-                  {subTitle}
-                </Text>
-              ) : null}
-            </Flex>
-          ) : null}
+                <Icons.ArrowLeftMedium size="24px" />
+              </TouchableOpacity>
+            ) : null}
+          </View>
+          <View>
+            {hasCloseButton ? (
+              <TouchableOpacity
+                onPress={handlecustomCloseAction}
+                hitSlop={hitSlop}
+              >
+                <Icons.CloseMedium size="24px" />
+              </TouchableOpacity>
+            ) : null}
+          </View>
         </Flex>
 
+        {/* HEADER TITLES */}
+        {title ? (
+          <Flex>
+            <Text
+              variant="h1"
+              fontSize={8}
+              mb={3}
+              textAlign={centerTitle ? "center" : null}
+              style={{ textTransform: "uppercase" }}
+            >
+              {title}
+            </Text>
+            {subTitle ? (
+              <Text variant="body" fontSize={4}>
+                {subTitle}
+              </Text>
+            ) : null}
+          </Flex>
+        ) : null}
+      </Flex>
+      <ScrollListContainer flex={1} px={6} bg="palette.background.main">
         {/* BODY */}
         {children ? <Flex flex={1}>{children}</Flex> : null}
-
-        {/* FOOTER */}
-        {footer ? <Flex>{footer}</Flex> : null}
-      </Flex>
+      </ScrollListContainer>
+      {/* FOOTER */}
+      {footer ? <Flex>{footer}</Flex> : null}
     </SafeAreaView>
   );
 }

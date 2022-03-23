@@ -8,6 +8,8 @@ import styled from "styled-components/native";
 import { ScreenName } from "../../../const";
 import Illustration from "../../../images/illustration/Illustration";
 
+import { normalize } from "../../../helpers/normalizeSize";
+
 import { DeviceNames } from "../types";
 
 const StyledSafeAreaView = styled(SafeAreaView)`
@@ -38,35 +40,21 @@ const Card = ({ index /* , deviceModelId */ }: CardType) => {
   const { t } = useTranslation();
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" px={20}>
-      <Flex mb={10}>
+      <Flex>
         <Illustration
-          size={248}
+          size={normalize(240)}
           darkSource={images.dark[index]}
           lightSource={images.light[index]}
         />
       </Flex>
-      <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>
+      <Flex flex={1} />
+      <Text variant="h2" mb={3} textAlign="center">
         {t(`onboarding.stepNewDevice.${index}.title`)}
       </Text>
       <Text textAlign="center" variant="body">
         {t(`onboarding.stepNewDevice.${index}.desc`)}
       </Text>
     </Flex>
-  );
-};
-
-const FooterDiscoveryLink = ({ label }: { label: string }) => {
-  const navigation = useNavigation();
-  const next = useCallback(() => {
-    // TODO: FIX @react-navigation/native using Typescript
-    // @ts-ignore next-line
-    navigation.navigate(ScreenName.OnboardingModalDiscoverLive);
-  }, [navigation]);
-
-  return (
-    <Link Icon={Icons.ArrowRightMedium} onPress={next} iconPosition="right">
-      {label}
-    </Link>
   );
 };
 
@@ -88,7 +76,6 @@ const FooterNextButton = ({ label }: { label: string }) => {
 };
 
 const FooterActions = new Map();
-FooterActions.set(0, FooterDiscoveryLink);
 FooterActions.set(4, FooterNextButton);
 
 const Footer = ({ index }: { index: number }) => {
@@ -133,7 +120,7 @@ function OnboardingStepNewDevice() {
           <Card index={index} key={index} deviceModelId={deviceModelId} />
         ))}
       </Carousel>
-      <Flex minHeight="13%" justifyContent="center" alignItems="center">
+      <Flex minHeight="60px" justifyContent="center" alignItems="center">
         <Footer index={currentIndex} />
       </Flex>
     </StyledSafeAreaView>

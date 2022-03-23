@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, memo } from "react";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
-import { ScreenName } from "../../../const";
+import { useDispatch } from "react-redux";
+import { NavigatorName, ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
 import BaseStepperView, { PairNew, ConnectNano } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
@@ -9,6 +10,8 @@ import SeedWarning from "../shared/SeedWarning";
 import Illustration from "../../../images/illustration/Illustration";
 
 import StepLottieAnimation from "./setupDevice/scenes/StepLottieAnimation";
+import { completeOnboarding } from "../../../actions/settings";
+import { useNavigationInterceptor } from "../onboardingContext";
 
 const images = {
   light: {
@@ -42,6 +45,9 @@ function OnboardingStepPairNew() {
       "params"
     >
   >();
+
+  const dispatch = useDispatch();
+  const { resetCurrentStep } = useNavigationInterceptor();
 
   const { deviceModelId, showSeedWarning } = route.params;
 
@@ -80,13 +86,28 @@ function OnboardingStepPairNew() {
     [deviceModelId, theme],
   );
 
+  const onFinish = useCallback(() => {
+    dispatch(completeOnboarding());
+    resetCurrentStep();
+
+    const parentNav = navigation.getParent();
+    if (parentNav) {
+      parentNav.popToTop();
+    }
+
+    navigation.replace(NavigatorName.Base, {
+      screen: NavigatorName.Main,
+    });
+  }, [dispatch, navigation, resetCurrentStep]);
+
   const nextPage = useCallback(() => {
+    onFinish();
     // TODO: FIX @react-navigation/native using Typescript
     // @ts-ignore next-line
-    navigation.navigate(ScreenName.OnboardingFinish, {
-      ...route.params,
-    });
-  }, [navigation, route.params]);
+    // navigation.navigate(ScreenName.OnboardingFinish, {
+    //  ...route.params,
+    // });
+  }, [onFinish]);
 
   return (
     <>
