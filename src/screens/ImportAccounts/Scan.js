@@ -9,6 +9,8 @@ import {
 } from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 
+import { Flex, Text, Alert } from "@ledgerhq/native-ui";
+import { Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 import Scanner from "../../components/Scanner";
@@ -96,7 +98,23 @@ class Scan extends PureComponent<
     return (
       <View style={[styles.root, { backgroundColor: colors.darkBlue }]}>
         <TrackScreen category="ImportAccounts" name="Scan" />
-        <Scanner onResult={this.onBarCodeRead} progress={progress} liveQrCode />
+        <Scanner
+          onResult={this.onBarCodeRead}
+          progress={progress}
+          liveQrCode
+          bottomComponent={
+            <Alert type="info">
+              <Flex>
+                <Text fontWeight="semiBold" variant="body">
+                  <Trans i18nKey="account.import.scan.descTop.line1" />
+                </Text>
+                <Text fontWeight="bold" variant="body">
+                  <Trans i18nKey="account.import.scan.descTop.line2" />
+                </Text>
+              </Flex>
+            </Alert>
+          }
+        />
         <GenericErrorBottomModal error={error} onClose={this.onCloseError} />
       </View>
     );
