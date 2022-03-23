@@ -3751,6 +3751,7 @@
   },
   "exchange": {
     "buy": {
+      "screenTitle": "BUY CRYPTO",
       "tabTitle": "Buy",
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
@@ -3793,6 +3794,9 @@
     },
     "history": {
       "tabTitle": "History"
+    },
+    "providerList": {
+      "title": "Choose a provider"
     }
   },
   "banner": {

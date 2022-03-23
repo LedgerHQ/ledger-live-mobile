@@ -68,6 +68,7 @@ import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccoun
 import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurrencyScreen";
 import SwapFormSelectFees from "../../screens/Swap/FormSelection/SelectFeesScreen";
 import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectProviderRateScreen";
+import ProviderList from "../../screens/Exchange/ProviderList";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -275,6 +276,16 @@ export default function BaseNavigator() {
         name={NavigatorName.Exchange}
         component={ExchangeNavigator}
         options={{ headerStyle: styles.headerNoShadow, headerLeft: null }}
+      />
+      <Stack.Screen
+        name={NavigatorName.ProviderList}
+        component={ProviderList}
+        options={({ navigation }) => ({
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+          headerTitle: t("exchange.buy.screenTitle"),
+          headerStyle: styles.headerNoShadow,
+        })}
       />
       <Stack.Screen
         name={NavigatorName.ExchangeBuyFlow}

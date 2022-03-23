@@ -27,10 +27,17 @@ export default function Buy() {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const [currency, setCurrency] = useState<CryptoCurrency | TokenCurrency | null>(null);
+  const [currency, setCurrency] = useState<
+    CryptoCurrency | TokenCurrency | null,
+  >(null);
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
-  const onContinue = useCallback(() => {}, []);
+  const onContinue = useCallback(() => {
+    navigation.navigate(NavigatorName.ProviderList, {
+      account,
+      currency,
+    });
+  }, [account, currency, navigation]);
 
   const onCurrencyChange = useCallback(
     (selectedCurrency: CryptoCurrency | TokenCurrency) => {
@@ -145,7 +152,7 @@ export default function Buy() {
           type={"primary"}
           title={t("common.continue")}
           onPress={() => onContinue()}
-          disabled={true}
+          disabled={!account && !currency}
         />
       </View>
     </SafeAreaView>

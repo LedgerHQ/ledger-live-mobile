@@ -358,6 +358,7 @@ export const NavigatorName = {
   PasswordAddFlow: "PasswordAddFlow",
   PasswordModifyFlow: "PasswordModifyFlow",
   Platform: "Platform",
+  ProviderList: "ProviderList",
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",
