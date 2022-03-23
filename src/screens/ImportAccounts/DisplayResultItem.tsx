@@ -28,11 +28,13 @@ export default class DisplayResultItem extends Component<{
         onPress={importing ? undefined : this.onSwitch}
         style={[styles.root, { opacity: selectable ? 1 : 0.5 }]}
       >
-        <AccountCard
-          account={account}
-          parentAccount={null}
-          style={styles.card}
-        />
+        <Flex flex={1}>
+          <AccountCard
+            account={account}
+            parentAccount={null}
+            style={styles.card}
+          />
+        </Flex>
         {!selectable ? null : (
           <Flex ml={8}>
             <CheckBox isChecked={checked} style={styles.marginLeft} />
