@@ -16,13 +16,14 @@ import {
 
 import { useTheme } from "@react-navigation/native";
 import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
-import { track } from "../../analytics/segment";
+import { track } from "../../analytics";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 import { getSupportedCurrencies } from "./coinifyConfig";
+import { NavigatorName, ScreenName } from "../../const";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -35,6 +36,7 @@ type Props = {
       currency?: string,
       mode: "buy" | "sell",
       device?: Device,
+      onCurrencyChange: (currency: CryptoCurrency | TokenCurrency) => void,
     },
   },
 };
@@ -72,19 +74,29 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     track("Buy Crypto Continue Button", { currencyName: currency.name });
-    navigation.navigate("ExchangeSelectAccount", {
-      currency,
-      mode,
-      device,
-    });
+    params?.onCurrencyChange && params.onCurrencyChange(currency);
+    params?.mode === "buy"
+      ? navigation.navigate(NavigatorName.Exchange, {
+          screen: ScreenName.ExchangeBuy,
+        })
+      : navigation.navigate("ExchangeSelectAccount", {
+          currency,
+          mode,
+          device,
+        });
   };
 
   const onPressToken = (token: TokenCurrency) => {
-    navigation.navigate("ExchangeSelectAccount", {
-      currency: token,
-      mode,
-      device,
-    });
+    params?.onCurrencyChange && params.onCurrencyChange(token);
+    params?.mode === "buy"
+      ? navigation.navigate(NavigatorName.Exchange, {
+          screen: ScreenName.ExchangeBuy,
+        })
+      : navigation.navigate("ExchangeSelectAccount", {
+          currency: token,
+          mode,
+          device,
+        });
   };
 
   const onPressItem = (currencyOrToken: CryptoCurrency | TokenCurrency) => {

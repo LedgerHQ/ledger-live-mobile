@@ -5,6 +5,7 @@ import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
 import type {
   Account,
+  AccountLike,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
@@ -25,6 +26,8 @@ import InfoIcon from "../../icons/Info";
 import PlusIcon from "../../icons/Plus";
 import Button from "../../components/Button";
 import { NavigatorName, ScreenName } from "../../const";
+import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Device } from "@ledgerhq/hw-transport";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
@@ -32,13 +35,26 @@ type Props = {
   accounts: Account[],
   allAccounts: AccountLikeArray,
   navigation: any,
-  // TODO: add proper type
-  route: { params: any },
+  route: {
+    params: {
+      mode: "buy" | "sell",
+      currency: CryptoCurrency | TokenCurrency,
+      device?: Device,
+      onAccountChange: (selectedAccount: Account | AccountLike) => void,
+      analyticsPropertyFlow?: any,
+    },
+  },
 };
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { mode, currency, device, analyticsPropertyFlow } = route.params;
+  const {
+    mode,
+    currency,
+    device,
+    analyticsPropertyFlow,
+    onAccountChange,
+  } = route.params;
 
   const accounts = useSelector(accountsSelector);
 
@@ -80,11 +96,9 @@ export default function SelectAccount({ navigation, route }: Props) {
             style={styles.card}
             onPress={() => {
               if (mode === "buy") {
-                navigation.navigate("ExchangeConnectDevice", {
-                  account,
-                  mode,
-                  parentId:
-                    account.type !== "Account" ? account.parentId : undefined,
+                onAccountChange && onAccountChange(account);
+                navigation.navigate(NavigatorName.Exchange, {
+                  screen: ScreenName.ExchangeBuy,
                 });
               } else {
                 navigation.navigate(ScreenName.ExchangeCoinifyWidget, {
