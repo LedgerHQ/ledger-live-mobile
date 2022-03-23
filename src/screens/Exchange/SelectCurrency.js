@@ -74,8 +74,8 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     track("Buy Crypto Continue Button", { currencyName: currency.name });
-    params.onCurrencyChange && params.onCurrencyChange(currency);
-    params.mode === "buy"
+    params?.onCurrencyChange && params.onCurrencyChange(currency);
+    params?.mode === "buy"
       ? navigation.navigate(NavigatorName.Exchange, {
           screen: ScreenName.ExchangeBuy,
         })
@@ -88,7 +88,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
 
   const onPressToken = (token: TokenCurrency) => {
     params.onCurrencyChange && params.onCurrencyChange(token);
-    params.mode === "buy"
+    params?.mode === "buy"
       ? navigation.navigate(NavigatorName.Exchange, {
           screen: ScreenName.ExchangeBuy,
         })
