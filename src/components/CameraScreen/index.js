@@ -14,7 +14,6 @@ type Props = {
   height: number,
   progress?: number,
   liveQrCode?: boolean,
-  bottomComponent?: React.ReactNode,
 };
 
 export default function CameraScreen({
@@ -22,7 +21,6 @@ export default function CameraScreen({
   height,
   progress,
   liveQrCode,
-  bottomComponent,
 }: Props) {
   // Make the viewfinder borders 2/3 of the screen shortest border
   const viewFinderSize = (width > height ? height : width) * (2 / 3);
@@ -46,7 +44,6 @@ export default function CameraScreen({
         viewFinderSize={viewFinderSize}
         progress={progress}
         liveQrCode={liveQrCode}
-        bottomComponent={bottomComponent}
       />
       <LText style={styles.version}>{liveCommonPkg.version}</LText>
     </View>

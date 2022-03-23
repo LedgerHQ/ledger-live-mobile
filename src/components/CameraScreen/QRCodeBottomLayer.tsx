@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import { Flex, Text, ProgressBar } from "@ledgerhq/native-ui";
+import { Flex, Text, ProgressBar, Alert } from "@ledgerhq/native-ui";
 import { rgba } from "../../colors";
 
 import { softMenuBarHeight } from "../../logic/getWindowDimensions";
@@ -10,10 +10,9 @@ import { softMenuBarHeight } from "../../logic/getWindowDimensions";
 type Props = {
   progress?: number;
   liveQrCode?: boolean;
-  bottomComponent?: React.ReactNode;
 };
 
-function QrCodeBottomLayer({ progress, liveQrCode, bottomComponent }: Props) {
+function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
   return (
     <Flex
       style={[
@@ -44,7 +43,16 @@ function QrCodeBottomLayer({ progress, liveQrCode, bottomComponent }: Props) {
           </Flex>
         )}
         <Flex flex={1} />
-        {bottomComponent ? bottomComponent : null}
+        <Alert type="info">
+          <Flex>
+            <Text fontWeight="semiBold" variant="body">
+              <Trans i18nKey="account.import.scan.descTop.line1" />
+            </Text>
+            <Text fontWeight="bold" variant="body">
+              <Trans i18nKey="account.import.scan.descTop.line2" />
+            </Text>
+          </Flex>
+        </Alert>
       </Flex>
     </Flex>
   );
