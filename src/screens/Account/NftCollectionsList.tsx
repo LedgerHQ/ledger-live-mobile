@@ -122,6 +122,12 @@ export default function NftCollectionsList({ account }: Props) {
     [data.length, navigateToCollection],
   );
 
+  const listFooterComponent = useMemo(
+    () =>
+      nftCollections.length > MAX_COLLECTIONS_TO_SHOW ? renderFooter : null,
+    [nftCollections.length, renderFooter],
+  );
+
   return (
     <View style={styles.collectionList}>
       <FlatList
@@ -129,7 +135,7 @@ export default function NftCollectionsList({ account }: Props) {
         renderItem={renderItem}
         keyExtractor={collectionKeyExtractor}
         ListHeaderComponent={renderHeader}
-        ListFooterComponent={renderFooter}
+        ListFooterComponent={listFooterComponent}
       />
     </View>
   );
