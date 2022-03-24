@@ -7,7 +7,7 @@ import { ScreenName } from "../../const";
 import styles from "../../navigation/styles";
 import Sell from "../../screens/Exchange/Sell";
 import LText from "../LText";
-import BuyNavigator from "./BuyNavigator";
+import Buy from "../../screens/Exchange/Buy";
 
 type TabLabelProps = {
   focused: boolean,
@@ -32,7 +32,7 @@ export default function ExchangeNavigator() {
     >
       <Tab.Screen
         name={ScreenName.ExchangeBuy}
-        component={BuyNavigator}
+        component={Buy}
         options={{
           title: t("exchange.buy.tabTitle"),
           tabBarLabel: ({ focused, color }: TabLabelProps) => (

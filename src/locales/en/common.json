@@ -3783,6 +3783,7 @@
       "tabTitle": "Sell",
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
+      "wantToSell": "I want to sell",
       "connectDevice": "Connect your device",
       "title": "Sell crypto via our partner",
       "description": "Sell crypto assets directly from your Ledger account via Coinify and receive fiat in your bank account.",

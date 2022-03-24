@@ -56,21 +56,22 @@ type ProviderItemProps = {
 
 const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
   const manifest = useRemoteLiveAppManifest(provider.appId);
+  const onItemClick = useCallback(() => {
+    onClick(provider, manifest.icon, manifest.name);
+  }, [provider, manifest, onClick]);
 
   if (!manifest) {
     return null;
   }
-
-  const onItemClick = useCallback(() => {
-    onClick(provider, manifest.icon, manifest.name);
-  }, [provider, manifest, onClick]);
 
   return (
     <TouchableOpacity onPress={onItemClick} style={styles.itemRoot}>
       <View>
         <View style={styles.itemHeader}>
           <AppIcon icon={manifest.icon} name={manifest.name} size={32} />
-          <LText style={styles.headerLabel}>{manifest.name}</LText>
+          <LText secondary style={styles.headerLabel}>
+            {manifest.name}
+          </LText>
         </View>
         <View style={styles.pmsRow}>
           {provider.paymentProviders.map(paymentProvider => (
@@ -136,6 +137,7 @@ export default function ProviderList({ route }: Props) {
         name,
       });
     },
+    [navigation, route, cryptoCurrencyId, fiatCurrency],
   );
 
   return (

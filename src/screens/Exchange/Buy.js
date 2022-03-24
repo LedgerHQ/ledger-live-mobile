@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, useState, useEffect } from "react";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -16,16 +16,13 @@ import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
-import LText from "../../components/LText";
-import DropdownArrow from "../../icons/DropdownArrow";
 import { NavigatorName, ScreenName } from "../../const";
-import CurrencyRow from "../../components/CurrencyRow";
-import AccountCard from "../../components/AccountCard";
 import { useRampCatalogCurrencies } from "./hooks";
+import SelectAccountCurrency from "./SelectAccountCurrency";
 
 const forceInset = { bottom: "always" };
 
-export default function Buy() {
+export default function OnRamp() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -103,56 +100,13 @@ export default function Buy() {
       forceInset={forceInset}
     >
       <TrackScreen category="Buy Crypto" />
-      <View style={styles.body}>
-        <View
-          style={[
-            styles.accountAndCurrencySelect,
-            { borderColor: colors.border },
-          ]}
-        >
-          <LText secondary semiBold>
-            {t("exchange.buy.wantToBuy")}
-          </LText>
-          <TouchableOpacity onPress={() => onSelectCurrency()}>
-            <View style={[styles.select, { borderColor: colors.border }]}>
-              {currency ? (
-                <View>
-                  <CurrencyRow
-                    currency={currency}
-                    onPress={() => {}}
-                    iconSize={32}
-                  />
-                </View>
-              ) : (
-                <LText style={styles.placeholder}>
-                  {t("exchange.buy.selectCurrency")}
-                </LText>
-              )}
-              <DropdownArrow size={10} color={colors.grey} />
-            </View>
-          </TouchableOpacity>
-          <LText secondary semiBold style={styles.itemMargin}>
-            {t("exchange.buy.selectAccount")}
-          </LText>
-          <TouchableOpacity onPress={() => onSelectAccount()}>
-            <View style={[styles.select, { borderColor: colors.border }]}>
-              {account ? (
-                <AccountCard
-                  style={styles.card}
-                  disabled={false}
-                  account={account}
-                  onPress={() => {}}
-                />
-              ) : (
-                <LText style={styles.placeholder}>
-                  {t("exchange.buy.selectAccount")}
-                </LText>
-              )}
-              <DropdownArrow size={10} color={colors.grey} />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <SelectAccountCurrency
+        title={t("exchange.buy.wantToBuy")}
+        currency={currency}
+        account={account}
+        onSelectAccount={onSelectAccount}
+        onSelectCurrency={onSelectCurrency}
+      />
       <View
         style={[
           styles.footer,
@@ -179,8 +133,8 @@ export default function Buy() {
           containerStyle={styles.button}
           type={"primary"}
           title={t("common.continue")}
-          onPress={() => onContinue()}
-          disabled={!account && !currency}
+          onPress={onContinue}
+          disabled={!account || !currency}
         />
       </View>
     </SafeAreaView>
@@ -191,36 +145,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  body: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    padding: 16,
-  },
-  accountAndCurrencySelect: {
-    width: "100%",
-    marginTop: 8,
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingVertical: 24,
-    paddingHorizontal: 16,
-  },
-  select: {
-    height: 56,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderRadius: 120,
-    paddingVertical: 14,
-    marginTop: 12,
-    paddingRight: 16,
-  },
-  itemMargin: {
-    marginTop: 40,
-  },
   footer: {
     marginTop: 40,
     padding: 16,
@@ -228,12 +152,5 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "stretch",
     minWidth: "100%",
-  },
-  placeholder: {
-    marginLeft: 16,
-  },
-  card: {
-    paddingHorizontal: 16,
-    backgroundColor: "transparent",
   },
 });
