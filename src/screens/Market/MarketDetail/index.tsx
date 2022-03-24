@@ -20,10 +20,10 @@ import { Image, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import { Account } from "@ledgerhq/live-common/lib/types";
 import {
+  localeSelector,
   starredMarketCoinsSelector,
   swapSelectableCurrenciesSelector,
 } from "../../../reducers/settings";
-import { useLocale } from "../../../context/Locale";
 import { NavigatorName, ScreenName } from "../../../const";
 import { isCurrencySupported } from "../../Exchange/coinifyConfig";
 import CircleCurrencyIcon from "../../../components/CircleCurrencyIcon";
@@ -82,7 +82,7 @@ function MarketDetail({
   const { currencyId, resetSearchOnUmount } = params;
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const locale = useSelector(localeSelector);
   const dispatch = useDispatch();
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);

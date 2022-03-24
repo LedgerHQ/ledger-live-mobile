@@ -25,9 +25,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MarketListRequestParams } from "@ledgerhq/live-common/lib/market/types";
-import { starredMarketCoinsSelector } from "../../reducers/settings";
+import {
+  localeSelector,
+  starredMarketCoinsSelector,
+} from "../../reducers/settings";
 import MarketRowItem from "./MarketRowItem";
-import { useLocale } from "../../context/Locale";
 import SortBadge, { Badge } from "./SortBadge";
 import SearchHeader from "./SearchHeader";
 import { ScreenName } from "../../const";
@@ -222,7 +224,7 @@ const BottomSection = ({
 export default function Market({ navigation }: { navigation: any }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const locale = useSelector(localeSelector);
 
   useProviders();
 
