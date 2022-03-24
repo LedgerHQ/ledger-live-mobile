@@ -2,9 +2,9 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Trans } from "react-i18next";
+import { Text } from "@ledgerhq/native-ui";
 import { useSelector } from "react-redux";
 import SettingsRow from "../../../components/SettingsRow";
-import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import { localeSelector } from "../../../reducers/settings";
 import regionsByKey from "./regions.json";
@@ -22,9 +22,9 @@ export default function RegionRow() {
       onPress={() => navigate(ScreenName.RegionSettings)}
       alignedTop
     >
-      <LText semiBold color="grey">
+      <Text variant="body" fontWeight="medium" color="primary.c80">
         {region ? `${region.regionDisplayName} (${locale})` : locale}
-      </LText>
+      </Text>
     </SettingsRow>
   );
 }
