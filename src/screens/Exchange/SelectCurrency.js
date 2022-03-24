@@ -16,8 +16,7 @@ import {
 
 import { useTheme } from "@react-navigation/native";
 import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
-import { track } from "../../analytics";
-import { TrackScreen } from "../../analytics";
+import { track, TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";

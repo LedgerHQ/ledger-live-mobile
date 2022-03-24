@@ -68,6 +68,9 @@ import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccoun
 import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurrencyScreen";
 import SwapFormSelectFees from "../../screens/Swap/FormSelection/SelectFeesScreen";
 import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectProviderRateScreen";
+import ProviderList from "../../screens/Exchange/ProviderList";
+import ProviderView from "../../screens/Exchange/ProviderView";
+import ScreenHeader from "../../screens/Exchange/ScreenHeader";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -275,6 +278,31 @@ export default function BaseNavigator() {
         name={NavigatorName.Exchange}
         component={ExchangeNavigator}
         options={{ headerStyle: styles.headerNoShadow, headerLeft: null }}
+      />
+      <Stack.Screen
+        name={NavigatorName.ProviderList}
+        component={ProviderList}
+        options={({ navigation, route }) => ({
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+          headerTitle:
+            route.params.type === "onRamp"
+              ? t("exchange.buy.screenTitle")
+              : t("exchange.sell.screenTitle"),
+          headerStyle: styles.headerNoShadow,
+        })}
+      />
+      <Stack.Screen
+        name={NavigatorName.ProviderView}
+        component={ProviderView}
+        options={({ navigation, route }) => ({
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+          headerTitle: () => (
+            <ScreenHeader icon={route.params.icon} name={route.params.name} />
+          ),
+          headerStyle: styles.headerNoShadow,
+        })}
       />
       <Stack.Screen
         name={NavigatorName.ExchangeBuyFlow}

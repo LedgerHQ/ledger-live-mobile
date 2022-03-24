@@ -14,6 +14,8 @@ import {
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
 import { useTheme } from "@react-navigation/native";
+import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Device } from "@ledgerhq/hw-transport";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -26,8 +28,6 @@ import InfoIcon from "../../icons/Info";
 import PlusIcon from "../../icons/Plus";
 import Button from "../../components/Button";
 import { NavigatorName, ScreenName } from "../../const";
-import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "@ledgerhq/hw-transport";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
