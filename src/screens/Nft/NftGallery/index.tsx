@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Platform,
-  ListRenderItemInfo,
+  ListRenderItem,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -28,15 +28,6 @@ const MAX_COLLECTIONS_FIRST_RENDER = 12;
 const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 6;
 
 const CollectionsList = Animated.createAnimatedComponent(FlatList);
-
-const renderItem = ({ item: collection }: ListRenderItemInfo<ProtoNFT[]>) => (
-  <View style={styles.collectionContainer}>
-    <NftCollectionWithName
-      key={collection?.[0]?.contract}
-      collection={collection}
-    />
-  </View>
-);
 
 const NftGallery = () => {
   const navigation = useNavigation();
@@ -79,6 +70,16 @@ const NftGallery = () => {
         .slice(0, collectionsCount)
         .map(([, collection]) => collection),
     [collections, collectionsCount],
+  );
+
+  const renderItem: ListRenderItem<ProtoNFT[]> = ({ item: collection }) => (
+    <View style={styles.collectionContainer}>
+      <NftCollectionWithName
+        key={collection?.[0]?.contract}
+        collection={collection}
+        account={account}
+      />
+    </View>
   );
 
   const onEndReached = useCallback(() => {
