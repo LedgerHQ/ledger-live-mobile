@@ -4,9 +4,10 @@ import styled from "styled-components/native";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { useTranslation } from "react-i18next";
 import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
-import { useTranslationLocale } from "../../../context/Locale";
+import { useSelector } from "react-redux";
 import { counterValueFormatter, getDateFormatter } from "../utils";
 import DeltaVariation from "../DeltaVariation";
+import { localeSelector } from "../../../reducers/settings";
 
 const StatRowContainer = styled(Flex).attrs({
   flexDirection: "row",
@@ -70,7 +71,7 @@ export default function MarketStats({
   counterCurrency: string;
 }) {
   const { t } = useTranslation();
-  const { locale } = useTranslationLocale();
+  const locale = useSelector(localeSelector);
 
   const {
     marketcap,
