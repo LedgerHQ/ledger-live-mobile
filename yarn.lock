@@ -2535,9 +2535,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#develop":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#082c946830a332f764f3c95c0eb9c0572b493825":
   version "21.35.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#5db2465bceff17cba50786e2a53f0bb4ee27cb2d"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#082c946830a332f764f3c95c0eb9c0572b493825"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -2686,11 +2686,6 @@
     react-native-ble-plx "2.0.3"
     rxjs "6"
     uuid "^3.4.0"
-
-"@ledgerhq/react-native-ledger-core@4.19.1":
-  version "4.19.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.19.1.tgz#454286e670efff9e1fd64f54038d1b63b79c34b6"
-  integrity sha512-68X3DcADqXHk2yseHtz4PH6uY5j6mKZWi7+XfPSuwGKZh3pQsYbb+IcnhUv65hj/SkdIyHPZdnNghqd9vpYF5w==
 
 "@ledgerhq/react-native-passcode-auth@^2.1.0":
   version "2.1.0"
@@ -5022,7 +5017,7 @@ axios@0.25.0:
   dependencies:
     follow-redirects "^1.14.7"
 
-axios@0.26.1, axios@^0.26.1:
+axios@0.26.1, axios@^0.26.0, axios@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
   integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
@@ -5035,13 +5030,6 @@ axios@^0.21.1, axios@^0.21.2:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
-
-axios@^0.26.0:
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
-  integrity sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==
-  dependencies:
-    follow-redirects "^1.14.8"
 
 axobject-query@^0.1.0:
   version "0.1.0"
