@@ -68,7 +68,7 @@ const GenericErrorView = ({
             outline={true}
             Icon={DownloadFileIcon}
             onPress={onExport}
-            mt={3}
+            mt={32}
           >
             <Trans i18nKey="common.saveLogs" />
           </Button>
