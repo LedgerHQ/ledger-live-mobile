@@ -31,29 +31,36 @@ type CurrentRouteType = RouteProp<
   "params"
 >;
 
-const InstructionScene = ({ onNext }: { onNext: () => void }) => {
+const InstructionScene = () => {
   const { t } = useTranslation();
   const route = useRoute<CurrentRouteType>();
 
   return (
-    <>
-      <NumberedList
-        flex={1}
-        items={items.map(item => ({
-          title: t(item.title),
-          description:
-            typeof item.label === "string"
-              ? t(item.label)
-              : t(item.label[route.params.deviceModelId]),
-        }))}
-      />
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepSetupDevice.setup.cta")}
-      </Button>
-    </>
+    <NumberedList
+      flex={1}
+      items={items.map(item => ({
+        title: t(item.title),
+        description:
+          typeof item.label === "string"
+            ? t(item.label)
+            : t(item.label[route.params.deviceModelId]),
+      }))}
+    />
   );
 };
 
 InstructionScene.id = "InstructionScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.stepSetupDevice.setup.cta")}
+    </Button>
+  );
+};
+
+InstructionScene.Next = Next;
 
 export default InstructionScene;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Text, Button, IconBoxList, Icons } from "@ledgerhq/native-ui";
+import { Text, Button, IconBoxList, Icons } from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenName } from "../../../../../const";
 
@@ -19,7 +19,24 @@ const items = [
   },
 ];
 
-const IntroScene = ({ onNext }: { onNext: () => void }) => {
+const IntroScene = () => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <Text variant="h2" mb={10} uppercase>
+        {t("onboarding.stepSetupDevice.start.title")}
+      </Text>
+      <IconBoxList
+        items={items.map(item => ({ ...item, title: t(item.title) }))}
+      />
+    </>
+  );
+};
+
+IntroScene.id = "IntroScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
   const { t } = useTranslation();
   const navigation = useNavigation();
 
@@ -27,27 +44,17 @@ const IntroScene = ({ onNext }: { onNext: () => void }) => {
     // TODO: FIX @react-navigation/native using Typescript
     // @ts-ignore next-line
     navigation.navigate(ScreenName.OnboardingModalWarning, {
-      onNext: onNext,
+      onNext,
     });
   };
 
   return (
-    <>
-      <Flex flex={1}>
-        <Text variant="h2" mb={10} uppercase>
-          {t("onboarding.stepSetupDevice.start.title")}
-        </Text>
-        <IconBoxList
-          items={items.map(item => ({ ...item, title: t(item.title) }))}
-        />
-      </Flex>
-      <Button type="main" size="large" onPress={next}>
-        {t("onboarding.stepSetupDevice.start.cta")}
-      </Button>
-    </>
+    <Button type="main" size="large" onPress={next}>
+      {t("onboarding.stepSetupDevice.start.cta")}
+    </Button>
   );
 };
 
-IntroScene.id = "IntroScene";
+IntroScene.Next = Next;
 
 export default IntroScene;

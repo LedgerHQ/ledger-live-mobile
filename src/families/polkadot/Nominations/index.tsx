@@ -22,9 +22,9 @@ import {
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
 import type { PolkadotNomination } from "@ledgerhq/live-common/lib/families/polkadot/types";
 
+import { Flex } from "@ledgerhq/native-ui";
 import { ScreenName, NavigatorName } from "../../../const";
 import AccountDelegationInfo from "../../../components/AccountDelegationInfo";
-import IlluRewards from "../../../icons/images/Rewards";
 import { urls } from "../../../config/urls";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
 import Alert from "../../../components/Alert";
@@ -39,6 +39,9 @@ import {
   ExternalControllerUnsupportedWarning,
   ExternalStashUnsupportedWarning,
 } from "./UnsupportedWarning";
+import Illustration from "../../../images/illustration/Illustration";
+import EarnLight from "../../../images/illustration/Earn.light.png";
+import EarnDark from "../../../images/illustration/Earn.dark.png";
 
 type Props = {
   account: Account,
@@ -337,7 +340,14 @@ export default function Nominations({ account }: Props) {
       {!hasNominations ? (
         <AccountDelegationInfo
           title={t("polkadot.nomination.emptyState.title")}
-          image={<IlluRewards style={styles.illustration} />}
+          image={
+          <Flex alignItems="center" mb={6}>
+            <Illustration
+              lightSource={EarnLight}
+              darkSource={EarnDark}
+              size={150}
+            />
+          </Flex>}
           description={t("polkadot.nomination.emptyState.description", {
             name: account.currency.name,
           })}

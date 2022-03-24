@@ -1,35 +1,33 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Button, Text } from "@ledgerhq/native-ui";
+import { Button, Text } from "@ledgerhq/native-ui";
 
-const QuizzFinalScene = ({
-  onNext,
-  success,
-}: {
-  onNext: () => void;
-  success: boolean;
-}) => {
+const QuizzFinalScene = ({ success }: { success: boolean }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Flex flex={1}>
-        <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
-          {t(
-            `onboarding.quizz.final.${success ? "successTitle" : "failTitle"}`,
-          )}
-        </Text>
-        <Text variant="paragraph" color="palette.neutral.c80" mb={10}>
-          {t(`onboarding.quizz.final.${success ? "successText" : "failText"}`)}
-        </Text>
-      </Flex>
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.quizz.final.cta")}
-      </Button>
+      <Text variant="h2" color="palette.neutral.c100" mb={3} uppercase>
+        {t(`onboarding.quizz.final.${success ? "successTitle" : "failTitle"}`)}
+      </Text>
+      <Text variant="paragraph" color="palette.neutral.c80" mb={10}>
+        {t(`onboarding.quizz.final.${success ? "successText" : "failText"}`)}
+      </Text>
     </>
   );
 };
 
 QuizzFinalScene.id = "QuizzFinalScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.quizz.final.cta")}
+    </Button>
+  );
+};
+
+QuizzFinalScene.Next = Next;
 
 export default QuizzFinalScene;

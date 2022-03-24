@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable } from "react-native";
-import { Flex } from "@ledgerhq/native-ui";
+import { Flex, ScrollContainer } from "@ledgerhq/native-ui";
 import { StackScreenProps } from "@react-navigation/stack";
 import styled from "styled-components/native";
 import type { FlexBoxProps } from "@ledgerhq/native-ui/components/layout/Flex";
@@ -41,7 +41,9 @@ export default function NavigationModalContainer({
       </Flex>
 
       <ScreenContainer backgroundColor={backgroundColor} {...contentContainerProps}>
-        <Flex style={{ flex: 1, borderRadius: 50 }}>{children}</Flex>
+        <Flex style={{ flex: 1, borderRadius: 50 }}>
+          {children}
+        </Flex>
       </ScreenContainer>
     </SafeAreaView>
   );

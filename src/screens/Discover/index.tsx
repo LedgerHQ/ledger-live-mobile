@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
-import { Linking, Platform } from "react-native";
+import { Linking, Platform, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { Flex, Text, Link as TextLink } from "@ledgerhq/native-ui";
@@ -108,37 +108,39 @@ function Discover() {
 
   return (
     <StyledSafeAreaView>
-      <Flex p={8} mt={8} flexDirection="row">
-        <Flex flex={1} justyfyContent="flex-start" alignItems="flex-start">
-          <Text variant="h1">{t("discover.title")}</Text>
-          <Text variant="body" mb={6} mt={4} color="neutral.c90">
-            {t("discover.desc")}
-          </Text>
-          <TextLink type="color" onPress={onTellMeMore}>
-            {t("discover.link")}
-          </TextLink>
+      <ScrollView>
+        <Flex p={8} mt={8} flexDirection="row">
+          <Flex flex={1} justyfyContent="flex-start" alignItems="flex-start">
+            <Text variant="h1">{t("discover.title")}</Text>
+            <Text variant="body" mb={6} mt={4} color="neutral.c90">
+              {t("discover.desc")}
+            </Text>
+            <TextLink type="color" onPress={onTellMeMore}>
+              {t("discover.link")}
+            </TextLink>
+          </Flex>
+          <Flex flex={1} justifyContent="flex-end" alignItems="flex-end">
+            <Illustration
+              size={130}
+              darkSource={discoverImg.dark}
+              lightSource={discoverImg.light}
+            />
+          </Flex>
         </Flex>
-        <Flex flex={1} justifyContent="flex-end" alignItems="flex-end">
-          <Illustration
-            size={130}
-            darkSource={discoverImg.dark}
-            lightSource={discoverImg.light}
-          />
-        </Flex>
-      </Flex>
-      {featuresList.map(
-        ({ title, subTitle, onPress, disabled, labelBadge, Image }, i) => (
-          <DiscoverCard
-            key={i}
-            title={title}
-            subTitle={subTitle}
-            onPress={onPress}
-            disabled={disabled}
-            labelBadge={labelBadge}
-            Image={Image}
-          />
-        ),
-      )}
+        {featuresList.map(
+          ({ title, subTitle, onPress, disabled, labelBadge, Image }, i) => (
+            <DiscoverCard
+              key={i}
+              title={title}
+              subTitle={subTitle}
+              onPress={onPress}
+              disabled={disabled}
+              labelBadge={labelBadge}
+              Image={Image}
+            />
+          ),
+        )}
+      </ScrollView>
     </StyledSafeAreaView>
   );
 }

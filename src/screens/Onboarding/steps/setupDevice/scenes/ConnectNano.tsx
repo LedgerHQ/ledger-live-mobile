@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Flex, Button } from "@ledgerhq/native-ui";
 import { useDispatch } from "react-redux";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -24,8 +23,6 @@ const ConnectNanoScene = ({
   onNext: () => void;
   deviceModelId: string;
 }) => {
-  const { t } = useTranslation();
-
   const dispatch = useDispatch();
   const [device, setDevice] = useState<Device | undefined>();
 
@@ -66,20 +63,6 @@ const ConnectNanoScene = ({
 
   const usbOnly = ["nanoS", "nanoSP", "blue"].includes(deviceModelId);
 
-  const Footer = __DEV__ ? (
-    <Button
-      mt={7}
-      type="color"
-      outline
-      onPress={() => {
-        dispatch(setReadOnlyMode(false));
-        onNext();
-      }}
-    >
-      (DEV) skip this step
-    </Button>
-  ) : null;
-
   return (
     <>
       <TrackScreen category="Onboarding" name="PairNew" />
@@ -93,7 +76,6 @@ const ConnectNanoScene = ({
           hideAnimation
         />
       </Flex>
-      {Footer}
       <DeviceActionModal
         onClose={setDevice}
         device={device}
@@ -106,5 +88,25 @@ const ConnectNanoScene = ({
 };
 
 ConnectNanoScene.id = "ConnectNanoScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const dispatch = useDispatch();
+
+  return __DEV__ ? (
+    <Button
+      mt={7}
+      type="color"
+      outline
+      onPress={() => {
+        dispatch(setReadOnlyMode(false));
+        onNext();
+      }}
+    >
+      (DEV) skip this step
+    </Button>
+  ) : null;
+};
+
+ConnectNanoScene.Next = Next;
 
 export default ConnectNanoScene;

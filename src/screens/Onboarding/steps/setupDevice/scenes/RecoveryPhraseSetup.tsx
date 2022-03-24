@@ -12,25 +12,31 @@ const items = [
   },
 ];
 
-const RecoveryPhraseSetupScene = ({ onNext }: { onNext: () => void }) => {
+const RecoveryPhraseSetupScene = () => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <NumberedList
-        flex={1}
-        items={items.map(item => ({
-          title: t(item.title),
-          description: item.desc ? t(item.desc) : undefined,
-        }))}
-      />
-      <Button type="main" size="large" onPress={onNext}>
-        {t("onboarding.stepSetupDevice.recoveryPhraseSetup.cta")}
-      </Button>
-    </>
+    <NumberedList
+      flex={1}
+      items={items.map(item => ({
+        title: t(item.title),
+        description: item.desc ? t(item.desc) : undefined,
+      }))}
+    />
   );
 };
 
 RecoveryPhraseSetupScene.id = "RecoveryPhraseSetupScene";
+
+const Next = ({ onNext }: { onNext: () => void }) => {
+  const { t } = useTranslation();
+  return (
+    <Button type="main" size="large" onPress={onNext}>
+      {t("onboarding.stepSetupDevice.recoveryPhraseSetup.cta")}
+    </Button>
+  );
+};
+
+RecoveryPhraseSetupScene.Next = Next;
 
 export default RecoveryPhraseSetupScene;

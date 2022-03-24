@@ -1,6 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Button, List, Icons, Text } from "@ledgerhq/native-ui";
+import {
+  Flex,
+  Button,
+  List,
+  Icons,
+  Text,
+  ScrollListContainer,
+} from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 
 const content = [
@@ -21,11 +28,10 @@ const OnboardingSetupDeviceInformation = () => {
   return (
     <Flex
       flex={1}
-      p={6}
       justifyContent="space-between"
       backgroundColor="background.main"
     >
-      <Flex>
+      <ScrollListContainer contentContainerStyle={{ padding: 16 }}>
         <Text variant="h1" mb={6}>
           {t("onboarding.stepSetupDevice.pinCodeSetup.infoModal.title")}
         </Text>
@@ -44,8 +50,8 @@ const OnboardingSetupDeviceInformation = () => {
           }))}
           itemSeparatorProps={{ mb: 7 }}
         />
-      </Flex>
-      <Button type="main" size="large" onPress={navigation.goBack}>
+      </ScrollListContainer>
+      <Button m={6} type="main" size="large" onPress={navigation.goBack}>
         {t("onboarding.stepSetupDevice.pinCodeSetup.cta")}
       </Button>
     </Flex>

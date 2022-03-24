@@ -197,7 +197,6 @@ const NftViewer = ({ route }: Props) => {
               style={styles.image}
               src={metadata?.media}
               status={status}
-              hackWidth={300}
             />
           </View>
 

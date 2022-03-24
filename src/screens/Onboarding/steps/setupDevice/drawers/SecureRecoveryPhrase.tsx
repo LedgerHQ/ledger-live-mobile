@@ -1,6 +1,12 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { Flex, Button, Text, List, Icons } from "@ledgerhq/native-ui";
+import {
+  Button,
+  Text,
+  List,
+  Icons,
+  ScrollListContainer,
+} from "@ledgerhq/native-ui";
 import { useNavigation } from "@react-navigation/native";
 
 const content = [
@@ -22,13 +28,8 @@ const OnboardingSetupRecoveryPhrase = () => {
   const navigation = useNavigation();
 
   return (
-    <Flex
-      flex={1}
-      p={6}
-      justifyContent="space-between"
-      backgroundColor="background.main"
-    >
-      <Flex>
+    <>
+      <ScrollListContainer flex={1} contentContainerStyle={{ padding: 16 }}>
         <Text variant="h1" color="neutral.c100" mb={8}>
           {t("onboarding.stepSetupDevice.hideRecoveryPhrase.title")}
         </Text>
@@ -39,11 +40,11 @@ const OnboardingSetupRecoveryPhrase = () => {
           }))}
           itemSeparatorProps={{ mb: 7 }}
         />
-      </Flex>
-      <Button type="main" size="large" onPress={navigation.goBack}>
+      </ScrollListContainer>
+      <Button type="main" m={6} size="large" onPress={navigation.goBack}>
         {t("onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
-    </Flex>
+    </>
   );
 };
 
