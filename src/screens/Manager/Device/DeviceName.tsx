@@ -39,6 +39,7 @@ export default function DeviceNameRow({
       <Text
         maxWidth="90%"
         variant={"h2"}
+        uppercase={false}
         numberOfLines={2}
         ellipsizeMode="tail"
       >
