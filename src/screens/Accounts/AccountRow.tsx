@@ -11,8 +11,10 @@ import {
   Account,
   Currency,
   TokenAccount,
+  CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { Flex, ProgressLoader, Text } from "@ledgerhq/native-ui";
+import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
+import { Flex, ProgressLoader, Text, Tag } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import { useSelector } from "react-redux";
 import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
@@ -48,6 +50,11 @@ const AccountRow = ({
   const currency = getAccountCurrency(account);
   const name = getAccountName(account);
   const unit = getAccountUnit(account);
+
+  const tag =
+    account.derivationMode !== undefined &&
+    account.derivationMode !== null &&
+    getTagDerivationMode(currency as CryptoCurrency, account.derivationMode);
 
   const color = useMemo(
     () => ensureContrast(getCurrencyColor(currency), colors.constant.white),
@@ -121,17 +128,30 @@ const AccountRow = ({
         </Flex>
         <Flex flex={1}>
           <Flex flexDirection="row" justifyContent="space-between">
-            <Flex alignItems="flex-start" flex={1}>
-              <Text
-                variant="large"
-                fontWeight="semiBold"
-                color="neutral.c100"
-                numberOfLines={1}
-              >
-                {name}
-              </Text>
+            <Flex
+              flexGrow={1}
+              flexShrink={1}
+              flexDirection="row"
+              alignItems="center"
+            >
+              <Flex flexShrink={1}>
+                <Text
+                  variant="large"
+                  fontWeight="semiBold"
+                  color="neutral.c100"
+                  numberOfLines={1}
+                  flexShrink={1}
+                >
+                  {name}
+                </Text>
+              </Flex>
+              {tag && (
+                <Flex mx={3} flexShrink={0}>
+                  <Tag>{tag}</Tag>
+                </Flex>
+              )}
             </Flex>
-            <Flex alignItems="flex-end" flexShrink={0} pl={3}>
+            <Flex flexDirection="row" alignItems="flex-end" flexShrink={0}>
               <Text variant="large" fontWeight="semiBold" color="neutral.c100">
                 <CounterValue
                   currency={currency}
