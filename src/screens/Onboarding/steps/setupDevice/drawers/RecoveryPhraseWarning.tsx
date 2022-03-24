@@ -1,14 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Flex,
-  Button,
-  Text,
-  Icons,
-  IconBox,
-  ScrollContainer,
-} from "@ledgerhq/native-ui";
+import { Button, Icons, ScrollContainer } from "@ledgerhq/native-ui";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { ModalHeader } from "@ledgerhq/native-ui/components/Layout/Modals/BaseModal";
 
 type WarningRouteProps = RouteProp<
   { params: { onNext?: () => void } },
@@ -28,37 +22,18 @@ const OnboardingRecoveryPhraseWarning = () => {
   return (
     <>
       <ScrollContainer flex={1}>
-        <Flex alignItems="center">
-          <IconBox
-            Icon={Icons.WarningMedium}
-            color="warning.c100"
-            iconSize={24}
-            boxSize={64}
-          />
-          <Text
-            variant="h2"
-            color="neutral.c100"
-            mt={8}
-            uppercase
-            textAlign="center"
-          >
-            {t(
-              "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title",
-            )}
-          </Text>
-          <Text
-            variant="paragraph"
-            color="neutral.c80"
-            mt={6}
-            textAlign="center"
-          >
-            {t(
-              "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc",
-            )}
-          </Text>
-        </Flex>
+        <ModalHeader
+          Icon={Icons.WarningMedium}
+          iconColor={"warning.c100"}
+          title={t(
+            "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.titlea",
+          )}
+          description={t(
+            "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc",
+          )}
+        />
       </ScrollContainer>
-      <Button type="main" size="large" onPress={handlePress}>
+      <Button type="main" size="large" onPress={handlePress} mt={4}>
         {t("onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta")}
       </Button>
     </>
