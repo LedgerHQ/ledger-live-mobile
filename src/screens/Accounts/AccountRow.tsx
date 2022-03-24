@@ -19,7 +19,7 @@ import { useTheme } from "styled-components/native";
 import { useSelector } from "react-redux";
 import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import { BigNumber } from "bignumber.js";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
 import CurrencyIcon from "../../components/CurrencyIcon";
@@ -87,14 +87,20 @@ const AccountRow = ({
 
   const onAccountPress = useCallback(() => {
     if (account.type === "Account") {
-      navigation.navigate(ScreenName.Account, {
-        accountId,
-        isForwardedFromAccounts: true,
+      navigation.navigate(NavigatorName.PortfolioAccounts, {
+        screen: ScreenName.Account,
+        params: {
+          accountId,
+          isForwardedFromAccounts: true,
+        },
       });
     } else if (account.type === "TokenAccount") {
-      navigation.navigate(ScreenName.Account, {
-        parentId: account?.parentId,
-        accountId: account.id,
+      navigation.navigate(NavigatorName.PortfolioAccounts, {
+        screen: ScreenName.Account,
+        params: {
+          parentId: account?.parentId,
+          accountId: account.id,
+        },
       });
     }
   }, [account, accountId, navigation]);
