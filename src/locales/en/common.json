@@ -1909,7 +1909,7 @@
       "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
       "hideNFTCollectionModal": {
         "title": "Hide Collection?",
-        "desc": "You can unhide this collection from the \"Account Section\" in the app settings"
+        "desc": "You can unhide this collection in the setting options."
       },
       "cryptoAssets": {
         "header": "Crypto assets",
