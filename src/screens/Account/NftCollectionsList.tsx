@@ -38,16 +38,17 @@ export default function NftCollectionsList({ account }: Props) {
   const navigation = useNavigation();
   const { nfts } = account;
   const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
-  const nftCollections = useMemo(
-    () =>
-      nftsByCollections(nfts).filter(
-        collection =>
-          !hiddenNftCollections.includes(
-            `${account.id}|${collection.contract}`,
-          ),
-      ),
-    [nfts, hiddenNftCollections, account.id],
-  );
+  const nftCollections = useMemo(() => {
+    const hiddenCollectionsDict: { [id: string]: boolean } = {};
+    hiddenNftCollections.forEach(collection => {
+      hiddenCollectionsDict[collection] = true;
+    });
+
+    return nftsByCollections(nfts).filter(
+      collection =>
+        !hiddenCollectionsDict[`${account.id}|${collection.contract}`],
+    );
+  }, [nfts, hiddenNftCollections, account.id]);
 
   const [isCollectionMenuOpen, setIsCollectionMenuOpen] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState();
@@ -59,7 +60,7 @@ export default function NftCollectionsList({ account }: Props) {
     },
     [setSelectedCollection, setIsCollectionMenuOpen],
   );
-    
+
   const data = take(nftCollections, MAX_COLLECTIONS_TO_SHOW);
 
   const navigateToReceive = useCallback(

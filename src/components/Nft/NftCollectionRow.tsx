@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import {
   useNftMetadata,
   CollectionWithNFT,
@@ -8,6 +7,7 @@ import {
 import { Flex, Text } from "@ledgerhq/native-ui";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
+import Touchable from "../Touchable";
 
 type Props = {
   collection: CollectionWithNFT;
@@ -25,13 +25,12 @@ function NftCollectionRow({
   const loading = status === "loading";
 
   return (
-    <TouchableOpacity onLongPress={onLongPress} onPress={onCollectionPress}>
-      <Flex
-        accessible
-        flexDirection={"row"}
-        alignItems={"center"}
-        py={6}
-      >
+    <Touchable
+      event="ShowNftCollectionMenu"
+      onPress={onCollectionPress}
+      onLongPress={onLongPress}
+    >
+      <Flex accessible flexDirection={"row"} alignItems={"center"} py={6}>
         <NftImage
           style={styles.collectionImage}
           status={status}
@@ -58,7 +57,7 @@ function NftCollectionRow({
           {collection.nfts.length}
         </Text>
       </Flex>
-    </TouchableOpacity>
+    </Touchable>
   );
 }
 

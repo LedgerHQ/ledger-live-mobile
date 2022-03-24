@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { TouchableOpacity, View, StyleSheet, SectionList } from "react-native";
 import { findTokenById } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import { Box } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { showToken } from "../../../actions/settings";
@@ -81,6 +80,7 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
         )}
         {hiddenNftCollections.length > 0 && (
           <SettingsRow
+            event="HiddenNftCollectionsSettings"
             title={t("settings.accounts.hiddenNFTCollections")}
             desc={t("settings.accounts.hiddenNFTCollectionsDesc")}
             arrowRight

@@ -30,15 +30,6 @@ const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 6;
 
 const CollectionsList = Animated.createAnimatedComponent(FlatList);
 
-const renderItem = ({ item: collection }) => (
-  <View style={styles.collectionContainer}>
-    <NftCollectionWithName
-      key={collection.contract}
-      collectionWithNfts={collection}
-    />
-  </View>
-);
-
 const NftGallery = () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
@@ -62,20 +53,34 @@ const NftGallery = () => {
     { useNativeDriver: true },
   );
 
+  const renderItem = useCallback(
+    ({ item: collection }) => (
+      <View style={styles.collectionContainer}>
+        <NftCollectionWithName
+          key={collection.contract}
+          collectionWithNfts={collection}
+          account={account}
+        />
+      </View>
+    ),
+    [account],
+  );
+
   const [collectionsCount, setCollectionsCount] = useState(
     MAX_COLLECTIONS_FIRST_RENDER,
   );
 
-  const collections = useMemo(
-    () =>
-      nftsByCollections(account.nfts).filter(
-        collection =>
-          !hiddenNftCollections.includes(
-            `${account.id}|${collection.contract}`,
-          ),
-      ),
-    [account.nfts, account.id, hiddenNftCollections],
-  );
+  const collections = useMemo(() => {
+    const hiddenCollectionsDict = {};
+    hiddenNftCollections.forEach(collection => {
+      hiddenCollectionsDict[collection] = true;
+    });
+
+    return nftsByCollections(account.nfts).filter(
+      collection =>
+        !hiddenCollectionsDict[`${account.id}|${collection.contract}`],
+    );
+  }, [account.nfts, account.id, hiddenNftCollections]);
 
   const collectionsSlice = useMemo(
     () => collections.slice(0, collectionsCount),
