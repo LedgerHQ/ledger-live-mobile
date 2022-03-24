@@ -10,7 +10,7 @@ import {
 } from "@ledgerhq/native-ui";
 import { StackScreenProps } from "@react-navigation/stack";
 import { useDispatch } from "react-redux";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 import { supportedLocales } from "../../../languages";
 import Button from "../../../components/Button";
 import { ScreenName } from "../../../const";
@@ -39,7 +39,7 @@ const languages = {
 };
 
 function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
-  const { locale: currentLocale } = useLocale();
+  const { locale: currentLocale } = useTranslationLocale();
   const dispatch = useDispatch();
 
   const next = useCallback(() => {

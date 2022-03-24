@@ -74,7 +74,16 @@ export default function LocaleProvider({ children }: Props) {
   );
 }
 
-export function useLocale() {
+/**
+ * This returns an object containing the "language setting" locale, to be used for
+ * translation purposes.
+ *
+ * /!\ Do not use this for number or date formatting.
+ * For number or date formatting (according to the "region setting" locale),
+ * use instead `useSelector(localeSelector)` where `localeSelector` comes from
+ * `src/reducers/settings.js`.
+ * */
+export function useTranslationLocale() {
   return useContext(LocaleContext);
 }
 

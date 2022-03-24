@@ -4,10 +4,10 @@ import { Linking } from "react-native";
 import { ExternalLinkMedium } from "@ledgerhq/native-ui/assets/icons";
 import SettingsRow from "../../../components/SettingsRow";
 import { urls } from "../../../config/urls";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 
 function PrivacyPolicyRow() {
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   return (
     <SettingsRow
       event="PrivacyPolicyRow"

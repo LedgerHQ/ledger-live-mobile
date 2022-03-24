@@ -39,7 +39,7 @@ export function DebugMocks() {
           dataStr={config.BRIDGESTREAM_DATA}
         />
       ) : null}
-      {accounts.length === 0 ? (
+      {true || accounts.length === 0 ? (
         <GenerateMockAccounts title="Generate 10 mock Accounts" count={10} />
       ) : null}
       <OpenDebugLogs />

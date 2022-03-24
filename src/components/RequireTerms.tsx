@@ -12,7 +12,7 @@ import { GraphGrowAltMedium } from "@ledgerhq/native-ui/assets/icons";
 import { BottomDrawer } from "@ledgerhq/native-ui";
 import { useTerms, useTermsAccept, url } from "../logic/terms";
 import getWindowDimensions from "../logic/getWindowDimensions";
-import { useLocale } from "../context/Locale";
+import { useTranslationLocale } from "../context/Locale";
 import LText from "./LText";
 import SafeMarkdown from "./SafeMarkdown";
 import Button from "./Button";
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
 const RequireTermsModal = () => {
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const [markdown, error, retry] = useTerms(locale);
   const [accepted, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
@@ -149,7 +149,7 @@ export const TermModals = ({
   const { t } = useTranslation();
 
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const [markdown, error, retry] = useTerms(locale);
   const height = getWindowDimensions().height - 320;
 

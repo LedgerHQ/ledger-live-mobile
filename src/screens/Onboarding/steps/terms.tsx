@@ -11,7 +11,7 @@ import { TrackScreen } from "../../../analytics";
 import { ScreenName } from "../../../const";
 import { setAnalytics } from "../../../actions/settings";
 import { useTermsAccept } from "../../../logic/terms";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 import { urls } from "../../../config/urls";
 import OnboardingView from "../OnboardingView";
 import StyledStatusBar from "../../../components/StyledStatusBar";
@@ -49,7 +49,7 @@ const LinkBox = React.memo(({ text, url, event, mb = 0 }: LinkBoxProps) => (
 ));
 
 function OnboardingStepTerms() {
-  const { locale = "en" } = useLocale();
+  const { locale = "en" } = useTranslationLocale();
   const dispatch = useDispatch();
   const [, setAccepted] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
