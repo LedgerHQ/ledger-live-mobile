@@ -45,12 +45,9 @@ const NftCardView = ({
           },
         ]}
         onPress={() => {
-          navigation.navigate(NavigatorName.NftNavigator, {
-            screen: ScreenName.NftViewer,
-            params: {
-              nft,
-              collection,
-            },
+          navigation.navigate(ScreenName.NftViewer, {
+            nft,
+            collection,
           });
         }}
       >

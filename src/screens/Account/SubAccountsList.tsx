@@ -161,7 +161,7 @@ export default function SubAccountsList({
       );
     }
     // If there is 3 or less sub accounts, no need for collapse button
-    if (subAccounts.length < 3) return null;
+    if (subAccounts.length <= 3) return null;
 
     // else, we render the collapse button
     return (

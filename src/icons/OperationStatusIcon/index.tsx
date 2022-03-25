@@ -35,8 +35,8 @@ const iconsComponent = {
   CHILL: Icons.VoteMedium,
   REWARD_PAYOUT: Icons.ClaimRewardsMedium,
   SET_CONTROLLER: Icons.ArrowFromBottomMedium,
-  NFT_IN: undefined, // TODO: get an icon from design team
-  NFT_OUT: undefined, // TODO: get an icon from design team
+  NFT_IN: Icons.ArrowBottomMedium,
+  NFT_OUT: Icons.ArrowTopMedium,
 };
 
 export default ({

@@ -17,7 +17,6 @@ import {
 } from "@ledgerhq/live-common/lib/types";
 import { createStructuredSelector } from "reselect";
 import { connect, useSelector } from "react-redux";
-import { useTheme } from "@react-navigation/native";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import CounterValue from "./CounterValue";

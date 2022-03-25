@@ -18,17 +18,16 @@ import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 import Clipboard from "@react-native-community/clipboard";
+import { Trans } from "react-i18next";
 
-import { Icons } from "@ledgerhq/native-ui";
+import { Button, Icons } from "@ledgerhq/native-ui";
 
 import { accountSelector } from "../../reducers/accounts";
 import NftLinksPanel from "./NftLinksPanel";
 import { ScreenName, NavigatorName } from "../../const";
-import SendIcon from "../../icons/Send";
 import { rgba } from "../../colors";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
-import Button from "../Button";
 import LText from "../LText";
 
 type Props = {
@@ -245,18 +244,18 @@ const NftViewer = ({ route }: Props) => {
           <View style={styles.buttons}>
             <View style={styles.sendButtonContainer}>
               <Button
-                type="primary"
-                IconLeft={SendIcon}
-                containerStyle={styles.sendButton}
-                title={t("account.send")}
+                type="main"
+                Icon={Icons.ArrowFromBottomMedium}
+                iconPosition="left"
                 onPress={goToRecipientSelection}
-              />
+              >
+                <Trans i18nKey="account.send" />
+              </Button>
             </View>
             <View style={styles.ellipsisButtonContainer}>
               <Button
-                type="primary"
-                containerStyle={styles.ellipsisButton}
-                title="•••"
+                type="main"
+                Icon={Icons.OthersMedium}
                 onPress={() => setBottomModalOpen(true)}
               />
             </View>

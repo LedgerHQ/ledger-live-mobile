@@ -3,8 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { BleErrorCode } from "react-native-ble-plx";
 import { Trans } from "react-i18next";
 import { PairingFailed, GenuineCheckFailed } from "@ledgerhq/errors";
-import { useTheme } from "@react-navigation/native";
-import { Button } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
+import { Button, Flex } from "@ledgerhq/native-ui";
 import LocationRequired from "../LocationRequired";
 import { TrackScreen } from "../../analytics";
 import Touchable from "../../components/Touchable";
@@ -52,25 +52,25 @@ function RenderError({ error, status, onBypassGenuine, onRetry }: Props) {
     : null;
 
   return (
-    <View style={styles.root}>
+    <Flex flex={1}>
       <TrackScreen category="PairDevices" name="Error" />
-      <View style={styles.body}>
+      <Flex flex={1} p={20} justifyContent="center">
         <GenericErrorView
           error={error}
           outerError={outerError}
           withDescription
           withIcon
         />
-        <View style={styles.buttonContainer}>
+        <Flex mt={30} flexDirection={"row"}>
           <Button
+            flex={1}
             event="PairDevicesRetry"
             type="main"
             onPress={onRetry}
-            containerStyle={styles.button}
           >
             <Trans i18nKey="common.retry" />
           </Button>
-        </View>
+        </Flex>
         {isGenuineCheckStatus ? (
           <Touchable
             event="PairDevicesBypassGenuine"
@@ -78,51 +78,27 @@ function RenderError({ error, status, onBypassGenuine, onRetry }: Props) {
             hitSlop={hitSlop}
             style={styles.linkContainer}
           >
-            <LText style={styles.linkText} color="live" semiBold>
+            <LText color={colors.primary} semiBold>
               <Trans i18nKey="common.skip" />{" "}
             </LText>
-            <IconArrowRight size={16} color={colors.live} />
+            <IconArrowRight size={16} color={colors.primary} />
           </Touchable>
         ) : (
           <HelpLink url={url} style={styles.linkContainer} />
         )}
-      </View>
+      </Flex>
       {isGenuineCheckStatus ? (
-        <View style={[styles.footer, { borderColor: colors.lightFog }]}>
+        <Flex height={48}>
           <HelpLink style={styles.linkContainerGenuine} />
-        </View>
+        </Flex>
       ) : null}
-    </View>
+    </Flex>
   );
 }
 
 export default RenderError;
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: "column",
-  },
-  body: {
-    flex: 1,
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-  title: {
-    marginTop: 32,
-    textAlign: "center",
-
-    fontSize: 18,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    marginTop: 32,
-  },
-  button: {
-    flex: 1,
-  },
   linkContainer: {
     marginTop: 24,
     alignItems: "center",
@@ -133,14 +109,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-  },
-  linkText: {
-    marginLeft: 6,
-  },
-  footer: {
-    height: 48,
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopWidth: 1,
   },
 });

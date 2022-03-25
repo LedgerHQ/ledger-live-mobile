@@ -50,6 +50,7 @@ const DeviceAppStorage = ({
         flexDirection={"row"}
         alignItems={"center"}
         justifyContent={"space-between"}
+        flexWrap={"wrap"}
         mb={3}
       >
         <Flex flexDirection={"row"} alignItems={"center"}>
@@ -64,7 +65,7 @@ const DeviceAppStorage = ({
               fontWeight={"medium"}
               color={"palette.neutral.c80"}
             >
-              Used
+              <Trans i18nKey="manager.storage.used" />
             </Text>{" "}
             <ByteSize
               value={appsSpaceBytes}

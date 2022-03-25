@@ -5,6 +5,7 @@ import { Flex, Text } from "@ledgerhq/native-ui";
 export default class ModalBottomAction extends Component<{
   icon?: any;
   title?: any;
+  uppercase?: boolean;
   description?: any;
   footer: any;
   shouldWrapDesc?: boolean;
@@ -13,6 +14,7 @@ export default class ModalBottomAction extends Component<{
     const {
       icon,
       title,
+      uppercase,
       description,
       footer,
       shouldWrapDesc = true,
@@ -21,7 +23,12 @@ export default class ModalBottomAction extends Component<{
       <Flex alignItems="center">
         {icon && <Flex mb={24}>{icon}</Flex>}
         {title ? (
-          <Text mb={6} fontWeight="semiBold" variant="h3">
+          <Text
+            mb={6}
+            uppercase={uppercase !== false}
+            fontWeight="semiBold"
+            variant="h3"
+          >
             {title}
           </Text>
         ) : null}

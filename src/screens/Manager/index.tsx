@@ -48,6 +48,7 @@ const RemoveDeviceModal = ({
         <Illustration size={100} darkSource={darkImg} lightSource={lightImg} />
       }
       title={deviceName}
+      uppercase={false}
       footer={
         <Button
           event="HardResetModalAction"

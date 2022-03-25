@@ -1336,7 +1336,7 @@
           "wrong": "No problem, Ledger can send me a copy"
         },
         "modal": {
-          "text": "Anyone who knows your recovery phrase can steal your crypto assets. \\nIf you lose it, you must quickly transfer your crypto to a secure place.",
+          "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
           "cta": "Next question"
         }
       },
@@ -3951,6 +3951,7 @@
     }
   },
   "walletconnect": {
+    "scan": "Scan Wallet Connect QR code",
     "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
     "reject": "Reject",
     "connect": "Connect",
