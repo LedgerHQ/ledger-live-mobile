@@ -10,9 +10,12 @@ import LText from "../../../components/LText";
 const NftCollectionHeaderTitle = () => {
   const { params } = useRoute();
   const { colors } = useTheme();
+  const { collection } = params;
+  const nft = collection[0];
   const { status, metadata } = useNftMetadata(
-    params.collection.contract,
-    params.collection.nfts[0].tokenId,
+    nft.contract,
+    nft.tokenId,
+    nft.currencyId,
   );
 
   return (

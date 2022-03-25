@@ -31,10 +31,7 @@ const CollectionsList = Animated.createAnimatedComponent(FlatList);
 
 const renderItem = ({ item: collection }) => (
   <View style={styles.collectionContainer}>
-    <NftCollectionWithName
-      key={collection.contract}
-      collectionWithNfts={collection}
-    />
+    <NftCollectionWithName key={collection.contract} collection={collection} />
   </View>
 );
 
@@ -66,7 +63,10 @@ const NftGallery = () => {
     account.nfts,
   ]);
   const collectionsSlice = useMemo(
-    () => collections.slice(0, collectionsCount),
+    () =>
+      Object.keys(collections)
+        .slice(0, collectionsCount)
+        .map(collectionName => collections[collectionName]),
     [collections, collectionsCount],
   );
 
