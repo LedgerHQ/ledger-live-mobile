@@ -74,7 +74,7 @@ const NftCollection = ({ route }: Props) => {
 
   // nfts' list related -----
   const [nftCount, setNftCount] = useState(MAX_NFT_FIRST_RENDER);
-  const nfts = useMemo(() => params.collection.nfts.slice(0, nftCount), [
+  const nfts = useMemo(() => params.collection.slice(0, nftCount), [
     nftCount,
     params.collection,
   ]);
@@ -93,7 +93,6 @@ const NftCollection = ({ route }: Props) => {
       <NftCard
         key={item.id}
         nft={item}
-        collection={params.collection}
         style={{
           maxWidth: "50%",
           paddingLeft: index % 2 !== 0 ? 8 : 0,
@@ -101,12 +100,12 @@ const NftCollection = ({ route }: Props) => {
         }}
       />
     ),
-    [params.collection],
+    [],
   );
 
   const renderNftListFooter = useCallback(
-    () => (params.collection.nfts.length > nftCount ? <LoadingFooter /> : null),
-    [params.collection.nfts.length, nftCount],
+    () => (params.collection.length > nftCount ? <LoadingFooter /> : null),
+    [params.collection.length, nftCount],
   );
 
   const onNftsEndReached = useCallback(() => {
