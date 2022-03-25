@@ -3,21 +3,25 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
-import type { CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import { useTheme } from "@react-navigation/native";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
 import LText from "../LText";
 
 type Props = {
-  collection: CollectionWithNFT,
+  collection: ProtoNFT[],
   onCollectionPress: () => void,
 };
 
 function NftCollectionRow({ collection, onCollectionPress }: Props) {
   const { colors } = useTheme();
-  const { contract, nfts } = collection;
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
+  const nft = collection[0];
+  const { status, metadata } = useNftMetadata(
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
+  );
   const loading = status === "loading";
 
   return (
@@ -40,11 +44,11 @@ function NftCollectionRow({ collection, onCollectionPress }: Props) {
               numberOfLines={2}
               style={styles.collectionName}
             >
-              {metadata?.tokenName || collection.contract}
+              {metadata?.tokenName || nft?.contract}
             </LText>
           </Skeleton>
         </View>
-        <LText semiBold>{collection.nfts.length}</LText>
+        <LText semiBold>{collection.length}</LText>
       </View>
     </RectButton>
   );

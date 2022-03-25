@@ -40,6 +40,11 @@ export default function NftCollectionsList({ account }: Props) {
   const { nfts } = account;
   const nftCollections = useMemo(() => nftsByCollections(nfts), [nfts]);
 
+  const visibleCollections = useMemo(
+    () => take(Object.values(nftCollections), MAX_COLLECTIONS_TO_SHOW),
+    [nftCollections],
+  );
+
   const navigateToReceive = useCallback(
     () =>
       navigation.navigate(NavigatorName.ReceiveFunds, {
@@ -97,7 +102,7 @@ export default function NftCollectionsList({ account }: Props) {
 
   const renderFooter = useCallback(
     () =>
-      nftCollections.length > MAX_COLLECTIONS_TO_SHOW && (
+      Object.keys(nftCollections).length > MAX_COLLECTIONS_TO_SHOW && (
         <Card
           style={[
             styles.card,
@@ -128,7 +133,7 @@ export default function NftCollectionsList({ account }: Props) {
           </RectButton>
         </Card>
       ),
-    [colors, navigateToGallery, nftCollections.length],
+    [colors.black, colors.card, colors.live, navigateToGallery, nftCollections],
   );
 
   const renderItem = useCallback(
@@ -159,7 +164,7 @@ export default function NftCollectionsList({ account }: Props) {
   return (
     <View style={styles.collectionList}>
       <FlatList
-        data={take(nftCollections, MAX_COLLECTIONS_TO_SHOW)}
+        data={visibleCollections}
         renderItem={renderItem}
         keyExtractor={collectionKeyExtractor}
         ListHeaderComponent={renderHeader}
