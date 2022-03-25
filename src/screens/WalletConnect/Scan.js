@@ -7,6 +7,7 @@ import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 // $FlowFixMe
 import { connect, context, STATUS } from "./Provider";
+import { Trans } from "react-i18next";
 
 type Props = {
   navigation: any,
@@ -44,7 +45,11 @@ const ScanWalletConnect = ({ navigation, route }: Props) => {
   return (
     <>
       <TrackScreen category="WalletConnect" screen="Scan" />
-      <Scanner navigation={navigation} onResult={onResult} />
+      <Scanner
+        navigation={navigation}
+        onResult={onResult}
+        instruction={<Trans i18nKey="walletconnect.scan" />}
+      />
     </>
   );
 };

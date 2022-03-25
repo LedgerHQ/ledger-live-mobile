@@ -10,9 +10,10 @@ import { softMenuBarHeight } from "../../logic/getWindowDimensions";
 type Props = {
   progress?: number;
   liveQrCode?: boolean;
+  instruction?: React.ReactNode | string;
 };
 
-function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
+function QrCodeBottomLayer({ progress, liveQrCode, instruction }: Props) {
   return (
     <Flex
       style={[
@@ -29,13 +30,15 @@ function QrCodeBottomLayer({ progress, liveQrCode }: Props) {
           color="constant.white"
           mb={2}
         >
-          <Trans
-            i18nKey={
-              liveQrCode
-                ? "account.import.scan.descBottom"
-                : "send.scan.descBottom"
-            }
-          />
+          {instruction || (
+            <Trans
+              i18nKey={
+                liveQrCode
+                  ? "account.import.scan.descBottom"
+                  : "send.scan.descBottom"
+              }
+            />
+          )}
         </Text>
         {progress !== undefined && progress > 0 && (
           <Flex width={104} mt={8} alignItems="center">

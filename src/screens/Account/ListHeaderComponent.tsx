@@ -204,7 +204,7 @@ export function getListHeaderComponents({
       ),
       ...(!empty
         ? [
-            <Box py={3} pl={6}>
+            <Box py={3}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <FabActions account={account} parentAccount={parentAccount} />
               </ScrollView>
@@ -212,14 +212,7 @@ export function getListHeaderComponents({
           ]
         : []),
       !empty && (
-        <Box
-          mx={6}
-          mt={7}
-          mb={8}
-          pb={8}
-          borderBottomWidth={"1px"}
-          borderBottomColor={"neutral.c40"}
-        >
+        <Box mx={6} mt={7} mb={8} pb={6}>
           <AccountGraphCard
             account={account}
             range={range}
@@ -249,13 +242,7 @@ export function getListHeaderComponents({
         : []),
       ...(!empty && account.type === "Account" && account.subAccounts
         ? [
-            <Box
-              mx={6}
-              mb={8}
-              pb={9}
-              borderBottomWidth={"1px"}
-              borderBottomColor={"neutral.c40"}
-            >
+            <Box mx={6} mb={8} pb={6}>
               <SubAccountsList
                 accountId={account.id}
                 onAccountPress={onAccountPress}

@@ -105,7 +105,7 @@ function FabAccountButtonBar({
   }, []);
 
   return (
-    <Flex justifyContent={"flex-start"} flexDirection={"row"}>
+    <Flex justifyContent={"flex-start"} flexDirection={"row"} pl={3}>
       {buttons.map(
         (
           { label, Icon, event, eventProperties, Component, ...rest },
