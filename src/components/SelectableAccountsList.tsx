@@ -189,37 +189,19 @@ const SelectableAccount = ({
     }
   };
 
-  const renderLeftActions = (
-    progress: Animated.AnimatedInterpolation,
-    dragX: Animated.AnimatedInterpolation,
-  ) => {
-    const translateX = dragX.interpolate({
-      inputRange: [0, 1000],
-      outputRange: [-112, 888],
-    });
+  const [editNameButtonWidth, setEditNameButtonWidth] = useState(0);
 
-    return (
-      <Flex
-        width="auto"
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Animated.View style={[{ transform: [{ translateX }] }]}>
-          <Button
-            event="EditAccountNameFromSlideAction"
-            type="primary"
-            title={<Trans i18nKey="common.editName" />}
-            onPress={editAccountName}
-            paddingLeft={0}
-            paddingRight={0}
-          />
-        </Animated.View>
-      </Flex>
-    );
-  };
+  const setLayout = useCallback(
+    event => {
+      const buttonWidth = event?.nativeEvent?.layout?.width;
+      if (buttonWidth) {
+        setEditNameButtonWidth(buttonWidth);
+      }
+    },
+    [setEditNameButtonWidth],
+  );
 
-  const editAccountName = () => {
+  const editAccountName = useCallback(() => {
     if (!onAccountNameChange) return;
 
     swipedAccountSubject.next({ row: -1, list: -1 });
@@ -227,7 +209,44 @@ const SelectableAccount = ({
       onAccountNameChange,
       account,
     });
-  };
+  }, [account, navigation, onAccountNameChange]);
+
+  const renderLeftActions = useCallback(
+    (
+      progress: Animated.AnimatedInterpolation,
+      dragX: Animated.AnimatedInterpolation,
+    ) => {
+      const translateX = dragX.interpolate({
+        inputRange: [0, 1000],
+        outputRange: [-1 * editNameButtonWidth, 1000 - editNameButtonWidth],
+      });
+
+      return (
+        <Flex
+          width="auto"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="center"
+          ml={2}
+        >
+          <Animated.View
+            style={[{ transform: [{ translateX }] }]}
+            onLayout={setLayout}
+          >
+            <Button
+              event="EditAccountNameFromSlideAction"
+              type="primary"
+              title={<Trans i18nKey="common.editName" />}
+              onPress={editAccountName}
+              paddingLeft={0}
+              paddingRight={0}
+            />
+          </Animated.View>
+        </Flex>
+      );
+    },
+    [editNameButtonWidth, setLayout, editAccountName],
+  );
 
   const subAccountCount = account.subAccounts && account.subAccounts.length;
   const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;

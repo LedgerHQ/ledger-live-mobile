@@ -155,8 +155,8 @@ function AccountGraphCard({
 
   const dataFormatted = useMemo(() => {
     const counterValueCurrencyMagnitude =
-      10 ** counterValueCurrency.units[0].magnitude;
-    return history
+      10 ** counterValueCurrency.units[0].magnitude || 1;
+    return history?.length
       ? history.map(d => ({
           date: d.date,
           value: d.countervalue / counterValueCurrencyMagnitude || 0,
@@ -168,6 +168,34 @@ function AccountGraphCard({
     (timestamp: number) =>
       new Intl.DateTimeFormat(locale, timeFormat).format(timestamp),
     [locale, timeFormat],
+  );
+
+  const yAxisFormatter = useCallback(
+    (value: number) =>
+      value
+        ? counterValueFormatter({
+            value,
+            shorten: true,
+            locale,
+            allowZeroValue: true,
+            t,
+          })
+        : 0,
+    [locale, t],
+  );
+
+  const valueFormmater = useCallback(
+    (value: number) =>
+      value
+        ? counterValueFormatter({
+            value,
+            currency: counterValueCurrency.ticker,
+            locale,
+            allowZeroValue: true,
+            t,
+          })
+        : 0,
+    [counterValueCurrency.ticker, locale, t],
   );
 
   return (
@@ -191,24 +219,8 @@ function AccountGraphCard({
       chartData={dataFormatted}
       currencyColor={graphColor}
       xAxisFormatter={xAxisFormatter}
-      yAxisFormatter={(value: number) =>
-        counterValueFormatter({
-          value,
-          shorten: true,
-          locale,
-          allowZeroValue: true,
-          t,
-        })
-      }
-      valueFormatter={(value: number) =>
-        counterValueFormatter({
-          value,
-          currency: counterValueCurrency.ticker,
-          locale,
-          allowZeroValue: true,
-          t,
-        })
-      }
+      yAxisFormatter={yAxisFormatter}
+      valueFormatter={valueFormmater}
     />
   );
 }

@@ -3688,6 +3688,7 @@
     }
   },
   "walletconnect": {
+    "scan": "Scan Wallet Connect QR code",
     "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
     "reject": "Reject",
     "connect": "Connect",

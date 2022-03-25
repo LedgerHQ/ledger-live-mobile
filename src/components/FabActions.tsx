@@ -51,14 +51,13 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
       ? [
           {
             navigationParams: [
-              NavigatorName.ExchangeBuyFlow,
+              NavigatorName.Exchange,
               {
-                screen: ScreenName.ExchangeConnectDevice,
+                screen: ScreenName.ExchangeBuy,
                 params: {
-                  account,
-                  mode: "buy",
-                  parentId:
-                    account.type !== "Account" ? account.parentId : undefined,
+                  accountId: account.id,
+                  // mode: "buy",
+                  parentId: parentAccount && parentAccount.id,
                 },
               },
             ],
