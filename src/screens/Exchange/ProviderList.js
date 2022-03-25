@@ -55,6 +55,7 @@ type ProviderItemProps = {
 };
 
 const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
+  const { colors } = useTheme();
   const manifest = useRemoteLiveAppManifest(provider.appId);
   const onItemClick = useCallback(() => {
     onClick(provider, manifest.icon, manifest.name);
@@ -65,7 +66,16 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
   }
 
   return (
-    <TouchableOpacity onPress={onItemClick} style={styles.itemRoot}>
+    <TouchableOpacity
+      onPress={onItemClick}
+      style={[
+        styles.itemRoot,
+        {
+          backgroundColor: colors.card,
+          borderColor: colors.border,
+        },
+      ]}
+    >
       <View>
         <View style={styles.itemHeader}>
           <AppIcon icon={manifest.icon} name={manifest.name} size={32} />
@@ -75,7 +85,10 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
         </View>
         <View style={styles.pmsRow}>
           {provider.paymentProviders.map(paymentProvider => (
-            <View key={paymentProvider} style={styles.pm}>
+            <View
+              key={paymentProvider}
+              style={[styles.pm, { borderColor: colors.border }]}
+            >
               {assetMap[paymentProvider] ? (
                 assetMap[paymentProvider]({})
               ) : (
@@ -85,7 +98,7 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
           ))}
         </View>
       </View>
-      <ArrowRight size={16} color={"white"} />
+      <ArrowRight size={16} color={colors.grey} />
     </TouchableOpacity>
   );
 };
@@ -183,7 +196,7 @@ const styles = StyleSheet.create({
   itemRoot: {
     padding: 16,
     borderRadius: 8,
-    backgroundColor: "#272727",
+    borderWidth: 1,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -208,7 +221,6 @@ const styles = StyleSheet.create({
   pm: {
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "#3C3C3C",
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 6,
