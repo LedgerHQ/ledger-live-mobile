@@ -4,6 +4,7 @@ import React from "react";
 
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
 import { View, StyleSheet } from "react-native";
 import Skeleton from "./Skeleton";
@@ -16,9 +17,11 @@ type Props = {
 
 const OperationRowNftName = ({ style, operation }: Props) => {
   const { colors } = useTheme();
+  const { currencyId } = decodeAccountId(operation.accountId);
   const { status, metadata } = useNftMetadata(
     operation.contract,
     operation.tokenId,
+    currencyId,
   );
 
   return (
