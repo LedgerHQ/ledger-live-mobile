@@ -24,7 +24,7 @@ const OnboardingSetupDeviceInformation = () => {
       justifyContent="space-between"
       backgroundColor="background.main"
     >
-      <Flex alignItems="center">
+      <Flex flex={1} alignItems="center" justifyContent="center">
         <IconBox
           Icon={Icons.WarningMedium}
           color="warning.c100"

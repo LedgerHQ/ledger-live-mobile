@@ -47,7 +47,6 @@ const Card = ({ index /* , deviceModelId */ }: CardType) => {
           lightSource={images.light[index]}
         />
       </Flex>
-      <Flex flex={1} />
       <Text variant="h2" mb={3} textAlign="center">
         {t(`onboarding.stepNewDevice.${index}.title`)}
       </Text>
@@ -85,7 +84,11 @@ const Footer = ({ index }: { index: number }) => {
   if (!Component) return null;
 
   return (
-    <Animatable.View animation="fadeIn" useNativeDriver>
+    <Animatable.View
+      style={{ width: "100%" }}
+      animation="fadeIn"
+      useNativeDriver
+    >
       <Component label={t(`onboarding.stepNewDevice.cta`)} />
     </Animatable.View>
   );
@@ -120,7 +123,12 @@ function OnboardingStepNewDevice() {
           <Card index={index} key={index} deviceModelId={deviceModelId} />
         ))}
       </Carousel>
-      <Flex minHeight="60px" justifyContent="center" alignItems="center">
+      <Flex
+        minHeight="60px"
+        width="100%"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Footer index={currentIndex} />
       </Flex>
     </StyledSafeAreaView>

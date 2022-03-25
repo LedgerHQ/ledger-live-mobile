@@ -50,7 +50,7 @@ export const counterValueFormatter = ({
   t?: TFunction;
   allowZeroValue?: boolean;
 }): string => {
-  if (!value && !allowZeroValue) {
+  if (isNaN(value) || (!value && !allowZeroValue)) {
     return "-";
   }
 
@@ -69,7 +69,7 @@ export const counterValueFormatter = ({
   if (shorten && t) {
     const sign = value > 0 ? "" : "-";
     const v = Math.abs(value);
-    const index = Math.floor(Math.log(v + 1) / Math.log(10) / 3);
+    const index = Math.floor(Math.log(v + 1) / Math.log(10) / 3) || 0;
 
     const [i, n] = indexes[index];
 

@@ -55,7 +55,6 @@ function OnboardingStepPairNew() {
     () => [
       {
         id: PairNew.id,
-        // @TODO: Replace this placeholder with the correct illustration asap
         illustration: (
           <Illustration
             size={150}
