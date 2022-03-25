@@ -189,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(SendFundsSelectCollection);
+export default memo<Props>(SendFundsSelectCollection);
