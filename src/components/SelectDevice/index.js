@@ -62,7 +62,7 @@ export default function SelectDevice({
           .then(() => {
             track("Device selection", {
               modelId,
-              connectionType: "USB",
+              connectionType: "BLE",
             });
             // Nb consider a device selection enough to show the fw update banner in portfolio
             dispatch(setHasConnectedDevice(true));
