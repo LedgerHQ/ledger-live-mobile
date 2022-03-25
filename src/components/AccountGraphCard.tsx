@@ -159,9 +159,7 @@ function AccountGraphCard({
     return history?.length
       ? history.map(d => ({
           date: d.date,
-          value: isNaN(d.countervalue / counterValueCurrencyMagnitude)
-            ? 0
-            : d.countervalue / counterValueCurrencyMagnitude,
+          value: d.countervalue / counterValueCurrencyMagnitude || 0,
         }))
       : [];
   }, [history, counterValueCurrency]);
