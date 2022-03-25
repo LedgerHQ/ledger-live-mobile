@@ -66,7 +66,7 @@
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.24.1",
     "@ledgerhq/hw-transport-http": "6.26.0",
-    "@ledgerhq/live-common": "https://github.com/LedgerHQ/ledger-live-common.git#develop",
+    "@ledgerhq/live-common": "https://github.com/LedgerHQ/ledger-live-common.git#a3719f7c5ca4d0da1cf87d9fdb4b2c301441864f",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/native-ui": "^0.7.0",
     "@ledgerhq/react-native-hid": "6.24.1",
