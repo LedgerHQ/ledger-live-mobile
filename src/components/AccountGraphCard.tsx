@@ -159,7 +159,7 @@ function AccountGraphCard({
     return history
       ? history.map(d => ({
           date: d.date,
-          value: d.countervalue / counterValueCurrencyMagnitude,
+          value: d.countervalue / counterValueCurrencyMagnitude || 0,
         }))
       : [];
   }, [history, counterValueCurrency]);
