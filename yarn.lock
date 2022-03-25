@@ -2537,7 +2537,7 @@
 
 "@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#develop":
   version "21.35.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#5db2465bceff17cba50786e2a53f0bb4ee27cb2d"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#0fcca21bd57f31bd34e83c27c7a0539a661509fc"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
