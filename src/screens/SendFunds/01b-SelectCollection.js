@@ -13,7 +13,7 @@ import {
 } from "react-native";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import type { CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 
 import LoadingFooter from "../../components/LoadingFooter";
 import NftImage from "../../components/Nft/NftImage";
@@ -26,18 +26,14 @@ const MAX_COLLECTIONS_FIRST_RENDER = 8;
 const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 8;
 
 const CollectionRow = memo(
-  ({
-    account,
-    collection,
-  }: {
-    account: Account,
-    collection: CollectionWithNFT,
-  }) => {
+  ({ account, collection }: { account: Account, collection: ProtoNFT[] }) => {
     const navigation = useNavigation();
     const { colors } = useTheme();
+    const nft = collection[0];
     const { status, metadata } = useNftMetadata(
-      collection?.contract,
-      collection?.nfts?.[0]?.tokenId,
+      nft.contract,
+      nft.tokenId,
+      nft.currencyId,
     );
 
     const goToNftSelection = () => {
@@ -61,7 +57,7 @@ const CollectionRow = memo(
             style={[styles.tokenNameSkeleton, styles.tokenName]}
             loading={status === "loading"}
           >
-            <LText>{metadata?.tokenName || collection.contract}</LText>
+            <LText>{metadata?.tokenName || nft.contract}</LText>
           </Skeleton>
         </View>
         <View style={styles.chevronContainer}>
@@ -72,13 +68,13 @@ const CollectionRow = memo(
   },
 );
 
-const keyExtractor = (collection: CollectionWithNFT) => collection?.contract;
+const keyExtractor = (collection: ProtoNFT[]) => collection?.[0]?.contract;
 
 type Props = {
   route: {
     params: {
       account: Account,
-      collections: CollectionWithNFT[],
+      collections: { [string]: ProtoNFT[] }[],
     },
   },
 };
@@ -92,7 +88,7 @@ const SendFundsSelectCollection = ({ route }: Props) => {
     MAX_COLLECTIONS_FIRST_RENDER,
   );
   const collectionsSlice = useMemo(
-    () => collections.slice(0, collectionCount),
+    () => Object.values(collections).slice(0, collectionCount),
     [collections, collectionCount],
   );
   const onEndReached = useCallback(
@@ -104,7 +100,7 @@ const SendFundsSelectCollection = ({ route }: Props) => {
   );
 
   const renderItem = useCallback(
-    ({ item }: { item: CollectionWithNFT }) => (
+    ({ item }: { item: ProtoNFT[] }) => (
       <CollectionRow account={account} collection={item} />
     ),
     [account],
@@ -186,4 +182,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SendFundsSelectCollection;
+// $FlowFixMe
+export default memo(SendFundsSelectCollection);
