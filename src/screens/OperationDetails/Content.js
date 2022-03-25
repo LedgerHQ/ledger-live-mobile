@@ -79,6 +79,7 @@ export default function Content({
   const { status, metadata } = useNftMetadata(
     operation.contract,
     operation.tokenId,
+    operation.currency.id,
   );
 
   const onPress = useCallback(() => {
