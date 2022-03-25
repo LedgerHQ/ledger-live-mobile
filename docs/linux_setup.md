@@ -147,21 +147,17 @@ export JRE_HOME
 export PATH
 
 ANDROID_SDK_ROOT=~/Android/Sdk
-
 export ANDROID_SDK_ROOT
 export ANDROID_HOME=~/Android/Sdk
 
 export PATH=$PATH:$HOME"/Android/Sdk/platform-tools"
-
 export PATH=$PATH:$HOME"/Android/Sdk/emulator/emulator"
-
 export PATH=$PATH:$HOME"/Android/Sdk/tools"
-
 export PATH="$(yarn global bin):$PATH"
-
 export PATH=$PATH:$HOME"/watchman/linux/bin"
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NODE_OPTIONS=--max-old-space-size=8192
 ```
 
 #### Dev on android
