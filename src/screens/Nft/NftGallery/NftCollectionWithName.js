@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, memo } from "react";
-import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import { FlatList, View, SafeAreaView, StyleSheet } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import NftCard from "../../../components/Nft/NftCard";
@@ -9,28 +9,27 @@ import Skeleton from "../../../components/Skeleton";
 import LText from "../../../components/LText";
 
 const NftCollectionWithNameList = ({
-  collectionWithNfts,
+  collection,
   contentContainerStyle,
   status,
   metadata,
 }: {
-  collectionWithNfts: CollectionWithNFT,
+  collection: ProtoNFT[],
   contentContainerStyle?: Object,
   status: "queued" | "loading" | "loaded" | "error" | "nodata",
   metadata?: Object,
 }) => {
-  const { contract, nfts } = collectionWithNfts;
-
+  const nft = collection[0];
   const renderItem = useCallback(
     ({ item, index }) => (
       <NftCard
         key={item.id}
         nft={item}
-        collection={collectionWithNfts}
+        collection={collection}
         style={index % 2 === 0 ? evenNftCardStyles : oddNftCardStyles}
       />
     ),
-    [collectionWithNfts],
+    [collection],
   );
 
   return (
@@ -46,12 +45,12 @@ const NftCollectionWithNameList = ({
             semiBold
             style={styles.tokenName}
           >
-            {metadata?.tokenName || contract}
+            {metadata?.tokenName || nft.contract}
           </LText>
         </Skeleton>
       </View>
       <FlatList
-        data={nfts}
+        data={collection}
         keyExtractor={nftKeyExtractor}
         scrollEnabled={false}
         numColumns={2}
@@ -65,20 +64,24 @@ const NftCollectionWithNameMemo = memo(NftCollectionWithNameList);
 // this technique of splitting the usage of context and memoing the presentational component is used to prevent
 // the rerender of all Nft Collections whenever the NFT cache changes (whenever a new NFT is loaded)
 type Props = {
-  collectionWithNfts: CollectionWithNFT,
+  collection: ProtoNFT,
   contentContainerStyle?: Object,
 };
 
 const NftCollectionWithName = ({
-  collectionWithNfts,
+  collection,
   contentContainerStyle,
 }: Props) => {
-  const { contract, nfts } = collectionWithNfts;
-  const { status, metadata } = useNftMetadata(contract, nfts?.[0]?.tokenId);
+  const nft = collection[0];
+  const { status, metadata } = useNftMetadata(
+    nft.contract,
+    nft.tokenId,
+    nft.currencyId,
+  );
 
   return (
     <NftCollectionWithNameMemo
-      collectionWithNfts={collectionWithNfts}
+      collection={collection}
       contentContainerStyle={contentContainerStyle}
       status={status}
       metadata={metadata}
@@ -86,7 +89,7 @@ const NftCollectionWithName = ({
   );
 };
 
-const nftKeyExtractor = (nft: NFT) => nft.id;
+const nftKeyExtractor = (nft: ProtoNFT) => nft.id;
 
 const styles = StyleSheet.create({
   title: {
