@@ -14,12 +14,13 @@ import { useSelector } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
+import {
+  useNftMetadata,
+  decodeNftId,
+  getNftCapabilities,
+} from "@ledgerhq/live-common/lib/nft";
 
-import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
-import Clipboard from "@react-native-community/clipboard";
-
-import { Button, Icons } from "@ledgerhq/native-ui";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 
 import { accountSelector } from "../../reducers/accounts";
 import NftLinksPanel from "./NftLinksPanel";
@@ -36,8 +37,7 @@ type Props = {
 };
 
 type RouteParams = {
-  nft: NFT,
-  collection: CollectionWithNFT,
+  nft: ProtoNFT,
 };
 
 const Section = ({
@@ -101,8 +101,12 @@ const Section = ({
 
 const NftViewer = ({ route }: Props) => {
   const { params } = route;
-  const { nft, collection } = params;
-  const { status, metadata } = useNftMetadata(collection.contract, nft.tokenId);
+  const { nft } = params;
+  const { status, metadata } = useNftMetadata(
+    nft.contract,
+    nft.tokenId,
+    nft.currencyId,
+  );
   const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -113,10 +117,12 @@ const NftViewer = ({ route }: Props) => {
   const [bottomModalOpen, setBottomModalOpen] = useState(false);
   const isLoading = status === "loading";
 
+  const nftCapabilities = useMemo(() => getNftCapabilities(nft), [nft]);
+
   const defaultLinks = {
-    opensea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
-    rarible: `https://rarible.com/token/${collection.contract}:${nft.tokenId}`,
-    etherscan: `https://etherscan.io/token/${collection.contract}?a=${nft.tokenId}`,
+    opensea: `https://opensea.io/assets/${nft.contract}/${nft.tokenId}`,
+    rarible: `https://rarible.com/token/${nft.contract}:${nft.tokenId}`,
+    etherscan: `https://etherscan.io/token/${nft.contract}?a=${nft.tokenId}`,
   };
 
   const closeModal = () => {
@@ -129,9 +135,10 @@ const NftViewer = ({ route }: Props) => {
     let transaction = bridge.createTransaction(account);
     transaction = bridge.updateTransaction(transaction, {
       tokenIds: [nft.tokenId],
-      quantities: [BigNumber(1)],
-      collection: collection.contract,
-      mode: `${collection.standard?.toLowerCase()}.transfer`,
+      // Quantity is set to null first to allow the user to change it on the amount page
+      quantities: [nftCapabilities.hasQuantity ? null : BigNumber(1)],
+      collection: nft.contract,
+      mode: `${nft.standard?.toLowerCase()}.transfer`,
     });
 
     navigation.navigate(NavigatorName.SendFunds, {
@@ -142,7 +149,7 @@ const NftViewer = ({ route }: Props) => {
         transaction,
       },
     });
-  }, [account, nft, collection, navigation]);
+  }, [account, nft, nftCapabilities.hasQuantity, navigation]);
 
   const properties = useMemo(() => {
     if (isLoading) {
@@ -306,7 +313,7 @@ const NftViewer = ({ route }: Props) => {
 
           <Section
             title={t("nft.viewer.tokenContract")}
-            value={collection.contract}
+            value={nft.contract}
             copyAvailable
             copiedString={t("nft.viewer.tokenContractCopied")}
           />
@@ -320,7 +327,7 @@ const NftViewer = ({ route }: Props) => {
             copiedString={t("nft.viewer.tokenIdCopied")}
           />
 
-          {collection.standard === "ERC1155" && (
+          {nft.standard === "ERC1155" && (
             <>
               <View style={styles.hr} />
               <TouchableOpacity onPress={closeModal}>
