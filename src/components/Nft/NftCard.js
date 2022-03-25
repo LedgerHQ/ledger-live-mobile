@@ -5,27 +5,24 @@ import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Platform } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { useTheme, useNavigation } from "@react-navigation/native";
-import type { CollectionWithNFT, NFT } from "@ledgerhq/live-common/lib/nft";
-import { ScreenName } from "../../const";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
+import { NavigatorName, ScreenName } from "../../const";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
 import LText from "../LText";
 
 type Props = {
-  nft: NFT | $Diff<NFT, { collection: * }>,
-  collection: CollectionWithNFT,
+  nft: ProtoNFT,
   style?: Object,
 };
 
 const NftCardView = ({
   nft,
-  collection,
   style,
   status,
   metadata,
 }: {
-  nft: NFT | $Diff<NFT, { collection: * }>,
-  collection: CollectionWithNFT,
+  nft: ProtoNFT,
   style?: Object,
   status: "queued" | "loading" | "loaded" | "error" | "nodata",
   metadata?: Object,
@@ -45,9 +42,11 @@ const NftCardView = ({
           },
         ]}
         onPress={() => {
-          navigation.navigate(ScreenName.NftViewer, {
-            nft,
-            collection,
+          navigation.navigate(NavigatorName.NftNavigator, {
+            screen: ScreenName.NftViewer,
+            params: {
+              nft,
+            },
           });
         }}
       >
@@ -92,17 +91,15 @@ const NftCardView = ({
 const NftCardMemo = memo(NftCardView);
 // this technique of splitting the usage of context and memoing the presentational component is used to prevent
 // the rerender of all NftCards whenever the NFT cache changes (whenever a new NFT is loaded)
-const NftCard = ({ nft, collection, style }: Props) => {
-  const { status, metadata } = useNftMetadata(collection.contract, nft.tokenId);
+const NftCard = ({ nft, style }: Props) => {
+  const { status, metadata } = useNftMetadata(
+    nft.contract,
+    nft.tokenId,
+    nft.currencyId,
+  );
 
   return (
-    <NftCardMemo
-      nft={nft}
-      collection={collection}
-      style={style}
-      status={status}
-      metadata={metadata}
-    />
+    <NftCardMemo nft={nft} style={style} status={status} metadata={metadata} />
   );
 };
 
