@@ -39,7 +39,7 @@ const iconsComponent = {
   NFT_OUT: Icons.ArrowTopMedium,
 };
 
-export default ({
+export const OperationStatusIcon = ({
   type,
   confirmed,
   failed,
@@ -59,7 +59,7 @@ export default ({
       ? Icons.CircledCrossSolidMedium
       : confirmed
       ? undefined
-      : Icons.CircledCrossSolidMedium);
+      : Icons.HistoryMedium);
   const borderColor = failed ? "error.c40" : "neutral.c40";
   const iconColor = failed
     ? "error.c100"
@@ -80,3 +80,5 @@ export default ({
     />
   );
 };
+
+export default React.memo(OperationStatusIcon);
