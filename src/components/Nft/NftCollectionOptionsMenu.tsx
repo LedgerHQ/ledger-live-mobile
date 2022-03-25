@@ -9,6 +9,7 @@ import {
   Icons,
   BoxedIcon,
   Button,
+  Flex,
 } from "@ledgerhq/native-ui";
 import { CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 import { Account } from "@ledgerhq/live-common/lib/types";
@@ -30,7 +31,6 @@ const NftCollectionOptionsMenu = ({
   account,
 }: Props) => {
   const { t } = useTranslation();
-  const { colors } = useTheme();
   const dispatch = useDispatch();
 
   const [isConfirmDrawerOpen, setIsConfirmDrawerOpen] = useState(false);
@@ -46,69 +46,43 @@ const NftCollectionOptionsMenu = ({
     <>
       <BottomDrawer isOpen={isOpen} onClose={onClose}>
         <TouchableOpacity onPress={() => setIsConfirmDrawerOpen(true)}>
-          <View style={styles.menuItem}>
-            <View
-              style={[
-                styles.menuIconContainer,
-                { backgroundColor: colors.primary.c30 },
-              ]}
+          <Flex flexDirection="row" alignItems="center">
+            <Flex
+              backgroundColor="primary.c30"
+              p={3}
+              borderRadius={50}
+              mr={4}
             >
               <Icons.EyeNoneMedium color="primary.c90" />
-            </View>
+            </Flex>
             <Text variant="body" color="primary.c90" fontWeight="semiBold">
               {t("settings.accounts.hideNFTCollectionCTA")}
             </Text>
-          </View>
+          </Flex>
         </TouchableOpacity>
       </BottomDrawer>
       <BottomDrawer
         isOpen={isConfirmDrawerOpen}
         onClose={() => setIsConfirmDrawerOpen(false)}
       >
-        <View style={styles.confirmDrawerContainer}>
+        <Flex alignItems="center">
           <BoxedIcon Icon={Icons.EyeNoneMedium} size={48} />
-          <Text variant="h1" style={styles.corfirmDrawerTitle}>
+          <Text variant="h1" mt={20}>
             {t("settings.accounts.hideNFTCollectionModal.title")}
           </Text>
-          <Text variant="body" style={styles.confirmDrawerDescription}>
+          <Text variant="body" textAlign="center" mt={20}>
             {t("settings.accounts.hideNFTCollectionModal.desc")}
           </Text>
-          <Button type="main" style={styles.confirmDrawerButtons} onPress={onConfirm}>
+          <Button type="main" alignSelf="stretch" mt={20} onPress={onConfirm}>
             {t("common.confirm")}
           </Button>
-          <Button type="default" style={styles.confirmDrawerButtons} onPress={() => setIsConfirmDrawerOpen(false)}>
+          <Button type="default" alignSelf="stretch" mt={20} onPress={() => setIsConfirmDrawerOpen(false)}>
             {t("common.cancel")}
           </Button>
-        </View>
+        </Flex>
       </BottomDrawer>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  menuItem: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  menuIconContainer: {
-    marginRight: 10,
-    padding: 8,
-    borderRadius: 50,
-  },
-  confirmDrawerContainer: {
-    alignItems: "center",
-  },
-  corfirmDrawerTitle: {
-    marginTop: 20,
-  },
-  confirmDrawerDescription: {
-    textAlign: "center",
-    marginTop: 20,
-  },
-  confirmDrawerButtons: {
-    marginTop: 20,
-    width: "100%",
-  },
-});
 
 export default React.memo(NftCollectionOptionsMenu);

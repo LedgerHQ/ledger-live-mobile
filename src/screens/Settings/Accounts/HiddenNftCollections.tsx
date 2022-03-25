@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { Box, Flex, Text, Icons } from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { hiddenNftCollectionsSelector } from "../../../reducers/settings";
@@ -10,9 +10,24 @@ import NftImage from "../../../components/Nft/NftImage";
 import Skeleton from "../../../components/Skeleton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { unhideNftCollection } from "../../../actions/settings";
+import styled from "styled-components";
 
 // TODO this type is wrongly declared on live-common, fix it there then remove it here
 type MetaDataType = NFTMetadataResponse["result"];
+
+const CollectionImage = styled(NftImage)`
+  borderRadius: 4px;
+  width: 36px;
+  aspectRatio: 1;
+  overflow: hidden;
+`;
+
+const CollectionNameSkeleton = styled(Skeleton)`
+  height: 8px;
+  width: 113px;
+  borderRadius: 4px;
+  marginLeft: 10px;
+`;
 
 const HiddenNftCollectionRow = ({
   contractAddress,
@@ -36,25 +51,26 @@ const HiddenNftCollectionRow = ({
 
   return (
     <Flex p={6} flexDirection="row" alignItems="center">
-      <NftImage
-        style={styles.collectionImage}
+      <CollectionImage
         status={status}
         src={metadata?.media}
       />
-      <Flex ml={6} flexDirection="row" alignItems="center" justifyContent="space-between" flexGrow={1}>
-        <Skeleton style={styles.collectionNameSkeleton} loading={loading}>
-          <Text
-            fontWeight={"semiBold"}
-            variant={"large"}
-            ellipsizeMode="tail"
-            numberOfLines={2}
-          >
-            {tokenName || contractAddress}
-          </Text>
-        </Skeleton>
+      <Flex flexDirection="row" alignItems="center" flexShrink={1} justifyContent="space-between">
+        <Flex mx={6} flexGrow={1} flexShrink={1} flexDirection="column">
+          <CollectionNameSkeleton loading={loading}>
+            <Text
+              fontWeight={"semiBold"}
+              variant={"large"}
+              ellipsizeMode="tail"
+              numberOfLines={2}
+            >
+              {tokenName || contractAddress}
+            </Text>
+          </CollectionNameSkeleton>
+        </Flex>
         <TouchableOpacity onPress={onUnhide}>
           <Icons.CloseMedium color="neutral.c100" size={24}  />
-        </TouchableOpacity>
+        </TouchableOpacity>        
       </Flex>      
     </Flex>
   )
@@ -77,30 +93,15 @@ const HiddenNftCollections = () => {
 
   return (
     <Box backgroundColor={"background.main"} height={"100%"}>
-      <FlatList
-        data={hiddenCollections}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        contentContainerStyle={styles.containerStyle}
-      />
+      <Flex p={5}>
+        <FlatList
+          data={hiddenCollections}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+        />
+      </Flex>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  containerStyle: { paddingTop: 16, paddingBottom: 64, paddingHorizontal: 16 },
-  collectionNameSkeleton: {
-    height: 8,
-    width: 113,
-    borderRadius: 4,
-    marginLeft: 10
-  },
-  collectionImage: {
-    borderRadius: 4,
-    width: 36,
-    aspectRatio: 1,
-    overflow: "hidden",
-  },
-});
 
 export default HiddenNftCollections;
