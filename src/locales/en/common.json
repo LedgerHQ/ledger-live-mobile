@@ -4131,7 +4131,9 @@
       "properties": "Properties",
       "description": "Description",
       "tokenContract": "Token Address",
+      "tokenContractCopied": "Token Address copied !",
       "tokenId": "Token ID",
+      "tokenIdCopied": "Token ID copied !",
       "quantity": "Quantity"
     },
     "viewerModal": {

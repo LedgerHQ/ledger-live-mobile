@@ -10,6 +10,7 @@ import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import TabIcon from "../TabIcon";
 import MarketNavigator from "./MarketNavigator";
+import PortfolioNavigator from "./PortfolioNavigator";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import Planet from "../../icons/Planet";
@@ -51,11 +52,24 @@ export default function MainNavigator({
       sceneContainerStyle={[{ backgroundColor: colors.background.main }]}
     >
       <Tab.Screen
-        name={ScreenName.Portfolio}
-        component={Portfolio}
+        name={NavigatorName.Portfolio}
+        component={PortfolioNavigator}
         options={{
+          headerShown: false,
+          unmountOnBlur: true,
           tabBarIcon: (props: any) => <PortfolioTabIcon {...props} />,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e: any) => {
+            e.preventDefault();
+            // NB The default behaviour is not reset route params, leading to always having the same
+            // search query or preselected tab after the first time (ie from Swap/Sell)
+            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+            navigation.navigate(NavigatorName.Portfolio, {
+              screen: ScreenName.Portfolio,
+            });
+          },
+        })}
       />
       <Tab.Screen
         name={NavigatorName.Market}

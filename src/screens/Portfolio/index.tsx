@@ -184,7 +184,7 @@ export default function PortfolioScreen({ navigation }: Props) {
               <SectionTitle
                 title={<Trans i18nKey={"distribution.title"} />}
                 navigation={navigation}
-                navigatorName={NavigatorName.Accounts}
+                navigatorName={NavigatorName.PortfolioAccounts}
               />
               <Assets
                 balanceHistory={portfolio.balanceHistory}
