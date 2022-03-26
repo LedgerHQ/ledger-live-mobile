@@ -6,10 +6,11 @@ import { useTranslation } from "react-i18next";
 import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
 import { NavigatorName, ScreenName } from "../../const";
-import { useLocale } from "../../context/Locale";
 import { useProviders } from "../Swap/SwapEntry";
 import MarketRowItem from "../Market/MarketRowItem";
 import Placeholder from "../../components/Placeholder";
+import { useSelector } from "react-redux";
+import { localeSelector } from "../../reducers/settings";
 
 function getTopGainers(
   coins: CurrencyData[] | undefined = [],
@@ -23,7 +24,7 @@ function getTopGainers(
 export default function MarketSection() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { locale } = useLocale();
+  const locale = useSelector(localeSelector);
   const [topGainers, setTopGainers] = useState<CurrencyData[] | undefined>();
 
   useProviders();

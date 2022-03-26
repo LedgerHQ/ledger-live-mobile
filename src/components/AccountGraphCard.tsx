@@ -15,6 +15,7 @@ import { Box, Flex, Text, ChartCard } from "@ledgerhq/native-ui";
 
 import { useTranslation } from "react-i18next";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
+import { useSelector } from "react-redux";
 import { ensureContrast } from "../colors";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
@@ -24,8 +25,8 @@ import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
-import { useLocale } from "../context/Locale";
 import { counterValueFormatter } from "../screens/Market/utils";
+import { localeSelector } from "../reducers/settings";
 
 type HeaderProps = {
   account: AccountLike;
@@ -102,7 +103,7 @@ function AccountGraphCard({
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const locale = useSelector(localeSelector);
   const { t } = useTranslation();
 
   const [rangeRequest, setRangeRequest] = useState("24h");

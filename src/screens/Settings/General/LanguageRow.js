@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import SettingsRow from "../../../components/SettingsRow";
 import LText from "../../../components/LText";
 import { NavigatorName, ScreenName } from "../../../const";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 
 export const languageLabels = {
   de: "Deutsch",
@@ -30,7 +30,7 @@ export const languageLabels = {
 };
 
 export default function LanguageSettingsRow() {
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const { t } = useTranslation();
   const { navigate } = useNavigation();
   const onNavigate = useCallback(() => {

@@ -15,7 +15,7 @@ import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 import { languages, supportedLocales } from "../../../languages";
 import { setLanguage } from "../../../actions/settings";
 
@@ -25,7 +25,7 @@ function OnboardingStepLanguage({ navigation }: *) {
   const next = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
-  const { locale: currentLocale } = useLocale();
+  const { locale: currentLocale } = useTranslationLocale();
 
   const changeLanguage = useCallback(
     l => {

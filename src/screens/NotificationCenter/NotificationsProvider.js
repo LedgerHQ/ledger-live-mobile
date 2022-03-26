@@ -11,7 +11,7 @@ import VersionNumber from "react-native-version-number";
 import Config from "react-native-config";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getNotifications, saveNotifications } from "../../db";
-import { useLocale } from "../../context/Locale";
+import { useTranslationLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import { track } from "../../analytics";
 import { lastSeenDeviceSelector } from "../../reducers/settings";
@@ -31,7 +31,7 @@ type Props = {
 };
 
 export default function NotificationsProvider({ children }: Props) {
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const currenciesRaw: CryptoCurrency[] = useSelector(cryptoCurrenciesSelector);
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
 

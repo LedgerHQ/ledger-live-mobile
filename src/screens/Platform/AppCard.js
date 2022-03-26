@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { translateContent } from "@ledgerhq/live-common/lib/platform/logic";
 
-import { useLocale } from "../../context/Locale";
+import { useTranslationLocale } from "../../context/Locale";
 
 import LText from "../../components/LText";
 import IconChevron from "../../icons/ArrowRight";
@@ -56,7 +56,7 @@ const AppCard = ({
   onPress: (manifest: AppManifest) => void,
 }) => {
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const { t } = useTranslation();
   const isDisabled = manifest.branch === "soon";
 

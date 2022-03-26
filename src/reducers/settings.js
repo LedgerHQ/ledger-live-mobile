@@ -85,8 +85,10 @@ export type SettingsState = {
   osTheme: ?string,
   carouselVisibility: any,
   discreetMode: boolean,
+  /** Used for translations. In the UI, this is the "language" setting. */
   language: string,
   languageIsSetByUser: boolean,
+  /** Used for number & date formatting. In the UI, this is the "region" setting. */
   locale: ?string,
   swap: {
     hasAcceptedIPSharing: false,

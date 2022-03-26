@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import { Text } from "@ledgerhq/native-ui";
 import SettingsRow from "../../../components/SettingsRow";
 import { NavigatorName, ScreenName } from "../../../const";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 
 export const languageLabels = {
   de: "Deutsch",
@@ -29,7 +29,7 @@ export const languageLabels = {
 };
 
 export default function LanguageSettingsRow() {
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const { navigate } = useNavigation();
   const onNavigate = useCallback(() => {
     navigate(ScreenName.OnboardingLanguage);

@@ -14,6 +14,8 @@ import ProgressBar from "../../components/ProgressBar";
 import CounterValue from "../../components/CounterValue";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 import { ensureContrast } from "../../colors";
+import { useSelector } from "react-redux";
+import { localeSelector } from "../../reducers/settings";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -68,6 +70,7 @@ export default function DistributionCard({
   item: { currency, amount, distribution },
 }: Props) {
   const { colors } = useTheme();
+  const locale = useSelector(localeSelector);
   const color = useMemo(
     () => ensureContrast(getCurrencyColor(currency), colors.background.main),
     [colors, currency],
@@ -86,7 +89,7 @@ export default function DistributionCard({
               {currency.name}
             </Text>
             <Text variant="large" color="neutral.c100" fontWeight="semiBold">
-              {`${percentage}%`}
+              {`${percentage.toLocaleString(locale)}%`}
             </Text>
           </CurrencyRow>
           {distribution ? (

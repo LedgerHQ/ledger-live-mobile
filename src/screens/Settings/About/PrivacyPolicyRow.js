@@ -6,11 +6,11 @@ import { View, Linking, StyleSheet } from "react-native";
 import SettingsRow from "../../../components/SettingsRow";
 import { urls } from "../../../config/urls";
 import ExternalLink from "../../../icons/ExternalLink";
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 
 function PrivacyPolicyRow() {
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   return (
     <SettingsRow
       event="PrivacyPolicyRow"

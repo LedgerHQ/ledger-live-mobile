@@ -4,8 +4,7 @@ import { Unit } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 
-import { useLocale } from "../context/Locale";
-import { discreetModeSelector } from "../reducers/settings";
+import { discreetModeSelector, localeSelector } from "../reducers/settings";
 
 type Props = {
   unit: Unit;
@@ -28,7 +27,7 @@ const CurrencyUnitValue = ({
   disableRounding = false,
   joinFragmentsSeparator = "",
 }: Props): JSX.Element => {
-  const { locale } = useLocale();
+  const locale = useSelector(localeSelector);
   const discreet = useSelector(discreetModeSelector);
   const value =
     valueProp instanceof BigNumber ? valueProp : new BigNumber(valueProp);

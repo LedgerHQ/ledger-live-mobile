@@ -18,7 +18,7 @@ import ExternalLink from "../../../components/ExternalLink";
 import Touchable from "../../../components/Touchable";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
-import { useLocale } from "../../../context/Locale";
+import { useTranslationLocale } from "../../../context/Locale";
 
 import { urls } from "../../../config/urls";
 import ArrowRight from "../../../icons/ArrowRight";
@@ -49,7 +49,7 @@ const LinkBox = React.memo(({ style, text, url, event }: LinkBoxProps) => {
 
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
-  const { locale } = useLocale();
+  const { locale } = useTranslationLocale();
   const dispatch = useDispatch();
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
