@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import styled from "styled-components/native";
@@ -38,7 +38,8 @@ export default function DeviceActionModal({
 }: Props) {
   const { t } = useTranslation();
   const showAlert = !device?.wired;
-  const [result, setResult] = useState<any[] | null>(null);
+  const [result, setResult] = useState<any | null>(null);
+
   return (
     <BottomModal
       id="DeviceActionModal"
@@ -46,11 +47,13 @@ export default function DeviceActionModal({
       onClose={onClose}
       onModalHide={() => {
         if (onModalHide) onModalHide();
-        if (result) onResult(...result);
-        setResult(null);
+        if (onResult && result) {
+          onResult(result);
+          setResult(null);
+        }
       }}
     >
-      {result
+      {onResult && result
         ? null
         : device && (
             <Flex>
@@ -59,9 +62,7 @@ export default function DeviceActionModal({
                   action={action}
                   device={device}
                   request={request}
-                  onResult={(...props) => {
-                    setResult([...props]);
-                  }}
+                  onResult={onResult ? p => setResult(p) : undefined}
                   renderOnResult={renderOnResult}
                   onSelectDeviceLink={onSelectDeviceLink}
                   analyticsPropertyFlow={analyticsPropertyFlow}
