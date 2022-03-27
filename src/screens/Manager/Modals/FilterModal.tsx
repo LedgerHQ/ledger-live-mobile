@@ -2,12 +2,11 @@ import React, { memo, useCallback, useEffect, useReducer } from "react";
 import { StyleSheet, SectionList } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import styled from "styled-components/native";
+import { Icons, Box, Flex, Text } from "@ledgerhq/native-ui";
 import Touchable from "../../../components/Touchable";
 
 import ActionModal from "./ActionModal";
-
-import styled from "styled-components/native";
-import { Icons, Box, Flex, Text } from "@ledgerhq/native-ui";
 
 const filterSections = [
   {

@@ -16,25 +16,23 @@ const Container = styled(Flex).attrs({
   bg: "constant.purple",
 })``;
 
-const CatalogBanner = () => {
-  return (
-    <Container>
-      <Text variant="h3" fontWeight="semiBold" color="constant.black" mb="8px">
-        <Trans i18nKey="platform.catalog.banner.title" />
-      </Text>
-      <Text variant="body" color="constant.black" pr={50}>
-        <Trans i18nKey="platform.catalog.banner.description" />
-      </Text>
-      <DAppsIcons
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "150%",
-          right: "-40%",
-          zIndex: -1,
-        }}
-      />
-    </Container>
-  );
-};
+const CatalogBanner = () => (
+  <Container>
+    <Text variant="h3" fontWeight="semiBold" color="constant.black" mb="8px">
+      <Trans i18nKey="platform.catalog.banner.title" />
+    </Text>
+    <Text variant="body" color="constant.black" pr={50}>
+      <Trans i18nKey="platform.catalog.banner.description" />
+    </Text>
+    <DAppsIcons
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "150%",
+        right: "-40%",
+        zIndex: -1,
+      }}
+    />
+  </Container>
+);
 export default CatalogBanner;

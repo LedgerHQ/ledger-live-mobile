@@ -3,9 +3,8 @@ import { TouchableOpacity } from "react-native";
 
 import { Icons, Box } from "@ledgerhq/native-ui";
 
-import NotifBadge from "../NotifBadge";
-
 import styled from "styled-components/native";
+import NotifBadge from "../NotifBadge";
 
 import FilterModalComponent from "../Modals/FilterModal";
 

@@ -45,7 +45,8 @@ function AccountBalanceSummaryFooter({ account }: Props) {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={[styles.root, { borderTopColor: colors.lightFog }]}
+      style={[styles.root]}
+      contentContainerStyle={{ paddingHorizontal: 16 }}
     >
       <InfoModal
         isOpened={!!infoName}
@@ -78,8 +79,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     flexDirection: "row",
-    borderTopWidth: 1,
-
     paddingTop: 16,
     overflow: "visible",
   },

@@ -373,7 +373,7 @@ function Delegations({ account }: Props) {
           },
         ]
       : [];
-  }, [t, onRedelegate, onCollectRewards, onUndelegate, delegation, account]);
+  }, [delegation, account, t, onRedelegate, onCollectRewards, onUndelegate, colors.lightFog, colors.fog, colors.grey, colors.yellow, colors.alert]);
 
   const delegationDisabled = delegations.length <= 0 || !canDelegate(account);
 
@@ -395,7 +395,7 @@ function Delegations({ account }: Props) {
             fontSize={24}
           />
         )}
-        amount={delegation?.amount ?? BigNumber(0)}
+        amount={delegation?.amount ?? new BigNumber(0)}
         data={data}
         actions={actions}
       />
@@ -403,7 +403,7 @@ function Delegations({ account }: Props) {
         <>
           <AccountSectionLabel name={t("account.claimReward.sectionLabel")} />
           <View
-            style={[styles.rewardsWrapper, { backgroundColor: colors.card }]}
+            style={[styles.rewardsWrapper]}
           >
             <View style={styles.column}>
               <Text fontWeight={'semiBold'} variant={'h4'}>
@@ -455,7 +455,6 @@ function Delegations({ account }: Props) {
               key={d.validatorAddress}
               style={[
                 styles.delegationsWrapper,
-                { backgroundColor: colors.card },
               ]}
             >
               <DelegationRow

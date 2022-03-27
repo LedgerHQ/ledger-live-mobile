@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Linking, Image } from "react-native";
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { Flex, Text, Link as TextLink, Icons } from "@ledgerhq/native-ui";
 import Touchable from "../Touchable";
 import { track } from "../../analytics";
 
@@ -9,6 +9,7 @@ type SlideProps = {
   name: string;
   title: string;
   description: any;
+  cta: any;
   image: any;
   icon: any;
   position: any;
@@ -19,6 +20,7 @@ const Slide = ({
   name,
   title,
   description,
+  cta,
   image,
   icon,
   position,
@@ -33,7 +35,7 @@ const Slide = ({
     <Touchable event={`${name} Carousel`} onPress={onClick}>
       <Flex
         width={"350px"}
-        height={"115px"}
+        height={"125px"}
         borderRadius={2}
         borderWidth={"1px"}
         borderColor={"neutral.c40"}
@@ -41,13 +43,23 @@ const Slide = ({
         flexDirection={"row"}
         p={6}
       >
-        <Flex width={"200px"}>
+        <Flex width={"200px"} alignItems="flex-start">
           <Text variant={"subtitle"} fontSize={11} color={"neutral.c60"}>
             {title}
           </Text>
           <Text variant="paragraph" fontSize={14}>
             {description}
           </Text>
+          <Flex flex={1} />
+          {cta ? (
+            <TextLink
+              type="color"
+              Icon={Icons.ArrowRightMedium}
+              iconPosition="right"
+            >
+              {cta}
+            </TextLink>
+          ) : null}
         </Flex>
         <Flex justifyContent={"center"}>
           {image ? (

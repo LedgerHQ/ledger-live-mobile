@@ -6,6 +6,7 @@ import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import { useTheme } from "@react-navigation/native";
+import { Icons } from "@ledgerhq/native-ui";
 import { ScreenName, NavigatorName } from "../../const";
 import { rgba } from "../../colors";
 import { TrackScreen } from "../../analytics";
@@ -13,7 +14,6 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
-import { Icons } from "@ledgerhq/native-ui";
 
 type Props = {
   navigation: any,
@@ -27,16 +27,24 @@ type RouteParams = {
 
 export default function AddAccountsSuccess({ navigation, route }: Props) {
   const { colors } = useTheme();
+  const currency = route.params.currency;
 
   const primaryCTA = useCallback(() => {
-    navigation.navigate(NavigatorName.Accounts);
-  }, [navigation]);
+    navigation.replace(NavigatorName.Main, {
+      screen: NavigatorName.Portfolio,
+      params: {
+        screen: NavigatorName.PortfolioAccounts,
+        params: {
+          screen: ScreenName.Accounts,
+          params: { search: currency.name },
+        },
+      },
+    });
+  }, [currency, navigation]);
 
   const secondaryCTA = useCallback(() => {
     navigation.navigate(ScreenName.AddAccountsSelectCrypto);
   }, [navigation]);
-
-  const currency = route.params.currency;
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>

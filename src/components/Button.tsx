@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 import React, { useCallback, memo, useContext, useMemo } from "react";
 import { ViewStyle } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
@@ -21,7 +22,7 @@ const inferType = (type?: string): ButtonProps["type"] => {
     case "tertiary":
       return "main";
     default:
-      return type;
+      return (type as ButtonProps["type"]) || "default";
   }
 };
 
@@ -94,6 +95,7 @@ export function BaseButton({
 
     switch (type) {
       case "primary":
+      case "main":
         return "Proceed";
       default:
         return event;

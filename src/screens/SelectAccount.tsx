@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useTheme } from "styled-components/native";
 import {
   accountWithMandatoryTokens,
   flattenAccounts,
@@ -26,6 +25,8 @@ type Props = {
       selectedCurrency?: CryptoCurrency | TokenCurrency;
       next: string;
       category: string;
+      notEmptyAccounts?: boolean;
+      minBalance?: number;
     };
   };
 };
@@ -40,7 +41,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
     minBalance,
   } = route.params || {};
 
-  const [error, setError] = useState();
+  const [error, setError] = useState<Error | undefined>();
 
   const accounts = useSelector(accountsSelector);
   const enhancedAccounts = useMemo(() => {
@@ -101,7 +102,10 @@ export default function ReceiveFunds({ navigation, route }: Props) {
         />
       </Flex>
       {error ? (
-        <GenericErrorBottomModal error={error} onClose={() => setError(null)} />
+        <GenericErrorBottomModal
+          error={error}
+          onClose={() => setError(undefined)}
+        />
       ) : null}
     </Flex>
   );

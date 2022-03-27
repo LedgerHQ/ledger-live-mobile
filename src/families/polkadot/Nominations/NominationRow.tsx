@@ -83,7 +83,9 @@ export default function NominationRow({
                 {t("polkadot.nomination.notValidator")}
               </LText>
             )}
-            <View style={[styles.seeMore, { borderLeftColor: colors.neutral.c70 }]}>
+            <View
+              style={[styles.seeMore, { borderLeftColor: colors.neutral.c70 }]}
+            >
               <LText style={styles.seeMoreText} color={colors.primary.c80}>
                 {t("common.seeMore")}
               </LText>

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Flex, Text, Link as TextLink } from "@ledgerhq/native-ui";
@@ -32,6 +32,7 @@ const SafeFlex = styled(SafeAreaView)`
 
 function OnboardingStepWelcome({ navigation }: any) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [, setAccepted] = useTermsAccept();
 
   const onLanguageSelect = useCallback(
@@ -117,10 +118,10 @@ function OnboardingStepWelcome({ navigation }: any) {
           pb={2}
           style={{ textTransform: "uppercase" }}
         >
-          <Trans i18nKey="onboarding.stepWelcome.title" />
+          {t("onboarding.stepWelcome.title")}
         </Text>
         <Text variant="body" color="constant.white" pb={10}>
-          <Trans i18nKey="onboarding.stepWelcome.subtitle" />
+          {t("onboarding.stepWelcome.subtitle")}
         </Text>
         <Button
           type="default"
@@ -138,7 +139,7 @@ function OnboardingStepWelcome({ navigation }: any) {
             textAlign="center"
             fontWeight="semiBold"
           >
-            <Trans i18nKey="onboarding.stepWelcome.start" />
+            {t("onboarding.stepWelcome.start")}
           </Text>
         </Button>
 
@@ -148,7 +149,7 @@ function OnboardingStepWelcome({ navigation }: any) {
           lineHeight="22px"
           color="constant.white"
         >
-          <Trans i18nKey="onboarding.stepWelcome.terms" />
+          {t("onboarding.stepWelcome.terms")}
         </Text>
         <Flex
           flexDirection="row"
@@ -157,13 +158,13 @@ function OnboardingStepWelcome({ navigation }: any) {
           pb={6}
         >
           <TextLink type="color" onPress={onTermsLink}>
-            <Trans i18nKey="onboarding.stepWelcome.termsLink" />
+            {t("onboarding.stepWelcome.termsLink")}
           </TextLink>
           <Text mx={2} variant="body" color="constant.white">
-            <Trans i18nKey="onboarding.stepWelcome.and" />
+            {t("onboarding.stepWelcome.and")}
           </Text>
           <TextLink type="color" onPress={onPrivacyLink}>
-            <Trans i18nKey="onboarding.stepWelcome.privacyLink" />
+            {t("onboarding.stepWelcome.privacyLink")}
           </TextLink>
         </Flex>
       </Flex>

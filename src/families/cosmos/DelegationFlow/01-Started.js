@@ -14,8 +14,8 @@ import NavigationScrollView from "../../../components/NavigationScrollView";
 import { urls } from "../../../config/urls";
 import { TrackScreen } from "../../../analytics";
 import Illustration from "../../../images/illustration/Illustration";
-import EarnLight from "../../../images/illustration/Earn.light.png";
-import EarnDark from "../../../images/illustration/Earn.dark.png";
+import EarnLight from "../../../images/illustration/Light/_003.png";
+import EarnDark from "../../../images/illustration/Dark/_003.png";
 
 const forceInset = { bottom: "always" };
 
@@ -41,9 +41,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, []);
 
   return (
-    <View
-      style={[styles.root, { backgroundColor: colors.background }]}
-    >
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}

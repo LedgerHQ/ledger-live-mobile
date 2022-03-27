@@ -3,12 +3,12 @@ import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import { FiltersMedium, OthersMedium } from "@ledgerhq/native-ui/assets/icons";
 import { NavigatorName, ScreenName } from "../../const";
 import Touchable from "../../components/Touchable";
 import Wrench from "../../icons/Wrench";
 import { accountScreenSelector } from "../../reducers/accounts";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
-import { FiltersMedium, OthersMedium } from "@ledgerhq/native-ui/assets/icons";
 
 export default function AccountHeaderRight() {
   const navigation = useNavigation();

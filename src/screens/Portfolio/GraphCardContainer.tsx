@@ -1,6 +1,11 @@
+// @flow
 import React from "react";
 import { useSelector } from "react-redux";
-import { Currency } from "@ledgerhq/live-common/lib/types";
+import {
+  Currency,
+  TokenCurrency,
+  CryptoCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import { Portfolio } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { currenciesSelector } from "../../reducers/accounts";
 import CurrencyDownStatusAlert from "../../components/CurrencyDownStatusAlert";
@@ -15,7 +20,9 @@ const GraphCardContainer = ({
   showGraphCard: boolean;
   counterValueCurrency: Currency;
 }) => {
-  const currencies = useSelector(currenciesSelector);
+  const currencies: Array<CryptoCurrency | TokenCurrency> = useSelector(
+    currenciesSelector,
+  );
 
   return (
     <>

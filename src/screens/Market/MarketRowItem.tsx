@@ -132,4 +132,4 @@ function MarketRowItem({ item, index, counterCurrency, locale, t }: Props) {
   );
 }
 
-export default memo<Props>(MarketRowItem);
+export default memo<Props>(MarketRowItem, () => true);

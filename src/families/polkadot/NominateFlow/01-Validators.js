@@ -308,7 +308,9 @@ function NominateSelectValidator({ navigation, route }: Props) {
     error instanceof PolkadotValidatorsRequired && !nominations.length; // Do not show error on first nominate
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.background.main }]}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background.main }]}
+    >
       <NominationDrawer
         isOpen={drawerInfo && drawerInfo.length > 0}
         onClose={onCloseDrawer}
@@ -372,14 +374,21 @@ function NominateSelectValidator({ navigation, route }: Props) {
       <View
         style={[
           styles.footer,
-          { borderTopColor: colors.neutral.c30, backgroundColor: colors.background.main },
+          {
+            borderTopColor: colors.neutral.c30,
+            backgroundColor: colors.background.main,
+          },
         ]}
       >
         <View style={styles.paddingBottom}>
           <View style={styles.labelContainer}>
             {!ignoreError && maybeChill ? (
               <TouchableOpacity onPress={onGoToChill}>
-                <LText semiBold style={[styles.footerMessage]} color={colors.primary.c80}>
+                <LText
+                  semiBold
+                  style={[styles.footerMessage]}
+                  color={colors.primary.c80}
+                >
                   <Trans i18nKey="polkadot.nominate.steps.validators.maybeChill" />
                 </LText>
               </TouchableOpacity>

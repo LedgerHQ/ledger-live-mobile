@@ -4,15 +4,15 @@ import { Trans } from "react-i18next";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
 
+import { isLiveSupportedApp } from "@ledgerhq/live-common/lib/apps/logic";
+import styled from "styled-components/native";
+import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import { NavigatorName } from "../../../const";
 
 import AppIcon from "../AppsList/AppIcon";
 
 import ActionModal from "./ActionModal";
 
-import { isLiveSupportedApp } from "@ledgerhq/live-common/lib/apps/logic";
-import styled from "styled-components/native";
-import { Flex, Text, Button } from "@ledgerhq/native-ui";
 
 type Props = {
   state: State,

@@ -3,7 +3,7 @@
 
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { NavigatorName, ScreenName } from "../../const";
 // $FlowFixMe
 // $FlowFixMe
@@ -29,7 +29,6 @@ export default function PortfolioNavigator() {
         component={Portfolio}
         options={{
           headerShown: false,
-          unmountOnBlur: true,
         }}
       />
       <Stack.Screen

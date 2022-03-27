@@ -105,6 +105,8 @@ export const urls = {
       "https://shop.ledger.com/pages/black-friday?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     familyPack:
       "https://shop.ledger.com/products/ledger-nano-s-3pack?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
+    familyPackX:
+      "https://shop.ledger.com/products/ledger-nano-x-3pack?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     ledgerAcademy:
       "https://www.ledger.com/academy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     valentine:

@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { NanoFoldedMedium } from "@ledgerhq/native-ui/assets/icons";
+import { Box, Icons, Flex } from "@ledgerhq/native-ui";
 import { ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
@@ -14,8 +15,6 @@ import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
-
-import { Box, Icons, Flex } from "@ledgerhq/native-ui";
 
 const BadgeContainer = styled(Flex).attrs({
   position: "absolute",

@@ -14,8 +14,9 @@ type Props = {
 
 function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
   const { colors } = useTheme();
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(true);
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
+  const handleImageError = useCallback(() => setImageLoaded(false), []);
 
   const firstLetter =
     typeof name === "string" && name[0] ? name[0].toUpperCase() : "";
@@ -33,11 +34,10 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
       ]}
     >
       {!imageLoaded && firstLetter ? (
-        <LText semiBold style={{ fontSize: size / 2 }}>
+        <LText semiBold variant="h2" style={{ lineHeight: size }}>
           {firstLetter}
         </LText>
-      ) : null}
-      {icon ? (
+      ) : icon ? (
         isDisabled ? (
           <>
             <Image
@@ -49,6 +49,7 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
               ]}
               fadeDuration={200}
               onLoad={handleImageLoad}
+              onError={handleImageError}
             />
             <Image
               source={{ uri: icon }}
@@ -58,7 +59,6 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
                 { width: size, height: size, tintColor: colors.fog },
               ]}
               fadeDuration={200}
-              onLoad={handleImageLoad}
             />
           </>
         ) : (
@@ -67,9 +67,14 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
             style={[styles.image, { width: size, height: size }]}
             fadeDuration={200}
             onLoad={handleImageLoad}
+            onError={handleImageError}
           />
         )
-      ) : null}
+      ) : (
+        <LText semiBold variant="h2" style={{ lineHeight: size }}>
+          {firstLetter}
+        </LText>
+      )}
     </View>
   );
 }

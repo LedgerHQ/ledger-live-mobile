@@ -29,7 +29,7 @@ import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountSubHeader from "../../generated/AccountSubHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
-import FabActions from "../../components/FabActions";
+import { FabAccountActions } from "../../components/FabActions";
 import { NoCountervaluePlaceholder } from "../../components/CounterValue.js";
 import DiscreetModeButton from "../../components/DiscreetModeButton";
 import Delta from "../../components/Delta";
@@ -205,9 +205,10 @@ export function getListHeaderComponents({
       ...(!empty
         ? [
             <Box py={3}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <FabActions account={account} parentAccount={parentAccount} />
-              </ScrollView>
+              <FabAccountActions
+                account={account}
+                parentAccount={parentAccount}
+              />
             </Box>,
           ]
         : []),

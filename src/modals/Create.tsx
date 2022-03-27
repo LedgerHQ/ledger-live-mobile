@@ -10,9 +10,8 @@ import {
   accountsCountSelector,
   hasLendEnabledAccountsSelector,
 } from "../reducers/accounts";
-import BottomModal from "../components/BottomModal";
+import BottomModal, { Props as ModalProps } from "../components/BottomModal";
 import BottomModalChoice from "../components/BottomModalChoice";
-import { Props as ModalProps } from "../components/BottomModal";
 import { readOnlyModeEnabledSelector } from "../reducers/settings";
 
 export default function CreateModal({ isOpened, onClose }: ModalProps) {

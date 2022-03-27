@@ -2,11 +2,11 @@
 
 import React, { useCallback } from "react";
 
+import { useDispatch } from "react-redux";
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import { NavigatorName, ScreenName } from "../../../const";
 
 import { importAccountsScenes } from "../shared/infoPagesData";
-import { useDispatch } from "react-redux";
 import { completeOnboarding } from "../../../actions/settings";
 import { useNavigationInterceptor } from "../onboardingContext";
 

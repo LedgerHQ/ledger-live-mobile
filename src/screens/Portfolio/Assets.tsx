@@ -6,7 +6,6 @@ import AccountRow from "../Accounts/AccountRow";
 
 type ListProps = {
   balanceHistory: BalanceHistory;
-  flatListRef: Function;
   assets: any;
 };
 

@@ -5,7 +5,7 @@ import { Switch } from "@ledgerhq/native-ui";
 import SettingsRow from "../../../components/SettingsRow";
 import { carouselVisibilitySelector } from "../../../reducers/settings";
 import { setCarouselVisibility } from "../../../actions/settings";
-import { SLIDES } from "../../../components/Carousel";
+import { SLIDES } from "../../../components/Carousel/shared";
 
 const CarouselRow = () => {
   const { t } = useTranslation();
@@ -31,9 +31,9 @@ const CarouselRow = () => {
       desc={t("settings.display.carouselDesc")}
     >
       <Switch
-        checked={
-          Object.values(carouselVisibility).some(cardVisible => cardVisible)
-        }
+        checked={Object.values(carouselVisibility).some(
+          cardVisible => cardVisible,
+        )}
         onChange={onSetCarouselVisibility}
       />
     </SettingsRow>

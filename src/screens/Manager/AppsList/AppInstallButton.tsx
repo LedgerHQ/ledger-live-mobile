@@ -6,10 +6,10 @@ import manager from "@ledgerhq/live-common/lib/manager";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import { useAppInstallNeedsDeps } from "@ledgerhq/live-common/lib/apps/react";
-import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
-import { installAppFirstTime } from "../../../actions/settings";
 import styled from "styled-components/native";
 import { Icons, Box } from "@ledgerhq/native-ui";
+import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
+import { installAppFirstTime } from "../../../actions/settings";
 
 type Props = {
   app: App,

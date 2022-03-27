@@ -4,28 +4,15 @@
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useCallback, useState, useEffect, memo } from "react";
 import { useTheme } from "styled-components/native";
-import {
-  Flex,
-  Text,
-  ScrollContainerHeader,
-  Icons,
-  ChartCard,
-} from "@ledgerhq/native-ui";
+import { Flex, Text, ScrollContainerHeader, Icons } from "@ledgerhq/native-ui";
+import { FlatList, Image, RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useSingleCoinMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
-import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
-import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import { Image, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import { Account } from "@ledgerhq/live-common/lib/types";
-import {
-  starredMarketCoinsSelector,
-  swapSelectableCurrenciesSelector,
-} from "../../../reducers/settings";
+import { Account } from "@ledgerhq/live-common/lib/types";
+import { starredMarketCoinsSelector } from "../../../reducers/settings";
 import { useLocale } from "../../../context/Locale";
-import { NavigatorName, ScreenName } from "../../../const";
-import { isCurrencySupported } from "../../Exchange/coinifyConfig";
 import CircleCurrencyIcon from "../../../components/CircleCurrencyIcon";
 import { IconContainer } from "../MarketRowItem";
 import { counterValueFormatter, getDateFormatter } from "../utils";
@@ -35,11 +22,13 @@ import {
   removeStarredMarketCoins,
 } from "../../../actions/settings";
 import MarketStats from "./MarketStats";
-import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accounts";
-// import AccountRow from "../../Accounts/AccountRow";
+import { flattenAccountsByCryptoCurrencyScreenSelector } from "../../../reducers/accounts";
+import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
 import Button from "../../../components/wrappedUi/Button";
-import { ensureContrast } from "../../../colors";
+import MarketGraph from "./MarketGraph";
+import { FabMarketActions } from "../../../components/FabActions";
+import { NavigatorName, ScreenName } from "../../../const";
 
 export const BackButton = ({ navigation }: { navigation: any }) => (
   <Button
@@ -48,28 +37,6 @@ export const BackButton = ({ navigation }: { navigation: any }) => (
     Icon={Icons.ArrowLeftMedium}
   />
 );
-
-/**
- * The following is disabled for now as the mapping for supported coins is not 100% working (ERC20 etc.)
-const NoCoinSupport = ({ t }: { t: TFunction }) => (
-  <Flex
-    bg="primary.c20"
-    px={18}
-    py={16}
-    borderRadius={4}
-    flexDirection="row"
-    justifyContent="flex-start"
-    alignItems="center"
-    mx={16}
-    my={16}
-  >
-    <Icon name="ShieldSecurity" size={16} color="primary.c90" />
-    <Text ml={16} color="primary.c90" variant="body">
-      {t("market.detailsPage.assetNotSupportedOnLedgerLive")}
-    </Text>
-  </Flex>
-);
-*/
 
 function MarketDetail({
   navigation,
@@ -87,14 +54,6 @@ function MarketDetail({
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);
 
-  const ranges = useMemo(
-    () =>
-      Object.keys(rangeDataTable)
-        .filter(key => key !== "1h")
-        .map(r => ({ label: t(`market.range.${r}`), value: r })),
-    [t],
-  );
-
   const {
     selectedCoinData: currency,
     selectCurrency,
@@ -103,7 +62,7 @@ function MarketDetail({
     loadingChart,
     refreshChart,
     counterCurrency,
-  } = useSingleCoinMarketData(currencyId);
+  } = useSingleCoinMarketData();
 
   const {
     name,
@@ -117,7 +76,7 @@ function MarketDetail({
 
   useEffect(() => {
     const resetState = () => {
-      selectCurrency();
+      // selectCurrency();
     };
     const sub = navigation.addListener("blur", resetState);
     return () => {
@@ -126,18 +85,13 @@ function MarketDetail({
   }, [selectCurrency, resetSearchOnUmount, navigation]);
 
   const allAccounts = useSelector(
-    accountsByCryptoCurrencyScreenSelector(internalCurrency),
+    flattenAccountsByCryptoCurrencyScreenSelector(internalCurrency),
   );
 
-  const availableOnBuy =
-    internalCurrency && isCurrencySupported(internalCurrency, "buy");
-  const swapCurrencies = useSelector(state =>
-    swapSelectableCurrenciesSelector(state),
+  const filteredAccounts = useMemo(
+    () => allAccounts.sort((a, b) => b.balance - a.balance).slice(0, 3),
+    [allAccounts],
   );
-  const availableOnSwap =
-    internalCurrency &&
-    allAccounts?.length > 0 &&
-    swapCurrencies.includes(internalCurrency.id);
 
   const toggleStar = useCallback(() => {
     const action = isStarred ? removeStarredMarketCoins : addStarredMarketCoins;
@@ -145,47 +99,35 @@ function MarketDetail({
   }, [dispatch, isStarred, currencyId]);
 
   const { range } = chartRequestParams;
-  const { interval } = rangeDataTable[range];
 
-  const dateRangeFormatter = useMemo(() => getDateFormatter(locale, interval), [
+  const dateRangeFormatter = useMemo(() => getDateFormatter(locale, range), [
     locale,
-    interval,
+    range,
   ]);
 
-  const [hoveredItem] = useState<{ date: Date; value: number } | undefined>();
-
-  const navigateToBuy = useCallback(() => {
-    navigation.navigate(NavigatorName.Exchange, {
-      screen: ScreenName.ExchangeBuy,
-      params: {
-        mode: "buy",
-      },
-    });
-  }, [navigation]);
-
-  /** Disabled for now on demand of PO
   const renderAccountItem = useCallback(
     ({ item, index }: { item: Account; index: number }) => (
       // @ts-expect-error import js issue
       <AccountRow
         navigation={navigation}
+        navigationParams={[
+          NavigatorName.Accounts,
+          {
+            screen: ScreenName.Account,
+            params: {
+              parentId: item?.parentId,
+              accountId: item.id,
+            },
+          },
+        ]}
         account={item}
         accountId={item.id}
         isLast={index === allAccounts.length - 1}
+        hideDelta
       />
     ),
     [navigation, allAccounts.length],
   );
-  */
-
-  const navigateToSwap = useCallback(() => {
-    navigation.navigate(NavigatorName.Swap, {
-      screen: ScreenName.Swap,
-      params: {
-        defaultAccount: allAccounts?.length > 0 ? allAccounts[0] : undefined,
-      },
-    });
-  }, [navigation, allAccounts]);
 
   useEffect(() => {
     if (name) {
@@ -208,72 +150,11 @@ function MarketDetail({
     if (refreshControlVisible && !loading) setRefreshControlVisible(false);
   }, [refreshControlVisible, loading]);
 
-  const currencyColor = useMemo(
-    () =>
-      internalCurrency
-        ? ensureContrast(getCurrencyColor(internalCurrency), colors.neutral.c30)
-        : colors.neutral.c100,
-    [internalCurrency, colors.neutral.c30, colors.neutral.c100],
-  );
-
-  const chartDataFormatted = useMemo(
-    () =>
-      chartData?.[chartRequestParams.range]
-        ? chartData?.[chartRequestParams.range].map(d => ({
-            date: new Date(d[0]),
-            value: d[1],
-          }))
-        : [],
-    [chartData, chartRequestParams.range],
-  );
-
-  const timeFormat = useMemo(() => {
-    switch (range) {
-      case "24h":
-        return { hour: "numeric", minute: "numeric" };
-      case "7d":
-        return { weekday: "short" };
-      case "30d":
-        return { month: "short", day: "numeric" };
-      default:
-        return { month: "short" };
-    }
-  }, [range]);
-
-  const xAxisFormatter = useCallback(
-    (timestamp: number) =>
-      new Intl.DateTimeFormat(locale, timeFormat).format(timestamp),
-    [locale, timeFormat],
-  );
-
-  const yAxisFormatter = useCallback(
-    (value: number) =>
-      counterValueFormatter({
-        value,
-        shorten: true,
-        locale,
-        allowZeroValue: true,
-        t,
-      }),
-    [locale, t],
-  );
-
-  const valueFormatter = useCallback(
-    (value: number) =>
-      counterValueFormatter({
-        value,
-        currency: counterCurrency,
-        locale,
-        allowZeroValue: true,
-        t,
-      }),
-    [counterCurrency, locale, t],
-  );
+  const [hoveredItem, setHoverItem] = useState<any>(null);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
       <ScrollContainerHeader
-        bg="background.main"
         TopLeftSection={<BackButton navigation={navigation} />}
         MiddleSection={
           <Flex
@@ -314,29 +195,46 @@ function MarketDetail({
           />
         }
         BottomSection={
-          <Flex justifyContent="center" alignItems="flex-start" pb={3}>
-            <Text variant="h1" mb={1}>
-              {price
-                ? counterValueFormatter({
-                    currency: counterCurrency,
-                    value: price,
-                    locale,
-                    t,
-                  })
-                : null}
-            </Text>
-            <Flex height={20}>
-              {priceChangePercentage !== null &&
-              !isNaN(priceChangePercentage) ? (
-                <DeltaVariation percent value={priceChangePercentage} />
-              ) : (
-                <Text variant="body" color="neutral.c70">
-                  {" "}
-                  -
-                </Text>
-              )}
+          <>
+            <Flex justifyContent="center" alignItems="flex-start" pb={3}>
+              <Text variant="h1" mb={1}>
+                {counterValueFormatter({
+                  currency: counterCurrency,
+                  value:
+                    hoveredItem && hoveredItem.value
+                      ? hoveredItem.value
+                      : price,
+                  locale,
+                  t,
+                })}
+              </Text>
+              <Flex height={20}>
+                {hoveredItem && hoveredItem.date ? (
+                  <Text variant="body" color="neutral.c70">
+                    {dateRangeFormatter.format(hoveredItem.date)}
+                  </Text>
+                ) : priceChangePercentage !== null &&
+                  !isNaN(priceChangePercentage) ? (
+                  <DeltaVariation percent value={priceChangePercentage} />
+                ) : (
+                  <Text variant="body" color="neutral.c70">
+                    {" "}
+                    -
+                  </Text>
+                )}
+              </Flex>
             </Flex>
-          </Flex>
+            {internalCurrency && isLiveSupported ? (
+              <Flex mb={6}>
+                <FabMarketActions
+                  currency={internalCurrency}
+                  eventProperties={{ currencyName: name, page: "MarketCoin" }}
+                  accounts={filteredAccounts}
+                  contentContainerStyle={{}}
+                />
+              </Flex>
+            ) : null}
+          </>
         }
         refreshControl={
           <RefreshControl
@@ -347,65 +245,25 @@ function MarketDetail({
           />
         }
       >
-        <ChartCard
-          locale={locale}
-          ranges={ranges}
-          range={chartRequestParams.range || "24h"}
-          isLoading={loadingChart}
+        <MarketGraph
+          setHoverItem={setHoverItem}
+          chartRequestParams={chartRequestParams}
+          loading={loading}
+          loadingChart={loadingChart}
           refreshChart={refreshChart}
-          chartData={chartDataFormatted}
-          currencyColor={currencyColor}
-          margin={16}
-          xAxisFormatter={xAxisFormatter}
-          yAxisFormatter={yAxisFormatter}
-          valueFormatter={valueFormatter}
+          chartData={chartData}
         />
-        {isLiveSupported ? (
-          <Flex
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-            p={16}
-          >
-            {availableOnBuy ? (
-              <Button
-                flex={1}
-                type="color"
-                onPress={navigateToBuy}
-                iconName="BuyCryptoAlt"
-                event={"Buy Crypto Page Market Coin"}
-                eventProperties={{ currencyName: name }}
-              >
-                {t("account.buy")}
-              </Button>
-            ) : null}
-            {availableOnSwap ? (
-              <Button
-                ml={16}
-                flex={1}
-                type="color"
-                onPress={navigateToSwap}
-                iconName="BuyCrypto"
-                event={"Swap Crypto Page Market Coin"}
-                eventProperties={{ currencyName: name }}
-              >
-                {t("transfer.swap.main.header")}
-              </Button>
-            ) : null}
-          </Flex>
-        ) : null}
-        {/* {allAccounts && allAccounts.length > 0 && isLiveSupported ? (
-          <Flex my={16}>
-            <Text mx={16} variant="h3">
-              {t("market.detailsPage.holding")}
-            </Text>
+
+        {filteredAccounts && filteredAccounts.length > 0 ? (
+          <Flex mx={6} mt={8}>
+            <Text variant="h3">{t("tabs.accounts")}</Text>
             <FlatList
-              data={allAccounts}
+              data={filteredAccounts}
               renderItem={renderAccountItem}
               keyExtractor={(item, index) => item.id + index}
             />
           </Flex>
-        ) : null} */}
+        ) : null}
         <MarketStats currency={currency} counterCurrency={counterCurrency} />
       </ScrollContainerHeader>
     </SafeAreaView>

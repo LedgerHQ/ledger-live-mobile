@@ -1,9 +1,8 @@
 import React, { memo, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
 
-import UninstallAllModal from "../Modals/UninstallAllModal";
-
 import { Button } from "@ledgerhq/native-ui";
+import UninstallAllModal from "../Modals/UninstallAllModal";
 
 type Props = {
   onUninstallAll: () => void;

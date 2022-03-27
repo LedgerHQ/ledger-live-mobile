@@ -4,13 +4,13 @@ import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import { Flex } from "@ledgerhq/native-ui";
 
+import styled from "styled-components/native";
 import AppInstallButton from "./AppInstallButton";
 import AppUninstallButton from "./AppUninstallButton";
 import AppUpdateButton from "./AppUpdateButton";
 
 import AppProgressButton from "./AppProgressButton";
 
-import styled from "styled-components/native";
 
 type Props = {
   app: App,

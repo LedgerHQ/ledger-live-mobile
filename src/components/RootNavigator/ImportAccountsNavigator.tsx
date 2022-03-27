@@ -54,11 +54,7 @@ export default function ImportAccountsNavigator() {
         name={ScreenName.FallBackCameraScreen}
         component={FallBackCameraScreen}
         options={{
-          headerTitle: (
-            <Text variant="h3" color="constant.white" uppercase>
-              {t("account.import.fallback.header")}
-            </Text>
-          ),
+          headerTitle: "",
         }}
       />
     </Stack.Navigator>

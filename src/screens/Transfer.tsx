@@ -14,7 +14,6 @@ const TransferButton = styled(Touchable)`
   justify-content: center;
   bottom: 14px;
   background-color: ${p => p.theme.colors.palette.neutral.c100};
-  transform: rotate(90deg);
 `;
 
 const hitSlop = {
@@ -45,7 +44,7 @@ export function TransferTabIcon() {
         hitSlop={hitSlop}
         onPress={openModal}
       >
-        <Icons.Sort1Medium size={28} color={"palette.background.main"} />
+        <Icons.TransferMedium size={28} color={"palette.background.main"} />
       </TransferButton>
       <CreateModal isOpened={isModalOpened} onClose={onModalClose} />
     </>

@@ -12,10 +12,10 @@ import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { useSelector } from "react-redux";
+import { Icons } from "@ledgerhq/native-ui";
 import Section from "../../screens/OperationDetails/Section";
 import OperationStatusIcon from "../../icons/OperationStatusIcon";
 import { discreetModeSelector, localeSelector } from "../../reducers/settings";
-import { Icons } from "@ledgerhq/native-ui";
 
 type Props = {
   extra: {

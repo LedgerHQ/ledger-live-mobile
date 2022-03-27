@@ -8,13 +8,13 @@ import {
 import { BoxedIcon, Flex, Text } from "@ledgerhq/native-ui";
 import { Trans } from "react-i18next";
 import { PieChartMedium } from "@ledgerhq/native-ui/assets/icons";
+import { useNavigation } from "@react-navigation/native";
 import Delta from "./Delta";
 import { Item } from "./Graph/types";
 import TransactionsPendingConfirmationWarning from "./TransactionsPendingConfirmationWarning";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import DiscreetModeButton from "./DiscreetModeButton";
-import { useNavigation } from "@react-navigation/native";
 import { NavigatorName } from "../const";
 
 type Props = {

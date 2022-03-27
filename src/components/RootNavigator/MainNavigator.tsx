@@ -6,7 +6,7 @@ import { Icons } from "@ledgerhq/native-ui";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSelector } from "react-redux";
 import { ScreenName, NavigatorName } from "../../const";
-import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
+import { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import TabIcon from "../TabIcon";
 import MarketNavigator from "./MarketNavigator";

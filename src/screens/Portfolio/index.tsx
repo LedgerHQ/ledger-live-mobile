@@ -1,4 +1,5 @@
-import React, { useRef, useCallback, useMemo, useState } from "react";
+/* eslint-disable import/named */
+import React, { useCallback, useMemo, useState, memo } from "react";
 import { useSelector } from "react-redux";
 import { FlatList, LayoutChangeEvent, Platform } from "react-native";
 import Animated, {
@@ -16,6 +17,7 @@ import styled, { useTheme } from "styled-components/native";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
+import { Currency } from "@ledgerhq/live-common/lib/types";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
 import {
@@ -32,7 +34,6 @@ import Header from "./Header";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
-import { useScrollToTop } from "../../navigation/utils";
 import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
@@ -40,8 +41,8 @@ import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
 import MarketSection from "./MarketSection";
-import Link from "../../components/wrappedUi/Link";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
+import { useProviders } from "../Swap/SwapEntry";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -107,10 +108,14 @@ const SectionTitle = ({
   );
 };
 
-export default function PortfolioScreen({ navigation }: Props) {
+const maxAssetsToDisplay = 3;
+
+function PortfolioScreen({ navigation }: Props) {
   const carouselVisibility = useSelector(carouselVisibilitySelector);
   const accounts = useSelector(accountsSelector);
-  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const counterValueCurrency: Currency = useSelector(
+    counterValueCurrencySelector,
+  );
   const portfolio = usePortfolio();
   const discreetMode = useSelector(discreetModeSelector);
   const [isAddModalOpened, setAddModalOpened] = useState(false);
@@ -118,6 +123,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const openAddModal = useCallback(() => setAddModalOpened(true), [
     setAddModalOpened,
   ]);
+  useProviders();
 
   const closeAddModal = useCallback(() => setAddModalOpened(false), [
     setAddModalOpened,
@@ -130,34 +136,22 @@ export default function PortfolioScreen({ navigation }: Props) {
   const handleScroll = useAnimatedScrollHandler(event => {
     currentPositionY.value = event.contentOffset.y;
   });
-  const ref = useRef();
-  useScrollToTop(ref);
-
-  const flatListRef = useRef();
 
   const onPortfolioCardLayout = useCallback((event: LayoutChangeEvent) => {
     const { y, height } = event.nativeEvent.layout;
-    setGraphCardEndPosition(y + height);
+    setGraphCardEndPosition(y + height / 2);
   }, []);
 
   const areAccountsEmpty = useMemo(() => accounts.every(isAccountEmpty), [
     accounts,
   ]);
-  const showAssets = accounts.length > 0;
-  const maxAssetsToDisplay = 3;
-  const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
+  const [showAssets, assetsToDisplay] = useMemo(
+    () => [accounts.length > 0, accounts.slice(0, maxAssetsToDisplay)],
+    [accounts],
+  );
 
   const data = useMemo(
     () => [
-      <Box bg={"background.main"}>
-        <Header
-          counterValueCurrency={counterValueCurrency}
-          portfolio={portfolio}
-          currentPositionY={currentPositionY}
-          graphCardEndPosition={graphCardEndPosition}
-          hidePortfolio={areAccountsEmpty}
-        />
-      </Box>,
       !showAssets && (
         <Box mx={6} mt={3}>
           <AddAssetsCard />
@@ -167,82 +161,19 @@ export default function PortfolioScreen({ navigation }: Props) {
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}
-          showGreeting={!areAccountsEmpty}
           showGraphCard={!areAccountsEmpty}
         />
       </Box>,
       ...(accounts.length > 0
         ? [
-            <Box mx={6} mt={6}>
+            <Box mt={6}>
               <FabActions />
             </Box>,
           ]
         : []),
-      ...(showAssets
-        ? [
-            <Flex mx={6} mt={10}>
-              <SectionTitle
-                title={<Trans i18nKey={"distribution.title"} />}
-                navigation={navigation}
-                navigatorName={NavigatorName.PortfolioAccounts}
-              />
-              <Assets
-                balanceHistory={portfolio.balanceHistory}
-                flatListRef={flatListRef}
-                assets={assetsToDisplay}
-              />
-              {accounts.length < 3 && (
-                <>
-                  <Flex
-                    mt={6}
-                    p={4}
-                    border={`1px dashed ${colors.neutral.c40}`}
-                    borderRadius={4}
-                  >
-                    <Link
-                      onPress={openAddModal}
-                      Icon={PlusMedium}
-                      iconPosition={"left"}
-                      type={"color"}
-                    >
-                      <Trans i18nKey={"distribution.moreAssets"} />
-                    </Link>
-                  </Flex>
-                  <AddAccountsModal
-                    navigation={navigation}
-                    isOpened={isAddModalOpened}
-                    onClose={closeAddModal}
-                  />
-                </>
-              )}
-            </Flex>,
-          ]
-        : []),
-      <Flex mx={6} my={10}>
-        <SectionTitle
-          title={<Trans i18nKey={"portfolio.topGainers.title"} />}
-          navigation={navigation}
-          navigatorName={NavigatorName.Market}
-          seeMoreText={<Trans i18nKey={"portfolio.topGainers.seeMarket"} />}
-          containerProps={{ mb: 5 }}
-        />
-        <MarketSection />
-      </Flex>,
-      ...(Object.values(carouselVisibility).some(Boolean)
-        ? [
-            <Flex mb={10}>
-              <Flex mx={6}>
-                <SectionTitle
-                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
-                />
-              </Flex>
-              <Carousel cardsVisibility={carouselVisibility} />
-            </Flex>,
-          ]
-        : []),
       ...(Platform.OS !== "ios"
         ? [
-            <Flex mb={10}>
+            <Flex mt={8}>
               <Flex mx={6}>
                 <SectionTitle
                   title={<Trans i18nKey={"tabs.platform"} />}
@@ -256,18 +187,81 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
+      ...(showAssets
+        ? [
+            <Flex mx={6} mt={8}>
+              <SectionTitle
+                title={<Trans i18nKey={"distribution.title"} />}
+                navigation={navigation}
+                navigatorName={NavigatorName.PortfolioAccounts}
+              />
+              <Assets
+                balanceHistory={portfolio.balanceHistory}
+                assets={assetsToDisplay}
+              />
+              {accounts.length < 3 && (
+                <>
+                  <Flex
+                    mt={6}
+                    p={4}
+                    border={`1px dashed ${colors.neutral.c40}`}
+                    borderRadius={4}
+                  >
+                    <TextLink
+                      onPress={openAddModal}
+                      Icon={PlusMedium}
+                      iconPosition={"left"}
+                      type={"color"}
+                    >
+                      <Trans i18nKey={"distribution.moreAssets"} />
+                    </TextLink>
+                  </Flex>
+                  <AddAccountsModal
+                    navigation={navigation}
+                    isOpened={isAddModalOpened}
+                    onClose={closeAddModal}
+                  />
+                </>
+              )}
+            </Flex>,
+          ]
+        : []),
+      ...(Object.values(carouselVisibility).some(Boolean)
+        ? [
+            <Flex mt={8}>
+              <Flex mx={6}>
+                <SectionTitle
+                  title={<Trans i18nKey={"portfolio.recommended.title"} />}
+                />
+              </Flex>
+              <Carousel cardsVisibility={carouselVisibility} />
+            </Flex>,
+          ]
+        : []),
+      <Flex mx={6} my={8}>
+        <SectionTitle
+          title={<Trans i18nKey={"portfolio.topGainers.title"} />}
+          navigation={navigation}
+          navigatorName={NavigatorName.Market}
+          seeMoreText={<Trans i18nKey={"portfolio.topGainers.seeMarket"} />}
+          containerProps={{ mb: 5 }}
+        />
+        <MarketSection />
+      </Flex>,
     ],
     [
       counterValueCurrency,
       portfolio,
-      currentPositionY,
-      graphCardEndPosition,
       areAccountsEmpty,
       showAssets,
       onPortfolioCardLayout,
       accounts.length,
       navigation,
       assetsToDisplay,
+      colors.neutral.c40,
+      openAddModal,
+      isAddModalOpened,
+      closeAddModal,
       carouselVisibility,
     ],
   );
@@ -283,15 +277,21 @@ export default function PortfolioScreen({ navigation }: Props) {
           accountsLength={accounts.length}
           discreet={discreetMode}
         />
-
+        <Box bg={"background.main"}>
+          <Header
+            counterValueCurrency={counterValueCurrency}
+            portfolio={portfolio}
+            currentPositionY={currentPositionY}
+            graphCardEndPosition={graphCardEndPosition}
+            hidePortfolio={areAccountsEmpty}
+          />
+        </Box>
         <AnimatedFlatListWithRefreshControl
-          ref={ref}
           data={data}
           style={{ flex: 1, position: "relative" }}
           renderItem={({ item }: { item: React.ReactNode }) => item}
           keyExtractor={(_: any, index: number) => String(index)}
           showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={[0]}
           onScroll={handleScroll}
           testID={
             accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
@@ -302,3 +302,5 @@ export default function PortfolioScreen({ navigation }: Props) {
     </>
   );
 }
+
+export default memo<Props>(PortfolioScreen);

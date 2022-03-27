@@ -1,13 +1,21 @@
 import React, { useCallback } from "react";
 import { Linking } from "react-native";
 import { Trans } from "react-i18next";
-import { Flex, Text, Icons, List, Link, Button, Log } from "@ledgerhq/native-ui";
+import {
+  Flex,
+  Text,
+  Icons,
+  List,
+  Link,
+  Button,
+  Log,
+} from "@ledgerhq/native-ui";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
 import Illustration from "../../../images/illustration/Illustration";
-import EarnLight from "../../../images/illustration/Earn.light.png";
-import EarnDark from "../../../images/illustration/Earn.dark.png";
+import EarnLight from "../../../images/illustration/Light/_003.png";
+import EarnDark from "../../../images/illustration/Dark/_003.png";
 
 type Props = {
   navigation: any;

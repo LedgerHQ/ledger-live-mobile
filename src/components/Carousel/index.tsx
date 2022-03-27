@@ -1,25 +1,13 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from "react";
 import { TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
-import map from "lodash/map";
-import { Trans } from "react-i18next";
 import { Box } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled from "styled-components/native";
 import Animated, { FadeOut, Layout } from "react-native-reanimated";
-import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
-import Slide from "./Slide";
-import Illustration from "../../images/illustration/Illustration";
-import AcademyLight from "../../images/illustration/Academy.light.png";
-import AcademyDark from "../../images/illustration/Academy.dark.png";
-import BuyCryptoLight from "../../images/illustration/BuyCrypto.light.png";
-import BuyCryptoDark from "../../images/illustration/BuyCrypto.dark.png";
-import SwapLight from "../../images/illustration/Swap.light.png";
-import SwapDark from "../../images/illustration/Swap.dark.png";
-import FamilyPackLight from "../../images/illustration/FamilyPack.light.png";
-import FamilyPackDark from "../../images/illustration/FamilyPack.dark.png";
 import { track } from "../../analytics";
+import { getDefaultSlides, SLIDES } from "./shared";
 
 const DismissCarousel = styled(TouchableOpacity)`
   position: absolute;
@@ -30,97 +18,6 @@ const DismissCarousel = styled(TouchableOpacity)`
   align-items: center;
   justify-content: center;
 `;
-
-export const SLIDES = [
-  {
-    url: urls.banners.ledgerAcademy,
-    name: "takeTour",
-    title: <Trans i18nKey={`carousel.banners.tour.title`} />,
-    description: <Trans i18nKey={`carousel.banners.tour.description`} />,
-    icon: (
-      <Illustration
-        lightSource={AcademyLight}
-        darkSource={AcademyDark}
-        size={84}
-      />
-    ),
-    position: {
-      bottom: 70,
-      left: 15,
-      width: 146,
-      height: 93,
-    },
-  },
-  {
-    url: "ledgerlive://buy",
-    name: "buyCrypto",
-    title: <Trans i18nKey={`carousel.banners.buyCrypto.title`} />,
-    description: <Trans i18nKey={`carousel.banners.buyCrypto.description`} />,
-    icon: (
-      <Illustration
-        lightSource={BuyCryptoLight}
-        darkSource={BuyCryptoDark}
-        size={84}
-      />
-    ),
-    position: {
-      bottom: 70,
-      left: 0,
-      width: 146,
-      height: 93,
-    },
-  },
-  {
-    url: "ledgerlive://swap",
-    name: "Swap",
-    title: <Trans i18nKey={`carousel.banners.swap.title`} />,
-    description: <Trans i18nKey={`carousel.banners.swap.description`} />,
-    icon: (
-      <Illustration lightSource={SwapLight} darkSource={SwapDark} size={84} />
-    ),
-    position: {
-      bottom: 70,
-      left: 0,
-      width: 127,
-      height: 100,
-    },
-  },
-  {
-    url: urls.banners.familyPack,
-    name: "FamilyPack",
-    title: <Trans i18nKey={`carousel.banners.familyPack.title`} />,
-    description: <Trans i18nKey={`carousel.banners.familyPack.description`} />,
-    icon: (
-      <Illustration
-        lightSource={FamilyPackLight}
-        darkSource={FamilyPackDark}
-        size={84}
-      />
-    ),
-    position: {
-      bottom: 70,
-      left: 0,
-      width: 180,
-      height: 80,
-    },
-  },
-];
-
-export const getDefaultSlides = () =>
-  map(SLIDES, slide => ({
-    id: slide.name,
-    Component: () => (
-      <Slide
-        url={slide.url}
-        name={slide.name}
-        title={slide.title}
-        description={slide.description}
-        image={slide.image}
-        icon={slide.icon}
-        position={slide.position}
-      />
-    ),
-  }));
 
 const hitSlop = {
   top: 16,
@@ -184,6 +81,8 @@ const Carousel = ({ cardsVisibility }: Props) => {
       }),
     [cardsVisibility],
   );
+
+  console.log(slides.length);
 
   const onHide = useCallback(
     cardId => {

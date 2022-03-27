@@ -2,13 +2,19 @@
 /* eslint-disable import/no-named-as-default-member */
 import React, { useMemo, useCallback, memo } from "react";
 import { useTheme } from "styled-components/native";
-import { Flex, GraphTabs, InfiniteLoader } from "@ledgerhq/native-ui";
+import {
+  Flex,
+  GraphTabs,
+  InfiniteLoader,
+  Transitions,
+} from "@ledgerhq/native-ui";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import * as Animatable from "react-native-animatable";
+import { useTranslation } from "react-i18next";
 import Graph from "../../../components/Graph";
 // @ts-expect-error impot issue
 import getWindowDimensions from "../../../logic/getWindowDimensions";
-import { useTranslation } from "react-i18next";
+import { Transition } from "@ledgerhq/native-ui/components/transitions";
 
 const { width } = getWindowDimensions();
 
@@ -46,7 +52,7 @@ function MarketGraph({
       chartData?.[range]
         ? chartData[range].map(d => ({
             date: new Date(d[0]),
-            value: d[1],
+            value: d[1] || 0,
           }))
         : [],
     [chartData, range],
@@ -64,28 +70,28 @@ function MarketGraph({
   const mapGraphValue = useCallback(d => d?.value || 0, []);
 
   return (
-    <Flex flexDirection="column" mt={20} p={16}>
-      <Flex height={100} alignItems="center" justifyContent="center">
+    <Flex flexDirection="column" mt={20} borderRadius={8}>
+      <Flex height={120} alignItems="center" justifyContent="center">
         {data && data.length > 0 ? (
-          <Animatable.View animation="fadeIn" duration={400} useNativeDriver>
+          <Transitions.Fade duration={400} status="entering">
             {/** @ts-expect-error import js issue */}
             <Graph
               isInteractive
               isLoading={loadingChart}
               height={100}
-              width={width - 32}
+              width={width}
               color={colors.primary.c80}
               data={data}
               mapValue={mapGraphValue}
               onItemHover={setHoverItem}
               verticalRangeRatio={10}
             />
-          </Animatable.View>
+          </Transitions.Fade>
         ) : (
           <InfiniteLoader size={32} />
         )}
       </Flex>
-      <Flex mt={25}>
+      <Flex mt={25} mx={6}>
         <GraphTabs
           activeIndex={activeRangeIndex}
           activeBg="neutral.c30"

@@ -168,9 +168,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
             icon={<Info size={16} color={colors.darkBlue} />}
             onPress={openRewardsInfoModal}
           />
-          <View
-            style={[styles.rewardSection, { backgroundColor: colors.card }]}
-          >
+          <View style={[styles.rewardSection]}>
             <View style={styles.labelSection}>
               <Text fontWeight={"semiBold"} variant={"h4"}>
                 <CurrencyUnitValue
@@ -205,13 +203,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
         formattedVotes.length > 0 ? (
           <>
             <Header count={formattedVotes.length} onPress={onManageVotes} />
-            <View
-              style={[
-                styles.container,
-                styles.noPadding,
-                { backgroundColor: colors.card },
-              ]}
-            >
+            <View style={[styles.container, styles.noPadding]}>
               <Box mb={5}>
                 {formattedVotes.map(
                   ({ validator, address, voteCount, isSR }, index) => (
@@ -229,7 +221,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
                 )}
               </Box>
               {percentVotesUsed < 1 && (
-                <View style={[styles.container]}>
+                <View style={{ marginBottom: 24 }}>
                   <TouchableOpacity
                     onPress={onDelegate}
                     style={[styles.warn, { backgroundColor: colors.lightLive }]}

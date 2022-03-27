@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useCallback } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -47,16 +48,19 @@ export default function PortfolioHeader({
   const { incidents } = useFilteredServiceStatus();
 
   const onNotificationButtonPress = useCallback(() => {
+    // @ts-expect-error navigation ts issue
     navigation.navigate(NavigatorName.NotificationCenter);
   }, [navigation]);
 
   const onStatusErrorButtonPress = useCallback(() => {
+    // @ts-expect-error navigation ts issue
     navigation.navigate(NavigatorName.NotificationCenter, {
       screen: ScreenName.NotificationCenterStatus,
     });
   }, [navigation]);
 
   const onSettingsButtonPress = useCallback(() => {
+    // @ts-expect-error navigation ts issue
     navigation.navigate(NavigatorName.Settings);
   }, [navigation]);
 

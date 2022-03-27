@@ -5,7 +5,7 @@ import { EyeMedium, EyeNoneMedium } from "@ledgerhq/native-ui/assets/icons";
 import { discreetModeSelector } from "../reducers/settings";
 import { setDiscreetMode } from "../actions/settings";
 
-export default function DiscreetModeButton({size = 24} : {size?: number}) {
+export default function DiscreetModeButton({ size = 24 }: { size?: number }) {
   const discreetMode = useSelector(discreetModeSelector);
   const dispatch = useDispatch();
   const onPress = useCallback(() => {

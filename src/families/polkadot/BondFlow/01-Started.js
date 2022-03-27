@@ -18,8 +18,8 @@ import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
 import Alert from "../../../components/Alert";
 import { urls } from "../../../config/urls";
 import Illustration from "../../../images/illustration/Illustration";
-import EarnLight from "../../../images/illustration/Earn.light.png";
-import EarnDark from "../../../images/illustration/Earn.dark.png";
+import EarnLight from "../../../images/illustration/Light/_003.png";
+import EarnDark from "../../../images/illustration/Dark/_003.png";
 
 type Props = {
   navigation: any,

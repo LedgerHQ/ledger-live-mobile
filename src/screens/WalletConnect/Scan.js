@@ -2,12 +2,12 @@
 import React, { useEffect, useContext } from "react";
 import Config from "react-native-config";
 import Clipboard from "@react-native-community/clipboard";
+import { Trans } from "react-i18next";
 import Scanner from "../../components/Scanner";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 // $FlowFixMe
 import { connect, context, STATUS } from "./Provider";
-import { Trans } from "react-i18next";
 
 type Props = {
   navigation: any,

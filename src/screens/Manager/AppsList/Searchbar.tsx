@@ -1,8 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import { Platform, TouchableOpacity, TextInput } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components/native";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import { Flex, Icons } from "@ledgerhq/native-ui";
 
 type Props = {

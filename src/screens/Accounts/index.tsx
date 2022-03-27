@@ -1,16 +1,10 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect, memo } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { Account } from "@ledgerhq/live-common/lib/types";
 import { findCryptoCurrencyByKeyword } from "@ledgerhq/live-common/lib/currencies";
-import {
-  Box,
-  Flex,
-  Icons,
-  ScrollContainerHeader,
-  Text,
-} from "@ledgerhq/native-ui";
+import { Box, Flex, Icons, Text } from "@ledgerhq/native-ui";
 
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,7 +17,6 @@ import TrackScreen from "../../analytics/TrackScreen";
 import NoAccounts from "./NoAccounts";
 import AccountRow from "./AccountRow";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
-import { useScrollToTop } from "../../navigation/utils";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 import { ScreenName } from "../../const";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
@@ -31,17 +24,19 @@ import { usePortfolio } from "../../actions/portfolio";
 import AddAccount from "./AddAccount";
 import AccountOrder from "./AccountOrder";
 
+import FilteredSearchBar from "../../components/FilteredSearchBar";
+
+const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
+
 const List = globalSyncRefreshControl(FlatList);
 
 type Props = {
   navigation: any;
-  route: { params?: { currency?: string } };
+  route: { params?: { currency?: string; search?: string } };
 };
 
 function Accounts({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
-  const ref = useRef();
-  useScrollToTop(ref);
   const portfolio = usePortfolio();
   const { t } = useTranslation();
 
@@ -49,6 +44,8 @@ function Accounts({ navigation, route }: Props) {
   useFocusEffect(refreshAccountsOrdering);
 
   const { params } = route;
+
+  const search = params?.search;
 
   const [account, setAccount] = useState(undefined);
 
@@ -90,64 +87,80 @@ function Accounts({ navigation, route }: Props) {
         }
       />
     ),
-    [navigation, accounts.length],
+    [navigation, accounts.length, portfolio.balanceHistory],
+  );
+
+  const renderList = useCallback(
+    items => (
+      <List
+        data={items}
+        renderItem={renderItem}
+        keyExtractor={i => i.id}
+        ListEmptyComponent={<NoAccounts />}
+        contentContainerStyle={{ padding: 16 }}
+      />
+    ),
+    [renderItem],
+  );
+
+  const renderEmptySearch = useCallback(
+    () => (
+      <Flex>
+        <Text variant="h3" color="fog">
+          {t("transfer.receive.noAccount")}
+        </Text>
+      </Flex>
+    ),
+    [t],
   );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Flex flex={1} position="relative">
-        <TrackScreen category="Accounts" accountsLength={accounts.length} />
-
-        <ScrollContainerHeader
-          bg="background.main"
-          width="100%"
-          flex={1}
-          TopLeftSection={
-            <Box mr={3}>
-              <TouchableOpacity onPress={navigation.goBack}>
-                <Icons.ArrowLeftMedium size={24} />
-              </TouchableOpacity>
-            </Box>
-          }
-          TopRightSection={
-            <Flex flexDirection="row" alignItems={"center"}>
-              <Box mr={7}>
-                {!flattenedAccounts.length ? null : <AccountOrder />}
-              </Box>
-              <AddAccount />
-            </Flex>
-          }
-          MiddleSection={
-            <Flex
-              height={30}
-              flexDirection="column"
-              justifyContent="center"
-              mt={4}
-              mb={3}
-            >
-              <Text variant="h1">{t("distribution.title")}</Text>
-            </Flex>
-          }
-        >
-          <Flex flex={1} bg={"background.main"} px={6}>
-            <List
-              ref={ref}
-              data={flattenedAccounts}
-              renderItem={renderItem}
-              keyExtractor={item => item.id}
-              ListEmptyComponent={<NoAccounts />}
-            />
-            <MigrateAccountsBanner />
-            <TokenContextualModal
-              onClose={() => setAccount(undefined)}
-              isOpened={!!account}
-              account={account}
-            />
+      <TrackScreen category="Accounts" accountsLength={accounts.length} />
+      <Flex flex={1} bg={"background.main"}>
+        <Flex p={6} flexDirection="row" alignItems="center">
+          <Box mr={3}>
+            <TouchableOpacity onPress={navigation.goBack}>
+              <Icons.ArrowLeftMedium size={24} />
+            </TouchableOpacity>
+          </Box>
+          <Flex
+            height={30}
+            flexDirection="column"
+            justifyContent="center"
+            mt={4}
+            mb={3}
+            flex={1}
+          >
+            <Text variant="h1">{t("distribution.title")}</Text>
           </Flex>
-        </ScrollContainerHeader>
+          <Flex flexDirection="row" alignItems={"center"}>
+            <Box mr={7}>
+              {!flattenedAccounts.length ? null : <AccountOrder />}
+            </Box>
+            <AddAccount />
+          </Flex>
+        </Flex>
+        <FilteredSearchBar
+          list={flattenedAccounts}
+          inputWrapperStyle={{
+            paddingHorizontal: 16,
+          }}
+          renderList={renderList}
+          renderEmptySearch={renderEmptySearch}
+          keys={SEARCH_KEYS}
+          initialQuery={search}
+        />
+
+        <MigrateAccountsBanner />
+        <TokenContextualModal
+          onClose={() => setAccount(undefined)}
+          isOpened={!!account}
+          account={account}
+        />
       </Flex>
     </SafeAreaView>
   );
 }
 
-export default withDiscreetMode(Accounts);
+export default memo(withDiscreetMode(Accounts));

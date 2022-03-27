@@ -240,14 +240,28 @@ const linkingOptions = {
               /**
                * ie: "ledgerlive://portfolio" -> will redirect to the portfolio
                */
-              [ScreenName.Portfolio]: "portfolio",
-              [NavigatorName.Accounts]: {
+              [NavigatorName.Portfolio]: {
+                screens: {
+                  [ScreenName.Portfolio]: "portfolio",
+                  [NavigatorName.PortfolioAccounts]: {
+                    screens: {
+                      /**
+                       * @params ?currency: string
+                       * ie: "ledgerlive://account?currency=bitcoin" will open the first bitcoin account
+                       */
+                      [ScreenName.Accounts]: "account",
+                    },
+                  },
+                },
+              },
+              [NavigatorName.Market]: {
                 screens: {
                   /**
-                   * @params ?currency: string
-                   * ie: "ledgerlive://account?currency=bitcoin" will open the first bitcoin account
+                   * @params ?platform: string
+                   * ie: "ledgerlive://discover" will open the catalog
+                   * ie: "ledgerlive://discover/paraswap?theme=light" will open the catalog and the paraswap dapp with a light theme as parameter
                    */
-                  [ScreenName.Accounts]: "account",
+                  [ScreenName.MarketList]: "market",
                 },
               },
               [NavigatorName.Discover]: {

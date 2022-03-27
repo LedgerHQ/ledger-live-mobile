@@ -22,7 +22,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
-import { SLIDES } from "../components/Carousel";
+import { SLIDES } from "../components/Carousel/shared";
 import { getDefaultLanguageLocale, getDefaultLocale } from "../languages";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");

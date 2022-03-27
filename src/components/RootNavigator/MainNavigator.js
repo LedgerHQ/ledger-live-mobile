@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { Platform } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { Icons } from "@ledgerhq/native-ui";
 import useFeature from "@ledgerhq/live-common/lib/featureFlags/useFeature";
 import { ScreenName, NavigatorName } from "../../const";

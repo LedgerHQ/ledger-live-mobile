@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
@@ -13,7 +13,7 @@ import DAppDisclaimer from "../Platform/DAppDisclaimer";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
-export default function DiscoverSection() {
+function DiscoverSection() {
   const navigation = useNavigation();
   const { manifests } = usePlatformApp();
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
@@ -91,3 +91,5 @@ export default function DiscoverSection() {
     </>
   );
 }
+
+export default memo(DiscoverSection);

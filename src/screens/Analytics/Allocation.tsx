@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { Dimensions, FlatList } from "react-native";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import { Flex, Text } from "@ledgerhq/native-ui";
-import { useTheme } from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import RingChart from "./RingChart";
 import { useDistribution } from "../../actions/general";
@@ -24,8 +23,9 @@ const AssetWrapperContainer = styled(Flex).attrs({
   alignItems: "center",
 })``;
 
-export default function Allocation() {
-  const size = Dimensions.get("window").width * (1 / 2);
+const size = Dimensions.get("window").width * (1 / 2);
+
+function Allocation() {
   const distribution = useDistribution();
   const { colors } = useTheme();
   const { t } = useTranslation();
@@ -62,3 +62,5 @@ export default function Allocation() {
     </Container>
   );
 }
+
+export default memo(Allocation);

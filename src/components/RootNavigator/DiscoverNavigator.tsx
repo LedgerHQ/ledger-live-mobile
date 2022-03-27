@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import useFeature from "@ledgerhq/live-common/lib/featureFlags/useFeature";
 import { ScreenName } from "../../const";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";

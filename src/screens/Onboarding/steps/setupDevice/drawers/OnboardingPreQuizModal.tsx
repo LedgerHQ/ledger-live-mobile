@@ -19,24 +19,24 @@ const OnboardingPreQuizModal = () => {
   };
 
   return (
-    <Flex flex={1} justifyContent="space-between" bg="primary.c60">
+    <Flex flex={1} justifyContent="space-between" bg="constant.purple">
       <Flex alignItems="center">
         <IconBox
           Icon={Icons.TrophyMedium}
-          color="neutral.c100"
+          color="constant.black"
           iconSize={24}
           boxSize={64}
         />
         <Text
           variant="h2"
-          color="neutral.c100"
+          color="constant.black"
           mt={8}
           uppercase
           textAlign="center"
         >
           {t("onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title")}
         </Text>
-        <Text variant="body" color="neutral.c100" mt={6} textAlign="center">
+        <Text variant="body" color="constant.black" mt={6} textAlign="center">
           {t("onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc")}
         </Text>
       </Flex>

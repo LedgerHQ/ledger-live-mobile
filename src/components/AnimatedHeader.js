@@ -18,7 +18,7 @@ import Animated from "react-native-reanimated";
 import * as Animatable from "react-native-animatable";
 import Styles from "../navigation/styles";
 import LText from "./LText";
-import { normalize, width } from "../helpers/normalizeSize";
+import { width } from "../helpers/normalizeSize";
 import ArrowLeft from "../icons/ArrowLeft";
 import Close from "../icons/Close";
 

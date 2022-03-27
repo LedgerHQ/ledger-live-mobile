@@ -1,21 +1,32 @@
-import React, { useState, useCallback, useMemo, ReactNode, memo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  ReactNode,
+  memo,
+  useEffect,
+} from "react";
 import { useTheme } from "styled-components/native";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
-import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import {
   ValueChange,
   PortfolioRange,
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import { Box, Flex, Text, ChartCard } from "@ledgerhq/native-ui";
+import {
+  Box,
+  Flex,
+  Text,
+  Transitions,
+  InfiniteLoader,
+  GraphTabs,
+} from "@ledgerhq/native-ui";
 
 import { useTranslation } from "react-i18next";
-import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
-import { ensureContrast } from "../colors";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
 import FormatDate from "./FormatDate";
@@ -24,38 +35,10 @@ import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
-import { useLocale } from "../context/Locale";
-import { counterValueFormatter } from "../screens/Market/utils";
+import getWindowDimensions from "../logic/getWindowDimensions";
+import Graph from "./Graph";
 
-type HeaderProps = {
-  account: AccountLike;
-  isAvailable: boolean;
-  history: BalanceHistoryWithCountervalue;
-  unit: Unit;
-  counterValueCurrency: Currency;
-  useCounterValue?: boolean;
-  countervalueChange: ValueChange;
-};
-
-const Header = ({
-  account,
-  isAvailable,
-  history,
-  unit,
-  counterValueCurrency,
-  useCounterValue,
-  countervalueChange,
-}: HeaderProps) => (
-  <GraphCardHeader
-    account={account}
-    isLoading={!isAvailable}
-    to={history[history.length - 1]}
-    cryptoCurrencyUnit={unit}
-    counterValueUnit={counterValueCurrency.units[0]}
-    useCounterValue={useCounterValue}
-    valueChange={countervalueChange}
-  />
-);
+const { width } = getWindowDimensions();
 
 type FooterProps = {
   renderAccountSummary: () => ReactNode;
@@ -87,10 +70,10 @@ type Props = {
 };
 
 const timeRangeMapped: any = {
-  "24h": "day",
-  "7d": "week",
-  "30d": "month",
   "1y": "year",
+  "30d": "month",
+  "7d": "week",
+  "24h": "day",
 };
 
 function AccountGraphCard({
@@ -102,11 +85,10 @@ function AccountGraphCard({
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
-  const { locale } = useLocale();
   const { t } = useTranslation();
 
-  const [rangeRequest, setRangeRequest] = useState("24h");
   const [timeRange, setTimeRange] = useTimeRange();
+  const [loading, setLoading] = useState(false);
   const { countervalueChange } = useBalanceHistoryWithCountervalue({
     account,
     range: timeRange,
@@ -114,114 +96,89 @@ function AccountGraphCard({
 
   const ranges = useMemo(
     () =>
-      Object.keys(rangeDataTable)
-        .filter(key => key !== "1h")
-        .map(r => ({ label: t(`market.range.${r}`), value: r })),
+      Object.keys(timeRangeMapped).map(r => ({
+        label: t(`market.range.${r}`),
+        value: timeRangeMapped[r],
+      })),
     [t],
   );
 
-  const timeFormat = useMemo(() => {
-    switch (rangeRequest) {
-      case "24h":
-        return { hour: "numeric", minute: "numeric" };
-      case "7d":
-        return { weekday: "short" };
-      case "30d":
-        return { month: "short", day: "numeric" };
-      default:
-        return { month: "short" };
-    }
-  }, [rangeRequest]);
+  const rangesLabels = ranges.map(({ label }) => label);
+
+  const activeRangeIndex = ranges.findIndex(r => r.value === timeRange);
 
   const isAvailable = !useCounterValue || countervalueAvailable;
-
-  const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
-  const graphColor = ensureContrast(
-    getCurrencyColor(currency),
-    colors.neutral.c30,
-  );
 
-  const refreshChart = useCallback(
-    request => {
-      if (request && request.range && timeRangeMapped[request.range]) {
-        const { range } = request;
-        setTimeRange(timeRangeMapped[range]);
-        setRangeRequest(range);
+  const updateRange = useCallback(
+    index => {
+      if (ranges[index]) {
+        const range: PortfolioRange = ranges[index].value;
+        setLoading(true);
+        setTimeRange(range);
       }
     },
-    [setTimeRange, setRangeRequest],
+    [ranges, setTimeRange],
   );
 
-  const dataFormatted = useMemo(() => {
-    const counterValueCurrencyMagnitude =
-      10 ** counterValueCurrency.units[0].magnitude || 1;
-    return history?.length
-      ? history.map(d => ({
-          date: d.date,
-          value: d.countervalue / counterValueCurrencyMagnitude || 0,
-        }))
-      : [];
-  }, [history, counterValueCurrency]);
+  useEffect(() => {
+    if (history && history.length > 0) {
+      setLoading(false);
+    }
+  }, [history]);
 
-  const xAxisFormatter = useCallback(
-    (timestamp: number) =>
-      new Intl.DateTimeFormat(locale, timeFormat).format(timestamp),
-    [locale, timeFormat],
-  );
+  const [hoveredItem, setHoverItem] = useState<Item>();
 
-  const yAxisFormatter = useCallback(
-    (value: number) =>
-      value
-        ? counterValueFormatter({
-            value,
-            shorten: true,
-            locale,
-            allowZeroValue: true,
-            t,
-          })
-        : 0,
-    [locale, t],
-  );
-
-  const valueFormmater = useCallback(
-    (value: number) =>
-      value
-        ? counterValueFormatter({
-            value,
-            currency: counterValueCurrency.ticker,
-            locale,
-            allowZeroValue: true,
-            t,
-          })
-        : 0,
-    [counterValueCurrency.ticker, locale, t],
-  );
+  const mapGraphValue = useCallback(d => d?.value || 0, []);
 
   return (
-    <ChartCard
-      locale={locale}
-      ranges={ranges}
-      Header={
-        <Header
-          account={account}
-          isAvailable={isAvailable}
-          history={history}
-          unit={unit}
-          counterValueCurrency={counterValueCurrency}
-          useCounterValue={useCounterValue}
-          countervalueChange={countervalueChange}
+    <Flex
+      flexDirection="column"
+      mt={20}
+      bg="neutral.c30"
+      py={6}
+      borderRadius={8}
+    >
+      <GraphCardHeader
+        account={account}
+        isLoading={!isAvailable}
+        to={history[history.length - 1]}
+        cryptoCurrencyUnit={unit}
+        counterValueUnit={counterValueCurrency.units[0]}
+        useCounterValue={useCounterValue}
+        valueChange={countervalueChange}
+        hoveredItem={hoveredItem}
+      />
+      <Flex height={120} alignItems="center" justifyContent="center">
+        {!loading ? (
+          <Transitions.Fade duration={400} status="entering">
+            {/** @ts-expect-error import js issue */}
+            <Graph
+              isInteractive
+              isLoading={!isAvailable}
+              height={100}
+              width={width - 32}
+              color={colors.primary.c80}
+              data={history}
+              mapValue={mapGraphValue}
+              onItemHover={setHoverItem}
+              verticalRangeRatio={10}
+            />
+          </Transitions.Fade>
+        ) : (
+          <InfiniteLoader size={32} />
+        )}
+      </Flex>
+      <Flex mt={25} px={6}>
+        <GraphTabs
+          activeIndex={activeRangeIndex}
+          activeBg="neutral.c20"
+          onChange={updateRange}
+          labels={rangesLabels}
         />
-      }
-      Footer={<Footer renderAccountSummary={renderAccountSummary} />}
-      range={rangeRequest}
-      refreshChart={refreshChart}
-      chartData={dataFormatted}
-      currencyColor={graphColor}
-      xAxisFormatter={xAxisFormatter}
-      yAxisFormatter={yAxisFormatter}
-      valueFormatter={valueFormmater}
-    />
+      </Flex>
+      <Footer renderAccountSummary={renderAccountSummary} />
+    </Flex>
   );
 }
 
@@ -250,6 +207,7 @@ function GraphCardHeader({
       flexDirection={"row"}
       justifyContent={"space-between"}
       alignItems={"center"}
+      px={6}
     >
       <Box flexShrink={1}>
         {hoveredItem ? (

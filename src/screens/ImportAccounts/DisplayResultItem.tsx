@@ -37,7 +37,11 @@ export default class DisplayResultItem extends Component<{
         </Flex>
         {!selectable ? null : (
           <Flex ml={8}>
-            <CheckBox onChange={importing ? undefined : this.onSwitch} isChecked={checked} style={styles.marginLeft} />
+            <CheckBox
+              onChange={importing ? undefined : this.onSwitch}
+              isChecked={checked}
+              style={styles.marginLeft}
+            />
           </Flex>
         )}
       </TouchableOpacity>

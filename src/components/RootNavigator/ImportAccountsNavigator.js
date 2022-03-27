@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
 import ScanAccounts from "../../screens/ImportAccounts/Scan";
@@ -21,9 +21,7 @@ export default function ImportAccountsNavigator() {
     [colors],
   );
   return (
-    <Stack.Navigator
-      screenOptions={{ ...stackNavigationConfig }}
-    >
+    <Stack.Navigator screenOptions={{ ...stackNavigationConfig }}>
       <Stack.Screen
         name={ScreenName.ScanAccounts}
         component={ScanAccounts}
@@ -48,7 +46,7 @@ export default function ImportAccountsNavigator() {
         name={ScreenName.FallBackCameraScreen}
         component={FallBackCameraScreen}
         options={{
-          headerTitle: t("account.import.fallback.header"),
+          headerTitle: "",
         }}
       />
     </Stack.Navigator>

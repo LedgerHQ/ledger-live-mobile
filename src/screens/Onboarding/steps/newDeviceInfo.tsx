@@ -26,13 +26,6 @@ const images = {
     require("../../../images/illustration/Light/_069.png"),
     require("../../../images/illustration/Light/_066.png"),
   ],
-  dark: [
-    require("../../../images/illustration/Dark/_049.png"),
-    require("../../../images/illustration/Dark/_073.png"),
-    require("../../../images/illustration/Dark/_070.png"),
-    require("../../../images/illustration/Dark/_069.png"),
-    require("../../../images/illustration/Dark/_066.png"),
-  ],
 };
 
 type CardType = { index: number; deviceModelId: DeviceNames };
@@ -43,14 +36,14 @@ const Card = ({ index /* , deviceModelId */ }: CardType) => {
       <Flex>
         <Illustration
           size={normalize(240)}
-          darkSource={images.dark[index]}
+          darkSource={images.light[index]}
           lightSource={images.light[index]}
         />
       </Flex>
-      <Text variant="h2" mb={3} textAlign="center">
+      <Text variant="h2" mb={3} textAlign="center" color="constant.black">
         {t(`onboarding.stepNewDevice.${index}.title`)}
       </Text>
-      <Text textAlign="center" variant="body">
+      <Text textAlign="center" variant="body" color="constant.black">
         {t(`onboarding.stepNewDevice.${index}.desc`)}
       </Text>
     </Flex>

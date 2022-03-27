@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import BenchmarkQRStream from "../../screens/BenchmarkQRStream";
 import DebugSwap from "../../screens/DebugSwap";

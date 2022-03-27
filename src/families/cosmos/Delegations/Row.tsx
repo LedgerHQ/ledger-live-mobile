@@ -35,7 +35,6 @@ export default function DelegationRow({
       style={[
         styles.row,
         styles.wrapper,
-        { backgroundColor: colors.card },
         !isLast
           ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey }
           : undefined,

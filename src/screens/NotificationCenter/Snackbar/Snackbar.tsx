@@ -106,7 +106,7 @@ export default function Snackbar({ toast, cta, onPress, onClose }: Props) {
       <Notification
         variant={"primary"}
         Icon={Icon}
-        title={type ? type : title}
+        title={type || title}
         subtitle={type ? title : type}
         linkText={cta}
         onLinkPress={handleOnPress}

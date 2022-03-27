@@ -35,6 +35,8 @@ type Props = {
   isLast: boolean;
   onSetAccount: (arg: TokenAccount) => void;
   portfolioValue: number;
+  navigationParams?: any[];
+  hideDelta?: boolean;
 };
 
 const AccountRow = ({
@@ -42,6 +44,8 @@ const AccountRow = ({
   account,
   accountId,
   portfolioValue,
+  navigationParams,
+  hideDelta,
 }: Props) => {
   // makes it refresh if this changes
   useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
@@ -86,24 +90,32 @@ const AccountRow = ({
   });
 
   const onAccountPress = useCallback(() => {
-    if (account.type === "Account") {
-      navigation.navigate(NavigatorName.PortfolioAccounts, {
-        screen: ScreenName.Account,
+    if (navigationParams) {
+      navigation.navigate(...navigationParams);
+    } else if (account.type === "Account") {
+      navigation.navigate(NavigatorName.Portfolio, {
+        screen: NavigatorName.PortfolioAccounts,
         params: {
-          accountId,
-          isForwardedFromAccounts: true,
+          screen: ScreenName.Account,
+          params: {
+            accountId,
+            isForwardedFromAccounts: true,
+          },
         },
       });
     } else if (account.type === "TokenAccount") {
-      navigation.navigate(NavigatorName.PortfolioAccounts, {
-        screen: ScreenName.Account,
+      navigation.navigate(NavigatorName.Portfolio, {
+        screen: NavigatorName.PortfolioAccounts,
         params: {
-          parentId: account?.parentId,
-          accountId: account.id,
+          screen: ScreenName.Account,
+          params: {
+            parentId: account?.parentId,
+            accountId: account.id,
+          },
         },
       });
     }
-  }, [account, accountId, navigation]);
+  }, [account, accountId, navigation, navigationParams]);
 
   return (
     <TouchableOpacity onPress={onAccountPress}>
@@ -171,7 +183,9 @@ const AccountRow = ({
             <Text variant="body" fontWeight="medium" color="neutral.c70">
               <CurrencyUnitValue showCode unit={unit} value={account.balance} />
             </Text>
-            <Delta percent valueChange={countervalueChange} />
+            {hideDelta ? null : (
+              <Delta percent valueChange={countervalueChange} />
+            )}
           </Flex>
         </Flex>
       </Flex>

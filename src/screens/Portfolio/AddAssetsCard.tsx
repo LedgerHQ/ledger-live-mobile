@@ -2,12 +2,11 @@ import React, { useCallback, useState } from "react";
 import { Button, Flex, Text } from "@ledgerhq/native-ui";
 import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 import { Trans } from "react-i18next";
-import { Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import Illustration from "../../images/illustration/Illustration";
-import PileOfBitcoinDark from "../../images/illustration/PileOfBitcoin.dark.png";
-import PileOfBitcoinLight from "../../images/illustration/PileOfBitcoin.light.png";
+import PileOfBitcoinDark from "../../images/illustration/Dark/_002.png";
+import PileOfBitcoinLight from "../../images/illustration/Light/_002.png";
 import { NavigatorName } from "../../const";
 
 export const AddAssetsCard = () => {

@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 import { useTheme } from "styled-components/native";
 
 import AccountList from "./AccountList";
-import FilteredSearchBar from "../components/FilteredSearchBar";
+import FilteredSearchBar from "./FilteredSearchBar";
 import { formatSearchResults } from "../helpers/formatAccountSearchResults";
 import { accountsSelector } from "../reducers/accounts";
 

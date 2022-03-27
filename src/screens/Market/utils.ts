@@ -1,4 +1,5 @@
 import { TFunction } from "i18next";
+import { localeSelector } from "../../reducers/settings";
 
 const indexes: [string, number][] = [
   ["d", 1],
@@ -17,22 +18,29 @@ const formatters = {};
 export const getDateFormatter = (locale: string, interval: string) => {
   if (!dateFormatters[locale]) {
     dateFormatters[locale] = {
-      daily: new Intl.DateTimeFormat(locale),
-      hourly: new Intl.DateTimeFormat(locale, {
+      "24h": new Intl.DateTimeFormat(locale, {
+        hour: "numeric",
+        minute: "numeric",
+      }),
+      "7d": new Intl.DateTimeFormat(locale, {
         year: "numeric",
         month: "numeric",
         day: "numeric",
         hour: "numeric",
         minute: "numeric",
       }),
-      minutely: new Intl.DateTimeFormat(locale, {
-        hour: "numeric",
-        minute: "numeric",
+      "30d": new Intl.DateTimeFormat(locale, {
+        month: "short",
+        day: "numeric",
+      }),
+      default: new Intl.DateTimeFormat(locale, {
+        month: "short",
+        day: "numeric",
       }),
     };
   }
 
-  return dateFormatters[locale][interval];
+  return dateFormatters[locale][interval] || dateFormatters[locale].default;
 };
 
 export const counterValueFormatter = ({

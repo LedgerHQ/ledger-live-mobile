@@ -49,15 +49,21 @@ export default function OnboardingQuizItem({
           />
           {selectedAnswer ? (
             <>
-              <Text variant="h2" mt={8} mb={7} textAlign="center">
+              <Text
+                variant="h2"
+                mt={8}
+                mb={7}
+                textAlign="center"
+                color="constant.black"
+              >
                 {selectedAnswer.title}
               </Text>
-              <Text variant="body" textAlign="center">
+              <Text variant="body" textAlign="center" color="constant.black">
                 {selectedAnswer.desc}
               </Text>
             </>
           ) : (
-            <Text variant="h2" mt={8} textAlign="center">
+            <Text variant="h2" mt={8} textAlign="center" color="constant.black">
               {question}
             </Text>
           )}
@@ -74,7 +80,7 @@ export default function OnboardingQuizItem({
         ) : (
           answers.map((answer, i) => (
             <BaseButton
-              type="main"
+              type="shade"
               outline
               key={i}
               onPress={() => {
@@ -83,7 +89,12 @@ export default function OnboardingQuizItem({
               }}
               mt={6}
             >
-              <Text variant="body" flex={1} textAlign="center">
+              <Text
+                variant="body"
+                flex={1}
+                textAlign="center"
+                color="constant.black"
+              >
                 {answer.answer}
               </Text>
             </BaseButton>

@@ -11,7 +11,6 @@ import {
   Icon,
   ScrollContainer,
   InfiniteLoader,
-  Box,
 } from "@ledgerhq/native-ui";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
@@ -49,16 +48,10 @@ function getAnalyticsProperties(
   };
 }
 
-const BottomSection = ({
-  navigation,
-  openSearch,
-}: {
-  navigation: any;
-  openSearch: () => void;
-}) => {
+const BottomSection = ({ navigation }: { navigation: any }) => {
   const { t } = useTranslation();
   const { requestParams, refresh, counterCurrency } = useMarketData();
-  const { range, starred = [], orderBy, order, search } = requestParams;
+  const { range, starred = [], orderBy, order } = requestParams;
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const starFilterOn = starred.length > 0;
 
@@ -114,9 +107,9 @@ const BottomSection = ({
 
   return (
     <ScrollContainer
-      style={{ marginHorizontal: -overflowX }}
+      style={{ marginHorizontal: -overflowX, marginTop: 16 }}
       contentContainerStyle={{ paddingHorizontal: overflowX - Badge.mx }}
-      height={55}
+      height={40}
       horizontal
       showsHorizontalScrollIndicator={false}
     >
@@ -131,22 +124,6 @@ const BottomSection = ({
           </Badge>
         </TouchableOpacity>
       )}
-
-      {search ? (
-        <TouchableOpacity onPress={openSearch}>
-          <Badge>
-            <Icon name="Search" color="neutral.c100" />
-            <Text
-              ml={2}
-              fontWeight="semiBold"
-              variant="body"
-              color="primary.c80"
-            >
-              {search}
-            </Text>
-          </Badge>
-        </TouchableOpacity>
-      ) : null}
       <SortBadge
         label={t("market.filters.sort")}
         valueLabel={t(`market.filters.order.${orderBy}`)}
@@ -169,7 +146,7 @@ const BottomSection = ({
       <SortBadge
         label={t("market.filters.time")}
         value={timeRangeValue?.value}
-        valueLabel={timeRangeValue?.label}
+        valueLabel={timeRangeValue?.label ?? ""}
         options={timeRanges}
         onChange={onChange}
       />
@@ -239,7 +216,6 @@ export default function Market({ navigation }: { navigation: any }) {
 
   const { limit, search, range } = requestParams;
   const [isLoading, setIsLoading] = useState(true);
-  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const resetSearch = useCallback(
     () => refresh({ search: "", starred: [], liveCompatible: false }),
@@ -270,7 +246,7 @@ export default function Market({ navigation }: { navigation: any }) {
 
   const renderEmptyComponent = useCallback(
     () =>
-      search && !loading ? (
+      search && !isLoading ? (
         <Flex
           flex={1}
           flexDirection="column"
@@ -281,7 +257,7 @@ export default function Market({ navigation }: { navigation: any }) {
           <Image
             style={{ width: 164, height: 164, alignSelf: "center" }}
             source={
-              colors.palette.type === "light"
+              colors.type === "light"
                 ? require("../../images/marketNoResultslight.png")
                 : require("../../images/marketNoResultsdark.png")
             }
@@ -304,7 +280,7 @@ export default function Market({ navigation }: { navigation: any }) {
           </Button>
         </Flex>
       ) : null,
-    [colors.palette.type, loading, resetSearch, search, t],
+    [colors.type, isLoading, resetSearch, search, t],
   );
 
   const onEndReached = useCallback(() => {
@@ -331,14 +307,6 @@ export default function Market({ navigation }: { navigation: any }) {
       .finally(() => setIsLoading(false));
   }, [limit, marketData, page, loading, loadNextPage]);
 
-  const openSearch = useCallback(() => {
-    track("Page Market Search", {
-      access: true,
-    });
-    setSearchOpen(true);
-  }, []);
-  const closeSearch = useCallback(() => setSearchOpen(false), []);
-
   const renderFooter = useCallback(
     () => (
       <Flex height={40} mb={6}>
@@ -360,57 +328,45 @@ export default function Market({ navigation }: { navigation: any }) {
   }, [refreshControlVisible, loading]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background.main }}>
-      <Flex flex={1} position="relative">
-        <ScrollContainerHeader
-          bg="background.main"
-          MiddleSection={
-            <Flex
-              height={48}
-              flexDirection="row"
-              justifyContent="flex-start"
-              alignItems="center"
-            >
-              <Text variant="h1">{t("market.title")}</Text>
-            </Flex>
-          }
-          TopRightSection={
-            <Button size="large" onPress={openSearch} iconName="Search" />
-          }
-          BottomSection={
-            <BottomSection navigation={navigation} openSearch={openSearch} />
-          }
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshControlVisible}
-              colors={[colors.primary.c80]}
-              tintColor={colors.primary.c80}
-              onRefresh={handlePullToRefresh}
-            />
-          }
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: colors.background.main,
+      }}
+    >
+      <Flex p={6}>
+        <Flex
+          height={48}
+          flexDirection="row"
+          justifyContent="flex-start"
+          alignItems="center"
         >
-          <Box px={4}>
-            <FlatList
-              data={marketData}
-              renderItem={renderItems}
-              onEndReached={onEndReached}
-              onEndReachedThreshold={10}
-              scrollEventThrottle={50}
-              initialNumToRender={limit}
-              keyExtractor={(item, index) => item.id + index}
-              ListFooterComponent={renderFooter}
-              ListEmptyComponent={renderEmptyComponent}
-            />
-          </Box>
-        </ScrollContainerHeader>
-
-        <SearchHeader
-          search={search}
-          refresh={refresh}
-          isOpen={isSearchOpen}
-          onClose={closeSearch}
-        />
+          <Text variant="h1">{t("market.title")}</Text>
+        </Flex>
+        <SearchHeader search={search} refresh={refresh} />
+        <BottomSection navigation={navigation} />
       </Flex>
+
+      <FlatList
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        data={marketData}
+        renderItem={renderItems}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+        scrollEventThrottle={50}
+        initialNumToRender={limit}
+        keyExtractor={(item, index) => item.id + index}
+        ListFooterComponent={renderFooter}
+        ListEmptyComponent={renderEmptyComponent}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshControlVisible}
+            colors={[colors.primary.c80]}
+            tintColor={colors.primary.c80}
+            onRefresh={handlePullToRefresh}
+          />
+        }
+      />
     </SafeAreaView>
   );
 }

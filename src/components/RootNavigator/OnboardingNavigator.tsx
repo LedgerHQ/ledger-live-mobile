@@ -38,6 +38,7 @@ import OnboardingWarning from "../../screens/Onboarding/steps/setupDevice/drawer
 import OnboardingSyncDesktopInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SyncDesktopInformation";
 import OnboardingRecoveryPhraseWarning from "../../screens/Onboarding/steps/setupDevice/drawers/RecoveryPhraseWarning";
 import PostWelcomeSelection from "../../screens/Onboarding/steps/postWelcomeSelection";
+import BuyDeviceScreen from "../../screens/BuyDeviceScreen";
 
 const Stack = createStackNavigator();
 const OnboardingCarefulWarningStack = createStackNavigator();
@@ -92,7 +93,7 @@ function OnboardingPreQuizModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-      <Flex backgroundColor="primary.c60">
+      <Flex bg="constant.purple">
         <NavigationHeader
           {...props}
           hideBack
@@ -107,7 +108,7 @@ function OnboardingPreQuizModalNavigator(props: StackScreenProps<{}>) {
   return (
     <NavigationModalContainer
       {...props}
-      backgroundColor="primary.c60"
+      backgroundColor="constant.purple"
       deadZoneProps={{ flex: 1 }}
       contentContainerProps={{ minHeight: 500, maxHeight: "50%" }}
     >
@@ -153,6 +154,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingPostWelcomeSelection}
         component={PostWelcomeSelection}
+      />
+      <Stack.Screen
+        name={ScreenName.BuyDeviceScreen}
+        component={BuyDeviceScreen}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingLanguage}

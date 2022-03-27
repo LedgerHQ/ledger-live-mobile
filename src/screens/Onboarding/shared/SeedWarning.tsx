@@ -2,8 +2,7 @@ import React, { useState, useCallback } from "react";
 
 import { Linking, Image } from "react-native";
 import { Trans } from "react-i18next";
-import { getDeviceModel } from "@ledgerhq/devices";
-import { DeviceModelId } from "@ledgerhq/devices";
+import { getDeviceModel, DeviceModelId } from "@ledgerhq/devices";
 import {
   Text,
   BottomDrawer,
@@ -43,7 +42,7 @@ const SeedWarning = ({ deviceModelId }: { deviceModelId: DeviceModelId }) => {
       <Alert
         type="info"
         title={<Trans i18nKey="onboarding.warning.seed.warning" />}
-      ></Alert>
+      />
       <Button
         type="main"
         testID={"Onboarding - Seed warning"}

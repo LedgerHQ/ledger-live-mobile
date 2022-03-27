@@ -4,9 +4,9 @@ import { View, StyleSheet, Linking } from "react-native";
 import { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { useTranslation } from "react-i18next";
 import { InfoMedium, WarningMedium } from "@ledgerhq/native-ui/assets/icons";
-import { useDeepLinkHandler } from "../../navigation/useDeepLinking";
 import { Flex, Notification } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
+import { useDeepLinkHandler } from "../../navigation/useDeepLinking";
 
 type Props = {
   item: Announcement;
@@ -70,7 +70,7 @@ export default function NewsRow({ item, isUnread, isLastElement }: Props) {
           Icon={Icon}
           iconColor={(icon && iconColors[icon]) || "palette.neutral.c100"}
           title={title}
-          subtitle={text ? text : ""}
+          subtitle={text || ""}
           linkText={link?.label || t("common.learnMore")}
           onLinkPress={openUrl}
         />

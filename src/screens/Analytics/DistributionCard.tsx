@@ -1,7 +1,6 @@
 // @flow
 import React, { useMemo } from "react";
-import { StyleSheet } from "react-native";
-import type {
+import {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types/currencies";
@@ -16,14 +15,14 @@ import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 import { ensureContrast } from "../../colors";
 
 export type DistributionItem = {
-  currency: CryptoCurrency | TokenCurrency,
-  distribution: number, // % of the total (normalized in 0-1)
-  amount: number,
-  countervalue: number, // countervalue of the amount that was calculated based of the rate provided
+  currency: CryptoCurrency | TokenCurrency;
+  distribution: number; // % of the total (normalized in 0-1)
+  amount: number;
+  countervalue: number; // countervalue of the amount that was calculated based of the rate provided
 };
 
 type Props = {
-  item: DistributionItem,
+  item: DistributionItem;
 };
 
 const Container = styled(Flex).attrs({
@@ -57,11 +56,10 @@ const RateRow = styled(Flex).attrs({
   flexWrap: "wrap",
 })``;
 
-
 const DistributionRow = styled(Flex).attrs({
   marginTop: 4,
   flexDirection: "row",
-  alignItems: "center",  
+  alignItems: "center",
 })``;
 
 export default function DistributionCard({
@@ -78,6 +76,7 @@ export default function DistributionCard({
     <Container>
       <Flex flexDirection="row">
         <IconContainer>
+          {/** @ts-expect-error flow issue */}
           <ParentCurrencyIcon currency={currency} size={32} />
         </IconContainer>
         <CoinInfoContainer>
@@ -105,7 +104,12 @@ export default function DistributionCard({
       </Flex>
       {distribution ? (
         <DistributionRow>
-          <ProgressBar progress={percentage} progressColor={color} backgroundColor={colors.neutral.c40} />
+          {/** @ts-expect-error flow issue */}
+          <ProgressBar
+            progress={percentage}
+            progressColor={color}
+            backgroundColor={colors.neutral.c40}
+          />
         </DistributionRow>
       ) : null}
     </Container>

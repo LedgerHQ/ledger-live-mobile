@@ -11,10 +11,10 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
+import { Button, Alert, Text, Log } from "@ledgerhq/native-ui";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
-import { Button, Alert, Text, Log } from "@ledgerhq/native-ui";
 import TranslatedError from "../../../components/TranslatedError";
 
 import FlowErrorBottomModal from "../components/FlowErrorBottomModal";

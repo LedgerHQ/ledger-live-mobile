@@ -13,6 +13,8 @@ import {
 import * as Keychain from "react-native-keychain";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { compose } from "redux";
+import { Flex, Logos } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
 import type { T } from "../../types/common";
 import type { Privacy } from "../../reducers/settings";
 import { withReboot } from "../Reboot";
@@ -29,8 +31,6 @@ import FailBiometrics from "./FailBiometrics";
 import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
 import { VIBRATION_PATTERN_ERROR } from "../../constants";
 import { withTheme } from "../../colors";
-import { Flex, Logos } from "@ledgerhq/native-ui";
-import { useTheme } from "styled-components/native";
 
 type State = {
   passwordError: ?Error,

@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
-import { Flex } from "@ledgerhq/native-ui";
+import { ScrollContainer } from "@ledgerhq/native-ui";
 import ChoiceButton from "./ChoiceButton";
 import InfoModal from "./InfoModal";
 import Button from "./wrappedUi/Button";
@@ -37,6 +37,9 @@ type ActionButton = ActionButtonEventProps & {
   event: string;
   eventProperties?: { [key: string]: any };
   Component?: ComponentType;
+  type?: string;
+  outline?: boolean;
+  disabled?: boolean;
 };
 
 type Props = {
@@ -51,6 +54,7 @@ function FabAccountButtonBar({
   actions,
   account,
   parentAccount,
+  ...props
 }: Props) {
   const navigation = useNavigation();
 
@@ -105,10 +109,25 @@ function FabAccountButtonBar({
   }, []);
 
   return (
-    <Flex justifyContent={"flex-start"} flexDirection={"row"} pl={3}>
+    <ScrollContainer
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 16 }}
+      {...props}
+    >
       {buttons.map(
         (
-          { label, Icon, event, eventProperties, Component, ...rest },
+          {
+            label,
+            Icon,
+            event,
+            eventProperties,
+            Component,
+            type = "color",
+            outline = false,
+            disabled,
+            ...rest
+          },
           index,
         ) => (
           <Button
@@ -117,7 +136,9 @@ function FabAccountButtonBar({
             iconPosition={"left"}
             event={event}
             eventProperties={eventProperties}
-            type={"color"}
+            type={type}
+            outline={outline}
+            disabled={disabled}
             onPress={() => onPress(rest)}
             key={index}
             mr={3}
@@ -143,7 +164,7 @@ function FabAccountButtonBar({
           isOpened={!!isModalInfoOpened}
         />
       )}
-    </Flex>
+    </ScrollContainer>
   );
 }
 

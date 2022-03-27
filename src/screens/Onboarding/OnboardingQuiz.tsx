@@ -83,7 +83,7 @@ const Header = ({ step }: { step: number }) => {
 function OnboardingQuiz({ navigation }: { navigation: any }) {
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
-  const [bg, setBg] = useState("primary.c60");
+  const [bg, setBg] = useState("constant.purple");
 
   const route = useRoute<
     RouteProp<
@@ -159,20 +159,26 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
     [t],
   );
 
+  const next = useCallback(
+    () =>
+      navigation.navigate(ScreenName.OnboardingQuizFinal, {
+        ...route.params,
+        success: userAnswers >= 2,
+      }) /* TODO */,
+    [navigation, route.params, userAnswers],
+  );
+
   const onNext = useCallback(
     correct => {
-      setAnswers(a => (correct ? a + 1 : a));
-      setBg("primary.c60");
+      setAnswers(userAnswers + correct);
+      setBg("constant.purple");
       if (index < quizData.length - 1) {
-        setIndex(i => i + 1);
+        setIndex(index + 1);
       } else {
-        navigation.navigate(ScreenName.OnboardingQuizFinal, {
-          ...route.params,
-          success: userAnswers >= 2,
-        });
+        next();
       }
     },
-    [index, navigation, quizData.length, route.params, userAnswers],
+    [index, next, quizData.length, userAnswers],
   );
 
   return (

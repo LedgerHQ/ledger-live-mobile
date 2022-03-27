@@ -1,8 +1,8 @@
 /* @flow */
-import React from "react";
+import React, { useMemo, memo } from "react";
 import { Text } from "@ledgerhq/native-ui";
-import getFontStyle from "./getFontStyle";
 import { FontWeightTypes } from "@ledgerhq/native-ui/components/Text/getTextStyle";
+import getFontStyle from "./getFontStyle";
 
 export { getFontStyle };
 
@@ -34,11 +34,12 @@ export type Res = {
 
 const inferFontWeight = ({ semiBold, bold }: Opts): FontWeightTypes => {
   if (bold) {
-    return 'bold'
-  } else if (semiBold) {
-    return 'semibold'
+    return "bold";
   }
-  return 'medium'
+  if (semiBold) {
+    return "semiBold";
+  }
+  return "medium";
 };
 
 /**
@@ -47,10 +48,16 @@ const inferFontWeight = ({ semiBold, bold }: Opts): FontWeightTypes => {
  *
  * @deprecated Please, prefer using the Text component from our design-system if possible.
  */
-export default function LText({ color, children, semiBold, bold, ...props }: Opts) {
+function LText({ color, children, semiBold, bold, ...props }: Opts) {
+  const fontWeight = useMemo(() => inferFontWeight({ semiBold, bold }), [
+    semiBold,
+    bold,
+  ]);
   return (
-    <Text {...props} fontWeight={inferFontWeight({semiBold, bold})} color={color}>
+    <Text {...props} fontWeight={fontWeight} color={color}>
       {children}
     </Text>
   );
 }
+
+export default memo<Opts>(LText);

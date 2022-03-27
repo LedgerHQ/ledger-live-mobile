@@ -1,11 +1,15 @@
 import React, { useCallback } from "react";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 
+import { useDispatch } from "react-redux";
 import Illustration from "../../../images/illustration/Illustration";
 import { NavigatorName, ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
 import BaseStepperView, { SyncDesktop, Metadata } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
+
+import { completeOnboarding } from "../../../actions/settings";
+import { useNavigationInterceptor } from "../onboardingContext";
 
 const images = {
   light: {
@@ -33,6 +37,9 @@ function OnboardingStepPairNew() {
 
   const { deviceModelId } = route.params;
 
+  const dispatch = useDispatch();
+  const { resetCurrentStep } = useNavigationInterceptor();
+
   const metadata: Array<Metadata> = [
     {
       id: SyncDesktop.id,
@@ -48,22 +55,30 @@ function OnboardingStepPairNew() {
     },
   ];
 
+  const onFinish = useCallback(() => {
+    dispatch(completeOnboarding());
+    resetCurrentStep();
+
+    const parentNav = navigation.getParent();
+    if (parentNav) {
+      parentNav.popToTop();
+    }
+
+    navigation.replace(NavigatorName.Base, {
+      screen: NavigatorName.Main,
+    });
+  }, [dispatch, navigation, resetCurrentStep]);
+
   const onNext = useCallback(() => {
     // TODO: FIX @react-navigation/native using Typescript
     // @ts-ignore next-line
     navigation.navigate(NavigatorName.ImportAccounts, {
       screen: ScreenName.ScanAccounts,
       params: {
-        onFinish: () => {
-          // TODO: FIX @react-navigation/native using Typescript
-          // @ts-ignore next-line
-          navigation.navigate(ScreenName.OnboardingFinish, {
-            ...route.params,
-          });
-        },
+        onFinish,
       },
     });
-  }, [navigation, route.params]);
+  }, [navigation, onFinish]);
 
   const nextPage = useCallback(() => {
     // TODO: FIX @react-navigation/native using Typescript

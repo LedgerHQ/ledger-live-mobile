@@ -1,4 +1,3 @@
-
 import React, { ComponentType, memo, useMemo } from "react";
 import { View } from "react-native";
 import {

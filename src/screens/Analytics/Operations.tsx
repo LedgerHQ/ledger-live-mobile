@@ -1,11 +1,12 @@
+/* eslint-disable import/named */
 import React, { memo, useState, useCallback } from "react";
 import { SectionList } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
-import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { SectionBase } from "react-native/Libraries/Lists/SectionList";
+import { AccountLikeArray, Operation } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account/groupOperations";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 
@@ -40,7 +41,7 @@ export function Operations({ navigation }: Props) {
   }
 
   const accounts = useSelector(accountsSelector);
-  const allAccounts = useSelector(flattenAccountsSelector);
+  const allAccounts: AccountLikeArray = useSelector(flattenAccountsSelector);
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -52,7 +53,7 @@ export function Operations({ navigation }: Props) {
 
   function ListEmptyComponent() {
     if (accounts.length === 0) {
-      return <EmptyStatePortfolio navigation={navigation} />;
+      return <EmptyStatePortfolio />;
     }
 
     if (accounts.every(isAccountEmpty)) {

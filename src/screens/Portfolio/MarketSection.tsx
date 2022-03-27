@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, createRef } from "react";
 import { Flex } from "@ledgerhq/native-ui";
 import { FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -7,7 +7,6 @@ import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvid
 import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
 import { NavigatorName, ScreenName } from "../../const";
 import { useLocale } from "../../context/Locale";
-import { useProviders } from "../Swap/SwapEntry";
 import MarketRowItem from "../Market/MarketRowItem";
 import Placeholder from "../../components/Placeholder";
 
@@ -20,13 +19,12 @@ function getTopGainers(
     .slice(0, n);
 }
 
+let topGainers: any[] = [];
+
 export default function MarketSection() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { locale } = useLocale();
-  const [topGainers, setTopGainers] = useState<CurrencyData[] | undefined>();
-
-  useProviders();
 
   const {
     refresh,
@@ -36,11 +34,11 @@ export default function MarketSection() {
   } = useMarketData();
 
   useEffect(() => {
-    if (!topGainers && marketData?.length) {
-      setTopGainers(getTopGainers(marketData, 3));
+    if (!topGainers.length && marketData?.length) {
+      topGainers = getTopGainers(marketData, 3);
       refresh({ limit: 20 });
     }
-  }, [marketData, refresh, topGainers]);
+  }, [marketData, refresh]);
 
   const renderItems = useCallback(
     ({ item, index }) => (

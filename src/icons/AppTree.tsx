@@ -2,9 +2,8 @@
 import React from "react";
 import Svg, { Path, G, Image } from "react-native-svg";
 import manager from "@ledgerhq/live-common/lib/manager";
-import AppIcon from "../screens/Manager/AppsList/AppIcon";
-
 import { Flex } from "@ledgerhq/native-ui";
+import AppIcon from "../screens/Manager/AppsList/AppIcon";
 
 type Props = {
   size: number;

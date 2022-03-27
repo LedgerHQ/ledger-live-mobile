@@ -15,6 +15,8 @@ import { importAccountsMakeItems } from "@ledgerhq/live-common/lib/account";
 import { Trans } from "react-i18next";
 
 import { compose } from "redux";
+import { Flex } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
 import { importDesktopSettings } from "../../actions/settings";
 import { importAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
@@ -27,8 +29,6 @@ import DisplayResultItem from "./DisplayResultItem";
 import DisplayResultSettingsSection from "./DisplayResultSettingsSection";
 import ResultSection from "./ResultSection";
 import HeaderBackImage from "../../components/HeaderBackImage";
-import { Flex } from "@ledgerhq/native-ui";
-import { useTheme } from "styled-components/native";
 
 const forceInset = { bottom: "always" };
 

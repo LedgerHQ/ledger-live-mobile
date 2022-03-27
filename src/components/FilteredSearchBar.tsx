@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from "react";
-import { SearchInput } from "@ledgerhq/native-ui";
+import React, { ReactNode, useState, memo } from "react";
+import { SearchInput, Flex } from "@ledgerhq/native-ui";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components/native";
 
@@ -20,6 +20,7 @@ const FilteredSearchBar = ({
   renderList,
   list,
   renderEmptySearch,
+  inputWrapperStyle,
 }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -27,13 +28,15 @@ const FilteredSearchBar = ({
 
   return (
     <>
-      <SearchInput
-        value={query}
-        onChange={setQuery}
-        placeholder={t("common.search")}
-        placeholderTextColor={colors.neutral.c70}
-        color={colors.neutral.c100}
-      />
+      <Flex style={inputWrapperStyle}>
+        <SearchInput
+          value={query}
+          onChange={setQuery}
+          placeholder={t("common.search")}
+          placeholderTextColor={colors.neutral.c70}
+          color={colors.neutral.c100}
+        />
+      </Flex>
       <Search
         fuseOptions={{
           threshold: 0.1,
@@ -49,4 +52,4 @@ const FilteredSearchBar = ({
   );
 };
 
-export default FilteredSearchBar;
+export default memo<Props>(FilteredSearchBar);

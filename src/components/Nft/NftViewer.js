@@ -11,14 +11,13 @@ import {
 } from "react-native";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 import Clipboard from "@react-native-community/clipboard";
-import { Trans } from "react-i18next";
 
 import { Button, Icons } from "@ledgerhq/native-ui";
 

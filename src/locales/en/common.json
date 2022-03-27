@@ -719,11 +719,13 @@
       },
       "tour": {
         "title": "Take a tour",
-        "description": "Explore the ledger live app and learn how to buy, grow and secure your assets"
+        "description": "Explore the ledger live app and learn how to buy, grow and secure your assets",
+        "cta": "Browse"
       },
       "academy": {
         "title": "Ledger Academy",
-        "description": "Everything you need to know about Blockchain"
+        "description": "Everything you need to know about Blockchain",
+        "cta": "Browse"
       },
       "stakeCosmos": {
         "title": "Stake COSMOS",
@@ -731,15 +733,23 @@
       },
       "familyPack": {
         "title": "Family pack",
-        "description": "Get your family into crypto with 3 Nano S"
+        "description": "Discounted Nano S 3-pack, perfect for gifts or backups",
+        "cta": "Buy now"
+      },
+      "familyPackX": {
+        "title": "Family pack LNX",
+        "description": "Discounted Nano X 3-pack, perfect for gifts or backups",
+        "cta": "Buy now"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
-        "description": "Buy crypto on Ledger Live"
+        "description": "Buy 50+ cryptos with our partners",
+        "cta": "Buy now"
       },
       "swap": {
         "title": "Swap crypto",
-        "description": "Securely exchange one crypto for another"
+        "description": "Swap 100+ cryptos with full custody with our partners",
+        "cta": "Swap now"
       },
       "algorand": {
         "title": "Algorand",
@@ -760,6 +770,16 @@
       "blackfriday": {
         "title": "BLACK FRIDAY",
         "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
+      },
+      "lido": {
+        "title": "Stake ETH with Lido",
+        "description": "Earn rewards by staking ETH securely with Lido",
+        "cta": "Stake now"
+      },
+      "market": {
+        "title": "Crypto Markets",
+        "description": "Check crypto prices and market trends right in the app",
+        "cta": "Browse"
       }
     }
   },
@@ -1758,7 +1778,7 @@
     "assets": "asset",
     "assets_plural": "assets",
     "total": "Total balance:",
-    "listAccount": "Account allocation ({{count}})",
+    "listAccount": "Asset allocation ({{count}})",
     "title": "Assets",
     "moreAssets": "Add more"
   },
@@ -4079,7 +4099,7 @@
       "last7d": "Last 7 days"
     },
     "detailsPage": {
-      "holding": "Your Holdings",
+      "holding": "My accounts",
       "priceStatistics": "Price Statistics",
       "price": "Price",
       "tradingVolume": "Trading volume",

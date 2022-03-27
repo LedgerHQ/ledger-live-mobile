@@ -6,8 +6,9 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { Flex, Icons } from "@ledgerhq/native-ui";
+import { useSelector } from "react-redux";
 import { ScreenName, NavigatorName } from "../../const";
 import * as families from "../../families";
 import OperationDetails, {
@@ -74,7 +75,6 @@ import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectP
 
 import BuyDeviceScreen from "../../screens/BuyDeviceScreen";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
-import { useSelector } from "react-redux";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
