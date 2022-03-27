@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
@@ -18,10 +18,13 @@ import {
 import { accountsCountSelector } from "../reducers/accounts";
 import { NavigatorName, ScreenName } from "../const";
 import FabAccountButtonBar from "./FabAccountButtonBar";
-import Exchange from "../icons/Exchange";
+import Minus from "../icons/Minus";
 import Swap from "../icons/Swap";
 import useActions from "../screens/Account/hooks/useActions";
 import useLendingActions from "../screens/Account/hooks/useLendingActions";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import Plus from "../icons/Plus";
 
 type Props = {
   account?: AccountLike,
@@ -44,7 +47,25 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
     swapSelectableCurrencies.includes(currency.id) && account.balance.gt(0);
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
-  const canBeBought = isCurrencySupported(currency, "buy");
+  const rampCatalog = useRampCatalog();
+
+  const [canBeBought, canBeSold] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [false, false];
+    }
+
+    const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.onRamp,
+    );
+    const allSellableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.offRamp,
+    );
+
+    return [
+      allBuyableCryptoCurrencyIds.includes(currency.id),
+      allSellableCryptoCurrencyIds.includes(currency.id),
+    ];
+  }, [rampCatalog.value, currency.id]);
 
   const allActions = [
     ...(!readOnlyModeEnabled && canBeBought
@@ -53,18 +74,38 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
             navigationParams: [
               NavigatorName.ExchangeBuyFlow,
               {
-                screen: ScreenName.ExchangeConnectDevice,
+                screen: ScreenName.ExchangeBuy,
                 params: {
-                  account,
-                  mode: "buy",
-                  parentId:
-                    account.type !== "Account" ? account.parentId : undefined,
+                  selectedCurrencyId: account && account.currency.id,
+                  accountId: account && account.id,
                 },
               },
             ],
             label: <Trans i18nKey="account.buy" />,
-            Icon: Exchange,
+            Icon: Plus,
             event: "Buy Crypto Account Button",
+            eventProperties: {
+              currencyName: currency.name,
+            },
+          },
+        ]
+      : []),
+    ...(!readOnlyModeEnabled && canBeSold
+      ? [
+          {
+            navigationParams: [
+              NavigatorName.ExchangeBuyFlow,
+              {
+                screen: ScreenName.ExchangeSell,
+                params: {
+                  selectedCurrencyId: account && account.currency.id,
+                  accountId: account && account.id,
+                },
+              },
+            ],
+            label: <Trans i18nKey="account.sell" />,
+            Icon: Minus,
+            event: "Sell Crypto Account Button",
             eventProperties: {
               currencyName: currency.name,
             },
@@ -97,7 +138,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
         ]
       : []),
     ...useActions({ account, parentAccount, colors }),
-  ];
+  ].filter(n => n);
 
   // Do not display separators as buttons. (they do not have a label)
   //
@@ -141,15 +182,6 @@ function FabActions({ account, parentAccount }: Props) {
     );
 
   const actions = [
-    {
-      event: "TransferExchange",
-      label: <Trans i18nKey="exchange.buy.tabTitle" />,
-      Icon: Exchange,
-      navigationParams: [
-        NavigatorName.Exchange,
-        { screen: ScreenName.ExchangeBuy },
-      ],
-    },
     ...(accountsCount > 0 && !readOnlyModeEnabled
       ? [
           {
@@ -165,7 +197,25 @@ function FabActions({ account, parentAccount }: Props) {
           },
         ]
       : []),
-  ];
+    {
+      event: "TransferExchange",
+      label: <Trans i18nKey="exchange.buy.tabTitle" />,
+      Icon: Plus,
+      navigationParams: [
+        NavigatorName.Exchange,
+        { screen: ScreenName.ExchangeBuy },
+      ],
+    },
+    {
+      event: "TransferExchange",
+      label: <Trans i18nKey="exchange.sell.tabTitle" />,
+      Icon: Minus,
+      navigationParams: [
+        NavigatorName.Exchange,
+        { screen: ScreenName.ExchangeSell },
+      ],
+    },
+  ].filter(n => n);
 
   return <FabAccountButtonBar buttons={actions} />;
 }

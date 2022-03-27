@@ -133,7 +133,7 @@ function EmptyStateAccount({
             onPress={goToReceiveFunds}
             IconLeft={Receive}
           />
-          {canBeBought ? (
+          {canBeBought && (
             <Button
               event="Buy Crypto Empty Account Button"
               eventProperties={{
@@ -145,7 +145,7 @@ function EmptyStateAccount({
               containerStyle={styles.buyButton}
               IconLeft={Exchange}
             />
-          ) : null}
+          )}
         </View>
       </View>
     </View>
