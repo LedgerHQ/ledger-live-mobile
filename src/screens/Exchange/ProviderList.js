@@ -32,6 +32,7 @@ import PayPal from "../../icons/PayPal";
 import Sepa from "../../icons/Sepa";
 import Visa from "../../icons/Visa";
 import ArrowRight from "../../icons/ArrowRight";
+import TrackScreen from "../../analytics/TrackScreen";
 
 const forceInset = { bottom: "always" };
 
@@ -76,6 +77,7 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
         },
       ]}
     >
+      <TrackScreen category="Multibuy" name="ProviderList" />
       <View>
         <View style={styles.itemHeader}>
           <AppIcon icon={manifest.icon} name={manifest.name} size={32} />

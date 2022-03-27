@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { mapQueryParamsForProvider } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { languageSelector } from "../../reducers/settings";
 import WebPlatformPlayer from "../../components/WebPlatformPlayer";
+import { TrackScreen } from "../../analytics";
 
 type TradeParams = {
   type: "onRamp" | "offRamp",
@@ -32,26 +33,39 @@ type RouteParams = {
 };
 
 export default function ProviderView({ route }: ProviderViewProps) {
-  const manifest = useRemoteLiveAppManifest(route.params.provider.appId);
+  const { provider, trade, accountId, accountAddress } = route.params;
+  const manifest = useRemoteLiveAppManifest(provider.appId);
   const { colors } = useTheme();
   const language = useSelector(languageSelector);
-  const cryptoCurrency = route.params.provider.cryptoCurrencies.find(
-    crypto => crypto.id === route.params.trade.cryptoCurrencyId,
+  const cryptoCurrency = provider.cryptoCurrencies.find(
+    crypto => crypto.id === trade.cryptoCurrencyId,
   );
-  const inputs = mapQueryParamsForProvider(route.params.provider, {
-    accountId: route.params.accountId,
-    accountAddress: route.params.accountAddress,
+  const inputs = mapQueryParamsForProvider(provider, {
+    accountId,
+    accountAddress,
     cryptoCurrencyId: cryptoCurrency ? cryptoCurrency.providerId : undefined,
-    fiatCurrencyId: route.params.trade.fiatCurrencyId.toLocaleLowerCase(),
+    fiatCurrencyId: trade.fiatCurrencyId.toLocaleLowerCase(),
     primaryColor: colors.fog,
-    mode: route.params.trade.type,
+    mode: trade.type,
     theme: colors.fog,
     language,
-    fiatAmount: route.params.trade.fiatAmount,
-    cryptoAmount: route.params.trade.cryptoAmount,
+    fiatAmount: trade.fiatAmount,
+    cryptoAmount: trade.cryptoAmount,
   });
 
   return (
-    <WebPlatformPlayer onClose={() => {}} manifest={manifest} inputs={inputs} />
+    <>
+      <TrackScreen
+        category="Multibuy"
+        name="ProviderLiveApp"
+        provider={provider.appId}
+        trade={trade}
+      />
+      <WebPlatformPlayer
+        onClose={() => {}}
+        manifest={manifest}
+        inputs={inputs}
+      />
+    </>
   );
 }
