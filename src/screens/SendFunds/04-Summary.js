@@ -164,6 +164,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     navigation.navigate(NavigatorName.Exchange, {
       screen: ScreenName.ExchangeBuy,
       params: {
+        selectedCurrencyId: account && account.currency.id,
         accountId: account && account.id,
         parentId: parentAccount && parentAccount.id,
       },

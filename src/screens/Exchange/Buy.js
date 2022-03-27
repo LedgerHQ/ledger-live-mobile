@@ -4,7 +4,7 @@ import React, { useCallback, useState, useEffect } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import type {
   Account,
   AccountLike,
@@ -15,6 +15,7 @@ import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/Ram
 import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
+import { useSelector } from "react-redux";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
@@ -22,15 +23,28 @@ import { NavigatorName, ScreenName } from "../../const";
 import { useRampCatalogCurrencies } from "./hooks";
 import SelectAccountCurrency from "./SelectAccountCurrency";
 import { track } from "../../analytics";
+import { accountsSelector } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };
 
-export default function OnRamp() {
+type Props = {
+  navigation: any,
+  route: {
+    params: {
+      selectedCurrencyId?: string,
+      accountId?: string,
+      parentId?: string,
+    },
+  },
+};
+
+export default function OnRamp({ navigation, route }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const navigation = useNavigation();
   const rampCatalog = useRampCatalog();
   const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
+  const { selectedCurrencyId, accountId } = route.params || {};
+  const accounts = useSelector(accountsSelector);
 
   const [currency, setCurrency] = useState<
     CryptoCurrency | TokenCurrency | null,
@@ -38,9 +52,20 @@ export default function OnRamp() {
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
   useEffect(() => {
-    currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
-      setCurrency(sortedCurrencies[0]);
-    });
+    if (selectedCurrencyId) {
+      const selectedCurrency = allCurrencies.find(
+        currency => currency.id === selectedCurrencyId,
+      );
+      setCurrency(selectedCurrency);
+    } else {
+      currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
+        setCurrency(sortedCurrencies[0]);
+      });
+    }
+
+    if (accountId) {
+      setAccount(accounts.find(acc => acc.id === accountId));
+    }
   }, []);
 
   const onContinue = useCallback(() => {
@@ -78,7 +103,6 @@ export default function OnRamp() {
     navigation.navigate(NavigatorName.ExchangeBuyFlow, {
       screen: ScreenName.ExchangeSelectCurrency,
       params: {
-        // initialCurrencySelected: default currency,
         mode: "buy",
         onCurrencyChange,
       },
