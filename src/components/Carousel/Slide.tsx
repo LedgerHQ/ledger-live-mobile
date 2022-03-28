@@ -56,6 +56,7 @@ const Slide = ({
               type="color"
               Icon={Icons.ArrowRightMedium}
               iconPosition="right"
+              onPress={onClick}
             >
               {cta}
             </TextLink>

@@ -82,8 +82,6 @@ const Carousel = ({ cardsVisibility }: Props) => {
     [cardsVisibility],
   );
 
-  console.log(slides.length);
-
   const onHide = useCallback(
     cardId => {
       const slide = SLIDES.find(slide => slide.name === cardId);
