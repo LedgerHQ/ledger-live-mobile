@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
@@ -56,11 +56,19 @@ type ProviderItemProps = {
 };
 
 const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
+  const [displayedPMs, setDisplayedPMs] = useState<string[]>(
+    provider.paymentProviders.slice(0, 4),
+  );
   const { colors } = useTheme();
   const manifest = useRemoteLiveAppManifest(provider.appId);
+
   const onItemClick = useCallback(() => {
     onClick(provider, manifest.icon, manifest.name);
   }, [provider, manifest, onClick]);
+
+  const onMorePMsClick = useCallback(() => {
+    setDisplayedPMs([...provider.paymentProviders]);
+  }, [displayedPMs]);
 
   if (!manifest) {
     return null;
@@ -78,7 +86,7 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
       ]}
     >
       <TrackScreen category="Multibuy" name="ProviderList" />
-      <View>
+      <View style={styles.itemLeft}>
         <View style={styles.itemHeader}>
           <AppIcon icon={manifest.icon} name={manifest.name} size={32} />
           <LText secondary style={styles.headerLabel}>
@@ -86,7 +94,7 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
           </LText>
         </View>
         <View style={styles.pmsRow}>
-          {provider.paymentProviders.map(paymentProvider => (
+          {displayedPMs.map(paymentProvider => (
             <View
               key={paymentProvider}
               style={[styles.pm, { borderColor: colors.border }]}
@@ -94,10 +102,20 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
               {assetMap[paymentProvider] ? (
                 assetMap[paymentProvider]({})
               ) : (
-                <LText>{paymentProvider}</LText>
+                <LText style={styles.pmLabel}>{paymentProvider}</LText>
               )}
             </View>
           ))}
+          {provider.paymentProviders.length > 4 && displayedPMs.length <= 4 && (
+            <TouchableOpacity
+              onPress={onMorePMsClick}
+              style={[styles.pm, { borderColor: colors.border }]}
+            >
+              <LText style={styles.pmLabel}>
+                +{provider.paymentProviders.length - 4} more
+              </LText>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       <ArrowRight size={16} color={colors.grey} />
@@ -122,29 +140,25 @@ export default function ProviderList({ route }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
-
+  const { currency, type, accountId, accountAddress } = route.params;
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const cryptoCurrencyId = route.params.currency.id;
 
-  const filteredProviders = filterRampCatalogEntries(
-    rampCatalog.value[route.params.type],
-    {
-      cryptoCurrencies: cryptoCurrencyId ? [cryptoCurrencyId] : undefined,
-      fiatCurrencies: fiatCurrency.ticker
-        ? [fiatCurrency.ticker.toLowerCase()]
-        : undefined,
-    },
-  );
+  const filteredProviders = filterRampCatalogEntries(rampCatalog.value[type], {
+    cryptoCurrencies: currency.id ? [currency.id] : undefined,
+    fiatCurrencies: fiatCurrency.ticker
+      ? [fiatCurrency.ticker.toLowerCase()]
+      : undefined,
+  });
 
   const onProviderClick = useCallback(
     (provider: RampCatalogEntry, icon: string, name: string) => {
       navigation.navigate(NavigatorName.ProviderView, {
         provider,
-        accountId: route.params.accountId,
-        accountAddress: route.params.accountAddress,
+        accountId,
+        accountAddress,
         trade: {
-          type: route.params.type,
-          cryptoCurrencyId,
+          type,
+          cryptoCurrencyId: currency.id,
           fiatCurrencyId: fiatCurrency.ticker,
           fiatAmount: 400,
         },
@@ -152,7 +166,7 @@ export default function ProviderList({ route }: Props) {
         name,
       });
     },
-    [navigation, route, cryptoCurrencyId, fiatCurrency],
+    [navigation, route, currency, fiatCurrency],
   );
 
   return (
@@ -203,6 +217,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 8,
   },
+  itemLeft: {
+    flex: 0.9,
+  },
   itemHeader: {
     display: "flex",
     flexDirection: "row",
@@ -217,6 +234,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
   },
   pm: {
     borderWidth: 1,
@@ -225,5 +243,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 6,
     marginRight: 4,
+  },
+  pmLabel: {
+    fontSize: 12,
   },
 });
