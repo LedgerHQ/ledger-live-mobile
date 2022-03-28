@@ -4,7 +4,6 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import React, { memo } from "react";
-import { StyleSheet } from "react-native";
 import {
   RectButton,
   LongPressGestureHandler,
@@ -128,40 +127,3 @@ const mapStateToProps = createStructuredSelector({
 const SubAccountRowComponent = connect(mapStateToProps)(SubAccountRow);
 
 export default memo<Props>(SubAccountRowComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 4,
-  },
-  innerContainer: {
-    paddingHorizontal: 12,
-    paddingVertical: 14,
-    flexDirection: "row",
-    alignItems: "center",
-    overflow: "visible",
-  },
-  inner: {
-    flexGrow: 1,
-    flexShrink: 1,
-    marginLeft: 16,
-    flexDirection: "column",
-  },
-  accountNameText: {
-    fontSize: 16,
-    marginBottom: 4,
-  },
-  balanceContainer: {
-    marginLeft: 16,
-    alignItems: "flex-end",
-  },
-  balanceNumText: {
-    fontSize: 16,
-  },
-  balanceCounterContainer: {
-    marginTop: 5,
-    height: 20,
-  },
-  balanceCounterText: {
-    fontSize: 14,
-  },
-});
