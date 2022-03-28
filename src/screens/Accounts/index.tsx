@@ -97,7 +97,7 @@ function Accounts({ navigation, route }: Props) {
         renderItem={renderItem}
         keyExtractor={i => i.id}
         ListEmptyComponent={<NoAccounts />}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
       />
     ),
     [renderItem],
@@ -145,6 +145,7 @@ function Accounts({ navigation, route }: Props) {
           list={flattenedAccounts}
           inputWrapperStyle={{
             paddingHorizontal: 16,
+            paddingBottom: 16,
           }}
           renderList={renderList}
           renderEmptySearch={renderEmptySearch}
