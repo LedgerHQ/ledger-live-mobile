@@ -49,6 +49,7 @@ function Accounts({ navigation, route }: Props) {
   useFocusEffect(refreshAccountsOrdering);
 
   const syncPending = globalSyncState.pending && !isUpToDate;
+
   const { params } = route;
 
   const search = params?.search;
