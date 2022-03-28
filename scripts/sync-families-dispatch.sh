@@ -17,7 +17,8 @@ SendRowsFee.js \
 AccountBalanceSummaryFooter.js \
 SubAccountList.js \
 Confirmation.js \
-ConnectDevice.js
+ConnectDevice.js \
+NoAssociatedAccounts.js
 "
 
 cd ../src
