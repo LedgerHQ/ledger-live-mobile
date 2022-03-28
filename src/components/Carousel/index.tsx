@@ -82,8 +82,6 @@ const Carousel = ({ cardsVisibility }: Props) => {
     [cardsVisibility],
   );
 
-  console.log(slides.length);
-
   const onHide = useCallback(
     cardId => {
       const slide = SLIDES.find(slide => slide.name === cardId);
@@ -128,11 +126,14 @@ const Carousel = ({ cardsVisibility }: Props) => {
       showsHorizontalScrollIndicator={false}
     >
       {slides.map(({ id, Component }, index) => (
-        <Animated.View key={id + index} exiting={FadeOut} layout={Layout}>
-          <CarouselCardContainer id={id} index={index} onHide={onHide}>
-            <Component key={id} />
-          </CarouselCardContainer>
-        </Animated.View>
+        <CarouselCardContainer
+          key={id + index}
+          id={id}
+          index={index}
+          onHide={onHide}
+        >
+          <Component key={id} />
+        </CarouselCardContainer>
       ))}
     </ScrollView>
   );

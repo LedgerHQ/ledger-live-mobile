@@ -407,8 +407,8 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
     compareOsTheme();
     const osThemeChangeHandler = nextAppState =>
       nextAppState === "active" && compareOsTheme();
-    AppState.addEventListener("change", osThemeChangeHandler);
-    return () => AppState.removeEventListener("change", osThemeChangeHandler);
+    const sub = AppState.addEventListener("change", osThemeChangeHandler);
+    return () => sub.remove();
   }, [compareOsTheme]);
 
   const resolvedTheme = useMemo(

@@ -9,6 +9,7 @@
 
 # Add any project specific keep options here:
 
+-keep class com.facebook.react.turbomodule.** { *; }
 
 # Hermes config, cf. https://reactnative.dev/docs/hermes#android
 -keep class com.facebook.hermes.unicode.** { *; }

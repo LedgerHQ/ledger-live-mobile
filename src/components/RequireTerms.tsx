@@ -148,10 +148,8 @@ export const TermModals = ({
 }) => {
   const { t } = useTranslation();
 
-  const { colors } = useTheme();
   const { locale } = useLocale();
   const [markdown, error, retry] = useTerms(locale);
-  const height = getWindowDimensions().height - 320;
 
   const onClose = useCallback(() => {
     close();
