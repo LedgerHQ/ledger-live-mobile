@@ -46,17 +46,19 @@ const getIntlPolyfills = () => {
     },
   ].forEach(({ prefix, supportedLocales }) => {
     polyfills.push(`${prefix}/polyfill`);
-    supportedLocales.forEach(supportedLocale => {
-      if (
-        regionsKeys.find(
-          regionLocale =>
-            regionLocale === supportedLocale ||
-            (supportedLocale.split("-").length === 1 &&
-              regionLocale.startsWith(supportedLocale)),
+    supportedLocales
+      .filter(k => k !== "haw") /* this locale crashes because the locale data is in the wrong format https://github.com/formatjs/formatjs/issues/3503 */
+      .forEach(supportedLocale => {
+        if (
+          regionsKeys.find(
+            regionLocale =>
+              regionLocale === supportedLocale ||
+              (supportedLocale.split("-").length === 1 &&
+                regionLocale.startsWith(supportedLocale)),
+          )
         )
-      )
-        polyfills.push(`${prefix}/locale-data/${supportedLocale}`);
-    });
+          polyfills.push(`${prefix}/locale-data/${supportedLocale}`);
+      });
   });
   polyfills.push("@formatjs/intl-datetimeformat/add-all-tz");
   return polyfills;
