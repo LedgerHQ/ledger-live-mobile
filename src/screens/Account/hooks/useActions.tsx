@@ -7,11 +7,9 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import {
-  ArrowBottomMedium,
-  ArrowTopMedium,
-} from "@ledgerhq/native-ui/assets/icons";
+import { Icons } from "@ledgerhq/native-ui";
 import { NavigatorName, ScreenName } from "../../../const";
+// eslint-disable-next-line import/named
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import perFamilyAccountActions from "../../../generated/accountActions";
 import { isCurrencySupported } from "../../Exchange/coinifyConfig";
@@ -32,12 +30,14 @@ export default function useActions({ account, parentAccount, colors }: Props) {
 
   const balance = getAccountSpendableBalance(account);
   const mainAccount = getMainAccount(account, parentAccount);
-  const decorators = perFamilyAccountActions[mainAccount.currency.family];
+  // @ts-expect-error issue in typing
+  const decorators = perFamilyAccountActions[mainAccount?.currency?.family];
 
   const walletConnectAvailable = currency.id === "ethereum";
 
   const accountId = account.id;
 
+  // @ts-expect-error issue in typing
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const canBeSold = isCurrencySupported(currency, "sell");
@@ -67,7 +67,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
     ],
     label: <Trans i18nKey="account.send" />,
     event: "AccountSend",
-    Icon: ArrowTopMedium,
+    Icon: Icons.MinusMedium,
     disabled: balance.lte(0),
     ...extraSendActionParams,
   };
@@ -81,7 +81,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
     ],
     label: <Trans i18nKey="account.receive" />,
     event: "AccountReceive",
-    Icon: ArrowBottomMedium,
+    Icon: Icons.PlusMedium,
     ...extraReceiveActionParams,
   };
 
