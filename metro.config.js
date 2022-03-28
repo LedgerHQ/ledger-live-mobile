@@ -47,7 +47,9 @@ const getIntlPolyfills = () => {
   ].forEach(({ prefix, supportedLocales }) => {
     polyfills.push(`${prefix}/polyfill`);
     supportedLocales
-      .filter(k => k !== "haw") /* this locale crashes because the locale data is in the wrong format https://github.com/formatjs/formatjs/issues/3503 */
+      .filter(
+        k => k !== "haw",
+      ) /* this locale crashes because the locale data is in the wrong format https://github.com/formatjs/formatjs/issues/3503 */
       .forEach(supportedLocale => {
         if (
           regionsKeys.find(
