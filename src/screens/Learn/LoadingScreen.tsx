@@ -3,7 +3,11 @@ import { Flex, Text } from "@ledgerhq/native-ui";
 import styled from "@ledgerhq/native-ui/components/styled";
 import { TouchableOpacity, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
-import Skeleton from "../../components/Skeleton";
+import BaseSkeleton from "../../components/Skeleton";
+
+const Skeleton = styled(BaseSkeleton).attrs({
+  backgroundColor: "neutral.c30",
+})``;
 
 const PlaceholderBig = styled(Skeleton).attrs({ loading: true })`
   border-radius: 4px;
