@@ -5,6 +5,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { Account } from "@ledgerhq/live-common/lib/types";
 import { findCryptoCurrencyByKeyword } from "@ledgerhq/live-common/lib/currencies";
 import { Box, Flex, Icons, Text } from "@ledgerhq/native-ui";
+import { RefreshMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -147,9 +148,12 @@ function Accounts({ navigation, route }: Props) {
           </Flex>
         </Flex>
         {syncPending && (
-          <Text px={6} color={"neutral.c80"} my={3}>
-            {t("portfolio.syncPending")}
-          </Text>
+          <Flex flexDirection={"row"} alignItems={"center"} px={6} my={3}>
+            <RefreshMedium size={20} color={"neutral.c80"} />
+            <Text color={"neutral.c80"} ml={2}>
+              {t("portfolio.syncPending")}
+            </Text>
+          </Flex>
         )}
 
         <FilteredSearchBar
