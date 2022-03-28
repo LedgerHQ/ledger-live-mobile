@@ -186,8 +186,6 @@ const styles = StyleSheet.create({
     minWidth: "100%",
     display: "flex",
     flexDirection: "column",
-    borderWidth: 1,
-    borderRadius: 4,
     paddingHorizontal: 16,
   },
   title: {
@@ -203,7 +201,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    rowGap: 8,
+    marginBottom: 8,
   },
   itemHeader: {
     display: "flex",

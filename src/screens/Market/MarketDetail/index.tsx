@@ -36,6 +36,8 @@ import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accoun
 // import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
 import Button from "../../../components/wrappedUi/Button";
+import {filterRampCatalogEntries} from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import {useRampCatalog} from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
 export const BackButton = ({ navigation }: { navigation: any }) => (
   <Button
@@ -94,6 +96,8 @@ export default function MarketDetail({
     counterCurrency,
   } = useSingleCoinMarketData(currencyId);
 
+  const rampCatalog = useRampCatalog();
+
   const {
     name,
     image,
@@ -117,8 +121,17 @@ export default function MarketDetail({
     accountsByCryptoCurrencyScreenSelector(internalCurrency),
   );
 
-  const availableOnBuy =
-    internalCurrency && isCurrencySupported(internalCurrency, "buy");
+  const availableOnBuy = useMemo(() => {
+    if (!rampCatalog.value || !currency) {
+      return false;
+    }
+
+    const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
+      tickers: [currency.ticker],
+    });
+
+    return onRampProviders.length > 0;
+  }, [rampCatalog.value, currency, internalCurrency]);
   const swapCurrencies = useSelector(state =>
     swapSelectableCurrenciesSelector(state),
   );
@@ -149,6 +162,7 @@ export default function MarketDetail({
       screen: ScreenName.ExchangeBuy,
       params: {
         mode: "buy",
+        selectedCurrencyId: currencyId,
       },
     });
   }, [navigation]);
