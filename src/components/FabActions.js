@@ -9,8 +9,6 @@ import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
-import { isCurrencySupported } from "../screens/Exchange/coinifyConfig";
-
 import {
   readOnlyModeEnabledSelector,
   swapSelectableCurrenciesSelector,
