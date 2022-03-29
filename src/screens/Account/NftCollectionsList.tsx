@@ -21,7 +21,7 @@ import Button from "../../components/wrappedUi/Button";
 
 const MAX_COLLECTIONS_TO_SHOW = 3;
 
-const collectionKeyExtractor = o => o.contract;
+const collectionKeyExtractor = (o: any) => o.contract;
 
 type Props = {
   account: Account;

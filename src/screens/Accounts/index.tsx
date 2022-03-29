@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState, useEffect, memo } from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
@@ -95,7 +95,7 @@ function Accounts({ navigation, route }: Props) {
       <List
         data={items}
         renderItem={renderItem}
-        keyExtractor={i => i.id}
+        keyExtractor={(i: any) => i.id}
         ListEmptyComponent={<NoAccounts />}
         contentContainerStyle={{ padding: 16 }}
       />
@@ -143,9 +143,7 @@ function Accounts({ navigation, route }: Props) {
         </Flex>
         <FilteredSearchBar
           list={flattenedAccounts}
-          inputWrapperStyle={{
-            paddingHorizontal: 16,
-          }}
+          inputWrapperStyle={{ paddingHorizontal: 16 }}
           renderList={renderList}
           renderEmptySearch={renderEmptySearch}
           keys={SEARCH_KEYS}

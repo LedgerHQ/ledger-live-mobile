@@ -76,13 +76,13 @@ export default function AccountScreen({ route }: Props) {
   return <AccountScreenInner account={account} parentAccount={parentAccount} />;
 }
 
-function AccountScreenInner({
+const AccountScreenInner = ({
   account,
   parentAccount,
 }: {
   account: AccountLike;
-  parentAccount: Account | undefined | null;
-}) {
+  parentAccount: Account | undefined;
+}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const range = useSelector(selectedTimeRangeSelector);
@@ -167,7 +167,7 @@ function AccountScreenInner({
     count: opCount,
   });
 
-  const compoundCapabilities =
+  const compoundCapabilities: any =
     account.type === "TokenAccount" &&
     !!account.compoundBalance &&
     getAccountCapabilities(account);
@@ -264,13 +264,13 @@ function AccountScreenInner({
       <AnimatedFlatListWithRefreshControl
         style={{ flex: 1 }}
         data={data}
-        renderItem={({ item }) => item}
-        keyExtractor={(item, index) => String(index)}
+        renderItem={({ item }: any) => item}
+        keyExtractor={(_: any, index: any) => String(index)}
         showsVerticalScrollIndicator={false}
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   root: {
