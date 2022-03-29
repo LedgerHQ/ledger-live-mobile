@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import {
   Adjust,
@@ -18,9 +18,9 @@ export default function AdjustProvider() {
       Config.ADJUST_APP_TOKEN,
       __DEV__
         ? AdjustConfig.EnvironmentSandbox
-        : AdjustConfig.EnvironmentSandbox, // @TODO: Change to Production when ready
+        : AdjustConfig.EnvironmentProduction, // @TODO: Change to Production when ready
     );
-    adjustConfig.setDelayStart(4.2);
+    adjustConfig.setDelayStart(Math.random() * 7 + 1);
     if (__DEV__) {
       adjustConfig.setLogLevel(AdjustConfig.LogLevelDebug);
     }
@@ -39,6 +39,7 @@ export default function AdjustProvider() {
         },
       );
     }
+
     Adjust.create(adjustConfig);
 
     return () => {
