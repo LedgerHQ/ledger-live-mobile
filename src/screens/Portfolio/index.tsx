@@ -112,6 +112,10 @@ const maxAssetsToDisplay = 3;
 
 function PortfolioScreen({ navigation }: Props) {
   const carouselVisibility = useSelector(carouselVisibilitySelector);
+  const showCarousel = useMemo(
+    () => Object.values(carouselVisibility).some(Boolean),
+    [carouselVisibility],
+  );
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency: Currency = useSelector(
     counterValueCurrencySelector,
@@ -226,7 +230,7 @@ function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      ...(Object.values(carouselVisibility).some(Boolean)
+      ...(showCarousel
         ? [
             <Flex mt={8}>
               <Flex mx={6}>

@@ -138,6 +138,7 @@ export default function BaseNavigator() {
           component={Learn}
           options={{
             headerShown: false,
+            animationEnabled: false,
           }}
         />
       ) : null}
