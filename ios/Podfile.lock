@@ -394,6 +394,8 @@ PODS:
     - react-native-config/App (= 1.4.4)
   - react-native-config/App (1.4.4):
     - React-Core
+  - react-native-fast-crypto (2.2.0):
+    - React
   - react-native-fingerprint-scanner (6.0.0):
     - React
   - react-native-flipper-performance-plugin (0.2.0):
@@ -649,6 +651,7 @@ DEPENDENCIES:
   - react-native-adjust (from `../node_modules/react-native-adjust`)
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-fast-crypto (from `../node_modules/react-native-fast-crypto`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-flipper-performance-plugin (from `../node_modules/react-native-flipper-performance-plugin`)
   - react-native-locale (from `../node_modules/react-native-locale`)
@@ -807,6 +810,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ble-plx"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-fast-crypto:
+    :path: "../node_modules/react-native-fast-crypto"
   react-native-fingerprint-scanner:
     :path: "../node_modules/react-native-fingerprint-scanner"
   react-native-flipper-performance-plugin:
@@ -965,6 +970,7 @@ SPEC CHECKSUMS:
   react-native-adjust: 8152efdf7a2e94a85ce427f2096b4167f2824273
   react-native-ble-plx: f10240444452dfb2d2a13a0e4f58d7783e92d76e
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
+  react-native-fast-crypto: 5943c42466b86ad70be60d3a5f64bd22251e5d9e
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper-performance-plugin: fccda3ebbcee11cda4e5dee85b335835e9c7e714
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
