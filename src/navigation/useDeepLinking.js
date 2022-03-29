@@ -37,7 +37,7 @@ function getSettingsScreen(pathname) {
 export function useDeepLinkHandler() {
   const { navigate } = useNavigation();
   const { state } = useRemoteLiveAppContext();
-  const manifests = state.value.liveAppByIndex;
+  const manifests = state && state.value ? state.value.liveAppByIndex : {};
 
   const filteredManifests = useMemo(() => {
     const branches = ["stable", "soon"];

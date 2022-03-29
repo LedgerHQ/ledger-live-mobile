@@ -54,6 +54,7 @@ export default function OffRamp({ navigation, route }: Props) {
   >(null);
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
+  // TODO: think about component functionality reuse since it is almost the same as Buy.
   useEffect(() => {
     if (!allCurrencies.length) return;
 
