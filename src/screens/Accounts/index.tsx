@@ -24,7 +24,7 @@ import { ScreenName } from "../../const";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
 import { usePortfolio } from "../../actions/portfolio";
 import AddAccount from "./AddAccount";
-import AccountOrder from "./AccountOrder";
+// import AccountOrder from "./AccountOrder";
 
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 
@@ -142,9 +142,12 @@ function Accounts({ navigation, route }: Props) {
             <Text variant="h1">{t("distribution.title")}</Text>
           </Flex>
           <Flex flexDirection="row" alignItems={"center"}>
-            <Box mr={7}>
-              {!flattenedAccounts.length ? null : <AccountOrder />}
-            </Box>
+            {/**
+                <Box mr={7}>
+                    {!flattenedAccounts.length ? null : <AccountOrder />}
+                </Box>
+               */}
+
             <AddAccount />
           </Flex>
         </Flex>
