@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { Box } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled from "styled-components/native";
-import Animated, { FadeOut, Layout } from "react-native-reanimated";
 import { setCarouselVisibility } from "../../actions/settings";
 import { track } from "../../analytics";
 import { getDefaultSlides, SLIDES } from "./shared";
@@ -67,7 +66,7 @@ const Carousel = ({ cardsVisibility }: Props) => {
 
   const slides = useMemo(
     () =>
-      getDefaultSlides().filter(slide => {
+      getDefaultSlides().filter((slide: any) => {
         if (!cardsVisibility[slide.id]) {
           return false;
         }
