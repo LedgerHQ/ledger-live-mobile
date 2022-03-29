@@ -3,7 +3,6 @@ import React, { memo, useMemo } from "react";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
@@ -38,10 +37,10 @@ type FabAccountActionsProps = {
   parentAccount?: Account;
 };
 
-function FabAccountActionsComponent({
+export const FabAccountActionsComponent = ({
   account,
   parentAccount,
-}: FabAccountActionsProps) {
+}: FabAccountActionsProps) => {
   const { colors } = useTheme();
 
   const currency = getAccountCurrency(account);
@@ -136,11 +135,11 @@ function FabAccountActionsComponent({
       parentAccount={parentAccount}
     />
   );
-}
+};
 
-function FabMarketActionsComponent({ currency, accounts, ...props }: Props) {
+const FabMarketActionsComponent = ({ currency, accounts, ...props }: Props) => {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
-  const hasAccounts = accounts?.length > 0;
+  const hasAccounts = accounts?.length && accounts.length > 0;
 
   const defaultAccount = useMemo(() => (accounts ? accounts[0] : undefined), [
     accounts,
@@ -255,9 +254,9 @@ function FabMarketActionsComponent({ currency, accounts, ...props }: Props) {
   );
 
   return <FabAccountButtonBar {...props} buttons={actions} />;
-}
+};
 
-function FabActions() {
+const FabActions = () => {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount: number = useSelector(accountsCountSelector);
   const hasAccounts = accountsCount > 0;
@@ -348,7 +347,7 @@ function FabActions() {
   );
 
   return <FabAccountButtonBar buttons={actions} />;
-}
+};
 
 export const FabAccountActions = memo(FabAccountActionsComponent);
 

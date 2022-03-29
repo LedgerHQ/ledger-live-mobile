@@ -10,7 +10,6 @@ import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import invariant from "invariant";
-import { useTheme } from "@react-navigation/native";
 import InfoModal from "../../modals/Info";
 import type { ModalInfo } from "../../modals/Info";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -23,7 +22,6 @@ type Props = {
 type InfoName = "available";
 
 function AccountBalanceSummaryFooter({ account }: Props) {
-  const { colors } = useTheme();
   const { t } = useTranslation();
   const [infoName, setInfoName] = useState<InfoName | typeof undefined>();
   const info = useInfo();

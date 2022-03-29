@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
-  Image,
   Vibration,
   Platform,
   SafeAreaView,
@@ -15,7 +14,6 @@ import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { compose } from "redux";
 import { Flex, Logos } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
-import type { T } from "../../types/common";
 import type { Privacy } from "../../reducers/settings";
 import { withReboot } from "../Reboot";
 import LText from "../../components/LText";

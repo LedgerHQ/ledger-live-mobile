@@ -20,7 +20,7 @@ import Touchable from "../../components/Touchable";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 import perFamilySubAccountList from "../../generated/SubAccountList";
 
-const keyExtractor = o => o.id;
+const keyExtractor = (o: any) => o.id;
 
 const styles = StyleSheet.create({
   footer: {

@@ -102,7 +102,7 @@ function Accounts({ navigation, route }: Props) {
       <List
         data={items}
         renderItem={renderItem}
-        keyExtractor={i => i.id}
+        keyExtractor={(i: any) => i.id}
         ListEmptyComponent={<NoAccounts />}
         contentContainerStyle={{ paddingHorizontal: 16 }}
       />

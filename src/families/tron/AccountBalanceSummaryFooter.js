@@ -12,7 +12,6 @@ import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import invariant from "invariant";
-import { useTheme } from "@react-navigation/native";
 import InfoModal from "../../modals/Info";
 import type { ModalInfo } from "../../modals/Info";
 import FreezeIcon from "../../icons/Freeze";

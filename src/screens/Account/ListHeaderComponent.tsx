@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { ScrollView } from "react-native";
 import {
   isAccountEmpty,
   getMainAccount,

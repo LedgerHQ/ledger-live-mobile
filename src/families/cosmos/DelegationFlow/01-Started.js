@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { Alert, Button, Flex } from "@ledgerhq/native-ui";
@@ -16,8 +15,6 @@ import { TrackScreen } from "../../../analytics";
 import Illustration from "../../../images/illustration/Illustration";
 import EarnLight from "../../../images/illustration/Light/_003.png";
 import EarnDark from "../../../images/illustration/Dark/_003.png";
-
-const forceInset = { bottom: "always" };
 
 type RouteParams = {
   accountId: string,
