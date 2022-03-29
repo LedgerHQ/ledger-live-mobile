@@ -34,7 +34,6 @@ type InfoName =
   | "minBondWarning";
 
 function AccountBalanceSummaryFooter({ account }: Props) {
-  const { colors } = useTheme();
   const { t } = useTranslation();
   const [infoName, setInfoName] = useState<InfoName | typeof undefined>();
   const info = useInfo();

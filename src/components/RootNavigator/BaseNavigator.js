@@ -66,7 +66,7 @@ import PortfolioHistory from "../../screens/Portfolio/PortfolioHistory";
 import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
 import PlatformApp from "../../screens/Platform/App";
-import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
+import ManagerNavigator from "./ManagerNavigator";
 
 import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccountScreen";
 import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurrencyScreen";
