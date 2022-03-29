@@ -3,6 +3,7 @@ import { Trans } from "react-i18next";
 import { urls } from "../../config/urls";
 import Slide from "./Slide";
 import Illustration from "../../images/illustration/Illustration";
+import { Platform } from "react-native";
 
 const illustrations = {
   dark: {
@@ -174,14 +175,17 @@ const FamilyPackXSlide = {
   },
 };
 
-export const SLIDES = [
-  SwapSlide,
-  LidoSlide,
-  BuySlide,
-  MarketSlide,
-  FamilyPackXSlide,
-  AcademySlide,
-];
+export const SLIDES =
+  Platform.OS === "ios"
+    ? [SwapSlide, BuySlide, MarketSlide, FamilyPackXSlide, AcademySlide]
+    : [
+        SwapSlide,
+        LidoSlide,
+        BuySlide,
+        MarketSlide,
+        FamilyPackXSlide,
+        AcademySlide,
+      ];
 
 export const getDefaultSlides = () =>
   SLIDES.map((slide: any) => ({
