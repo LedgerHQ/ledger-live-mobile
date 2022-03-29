@@ -2,12 +2,13 @@ import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import { Box, Button, Flex, Text } from "@ledgerhq/native-ui";
+import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import { BluetoothMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import lottie from "../../screens/Onboarding/assets/nanoX/pairDevice/dark.json";
 
 import Animation from "../Animation";
+import Button from "../wrappedUi/Button";
 
 type Props = {
   onPairNewDevice: () => void;

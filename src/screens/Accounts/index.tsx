@@ -5,12 +5,14 @@ import { useFocusEffect } from "@react-navigation/native";
 import { Account } from "@ledgerhq/live-common/lib/types";
 import { findCryptoCurrencyByKeyword } from "@ledgerhq/live-common/lib/currencies";
 import { Box, Flex, Icons, Text } from "@ledgerhq/native-ui";
+import { RefreshMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { useRefreshAccountsOrdering } from "../../actions/general";
-import { accountsSelector } from "../../reducers/accounts";
+import { accountsSelector, isUpToDateSelector } from "../../reducers/accounts";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import TrackScreen from "../../analytics/TrackScreen";
 
@@ -22,7 +24,7 @@ import { ScreenName } from "../../const";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
 import { usePortfolio } from "../../actions/portfolio";
 import AddAccount from "./AddAccount";
-import AccountOrder from "./AccountOrder";
+// import AccountOrder from "./AccountOrder";
 
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 
@@ -38,10 +40,15 @@ type Props = {
 function Accounts({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
   const portfolio = usePortfolio();
+  const isUpToDate = useSelector(isUpToDateSelector);
+  const globalSyncState = useGlobalSyncState();
+
   const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
+
+  const syncPending = globalSyncState.pending && !isUpToDate;
 
   const { params } = route;
 
@@ -97,7 +104,7 @@ function Accounts({ navigation, route }: Props) {
         renderItem={renderItem}
         keyExtractor={(i: any) => i.id}
         ListEmptyComponent={<NoAccounts />}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
       />
     ),
     [renderItem],
@@ -135,15 +142,30 @@ function Accounts({ navigation, route }: Props) {
             <Text variant="h1">{t("distribution.title")}</Text>
           </Flex>
           <Flex flexDirection="row" alignItems={"center"}>
-            <Box mr={7}>
-              {!flattenedAccounts.length ? null : <AccountOrder />}
-            </Box>
+            {/**
+                <Box mr={7}>
+                    {!flattenedAccounts.length ? null : <AccountOrder />}
+                </Box>
+               */}
+
             <AddAccount />
           </Flex>
         </Flex>
+        {syncPending && (
+          <Flex flexDirection={"row"} alignItems={"center"} px={6} my={3}>
+            <RefreshMedium size={20} color={"neutral.c80"} />
+            <Text color={"neutral.c80"} ml={2}>
+              {t("portfolio.syncPending")}
+            </Text>
+          </Flex>
+        )}
+
         <FilteredSearchBar
           list={flattenedAccounts}
-          inputWrapperStyle={{ paddingHorizontal: 16 }}
+          inputWrapperStyle={{
+            paddingHorizontal: 16,
+            paddingBottom: 16,
+          }}
           renderList={renderList}
           renderEmptySearch={renderEmptySearch}
           keys={SEARCH_KEYS}

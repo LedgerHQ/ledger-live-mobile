@@ -8,7 +8,7 @@ export type WrappedButtonProps = ButtonProps & {
   eventProperties?: Object;
 };
 
-export default function Button({
+export function Button({
   onPress,
   event,
   eventProperties,
@@ -27,3 +27,5 @@ export default function Button({
 
   return <UiButton onPress={onPressHandler} {...othersProps} />;
 }
+
+export default Button;

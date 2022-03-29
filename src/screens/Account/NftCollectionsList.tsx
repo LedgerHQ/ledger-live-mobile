@@ -51,7 +51,7 @@ export default function NftCollectionsList({ account }: Props) {
   // Forced to use useCallback here to avoid a non sensical warning...
   const navigateToCollection = useCallback(
     collection =>
-      navigation.navigate(NavigatorName.Accounts, {
+      navigation.navigate(NavigatorName.PortfolioAccounts, {
         screen: ScreenName.NftCollection,
         params: {
           collection,
@@ -63,7 +63,7 @@ export default function NftCollectionsList({ account }: Props) {
   );
 
   const navigateToGallery = useCallback(() => {
-    navigation.navigate(NavigatorName.Accounts, {
+    navigation.navigate(NavigatorName.PortfolioAccounts, {
       screen: ScreenName.NftGallery,
       params: {
         title: t("nft.gallery.allNft"),

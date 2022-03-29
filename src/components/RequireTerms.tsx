@@ -147,7 +147,6 @@ export const TermModals = ({
   close: () => void;
 }) => {
   const { t } = useTranslation();
-
   const { locale } = useLocale();
   const [markdown, error, retry] = useTerms(locale);
 
