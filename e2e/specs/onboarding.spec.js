@@ -1,29 +1,30 @@
-// @flow
-import { it } from "jest-circus";
-import { cleanLaunch, onboard } from "../engine";
+import { device } from "detox";
+import OnboardingSteps from "../models/onboarding/onboardingSteps";
+import PortfolioPage from "../models/portfolioPage";
+// import { expectBitmapsToBeEqual } from "../helpers";
 
 describe("Onboarding", () => {
-  describe("Nano X", () => {
-    beforeAll(async () => {
-      await cleanLaunch();
-    });
-
-    describe("New Device", () => {});
-
-    describe("Import", () => {});
-
-    describe("Restore", () => {});
-
-    describe("Connect", () => {
-      onboard("nanoX", "connect");
-    });
+  beforeAll(async () => {
+    console.log("==============> STARTING ONBOARDING DEVICE LAUNCH");
+    await device.launchApp({ newInstance: false });
+    // await device.reloadReactNative();
   });
 
-  describe("Nano S", () => {
-    it.todo("should run through Nano S onboarding");
-  });
+  it("should be able to connect a Nano X", async () => {
+    console.log("==============> STARTING ONBOARDING TEST");
+    await OnboardingSteps.waitForPageToBeVisible();
+    await OnboardingSteps.getStarted();
+    await OnboardingSteps.acceptTerms();
+    await OnboardingSteps.selectDevice("nanoX");
+    await OnboardingSteps.connectYourNano("nanoX");
+    await OnboardingSteps.acceptSeedWarning();
+    await OnboardingSteps.startPairing();
+    await OnboardingSteps.addNewNano();
+    await OnboardingSteps.addDeviceViaBluetooth();
+    await OnboardingSteps.openLedgerLive();
 
-  describe("Nano Blue", () => {
-    it.todo("should run through Nano blue onboarding");
+    // const image = await device.takeScreenshot("nanoX-onboarding-snapshot");
+    // const snapshottedImagePath = `e2e/specs/snapshots/${device.getPlatform()}-nanoX-onboarding-snapshot.png`;
+    // expectBitmapsToBeEqual(image, snapshottedImagePath);
   });
 });
