@@ -42,7 +42,7 @@ function EmptyStateAccount({
 
   const canBeBought = useMemo(() => {
     if (!rampCatalog.value) {
-      return [false, false];
+      return false;
     }
 
     const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(

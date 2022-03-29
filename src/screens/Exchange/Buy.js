@@ -42,7 +42,10 @@ export default function OnRamp({ navigation, route }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
-  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
+  const allCurrencies =
+    rampCatalog && rampCatalog.value
+      ? useRampCatalogCurrencies(rampCatalog.value.onRamp)
+      : [];
   const { selectedCurrencyId, accountId } = route.params || {};
   const accounts = useSelector(accountsSelector);
 
@@ -52,6 +55,8 @@ export default function OnRamp({ navigation, route }: Props) {
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
   useEffect(() => {
+    if (!allCurrencies.length) return;
+
     if (selectedCurrencyId) {
       const selectedCurrency = allCurrencies.find(
         currency => currency.id === selectedCurrencyId,
@@ -66,7 +71,7 @@ export default function OnRamp({ navigation, route }: Props) {
     if (accountId) {
       setAccount(accounts.find(acc => acc.id === accountId));
     }
-  }, []);
+  }, [rampCatalog.value]);
 
   const onContinue = useCallback(() => {
     if (account) {
