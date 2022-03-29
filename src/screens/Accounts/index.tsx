@@ -1,16 +1,18 @@
-import React, { useCallback, useRef, useState, useEffect, memo } from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { Account } from "@ledgerhq/live-common/lib/types";
 import { findCryptoCurrencyByKeyword } from "@ledgerhq/live-common/lib/currencies";
 import { Box, Flex, Icons, Text } from "@ledgerhq/native-ui";
+import { RefreshMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { useRefreshAccountsOrdering } from "../../actions/general";
-import { accountsSelector } from "../../reducers/accounts";
+import { accountsSelector, isUpToDateSelector } from "../../reducers/accounts";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import TrackScreen from "../../analytics/TrackScreen";
 
@@ -38,10 +40,15 @@ type Props = {
 function Accounts({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
   const portfolio = usePortfolio();
+  const isUpToDate = useSelector(isUpToDateSelector);
+  const globalSyncState = useGlobalSyncState();
+
   const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
+
+  const syncPending = globalSyncState.pending && !isUpToDate;
 
   const { params } = route;
 
@@ -141,6 +148,15 @@ function Accounts({ navigation, route }: Props) {
             <AddAccount />
           </Flex>
         </Flex>
+        {syncPending && (
+          <Flex flexDirection={"row"} alignItems={"center"} px={6} my={3}>
+            <RefreshMedium size={20} color={"neutral.c80"} />
+            <Text color={"neutral.c80"} ml={2}>
+              {t("portfolio.syncPending")}
+            </Text>
+          </Flex>
+        )}
+
         <FilteredSearchBar
           list={flattenedAccounts}
           inputWrapperStyle={{

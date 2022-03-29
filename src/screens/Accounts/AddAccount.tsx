@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Flex } from "@ledgerhq/native-ui";
 import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 import Touchable from "../../components/Touchable";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 
-export default function AddAccount() {
+function AddAccount() {
   const navigation = useNavigation();
 
   const [isAddModalOpened, setIsAddModalOpened] = useState(false);
@@ -42,3 +42,5 @@ export default function AddAccount() {
     </Touchable>
   );
 }
+
+export default memo(AddAccount);
