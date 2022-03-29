@@ -2,12 +2,12 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation, Trans } from "react-i18next";
-import { Button } from "@ledgerhq/native-ui";
 import LText from "../../../components/LText";
 import KeyboardView from "../../../components/KeyboardView";
 import TranslatedError from "../../../components/TranslatedError";
 import PasswordInput from "../../../components/PasswordInput";
 import { withTheme } from "../../../colors";
+import Button from "../../../components/wrappedUi/Button";
 
 type Props = {
   onChange: (value: string) => void;
@@ -21,8 +21,6 @@ type Props = {
 type State = {
   secureTextEntry: boolean;
 };
-
-const forceInset = { bottom: "always" };
 
 class PasswordForm extends PureComponent<Props, State> {
   state = {

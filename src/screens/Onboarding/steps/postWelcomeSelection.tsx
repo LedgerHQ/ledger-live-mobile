@@ -43,7 +43,7 @@ function PostWelcomeSelection() {
   const buyLedger = useCallback(() => {
     track("Onboarding PostWelcome - Buy Ledger");
     navigation.navigate(ScreenName.BuyDeviceScreen);
-    //Linking.openURL(urls.buyNanoX);
+    // Linking.openURL(urls.buyNanoX);
   }, []);
 
   return (

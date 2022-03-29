@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import { TextInput, StyleSheet, Keyboard, View, Platform } from "react-native";
+import { TextInput, StyleSheet, Keyboard, Platform } from "react-native";
 import { getEnvDefault } from "@ledgerhq/live-common/lib/env";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
@@ -52,10 +52,10 @@ const FeatureInteger = ({
   const [inputValue, setInputValue] = useState(String(constraintValue(value)));
 
   const onKeyboardShow = useCallback(() => {
-    navigation.getParent().setOptions({ tabBarStyle: { display: "none" } });
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
   }, [navigation]);
   const onKeyboardHide = useCallback(() => {
-    navigation.getParent().setOptions({ tabBarStyle: { display: "flex" } });
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "flex" } });
   }, [navigation]);
 
   useEffect(() => {
@@ -66,7 +66,10 @@ const FeatureInteger = ({
 
     return () => {
       if (Platform.OS === "android") {
+        // Deprecated: https://reactnative.dev/docs/keyboard#removelistener
+        // @ts-ignore
         Keyboard.removeListener("keyboardDidShow", onKeyboardShow);
+        // @ts-ignore
         Keyboard.removeListener("keyboardDidHide", onKeyboardHide);
       }
     };

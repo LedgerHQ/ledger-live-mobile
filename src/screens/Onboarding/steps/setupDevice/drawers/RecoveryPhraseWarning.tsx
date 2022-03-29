@@ -26,7 +26,7 @@ const OnboardingRecoveryPhraseWarning = () => {
           Icon={Icons.WarningMedium}
           iconColor={"warning.c100"}
           title={t(
-            "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.titlea",
+            "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title",
           )}
           description={t(
             "onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc",

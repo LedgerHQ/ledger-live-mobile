@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { BottomDrawer, Button } from "@ledgerhq/native-ui";
+import { BottomDrawer } from "@ledgerhq/native-ui";
 import { InfoMedium } from "@ledgerhq/native-ui/assets/icons";
 import { useCleanCache } from "../../../actions/general";
 import SettingsRow from "../../../components/SettingsRow";
 import { useReboot } from "../../../context/Reboot";
+import Button from "../../../components/wrappedUi/Button";
 
 export default function ClearCacheRow() {
   const { t } = useTranslation();

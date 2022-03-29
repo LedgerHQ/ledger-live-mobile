@@ -1,4 +1,3 @@
-/* @flow */
 import React, { memo, useCallback } from "react";
 import { getEnv, setEnvUnsafe } from "@ledgerhq/live-common/lib/env";
 import SettingsRow from "../../../components/SettingsRow";
@@ -12,18 +11,19 @@ type Props = {
 
 function MockModeRow({ reboot }: Props) {
   const isMock = getEnv("MOCK");
-  const setReadOnlyModeAndReset = useCallback((enabled: boolean) => {
-    setEnvUnsafe("MOCK", enabled ? "1" : "");
-    reboot();
-  }, []);
+  const setReadOnlyModeAndReset = useCallback(
+    (enabled: boolean) => {
+      setEnvUnsafe("MOCK", enabled ? "1" : "");
+      reboot();
+    },
+    [reboot],
+  );
 
   return (
     <SettingsRow
       event="MockModeRow"
       title="Mock mode"
       desc="Toggle Mock mode for testing, relaunch to refresh"
-      onPress={null}
-      alignedTop
     >
       <Track
         event={isMock ? "EnableReadOnlyMode" : "DisableReadOnlyMode"}

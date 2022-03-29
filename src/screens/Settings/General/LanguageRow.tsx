@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import { Text } from "@ledgerhq/native-ui";
 import SettingsRow from "../../../components/SettingsRow";
-import { NavigatorName, ScreenName } from "../../../const";
+import { ScreenName } from "../../../const";
 import { useLocale } from "../../../context/Locale";
 
 export const languageLabels = {
