@@ -17,7 +17,8 @@ import InfoModal from "./InfoModal";
 import Button from "./wrappedUi/Button";
 
 type ActionButtonEventProps = {
-  navigationParams?: any[] | string;
+  navigationParams?: any[];
+  linkUrl?: string;
   confirmModalProps?: {
     withCancel?: boolean;
     id?: string;
@@ -82,15 +83,13 @@ function FabAccountButtonBar({
 
   const onPress = useCallback(
     (data: ActionButtonEventProps) => {
-      const { navigationParams, confirmModalProps } = data;
+      const { navigationParams, confirmModalProps, linkUrl } = data;
       if (!confirmModalProps) {
         setInfoModalProps();
-        if (navigationParams) {
-          if (typeof navigationParams === "string") {
-            Linking.openURL(navigationParams);
-          } else {
-            onNavigate(...navigationParams);
-          }
+        if (linkUrl) {
+          Linking.openURL(linkUrl);
+        } else if (navigationParams) {
+          onNavigate(...navigationParams);
         }
       } else {
         setInfoModalProps(data);
@@ -109,13 +108,11 @@ function FabAccountButtonBar({
     setIsModalInfoOpened();
   }, []);
 
-  const onChoiceSelect = useCallback(({ navigationParams }) => {
-    if (navigationParams) {
-      if (typeof navigationParams === "string") {
-        Linking.openURL(navigationParams);
-      } else {
-        onNavigate(...navigationParams);
-      }
+  const onChoiceSelect = useCallback(({ navigationParams, linkUrl }) => {
+    if (linkUrl) {
+      Linking.openURL(linkUrl);
+    } else if (navigationParams) {
+      onNavigate(...navigationParams);
     }
   }, []);
 

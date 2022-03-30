@@ -115,7 +115,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
     ...(isEthereum
       ? [
           {
-            navigationParams: "ledgerlive://discover/lido",
+            linkUrl: "ledgerlive://discover/lido",
             label: <Trans i18nKey="account.stake" />,
             Icon: Icons.ClaimRewardsMedium,
             event: "Stake Ethereum Account Button",
