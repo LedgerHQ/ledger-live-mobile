@@ -3,6 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import {
   Portfolio,
+  PortfolioRange,
   ValueChange,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { BoxedIcon, Flex, Text } from "@ledgerhq/native-ui";
@@ -29,8 +30,9 @@ export default function GraphCard({
   renderTitle,
   counterValueCurrency,
 }: Props) {
-  const { countervalueChange } = portfolio;
+  const { countervalueChange, range } = portfolio;
 
+  console.log("range", range);
   const isAvailable = portfolio.balanceAvailable;
   const balanceHistory = portfolio.balanceHistory;
 
@@ -41,6 +43,7 @@ export default function GraphCard({
         isLoading={!isAvailable}
         to={balanceHistory[balanceHistory.length - 1]}
         unit={counterValueCurrency.units[0]}
+        range={portfolio.range}
         renderTitle={renderTitle}
       />
     </Flex>
@@ -50,6 +53,7 @@ export default function GraphCard({
 function GraphCardHeader({
   unit,
   valueChange,
+  range,
   renderTitle,
   isLoading,
   to,
@@ -58,6 +62,7 @@ function GraphCardHeader({
   valueChange: ValueChange;
   unit: Unit;
   to: Item;
+  range?: PortfolioRange;
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => ReactNode;
 }) {
   const item = to;
@@ -111,8 +116,7 @@ function GraphCardHeader({
             </>
           ) : (
             <View>
-              <Delta percent valueChange={valueChange} />
-              <Delta valueChange={valueChange} unit={unit} />
+              <Delta percent valueChange={valueChange} range={range} />
             </View>
           )}
         </Flex>
