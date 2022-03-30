@@ -62,7 +62,7 @@ export default function OffRamp({ navigation, route }: Props) {
     } else {
       if (!accountCurrency) return;
 
-      const filteredAccounts = accounts.filter(
+      let filteredAccounts = accounts.filter(
         acc =>
           acc.currency.id ===
           (accountCurrency.type === "TokenCurrency"
@@ -70,7 +70,7 @@ export default function OffRamp({ navigation, route }: Props) {
             : accountCurrency.id),
       );
       if (accountCurrency.type === "TokenCurrency") {
-        return filteredAccounts.map(acc =>
+        filteredAccounts = filteredAccounts.map(acc =>
           accountWithMandatoryTokens(acc, [accountCurrency]),
         );
       }

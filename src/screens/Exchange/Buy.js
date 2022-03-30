@@ -62,7 +62,7 @@ export default function OnRamp({ navigation, route }: Props) {
     } else {
       if (!accountCurrency) return;
 
-      const filteredAccounts = accounts.filter(
+      let filteredAccounts = accounts.filter(
         acc =>
           acc.currency.id ===
           (accountCurrency.type === "TokenCurrency"
@@ -70,7 +70,7 @@ export default function OnRamp({ navigation, route }: Props) {
             : accountCurrency.id),
       );
       if (accountCurrency.type === "TokenCurrency") {
-        return filteredAccounts.map(acc =>
+        filteredAccounts = filteredAccounts.map(acc =>
           accountWithMandatoryTokens(acc, [accountCurrency]),
         );
       }
@@ -113,7 +113,6 @@ export default function OnRamp({ navigation, route }: Props) {
 
   const onCurrencyChange = useCallback(
     (selectedCurrency: CryptoCurrency | TokenCurrency) => {
-      console.log(selectedCurrency);
       setCurrency(selectedCurrency);
       selectAccount(selectedCurrency);
     },
