@@ -1,8 +1,8 @@
 // @flow
 
-import React from "react";
+import React, { memo } from "react";
 
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { Operation } from "@ledgerhq/live-common/lib/types";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
@@ -11,8 +11,8 @@ import Skeleton from "./Skeleton";
 import LText from "./LText";
 
 type Props = {
-  style?: Object,
-  operation: Operation,
+  style?: Object;
+  operation: Operation;
 };
 
 const OperationRowNftName = ({ style, operation }: Props) => {
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OperationRowNftName;
+export default memo(OperationRowNftName);
