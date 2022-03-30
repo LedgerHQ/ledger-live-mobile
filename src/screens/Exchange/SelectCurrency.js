@@ -15,7 +15,6 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
-import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
 import { track, TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
@@ -34,7 +33,6 @@ type Props = {
     params?: {
       currency?: string,
       mode: "buy" | "sell",
-      device?: Device,
       onCurrencyChange: (currency: CryptoCurrency | TokenCurrency) => void,
     },
   },
@@ -57,7 +55,6 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { params } = route;
   const initialCurrencySelected = params?.currency;
-  const device = params?.device;
   const mode = params?.mode || "buy";
 
   const cryptoCurrencies = useMemo(

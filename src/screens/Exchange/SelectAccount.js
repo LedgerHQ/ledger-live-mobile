@@ -15,7 +15,6 @@ import {
 } from "@ledgerhq/live-common/lib/account/helpers";
 import { useTheme } from "@react-navigation/native";
 import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import type { Device } from "@ledgerhq/hw-transport";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -39,7 +38,6 @@ type Props = {
     params: {
       mode: "buy" | "sell",
       currency: CryptoCurrency | TokenCurrency,
-      device?: Device,
       onAccountChange: (selectedAccount: Account | AccountLike) => void,
       analyticsPropertyFlow?: any,
     },
@@ -51,7 +49,6 @@ export default function SelectAccount({ navigation, route }: Props) {
   const {
     mode,
     currency,
-    device,
     analyticsPropertyFlow,
     onAccountChange,
   } = route.params;
@@ -95,24 +92,19 @@ export default function SelectAccount({ navigation, route }: Props) {
             account={account}
             style={styles.card}
             onPress={() => {
-              if (mode === "buy") {
-                onAccountChange && onAccountChange(account);
-                navigation.navigate(NavigatorName.Exchange, {
-                  screen: ScreenName.ExchangeBuy,
-                });
-              } else {
-                navigation.navigate(ScreenName.ExchangeCoinifyWidget, {
-                  account,
-                  mode,
-                  device,
-                });
-              }
+              onAccountChange && onAccountChange(account);
+              navigation.navigate(NavigatorName.Exchange, {
+                screen:
+                  mode === "buy"
+                    ? ScreenName.ExchangeBuy
+                    : ScreenName.ExchangeSell,
+              });
             }}
           />
         </View>
       );
     },
-    [colors.fog, navigation, device, mode],
+    [colors.fog, navigation, mode],
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
