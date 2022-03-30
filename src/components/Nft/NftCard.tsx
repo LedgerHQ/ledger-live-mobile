@@ -5,15 +5,15 @@ import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Platform } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { useTheme, useNavigation } from "@react-navigation/native";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
+import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { NavigatorName, ScreenName } from "../../const";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
 import LText from "../LText";
 
 type Props = {
-  nft: ProtoNFT,
-  style?: Object,
+  nft: ProtoNFT;
+  style?: Object;
 };
 
 const NftCardView = ({
@@ -22,10 +22,10 @@ const NftCardView = ({
   status,
   metadata,
 }: {
-  nft: ProtoNFT,
-  style?: Object,
-  status: "queued" | "loading" | "loaded" | "error" | "nodata",
-  metadata?: Object,
+  nft: ProtoNFT;
+  style?: Object;
+  status: "queued" | "loading" | "loaded" | "error" | "nodata";
+  metadata?: Object;
 }) => {
   const amount = nft.amount.toFixed();
   const { colors } = useTheme();
