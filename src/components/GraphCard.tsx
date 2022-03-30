@@ -30,9 +30,8 @@ export default function GraphCard({
   renderTitle,
   counterValueCurrency,
 }: Props) {
-  const { countervalueChange, range } = portfolio;
+  const { countervalueChange } = portfolio;
 
-  console.log("range", range);
   const isAvailable = portfolio.balanceAvailable;
   const balanceHistory = portfolio.balanceHistory;
 
