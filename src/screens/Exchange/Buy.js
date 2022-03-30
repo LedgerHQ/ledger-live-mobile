@@ -13,7 +13,10 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import {
+  accountWithMandatoryTokens,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account/helpers";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -53,22 +56,42 @@ export default function OnRamp({ navigation, route }: Props) {
   >(null);
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
+  const selectAccount = accountCurrency => {
+    if (accountId) {
+      setAccount(accounts.find(acc => acc.id === accountId));
+    } else {
+      if (!accountCurrency) return;
+
+      const filteredAccounts = accounts.filter(
+        acc =>
+          acc.currency.id ===
+          (accountCurrency.type === "TokenCurrency"
+            ? accountCurrency.parentCurrency.id
+            : accountCurrency.id),
+      );
+      if (accountCurrency.type === "TokenCurrency") {
+        return filteredAccounts.map(acc =>
+          accountWithMandatoryTokens(acc, [accountCurrency]),
+        );
+      }
+      setAccount(filteredAccounts[0] || null);
+    }
+  };
+
   useEffect(() => {
-    if (!allCurrencies.length) return;
+    if (!allCurrencies) return;
 
     if (selectedCurrencyId) {
       const selectedCurrency = allCurrencies.find(
         currency => currency.id === selectedCurrencyId,
       );
       setCurrency(selectedCurrency);
+      selectAccount(selectedCurrency);
     } else {
       currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
         setCurrency(sortedCurrencies[0]);
+        selectAccount(sortedCurrencies[0]);
       });
-    }
-
-    if (accountId) {
-      setAccount(accounts.find(acc => acc.id === accountId));
     }
   }, [rampCatalog.value]);
 
@@ -90,8 +113,9 @@ export default function OnRamp({ navigation, route }: Props) {
 
   const onCurrencyChange = useCallback(
     (selectedCurrency: CryptoCurrency | TokenCurrency) => {
-      setAccount(null);
+      console.log(selectedCurrency);
       setCurrency(selectedCurrency);
+      selectAccount(selectedCurrency);
     },
     [],
   );
@@ -165,13 +189,24 @@ export default function OnRamp({ navigation, route }: Props) {
           },
         ]}
       >
-        <Button
-          containerStyle={styles.button}
-          type={"primary"}
-          title={t("common.continue")}
-          onPress={onContinue}
-          disabled={!account || !currency}
-        />
+        {account ? (
+          <Button
+            containerStyle={styles.button}
+            type={"primary"}
+            title={t("common.continue")}
+            onPress={onContinue}
+            disabled={!account || !currency}
+          />
+        ) : (
+          <Button
+            containerStyle={styles.button}
+            type={"primary"}
+            title={t("exchange.buy.emptyState.CTAButton")}
+            onPress={() =>
+              navigation.navigate(NavigatorName.AddAccounts, { currency })
+            }
+          />
+        )}
       </View>
     </SafeAreaView>
   );

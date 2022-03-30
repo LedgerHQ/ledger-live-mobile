@@ -78,10 +78,8 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
       ? navigation.navigate(NavigatorName.Exchange, {
           screen: ScreenName.ExchangeBuy,
         })
-      : navigation.navigate("ExchangeSelectAccount", {
-          currency,
-          mode,
-          device,
+      : navigation.navigate(NavigatorName.Exchange, {
+          screen: ScreenName.ExchangeSell,
         });
   };
 

@@ -62,21 +62,25 @@ export default function SelectAccountCurrency({
             <DropdownArrow size={10} color={colors.grey} />
           </View>
         </TouchableOpacity>
-        <LText secondary semiBold style={styles.itemMargin}>
-          {t("exchange.buy.selectAccount")}
-        </LText>
-        <TouchableOpacity onPress={onSelectAccount}>
-          <View style={[styles.select, { borderColor: colors.border }]}>
-            {account ? (
-              <AccountCard style={styles.card} account={account} />
-            ) : (
-              <LText style={styles.placeholder}>
-                {t("exchange.buy.selectAccount")}
-              </LText>
-            )}
-            <DropdownArrow size={10} color={colors.grey} />
-          </View>
-        </TouchableOpacity>
+        {account && (
+          <>
+            <LText secondary semiBold style={styles.itemMargin}>
+              {t("exchange.buy.selectAccount")}
+            </LText>
+            <TouchableOpacity onPress={onSelectAccount}>
+              <View style={[styles.select, { borderColor: colors.border }]}>
+                {account ? (
+                  <AccountCard style={styles.card} account={account} />
+                ) : (
+                  <LText style={styles.placeholder}>
+                    {t("exchange.buy.selectAccount")}
+                  </LText>
+                )}
+                <DropdownArrow size={10} color={colors.grey} />
+              </View>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </View>
   );

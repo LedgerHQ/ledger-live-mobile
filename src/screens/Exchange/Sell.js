@@ -13,7 +13,10 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import {
+  accountWithMandatoryTokens,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account/helpers";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -53,6 +56,28 @@ export default function OffRamp({ navigation, route }: Props) {
   >(null);
   const [account, setAccount] = useState<Account | AccountLike | null>(null);
 
+  const selectAccount = accountCurrency => {
+    if (accountId) {
+      setAccount(accounts.find(acc => acc.id === accountId));
+    } else {
+      if (!accountCurrency) return;
+
+      const filteredAccounts = accounts.filter(
+        acc =>
+          acc.currency.id ===
+          (accountCurrency.type === "TokenCurrency"
+            ? accountCurrency.parentCurrency.id
+            : accountCurrency.id),
+      );
+      if (accountCurrency.type === "TokenCurrency") {
+        return filteredAccounts.map(acc =>
+          accountWithMandatoryTokens(acc, [accountCurrency]),
+        );
+      }
+      setAccount(filteredAccounts[0] || null);
+    }
+  };
+
   // TODO: think about component functionality reuse since it is almost the same as Buy.
   useEffect(() => {
     if (!allCurrencies.length) return;
@@ -62,9 +87,11 @@ export default function OffRamp({ navigation, route }: Props) {
         currency => currency.id === selectedCurrencyId,
       );
       setCurrency(selectedCurrency);
+      selectAccount(selectedCurrency);
     } else {
       currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
         setCurrency(sortedCurrencies[0]);
+        selectAccount(sortedCurrencies[0]);
       });
     }
 
@@ -91,7 +118,7 @@ export default function OffRamp({ navigation, route }: Props) {
 
   const onCurrencyChange = useCallback(
     (selectedCurrency: CryptoCurrency | TokenCurrency) => {
-      setAccount(null);
+      selectAccount(selectedCurrency);
       setCurrency(selectedCurrency);
     },
     [],
