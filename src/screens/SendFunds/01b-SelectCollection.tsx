@@ -1,8 +1,6 @@
 // @flow
 import React, { useCallback, useMemo, useState, memo } from "react";
 
-import { useNavigation, useTheme } from "@react-navigation/native";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import {
   View,
   StyleSheet,
@@ -11,10 +9,12 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
-
+import {
+  nftsByCollections,
+  useNftMetadata,
+} from "@ledgerhq/live-common/lib/nft";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import LoadingFooter from "../../components/LoadingFooter";
 import NftImage from "../../components/Nft/NftImage";
 import Skeleton from "../../components/Skeleton";
@@ -26,7 +26,7 @@ const MAX_COLLECTIONS_FIRST_RENDER = 8;
 const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 8;
 
 const CollectionRow = memo(
-  ({ account, collection }: { account: Account, collection: ProtoNFT[] }) => {
+  ({ account, collection }: { account: Account; collection: ProtoNFT[] }) => {
     const navigation = useNavigation();
     const { colors } = useTheme();
     const nft = collection[0];
@@ -37,7 +37,7 @@ const CollectionRow = memo(
     );
 
     const goToNftSelection = () => {
-      navigation.push(ScreenName.SendNft, {
+      navigation.navigate(ScreenName.SendNft, {
         account,
         collection,
       });
@@ -73,20 +73,22 @@ const keyExtractor = (collection: ProtoNFT[]) => collection?.[0]?.contract;
 type Props = {
   route: {
     params: {
-      account: Account,
-      collections: { [string]: ProtoNFT[] }[],
-    },
-  },
+      account: Account;
+    };
+  };
 };
 
 const SendFundsSelectCollection = ({ route }: Props) => {
   const { params } = route;
-  const { account, collections } = params;
+  const { account } = params;
   const { colors } = useTheme();
 
   const [collectionCount, setCollectionCount] = useState(
     MAX_COLLECTIONS_FIRST_RENDER,
   );
+  const collections = useMemo(() => nftsByCollections(account.nfts), [
+    account.nfts,
+  ]);
   const collectionsSlice = useMemo(
     () => Object.values(collections).slice(0, collectionCount),
     [collections, collectionCount],
@@ -182,5 +184,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// $FlowFixMe
 export default memo(SendFundsSelectCollection);

@@ -1,4 +1,3 @@
-// @flow
 import React, { memo } from "react";
 
 import { useTranslation } from "react-i18next";
@@ -67,5 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// $FlowFixMe
 export default memo(SummaryNft);

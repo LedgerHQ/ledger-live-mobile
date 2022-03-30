@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useMemo, useState, memo } from "react";
 
 import {
@@ -7,6 +6,7 @@ import {
 } from "@ledgerhq/live-common/lib/nft";
 import { BigNumber } from "bignumber.js";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   View,
@@ -16,10 +16,6 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
-
 import LoadingFooter from "../../components/LoadingFooter";
 import NftImage from "../../components/Nft/NftImage";
 import Skeleton from "../../components/Skeleton";
@@ -29,7 +25,7 @@ import { ScreenName } from "../../const";
 const MAX_NFTS_FIRST_RENDER = 8;
 const NFTS_TO_ADD_ON_LIST_END_REACHED = 8;
 
-const NftRow = memo(({ account, nft }: { account: Account, nft: ProtoNFT }) => {
+const NftRow = memo(({ account, nft }: { account: Account; nft: ProtoNFT }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
   const { status, metadata } = useNftMetadata(
@@ -106,10 +102,10 @@ const keyExtractor = (nft: ProtoNFT) => nft?.tokenId;
 type Props = {
   route: {
     params: {
-      account: Account,
-      collection: ProtoNFT[],
-    },
-  },
+      account: Account;
+      collection: ProtoNFT[];
+    };
+  };
 };
 
 const SendFundsSelectNft = ({ route }: Props) => {
@@ -214,5 +210,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// $FlowFixMe
 export default memo(SendFundsSelectNft);
