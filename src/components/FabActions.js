@@ -9,6 +9,8 @@ import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import {
   readOnlyModeEnabledSelector,
   swapSelectableCurrenciesSelector,
@@ -20,8 +22,6 @@ import Minus from "../icons/Minus";
 import Swap from "../icons/Swap";
 import useActions from "../screens/Account/hooks/useActions";
 import useLendingActions from "../screens/Account/hooks/useLendingActions";
-import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
-import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import Plus from "../icons/Plus";
 
 type Props = {
@@ -70,11 +70,11 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
       ? [
           {
             navigationParams: [
-              NavigatorName.ExchangeBuyFlow,
+              NavigatorName.Exchange,
               {
                 screen: ScreenName.ExchangeBuy,
                 params: {
-                  selectedCurrencyId: account && account.currency.id,
+                  selectedCurrencyId: currency && currency.id,
                   accountId: account && account.id,
                 },
               },
@@ -92,11 +92,11 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
       ? [
           {
             navigationParams: [
-              NavigatorName.ExchangeBuyFlow,
+              NavigatorName.Exchange,
               {
                 screen: ScreenName.ExchangeSell,
                 params: {
-                  selectedCurrencyId: account && account.currency.id,
+                  selectedCurrencyId: currency && currency.id,
                   accountId: account && account.id,
                 },
               },

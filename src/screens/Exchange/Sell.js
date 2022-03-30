@@ -15,6 +15,7 @@ import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/Ram
 import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
+import { useSelector } from "react-redux";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
@@ -22,7 +23,6 @@ import { NavigatorName, ScreenName } from "../../const";
 import { useRampCatalogCurrencies } from "./hooks";
 import SelectAccountCurrency from "./SelectAccountCurrency";
 import { track } from "../../analytics";
-import { useSelector } from "react-redux";
 import { accountsSelector } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };

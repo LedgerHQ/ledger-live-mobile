@@ -43,7 +43,7 @@ export default function OnRamp({ navigation, route }: Props) {
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
   const allCurrencies = useRampCatalogCurrencies(
-    rampCatalog && rampCatalog.value ? rampCatalog.value.offRamp : [],
+    rampCatalog && rampCatalog.value ? rampCatalog.value.onRamp : [],
   );
   const { selectedCurrencyId, accountId } = route.params || {};
   const accounts = useSelector(accountsSelector);
