@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from "react";
 import {
   CryptoCurrency,
@@ -11,8 +10,9 @@ import { Text, Flex } from "@ledgerhq/native-ui";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import ProgressBar from "../../components/ProgressBar";
 import CounterValue from "../../components/CounterValue";
-import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 import { ensureContrast } from "../../colors";
+import CurrencyIcon from "../../components/CurrencyIcon";
+import { withDiscreetMode } from "../../context/DiscreetModeContext";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency;
@@ -62,7 +62,7 @@ const DistributionRow = styled(Flex).attrs({
   alignItems: "center",
 })``;
 
-export default function DistributionCard({
+function DistributionCard({
   item: { currency, amount, distribution },
 }: Props) {
   const { colors } = useTheme();
@@ -76,8 +76,20 @@ export default function DistributionCard({
     <Container>
       <Flex flexDirection="row">
         <IconContainer>
-          {/** @ts-expect-error flow issue */}
-          <ParentCurrencyIcon currency={currency} size={32} />
+          <Flex
+            bg={color}
+            width={"32px"}
+            height={"32px"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            borderRadius={32}
+          >
+            <CurrencyIcon
+              currency={currency}
+              size={20}
+              color={colors.constant.white}
+            />
+          </Flex>
         </IconContainer>
         <CoinInfoContainer>
           <CurrencyRow>
@@ -115,3 +127,5 @@ export default function DistributionCard({
     </Container>
   );
 }
+
+export default withDiscreetMode(DistributionCard);

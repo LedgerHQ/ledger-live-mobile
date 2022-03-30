@@ -33,7 +33,7 @@ type ActionButtonEventProps = {
   enableActions?: string;
 };
 
-type ActionButton = ActionButtonEventProps & {
+export type ActionButton = ActionButtonEventProps & {
   label: ReactNode;
   Icon?: ComponentType<{ size: number; color: string }>;
   event: string;
