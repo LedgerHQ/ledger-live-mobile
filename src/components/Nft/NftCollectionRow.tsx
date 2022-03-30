@@ -1,24 +1,25 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import {
-  useNftMetadata,
-  CollectionWithNFT,
-} from "@ledgerhq/live-common/lib/nft";
+import { useNftMetadata, ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
 
 type Props = {
-  collection: CollectionWithNFT;
+  collection: ProtoNFT[];
   onCollectionPress: () => void;
 };
 
 function NftCollectionRow({ collection, onCollectionPress }: Props) {
   const { colors } = useTheme();
-  const { contract, nfts } = collection;
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
+  const nft = collection[0];
+  const { status, metadata } = useNftMetadata(
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
+  );
   const loading = status === "loading";
 
   return (
@@ -41,7 +42,7 @@ function NftCollectionRow({ collection, onCollectionPress }: Props) {
               ellipsizeMode="tail"
               numberOfLines={2}
             >
-              {metadata?.tokenName || collection.contract}
+              {metadata?.tokenName || nft.contract}
             </Text>
           </Skeleton>
         </Flex>
@@ -51,14 +52,14 @@ function NftCollectionRow({ collection, onCollectionPress }: Props) {
           color={"neutral.c70"}
           ml={5}
         >
-          {collection.nfts.length}
+          {collection.length}
         </Text>
       </Flex>
     </RectButton>
   );
 }
 
-export default NftCollectionRow;
+export default memo(NftCollectionRow);
 
 const styles = StyleSheet.create({
   container: {
