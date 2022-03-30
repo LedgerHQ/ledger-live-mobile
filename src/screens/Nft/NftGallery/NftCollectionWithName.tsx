@@ -1,12 +1,19 @@
-// @flow
-
-import React, { useCallback, memo } from "react";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
-import { FlatList, View, SafeAreaView, StyleSheet } from "react-native";
+import React, { memo } from "react";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { FlatList, View, SafeAreaView, StyleSheet } from "react-native";
+import { ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
+import { NFTResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider/types";
 import NftCard from "../../../components/Nft/NftCard";
 import Skeleton from "../../../components/Skeleton";
 import LText from "../../../components/LText";
+
+const renderItem = ({ item, index }: { item: ProtoNFT; index: number }) => (
+  <NftCard
+    key={item.id}
+    nft={item}
+    style={index % 2 === 0 ? evenNftCardStyles : oddNftCardStyles}
+  />
+);
 
 const NftCollectionWithNameList = ({
   collection,
@@ -14,23 +21,12 @@ const NftCollectionWithNameList = ({
   status,
   metadata,
 }: {
-  collection: ProtoNFT[],
-  contentContainerStyle?: Object,
-  status: "queued" | "loading" | "loaded" | "error" | "nodata",
-  metadata?: Object,
+  collection: ProtoNFT[];
+  contentContainerStyle?: Object;
+  status: NFTResource["status"];
+  metadata?: NFTMetadata;
 }) => {
-  const nft = collection[0];
-  const renderItem = useCallback(
-    ({ item, index }) => (
-      <NftCard
-        key={item.id}
-        nft={item}
-        collection={collection}
-        style={index % 2 === 0 ? evenNftCardStyles : oddNftCardStyles}
-      />
-    ),
-    [collection],
-  );
+  const nft = collection?.[0] || {};
 
   return (
     <SafeAreaView style={contentContainerStyle}>
@@ -64,8 +60,8 @@ const NftCollectionWithNameMemo = memo(NftCollectionWithNameList);
 // this technique of splitting the usage of context and memoing the presentational component is used to prevent
 // the rerender of all Nft Collections whenever the NFT cache changes (whenever a new NFT is loaded)
 type Props = {
-  collection: ProtoNFT,
-  contentContainerStyle?: Object,
+  collection: ProtoNFT[];
+  contentContainerStyle?: Object;
 };
 
 const NftCollectionWithName = ({
