@@ -61,7 +61,7 @@ function Delta({ valueChange, percent, unit, range, style }: Props) {
           ) : percent ? (
             `${absDelta.toFixed(0)}%`
           ) : null}
-          {range && <> ({t(`time.${range}`)})</>}
+          {range && ` (${t(`time.${range}`)})`}
         </Text>
       </View>
     </View>
