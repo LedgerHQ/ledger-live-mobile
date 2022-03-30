@@ -1,5 +1,4 @@
-/* @flow */
-import React from "react";
+import React, { memo } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { useRoute, useTheme } from "@react-navigation/native";
@@ -42,7 +41,7 @@ const NftCollectionHeaderTitle = () => {
           numberOfLines={1}
           style={styles.title}
         >
-          {metadata?.tokenName || params.collection.contract}
+          {metadata?.tokenName || collection.contract}
         </LText>
       </View>
     </TouchableWithoutFeedback>
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NftCollectionHeaderTitle;
+export default memo(NftCollectionHeaderTitle);
