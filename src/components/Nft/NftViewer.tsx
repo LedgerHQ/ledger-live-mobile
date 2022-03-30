@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useMemo, useState, useCallback } from "react";
 
 import {
@@ -9,22 +7,21 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import { BigNumber } from "bignumber.js";
-import { useSelector } from "react-redux";
-import { useTranslation, Trans } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   useNftMetadata,
   decodeNftId,
   getNftCapabilities,
 } from "@ledgerhq/live-common/lib/nft";
-
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
-
+import { BigNumber } from "bignumber.js";
+import { useSelector } from "react-redux";
+import { Button, Icons } from "@ledgerhq/native-ui";
+import { useTranslation, Trans } from "react-i18next";
+import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountSelector } from "../../reducers/accounts";
-import NftLinksPanel from "./NftLinksPanel";
 import { ScreenName, NavigatorName } from "../../const";
+import NftLinksPanel from "./NftLinksPanel";
 import { rgba } from "../../colors";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
@@ -32,12 +29,12 @@ import LText from "../LText";
 
 type Props = {
   route: {
-    params: RouteParams,
-  },
+    params: RouteParams;
+  };
 };
 
 type RouteParams = {
-  nft: ProtoNFT,
+  nft: ProtoNFT;
 };
 
 const Section = ({
@@ -48,12 +45,12 @@ const Section = ({
   copyAvailable,
   copiedString,
 }: {
-  title: string,
-  value?: any,
-  style?: Object,
-  children?: React$Node,
-  copyAvailable?: boolean,
-  copiedString?: string,
+  title: string;
+  value?: any;
+  style?: Object;
+  children?: React$Node;
+  copyAvailable?: boolean;
+  copiedString?: string;
 }) => {
   const [copied, setCopied] = useState(false);
   const [timeoutFunction, setTimeoutFunction] = useState(null);
