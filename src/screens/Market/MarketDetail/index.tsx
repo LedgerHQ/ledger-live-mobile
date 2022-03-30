@@ -162,10 +162,10 @@ export default function MarketDetail({
       screen: ScreenName.ExchangeBuy,
       params: {
         mode: "buy",
-        selectedCurrencyId: currencyId,
+        selectedCurrencyId: internalCurrency && internalCurrency.id,
       },
     });
-  }, [navigation]);
+  }, [navigation, currency]);
 
   /** Disabled for now on demand of PO
   const renderAccountItem = useCallback(
