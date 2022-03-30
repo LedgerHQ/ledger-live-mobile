@@ -1,11 +1,8 @@
-// @flow
-
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import type { NFTMetadata } from "@ledgerhq/live-common/lib/nft";
+import { NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import { View, StyleSheet, TouchableOpacity, Linking } from "react-native";
-
 import ExternalLinkIcon from "../../icons/ExternalLink";
 import OpenSeaIcon from "../../icons/OpenSea";
 import RaribleIcon from "../../icons/Rarible";
@@ -15,9 +12,9 @@ import { rgba } from "../../colors";
 import LText from "../LText";
 
 type Props = {
-  links: $PropertyType<NFTMetadata, "links">,
-  isOpen: boolean,
-  onClose: () => void,
+  links: NFTMetadata["links"];
+  isOpen: boolean;
+  onClose: () => void;
 };
 
 const NftLink = ({
@@ -28,12 +25,12 @@ const NftLink = ({
   subtitle,
   onPress,
 }: {
-  style?: Object,
-  leftIcon: React$Node,
-  rightIcon?: React$Node,
-  title: string,
-  subtitle?: string,
-  onPress?: () => any,
+  style?: Object;
+  leftIcon: React$Node;
+  rightIcon?: React$Node;
+  title: string;
+  subtitle?: string;
+  onPress?: () => any;
 }) => (
   <TouchableOpacity style={[styles.section, style]} onPress={onPress}>
     <View style={styles.sectionBody}>
@@ -152,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NftLinksPanel;
+export default memo(NftLinksPanel);
