@@ -1,6 +1,5 @@
 /* @flow */
 import React from "react";
-import { StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import CountervalueSettingsRow from "./CountervalueSettingsRow";
 import ThemeSettingsRow from "./ThemeSettingsRow";
@@ -27,7 +26,3 @@ export default function GeneralSettings() {
     </NavigationScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { paddingTop: 16, paddingBottom: 64 },
-});

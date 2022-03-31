@@ -20,7 +20,7 @@ function VerifyAddress({
   device: ?Device,
   onResult: (confirmed: boolean, error?: Error) => void,
 }) {
-  const { theme } = useTheme();
+  const { dark } = useTheme();
   const { t } = useTranslation();
 
   const onConfirmAddress = useCallback(async () => {
