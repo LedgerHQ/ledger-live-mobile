@@ -90,6 +90,7 @@ export default function BuyDeviceScreen() {
       <Flex height={250} width="100%" position="relative" overflow="hidden">
         {videoMounted && (
           <Video
+            disableFocus
             source={theme === "light" ? sourceLight : sourceDark}
             style={{
               height: "100%",

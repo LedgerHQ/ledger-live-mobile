@@ -73,6 +73,7 @@ function OnboardingStepWelcome({ navigation }: any) {
       <StyledStatusBar barStyle="light-content" />
       {videoMounted && (
         <Video
+          disableFocus
           source={source}
           style={absoluteStyle}
           muted
