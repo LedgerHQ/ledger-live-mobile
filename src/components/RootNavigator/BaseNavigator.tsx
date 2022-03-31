@@ -441,7 +441,7 @@ export default function BaseNavigator() {
         name={ScreenName.MarketCurrencySelect}
         component={MarketCurrencySelect}
         options={{
-          title: t("analytics.title"),
+          title: t("market.filters.currency"),
           headerLeft: null,
           unmountOnBlur: true,
         }}
