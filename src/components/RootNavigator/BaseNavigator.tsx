@@ -536,11 +536,7 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.NftNavigator}
         component={NftNavigator}
-        options={({ navigation }) => ({
-          title: null,
-          headerRight: null,
-          headerLeft: () => <CloseButton navigation={navigation} />,
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.Accounts}
