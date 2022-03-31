@@ -6,6 +6,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { useTheme, useNavigation } from "@react-navigation/native";
 import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
+import { NFTResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider/types";
 import { NavigatorName, ScreenName } from "../../const";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
@@ -24,7 +25,7 @@ const NftCardView = ({
 }: {
   nft: ProtoNFT;
   style?: Object;
-  status: "queued" | "loading" | "loaded" | "error" | "nodata";
+  status: NFTResource["status"];
   metadata?: Object;
 }) => {
   const amount = nft.amount.toFixed();
