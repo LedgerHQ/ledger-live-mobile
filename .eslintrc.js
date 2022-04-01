@@ -2,9 +2,19 @@ module.exports = {
   root: true,
   extends: [
     "@react-native-community",
-    "airbnb",
+    // "airbnb",
     "prettier",
     "plugin:json/recommended",
+  ],
+  overrides: [
+    {
+      files: "*.{ts,tsx}",
+      extends: ["plugin:import/typescript"],
+    },
+    {
+      files: "*.{js,jsx}",
+      extends: ["plugin:import/recommended"],
+    },
   ],
   settings: {
     "import/resolver": {
@@ -64,10 +74,10 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-no-bind": 0,
     // for importing detox
-    "import/no-extraneous-dependencies": [
-      "error",
-      { devDependencies: ["e2e/**"] },
-    ],
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   { devDependencies: ["e2e/**"] },
+    // ],
     // New rules from default RN 0.61 ruleset
     // that were triggered in our codebase
     // The following are probably intentional (from my own guesstimate)
@@ -85,36 +95,6 @@ module.exports = {
     "react/no-deprecated": "warn",
     "prettier/prettier": "error",
   },
-  overrides: [
-    {
-      files: ["**/*.ts", "**/*.tsx"],
-      env: { browser: true, es6: true, node: true },
-      extends: [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-      ],
-      parser: "@typescript-eslint/parser",
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-        project: "./tsconfig.json",
-      },
-      plugins: ["react", "@typescript-eslint"],
-      rules: {
-        "@typescript-eslint/no-use-before-define": "off",
-        "@typescript-eslint/no-unused-vars": [
-          "error",
-          { argsIgnorePattern: "^_" },
-        ],
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-namespace": [
-          "error",
-          { allowDeclarations: true },
-        ],
-      },
-      settings: { react: { version: "detect" } },
-    },
-  ],
   globals: {
     __DEV__: false,
     __REDUX_DEVTOOLS_EXTENSION__: false,
