@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 
 import {
   ScrollView,
@@ -16,9 +16,11 @@ import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import { Button, Icons } from "@ledgerhq/native-ui";
 import { useTranslation, Trans } from "react-i18next";
+import network from "@ledgerhq/live-common/lib/network";
 import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { accountSelector } from "../../reducers/accounts";
 import { ScreenName, NavigatorName } from "../../const";
 import NftLinksPanel from "./NftLinksPanel";
@@ -26,6 +28,22 @@ import { rgba } from "../../colors";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
 import LText from "../LText";
+
+const FLOOR_PRICE_CURRENCIES = new Set(["ethereum"]);
+
+const getFloorPrice = async (nft: ProtoNFT): Promise<number | null> => {
+  if (!FLOOR_PRICE_CURRENCIES.has(nft.currencyId)) {
+    return null;
+  }
+
+  const { data } = await network({
+    method: "GET",
+    url: `https://api-opensea.vercel.app/floor?contract=${nft.contract}&currencyId=${nft.currencyId}`,
+  });
+
+  // eslint-disable-next-line camelcase
+  return data?.floor_price ?? null;
+};
 
 type Props = {
   route: {
@@ -121,6 +139,19 @@ const NftViewer = ({ route }: Props) => {
     rarible: `https://rarible.com/token/${nft.contract}:${nft.tokenId}`,
     etherscan: `https://etherscan.io/token/${nft.contract}?a=${nft.tokenId}`,
   };
+
+  const currency = useMemo(() => getCryptoCurrencyById(nft.currencyId), [
+    nft.currencyId,
+  ]);
+
+  const [floorPriceLoading, setFloorPriceLoading] = useState(false);
+  const [floorPrice, setFloorPrice] = useState<number | null>(null);
+  useEffect(() => {
+    setFloorPriceLoading(true);
+    getFloorPrice(nft)
+      .then(setFloorPrice)
+      .finally(() => setFloorPriceLoading(false));
+  }, [nft]);
 
   const closeModal = () => {
     setBottomModalOpen(false);
@@ -335,6 +366,22 @@ const NftViewer = ({ route }: Props) => {
               </TouchableOpacity>
             </>
           )}
+
+          {floorPriceLoading || (!floorPriceLoading && floorPrice) ? (
+            <>
+              <View style={styles.hr} />
+              <Section title={t("nft.viewer.floorPrice")}>
+                <Skeleton
+                  style={styles.floorPriceSkeleton}
+                  loading={floorPriceLoading}
+                >
+                  <LText>
+                    {floorPrice} <LText semiBold>{currency.ticker}</LText>
+                  </LText>
+                </Skeleton>
+              </Section>
+            </>
+          ) : null}
         </View>
       </ScrollView>
       <NftLinksPanel
@@ -487,6 +534,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 12,
     width: "100%",
+  },
+  floorPriceSkeleton: {
+    marginBottom: 10,
+    height: 14,
+    width: 75,
+    borderRadius: 4,
   },
   hr: {
     flex: 1,

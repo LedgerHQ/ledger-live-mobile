@@ -4162,7 +4162,8 @@
       "tokenContractCopied": "Token Address copied !",
       "tokenId": "Token ID",
       "tokenIdCopied": "Token ID copied !",
-      "quantity": "Quantity"
+      "quantity": "Quantity",
+      "floorPrice": "Collection Floor Price"
     },
     "viewerModal": {
       "viewOn": "View on",
