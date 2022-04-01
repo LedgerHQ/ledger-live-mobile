@@ -19,8 +19,6 @@ node_modules/warning/.*
 
 .*/node_modules/react-native-gesture-handler/Swipeable.js
 
-
-
 .*/TcpSocket.js
 .*/TcpServer.js
 .*/core-js/.*
@@ -28,6 +26,9 @@ node_modules/warning/.*
 
 .*/vendor/bundle/.*
 .*/fixtures/fail*.json
+
+*.ts
+*.tsx
 
 [untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
