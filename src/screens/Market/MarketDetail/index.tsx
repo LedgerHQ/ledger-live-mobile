@@ -105,7 +105,6 @@ export default function MarketDetail({
     priceChangePercentage,
     internalCurrency,
     chartData,
-    isLiveSupported,
   } = currency || {};
 
   useEffect(
@@ -224,7 +223,7 @@ export default function MarketDetail({
             justifyContent="flex-start"
             alignItems="center"
           >
-            {isLiveSupported && internalCurrency ? (
+            {internalCurrency ? (
               // @ts-expect-error import js issue
               <CircleCurrencyIcon
                 size={32}
@@ -300,14 +299,14 @@ export default function MarketDetail({
           refreshChart={refreshChart}
           chartData={chartData}
         />
-        {isLiveSupported ? (
+        {internalCurrency && (availableOnBuy || availableOnSwap) && (
           <Flex
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
             p={16}
           >
-            {availableOnBuy ? (
+            {availableOnBuy && (
               <Button
                 flex={1}
                 type="color"
@@ -318,8 +317,8 @@ export default function MarketDetail({
               >
                 {t("account.buy")}
               </Button>
-            ) : null}
-            {availableOnSwap ? (
+            )}
+            {availableOnSwap && (
               <Button
                 ml={16}
                 flex={1}
@@ -331,9 +330,9 @@ export default function MarketDetail({
               >
                 {t("transfer.swap.main.header")}
               </Button>
-            ) : null}
+            )}
           </Flex>
-        ) : null}
+        )}
         {/* {allAccounts && allAccounts.length > 0 && isLiveSupported ? (
           <Flex my={16}>
             <Text mx={16} variant="h3">

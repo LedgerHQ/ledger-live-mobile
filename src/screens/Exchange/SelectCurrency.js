@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -7,21 +7,17 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  isCurrencySupported,
-  listTokens,
-  useCurrenciesByMarketcap,
-  listSupportedCurrencies,
-} from "@ledgerhq/live-common/lib/currencies";
+import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { track, TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
-import { getSupportedCurrencies } from "./coinifyConfig";
 import { NavigatorName, ScreenName } from "../../const";
+import { useRampCatalogCurrencies } from "./hooks";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -48,25 +44,18 @@ const renderEmptyList = () => (
   </View>
 );
 
-const listSupportedTokens = () =>
-  listTokens().filter(t => isCurrencySupported(t.parentCurrency));
-
 export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { params } = route;
   const initialCurrencySelected = params?.currency;
   const mode = params?.mode || "buy";
 
-  const cryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listSupportedTokens()),
-    [],
+  const rampCatalog = useRampCatalog();
+  const cryptoCurrencies = useRampCatalogCurrencies(
+    mode === "buy" ? rampCatalog.value.onRamp : rampCatalog.value.offRamp,
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
-
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
-    getSupportedCurrencies(mode).includes(currency.id),
-  );
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     track("Buy Crypto Continue Button", { currencyName: currency.name });
@@ -119,7 +108,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
           <FilteredSearchBar
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.filteredSearchInputWrapperStyle}
-            list={supportedCryptoCurrencies}
+            list={sortedCryptoCurrencies}
             renderList={renderList}
             renderEmptySearch={renderEmptyList}
             initialQuery={initialCurrencySelected}

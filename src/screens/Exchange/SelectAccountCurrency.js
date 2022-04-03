@@ -46,19 +46,21 @@ export default function SelectAccountCurrency({
         </LText>
         <TouchableOpacity onPress={onSelectCurrency}>
           <View style={[styles.select, { borderColor: colors.border }]}>
-            {currency ? (
-              <View>
-                <CurrencyRow
-                  currency={currency}
-                  onPress={() => {}}
-                  iconSize={32}
-                />
-              </View>
-            ) : (
-              <LText style={styles.placeholder}>
-                {t("exchange.buy.selectCurrency")}
-              </LText>
-            )}
+            <View style={styles.name}>
+              {currency ? (
+                <View>
+                  <CurrencyRow
+                    currency={currency}
+                    onPress={() => {}}
+                    iconSize={32}
+                  />
+                </View>
+              ) : (
+                <LText style={styles.placeholder}>
+                  {t("exchange.buy.selectCurrency")}
+                </LText>
+              )}
+            </View>
             <DropdownArrow size={10} color={colors.grey} />
           </View>
         </TouchableOpacity>
@@ -113,6 +115,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     marginTop: 12,
     paddingRight: 16,
+  },
+  name: {
+    flex: 1,
   },
   itemMargin: {
     marginTop: 40,
