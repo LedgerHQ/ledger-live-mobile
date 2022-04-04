@@ -3,19 +3,10 @@
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
-import type {
-  Account,
-  AccountLike,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
-import { useSelector } from "react-redux";
-import {
-  accountWithMandatoryTokens,
-  flattenAccounts,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { accountWithMandatoryTokens } from "@ledgerhq/live-common/lib/account/helpers";
 import { useTheme } from "@react-navigation/native";
 import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -27,18 +18,18 @@ import InfoIcon from "../../icons/Info";
 import PlusIcon from "../../icons/Plus";
 import Button from "../../components/Button";
 import { NavigatorName, ScreenName } from "../../const";
+import type { AccountTuple } from "./hooks";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
 type Props = {
-  accounts: Account[],
-  allAccounts: AccountLikeArray,
   navigation: any,
   route: {
     params: {
       mode: "buy" | "sell",
       currency: CryptoCurrency | TokenCurrency,
       onAccountChange: (selectedAccount: Account | AccountLike) => void,
+      tuples: AccountTuple[],
       analyticsPropertyFlow?: any,
     },
   },
@@ -51,27 +42,41 @@ export default function SelectAccount({ navigation, route }: Props) {
     currency,
     analyticsPropertyFlow,
     onAccountChange,
+    tuples,
   } = route.params;
 
-  const accounts = useSelector(accountsSelector);
-
   const enhancedAccounts = useMemo(() => {
-    const filteredAccounts = accounts.filter(
-      acc =>
-        acc.currency.id ===
-        (currency.type === "TokenCurrency"
-          ? currency.parentCurrency.id
-          : currency.id),
-    );
+    const filteredAccounts = tuples
+      .map(t => t.account)
+      .filter(
+        acc =>
+          acc &&
+          acc.currency &&
+          acc.currency.id ===
+            (currency.type === "TokenCurrency"
+              ? currency.parentCurrency.id
+              : currency.id),
+      );
     if (currency.type === "TokenCurrency") {
       return filteredAccounts.map(acc =>
         accountWithMandatoryTokens(acc, [currency]),
       );
     }
     return filteredAccounts;
-  }, [accounts, currency]);
+  }, [tuples, currency]);
 
-  const allAccounts = flattenAccounts(enhancedAccounts);
+  const allAccounts = useMemo(() => {
+    const accounts = enhancedAccounts;
+    if (currency.type === "TokenCurrency") {
+      const subAccounts = tuples.map(t => t.subAccount);
+
+      for (let i = 0; i < subAccounts.length; i++) {
+        accounts.push(subAccounts[i]);
+      }
+    }
+
+    return accounts;
+  }, [enhancedAccounts, currency, tuples]);
 
   const { t } = useTranslation();
 
@@ -107,11 +112,15 @@ export default function SelectAccount({ navigation, route }: Props) {
     [colors.fog, navigation, mode],
   );
 
-  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
-    account =>
-      (account.type === "TokenAccount"
-        ? account.token.id
-        : account.currency.id) === currency.id,
+  const elligibleAccountsForSelectedCurrency = useMemo(
+    () =>
+      allAccounts.filter(
+        account =>
+          (account.type === "TokenAccount"
+            ? account.token.id
+            : account.currency.id) === currency.id,
+      ),
+    [allAccounts],
   );
 
   const renderList = useCallback(

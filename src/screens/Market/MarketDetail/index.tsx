@@ -160,8 +160,7 @@ export default function MarketDetail({
     navigation.navigate(NavigatorName.Exchange, {
       screen: ScreenName.ExchangeBuy,
       params: {
-        mode: "buy",
-        selectedCurrencyId: internalCurrency && internalCurrency.id,
+        defaultTicker: currency && currency.ticker && currency.ticker.toUpperCase()
       },
     });
   }, [navigation, currency]);

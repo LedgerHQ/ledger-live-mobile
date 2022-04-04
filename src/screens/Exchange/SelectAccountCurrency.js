@@ -1,37 +1,115 @@
 // @flow
 
-import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { useCallback } from "react";
+import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import type {
   Account,
   AccountLike,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
+import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import LText from "../../components/LText";
 import CurrencyRow from "../../components/CurrencyRow";
 import DropdownArrow from "../../icons/DropdownArrow";
 import AccountCard from "../../components/AccountCard";
+import { useCurrencyAccountSelect } from "./hooks";
+import { accountsSelector } from "../../reducers/accounts";
+import { NavigatorName, ScreenName } from "../../const";
+import Button from "../../components/Button";
+import { track } from "../../analytics";
 
 type Props = {
-  title: string,
-  currency: CryptoCurrency | TokenCurrency | null,
-  account: Account | AccountLike | null,
-  onSelectCurrency: () => void,
-  onSelectAccount: () => void,
+  flow: string,
+  allCurrencies: Array<TokenCurrency | CryptoCurrency>,
+  defaultCurrencyId?: ?string,
+  defaultAccountId?: ?string,
 };
 
 export default function SelectAccountCurrency({
-  title,
-  currency,
-  account,
-  onSelectCurrency,
-  onSelectAccount,
+  flow,
+  allCurrencies,
+  defaultCurrencyId,
+  defaultAccountId,
 }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const navigation = useNavigation();
+  const allAccounts = useSelector(accountsSelector);
+  const {
+    availableAccounts,
+    currency,
+    account,
+    subAccount,
+    setAccount,
+    setCurrency,
+  } = useCurrencyAccountSelect({
+    allCurrencies: allCurrencies || [],
+    allAccounts,
+    defaultCurrencyId,
+    defaultAccountId,
+  });
+
+  const onCurrencyChange = useCallback(
+    (selectedCurrency: CryptoCurrency | TokenCurrency) => {
+      setCurrency(selectedCurrency);
+    },
+    [setCurrency],
+  );
+
+  const onAccountChange = useCallback(
+    (selectedAccount: Account | AccountLike) => {
+      setAccount(selectedAccount);
+    },
+    [setAccount],
+  );
+
+  const onSelectCurrency = useCallback(() => {
+    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      screen: ScreenName.ExchangeSelectCurrency,
+      params: {
+        mode: flow,
+        onCurrencyChange,
+      },
+    });
+  }, [navigation, account, flow, onCurrencyChange]);
+
+  const onSelectAccount = useCallback(() => {
+    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      screen: ScreenName.ExchangeSelectAccount,
+      params: {
+        currency,
+        mode: flow,
+        onAccountChange,
+        tuples: availableAccounts,
+      },
+    });
+  }, [navigation, currency, flow, availableAccounts, onAccountChange]);
+
+  const onContinue = useCallback(() => {
+    if (account) {
+      navigation.navigate(NavigatorName.ProviderList, {
+        accountId: account.id,
+        accountAddress: account.freshAddress,
+        currency,
+        type: flow === "buy" ? "onRamp" : "offRamp",
+      });
+
+      track(
+        `${flow.charAt(0).toUpperCase()}${flow.slice(
+          1,
+        )} Crypto Continue Button`,
+        {
+          currencyName: getAccountCurrency(account).name,
+          isEmpty: isAccountEmpty(account),
+        },
+      );
+    }
+  }, [account, currency, navigation]);
 
   return (
     <View style={styles.body}>
@@ -42,7 +120,9 @@ export default function SelectAccountCurrency({
         ]}
       >
         <LText secondary semiBold>
-          {title}
+          {flow === "buy"
+            ? t("exchange.buy.wantToBuy")
+            : t("exchange.sell.wantToSell")}
         </LText>
         <TouchableOpacity onPress={onSelectCurrency}>
           <View style={[styles.select, { borderColor: colors.border }]}>
@@ -64,15 +144,18 @@ export default function SelectAccountCurrency({
             <DropdownArrow size={10} color={colors.grey} />
           </View>
         </TouchableOpacity>
-        {account && (
+        {(account || subAccount) && (
           <>
             <LText secondary semiBold style={styles.itemMargin}>
               {t("exchange.buy.selectAccount")}
             </LText>
             <TouchableOpacity onPress={onSelectAccount}>
               <View style={[styles.select, { borderColor: colors.border }]}>
-                {account ? (
-                  <AccountCard style={styles.card} account={account} />
+                {account || subAccount ? (
+                  <AccountCard
+                    style={styles.card}
+                    account={subAccount || account}
+                  />
                 ) : (
                   <LText style={styles.placeholder}>
                     {t("exchange.buy.selectAccount")}
@@ -84,6 +167,47 @@ export default function SelectAccountCurrency({
           </>
         )}
       </View>
+      <View
+        style={[
+          styles.footer,
+          {
+            ...Platform.select({
+              android: {
+                borderTopColor: "rgba(20, 37, 51, 0.1)",
+                borderTopWidth: 1,
+              },
+              ios: {
+                shadowColor: "rgb(20, 37, 51)",
+                shadowRadius: 14,
+                shadowOpacity: 0.04,
+                shadowOffset: {
+                  width: 0,
+                  height: -4,
+                },
+              },
+            }),
+          },
+        ]}
+      >
+        {account ? (
+          <Button
+            containerStyle={styles.button}
+            type={"primary"}
+            title={t("common.continue")}
+            onPress={onContinue}
+            disabled={!account || !currency}
+          />
+        ) : (
+          <Button
+            containerStyle={styles.button}
+            type={"primary"}
+            title={t("exchange.buy.emptyState.CTAButton")}
+            onPress={() =>
+              navigation.navigate(NavigatorName.AddAccounts, { currency })
+            }
+          />
+        )}
+      </View>
     </View>
   );
 }
@@ -93,8 +217,9 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-start",
-    padding: 16,
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
   accountAndCurrencySelect: {
     width: "100%",
@@ -130,5 +255,12 @@ const styles = StyleSheet.create({
     paddingVertical: -16,
     paddingHorizontal: 16,
     backgroundColor: "transparent",
+  },
+  footer: {
+    paddingVertical: 16,
+  },
+  button: {
+    alignSelf: "stretch",
+    minWidth: "100%",
   },
 });

@@ -1,32 +1,20 @@
 // @flow
 
-import React, { useCallback, useState, useEffect } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import type {
-  Account,
-  AccountLike,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import {
-  accountWithMandatoryTokens,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
-import { useSelector } from "react-redux";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
-import Button from "../../components/Button";
-import { NavigatorName, ScreenName } from "../../const";
 import { useRampCatalogCurrencies } from "./hooks";
 import SelectAccountCurrency from "./SelectAccountCurrency";
-import { track } from "../../analytics";
-import { accountsSelector } from "../../reducers/accounts";
+import BigSpinner from "../../icons/BigSpinner";
 
 const forceInset = { bottom: "always" };
 
@@ -34,124 +22,44 @@ type Props = {
   navigation: any,
   route: {
     params: {
-      selectedCurrencyId?: string,
-      accountId?: string,
-      parentId?: string,
+      defaultAccountId?: string,
+      defaultCurrencyId?: string,
+      defaultTicker?: string,
     },
   },
 };
 
-export default function OffRamp({ navigation, route }: Props) {
-  const { t } = useTranslation();
+type State = {
+  sortedCurrencies: Array<TokenCurrency | CryptoCurrency>,
+  isLoading: boolean,
+};
+
+export default function OffRamp({ route }: Props) {
+  const [currencyState, setCurrencyState] = useState<State>({
+    sortedCurrencies: [],
+    isLoading: true,
+  });
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
   const allCurrencies = useRampCatalogCurrencies(
     rampCatalog && rampCatalog.value ? rampCatalog.value.offRamp : [],
   );
-  const { selectedCurrencyId, accountId } = route.params || {};
-  const accounts = useSelector(accountsSelector);
 
-  const [currency, setCurrency] = useState<
-    CryptoCurrency | TokenCurrency | null,
-  >(null);
-  const [account, setAccount] = useState<Account | AccountLike | null>(null);
+  const { defaultAccountId, defaultCurrencyId, defaultTicker } =
+    route.params || {};
 
-  const selectAccount = accountCurrency => {
-    if (accountId) {
-      setAccount(accounts.find(acc => acc.id === accountId));
-    } else {
-      if (!accountCurrency) return;
-
-      let filteredAccounts = accounts.filter(
-        acc =>
-          acc.currency.id ===
-          (accountCurrency.type === "TokenCurrency"
-            ? accountCurrency.parentCurrency.id
-            : accountCurrency.id),
-      );
-      if (accountCurrency.type === "TokenCurrency") {
-        filteredAccounts = filteredAccounts.map(acc =>
-          accountWithMandatoryTokens(acc, [accountCurrency]),
-        );
-      }
-      setAccount(filteredAccounts[0] || null);
-    }
-  };
-
-  // TODO: think about component functionality reuse since it is almost the same as Buy.
   useEffect(() => {
-    if (!allCurrencies.length) return;
+    const filteredCurrencies = defaultTicker
+      ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
+      : allCurrencies;
 
-    if (selectedCurrencyId) {
-      const selectedCurrency = allCurrencies.find(
-        currency => currency.id === selectedCurrencyId,
-      );
-      setCurrency(selectedCurrency);
-      selectAccount(selectedCurrency);
-    } else {
-      currenciesByMarketcap(allCurrencies).then(sortedCurrencies => {
-        setCurrency(sortedCurrencies[0]);
-        selectAccount(sortedCurrencies[0]);
+    currenciesByMarketcap(filteredCurrencies).then(sortedCurrencies => {
+      setCurrencyState({
+        sortedCurrencies,
+        isLoading: false,
       });
-    }
-
-    if (accountId) {
-      setAccount(accounts.find(acc => acc.id === accountId));
-    }
-  }, [rampCatalog.value]);
-
-  const onContinue = useCallback(() => {
-    if (account) {
-      navigation.navigate(NavigatorName.ProviderList, {
-        accountId: account.id,
-        accountAddress: account.freshAddress,
-        currency,
-        type: "offRamp",
-      });
-
-      track("Sell Crypto Continue Button", {
-        currencyName: getAccountCurrency(account).name,
-        isEmpty: isAccountEmpty(account),
-      });
-    }
-  }, [account, currency, navigation]);
-
-  const onCurrencyChange = useCallback(
-    (selectedCurrency: CryptoCurrency | TokenCurrency) => {
-      selectAccount(selectedCurrency);
-      setCurrency(selectedCurrency);
-    },
-    [],
-  );
-
-  const onAccountChange = useCallback(
-    (selectedAccount: Account | AccountLike) => {
-      setAccount(selectedAccount);
-    },
-    [],
-  );
-
-  const onSelectCurrency = useCallback(() => {
-    navigation.navigate(NavigatorName.ExchangeSellFlow, {
-      screen: ScreenName.ExchangeSelectCurrency,
-      params: {
-        // initialCurrencySelected: default currency,
-        mode: "sell",
-        onCurrencyChange,
-      },
     });
-  }, [navigation, account]);
-
-  const onSelectAccount = useCallback(() => {
-    navigation.navigate(NavigatorName.ExchangeSellFlow, {
-      screen: ScreenName.ExchangeSelectAccount,
-      params: {
-        currency,
-        mode: "sell",
-        onAccountChange,
-      },
-    });
-  }, [navigation, currency]);
+  }, []);
 
   return (
     <SafeAreaView
@@ -165,43 +73,18 @@ export default function OffRamp({ navigation, route }: Props) {
       forceInset={forceInset}
     >
       <TrackScreen category="Multibuy" name="Sell" />
-      <SelectAccountCurrency
-        title={t("exchange.sell.wantToSell")}
-        currency={currency}
-        account={account}
-        onSelectAccount={onSelectAccount}
-        onSelectCurrency={onSelectCurrency}
-      />
-      <View
-        style={[
-          styles.footer,
-          {
-            ...Platform.select({
-              android: {
-                borderTopColor: "rgba(20, 37, 51, 0.1)",
-                borderTopWidth: 1,
-              },
-              ios: {
-                shadowColor: "rgb(20, 37, 51)",
-                shadowRadius: 14,
-                shadowOpacity: 0.04,
-                shadowOffset: {
-                  width: 0,
-                  height: -4,
-                },
-              },
-            }),
-          },
-        ]}
-      >
-        <Button
-          containerStyle={styles.button}
-          type={"primary"}
-          title={t("common.continue")}
-          onPress={onContinue}
-          disabled={!account || !currency}
+      {currencyState.isLoading ? (
+        <View style={styles.spinner}>
+          <BigSpinner size={42} />
+        </View>
+      ) : (
+        <SelectAccountCurrency
+          flow="sell"
+          allCurrencies={currencyState.sortedCurrencies}
+          defaultCurrencyId={defaultCurrencyId}
+          defaultAccountId={defaultAccountId}
         />
-      </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -210,12 +93,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  footer: {
-    marginTop: 40,
-    padding: 16,
-  },
-  button: {
-    alignSelf: "stretch",
-    minWidth: "100%",
+  spinner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
