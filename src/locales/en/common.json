@@ -719,7 +719,7 @@
       },
       "tour": {
         "title": "Take a tour",
-        "description": "Explore the ledger live app and learn how to buy, grow and secure your assets",
+        "description": "Explore the Ledger Live app and learn how to buy, grow and secure your assets",
         "cta": "Browse"
       },
       "academy": {
@@ -1639,6 +1639,7 @@
     "receive": "Receive",
     "buy": "Buy",
     "walletconnect": "WalletConnect",
+    "stake": "Stake",
     "sell": "Sell",
     "swap": "Swap",
     "manage": "Manage",
@@ -1770,7 +1771,9 @@
         "hideTokens": "Hide ASA",
         "hideTokens_plural": "Hide ASA"
       }
-    }
+    },
+    "noResultsFound": "No asset found",
+    "noResultsDesc": "Please verify the spelling and try again"
   },
   "distribution": {
     "header": "Asset allocation",
@@ -2002,7 +2005,7 @@
       "headerTitle": "Crypto asset",
       "titleDevice": "Connect device",
       "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
+      "verifyPending": "Please verify that the {{currencyName}} address displayed on your Ledger device exactly matches the one displayed on your phone.",
       "verified": "Address confirmed. Check again if you copied or scanned it.",
       "verifyAgain": "Check again",
       "noAccount": "No account found",
@@ -2020,7 +2023,9 @@
         "text": "Please be careful",
         "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
         "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
-      }
+      },
+      "noResultsFound": "No crypto asset found",
+      "noResultsDesc": "Please verify the spelling and try again"
     },
     "exchange": {
       "title": "Buy / Sell"
@@ -2736,7 +2741,7 @@
     }
   },
   "DeviceAction": {
-    "stayInTheAppPlz": "Stay in the app and keep your Nano X nearby",
+    "stayInTheAppPlz": "Stay in the Ledger Live App and keep your Nano X nearby",
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
     "allowManagerPermission": "Allow {{wording}} on your device",
@@ -2849,7 +2854,7 @@
     "GenuineCheck": {
       "title": "Device authentication check",
       "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>.",
-      "info": "This step is meant to ensure that your Nano is authentical."
+      "info": "This step is meant to ensure that your Nano is authentic."
     },
     "ScanningHeader": {
       "title": "Looking for devices",
@@ -2877,8 +2882,8 @@
     }
   },
   "manager": {
-    "tabTitle": "Device Manager",
-    "title": "Manager",
+    "tabTitle": "My Ledger",
+    "title": "My Ledger",
     "connect": "Select your device",
     "appsCatalog": "App catalog",
     "installedApps": "Apps installed",
@@ -2956,9 +2961,6 @@
       "subtitle": "Updates available",
       "updateAll": "Update"
     }
-  },
-  "ManagerDevice": {
-    "title": "Device"
   },
   "AppAction": {
     "install": {
@@ -4083,6 +4085,7 @@
         "liveCompatible_label": "Only Live Supported"
       },
       "order": {
+        "topGainers": "Top gainers",
         "market_cap": "Rank",
         "market_cap_asc": "Rank (Market cap) asc.",
         "market_cap_desc": "Rank (Market cap) desc."
