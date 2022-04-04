@@ -6,7 +6,6 @@ import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { discoverDevices, TransportModule } from "@ledgerhq/live-common/lib/hw";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { Button } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
@@ -19,6 +18,7 @@ import Animation from "../Animation";
 
 import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/dark.json";
 import { track } from "../../analytics";
+import Button from "../wrappedUi/Button";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => void;
