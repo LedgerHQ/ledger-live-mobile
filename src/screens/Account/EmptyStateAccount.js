@@ -66,8 +66,8 @@ function EmptyStateAccount({
     navigation.navigate(NavigatorName.Exchange, {
       screen: ScreenName.ExchangeBuy,
       params: {
-        selectedCurrencyId: account.currency.id,
-        accountId: account.id,
+        defaultCurrencyId: account.currency.id,
+        defaultAccountId: account.id,
         parentId: parentAccount && parentAccount.id,
       },
     });

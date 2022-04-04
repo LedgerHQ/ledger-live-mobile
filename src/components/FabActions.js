@@ -74,8 +74,8 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
               {
                 screen: ScreenName.ExchangeBuy,
                 params: {
-                  selectedCurrencyId: currency && currency.id,
-                  accountId: account && account.id,
+                  defaultCurrencyId: currency && currency.id,
+                  defaultAccountId: account && account.id,
                 },
               },
             ],
