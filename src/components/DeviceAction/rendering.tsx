@@ -295,6 +295,9 @@ const AllowOpeningApp = ({
           source={getDeviceAnimation({ device, key: "openApp", theme })}
         />
       </AnimationContainer>
+      {device.deviceName && (
+        <ConnectDeviceNameText>{device.deviceName}</ConnectDeviceNameText>
+      )}
       <TitleText>{t("DeviceAction.allowAppPermission", { wording })}</TitleText>
       {tokenContext ? (
         <CenteredText>
