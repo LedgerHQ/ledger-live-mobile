@@ -2613,7 +2613,7 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.36.1":
+"@ledgerhq/live-common@21.36.1":
   version "21.36.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.36.1.tgz#ea0bfb3565c83b51d07ea72c1bde258b95238507"
   integrity sha512-nSJEquDjahm1Y0Luv9WVnOI0PVINbwNmLTV0IAbGcaveQm8clm+WdCdMpK7W4AjeSGMkZIYq9PV5unkPcwvvmQ==
