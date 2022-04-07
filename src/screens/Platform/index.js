@@ -5,7 +5,6 @@ import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { useRemoteLiveAppContext } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
-import { useGlobalCatalog } from "@ledgerhq/live-common/lib/platform/providers/GlobalCatalogProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
@@ -37,7 +36,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const navigation = useNavigation();
 
   const { state } = useRemoteLiveAppContext();
-  const global = useGlobalCatalog();
   const manifests = state.value.liveAppByIndex;
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
 
@@ -48,18 +46,12 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
       ...(experimental ? ["experimental"] : []),
     ];
 
-    const filtered = filterPlatformApps(Array.from(manifests.values()), {
+    return filterPlatformApps(Array.from(manifests.values()), {
       version: "0.0.1",
       platform: "mobile",
       branches,
     });
-
-    return filtered.filter(m =>
-      global.value.appsMetadata.find(
-        g => g.appId === m.id && g.branch === m.branch,
-      ),
-    );
-  }, [manifests, experimental, global]);
+  }, [manifests, experimental]);
 
   // Disclaimer State
   const [disclaimerOpts, setDisclaimerOpts] = useState<DisclaimerOpts>(null);
