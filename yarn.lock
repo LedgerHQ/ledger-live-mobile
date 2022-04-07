@@ -23,6 +23,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@azure/core-asynciterator-polyfill@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@azure/core-asynciterator-polyfill/-/core-asynciterator-polyfill-1.0.2.tgz#0dd3849fb8d97f062a39db0e5cadc9ffaf861fec"
+  integrity sha512-3rkP4LnnlWawl0LZptJOdXNrT/fHp2eQMadoasa6afspXdpGrtPZuAQc2PD0cpgyuoXtUWyC3tv7xfntjGS5Dw==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -2717,10 +2722,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.7.8":
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.8.tgz#4bc33a1957645d040d590a275b7157edb8f912e3"
-  integrity sha512-EXgaBoCptecBHjT0oU8/aFISv8HBQ3DdHDihsX7l6IVJjDgq0tJbyS7WXlpvdszHVqjvPvRDa51lrBjEhCfKHQ==
+"@ledgerhq/native-ui@^0.7.10":
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.10.tgz#6f6849122841380aa21481b6e2f27e1c0d35092c"
+  integrity sha512-WDPQp0Yq1ehIzqjf16iZSvfO0Ov//2lQ/jlBEf77W4GSsN1rTWTeWpwhYLfq8HcfDYkNSqGRqEf8cTB2+Tsa3w==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.3"
     "@ledgerhq/ui-shared" "^0.1.6"
@@ -14310,10 +14315,10 @@ react-native-redash@^16.0.11:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
-react-native-safe-area-context@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
-  integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
+react-native-safe-area-context@^4.1.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.2.4.tgz#4df42819759c4d3c74252c8678c2772cfa2271a6"
+  integrity sha512-OOX+W2G4YYufvryonn6Kw6YnyT8ZThkxPHZBD04NLHaZmicUaaDVII/PZ3M5fD1o5N62+T+8K4bCS5Un2ggvkA==
 
 react-native-safe-area-view@^1.1.1:
   version "1.1.1"

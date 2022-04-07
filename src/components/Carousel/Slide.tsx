@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Linking, Image } from "react-native";
 import { Flex, Text, Link as TextLink, Icons } from "@ledgerhq/native-ui";
+import { useTranslation } from "react-i18next";
 import Touchable from "../Touchable";
 import { track } from "../../analytics";
 
@@ -13,6 +14,7 @@ type SlideProps = {
   image: any;
   icon: any;
   position: any;
+  width: number;
 };
 
 const Slide = ({
@@ -24,7 +26,9 @@ const Slide = ({
   image,
   icon,
   position,
+  width,
 }: SlideProps) => {
+  const { t } = useTranslation();
   const onClick = useCallback(() => {
     track("Portfolio Recommended OpenUrl", {
       url,
@@ -34,7 +38,7 @@ const Slide = ({
   return (
     <Touchable event={`${name} Carousel`} onPress={onClick}>
       <Flex
-        width={"350px"}
+        width={width}
         height={"125px"}
         borderRadius={2}
         borderWidth={"1px"}
@@ -45,10 +49,10 @@ const Slide = ({
       >
         <Flex width={"200px"} alignItems="flex-start">
           <Text variant={"subtitle"} fontSize={11} color={"neutral.c60"}>
-            {title}
+            {t(title)}
           </Text>
           <Text variant="paragraph" fontSize={14}>
-            {description}
+            {t(description)}
           </Text>
           <Flex flex={1} />
           {cta ? (
@@ -58,7 +62,7 @@ const Slide = ({
               iconPosition="right"
               onPress={onClick}
             >
-              {cta}
+              {t(cta)}
             </TextLink>
           ) : null}
         </Flex>

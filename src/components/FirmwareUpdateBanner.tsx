@@ -88,6 +88,7 @@ const FirmwareUpdateBanner = () => {
         Icon={DownloadMedium}
         title={t("FirmwareUpdate.drawerUpdate.title")}
         description={t("FirmwareUpdate.drawerUpdate.description")}
+        noCloseButton
       >
         <Button
           type="primary"
@@ -114,5 +115,7 @@ const styles = {
     },
   }),
 };
-
-export default FirmwareUpdateBanner;
+// remove this while we dont have a proper way to handle the banner
+export default function FirmwareUpdateBannerWrapper() {
+  return null;
+}
