@@ -737,9 +737,9 @@
         "cta": "Buy now"
       },
       "familyPackX": {
-        "title": "Family pack LNX",
+        "title": "Ledger Nano X Family pack",
         "description": "Discounted Nano X 3-pack, perfect for gifts or backups",
-        "cta": "Buy now"
+        "cta": "Save now"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
@@ -812,11 +812,11 @@
     "sections": {
       "learn": {
         "title": "Learn",
-        "desc": "Educate yourself about web3 and stay informed"
+        "desc": "Learn about crypto, NFTs, digital security and more"
       },
       "ledgerApps": {
         "title": "Apps",
-        "desc": "Explore Ledger’s integrated apps all in one place"
+        "desc": "Explore Ledger's partner apps all in one place"
       },
       "earn": {
         "title": "Earn",
