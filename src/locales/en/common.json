@@ -785,23 +785,23 @@
   },
   "buyDevice": {
     "0": {
-      "title": "Gain financial freedom",
+      "title": "It's your money. Own it.",
       "desc": "Take charge and unlock the freedom to manage your crypto on your own."
     },
     "1": {
-      "title": "Access a world of Defi",
+      "title": "Access DeFi and NFTs",
       "desc": "Securely interact with our trusted DeFi applications directly from the app."
     },
     "2": {
-      "title": "Your one stop shop for crypto",
+      "title": "Your key to Web3",
       "desc": "You can buy, sell and swap major cryptocurrencies from our partners safely with your Ledger."
     },
     "3": {
-      "title": "Peace of mind with certified security",
+      "title": "Certified security",
       "desc": "Our products are the only hardware wallets certified for their security by national cyber security agencies."
     },
     "title": "GET YOUR LEDGER",
-    "desc": "Protect your cryptocurrencies with industry-leading security",
+    "desc": "Protect your crypto & NFTs with industry-leading security",
     "cta": "Buy your Ledger now",
     "footer": "I already have a device, set it up now"
   },
