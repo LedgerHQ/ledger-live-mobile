@@ -50,7 +50,7 @@
     "staging-android": "yarn android:staging && yarn android:install",
     "prettier": "prettier --write \"src/**/*.js\"",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx,.json",
-    "lint:fix": "eslint src --fix --ext .js,.jsx,.ts,.tsx,.json",
+    "lint:fix": "yarn lint --fix",
     "flow": "flow",
     "test": "yarn check --integrity && ./scripts/check-no-dups.sh && yarn lint --quiet",
     "sync-flowtyped": "NODE_OPTIONS=--max_old_space_size=10000 flow-typed install -s -o && rm flow-typed/npm/axios_*",
