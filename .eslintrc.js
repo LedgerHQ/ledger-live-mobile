@@ -17,11 +17,20 @@ module.exports = {
     },
   ],
   settings: {
-    "import/resolver": {node: { extensions: [".js", ".android.js", ".ios.js", ".ts", ".tsx"] },},
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".android.js", ".ios.js", ".ts", ".tsx"],
+      },
+    },
   },
   plugins: ["prettier", "detox"],
   rules: {
-    "no-console": ["error", { allow: ["warn", "error"] }],
+    "no-console": [
+      "error",
+      {
+        allow: ["warn", "error"],
+      },
+    ],
     "no-unused-vars": [
       "error",
       {
@@ -64,14 +73,6 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-no-bind": 0,
-    "object-curly-newline": [
-      "error",
-      {
-        multiline: true,
-        consistent: false,
-      },
-    ],
-    "newline-per-chained-call": "warn",
     // for importing detox
     // "import/no-extraneous-dependencies": [
     //   "error",
@@ -92,6 +93,7 @@ module.exports = {
     "react-native/no-inline-styles": "warn",
     "react/jsx-fragments": "warn",
     "react/no-deprecated": "warn",
+    "prettier/prettier": "error",
   },
   globals: {
     __DEV__: false,
