@@ -1443,8 +1443,9 @@
         "managerSecondary": "Install apps on my device"
       },
       "addAccounts": {
-        "title": "Add assets",
-        "description": "You’re one step away from fully exploring Ledger Live and truly owning your money"
+        "addAccounts": "Add asset",
+        "title": "Get started",
+        "description": "You can either purchase crypto from our partners or setup your wallet"
       }
     },
     "noOpState": {
