@@ -2595,10 +2595,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@21.36.0":
-  version "21.36.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.36.0.tgz#c0164daa4a913269f0977c55ccb0c9e423fd162c"
-  integrity sha512-cGmBGCv11sNiGXv61mgNDd5bSLTq2Efn5EYP+rCnQsau4Nm8fBrSKw3VIIwiIVIsXlhyicuW5ol/TlWW9xwgxA==
+"@ledgerhq/live-common@21.36.2":
+  version "21.36.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.36.2.tgz#8fc1770827901d9b9a11f6904dbd1718838c3062"
+  integrity sha512-/YEItWpyQxPW2vkrhmNm7VHV6Id+hpngxadWXkc4q1hzWI5gvGKWYaZDjRPDSAhpk5CdNjobPEl77vlol8+oeg==
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -2690,6 +2690,7 @@
     semver "^7.3.5"
     sha.js "^2.4.11"
     stellar-sdk "^10.0.1"
+    superstruct "^0.14.2"
     triple-beam "^1.3.0"
     winston "^3.4.0"
     xstate "^4.28.1"
@@ -2704,10 +2705,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.7.10":
-  version "0.7.10"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.10.tgz#6f6849122841380aa21481b6e2f27e1c0d35092c"
-  integrity sha512-WDPQp0Yq1ehIzqjf16iZSvfO0Ov//2lQ/jlBEf77W4GSsN1rTWTeWpwhYLfq8HcfDYkNSqGRqEf8cTB2+Tsa3w==
+"@ledgerhq/native-ui@^0.7.11":
+  version "0.7.11"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.11.tgz#c2cb59836f878b728b33cd6d4adf463f3d9018ae"
+  integrity sha512-hbKjtsG+EVvrj1DsJ6TXOVTk+PvYa9fM/Xxad78uxt+EX3agpMvnw3clyXbfgZS8dklMXB5AF8TE2/IJvhMZ3g==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.3"
     "@ledgerhq/ui-shared" "^0.1.6"
@@ -14273,10 +14274,10 @@ react-native-level-fs@^3.0.0:
     level-filesystem "^1.0.1"
     levelup "^0.18.2"
 
-react-native-locale@0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/react-native-locale/-/react-native-locale-0.0.19.tgz#336842dfb97510a539f98a39331fb7430acdc498"
-  integrity sha512-US+249Sl2PhFcM0k/yU7RFwK8eiU0Qh8vHTZGF4xw5VnhJyDu2oOn3x8Gshb4X+Xyx9AxSTkib280QROnjPFzQ==
+react-native-localize@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.2.1.tgz#6fe646833691c6ee8a474df3c8b069402cb1dba8"
+  integrity sha512-BuPaQWvxLZG1NrCDGqgAnecDrNQu3LED9/Pyl4H2LwTMHcEngXpE5PfVntW2GiLumdr6nUOkWmMnh8PynZqrsw==
 
 react-native-modal@^13.0.0:
   version "13.0.1"

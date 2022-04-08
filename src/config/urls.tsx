@@ -23,7 +23,7 @@ export const urls = {
       "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
   },
   buyNanoX:
-    "https://shop.ledger.com/pages/ledger-nano-x?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=onboarding",
+    "https://shop.ledger.com/products/ledger-nano-x?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=onboarding",
   playstore: "https://play.google.com/store/apps/details?id=com.ledger.live",
   applestore:
     "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1361671700&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software",
@@ -61,13 +61,15 @@ export const urls = {
     "https://www.ledger.com/staking-tron?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=tron",
   supportLinkByTokenType: {
     erc20:
-      "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow",
+      "https://support.ledger.com/hc/en-us/articles/4404389645329-Manage-ERC20-tokens?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow",
     trc10:
       "https://support.ledger.com/hc/en-us/articles/360013062159?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow_trc10",
     trc20:
       "https://support.ledger.com/hc/en-us/articles/360013062159?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow_trc20",
     asa:
       "https://support.ledger.com/hc/en-us/articles/360015896040?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow",
+    bep20:
+      "https://support.ledger.com/hc/en-us/articles/4412962166289-Manage-BEP20-tokens?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow_bep20",
   },
   cosmosStaking:
     "https://www.ledger.com/staking-cosmos?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=cosmos",

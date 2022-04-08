@@ -1,7 +1,7 @@
 /* eslint-disable import/named */
 import React, { useCallback, useMemo, useState, memo } from "react";
 import { useSelector } from "react-redux";
-import { FlatList, LayoutChangeEvent, Platform } from "react-native";
+import { FlatList, LayoutChangeEvent } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -37,7 +37,6 @@ import RequireTerms from "../../components/RequireTerms";
 import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
-import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
 import MarketSection from "./MarketSection";
@@ -57,6 +56,13 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
 type Props = {
   navigation: any;
 };
+
+const StyledTouchableOpacity = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: flex-end;
+  padding-left: 24px;
+  padding-vertical: 16px;
+`;
 
 const ContentContainer = styled(SafeAreaView)`
   flex: 1;
@@ -96,16 +102,17 @@ const SectionTitle = ({
       flexDirection={"row"}
       justifyContent={"space-between"}
       alignItems={"center"}
-      mb={6}
       {...containerProps}
     >
       <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
         {title}
       </Text>
       {onSeeAllPress || navigatorName ? (
-        <TextLink onPress={onLinkPress} type={"color"}>
-          {seeMoreText || t("common.seeAll")}
-        </TextLink>
+        <StyledTouchableOpacity onPress={onLinkPress}>
+          <TextLink type={"color"}>
+            {seeMoreText || t("common.seeAll")}
+          </TextLink>
+        </StyledTouchableOpacity>
       ) : null}
     </Flex>
   );
@@ -177,22 +184,6 @@ function PortfolioScreen({ navigation }: Props) {
             <Box mt={6}>
               <FabActions />
             </Box>,
-          ]
-        : []),
-      ...(Platform.OS !== "ios"
-        ? [
-            <Flex mt={8}>
-              <Flex mx={6}>
-                <SectionTitle
-                  title={t("tabs.platform")}
-                  navigation={navigation}
-                  navigatorName={NavigatorName.Discover}
-                  screenName={ScreenName.PlatformCatalog}
-                />
-              </Flex>
-
-              <DiscoverSection />
-            </Flex>,
           ]
         : []),
       ...(showAssets
