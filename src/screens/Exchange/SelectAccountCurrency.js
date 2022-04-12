@@ -144,7 +144,7 @@ export default function SelectAccountCurrency({
             <DropdownArrow size={10} color={colors.grey} />
           </View>
         </TouchableOpacity>
-        {(account || subAccount) && (
+        {availableAccounts.length > 0 && (
           <>
             <LText secondary semiBold style={styles.itemMargin}>
               {t("exchange.buy.selectAccount")}
@@ -195,7 +195,6 @@ export default function SelectAccountCurrency({
             type={"primary"}
             title={t("common.continue")}
             onPress={onContinue}
-            disabled={!account || !currency}
           />
         ) : (
           <Button

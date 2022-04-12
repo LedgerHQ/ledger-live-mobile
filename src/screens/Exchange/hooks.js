@@ -1,5 +1,5 @@
 // @flow
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import {
   listCryptoCurrencies,
   listTokens,
@@ -105,8 +105,8 @@ export function useCurrencyAccountSelect({
     const currency = defaultCurrencyId
       ? allCurrencies.find(currency => currency.id === defaultCurrencyId)
       : allCurrencies.length > 0
-        ? allCurrencies[0]
-        : undefined;
+      ? allCurrencies[0]
+      : undefined;
     if (!currency) {
       return { currency: null, accountId: null };
     }
@@ -183,6 +183,18 @@ export function useCurrencyAccountSelect({
       },
     [availableAccounts, accountId],
   );
+
+  useEffect(() => {
+    if (!accountId && availableAccounts.length > 0) {
+      setState(currState => ({
+        ...currState,
+        accountId: availableAccounts[0].account.id,
+        subAccountId: availableAccounts[0].subAccount
+          ? availableAccounts[0].subAccount.id
+          : null,
+      }));
+    }
+  }, [availableAccounts, accountId]);
 
   return {
     availableAccounts,
