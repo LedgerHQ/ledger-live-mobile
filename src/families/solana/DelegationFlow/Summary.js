@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -15,13 +15,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import {
-  useDelegation,
-  useBaker,
-  useBakers,
-  useRandomBaker,
-} from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../reducers/accounts";
@@ -37,7 +30,8 @@ import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import Touchable from "../../../components/Touchable";
 import Alert from "../../../components/Alert";
 import DelegatingContainer from "../../tezos/DelegatingContainer";
-import BakerImage from "../../tezos/BakerImage";
+import ValidatorImage from "../shared/ValidatorImage";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 
 const forceInset = { bottom: "always" };
 
@@ -141,8 +135,17 @@ const BakerSelection = ({
 export default function DelegationSummary({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  const bakers = useBakers(whitelist);
-  const randomBaker = useRandomBaker(bakers);
+  const baker = {
+    address: "baker addr",
+    name: "baker name",
+    logoURL: "bake logo url",
+    nominalYield: "baker yeld",
+    capacityStatus: "normal",
+  };
+
+  invariant(account, "account must be defined");
+
+  const validators = useLedgerFirstShuffledValidators(account.currency);
 
   const {
     transaction,
@@ -153,18 +156,44 @@ export default function DelegationSummary({ navigation, route }: Props) {
   } = useBridgeTransaction(() => ({
     account,
     parentAccount,
+    transaction: {
+      family: "solana",
+      model: {
+        kind: "stake.createAccount",
+        uiState: {
+          delegate: {
+            voteAccAddress: validators[0].voteAccount,
+          },
+        },
+      },
+    },
   }));
 
-  invariant(account, "account must be defined");
+  console.log("our tx is", transaction);
+
   invariant(transaction, "transaction must be defined");
-  invariant(transaction.family === "tezos", "transaction tezos");
+  invariant(transaction.family === "solana", "transaction solana");
+  invariant(
+    transaction.model.kind === "stake.createAccount",
+    "transaction stake create account",
+  );
+
+  const chosenValidator = useMemo(() => {
+    return validators.find(
+      v => v.voteAccount === transaction.model.uiState.delegate.voteAccAddress,
+    );
+  }, [validators, transaction.model.uiState.delegate.voteAccAddress]);
+
+  //invariant(chosenValidator, "validator must be defined");
 
   // make sure tx is in sync
   useEffect(() => {
-    if (!transaction || !account) return;
-    invariant(transaction.family === "tezos", "tezos tx");
+    console.log(transaction);
+    //if (!transaction || !account) return;
+    //invariant(transaction.family === "solana", "solana tx");
 
     // make sure the mode is in sync (an account changes can reset it)
+    /*
     const patch: Object = {
       mode: route.params?.mode ?? "delegate",
     };
@@ -183,9 +212,9 @@ export default function DelegationSummary({ navigation, route }: Props) {
         ),
       );
     }
+    */
   }, [
     account,
-    randomBaker,
     navigation,
     parentAccount,
     setTransaction,
@@ -194,6 +223,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   ]);
 
   const [rotateAnim] = useState(() => new Animated.Value(0));
+
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
@@ -234,13 +264,14 @@ export default function DelegationSummary({ navigation, route }: Props) {
     });
   }, [rotateAnim, navigation, transaction, route.params]);
 
-  const delegation = useDelegation(account);
-  const addr =
+  //const delegation = useDelegation(account);
+  //const addr = "test address";
+  /*
     transaction.mode === "undelegate"
       ? (delegation && delegation.address) || ""
       : transaction.recipient;
-  const baker = useBaker(addr);
-  const bakerName = baker ? baker.name : shortAddressPreview(addr);
+  */
+  //const bakerName = "test backer name"; // baker ? baker.name : shortAddressPreview(addr);
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency);
   const accountName = getAccountName(account);
@@ -294,13 +325,13 @@ export default function DelegationSummary({ navigation, route }: Props) {
                       ],
                     }}
                   >
-                    <BakerImage baker={baker} />
+                    <ValidatorImage validator={chosenValidator} />
                   </Animated.View>
                   <ChangeDelegator />
                 </Circle>
               </Touchable>
             ) : (
-              <BakerImage baker={baker} />
+              <ValidatorImage validator={chosenValidator} />
             )
           }
         />
@@ -328,7 +359,9 @@ export default function DelegationSummary({ navigation, route }: Props) {
                 event="DelegationFlowSummaryChangeBtn"
                 onPress={onChangeDelegator}
               >
-                <BakerSelection name={bakerName} />
+                <BakerSelection
+                  name={chosenValidator?.name ?? chosenValidator?.voteAccount}
+                />
               </Touchable>
             </Line>
           ) : (
@@ -336,7 +369,10 @@ export default function DelegationSummary({ navigation, route }: Props) {
               <Words>
                 <Trans i18nKey="delegation.from" />
               </Words>
-              <BakerSelection readOnly name={bakerName} />
+              <BakerSelection
+                readOnly
+                name={chosenValidator?.name ?? chosenValidator?.voteAccount}
+              />
             </Line>
           )}
 
