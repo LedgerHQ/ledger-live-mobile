@@ -383,6 +383,9 @@ export const NavigatorName = {
   PolkadotNominateFlow: "PolkadotNominateFlow",
   PolkadotSimpleOperationFlow: "PolkadotSimpleOperationFlow",
 
+  // Solana
+  SolanaDelegationFlow: "SolanaDelegationFlow",
+
   NotificationCenter: "NotificationCenter",
   Market: "Market",
 

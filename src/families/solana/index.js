@@ -1,4 +1,5 @@
 // @flow
 import * as SolanaEditMemo from "./ScreenEditMemo";
+import * as SolanaDelegationFlow from "./DelegationFlow";
 
-export { SolanaEditMemo };
+export { SolanaEditMemo, SolanaDelegationFlow };

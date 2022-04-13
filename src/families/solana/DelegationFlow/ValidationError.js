@@ -3,22 +3,23 @@ import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
-import { TrackScreen } from "../../../analytics";
 import ValidateError from "../../../components/ValidateError";
+import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-type RouteParams = {
-  accountId: string,
-  deviceId: string,
-  transaction: any,
-  error: Error,
-};
-
 type Props = {
   navigation: any,
   route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  parentId: string,
+  deviceId: string,
+  transaction: any,
+  error: Error,
 };
 
 export default function ValidationError({ navigation, route }: Props) {
@@ -35,14 +36,14 @@ export default function ValidationError({ navigation, route }: Props) {
     navigation.goBack();
   }, [navigation]);
 
-  const error = route.params.error;
+  const error = route.params?.error;
 
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen category="CosmosDelegation" name="ValidationError" />
+      <TrackScreen category="DelegationFlow" name="ValidationError" />
       <ValidateError
         error={error}
         onRetry={retry}

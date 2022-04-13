@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import type { Operation, Transaction } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
@@ -19,7 +19,7 @@ type Props = {
 type RouteParams = {
   accountId: string,
   deviceId: string,
-  transaction: any,
+  transaction: Transaction,
   result: Operation,
 };
 
@@ -43,18 +43,27 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     });
   }, [account, route.params, navigation]);
 
+  const transaction = route.params.transaction;
+  if (transaction.family !== "tezos") return null;
+
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="CosmosDelegation" name="ValidationSuccess" />
+      <TrackScreen category="SendFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
         title={
-          <Trans i18nKey="cosmos.delegation.flow.steps.verification.success.title" />
+          <Trans
+            i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
+          />
         }
         description={
-          <Trans i18nKey="cosmos.delegation.flow.steps.verification.success.text" />
+          <Trans
+            i18nKey={
+              "delegation.broadcastSuccessDescription." + transaction.mode
+            }
+          />
         }
       />
     </View>
@@ -64,5 +73,9 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  button: {
+    alignSelf: "stretch",
+    marginTop: 24,
   },
 });
