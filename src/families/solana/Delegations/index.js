@@ -110,6 +110,11 @@ function Delegations({ account }: Props) {
       //route: NavigatorName.SolanaDelegationFlow,
       route: NavigatorName.SolanaDelegationFlow,
       screen: ScreenName.DelegationStarted,
+      params: {
+        test: {
+          test: 1,
+        },
+      },
     });
   }, [onNavigate]);
 

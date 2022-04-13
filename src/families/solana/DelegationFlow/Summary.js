@@ -1,37 +1,41 @@
 /* @flow */
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { View, StyleSheet, Animated } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
-import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
-import invariant from "invariant";
-import Icon from "react-native-vector-icons/dist/Feather";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   getAccountCurrency,
   getAccountName,
   getAccountUnit,
-  shortAddressPreview,
 } from "@ledgerhq/live-common/lib/account";
-import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  SolanaStakeWithMeta,
+  TransactionModel,
+} from "@ledgerhq/live-common/lib/families/solana/types";
+import type { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
+import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../reducers/accounts";
-import { rgba } from "../../../colors";
-import { ScreenName } from "../../../const";
+import invariant from "invariant";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Trans } from "react-i18next";
+import { Animated, StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import Icon from "react-native-vector-icons/dist/Feather";
+import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
-import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
+import { rgba } from "../../../colors";
+import Alert from "../../../components/Alert";
 import Button from "../../../components/Button";
-import LText from "../../../components/LText";
 import Circle from "../../../components/Circle";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
-import Alert from "../../../components/Alert";
+import { ScreenName } from "../../../const";
+import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import DelegatingContainer from "../../tezos/DelegatingContainer";
 import ValidatorImage from "../shared/ValidatorImage";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 
 const forceInset = { bottom: "always" };
 
@@ -41,10 +45,20 @@ type Props = {
 };
 
 type RouteParams = {
-  mode?: "delegate" | "undelegate",
+  delegationAction: DelegationAction,
   accountId: string,
   parentId?: string,
 };
+
+type DelegationAction =
+  | {
+      kind: "new",
+    }
+  | {
+      kind: "change",
+      stakeWithMeta: SolanaStakeWithMeta,
+      stakeAction: StakeAction,
+    };
 
 const AccountBalanceTag = ({ account }: { account: AccountLike }) => {
   const unit = getAccountUnit(account);
@@ -135,13 +149,6 @@ const BakerSelection = ({
 export default function DelegationSummary({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  const baker = {
-    address: "baker addr",
-    name: "baker name",
-    logoURL: "bake logo url",
-    nominalYield: "baker yeld",
-    capacityStatus: "normal",
-  };
 
   invariant(account, "account must be defined");
 
@@ -153,45 +160,49 @@ export default function DelegationSummary({ navigation, route }: Props) {
     status,
     bridgePending,
     bridgeError,
-  } = useBridgeTransaction(() => ({
-    account,
-    parentAccount,
-    transaction: {
-      family: "solana",
-      model: {
-        kind: "stake.createAccount",
-        uiState: {
-          delegate: {
-            voteAccAddress: validators[0].voteAccount,
-          },
-        },
+  } = useBridgeTransaction(() => {
+    return {
+      account,
+      parentAccount,
+      transaction: {
+        family: "solana",
+        model: txModelByDelegationAction(
+          route.params.delegationAction,
+          validators[0],
+        ),
       },
-    },
-  }));
-
-  console.log("our tx is", transaction);
+    };
+  });
 
   invariant(transaction, "transaction must be defined");
   invariant(transaction.family === "solana", "transaction solana");
-  invariant(
-    transaction.model.kind === "stake.createAccount",
-    "transaction stake create account",
-  );
 
   const chosenValidator = useMemo(() => {
-    return validators.find(
-      v => v.voteAccount === transaction.model.uiState.delegate.voteAccAddress,
-    );
-  }, [validators, transaction.model.uiState.delegate.voteAccAddress]);
+    const delegationAction = route.params.delegationAction;
+    if (delegationAction.kind === "new") {
+      const { model } = transaction;
+      invariant(
+        model.kind === "stake.createAccount",
+        "must be stake.createAccount tx model",
+      );
+      return validators.find(
+        v => v.voteAccount === model.uiState.delegate.voteAccAddress,
+      );
+    }
+
+    const { stake, meta } = delegationAction.stakeWithMeta;
+
+    invariant(stake.delegation, "delegation must be defined");
+
+    return validators.find(v => v.voteAccount === stake.delegation.voteAccAddr);
+  }, [validators, transaction, route.params.delegationAction]);
 
   //invariant(chosenValidator, "validator must be defined");
 
   // make sure tx is in sync
   useEffect(() => {
-    console.log(transaction);
     //if (!transaction || !account) return;
     //invariant(transaction.family === "solana", "solana tx");
-
     // make sure the mode is in sync (an account changes can reset it)
     /*
     const patch: Object = {
@@ -307,7 +318,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
             </View>
           }
           right={
-            transaction.mode === "delegate" ? (
+            transaction.mode !== "delegate" ? (
               <Touchable
                 event="DelegationFlowSummaryChangeCircleBtn"
                 onPress={onChangeDelegator}
@@ -376,8 +387,8 @@ export default function DelegationSummary({ navigation, route }: Props) {
             </Line>
           )}
 
-          {baker && transaction.mode === "delegate" ? (
-            baker.capacityStatus === "full" ? null : (
+          {false && transaction.mode === "delegate" ? (
+            "test" === "full" ? null : (
               /*
               <Line>
                 <IconInfo size={16} color={colors.orange} />
@@ -393,7 +404,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
                   <Trans
                     i18nKey="delegation.yieldPerYear"
                     values={{
-                      yield: baker.nominalYield,
+                      yield: 1,
                     }}
                   />
                 </Words>
@@ -505,3 +516,59 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 });
+
+// TODO: export stake actions type from live-common (or better move them to types)
+type StakeAction = "deactivate" | "activate" | "withdraw" | "reactivate";
+
+function txModelByDelegationAction(
+  delegationAction: DelegationAction,
+  voteAccAddrForNewAction: ValidatorsAppValidator,
+): TransactionModel {
+  if (delegationAction.kind === "new") {
+    return {
+      kind: "stake.createAccount",
+      uiState: {
+        delegate: {
+          voteAccAddress: voteAccAddrForNewAction.voteAccount,
+        },
+      },
+    };
+  }
+
+  const {
+    stakeAction,
+    stakeWithMeta: { stake, meta },
+  } = delegationAction;
+
+  invariant(stake.delegation, "stake delegation must be defined");
+
+  const { stakeAccAddr, voteAccAddr } = stake;
+
+  switch (stakeAction) {
+    case "activate":
+    case "reactivate":
+      return {
+        kind: "stake.delegate",
+        uiState: {
+          stakeAccAddr,
+          voteAccAddr,
+        },
+      };
+    case "deactivate":
+      return {
+        kind: "stake.undelegate",
+        uiState: {
+          stakeAccAddr,
+        },
+      };
+    case "withdraw":
+      return {
+        kind: "stake.withdraw",
+        uiState: {
+          stakeAccAddr,
+        },
+      };
+    default:
+      assertUnreachable(stakeAction);
+  }
+}

@@ -10,17 +10,19 @@ type Props = {
   validator?: ?ValidatorsAppValidator,
 };
 
-const ValidatorImage = ({ validator, size = 64 }: Props) => (
-  <Circle crop size={size}>
-    <Image
-      style={{ width: size, height: size }}
-      source={
-        validator && validator.avatarUrl
-          ? { uri: validator.avatarUrl }
-          : require("../../tezos/custom.png")
-      }
-    />
-  </Circle>
-);
+const ValidatorImage = ({ validator, size = 64 }: Props) => {
+  return (
+    <Circle crop size={size}>
+      <Image
+        style={{ width: size, height: size }}
+        source={
+          validator && validator.avatarUrl
+            ? { uri: validator.avatarUrl }
+            : require("../../tezos/custom.png")
+        }
+      />
+    </Circle>
+  );
+};
 
 export default ValidatorImage;
