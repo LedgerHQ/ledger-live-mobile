@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import { WebView } from "react-native-webview";
+import InAppReview from 'react-native-in-app-review';
 import BottomModal from "./BottomModal";
 
 const RatingsModal = () => {
@@ -10,7 +11,8 @@ const RatingsModal = () => {
   }, [setIsOpened]);
 
   const onRate = useCallback(() => {
-    console.log("Rating");
+    const isRatingAvailable = InAppReview.isAvailable();
+    console.log("Rating", isRatingAvailable);
   }, []);
 
   console.log("Hello Ratings Modal");
