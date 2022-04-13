@@ -120,20 +120,25 @@ export default function MarketDetail({
     accountsByCryptoCurrencyScreenSelector(internalCurrency),
   );
 
-  const availableOnBuy = useMemo(() => {
+  const [availableOnBuy, availableOnSell] = useMemo(() => {
     if (!rampCatalog.value || !currency) {
-      return false;
+      return [false, false];
     }
 
     const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
       tickers: [currency.ticker],
     });
+    const offRampProviders = filterRampCatalogEntries(rampCatalog.value.offRamp, {
+      tickers: [currency.ticker],
+    });
 
-    return onRampProviders.length > 0;
-  }, [rampCatalog.value, currency, internalCurrency]);
+    return [onRampProviders.length > 0, offRampProviders.length > 0];
+  }, [rampCatalog.value, currency]);
+
   const swapCurrencies = useSelector(state =>
     swapSelectableCurrenciesSelector(state),
   );
+
   const availableOnSwap =
     internalCurrency &&
     allAccounts?.length > 0 &&
@@ -159,6 +164,15 @@ export default function MarketDetail({
   const navigateToBuy = useCallback(() => {
     navigation.navigate(NavigatorName.Exchange, {
       screen: ScreenName.ExchangeBuy,
+      params: {
+        defaultTicker: currency && currency.ticker && currency.ticker.toUpperCase()
+      },
+    });
+  }, [navigation, currency]);
+
+  const navigateToSell = useCallback(() => {
+    navigation.navigate(NavigatorName.Exchange, {
+      screen: ScreenName.ExchangeSell,
       params: {
         defaultTicker: currency && currency.ticker && currency.ticker.toUpperCase()
       },
@@ -315,6 +329,19 @@ export default function MarketDetail({
                 eventProperties={{ currencyName: name }}
               >
                 {t("account.buy")}
+              </Button>
+            )}
+            {availableOnSell && (
+              <Button
+                ml={16}
+                flex={1}
+                type="color"
+                onPress={navigateToSell}
+                iconName="Coins"
+                event={"Sell Crypto Page Market Coin"}
+                eventProperties={{ currencyName: name }}
+              >
+                {t("account.sell")}
               </Button>
             )}
             {availableOnSwap && (
