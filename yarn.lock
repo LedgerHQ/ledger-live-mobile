@@ -14242,6 +14242,11 @@ react-native-gradle-plugin@^0.0.3:
   dependencies:
     react-native-codegen "*"
 
+react-native-in-app-review@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-in-app-review/-/react-native-in-app-review-3.3.3.tgz#794c548d92eef4b40835302fab1a74367167f4b8"
+  integrity sha512-f+usHBLApjexTSdRCRpUF0Yd8rWDdpSf16VsUkn+v9YZKJN185w0Srk4ZvLrVF/LBI/hHFtwjlAKzw3XFJ0FDA==
+
 react-native-keychain@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-7.0.0.tgz#11fd559fe86ae89f934b8c75ae228247deed5494"
@@ -14410,6 +14415,11 @@ react-native-text-input-mask@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-3.1.4.tgz#9b09d97a910ce8c24024d6187256b07c73e173ac"
   integrity sha512-XhTPL1/Pv0kyuH8TMJGaxfnq5su9e+4G2PLngiismZ4xbP8+W/1ZEH4KQJQV+QkE2I5Oi+lPJXB2E47s60/OBA==
+
+react-native-typeform-embed@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-typeform-embed/-/react-native-typeform-embed-1.0.4.tgz#454ec137cc4ad3cb74c4a41dc2ba52364d7e4529"
+  integrity sha512-fPOvv7PZ/szL2E2+qX8wMVf5/Q6nN+s8rRWly5ewXBcrboG9CG7XcXtw9BE0ciuie8Yg5k07jmGFI1Z1hq2EkA==
 
 react-native-udp@^4.1.2:
   version "4.1.3"

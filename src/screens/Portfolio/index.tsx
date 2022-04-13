@@ -35,6 +35,7 @@ import Header from "./Header";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
+import RatingsModal from "../../components/RatingsModal";
 import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
@@ -285,6 +286,7 @@ function PortfolioScreen({ navigation }: Props) {
     <>
       <FirmwareUpdateBanner />
       <ContentContainer>
+        <RatingsModal />
         <RequireTerms />
 
         <TrackScreen
