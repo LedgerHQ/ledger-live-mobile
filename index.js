@@ -22,8 +22,16 @@ import { getEnabled } from "./src/components/HookSentry";
 import logReport from "./src/log-report";
 import pkg from "./package.json";
 
-const blacklistErrorName = ["NetworkDown"];
-const blacklistErrorDescription = [/Device .* was disconnected/];
+const blacklistErrorName = [
+  "NetworkDown",
+  "Network Error",
+  "WebsocketConnectionError",
+  "DisconnectedDeviceDuringOperation",
+  "BleError",
+];
+const blacklistErrorDescription = [
+  "Transaction signing request was rejected by the user",
+];
 
 if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
   Sentry.init({
