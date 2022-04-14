@@ -37,7 +37,7 @@ if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
   Sentry.init({
     dsn: Config.SENTRY_DSN,
     environment: Config.SENTRY_ENVIRONMENT,
-    release: `ledger-live-mobile@${pkg.version}`,
+    release: `com.ledger.live@${pkg.version}+${VersionNumber.buildVersion}`,
     dist: String(VersionNumber.buildVersion),
     sampleRate: 0.05,
     tracesSampleRate: 0.001,
