@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-// import { device } from "detox";
+import { device } from "detox";
 import * as bridge from "./bridge/server";
 
 // eslint-disable-next-line no-undef
@@ -13,13 +13,6 @@ beforeAll(async () => {
 
   console.log("==============> SETTING UP DEMO MODE");
   setupDemoModeForScreenshots();
-
-  // return device.launchApp({
-  //   delete: true,
-  //   launchArgs: {
-  //     detoxURLBlacklistRegex: ".*://explorers.api.live.ledger.com/.*",
-  //   },
-  // });
 });
 
 // eslint-disable-next-line no-undef
@@ -34,7 +27,9 @@ function setupDemoModeForScreenshots() {
     execSync(
       'xcrun simctl status_bar "iPhone 11 Pro" override --time "12:00" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularMode active --cellularBars 4',
     );
-  } else {
+  }
+
+  if (device.getPlatform() === "android") {
     // enter demo mode
     execSync("adb shell settings put global sysui_demo_allowed 1");
     // display time 12:00
