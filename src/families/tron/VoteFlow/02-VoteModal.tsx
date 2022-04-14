@@ -13,10 +13,7 @@ import Check from "../../../icons/Check";
 import getFontStyle from "../../../components/LText/getFontStyle";
 import KeyboardView from "../../../components/KeyboardView";
 
-import getWindowDimensions from "../../../logic/getWindowDimensions";
 import Button from "../../../components/wrappedUi/Button";
-
-const { height } = getWindowDimensions();
 
 type Props = {
   vote: Vote;
@@ -94,8 +91,8 @@ const VoteModal = ({
       title={name || address}
       subtitle={t("vote.castVotes.voteFor")}
     >
-      <SafeAreaView style={{ height: "100%" }}>
-        <KeyboardView>
+      <View style={{ height: "100%" }}>
+        <KeyboardView style={{ flex: 1 }} behavior="padding">
           <View style={styles.wrapper}>
             <TextInput
               ref={inputRef}
@@ -113,7 +110,7 @@ const VoteModal = ({
               placeholder="0"
             />
           </View>
-          <Flex flexDirection={"row"} justifyContent={"flex-end"} mb={6}>
+          <Flex flexDirection={"row"} justifyContent={"flex-end"}>
             <Link onPress={remove} Icon={TrashMedium}>
               {t("vote.castVotes.removeVotes")}
             </Link>
@@ -198,71 +195,15 @@ const VoteModal = ({
             </Button>
           </View>
         </KeyboardView>
-      </SafeAreaView>
+      </View>
     </BottomDrawer>
   );
 };
 
 const styles = StyleSheet.create({
-  rootKeyboard: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    height,
-    flexShrink: 1,
-  },
-  topButton: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  topContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    flexBasis: 50,
-    flexShrink: 0,
-  },
-  topLabel: {
-    flex: 1,
-    paddingTop: 16,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  topSubTitle: {
-    fontSize: 13,
-  },
-  topTitle: {
-    fontSize: 15,
-  },
   bottomWrapper: {
-    alignSelf: "stretch",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    paddingHorizontal: 16,
+    padding: 16,
     borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  button: {
-    flex: 1,
-    marginHorizontal: 8,
-  },
-  buttonRight: {
-    marginLeft: 8,
-  },
-  continueWrapper: {
-    alignSelf: "stretch",
-    alignItems: "stretch",
-    justifyContent: "flex-end",
-  },
-  container: {
-    flex: 1,
-    paddingTop: 16,
-    paddingHorizontal: 16,
-    alignItems: "stretch",
   },
   row: {
     flexDirection: "row",
@@ -295,20 +236,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexGrow: 1,
-    flexShrink: 1,
   },
   inputStyle: {
     ...getFontStyle(),
     padding: 30,
     fontSize: 32,
   },
-  maxLabel: {
-    marginRight: 4,
+  availableSuccess: {
+    marginLeft: 10,
   },
-  switch: {
-    opacity: 0.99,
-  },
-  availableSuccess: { marginLeft: 10 },
 });
 
 export default memo<Props>(VoteModal);
