@@ -107,12 +107,11 @@ function Delegations({ account }: Props) {
 
   const onDelegate = useCallback(() => {
     onNavigate({
-      //route: NavigatorName.SolanaDelegationFlow,
       route: NavigatorName.SolanaDelegationFlow,
       screen: ScreenName.DelegationStarted,
       params: {
-        test: {
-          test: 1,
+        delegationAction: {
+          kind: "new",
         },
       },
     });

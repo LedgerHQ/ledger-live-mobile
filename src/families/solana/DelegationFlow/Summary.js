@@ -36,6 +36,7 @@ import { useTransactionChangeFromNavigation } from "../../../logic/screenTransac
 import { accountScreenSelector } from "../../../reducers/accounts";
 import DelegatingContainer from "../../tezos/DelegatingContainer";
 import ValidatorImage from "../shared/ValidatorImage";
+import { BigNumber } from "bignumber.js";
 
 const forceInset = { bottom: "always" };
 
@@ -45,7 +46,7 @@ type Props = {
 };
 
 type RouteParams = {
-  delegationAction: DelegationAction,
+  delegationAction?: DelegationAction,
   accountId: string,
   parentId?: string,
 };
@@ -147,6 +148,10 @@ const BakerSelection = ({
 };
 
 export default function DelegationSummary({ navigation, route }: Props) {
+  const { delegationAction } = route.params;
+
+  invariant(delegationAction, "delegation action must be defined");
+
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
@@ -166,19 +171,19 @@ export default function DelegationSummary({ navigation, route }: Props) {
       parentAccount,
       transaction: {
         family: "solana",
-        model: txModelByDelegationAction(
-          route.params.delegationAction,
-          validators[0],
-        ),
+        // TODO: fix amount
+        amount: new BigNumber(1),
+        model: txModelByDelegationAction(delegationAction, validators[0]),
       },
     };
   });
+
+  console.log(bridgeError);
 
   invariant(transaction, "transaction must be defined");
   invariant(transaction.family === "solana", "transaction solana");
 
   const chosenValidator = useMemo(() => {
-    const delegationAction = route.params.delegationAction;
     if (delegationAction.kind === "new") {
       const { model } = transaction;
       invariant(
@@ -195,7 +200,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
     invariant(stake.delegation, "delegation must be defined");
 
     return validators.find(v => v.voteAccount === stake.delegation.voteAccAddr);
-  }, [validators, transaction, route.params.delegationAction]);
+  }, [validators, transaction, delegationAction]);
 
   //invariant(chosenValidator, "validator must be defined");
 
@@ -308,7 +313,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
       <View style={styles.body}>
         <DelegatingContainer
-          undelegation={transaction.mode === "undelegate"}
+          undelegation={undelegation(delegationAction)}
           left={
             <View style={styles.delegatingAccount}>
               <Circle size={64} bg={rgba(color, 0.2)}>
@@ -318,7 +323,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
             </View>
           }
           right={
-            transaction.mode !== "delegate" ? (
+            supportValidatorChange(delegationAction) ? (
               <Touchable
                 event="DelegationFlowSummaryChangeCircleBtn"
                 onPress={onChangeDelegator}
@@ -348,69 +353,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
         />
 
         <View style={styles.summary}>
-          <Line>
-            <Words>
-              {transaction.mode === "delegate" ? (
-                <Trans i18nKey="delegation.iDelegateMy" />
-              ) : (
-                <Trans i18nKey="delegation.undelegateMy" />
-              )}
-            </Words>
-            <Words highlighted style={styles.accountName}>
-              {accountName}
-            </Words>
-          </Line>
-
-          {transaction.mode === "delegate" ? (
-            <Line>
-              <Words>
-                <Trans i18nKey="delegation.to" />
-              </Words>
-              <Touchable
-                event="DelegationFlowSummaryChangeBtn"
-                onPress={onChangeDelegator}
-              >
-                <BakerSelection
-                  name={chosenValidator?.name ?? chosenValidator?.voteAccount}
-                />
-              </Touchable>
-            </Line>
-          ) : (
-            <Line>
-              <Words>
-                <Trans i18nKey="delegation.from" />
-              </Words>
-              <BakerSelection
-                readOnly
-                name={chosenValidator?.name ?? chosenValidator?.voteAccount}
-              />
-            </Line>
-          )}
-
-          {false && transaction.mode === "delegate" ? (
-            "test" === "full" ? null : (
-              /*
-              <Line>
-                <IconInfo size={16} color={colors.orange} />
-                <Words style={{ marginLeft: 8, color: colors.orange }}>
-                  <Trans i18nKey="delegation.overdelegated" />
-                </Words>
-              </Line>
-              */ <Line>
-                <Words>
-                  <Trans i18nKey="delegation.forAnEstYield" />
-                </Words>
-                <Words highlighted>
-                  <Trans
-                    i18nKey="delegation.yieldPerYear"
-                    values={{
-                      yield: 1,
-                    }}
-                  />
-                </Words>
-              </Line>
-            )
-          ) : null}
+          <SummaryWords delegationAction={delegationAction} account={account} />
         </View>
         {transaction.mode === "undelegate" ? (
           <Alert type="help">
@@ -571,4 +514,55 @@ function txModelByDelegationAction(
     default:
       assertUnreachable(stakeAction);
   }
+}
+
+function supportValidatorChange(delegationAction: DelegationAction) {
+  return (
+    delegationAction.kind === "new" ||
+    delegationAction.stakeAction === "activate"
+  );
+}
+
+function undelegation(delegationAction: DelegationAction) {
+  if (delegationAction.kind === "new") {
+    return false;
+  }
+  const { stakeAction } = delegationAction;
+  return stakeAction === "deactivate" || stakeAction === "withdraw";
+}
+
+function SummaryWords({
+  delegationAction,
+  account,
+}: {
+  delegationAction: DelegationAction,
+  account: AccountLike,
+}) {
+  /*
+  const accountName = getAccountName(account);
+  if (delegationAction.kind === "new") {
+    return (
+      <>
+        <Line>
+          <Words>
+            delegate from
+          </Words>
+          <Words highlighted style={styles.accountName}>
+            {accountName}
+          </Words>
+        </Line>
+            <Line>
+              <Words>
+                <Trans i18nKey="delegation.from" />
+              </Words>
+              <BakerSelection
+                readOnly
+                name={chosenValidator?.name ?? chosenValidator?.voteAccount}
+              />
+            </Line>
+      </>
+    );
+  }
+    */
+  return <LText>Some wording here</LText>;
 }
