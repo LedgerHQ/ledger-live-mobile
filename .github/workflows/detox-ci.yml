@@ -146,9 +146,9 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 30
           force-avd-creation: false
-          avd-name: Nexus_5_API_30
+          avd-name: Nexus_6_API_30
           emulator-options: -verbose -no-boot-anim -noaudio
           ram-size: 2048
           # disable-animations: true
@@ -166,10 +166,11 @@ jobs:
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 30
           force-avd-creation: false
-          avd-name: Nexus_5_API_30
+          avd-name: Nexus_6_API_30
           emulator-options: -verbose -no-snapshot-save -no-boot-anim -noaudio
+          ram-size: 2048
           # disable-animations: true
           # ./gradlew connectedCheck
           script: |

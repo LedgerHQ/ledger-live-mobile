@@ -11,8 +11,10 @@ const CORRECT_PASSWORD = "passWORD$123!";
 describe("Password Lock Screen", () => {
   beforeAll(async () => {
     console.log("==============> STARTING PASSWORD DEVICE LAUNCH");
-    await device.launchApp({ newInstance: false });
+    // await device.launchApp({ newInstance: false });
     // await device.reloadReactNative();
+    console.log("==============> LAUNCH APP BEFORE ALL");
+    await device.launchApp({ newInstance: true });
   });
 
   it("should be able to enter the correct password", async () => {
