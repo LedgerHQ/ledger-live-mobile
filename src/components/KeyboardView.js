@@ -27,7 +27,7 @@ const KeyboardView = React.memo<Props>(
     let keyboardVerticalOffset = isExperimental ? ExperimentalHeaderHeight : 0;
     if (Platform.OS === "ios") {
       keyboardVerticalOffset += DeviceInfo.isIPhoneX_deprecated ? 88 : 64;
-      behaviorParam = behavior || "padding";
+      behaviorParam = behavior || "height";
     }
 
     return (
