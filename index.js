@@ -31,6 +31,7 @@ if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
     environment: Config.SENTRY_ENVIRONMENT,
     release: `ledger-live-mobile@${pkg.version}`,
     dist: String(VersionNumber.buildVersion),
+    sampleRate: 0.05,
     tracesSampleRate: 0.001,
     integrations: [
       new Sentry.ReactNativeTracing({
