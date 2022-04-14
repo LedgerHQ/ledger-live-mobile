@@ -1,48 +1,42 @@
 /* @flow */
 
-import invariant from "invariant";
-import React, { useState, useCallback, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Keyboard,
-  Platform,
-  Linking,
-} from "react-native";
-import { useSelector } from "react-redux";
-import SafeAreaView from "react-native-safe-area-view";
-import { useTranslation, Trans } from "react-i18next";
-import Icon from "react-native-vector-icons/dist/Feather";
-import type {
-  AccountLike,
-  Account,
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
 import { RecipientRequired } from "@ledgerhq/errors";
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
+import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { Baker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import { useBakers } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../reducers/accounts";
+import invariant from "invariant";
+import React, { useCallback, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { FlatList, Linking, StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import Icon from "react-native-vector-icons/dist/Feather";
+import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
-import { ScreenName } from "../../../const";
+import ExternalLink from "../../../components/ExternalLink";
 import InfoModal from "../../../components/InfoModal";
 import LText, { getFontStyle } from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
-import Button from "../../../components/Button";
-import TextInput from "../../../components/TextInput";
-import TranslatedError from "../../../components/TranslatedError";
-import ExternalLink from "../../../components/ExternalLink";
+import { ScreenName } from "../../../const";
 import Info from "../../../icons/Info";
-import BakerImage from "../../tezos/BakerImage";
+import { accountScreenSelector } from "../../../reducers/accounts";
+import ValidatorImage from "../shared/ValidatorImage";
+import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 
 const forceInset = { bottom: "always" };
 
-const keyExtractor = baker => baker.address;
+const keyExtractor = (v: ValidatorsAppValidator) => v.voteAccount;
 
 const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
   const { colors } = useTheme();
@@ -63,7 +57,7 @@ const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
           numberOfLines={1}
           semiBold
         >
-          Est. Yield
+          Total Stake
         </LText>
         <Touchable
           style={styles.bakerHeadInfo}
@@ -76,61 +70,58 @@ const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
     </View>
   );
 };
-const BakerRow = ({
+const ValidatorRow = ({
   onPress,
-  baker,
+  validator,
+  account,
 }: {
-  onPress: Baker => void,
-  baker: Baker,
+  onPress: (v: ValidatorsAppValidator) => void,
+  validator: ValidatorsAppValidator,
+  account: AccountLike,
 }) => {
   const { colors } = useTheme();
+  /*
   const onPressT = useCallback(() => {
     onPress(baker);
   }, [baker, onPress]);
+  */
 
   return (
     <Touchable
       event="DelegationFlowChoseBaker"
-      eventProperties={{
-        bakerName: baker.name,
-      }}
-      onPress={onPressT}
+      eventProperties={{ validator }}
+      onPress={onPress}
     >
       <View style={styles.baker}>
-        <BakerImage size={32} baker={baker} />
-        {baker.capacityStatus === "full" ? (
-          <View
-            style={[
-              styles.overdelegatedIndicator,
-              { backgroundColor: colors.orange, borderColor: colors.white },
-            ]}
-          />
-        ) : null}
+        <ValidatorImage size={32} validator={validator} />
         <View style={styles.bakerBody}>
           <LText numberOfLines={1} semiBold style={styles.bakerName}>
-            {baker.name}
+            {validator.name || validator.voteAccount}
           </LText>
-          {baker.capacityStatus === "full" ? (
+          {true ? (
             <LText
               semiBold
               numberOfLines={1}
               style={styles.overdelegated}
-              color="orange"
+              //color="orange"
             >
-              <Trans i18nKey="delegation.overdelegated" />
+              commission {validator.commission} %
             </LText>
           ) : null}
         </View>
         <LText
           semiBold
           numberOfLines={1}
-          style={[
-            styles.bakerYield,
-            baker.capacityStatus === "full" ? styles.bakerYieldFull : null,
-          ]}
+          style={[styles.bakerYield]}
           color="smoke"
         >
-          {baker.nominalYield}
+          <LText semiBold numberOfLines={1}>
+            <CurrencyUnitValue
+              showCode
+              unit={getAccountUnit(account)}
+              value={validator.activeStake}
+            />
+          </LText>
         </LText>
       </View>
     </Touchable>
@@ -164,37 +155,9 @@ export default function SelectValidator({ navigation, route }: Props) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [showInfos, setShowInfos] = useState(false);
 
-  if (Platform.OS === "ios") {
-    const keyboardDidShow = event => {
-      const { height } = event.endCoordinates;
+  invariant(account, "account must be defined");
 
-      setKeyboardHeight(height);
-    };
-
-    const keyboardDidHide = () => {
-      setKeyboardHeight(0);
-    };
-
-    // The platform changing during runtime seems... unlikely
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const keyboardDidShowListener = Keyboard.addListener(
-        "keyboardDidShow",
-        keyboardDidShow,
-      );
-      const keyboardDidHideListener = Keyboard.addListener(
-        "keyboardDidHide",
-        keyboardDidHide,
-      );
-
-      return () => {
-        keyboardDidShowListener.remove();
-        keyboardDidHideListener.remove();
-      };
-    });
-  }
-
-  invariant(account, "account is undefined");
+  const validators = useLedgerFirstShuffledValidators(account.currency);
 
   const {
     transaction,
@@ -207,9 +170,7 @@ export default function SelectValidator({ navigation, route }: Props) {
     return {
       account,
       parentAccount,
-      transaction: bridge.updateTransaction(route.params?.transaction, {
-        recipient: "",
-      }),
+      transaction: route.params.transaction,
     };
   });
 
@@ -221,16 +182,6 @@ export default function SelectValidator({ navigation, route }: Props) {
     error = null;
   }
 
-  const onChangeText = useCallback(
-    recipient => {
-      const bridge = getAccountBridge(account, parentAccount);
-      setTransaction(bridge.updateTransaction(transaction, { recipient }));
-    },
-    [account, parentAccount, setTransaction, transaction],
-  );
-
-  const clear = useCallback(() => onChangeText(""), [onChangeText]);
-
   const continueCustom = useCallback(() => {
     setEditingCustom(false);
     navigation.navigate(ScreenName.DelegationSummary, {
@@ -238,14 +189,6 @@ export default function SelectValidator({ navigation, route }: Props) {
       transaction,
     });
   }, [navigation, transaction, route.params]);
-
-  const enableCustomValidator = useCallback(() => {
-    setEditingCustom(true);
-  }, []);
-
-  const disableCustomValidator = useCallback(() => {
-    setEditingCustom(false);
-  }, []);
 
   const displayInfos = useCallback(() => {
     setShowInfos(true);
@@ -270,7 +213,9 @@ export default function SelectValidator({ navigation, route }: Props) {
   );
 
   const renderItem = useCallback(
-    ({ item }) => <BakerRow baker={item} onPress={onItemPress} />,
+    ({ item }: { item: ValidatorsAppValidator }) => (
+      <ValidatorRow account={account} validator={item} onPress={onItemPress} />
+    ),
     [onItemPress],
   );
 
@@ -286,49 +231,10 @@ export default function SelectValidator({ navigation, route }: Props) {
       </View>
       <FlatList
         contentContainerStyle={styles.list}
-        data={bakers}
+        data={validators}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
-
-      <InfoModal
-        withCancel
-        Icon={ModalIcon}
-        onContinue={continueCustom}
-        onClose={disableCustomValidator}
-        isOpened={editingCustom}
-        id="SelectValidatorCustom"
-        title="Custom validator"
-        desc="Please enter the address of the custom validator to delegate your account to."
-        confirmLabel="Confirm validator"
-        confirmProps={{
-          disabled: bridgePending || !!status.errors.recipient,
-          pending: bridgePending,
-        }}
-        style={keyboardHeight ? { marginBottom: keyboardHeight } : undefined}
-        containerStyle={styles.infoModalContainerStyle}
-      >
-        <TextInput
-          placeholder="Enter validator address"
-          placeholderTextColor={colors.fog}
-          style={[
-            styles.addressInput,
-            error ? { color: colors.alert } : { color: colors.darkBlue },
-          ]}
-          onChangeText={onChangeText}
-          onInputCleared={clear}
-          value={transaction.recipient}
-          blurOnSubmit
-          autoCapitalize="none"
-          clearButtonMode="always"
-        />
-
-        {error && (
-          <LText style={[styles.warningBox]} color="alert">
-            <TranslatedError error={error} />
-          </LText>
-        )}
-      </InfoModal>
 
       <InfoModal
         id="SelectValidatorInfos"
@@ -347,15 +253,6 @@ export default function SelectValidator({ navigation, route }: Props) {
           />
         </View>
       </InfoModal>
-
-      <View style={styles.footer}>
-        <Button
-          type="secondary"
-          title="+ Add custom validator"
-          event="DelegationFlowAddCustom"
-          onPress={enableCustomValidator}
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -446,3 +343,23 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
 });
+
+const Amount = ({
+  account,
+  value,
+}: {
+  account: AccountLike,
+  value: number,
+}) => {
+  const unit = getAccountUnit(account);
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[styles.accountBalanceTag, { backgroundColor: colors.lightFog }]}
+    >
+      <LText semiBold numberOfLines={1}>
+        <CurrencyUnitValue showCode unit={unit} value={account.balance} />
+      </LText>
+    </View>
+  );
+};

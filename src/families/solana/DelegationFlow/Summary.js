@@ -11,6 +11,7 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import type {
   SolanaStakeWithMeta,
   TransactionModel,
+  Transaction,
 } from "@ledgerhq/live-common/lib/families/solana/types";
 import type { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
@@ -47,6 +48,7 @@ type Props = {
 
 type RouteParams = {
   delegationAction?: DelegationAction,
+  transaction?: Transaction,
   accountId: string,
   parentId?: string,
 };
@@ -148,7 +150,7 @@ const BakerSelection = ({
 };
 
 export default function DelegationSummary({ navigation, route }: Props) {
-  const { delegationAction } = route.params;
+  const { delegationAction, transaction: routeTransaction } = route.params;
 
   invariant(delegationAction, "delegation action must be defined");
 
@@ -169,7 +171,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
     return {
       account,
       parentAccount,
-      transaction: {
+      transaction: routeTransaction ?? {
         family: "solana",
         // TODO: fix amount
         amount: new BigNumber(1),
@@ -177,8 +179,6 @@ export default function DelegationSummary({ navigation, route }: Props) {
       },
     };
   });
-
-  console.log(bridgeError);
 
   invariant(transaction, "transaction must be defined");
   invariant(transaction.family === "solana", "transaction solana");
