@@ -29,16 +29,26 @@ export async function loadConfig(
     acceptTerms();
   }
 
+  console.log("==========> starting file sync");
   const f = fs.readFileSync(path.resolve("e2e", "setups", `${fileName}.json`));
   // $FlowFixMe
+  console.log("==========> parsing JSON");
   const { data } = JSON.parse(f);
 
+  console.log("==========> post message");
   postMessage({ type: "importSettngs", payload: data.settings });
+
+  console.log("==========> navigating to portfolio");
   navigate(NavigatorName.Base);
 
-  if (data.accounts.length) {
-    postMessage({ type: "importAccounts", payload: data.accounts });
-    // await $waitFor("PortfolioAccountsList", -1, 10000);
+  console.log("==========> importing accounts");
+  try {
+    if (data.accounts.length) {
+      postMessage({ type: "importAccounts", payload: data.accounts });
+      // await $waitFor("PortfolioAccountsList", -1, 10000);
+    }
+  } catch (error) {
+    console.error({ error });
   }
 }
 
@@ -95,9 +105,9 @@ function acceptTerms() {
   postMessage({ type: "acceptTerms", payload: null });
 }
 
-function postMessage(message: E2EBridgeMessage) {
+export function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
-    log(`sent the following message: ${{ message }}`);
+    // log(`sent the following message: ${JSON.stringify(message)}`);
   }
 }

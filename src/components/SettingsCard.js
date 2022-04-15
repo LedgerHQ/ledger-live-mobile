@@ -12,14 +12,22 @@ type Props = {
   desc: string,
   icon: any,
   onClick: Function,
+  settingsCardTestId?: string,
 };
-export default function SettingsCard({ title, desc, icon, onClick }: Props) {
+export default function SettingsCard({
+  title,
+  desc,
+  icon,
+  onClick,
+  settingsCardTestId,
+}: Props) {
   const { colors } = useTheme();
 
   return (
     <Card
       onPress={onClick}
       style={[styles.cardStyle, { backgroundColor: colors.card }]}
+      cardTestId={settingsCardTestId}
     >
       <Circle bg={colors.lightLive} size={32}>
         {icon}
