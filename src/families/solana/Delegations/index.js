@@ -463,7 +463,7 @@ function Delegations({ account }: Props) {
           />
           {stakesWithMeta.map((d, i) => (
             <View
-              key={d.validatorAddress}
+              key={d.stake.stakeAccAddr}
               style={[
                 styles.delegationsWrapper,
                 { backgroundColor: colors.card },
