@@ -144,7 +144,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          force-avd-creation: false
+          # force-avd-creation: false
           avd-name: Nexus_6_API_30
           emulator-options: -verbose -no-boot-anim -noaudio
           ram-size: 2048
@@ -158,25 +158,25 @@ jobs:
          # curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
          # adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
 
-      - name: Run Android tests (with Test Butler)
-        if: steps.avd-cache.outputs.cache-hit == 'true'
-        timeout-minutes: 30
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          force-avd-creation: false
-          avd-name: Nexus_6_API_30
-          emulator-options: -verbose -no-snapshot-save -no-boot-anim -noaudio
-          ram-size: 2048
-          # disable-animations: true
-          # ./gradlew connectedCheck
-          script: |
-            adb logcat -c
-            adb logcat *:E &
-            mkdir ./temp
-            curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
-            adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
-            yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
+      # - name: Run Android tests (with Test Butler)
+      #   if: steps.avd-cache.outputs.cache-hit == 'true'
+      #   timeout-minutes: 30
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     api-level: 30
+      #     # force-avd-creation: false
+      #     avd-name: Nexus_6_API_30
+      #     emulator-options: -verbose -no-snapshot-save -no-boot-anim -noaudio
+      #     ram-size: 2048
+      #     # disable-animations: true
+      #     # ./gradlew connectedCheck
+      #     script: |
+      #       adb logcat -c
+      #       adb logcat *:E &
+      #       mkdir ./temp
+      #       curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
+      #       adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
+      #       yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
 #  --retries 1 --reuse
 
       - name: Upload test artifacts

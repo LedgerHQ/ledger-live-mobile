@@ -108,6 +108,6 @@ function acceptTerms() {
 export function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
-    // log(`sent the following message: ${JSON.stringify(message)}`);
+    log(`sent the following message: ${JSON.stringify(message)}`);
   }
 }
