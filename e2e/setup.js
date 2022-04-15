@@ -1,8 +1,6 @@
 import { execSync } from "child_process";
-import { device } from "detox";
 import * as bridge from "./bridge/server";
 
-// eslint-disable-next-line no-undef
 beforeAll(async () => {
   // console.log("==============> LAUNCH APP BEFORE ALL");
   // await device.launchApp({ newInstance: true });
@@ -15,8 +13,7 @@ beforeAll(async () => {
   setupDemoModeForScreenshots();
 });
 
-// eslint-disable-next-line no-undef
-afterAll(async () => {
+afterAll(() => {
   console.log("==============> CLOSING BRIDGE");
   bridge.close();
 });

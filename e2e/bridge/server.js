@@ -3,12 +3,11 @@ import { Server } from "ws";
 import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "./client";
-import { waitForElement } from "../helpers";
 import { NavigatorName } from "../../src/const";
 
 let wss: Server;
 
-export function init(port?: number = 8099) {
+export async function init(port?: number = 8099) {
   wss = new Server({ port });
   log(`Start listening on localhost:${port}`);
 
@@ -40,10 +39,7 @@ export async function loadConfig(
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
     // await $waitFor("PortfolioAccountsList", -1, 10000);
-    return;
   }
-
-  await waitForElement("PortfolioEmptyAccount");
 }
 
 function navigate(name: string) {
@@ -102,5 +98,6 @@ function acceptTerms() {
 function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
+    log(`sent the following message: ${{ message }}`);
   }
 }

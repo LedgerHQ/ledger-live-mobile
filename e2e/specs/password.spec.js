@@ -1,4 +1,3 @@
-import { device } from "detox";
 import { loadConfig } from "../bridge/server";
 import PortfolioPage from "../models/portfolioPage";
 import SettingsPage from "../models/settings/settingsPage";
@@ -19,7 +18,11 @@ describe("Password Lock Screen", () => {
 
   it("should be able to enter the correct password", async () => {
     console.log("==============> STARTING PASSWORD TEST");
-    await loadConfig("1AccountBTC1AccountETH", true);
+    try {
+      await loadConfig("1AccountBTC1AccountETH", true);
+    } catch (error) {
+      console.error(error);
+    }
 
     await PortfolioPage.waitForPageToBeVisible();
     await PortfolioPage.navigateToSettings();

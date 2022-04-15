@@ -1,4 +1,3 @@
-import { device } from "detox";
 import OnboardingSteps from "../models/onboarding/onboardingSteps";
 import PortfolioPage from "../models/portfolioPage";
 // import { expectBitmapsToBeEqual } from "../helpers";
