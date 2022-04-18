@@ -38,7 +38,7 @@ import ConfirmationModal from "../../../components/ConfirmationModal";
 import Circle from "../../../components/Circle";
 import Info from "../../../icons/Info";
 import { urls } from "../../../config/urls";
-import { discreetModeSelector } from "../../../reducers/settings";
+import { localeSelector } from "../../../reducers/settings";
 
 const SEARCH_KEYS = [
   "account.name",
@@ -56,9 +56,9 @@ const keyExtractor = item => item.account.id;
 
 function LendingEnableSelectAccount({ route, navigation }: Props) {
   const { colors } = useTheme();
+  const locale = useSelector(localeSelector);
   const currency = route?.params?.currency;
   invariant(currency, "currency required");
-  const discreet = useSelector(discreetModeSelector);
 
   let enabledTotalAmount = null;
   const accounts = useSelector(
@@ -71,7 +71,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
 
   useEffect(() => {
     if (!filteredAccounts.length) {
-      const n = navigation.dangerouslyGetParent() || navigation;
+      const n = navigation.getParent() || navigation;
       n.replace(NavigatorName.AddAccounts, {
         screen: ScreenName.AddAccountsTokenCurrencyDisclaimer,
         params: { token: currency },
@@ -106,7 +106,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     formatCurrencyUnit(currency.units[0], enabledTotalAmount, {
       showCode: true,
       disableRounding: false,
-      discreet,
+      locale,
     });
 
   const [approveInfoModalOpen, setApproveInfoModalOpen] = useState(false);
@@ -116,14 +116,14 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     [],
   );
   const redirectToEnableFlow = useCallback(() => {
-    const n = navigation.dangerouslyGetParent() || navigation;
+    const n = navigation.getParent() || navigation;
     n.push(ScreenName.LendingEnableAmount, { ...approveInfoModalOpen });
     closeApproveInfoModal();
   }, [approveInfoModalOpen, closeApproveInfoModal, navigation]);
 
   const redirectToSupplyFlow = useCallback(
     params => {
-      const n = navigation.dangerouslyGetParent() || navigation;
+      const n = navigation.getParent() || navigation;
       n.replace(NavigatorName.LendingSupplyFlow, {
         screen: ScreenName.LendingSupplyAmount,
         params,

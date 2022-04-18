@@ -1,10 +1,15 @@
 module.exports = {
   root: true,
-  extends: ["@react-native-community", "airbnb", "prettier", "prettier/react"],
+  extends: [
+    "@react-native-community",
+    "airbnb",
+    "prettier",
+    "plugin:json/recommended",
+  ],
   settings: {
     "import/resolver": {
       node: {
-        extensions: [".js", ".android.js", ".ios.js"],
+        extensions: [".js", ".android.js", ".ios.js", ".ts", ".tsx"],
       },
     },
   },
@@ -57,6 +62,7 @@ module.exports = {
     "react/destructuring-assignment": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-no-bind": 0,
     // for importing detox
     "import/no-extraneous-dependencies": [
       "error",

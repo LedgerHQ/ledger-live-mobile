@@ -22,6 +22,7 @@ export const ScreenName = {
   ClaimRewardsSelectDevice: "ClaimRewardsSelectDevice",
   ClaimRewardsValidationError: "ClaimRewardsValidationError",
   ClaimRewardsValidationSuccess: "ClaimRewardsValidationSuccess",
+  Coinify: "Coinify",
   ConfirmPassword: "ConfirmPassword",
   CountervalueSettings: "CountervalueSettings",
   CryptoAssetsSettings: "CryptoAssetsSettings",
@@ -41,6 +42,7 @@ export const ScreenName = {
   DebugPlayground: "DebugPlayground",
   DebugSettings: "DebugSettings",
   DebugStore: "DebugStore",
+  DebugEnv: "DebugEnv",
   DelegationConnectDevice: "DelegationConnectDevice",
   DelegationSelectDevice: "DelegationSelectDevice",
   DelegationSelectValidator: "DelegationSelectValidator",
@@ -48,6 +50,8 @@ export const ScreenName = {
   DelegationSummary: "DelegationSummary",
   DelegationValidationError: "DelegationValidationError",
   DelegationValidationSuccess: "DelegationValidationSuccess",
+  DeveloperSettings: "DeveloperSettings",
+  DeveloperCustomManifest: "DeveloperCustomManifest",
   DisplayResult: "DisplayResult",
   Distribution: "Distribution",
   EditAccountName: "EditAccountName",
@@ -87,6 +91,9 @@ export const ScreenName = {
   MigrateAccountsConnectDevice: "MigrateAccountsConnectDevice",
   MigrateAccountsOverview: "MigrateAccountsOverview",
   MigrateAccountsProgress: "MigrateAccountsProgress",
+  NftCollection: "NftCollection",
+  NftGallery: "NftGallery",
+  NftViewer: "NftViewer",
 
   OperationDetails: "OperationDetails",
   PairDevices: "PairDevices",
@@ -98,15 +105,19 @@ export const ScreenName = {
   ReceiveConfirmation: "ReceiveConfirmation",
   ReceiveConnectDevice: "ReceiveConnectDevice",
   ReceiveSelectAccount: "ReceiveSelectAccount",
+  RegionSettings: "RegionSettings",
   RepairDevice: "RepairDevice",
   Resources: "Resources",
   RippleEditFee: "RippleEditFee",
   RippleEditTag: "RippleEditTag",
   ScanAccounts: "ScanAccounts",
   ScanRecipient: "ScanRecipient",
-  SendAmount: "SendAmount",
+  SendAmountCoin: "SendAmountCoin",
+  SendAmountNft: "SendAmountNft",
   SendConnectDevice: "SendConnectDevice",
-  SendFundsMain: "SendFundsMain",
+  SendCoin: "SendCoin",
+  SendCollection: "SendCollection",
+  SendNft: "SendNft",
   SendSelectDevice: "SendSelectDevice",
   SendSelectRecipient: "SendSelectRecipient",
   SendSummary: "SendSummary",
@@ -133,6 +144,12 @@ export const ScreenName = {
   SwapOperationDetails: "SwapOperationDetails",
   SwapPendingOperation: "SwapPendingOperation",
   SwapSummary: "SwapSummary",
+
+  SwapV2FormSelectAccount: "SwapV2FormSelectAccount",
+  SwapV2FormSelectCurrency: "SwapV2FormSelectCurrency",
+  SwapV2FormSelectFees: "SwapV2FormSelectFees",
+  SwapFormSelectProviderRate: "SwapFormSelectProviderRate",
+
   TezosDelegationFlow: "TezosDelegationFlow",
   Transfer: "Transfer",
   UnfreezeAmount: "UnfreezeAmount",
@@ -175,6 +192,9 @@ export const ScreenName = {
   CosmosClaimRewardsValidation: "CosmosClaimRewardsValidation",
   CosmosClaimRewardsValidationError: "CosmosClaimRewardsValidationError",
   CosmosClaimRewardsValidationSuccess: "CosmosClaimRewardsValidationSuccess",
+
+  // crypto_org
+  CryptoOrgEditMemo: "CryptoOrgEditMemo",
 
   AlgorandEditMemo: "AlgorandEditMemo",
   AlgorandClaimRewardsInfo: "AlgorandClaimRewardsInfo",
@@ -298,7 +318,14 @@ export const ScreenName = {
   RequestAccountsSelectCrypto: "RequestAccountsSelectCrypto",
   RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
 
+  MarketList: "MarketList",
+  MarketCurrencySelect: "MarketCurrencySelect",
+  MarketDetail: "MarketDetail",
+
   VerifyAccount: "VerifyAccount",
+
+  // solana
+  SolanaEditMemo: "SolanaEditMemo",
 };
 
 export const NavigatorName = {
@@ -326,6 +353,7 @@ export const NavigatorName = {
   Manager: "Manager",
   ManagerStack: "ManagerStack",
   MigrateAccountsFlow: "MigrateAccountsFlow",
+  NftNavigator: "NftNavigator",
   Onboarding: "Onboarding",
   PasswordAddFlow: "PasswordAddFlow",
   PasswordModifyFlow: "PasswordModifyFlow",
@@ -356,10 +384,13 @@ export const NavigatorName = {
   PolkadotSimpleOperationFlow: "PolkadotSimpleOperationFlow",
 
   NotificationCenter: "NotificationCenter",
+  Market: "Market",
 
   // Tab
   Main: "Main",
 
   // Root
   RootNavigator: "RootNavigator",
+
+  Learn: "Learn",
 };

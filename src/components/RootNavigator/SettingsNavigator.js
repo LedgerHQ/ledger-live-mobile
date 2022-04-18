@@ -14,6 +14,7 @@ import DebugIcons from "../../screens/DebugIcons";
 import DebugLottie from "../../screens/DebugLottie.js";
 import DebugLogs from "../../screens/DebugLogs.js";
 import DebugStore from "../../screens/DebugStore";
+import DebugEnv from "../../screens/DebugEnv";
 import DebugPlayground from "../../screens/DebugPlayground";
 import Settings from "../../screens/Settings";
 import AccountsSettings from "../../screens/Settings/Accounts";
@@ -22,6 +23,7 @@ import Resources from "../../screens/Settings/Resources";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import HelpSettings from "../../screens/Settings/Help";
+import RegionSettings from "../../screens/Settings/General/Region";
 import CurrenciesList from "../../screens/Settings/CryptoAssets/Currencies/CurrenciesList";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
 import DebugSettings, {
@@ -30,6 +32,9 @@ import DebugSettings, {
 } from "../../screens/Settings/Debug";
 import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
+import DeveloperSettings, {
+  DeveloperCustomManifest,
+} from "../../screens/Settings/Developer";
 import RepairDevice from "../../screens/RepairDevice";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Button from "../Button";
@@ -56,6 +61,13 @@ export default function SettingsNavigator() {
         component={CountervalueSettings}
         options={{
           title: t("settings.display.counterValue"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.RegionSettings}
+        component={RegionSettings}
+        options={{
+          title: t("settings.display.region"),
         }}
       />
       <Stack.Screen
@@ -116,6 +128,20 @@ export default function SettingsNavigator() {
         component={ExperimentalSettings}
         options={{
           title: t("settings.experimental.title"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.DeveloperSettings}
+        component={DeveloperSettings}
+        options={{
+          title: t("settings.developer.title"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.DeveloperCustomManifest}
+        component={DeveloperCustomManifest}
+        options={{
+          title: t("settings.developer.customManifest.title"),
         }}
       />
       <Stack.Screen
@@ -192,6 +218,13 @@ export default function SettingsNavigator() {
         component={DebugStore}
         options={{
           title: "Debug Store",
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.DebugEnv}
+        component={DebugEnv}
+        options={{
+          title: "Debug Env",
         }}
       />
       <Stack.Screen

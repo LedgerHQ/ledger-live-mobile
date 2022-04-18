@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import Animated, {
   set,
-  interpolate,
+  interpolateNode,
   Extrapolate,
   useCode,
-  Easing,
+  EasingNode,
 } from "react-native-reanimated";
 import { useClock, timing } from "react-native-redash/lib/module/v1";
 import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
@@ -33,8 +33,9 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
 
 type Props = {
   toast: ToastData,
+  cta?: string,
   onPress: (toast: ToastData) => void,
-  onClose: (toast: ToastData) => void,
+  onClose?: (toast: ToastData) => void,
 };
 
 const icons = {
@@ -42,9 +43,8 @@ const icons = {
   warning: Warning,
 };
 
-export default function Snackbar({ toast, onPress, onClose }: Props) {
+export default function Snackbar({ toast, cta, onPress, onClose }: Props) {
   const [anim] = useState(new Animated.Value(0));
-
   const clock = useClock();
   const [closed, setIsClosed] = useState(false);
 
@@ -54,7 +54,7 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
         anim,
         timing({
           duration: 800,
-          easing: Easing.ease,
+          easing: EasingNode.ease,
           clock,
           from: anim,
           to: new Animated.Value(closed ? 0 : 1),
@@ -65,7 +65,7 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
 
   const handleClose = useCallback(() => {
     setIsClosed(true);
-    setTimeout(() => onClose(toast), 1000);
+    setTimeout(() => onClose && onClose(toast), 1000);
   }, [onClose, toast]);
 
   const handleOnPress = useCallback(() => {
@@ -84,25 +84,25 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
   const Icon = icon && icons[icon];
   const iconColor = icon && iconColors[icon];
 
-  const maxHeight = interpolate(anim, {
+  const maxHeight = interpolateNode(anim, {
     inputRange: [0, 0.4, 1],
     outputRange: [0, 200, 200],
     extrapolate: Extrapolate.CLAMP,
   });
 
-  const translateX = interpolate(anim, {
+  const translateX = interpolateNode(anim, {
     inputRange: [0, 0.6, 1],
     outputRange: [width + 100, width - 100, 0],
     extrapolate: Extrapolate.CLAMP,
   });
 
-  const opacity = interpolate(anim, {
+  const opacity = interpolateNode(anim, {
     inputRange: [0, 0.6, 1],
     outputRange: [0, 0, 1],
     extrapolate: Extrapolate.CLAMP,
   });
 
-  const marginBottom = interpolate(anim, {
+  const marginBottom = interpolateNode(anim, {
     inputRange: [0, 0.4, 1],
     outputRange: [0, 16, 16],
     extrapolate: Extrapolate.CLAMP,
@@ -128,19 +128,34 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
           {Icon && <Icon size={17} color={iconColor} />}
         </View>
         <View style={styles.rightSection}>
-          <LText bold style={styles.subTitle} color="grey">
-            {type}
-          </LText>
-          <LText
-            semiBold
-            style={[styles.title, { color: colors.snackBarColor }]}
-          >
-            {title}
-          </LText>
+          {type && (
+            <LText bold style={styles.subTitle} color="grey">
+              {type}
+            </LText>
+          )}
+          <View style={styles.horizontal}>
+            <LText
+              semiBold
+              style={[styles.title, { color: colors.snackBarColor }]}
+            >
+              {title}
+            </LText>
+            {cta && (
+              <LText
+                fontSize={3}
+                style={[{ color: colors.live }, styles.cta]}
+                onPress={handleOnPress}
+              >
+                {cta}
+              </LText>
+            )}
+          </View>
         </View>
-        <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
-          <Close size={16} color={colors.snackBarColor} />
-        </TouchableOpacity>
+        {onClose && (
+          <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+            <Close size={16} color={colors.snackBarColor} />
+          </TouchableOpacity>
+        )}
       </View>
     </AnimatedTouchableOpacity>
   );
@@ -155,7 +170,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingRight: 36,
   },
   leftSection: { width: 18, marginRight: 14 },
   rightSection: {
@@ -174,5 +188,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 4,
     right: 4,
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  cta: {
+    textDecorationLine: "underline",
   },
 });

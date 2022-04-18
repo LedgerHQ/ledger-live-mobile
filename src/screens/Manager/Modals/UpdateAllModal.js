@@ -39,7 +39,7 @@ const UpdateAllModal = ({
         onPress: onConfirm,
         type: "primary",
         event: "ManagerAppUpdateAllModalConfirm",
-        eventProperties: { appsList: apps.map(({ name }) => name) },
+        eventProperties: { appName: apps.map(({ name }) => name) },
       },
       {
         title: <Trans i18nKey="common.cancel" />,
@@ -92,6 +92,7 @@ const UpdateAllModal = ({
               value={bytes}
               deviceModel={state.deviceModel}
               firmwareVersion={deviceInfo.version}
+              formatFunction={Math.ceil}
             />
           </LText>
         </View>

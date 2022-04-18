@@ -5,13 +5,20 @@
  * @format
  */
 
+const defaultSourceExts = require("metro-config/src/defaults/defaults")
+  .sourceExts;
+const resolve = require("metro-resolver").resolve
+
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: false,
+        inlineRequires: true,
       },
     }),
   },
+  resolver: {
+    sourceExts: [...defaultSourceExts, 'cjs']
+  }
 };

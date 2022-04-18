@@ -1,8 +1,9 @@
 // @flow
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, FlatList, SafeAreaView, View } from "react-native";
-import Animated, { interpolate } from "react-native-reanimated";
+import { StyleSheet, FlatList, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Animated, { interpolateNode } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
@@ -33,6 +34,9 @@ import { PortfolioHistoryList } from "./PortfolioHistory";
 
 import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
+import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
+import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
+import { withDiscreetMode } from "../../context/DiscreetModeContext";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -47,7 +51,7 @@ type Props = {
   navigation: any,
 };
 
-export default function PortfolioScreen({ navigation }: Props) {
+function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
@@ -63,7 +67,7 @@ export default function PortfolioScreen({ navigation }: Props) {
 
   const StickyActions = useCallback(() => {
     const offset = 410;
-    const top = interpolate(scrollY, {
+    const top = interpolateNode(scrollY, {
       inputRange: [offset, offset + 56],
       outputRange: [0, 56],
       extrapolate: "clamp",
@@ -162,55 +166,61 @@ export default function PortfolioScreen({ navigation }: Props) {
   );
 
   return (
-    <SafeAreaView
-      style={[
-        styles.root,
-        {
-          paddingTop: extraStatusBarPadding,
-          backgroundColor: colors.background,
-        },
-      ]}
-    >
-      {!showingPlaceholder ? (
-        <StickyHeader
-          scrollY={scrollY}
-          portfolio={portfolio}
-          counterValueCurrency={counterValueCurrency}
-        />
-      ) : null}
+    <>
+      <FirmwareUpdateBanner />
+      <SafeAreaView
+        style={[
+          styles.root,
+          {
+            paddingTop: extraStatusBarPadding,
+            backgroundColor: colors.background,
+          },
+        ]}
+      >
+        {!showingPlaceholder ? (
+          <StickyHeader
+            scrollY={scrollY}
+            portfolio={portfolio}
+            counterValueCurrency={counterValueCurrency}
+          />
+        ) : null}
 
-      <RequireTerms />
+        <RequireTerms />
+        <CheckLanguageAvailability />
 
-      <TrackScreen category="Portfolio" accountsLength={accounts.length} />
+        <TrackScreen category="Portfolio" accountsLength={accounts.length} />
 
-      {areAccountsEmpty && <Header />}
+        {areAccountsEmpty && <Header />}
 
-      <AnimatedFlatListWithRefreshControl
-        ref={ref}
-        data={data}
-        style={styles.inner}
-        renderItem={({ item }) => item}
-        keyExtractor={(item, index) => String(index)}
-        showsVerticalScrollIndicator={false}
-        stickyHeaderIndices={[2]}
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: {
-                contentOffset: { y: scrollY },
+        <AnimatedFlatListWithRefreshControl
+          ref={ref}
+          data={data}
+          style={styles.inner}
+          renderItem={({ item }) => item}
+          keyExtractor={(item, index) => String(index)}
+          showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[2]}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: { y: scrollY },
+                },
               },
-            },
-          ],
-          { useNativeDriver: true },
-        )}
-        testID={
-          accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
-        }
-      />
-      <MigrateAccountsBanner />
-    </SafeAreaView>
+            ],
+            { useNativeDriver: true },
+          )}
+          testID={
+            accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
+          }
+        />
+        <MigrateAccountsBanner />
+      </SafeAreaView>
+    </>
   );
 }
+
+export default withDiscreetMode(PortfolioScreen);
 
 const styles = StyleSheet.create({
   root: {

@@ -1,6 +1,7 @@
 // @flow
+import { useState, useEffect } from "react";
 import Config from "react-native-config";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { concatMap } from "rxjs/operators";
 import {
   setEnvUnsafe,
@@ -32,15 +33,31 @@ export type FeatureInteger = {
 
 export type Feature = FeatureCommon & (FeatureToggle | FeatureInteger);
 
+// comma-separated list of currencies that we want to enable as experimental, e.g:
+// const experimentalCurrencies = "solana,cardano";
+const experimentalCurrencies = "";
+
 export const experimentalFeatures: Feature[] = [
-  /* {
+  {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: "Tezos JS impl",
-    description: "Tezos JS impl",
+    title: "Experimental JS impl",
+    description: "Use experimental JS implementation for Tezos.",
     valueOn: "tezos",
     valueOff: "",
-  }, */
+  },
+  ...(experimentalCurrencies.length
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_CURRENCIES",
+          title: "Experimental integrations",
+          description: "Use available experimental crypto assets integrations.",
+          valueOn: experimentalCurrencies,
+          valueOff: "",
+        },
+      ]
+    : []),
   {
     type: "toggle",
     name: "MANAGER_DEV_MODE",
@@ -62,6 +79,15 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
   },
+  {
+    type: "toggle",
+    name: "LEDGER_COUNTERVALUES_API",
+    title: "Experimental countervalues API",
+    description:
+      "This may cause the countervalues displayed for your accounts to become incorrect.",
+    valueOn: "https://countervalues-experimental.live.ledger.com",
+    valueOff: "https://countervalues.live.ledger.com",
+  },
   ...(__DEV__
     ? [
         {
@@ -72,6 +98,21 @@ export const experimentalFeatures: Feature[] = [
         },
       ]
     : []),
+];
+
+export const developerFeatures: Feature[] = [
+  {
+    type: "toggle",
+    name: "PLATFORM_EXPERIMENTAL_APPS",
+    title: "Allow experimental apps",
+    description: "Display and allow opening experimental tagged platform apps.",
+  },
+  {
+    type: "toggle",
+    name: "USE_LEARN_STAGING_URL",
+    title: "Learn staging URL",
+    description: "Use the staging URL for the Learn page.",
+  },
 ];
 
 const storageKey = "experimentalFlags";
@@ -100,7 +141,9 @@ export const isReadOnly = (key: EnvName) => key in Config;
 
 export const enabledExperimentalFeatures = (): string[] =>
   // $FlowFixMe
-  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k));
+  [...experimentalFeatures, ...developerFeatures]
+    .map(e => e.name)
+    .filter(k => !isEnvDefault(k));
 
 (async () => {
   const envs = await getStorageEnv();
@@ -116,7 +159,12 @@ export const enabledExperimentalFeatures = (): string[] =>
   /* eslint-enable guard-for-in */
 
   const saveEnvs = async (name, value) => {
-    if (experimentalFeatures.find(f => f.name === name) && !isReadOnly(name)) {
+    if (
+      [...experimentalFeatures, ...developerFeatures].find(
+        f => f.name === name,
+      ) &&
+      !isReadOnly(name)
+    ) {
       await setStorageEnvs(name, value);
     }
   };
@@ -125,3 +173,20 @@ export const enabledExperimentalFeatures = (): string[] =>
     .pipe(concatMap(({ name, value }) => saveEnvs(name, value)))
     .subscribe();
 })();
+
+export function useExperimental(): boolean {
+  const [state, setState] = useState(
+    () => enabledExperimentalFeatures().length > 0,
+  );
+
+  useEffect(() => {
+    const sub = changes.subscribe(() => {
+      const newExperimental = enabledExperimentalFeatures().length > 0;
+      setState(newExperimental);
+    });
+
+    return () => sub.unsubscribe();
+  }, []);
+
+  return state;
+}

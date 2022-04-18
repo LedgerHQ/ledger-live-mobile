@@ -26,6 +26,7 @@ import NotSyncedWarning from "./NotSyncedWarning";
 import GenericErrorView from "../../components/GenericErrorView";
 import DeviceActionModal from "../../components/DeviceActionModal";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
+import SkipSelectDevice from "../SkipSelectDevice";
 
 const forceInset = { bottom: "always" };
 
@@ -94,8 +95,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   const onSkipDevice = useCallback(() => {
     if (!account) return;
     navigation.navigate(ScreenName.ReceiveConfirmation, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
+      ...route.params,
     });
   }, [account, navigation, parentAccount]);
 
@@ -149,6 +149,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
+        <SkipSelectDevice route={route} onResult={setDevice} />
         <SelectDevice
           onSelect={setDevice}
           onWithoutDevice={onSkipDevice}
@@ -162,6 +163,8 @@ export default function ConnectDevice({ navigation, route }: Props) {
         onClose={onClose}
         request={{ account: mainAccount, tokenCurrency }}
         appName={route.params.appName}
+        onSelectDeviceLink={() => setDevice()}
+        analyticsPropertyFlow="receive"
       />
     </SafeAreaView>
   );

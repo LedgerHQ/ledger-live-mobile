@@ -62,6 +62,7 @@ const RemoveDeviceModal = ({
 type RouteParams = {
   searchQuery?: string,
   tab?: ManagerTab,
+  installApp?: string,
 };
 
 type Props = {
@@ -114,15 +115,19 @@ class ChooseDevice extends Component<
 
   onSelect = (result: Object) => {
     this.setState({ device: undefined, result });
-  };
-
-  onModalHide = () => {
-    const { result } = this.state;
+    const {
+      route: { params = {} },
+    } = this.props;
     result?.result &&
       this.props.navigation.navigate(ScreenName.ManagerMain, {
         ...result,
-        ...this.props.route.params,
+        ...params,
+        searchQuery: params.searchQuery || params.installApp,
       });
+  };
+
+  onModalHide = () => {
+    this.setState({ device: undefined });
   };
 
   onStepEntered = (i: number, meta: Object) => {
@@ -177,7 +182,7 @@ class ChooseDevice extends Component<
           onBluetoothDeviceAction={this.onShowMenu}
         />
         <DeviceActionModal
-          onClose={this.onSelectDevice}
+          onClose={() => this.onSelectDevice()}
           device={device}
           onResult={this.onSelect}
           onModalHide={this.onModalHide}

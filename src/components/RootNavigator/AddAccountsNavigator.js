@@ -15,7 +15,12 @@ import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 
 type Route = {
-  params: ?{ currency: *, token?: *, returnToSwap?: boolean },
+  params: ?{
+    currency: *,
+    token?: *,
+    returnToSwap?: boolean,
+    analyticsPropertyFlow?: string,
+  },
 };
 
 const totalSteps = "3";
@@ -29,9 +34,9 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
     colors,
   ]);
+  const analyticsPropertyFlow = route.params?.analyticsPropertyFlow;
   return (
     <Stack.Navigator
-      headerMode="float"
       initialRouteName={
         token
           ? ScreenName.AddAccountsTokenCurrencyDisclaimer
@@ -42,6 +47,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       screenOptions={{
         ...stackNavConfig,
         headerRight: () => <AddAccountsHeaderRightClose />,
+        headerMode: "float",
       }}
     >
       <Stack.Screen
@@ -62,9 +68,10 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       <Stack.Screen
         name={ScreenName.AddAccountsSelectDevice}
         component={AddAccountsSelectDevice}
-        initialParams={
-          currency ? { currency, inline: true, returnToSwap } : undefined
-        }
+        initialParams={{
+          ...(currency ? { currency, inline: true, returnToSwap } : {}),
+          analyticsPropertyFlow,
+        }}
         options={{
           headerTitle: () => (
             <StepHeader

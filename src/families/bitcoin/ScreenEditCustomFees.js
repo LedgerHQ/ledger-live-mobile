@@ -3,13 +3,7 @@ import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import {
-  Keyboard,
-  StyleSheet,
-  TextInput,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { Keyboard, StyleSheet, View, SafeAreaView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useSelector } from "react-redux";
@@ -19,6 +13,7 @@ import KeyboardView from "../../components/KeyboardView";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import LText from "../../components/LText";
 import { accountScreenSelector } from "../../reducers/accounts";
+import TextInput from "../../components/FocusedTextInput";
 
 const options = {
   title: <Trans i18nKey="send.summary.fees" />,
@@ -48,7 +43,9 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
   invariant(transaction.family === "bitcoin", "not bitcoin family");
   invariant(account, "no account found");
 
-  const [ownSatPerByte, setOwnSatPerByte] = useState(null);
+  const [ownSatPerByte, setOwnSatPerByte] = useState(
+    satPerByte ? satPerByte.toString() : "",
+  );
 
   const onChange = text => {
     setOwnSatPerByte(text.replace(/\D/g, ""));
@@ -88,12 +85,12 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
             <TextInput
               autoFocus
               style={[styles.textInputAS, { color: colors.darkBlue }]}
-              defaultValue={satPerByte ? satPerByte.toString() : ""}
-              keyboardType="numeric"
+              keyboardType="number-pad"
               returnKeyType="done"
               maxLength={10}
               onChangeText={onChange}
               onSubmitEditing={onValidateText}
+              value={ownSatPerByte}
             />
             <LText style={[styles.currency, { color: colors.grey }]}>
               <Trans i18nKey="common.satPerByte" />
@@ -106,6 +103,7 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
               title={t("common.continue")}
               onPress={onValidateText}
               containerStyle={styles.buttonContainer}
+              disabled={BigNumber(ownSatPerByte || 0).isZero()}
             />
           </View>
         </NavigationScrollView>
