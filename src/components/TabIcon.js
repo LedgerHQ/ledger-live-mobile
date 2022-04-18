@@ -1,20 +1,39 @@
 /* @flow */
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import LText from "./LText";
+import styled from "styled-components/native";
 
+const ICON_SIZE = 24;
+
+const IconContainer = styled.View`
+  height: ${ICON_SIZE}px;
+  width: ${ICON_SIZE}px;
+  justify-content: center;
+  align-items: center;
+`;
 type Props = {
   color: string,
   focused: boolean,
   i18nKey: string,
   Icon: any,
+  iconSize?: number,
 };
 
-export default function TabIcon({ Icon, i18nKey, color, focused }: Props) {
+export default function TabIcon({
+  Icon,
+  i18nKey,
+  color,
+  focused,
+  iconSize,
+}: Props) {
+  const { t } = useTranslation();
   return (
     <View style={styles.root}>
-      <Icon size={20} color={color} />
+      <IconContainer>
+        <Icon size={iconSize || ICON_SIZE} resizeMode="contain" color={color} />
+      </IconContainer>
       <LText
         numberOfLines={1}
         semiBold={!focused}
@@ -22,7 +41,7 @@ export default function TabIcon({ Icon, i18nKey, color, focused }: Props) {
         secondary
         style={[styles.text, { color }]}
       >
-        <Trans i18nKey={i18nKey} />
+        {t(i18nKey)}
       </LText>
     </View>
   );

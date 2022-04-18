@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // @flow
 import "../shim";
 import "./polyfill";
@@ -13,6 +14,7 @@ import React, {
   useEffect,
 } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+
 import {
   StyleSheet,
   View,
@@ -24,22 +26,19 @@ import {
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
-import {
-  useLinking,
-  NavigationContainer,
-  getStateFromPath,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
-import _ from "lodash";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
+import { NftMetadataProvider } from "@ledgerhq/live-common/lib/nft";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { getProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
+
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -78,16 +77,22 @@ import { navigationRef, isReadyRef } from "./rootnavigation";
 import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
-import { lightTheme, duskTheme, darkTheme } from "./colors";
+import { lightTheme, darkTheme } from "./colors";
 import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
-import { setOsTheme, setTheme } from "./actions/settings";
-import FirmwareUpdateBanner from "./components/FirmwareUpdateBanner";
+import { setOsTheme } from "./actions/settings";
+// $FlowFixMe
+import { FirebaseRemoteConfigProvider } from "./components/FirebaseRemoteConfig";
+// $FlowFixMe
+import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags";
+// $FlowFixMe
+import StyleProvider from "./StyleProvider";
+// $FlowFixMe
+import MarketDataProvider from "./screens/Market/MarketDataProviderWrapper";
 
 const themes = {
   light: lightTheme,
-  dusk: duskTheme,
   dark: darkTheme,
 };
 
@@ -190,135 +195,149 @@ function App({ importDataString }: AppProps) {
   );
 }
 
-/*
-Monkey patching Linking in order to transform wc: schemes to ledgerlive schemes in order
-to play correctly with react navigation.
-*/
-
-const fixURL = url => {
-  let NEWurl = url;
-  if (url && url.substr(0, 3) === "wc:") {
-    NEWurl = `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
+function getProxyURL(url: ?string) {
+  if (typeof url === "string" && url.substr(0, 3) === "wc:") {
+    return `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
   }
-  return NEWurl;
-};
 
-const OGgetInitialURL = Linking.getInitialURL.bind(Linking);
-// $FlowFixMe
-Linking.getInitialURL = () => OGgetInitialURL().then(fixURL);
-
-const NEWcallbacks = [];
-const OGcallbacks = [];
-const OGaddEventListener = Linking.addEventListener.bind(Linking);
-const OGremoveEventListener = Linking.removeEventListener.bind(Linking);
-// $FlowFixMe
-Linking.addEventListener = (evt, OGcallback) => {
-  let NEWcallback = OGcallback;
-  if (evt === "url") {
-    NEWcallback = ({ url }) => OGcallback({ url: fixURL(url) });
-    OGcallbacks.push(OGcallback);
-    NEWcallbacks.push(NEWcallback);
-  }
-  return OGaddEventListener(evt, NEWcallback);
-};
-// $FlowFixMe
-Linking.removeEventListener = (evt, OGcallback) => {
-  let NEWcallback = OGcallback;
-  if (evt === "url") {
-    const index = _.findLastIndex(OGcallbacks, OGcallback);
-    NEWcallback = NEWcallbacks[index];
-    _.pull(NEWcallbacks, NEWcallback);
-    _.pull(OGcallbacks, OGcallback);
-  }
-  return OGremoveEventListener(evt, NEWcallback);
-};
+  return url;
+}
 
 // DeepLinking
-const linking = {
+const linkingOptions = {
+  async getInitialURL() {
+    const url = await Linking.getInitialURL();
+    return getProxyURL(url);
+  },
+  subscribe(listener) {
+    function onReceiveURL({ url: _url }: { url: string }) {
+      const url = getProxyURL(_url);
+      listener(url);
+    }
+
+    Linking.addEventListener("url", onReceiveURL);
+
+    return () => {
+      // Clean up the event listeners
+      Linking.removeEventListener("url", onReceiveURL);
+    };
+  },
   prefixes: ["ledgerlive://"],
   config: {
-    [NavigatorName.Base]: {
-      initialRouteName: NavigatorName.Main,
-      screens: {
-        /**
-         * @params ?uri: string
-         * ie: "ledgerlive://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
-         */
-        [ScreenName.WalletConnectDeeplinkingSelectAccount]: "wc",
-        [NavigatorName.Main]: {
+    screens: {
+      [NavigatorName.Base]: {
+        initialRouteName: NavigatorName.Main,
+        screens: {
           /**
-           * ie: "ledgerlive://portfolio" -> will redirect to the portfolio
+           * @params ?uri: string
+           * ie: "ledgerlive://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
            */
-          initialRouteName: ScreenName.Portfolio,
-          screens: {
-            [ScreenName.Portfolio]: "portfolio",
-            [NavigatorName.Accounts]: {
-              screens: {
-                /**
-                 * @params ?currency: string
-                 * ie: "ledgerlive://account?currency=bitcoin" will open the first bitcoin account
-                 */
-                [ScreenName.Accounts]: "account",
+          [ScreenName.WalletConnectDeeplinkingSelectAccount]: "wc",
+          [NavigatorName.Main]: {
+            initialRouteName: ScreenName.Portfolio,
+            screens: {
+              /**
+               * ie: "ledgerlive://portfolio" -> will redirect to the portfolio
+               */
+              [ScreenName.Portfolio]: "portfolio",
+              [NavigatorName.Accounts]: {
+                screens: {
+                  /**
+                   * @params ?currency: string
+                   * ie: "ledgerlive://account?currency=bitcoin" will open the first bitcoin account
+                   */
+                  [ScreenName.Accounts]: "account",
+                },
+              },
+              [NavigatorName.Platform]: {
+                screens: {
+                  /**
+                   * @params ?platform: string
+                   * ie: "ledgerlive://discover" will open the catalog
+                   * ie: "ledgerlive://discover/paraswap?theme=light" will open the catalog and the paraswap dapp with a light theme as parameter
+                   */
+                  [ScreenName.PlatformCatalog]: "discover/:platform?",
+                },
+              },
+              [NavigatorName.Manager]: {
+                screens: {
+                  /**
+                   * ie: "ledgerlive://manager" will open the manager
+                   *
+                   * @params ?installApp: string
+                   * ie: "ledgerlive://manager?installApp=bitcoin" will open the manager with "bitcoin" prefilled in the search input
+                   *
+                   * * @params ?searchQuery: string
+                   * ie: "ledgerlive://manager?searchQuery=bitcoin" will open the manager with "bitcoin" prefilled in the search input
+                   */
+                  [ScreenName.Manager]: "manager",
+                },
               },
             },
           },
-        },
-        [NavigatorName.ReceiveFunds]: {
-          screens: {
-            /**
-             * @params ?currency: string
-             * ie: "ledgerlive://receive?currency=bitcoin" will open the prefilled search account in the receive flow
-             */
-            [ScreenName.ReceiveSelectAccount]: "receive",
+          [NavigatorName.ReceiveFunds]: {
+            screens: {
+              /**
+               * @params ?currency: string
+               * ie: "ledgerlive://receive?currency=bitcoin" will open the prefilled search account in the receive flow
+               */
+              [ScreenName.ReceiveSelectAccount]: "receive",
+            },
           },
-        },
-        [NavigatorName.Swap]: {
-          screens: {
-            /**
-             * @params ?currency: string
-             * ie: "ledgerlive://receive?currency=bitcoin" will open the prefilled search account in the receive flow
-             */
-            [ScreenName.Swap]: "swap",
+          [NavigatorName.Swap]: {
+            screens: {
+              /**
+               * @params ?currency: string
+               * ie: "ledgerlive://receive?currency=bitcoin" will open the prefilled search account in the receive flow
+               */
+              [ScreenName.Swap]: "swap",
+            },
           },
-        },
-        [NavigatorName.SendFunds]: {
-          screens: {
-            /**
-             * @params ?currency: string
-             * ie: "ledgerlive://send?currency=bitcoin" will open the prefilled search account in the send flow
-             */
-            [ScreenName.SendFundsMain]: "send",
+          [NavigatorName.SendFunds]: {
+            screens: {
+              /**
+               * @params ?currency: string
+               * ie: "ledgerlive://send?currency=bitcoin" will open the prefilled search account in the send flow
+               */
+              [ScreenName.SendCoin]: "send",
+            },
           },
-        },
-        [NavigatorName.ExchangeBuyFlow]: {
-          screens: {
-            /**
-             * @params currency: string
-             * ie: "ledgerlive://buy/bitcoin" -> will redirect to the prefilled search currency in the buy crypto flow
-             */
-            [ScreenName.ExchangeSelectCurrency]: "buy/:currency",
+          [NavigatorName.ExchangeBuyFlow]: {
+            screens: {
+              /**
+               * @params currency: string
+               * ie: "ledgerlive://buy/bitcoin" -> will redirect to the prefilled search currency in the buy crypto flow
+               */
+              [ScreenName.ExchangeSelectCurrency]: "buy/:currency",
+            },
           },
-        },
-        /**
-         * ie: "ledgerlive://buy" -> will redirect to the main exchange page
-         */
-        [NavigatorName.Exchange]: "buy",
-        /**
-         * ie: "ledgerlive://swap" -> will redirect to the main swap page
-         */
-        [NavigatorName.Swap]: "swap",
-        [NavigatorName.Settings]: {
-          initialRouteName: [ScreenName.Settings],
-          screens: {
-            /**
-             * ie: "ledgerlive://settings/experimental" -> will redirect to the experimental settings panel
-             */
-            [ScreenName.Settings]: "settings",
-            [ScreenName.GeneralSettings]: "settings/general",
-            [ScreenName.AccountsSettings]: "settings/accounts",
-            [ScreenName.AboutSettings]: "settings/about",
-            [ScreenName.HelpSettings]: "settings/help",
-            [ScreenName.ExperimentalSettings]: "settings/experimental",
+          /**
+           * ie: "ledgerlive://buy" -> will redirect to the main exchange page
+           */
+          [NavigatorName.Exchange]: {
+            initialRouteName: "buy",
+            screens: {
+              [ScreenName.Coinify]: "coinify",
+            },
+          },
+          /**
+           * ie: "ledgerlive://swap" -> will redirect to the main swap page
+           */
+          [NavigatorName.Swap]: "swap",
+          [NavigatorName.Settings]: {
+            initialRouteName: [ScreenName.Settings],
+            screens: {
+              /**
+               * ie: "ledgerlive://settings/experimental" -> will redirect to the experimental settings panel
+               */
+              [ScreenName.Settings]: "settings",
+              [ScreenName.GeneralSettings]: "settings/general",
+              [ScreenName.AccountsSettings]: "settings/accounts",
+              [ScreenName.AboutSettings]: "settings/about",
+              [ScreenName.HelpSettings]: "settings/help",
+              [ScreenName.ExperimentalSettings]: "settings/experimental",
+              [ScreenName.DeveloperSettings]: "settings/developer",
+            },
           },
         },
       },
@@ -331,39 +350,25 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const wcContext = useContext(_wcContext);
 
-  const enabled =
-    hasCompletedOnboarding && wcContext.initDone && !wcContext.session.session;
-
-  const { getInitialState } = useLinking(navigationRef, {
-    ...linking,
-    getStateFromPath(path, config) {
-      if (!enabled) {
-        // Our current version of react navigation does not support the enable param
-        return null;
-      }
-      return getStateFromPath(path, config);
-    },
-  });
+  const linking = useMemo(
+    () => ({
+      ...linkingOptions,
+      enabled:
+        hasCompletedOnboarding &&
+        wcContext.initDone &&
+        !wcContext.session.session,
+    }),
+    [hasCompletedOnboarding, wcContext.initDone, wcContext.session.session],
+  );
 
   const [isReady, setIsReady] = React.useState(false);
-  const [initialState, setInitialState] = React.useState();
 
   useEffect(() => {
     if (!wcContext.initDone) {
       return;
     }
-    getInitialState()
-      .catch(() => {
-        setIsReady(true);
-      })
-      .then(state => {
-        if (state) {
-          setInitialState(state);
-        }
-
-        setIsReady(true);
-      });
-  }, [getInitialState, wcContext.initDone]);
+    setIsReady(true);
+  }, [wcContext.initDone]);
 
   React.useEffect(
     () => () => {
@@ -378,13 +383,9 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const compareOsTheme = useCallback(() => {
     const currentOsTheme = Appearance.getColorScheme();
     if (currentOsTheme && osTheme !== currentOsTheme) {
-      const isDark = themes[theme].dark;
-      const newTheme =
-        currentOsTheme === "dark" ? (isDark ? theme : "dusk") : "light";
-      dispatch(setTheme(newTheme));
       dispatch(setOsTheme(currentOsTheme));
     }
-  }, [dispatch, osTheme, theme]);
+  }, [dispatch, osTheme]);
 
   useEffect(() => {
     compareOsTheme();
@@ -394,21 +395,29 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
     return () => AppState.removeEventListener("change", osThemeChangeHandler);
   }, [compareOsTheme]);
 
+  const resolvedTheme = useMemo(
+    () =>
+      ((theme === "system" && osTheme) || theme) === "light" ? "light" : "dark",
+    [theme, osTheme],
+  );
+
   if (!isReady) {
     return null;
   }
 
   return (
-    <NavigationContainer
-      theme={themes[theme]}
-      initialState={initialState}
-      ref={navigationRef}
-      onReady={() => {
-        isReadyRef.current = true;
-      }}
-    >
-      {children}
-    </NavigationContainer>
+    <StyleProvider selectedPalette={resolvedTheme}>
+      <NavigationContainer
+        theme={themes[resolvedTheme]}
+        linking={linking}
+        ref={navigationRef}
+        onReady={() => {
+          isReadyRef.current = true;
+        }}
+      >
+        {children}
+      </NavigationContainer>
+    </StyleProvider>
   );
 };
 
@@ -452,37 +461,46 @@ export default class Root extends Component<
                   <PlatformAppProvider
                     platformAppsServerURL={getProvider("production").url}
                   >
-                    <DeepLinkingNavigator>
-                      <SafeAreaProvider>
-                        <StyledStatusBar />
-                        <NavBarColorHandler />
-                        <AuthPass>
-                          <I18nextProvider i18n={i18n}>
-                            <LocaleProvider>
-                              <BridgeSyncProvider>
-                                <CounterValuesProvider
-                                  initialState={initialCountervalues}
-                                >
-                                  <ButtonUseTouchable.Provider value={true}>
-                                    <OnboardingContextProvider>
-                                      <FirmwareUpdateBanner />
-                                      <ToastProvider>
-                                        <NotificationsProvider>
-                                          <SnackbarContainer />
-                                          <App
-                                            importDataString={importDataString}
-                                          />
-                                        </NotificationsProvider>
-                                      </ToastProvider>
-                                    </OnboardingContextProvider>
-                                  </ButtonUseTouchable.Provider>
-                                </CounterValuesProvider>
-                              </BridgeSyncProvider>
-                            </LocaleProvider>
-                          </I18nextProvider>
-                        </AuthPass>
-                      </SafeAreaProvider>
-                    </DeepLinkingNavigator>
+                    <FirebaseRemoteConfigProvider>
+                      <FirebaseFeatureFlagsProvider>
+                        <DeepLinkingNavigator>
+                          <SafeAreaProvider>
+                            <StyledStatusBar />
+                            <NavBarColorHandler />
+                            <AuthPass>
+                              <I18nextProvider i18n={i18n}>
+                                <LocaleProvider>
+                                  <BridgeSyncProvider>
+                                    <CounterValuesProvider
+                                      initialState={initialCountervalues}
+                                    >
+                                      <ButtonUseTouchable.Provider value={true}>
+                                        <OnboardingContextProvider>
+                                          <ToastProvider>
+                                            <NotificationsProvider>
+                                              <SnackbarContainer />
+                                              <NftMetadataProvider>
+                                                <MarketDataProvider>
+                                                  <App
+                                                    importDataString={
+                                                      importDataString
+                                                    }
+                                                  />
+                                                </MarketDataProvider>
+                                              </NftMetadataProvider>
+                                            </NotificationsProvider>
+                                          </ToastProvider>
+                                        </OnboardingContextProvider>
+                                      </ButtonUseTouchable.Provider>
+                                    </CounterValuesProvider>
+                                  </BridgeSyncProvider>
+                                </LocaleProvider>
+                              </I18nextProvider>
+                            </AuthPass>
+                          </SafeAreaProvider>
+                        </DeepLinkingNavigator>
+                      </FirebaseFeatureFlagsProvider>
+                    </FirebaseRemoteConfigProvider>
                   </PlatformAppProvider>
                 </WalletConnectProvider>
               </>

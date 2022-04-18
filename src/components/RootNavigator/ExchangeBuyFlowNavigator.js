@@ -20,10 +20,10 @@ export default function ExchangeNavigator() {
   );
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
         ...stackNavigationConfig,
         headerRight: () => <AddAccountsHeaderRightClose />,
+        headerMode: "float",
       }}
     >
       <Stack.Screen
@@ -34,11 +34,13 @@ export default function ExchangeNavigator() {
       <Stack.Screen
         name={ScreenName.ExchangeSelectAccount}
         component={ExchangeSelectAccount}
+        initialParams={{ analyticsPropertyFlow: "buy" }}
         options={{ title: t("exchange.buy.selectAccount") }}
       />
       <Stack.Screen
         name={ScreenName.ExchangeConnectDevice}
         component={ExchangeConnectDevice}
+        initialParams={{ analyticsPropertyFlow: "buy" }}
         options={{ title: t("exchange.buy.connectDevice") }}
       />
       <Stack.Screen

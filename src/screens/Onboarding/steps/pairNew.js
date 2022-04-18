@@ -12,12 +12,14 @@ import SelectDevice from "../../../components/SelectDevice";
 import DeviceActionModal from "../../../components/DeviceActionModal";
 import {
   installAppFirstTime,
+  setLastConnectedDevice,
   setReadOnlyMode,
 } from "../../../actions/settings";
 
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
+import SeedWarning from "../shared/SeedWarning";
 
 import pairYourNano from "../assets/pairYourNano.png";
 import plugYourNano from "../assets/plugNanoS.png";
@@ -91,14 +93,23 @@ type Props = {
     params: {
       deviceModelId: "nanoS" | "nanoX" | "blue",
       next: string,
+      showSeedWarning?: boolean,
     },
   },
 };
 
 export default function OnboardingStepPairNew({ navigation, route }: Props) {
-  const { deviceModelId, next } = route.params;
+  const { deviceModelId, next, showSeedWarning } = route.params;
   const dispatch = useDispatch();
   const [device, setDevice] = useState<?Device>();
+
+  const onSetDevice = useCallback(
+    device => {
+      dispatch(setLastConnectedDevice(device));
+      setDevice(device);
+    },
+    [dispatch],
+  );
 
   const onNext = useCallback(
     () => navigation.navigate(next, { ...route.params }),
@@ -115,10 +126,14 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
     />
   ) : null;
 
-  const directNext = useCallback(() => {
-    dispatch(setReadOnlyMode(false));
-    onNext();
-  }, [dispatch, onNext]);
+  const directNext = useCallback(
+    device => {
+      dispatch(setLastConnectedDevice(device));
+      dispatch(setReadOnlyMode(false));
+      onNext();
+    },
+    [dispatch, onNext],
+  );
 
   const onResult = useCallback(
     (info: any) => {
@@ -167,7 +182,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
               withArrows
               usbOnly={usbOnly}
               deviceModelId={deviceModelId}
-              onSelect={usbOnly ? setDevice : directNext}
+              onSelect={usbOnly ? onSetDevice : directNext}
               autoSelectOnAdd
             />
             {Footer}
@@ -189,11 +204,14 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
   ];
 
   return (
-    <OnboardingStepperView
-      scenes={scenes}
-      navigation={navigation}
-      route={route}
-      onFinish={onNext}
-    />
+    <>
+      <OnboardingStepperView
+        scenes={scenes}
+        navigation={navigation}
+        route={route}
+        onFinish={onNext}
+      />
+      {showSeedWarning ? <SeedWarning deviceModelId={deviceModelId} /> : null}
+    </>
   );
 }

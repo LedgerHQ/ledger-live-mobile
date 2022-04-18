@@ -133,7 +133,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   }
 
   function onDone(): void {
-    const n = navigation.dangerouslyGetParent();
+    const n = navigation.getParent();
     if (n) {
       n.pop();
     }
@@ -160,13 +160,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   useEffect(() => {
     const device = route.params.device;
 
-    if (device) {
+    if (device && !verified) {
       setAllowNavigation(false);
       verifyOnDevice(device);
     } else {
       setAllowNavigation(true);
     }
-  }, [route.params, account, parentAccount, verifyOnDevice]);
+  }, [route.params, verified, verifyOnDevice]);
 
   if (!account) return null;
   const { width } = getWindowDimensions();
@@ -236,6 +236,14 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
               verified={verified}
             />
           </View>
+          {mainAccount.derivationMode === "taproot" ? (
+            <View style={styles.taprootWarning}>
+              <Alert type="warning">
+                <Trans i18nKey="transfer.receive.taprootWarning" />
+              </Alert>
+            </View>
+          ) : null}
+
           <View style={styles.copyLink}>
             <CopyLink
               style={styles.copyShare}
@@ -400,6 +408,12 @@ const styles = StyleSheet.create({
   },
   address: {
     paddingTop: 24,
+  },
+  taprootWarning: {
+    paddingTop: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignSelf: "stretch",
   },
   copyLink: {
     paddingTop: 24,

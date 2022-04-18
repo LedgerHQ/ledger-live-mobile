@@ -20,10 +20,10 @@ export default function ExchangeNavigator() {
   );
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
         ...stackNavigationConfig,
         headerRight: () => <AddAccountsHeaderRightClose />,
+        headerMode: "float",
       }}
     >
       <Stack.Screen
@@ -40,6 +40,7 @@ export default function ExchangeNavigator() {
         name={ScreenName.ExchangeSelectAccount}
         component={ExchangeSelectAccount}
         options={{ title: t("exchange.sell.selectAccount") }}
+        initialParams={{ analyticsPropertyFlow: "sell" }}
       />
       <Stack.Screen
         name={ScreenName.ExchangeCoinifyWidget}

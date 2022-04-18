@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -22,6 +22,7 @@ import LText from "./LText";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import CounterValue from "./CounterValue";
 
+import OperationRowNftName from "./OperationRowNftName";
 import OperationIcon from "./OperationIcon";
 import { ScreenName } from "../const";
 import OperationRowDate from "./OperationRowDate";
@@ -44,14 +45,14 @@ const placeholderProps = {
   containerHeight: 20,
 };
 
-export default function OperationRow({
+const OperationRow = ({
   account,
   parentAccount,
   operation,
   isSubOperation,
   multipleAccounts,
   isLast,
-}: Props) {
+}: Props) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
 
@@ -71,6 +72,11 @@ export default function OperationRow({
     if (isSubOperation) navigation.push(...params);
     else navigation.navigate(...params);
   }, 300);
+
+  const isNftOperation =
+    ["NFT_IN", "NFT_OUT"].includes(operation.type) &&
+    operation.contract &&
+    operation.tokenId;
 
   const renderAmountCellExtra = useCallback(() => {
     const mainAccount = getMainAccount(account, parentAccount);
@@ -108,6 +114,49 @@ export default function OperationRow({
       </Spinning>
     </View>
   );
+
+  const amountRender = useCallback(() => {
+    if (isNftOperation) {
+      return (
+        <OperationRowNftName
+          style={operationRowNftNameStyles}
+          operation={operation}
+        />
+      );
+    }
+
+    if (amount.isZero()) {
+      return null;
+    }
+
+    return (
+      <View style={styles.bodyRight}>
+        <LText
+          semiBold
+          numberOfLines={1}
+          color={valueColor}
+          style={[styles.bodyRight, styles.topRow]}
+        >
+          <CurrencyUnitValue
+            showCode
+            unit={unit}
+            value={amount}
+            alwaysShowSign
+          />
+        </LText>
+        <CounterValue
+          showCode
+          date={operation.date}
+          currency={currency}
+          value={amount}
+          alwaysShowSign
+          withPlaceholder
+          placeholderProps={placeholderProps}
+          Wrapper={OpCounterValue}
+        />
+      </View>
+    );
+  }, [amount, currency, isNftOperation, operation, unit, valueColor]);
 
   return (
     <View
@@ -165,38 +214,12 @@ export default function OperationRow({
 
           <View style={styles.bodyRight}>{renderAmountCellExtra()}</View>
 
-          {amount.isZero() ? null : (
-            <View style={styles.bodyRight}>
-              <LText
-                semiBold
-                numberOfLines={1}
-                color={valueColor}
-                style={[styles.bodyRight, styles.topRow]}
-              >
-                <CurrencyUnitValue
-                  showCode
-                  unit={unit}
-                  value={amount}
-                  alwaysShowSign
-                />
-              </LText>
-              <CounterValue
-                showCode
-                date={operation.date}
-                currency={currency}
-                value={amount}
-                alwaysShowSign
-                withPlaceholder
-                placeholderProps={placeholderProps}
-                Wrapper={OpCounterValue}
-              />
-            </View>
-          )}
+          {amountRender()}
         </View>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const OpCounterValue = ({ children }: { children: React$Node }) => (
   <LText semiBold numberOfLines={1} style={styles.bottomRow}>
@@ -265,3 +288,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+const operationRowNftNameStyles = [styles.bodyRight, { maxWidth: "50%" }];
+
+export default memo<Props>(OperationRow);

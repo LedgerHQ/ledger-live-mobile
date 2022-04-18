@@ -30,6 +30,7 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # node.js
 #
@@ -96,20 +97,4 @@ artifacts/
 
 #CI
 **/vendor/**
-.bundle/
-
-
-
-#uilib
-
-uilib/node_modules/
-uilib/.expo/
-uilib/npm-debug.*
-uilib/*.jks
-uilib/*.p8
-uilib/*.p12
-uilib/*.key
-uilib/*.mobileprovision
-uilib/*.orig.*
-uilib/web-build/
-uilib/lib/
+**/*.jks

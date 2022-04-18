@@ -1,4 +1,4 @@
-// @flow;
+// @flow
 import React from "react";
 
 import { useTheme } from "@react-navigation/native";
@@ -12,8 +12,8 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { isCurrencySupported } from "../screens/Exchange/coinifyConfig";
 
 import {
-  swapSelectableCurrenciesSelector,
   readOnlyModeEnabledSelector,
+  swapSelectableCurrenciesSelector,
 } from "../reducers/settings";
 import { accountsCountSelector } from "../reducers/accounts";
 import { NavigatorName, ScreenName } from "../const";
@@ -37,9 +37,11 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   const { colors } = useTheme();
 
   const currency = getAccountCurrency(account);
-  const availableOnSwap = useSelector(state =>
-    swapSelectableCurrenciesSelector(state),
+  const swapSelectableCurrencies = useSelector(
+    swapSelectableCurrenciesSelector,
   );
+  const availableOnSwap =
+    swapSelectableCurrencies.includes(currency.id) && account.balance.gt(0);
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const canBeBought = isCurrencySupported(currency, "buy");
@@ -69,7 +71,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
           },
         ]
       : []),
-    ...(availableOnSwap.includes(currency.id)
+    ...(availableOnSwap
       ? [
           {
             navigationParams: [
@@ -97,10 +99,25 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
     ...useActions({ account, parentAccount, colors }),
   ];
 
-  const buttons = allActions.slice(0, 2);
+  // Do not display separators as buttons. (they do not have a label)
+  //
+  // First, count the index at which there are 2 valid buttons.
+  let counter = 0;
+  const sliceIndex =
+    allActions.findIndex(action => {
+      if (action.label) counter++;
+      return counter === 2;
+    }) + 1;
+
+  // Then slice from 0 to the index and ignore invalid button elements.
+  // Chaining methods should not be a big deal given the size of the actions array.
+  const buttons = allActions
+    .slice(0, sliceIndex || undefined)
+    .filter(action => !!action.label)
+    .slice(0, 2);
 
   const actions = {
-    default: allActions.slice(2),
+    default: sliceIndex ? allActions.slice(sliceIndex) : [],
     lending: useLendingActions({ account }),
   };
 

@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import {
   createStackNavigator,
   CardStyleInterpolators,
+  TransitionPresets,
 } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -48,6 +49,7 @@ import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
 import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
 import NotificationCenterNavigator from "./NotificationCenterNavigator";
+import NftNavigator from "./NftNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
@@ -60,6 +62,12 @@ import PortfolioHistory from "../../screens/Portfolio/PortfolioHistory";
 import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
 import PlatformApp from "../../screens/Platform/App";
+import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
+
+import SwapFormSelectAccount from "../../screens/Swap/FormSelection/SelectAccountScreen";
+import SwapFormSelectCurrency from "../../screens/Swap/FormSelection/SelectCurrencyScreen";
+import SwapFormSelectFees from "../../screens/Swap/FormSelection/SelectFeesScreen";
+import SwapFormSelectProviderRate from "../../screens/Swap/FormSelection/SelectProviderRateScreen";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -69,7 +77,12 @@ export default function BaseNavigator() {
     [colors],
   );
   return (
-    <Stack.Navigator mode="modal" screenOptions={stackNavigationConfig}>
+    <Stack.Navigator
+      screenOptions={{
+        ...stackNavigationConfig,
+        ...TransitionPresets.ModalTransition,
+      }}
+    >
       <Stack.Screen
         name={NavigatorName.Main}
         component={Main}
@@ -111,7 +124,56 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Swap}
         component={SwapNavigator}
-        options={{ headerShown: false }}
+        options={{
+          ...stackNavigationConfig,
+          headerStyle: styles.headerNoShadow,
+          headerLeft: null,
+          title: t("transfer.swap.form.tab"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectAccount}
+        component={SwapFormSelectAccount}
+        options={({ route }) => ({
+          headerTitle: () => (
+            <StepHeader
+              title={
+                route.params.target === "from"
+                  ? t("transfer.swap.form.from")
+                  : t("transfer.swap.form.to")
+              }
+            />
+          ),
+          headerRight: null,
+        })}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectCurrency}
+        component={SwapFormSelectCurrency}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
+          headerRight: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapFormSelectProviderRate}
+        component={SwapFormSelectProviderRate}
+        options={{
+          headerTitle: () => (
+            <StepHeader title={t("transfer.swap.form.summary.method")} />
+          ),
+          headerRight: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectFees}
+        component={SwapFormSelectFees}
+        options={{
+          headerTitle: () => (
+            <StepHeader title={t("transfer.swap.form.summary.fees")} />
+          ),
+          headerRight: null,
+        }}
       />
       <Stack.Screen
         name={NavigatorName.Lending}
@@ -332,7 +394,7 @@ export default function BaseNavigator() {
         name={ScreenName.PortfolioOperationHistory}
         component={PortfolioHistory}
         options={{
-          headerTitle: t("portfolio.transactions"),
+          headerTitle: t("tabs.portfolio"),
           headerRight: null,
         }}
       />
@@ -406,6 +468,40 @@ export default function BaseNavigator() {
           headerLeft: null,
           headerRight: () => <CloseButton navigation={navigation} />,
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name={NavigatorName.NftNavigator}
+        component={NftNavigator}
+        options={({ navigation }) => ({
+          title: null,
+          headerRight: null,
+          headerLeft: () => <CloseButton navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name={NavigatorName.Manager}
+        component={ManagerNavigator}
+        options={{
+          tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
+          tabBarTestID: "TabBarManager",
+          headerShown: false,
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault();
+            // NB The default behaviour is not reset route params, leading to always having the same
+            // search query or preselected tab after the first time (ie from Swap/Sell)
+            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+            navigation.navigate(NavigatorName.Manager, {
+              screen: ScreenName.Manager,
+              params: {
+                tab: undefined,
+                searchQuery: undefined,
+                updateModalOpened: undefined,
+              },
+            });
+          },
         })}
       />
       {Object.keys(families).map(name => {

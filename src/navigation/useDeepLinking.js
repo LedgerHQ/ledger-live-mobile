@@ -1,6 +1,8 @@
 // @flow
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import { NavigatorName, ScreenName } from "../const";
 
 function getSettingsScreen(pathname) {
@@ -23,6 +25,9 @@ function getSettingsScreen(pathname) {
     case "experimental":
       screen = ScreenName.ExperimentalSettings;
       break;
+    case "developer":
+      screen = ScreenName.DeveloperSettings;
+      break;
     default:
       screen = ScreenName.Settings;
   }
@@ -31,12 +36,24 @@ function getSettingsScreen(pathname) {
 
 export function useDeepLinkHandler() {
   const { navigate } = useNavigation();
+  const { manifests } = usePlatformApp();
+
+  const filteredManifests = useMemo(() => {
+    const branches = ["stable", "soon"];
+
+    return filterPlatformApps(Array.from(manifests.values()), {
+      version: "0.0.1",
+      platform: "mobile",
+      branches,
+    });
+  }, [manifests]);
 
   const handler = useCallback(
     (deeplink: string) => {
       const { hostname, searchParams, pathname = "" } = new URL(deeplink);
       const query = Object.fromEntries(searchParams);
       const { currency } = query;
+      const path = pathname.replace(/(^\/+|\/+$)/g, "");
 
       switch (hostname) {
         case "accounts":
@@ -73,7 +90,7 @@ export function useDeepLinkHandler() {
           break;
         case "send":
           navigate(NavigatorName.SendFunds, {
-            screen: ScreenName.SendFundsMain,
+            screen: ScreenName.SendCoin,
             params: { currency },
           });
           break;
@@ -84,13 +101,40 @@ export function useDeepLinkHandler() {
           });
           break;
 
+        case "discover": {
+          const dapp =
+            path && filteredManifests.find(m => path.toLowerCase() === m.id);
+
+          navigate(NavigatorName.Platform, {
+            screen: ScreenName.PlatformCatalog,
+            params: dapp
+              ? {
+                  platform: dapp.id,
+                  name: dapp.name,
+                  // $FlowFixMe Nope I want query to be spread last. Sry Flow.
+                  ...query,
+                }
+              : query,
+          });
+
+          break;
+        }
+
+        case "manager": {
+          navigate(NavigatorName.Manager, {
+            screen: ScreenName.Manager,
+            params: query,
+          });
+          break;
+        }
+
         case "portfolio":
         default:
           navigate(NavigatorName.Main, { screen: ScreenName.Portfolio });
           break;
       }
     },
-    [navigate],
+    [navigate, filteredManifests],
   );
 
   return {
