@@ -11,6 +11,7 @@ import LText from "../../../components/LText";
 import FirstLetterIcon from "../../../components/FirstLetterIcon";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
+import ValidatorImage from "../shared/ValidatorImage";
 
 type Props = {
   stakeWithMeta: SolanaStakeWithMeta,
@@ -43,16 +44,24 @@ export default function DelegationRow({
       ]}
       onPress={() => onPress(stakeWithMeta)}
     >
-      <View style={[styles.icon, { backgroundColor: colors.lightLive }]}>
+      <View style={[styles.icon]}>
+        <ValidatorImage size={32} imgUrl={meta.validator?.img} />
+        {/*
+          // view extra style = { backgroundColor: colors.lightLive }
+
         <FirstLetterIcon
-          label={meta.validator?.name ?? stake.delegation?.voteAccAddr}
+          label={meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
         />
+    */}
       </View>
 
       <View style={styles.nameWrapper}>
         <LText semiBold numberOfLines={1}>
-          {meta.validator?.name ?? stake.delegation?.voteAccAddr}
+          {meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
         </LText>
+        <View>
+          <LText>{stake.activation.state}</LText>
+        </View>
 
         <View style={styles.row}>
           <LText style={styles.seeMore} color="live">
@@ -69,6 +78,7 @@ export default function DelegationRow({
             new BigNumber(stake.delegation?.stake || 0),
             {
               showCode: true,
+              disableRounding: true,
             },
           )}
         </LText>

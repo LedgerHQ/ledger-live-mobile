@@ -18,6 +18,7 @@ import {
   useSolanaPreloadData,
   useSolanaStakesWithMeta,
 } from "@ledgerhq/live-common/lib/families/solana/react";
+import { stakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
 import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import {} from "@ledgerhq/live-common/lib/families/cosmos/logic";
@@ -42,6 +43,7 @@ import DelegationLabelRight from "./LabelRight";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CounterValue from "../../../components/CounterValue";
 import DateFromNow from "../../../components/DateFromNow";
+import { capitalize } from "lodash/fp";
 
 type Props = {
   account: Account,
@@ -108,7 +110,7 @@ function Delegations({ account }: Props) {
   const onDelegate = useCallback(() => {
     onNavigate({
       route: NavigatorName.SolanaDelegationFlow,
-      screen: ScreenName.DelegationStarted,
+      screen: ScreenName.DelegationSummary,
       params: {
         delegationAction: {
           kind: "new",
@@ -172,7 +174,13 @@ function Delegations({ account }: Props) {
 
   const data = useMemo<$PropertyType<DelegationDrawerProps, "data">>(() => {
     //const d = delegation || undelegation;
-    const d = delegation;
+    const d: SolanaStakeWithMeta = delegation;
+    //console.log("d is", d);
+    if (!d) {
+      return [];
+    }
+
+    //console.log(d.stake.stakeAccAddr);
 
     //const redelegation = delegation && getRedelegation(account, delegation);
     const redelegation = null;
@@ -252,7 +260,7 @@ function Delegations({ account }: Props) {
                       semiBold
                       style={[styles.valueText]}
                     >
-                      {delegation.formattedPendingRewards ?? ""}
+                      {delegation.stake.stakeAccAddr}
                     </LText>
                   ),
                 },
@@ -313,77 +321,37 @@ function Delegations({ account }: Props) {
       : [];
   }, [delegation, t, account, onOpenExplorer /* undelegation */]);
 
-  const actions = useMemo<DelegationDrawerActions>(() => {
-    const rewardsDisabled =
-      !delegation ||
-      !delegation.pendingRewards ||
-      delegation.pendingRewards.isZero();
+  const delegationActions = useMemo<DelegationDrawerActions>(() => {
+    const actions = (delegation && stakeActions(delegation.stake)) ?? [];
 
-    //const redelegateEnabled = delegation && canRedelegate(account, delegation);
-
-    //const undelegationEnabled = canUndelegate(account);
-    const redelegateEnabled = true;
-    const undelegationEnabled = true;
-
-    return delegation
-      ? [
-          {
-            label: t("delegation.actions.redelegate"),
-            Icon: (props: IconProps) => (
-              <Circle
-                {...props}
-                bg={!redelegateEnabled ? colors.lightFog : colors.fog}
-              >
-                <RedelegateIcon
-                  color={!redelegateEnabled ? colors.grey : undefined}
-                />
-              </Circle>
-            ),
-            disabled: !redelegateEnabled,
-            onPress: onRedelegate,
-            event: "DelegationActionRedelegate",
-          },
-          {
-            label: t("delegation.actions.collectRewards"),
-            Icon: (props: IconProps) => (
-              <Circle
-                {...props}
-                bg={
-                  rewardsDisabled ? colors.lightFog : rgba(colors.yellow, 0.2)
-                }
-              >
-                <ClaimRewardIcon
-                  color={rewardsDisabled ? colors.grey : undefined}
-                />
-              </Circle>
-            ),
-            disabled: rewardsDisabled,
-            onPress: onCollectRewards,
-            event: "DelegationActionCollectRewards",
-          },
-          {
-            label: t("delegation.actions.undelegate"),
-            Icon: (props: IconProps) => (
-              <Circle
-                {...props}
-                bg={
-                  !undelegationEnabled
-                    ? colors.lightFog
-                    : rgba(colors.alert, 0.2)
-                }
-              >
-                <UndelegateIcon
-                  color={!undelegationEnabled ? colors.grey : undefined}
-                />
-              </Circle>
-            ),
-            disabled: !undelegationEnabled,
-            onPress: onUndelegate,
-            event: "DelegationActionUndelegate",
-          },
-        ]
-      : [];
-  }, [t, onRedelegate, onCollectRewards, onUndelegate, delegation, account]);
+    return actions.map(action => {
+      const drawerAction: $ElementType<DelegationDrawerActions, number> = {
+        label: capitalize(action),
+        Icon: (props: IconProps) => (
+          <Circle {...props}>
+            <RedelegateIcon
+            //color={!redelegateEnabled ? colors.grey : undefined}
+            />
+          </Circle>
+        ),
+        event: `DelegationAction${capitalize(action)}`,
+        onPress: () => {
+          onNavigate({
+            route: NavigatorName.SolanaDelegationFlow,
+            screen: ScreenName.DelegationSummary,
+            params: {
+              delegationAction: {
+                kind: "change",
+                stakeWithMeta: delegation,
+                stakeAction: action,
+              },
+            },
+          });
+        },
+      };
+      return drawerAction;
+    });
+  }, [t, delegation, account, onNavigate]);
 
   //const delegationDisabled = delegations.length <= 0 || !canDelegate(account);
   const delegationDisabled = false;
@@ -408,7 +376,7 @@ function Delegations({ account }: Props) {
         )}
         amount={delegation?.amount ?? BigNumber(0)}
         data={data}
-        actions={actions}
+        actions={delegationActions}
       />
       {totalRewardsAvailable.gt(0) && (
         <>
