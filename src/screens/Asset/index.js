@@ -128,7 +128,15 @@ class Asset extends PureComponent<AssetProps, any> {
       portfolio,
       counterValueCurrency,
       accounts,
+      allAccounts,
     } = this.props;
+
+    const account = accounts.length && accounts[0];
+    const parentAccount =
+      account && account.type !== "Account"
+        ? allAccounts.find(a => a.id === account.parentId)
+        : null;
+
     return (
       <View>
         <AssetGraphCard
@@ -143,9 +151,11 @@ class Asset extends PureComponent<AssetProps, any> {
           counterValueCurrency={counterValueCurrency}
           renderTitle={this.renderListHeaderTitle}
         />
-        <View style={[styles.fabActions]}>
-          <FabActions />
-        </View>
+        {account && (
+          <View style={[styles.fabActions]}>
+            <FabActions account={account} parentAccount={parentAccount} />
+          </View>
+        )}
         <AccountDistribution
           accounts={accounts}
           counterValueCurrency={counterValueCurrency}
