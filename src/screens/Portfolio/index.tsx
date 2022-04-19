@@ -34,7 +34,6 @@ import Carousel from "../../components/Carousel";
 import Header from "./Header";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
-import RequireTerms from "../../components/RequireTerms";
 import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
@@ -43,6 +42,8 @@ import Assets from "./Assets";
 import MarketSection from "./MarketSection";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import { useProviders } from "../Swap/SwapEntry";
+import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
+import CheckTermOfUseUpdate from "../../components/CheckTermOfUseUpdate";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -285,7 +286,8 @@ function PortfolioScreen({ navigation }: Props) {
     <>
       <FirmwareUpdateBanner />
       <ContentContainer>
-        <RequireTerms />
+        <CheckLanguageAvailability />
+        <CheckTermOfUseUpdate />
 
         <TrackScreen
           category="Portfolio"

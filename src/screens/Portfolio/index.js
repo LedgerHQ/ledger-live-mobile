@@ -27,7 +27,6 @@ import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
-import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 import { ScreenName } from "../../const";
 import { PortfolioHistoryList } from "./PortfolioHistory";
@@ -36,6 +35,7 @@ import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
+import CheckTermOfUseUpdate from "../../components/CheckTermOfUseUpdate";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
@@ -185,8 +185,8 @@ function PortfolioScreen({ navigation }: Props) {
           />
         ) : null}
 
-        <RequireTerms />
         <CheckLanguageAvailability />
+        <CheckTermOfUseUpdate />
 
         <TrackScreen category="Portfolio" accountsLength={accounts.length} />
 
