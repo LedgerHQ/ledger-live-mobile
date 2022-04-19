@@ -44,6 +44,7 @@ import Assets from "./Assets";
 import MarketSection from "./MarketSection";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import { useProviders } from "../Swap/SwapEntry";
+import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -288,6 +289,7 @@ function PortfolioScreen({ navigation }: Props) {
       <ContentContainer>
         <RatingsModal />
         <RequireTerms />
+        <CheckLanguageAvailability />
 
         <TrackScreen
           category="Portfolio"
