@@ -151,13 +151,13 @@ jobs:
           # disable-animations: true
           script: |
             $ANDROID_HOME/platform-tools/adb devices
-          # adb logcat -c
-          # adb logcat *:E &
             yarn e2e:test -c android.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
         # yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
-         # mkdir ./temp
-         # curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
-         # adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
+        # mkdir ./temp
+        # curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
+        # adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
+        # adb logcat -c
+        # adb logcat *:E &
 
       # - name: Run Android tests (with Test Butler)
       #   if: steps.avd-cache.outputs.cache-hit == 'true'
