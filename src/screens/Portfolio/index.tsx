@@ -288,7 +288,6 @@ function PortfolioScreen({ navigation }: Props) {
       <ContentContainer>
         <CheckLanguageAvailability />
         <CheckTermOfUseUpdate />
-
         <TrackScreen
           category="Portfolio"
           accountsLength={accounts.length}
