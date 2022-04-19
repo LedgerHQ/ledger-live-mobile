@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { Flex, Text, Button } from "@ledgerhq/native-ui";
+import { Linking, Platform } from "react-native";
 import { WebView } from "react-native-webview";
 import InAppReview from "react-native-in-app-review";
 import BottomModal from "./BottomModal";
+import { urls } from "../config/urls";
 
 const RatingsModal = () => {
   const [isOpened, setIsOpened] = useState(true);
@@ -10,7 +12,11 @@ const RatingsModal = () => {
     setIsOpened(false);
   }, [setIsOpened]);
 
-  const onRate = useCallback(async () => {
+  const goToStore = useCallback(() => {
+    Linking.openURL(Platform.OS === "ios" ? "https://apps.apple.com/app/id1361671700?action=write-review" : urls.playstore);
+  }, []);
+
+  const requestInAppReview = useCallback(async () => {
     try {
       const isRatingAvailable = InAppReview.isAvailable();
       console.log("Rating", isRatingAvailable);
@@ -60,7 +66,7 @@ const RatingsModal = () => {
       onClose={onClose}
       // preventBackdropClick
     >
-      <Flex m={4} style={{ height: "100%" }}>
+      <Flex style={{ height: "100%" }}>
         <Text
           variant="h2"
           fontWeight="semiBold"
@@ -75,7 +81,7 @@ const RatingsModal = () => {
           onLoadEnd={(message: any) => console.log("ON LOAD", message)}
           onMessage={(message: any) => console.log("ON MESSAGE", message)}
         />
-        <Button type="color" onPress={onRate}>
+        <Button type="color" onPress={goToStore}>
           Rate
         </Button>
       </Flex>
