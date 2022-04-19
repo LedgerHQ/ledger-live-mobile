@@ -42,13 +42,9 @@ export async function loadConfig(
   navigate(NavigatorName.Base);
 
   console.log("==========> importing accounts");
-  try {
-    if (data.accounts.length) {
-      postMessage({ type: "importAccounts", payload: data.accounts });
-      // await $waitFor("PortfolioAccountsList", -1, 10000);
-    }
-  } catch (error) {
-    console.error({ error });
+  if (data.accounts.length) {
+    postMessage({ type: "importAccounts", payload: data.accounts });
+    // await $waitFor("PortfolioAccountsList", -1, 10000);
   }
 }
 
@@ -108,6 +104,5 @@ function acceptTerms() {
 export function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
-    log(`sent the following message: ${JSON.stringify(message)}`);
   }
 }
