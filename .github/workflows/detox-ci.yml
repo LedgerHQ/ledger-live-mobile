@@ -79,7 +79,7 @@ jobs:
 
       - name: Test iOS app
         timeout-minutes: 15
-        run: yarn e2e:test -c ios.staging
+        run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
 #  --retries 1 --reuse
         
       - name: Upload test artifacts
@@ -136,10 +136,10 @@ jobs:
       #     key: avd-api-29
       
       - name: Build Android app for Detox test run
-        run: yarn e2e:build -c android.staging
+        run: yarn e2e:build -c android.staging 
 
-      - name: Create AVD and generate snapshot for caching
-        timeout-minutes: 30
+      - name: Run Android tests
+        timeout-minutes: 15
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -151,9 +151,9 @@ jobs:
           # disable-animations: true
           script: |
             $ANDROID_HOME/platform-tools/adb devices
-            adb logcat -c
-            adb logcat *:E &
-            yarn e2e:test -c android.staging
+          # adb logcat -c
+          # adb logcat *:E &
+            yarn e2e:test -c android.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
         # yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
          # mkdir ./temp
          # curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
