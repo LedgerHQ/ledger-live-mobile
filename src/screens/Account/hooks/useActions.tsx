@@ -34,6 +34,9 @@ export default function useActions({ account, parentAccount, colors }: Props) {
   const decorators = perFamilyAccountActions[mainAccount?.currency?.family];
 
   const isEthereum = currency.id === "ethereum";
+  const isWalletConnectSupported = ["ethereum", "bsc", "polygon"].includes(
+    currency.id,
+  );
 
   const accountId = account.id;
 
@@ -123,7 +126,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
           },
         ]
       : []),
-    ...(isEthereum
+    ...(isWalletConnectSupported
       ? [
           {
             navigationParams: [
