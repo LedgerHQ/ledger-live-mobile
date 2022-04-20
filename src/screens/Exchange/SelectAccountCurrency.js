@@ -1,27 +1,27 @@
 // @flow
 
-import React, { useCallback } from "react";
-import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
-import { useTranslation } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type {
   Account,
   AccountLike,
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
-import LText from "../../components/LText";
-import CurrencyRow from "../../components/CurrencyRow";
-import DropdownArrow from "../../icons/DropdownArrow";
-import AccountCard from "../../components/AccountCard";
-import { useCurrencyAccountSelect } from "./hooks";
-import { accountsSelector } from "../../reducers/accounts";
-import { NavigatorName, ScreenName } from "../../const";
-import Button from "../../components/Button";
 import { track } from "../../analytics";
+import AccountCard from "../../components/AccountCard";
+import Button from "../../components/Button";
+import CurrencyRow from "../../components/CurrencyRow";
+import LText from "../../components/LText";
+import { NavigatorName, ScreenName } from "../../const";
+import DropdownArrow from "../../icons/DropdownArrow";
+import { accountsSelector } from "../../reducers/accounts";
+import { useCurrencyAccountSelect } from "./hooks";
 
 type Props = {
   flow: string,
@@ -76,7 +76,7 @@ export default function SelectAccountCurrency({
         onCurrencyChange,
       },
     });
-  }, [navigation, account, flow, onCurrencyChange]);
+  }, [navigation, flow, onCurrencyChange]);
 
   const onSelectAccount = useCallback(() => {
     navigation.navigate(NavigatorName.ExchangeBuyFlow, {
@@ -109,7 +109,21 @@ export default function SelectAccountCurrency({
         },
       );
     }
-  }, [account, currency, navigation]);
+  }, [account, currency, flow, navigation]);
+
+  const onAddAccount = useCallback(() => {
+    if (currency && currency.type === "TokenCurrency") {
+      navigation.navigate(NavigatorName.AddAccounts, {
+        token: currency,
+        analyticsPropertyFlow: flow,
+      });
+    } else {
+      navigation.navigate(NavigatorName.AddAccounts, {
+        currency,
+        analyticsPropertyFlow: flow,
+      });
+    }
+  }, [currency, flow, navigation]);
 
   return (
     <View style={styles.body}>
@@ -201,9 +215,7 @@ export default function SelectAccountCurrency({
             containerStyle={styles.button}
             type={"primary"}
             title={t("exchange.buy.emptyState.CTAButton")}
-            onPress={() =>
-              navigation.navigate(NavigatorName.AddAccounts, { currency })
-            }
+            onPress={onAddAccount}
           />
         )}
       </View>

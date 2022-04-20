@@ -1,23 +1,23 @@
 /* @flow */
 
-import React, { useCallback, useMemo } from "react";
-import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { accountWithMandatoryTokens } from "@ledgerhq/live-common/lib/account/helpers";
-import { useTheme } from "@react-navigation/native";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
+import React, { useCallback, useMemo } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import { TrackScreen } from "../../analytics";
-import LText from "../../components/LText";
-import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
+import Button from "../../components/Button";
+import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
-import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
+import LText from "../../components/LText";
+import { NavigatorName, ScreenName } from "../../const";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
+import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import InfoIcon from "../../icons/Info";
 import PlusIcon from "../../icons/Plus";
-import Button from "../../components/Button";
-import { NavigatorName, ScreenName } from "../../const";
 import type { AccountTuple } from "./hooks";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
@@ -30,7 +30,7 @@ type Props = {
       currency: CryptoCurrency | TokenCurrency,
       onAccountChange: (selectedAccount: Account | AccountLike) => void,
       tuples: AccountTuple[],
-      analyticsPropertyFlow?: any,
+      analyticsPropertyFlow?: string,
     },
   },
 };
@@ -123,6 +123,20 @@ export default function SelectAccount({ navigation, route }: Props) {
     [allAccounts],
   );
 
+  const onAddAccount = useCallback(() => {
+    if (currency && currency.type === "TokenCurrency") {
+      navigation.navigate(NavigatorName.AddAccounts, {
+        token: currency,
+        analyticsPropertyFlow,
+      });
+    } else {
+      navigation.navigate(NavigatorName.AddAccounts, {
+        currency,
+        analyticsPropertyFlow,
+      });
+    }
+  }, [analyticsPropertyFlow, currency, navigation]);
+
   const renderList = useCallback(
     items => {
       // $FlowFixMe seriously WTF (60 errors just on this 😱)
@@ -141,26 +155,14 @@ export default function SelectAccount({ navigation, route }: Props) {
               outline={false}
               IconLeft={PlusIcon}
               title={t("exchange.buy.emptyState.CTAButton")}
-              onPress={() =>
-                navigation.navigate(NavigatorName.AddAccounts, {
-                  currency,
-                  analyticsPropertyFlow,
-                })
-              }
+              onPress={onAddAccount}
             />
           }
           keyboardDismissMode="on-drag"
         />
       );
     },
-    [
-      renderItem,
-      navigation,
-      currency,
-      t,
-      enhancedAccounts,
-      analyticsPropertyFlow,
-    ],
+    [enhancedAccounts, renderItem, t, onAddAccount],
   );
 
   // empty state if no accounts available for this currency
@@ -186,14 +188,7 @@ export default function SelectAccount({ navigation, route }: Props) {
             event="ExchangeStartBuyFlow"
             type="primary"
             title={t("exchange.buy.emptyState.CTAButton")}
-            onPress={() =>
-              navigation.navigate(NavigatorName.AddAccounts, {
-                ...(currency.type === "TokenCurrency"
-                  ? { token: currency }
-                  : { currency }),
-                analyticsPropertyFlow,
-              })
-            }
+            onPress={onAddAccount}
           />
         </View>
       </View>
