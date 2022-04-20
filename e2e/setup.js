@@ -1,13 +1,9 @@
 import { execSync } from "child_process";
 import * as bridge from "./bridge/server";
 
-beforeAll(async () => {
-  // console.log("==============> LAUNCH APP BEFORE ALL");
-  // await device.launchApp({ newInstance: true });
-
+beforeAll(() => {
   console.log("==============> STARTING BRIDGE INIT");
   bridge.init();
-  // await device.launchApp();
 
   console.log("==============> SETTING UP DEMO MODE");
   setupDemoModeForScreenshots();
