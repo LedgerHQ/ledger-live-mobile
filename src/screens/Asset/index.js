@@ -6,42 +6,43 @@ import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
+import { isCountervalueEnabled } from "@ledgerhq/live-common/lib/countervalues/modules";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type {
   Account,
   Currency,
   Operation,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
-import { isCountervalueEnabled } from "@ledgerhq/live-common/lib/countervalues/modules";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import React, { PureComponent, useMemo } from "react";
-import { StyleSheet, View, SectionList } from "react-native";
 import { useRoute, useTheme } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
+import React, { PureComponent, useMemo } from "react";
+import { SectionList, StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import CurrencyIcon from "../../components/CurrencyIcon";
-import { switchCountervalueFirst } from "../../actions/settings";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
-import LText from "../../components/LText";
-import Touchable from "../../components/Touchable";
-import AssetGraphCard from "../../components/AssetGraphCard";
-import type { RenderTitle } from "../../components/AssetGraphCard";
+import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
+import { useDispatch, useSelector } from "react-redux";
 import { useCurrencyPortfolio } from "../../actions/portfolio";
+import { switchCountervalueFirst } from "../../actions/settings";
+import AccountDistribution from "../../components/AccountDistribution";
+import type { RenderTitle } from "../../components/AssetGraphCard";
+import AssetGraphCard from "../../components/AssetGraphCard";
+import CurrencyIcon from "../../components/CurrencyIcon";
+import CurrencyUnitValue from "../../components/CurrencyUnitValue";
+import FabActions from "../../components/FabActions";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import LoadingFooter from "../../components/LoadingFooter";
+import LText from "../../components/LText";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
 import NoOperationFooter from "../../components/NoOperationFooter";
-import AccountDistribution from "../../components/AccountDistribution";
 import OperationRow from "../../components/OperationRow";
 import SectionHeader from "../../components/SectionHeader";
+import Touchable from "../../components/Touchable";
+import { withDiscreetMode } from "../../context/DiscreetModeContext";
 import { accountsSelector } from "../../reducers/accounts";
 import {
   counterValueCurrencySelector,
   countervalueFirstSelector,
   selectedTimeRangeSelector,
 } from "../../reducers/settings";
-import { withDiscreetMode } from "../../context/DiscreetModeContext";
 
 const List = globalSyncRefreshControl(SectionList);
 
@@ -127,7 +128,15 @@ class Asset extends PureComponent<AssetProps, any> {
       portfolio,
       counterValueCurrency,
       accounts,
+      allAccounts,
     } = this.props;
+
+    const account = accounts.length && accounts[0];
+    const parentAccount =
+      account && account.type !== "Account"
+        ? allAccounts.find(a => a.id === account.parentId)
+        : null;
+
     return (
       <View>
         <AssetGraphCard
@@ -142,6 +151,11 @@ class Asset extends PureComponent<AssetProps, any> {
           counterValueCurrency={counterValueCurrency}
           renderTitle={this.renderListHeaderTitle}
         />
+        {account && (
+          <View style={[styles.fabActions]}>
+            <FabActions account={account} parentAccount={parentAccount} />
+          </View>
+        )}
         <AccountDistribution
           accounts={accounts}
           counterValueCurrency={counterValueCurrency}
@@ -302,5 +316,11 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     alignItems: "flex-start",
     height: 44,
+  },
+  fabActions: {
+    height: 56,
+    width: "100%",
+    alignContent: "flex-start",
+    justifyContent: "flex-start",
   },
 });
