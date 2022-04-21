@@ -1,6 +1,7 @@
 package com.ledger.live;
 
 import com.wix.detox.Detox;
+import com.wix.detox.config.DetoxConfig;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,6 +20,10 @@ public class DetoxTest {
 
     @Test
     public void runDetoxTests() {
-        Detox.runTests(mActivityRule);
+        // TestButlerProbe.assertReadyIfInstalled();
+
+        DetoxConfig detoxConfig = new DetoxConfig();
+
+        Detox.runTests(mActivityRule, detoxConfig);
     }
 }
