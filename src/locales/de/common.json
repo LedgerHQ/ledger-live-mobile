@@ -2675,7 +2675,7 @@
       "title": "Konto hinzufügen abbrechen",
       "desc": "Sind Sie sicher, dass Sie das Hinzufügen von Konten abbrechen möchten?"
     },
-    "imported": "Asset added successfully",
+    "imported": "Vermögenswert erfolgreich hinzugefügt",
     "sections": {
       "importable": {
         "title": "Vorhandenes Konto hinzufügen"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "Ihre Konten anzeigen oder andere Konten hinzufügen",
-      "secondaryCTA": "Add new asset",
-      "cta": "See your asset"
+      "secondaryCTA": "Neuen Vermögenswert hinzufügen",
+      "cta": "Ihre Vermögenswerte anzeigen"
     },
     "stopScanning": "Scannen stoppen",
     "retryScanning": "Scanversuch wiederholen",
@@ -2791,12 +2791,12 @@
     "title": "Neues Gerät koppeln",
     "bluetooth": {
       "title": "Über Bluetooth verbinden...",
-      "label": "Automatically detect your Nano"
+      "label": "Nano automatisch erkennen"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "Mit Bluetooth verbinden",
     "headerDescription": "Bitte stellen Sie sicher, dass Ihr {{productName}} entsperrt ist, wenn Bluetooth aktiviert ist",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "... oder USB-Kabel anschließen",
+    "usbLabel": "Stecken Sie Ihr Kabel an und geben Sie Ihren PIN-Code auf Ihrem Gerät ein",
     "withoutDeviceHeader": "Ich habe mein Gerät nicht dabei",
     "withoutDevice": "Weiter ohne mein Gerät",
     "steps": {
