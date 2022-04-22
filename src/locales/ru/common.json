@@ -3985,7 +3985,7 @@
   },
   "walletconnect": {
     "scan": "Сканировать QR-код WalletConnect",
-    "disclaimer": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:",
+    "disclaimer": "Собирается подключиться к этому Ethereum-счёту через ваш кошелёк:",
     "reject": "Отклонить",
     "connect": "Подключить",
     "connected": "Подключено",
