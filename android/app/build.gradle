@@ -247,6 +247,8 @@ dependencies {
     // Adjust
     compile 'com.google.android.gms:play-services-analytics:10.0.1'
     compile 'com.android.installreferrer:installreferrer:1.0'
+
+    implementation files("../../node_modules/react-native-tor/android/libs/sifir_android.aar")
 }
 
 // Run this once to be able to run the application with BUCK
