@@ -353,6 +353,18 @@ export const ScreenName = {
 
   DiscoverScreen: "DiscoverScreen",
   Learn: "Learn",
+
+  GetPaidConfirmation: "GetPaidConfirmation",
+  GetPaidSelectAmount: "GetPaidSelectAmount",
+  GetPaidConnectDevice: "GetPaidConnectDevice",
+  GetPaidSelectAccount: "GetPaidSelectAccount",
+
+  PaySelectAccount: "PaySelectAccount",
+  PaySummary: "PaySummary",
+  PaySelectDevice: "PaySelectDevice",
+  PayConnectDevice: "PayConnectDevice",
+  PayValidationSuccess: "PayValidationSuccess",
+  PayValidationError: "PayValidationError",
 };
 
 export const NavigatorName = {
@@ -389,6 +401,8 @@ export const NavigatorName = {
   PasswordModifyFlow: "PasswordModifyFlow",
   Platform: "Platform",
   ReceiveFunds: "ReceiveFunds",
+  GetPaidFunds: "GetPaidFunds",
+  PayFunds: "PayFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",
   SignMessage: "SignMessage",

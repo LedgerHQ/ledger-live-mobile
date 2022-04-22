@@ -2033,6 +2033,45 @@
       "noResultsFound": "No crypto asset found",
       "noResultsDesc": "Please verify the spelling and try again"
     },
+    "getPaid": {
+      "title": "Get Paid",
+      "titleReadOnly": "Unverified address",
+      "headerTitle": "Select Crypto",
+      "titleSelectAmount": "Select amount",
+      "titleDevice": "Connect device",
+      "titleConfirmation": "Share link",
+      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
+      "verifyPending": "Please verify that the {{currencyName}} address displayed on your Ledger device exactly matches the one displayed on your phone.",
+      "verified": "Address confirmed. Check again if you copied or scanned it.",
+      "verifyAgain": "Check again",
+      "noAccount": "No account found",
+      "address": "Address for account",
+      "copyAddress": "Copy address",
+      "shareAddress": "Share address",
+      "addressCopied": "Address copied!",
+      "taprootWarning": "Make sure the sender supports taproot",
+      "notSynced": {
+        "text": "Synchronizing",
+        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+      },
+      "readOnly": {
+        "title": "Receive",
+        "text": "Please be careful",
+        "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
+        "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
+      },
+      "selectAmount": {
+        "placeholder": "Add a message (optional)"
+      },
+      "noResultsFound": "No crypto asset found",
+      "noResultsDesc": "Please verify the spelling and try again"
+    },
+    "pay": {
+      "headerTitle": "Pay",
+      "titleSummary": "Review payment",
+      "titleDevice": "Secure payment",
+      "titleConfirmation": "Payment confirmation"
+    },
     "exchange": {
       "title": "Buy / Sell"
     },
@@ -2451,6 +2490,108 @@
     "loading": "Searching devices..."
   },
   "send": {
+    "tooMuchUTXOBottomModal": {
+      "cta": "Continue",
+      "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+      "title": "UTXO message"
+    },
+    "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
+    "scan": {
+      "title": "Scan QR code",
+      "descBottom": "Please center the QR code inside the square.",
+      "fallback": {
+        "header": "Scan QR code",
+        "title": "Enable camera",
+        "desc": "Please enable Camera in Settings to scan QR codes.",
+        "buttonTitle": "Go to Settings"
+      }
+    },
+    "stepperHeader": {
+      "selectAccount": "Account to debit",
+      "recipientAddress": "Recipient address",
+      "selectAmount": "Amount",
+      "summary": "Summary",
+      "selectDevice": "Select device",
+      "connectDevice": "Connect device",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}",
+      "quantity": "Quantity",
+      "selectCollection": "Collection",
+      "selectNft": "NFT"
+    },
+    "recipient": {
+      "scan": "Scan QR code",
+      "enterAddress": "Enter address",
+      "input": "Enter address",
+      "verifyAddress": "Please verify the address matches the one shared by the recipient."
+    },
+    "amount": {
+      "available": "Total available",
+      "useMax": "Use max",
+      "loadingNetwork": "Loading network fees...",
+      "noRateProvider": "Not available",
+      "quantityAvailable": "Quantity available"
+    },
+    "summary": {
+      "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+      "tag": "Tag (Optional)",
+      "validateTag": "Validate tag",
+      "total": "Total",
+      "amount": "Amount",
+      "from": "From",
+      "to": "To",
+      "infoTotalTitle": "Total debit",
+      "infoTotalDesc": "Includes transaction amount and the selected network fees",
+      "gasLimit": "Gas limit",
+      "gasPrice": "Gas price",
+      "maxFees": "Max fees",
+      "validateGasLimit": "Validate gas limit",
+      "fees": "Fees",
+      "validateFees": "Validate Fees",
+      "customizeFees": "Customize Fees",
+      "memo": {
+        "title": "Memo",
+        "type": "Memo type",
+        "value": "Memo value"
+      },
+      "validateMemo": "Validate memo",
+      "quantity": "Quantity"
+    },
+    "validation": {
+      "message": "On your device, confirm the transaction to sign it securely.",
+      "sent": "Transaction sent",
+      "amount": "Amount",
+      "fees": "Fees",
+      "confirm": "Your account balance will be updated once the network confirms the transaction.",
+      "button": {
+        "details": "View details",
+        "retry": "Retry"
+      }
+    },
+    "fees": {
+      "title": "Network fees",
+      "validate": "Confirm",
+      "required": "Fees are required",
+      "chooseGas": "Choose a gas price",
+      "higherFaster": "Higher gas price means a faster confirmation.",
+      "edit": {
+        "title": "Choose unit"
+      },
+      "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction"
+    },
+    "verification": {
+      "streaming": {
+        "accurate": "Loading... ({{percentage}})",
+        "inaccurate": "Loading..."
+      }
+    },
+    "info": {
+      "maxSpendable": {
+        "title": "Max spendable amount",
+        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
+      }
+    }
+  },
+  "pay": {
     "tooMuchUTXOBottomModal": {
       "cta": "Continue",
       "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",

@@ -84,10 +84,11 @@ export default function ReceiveFunds({ navigation, route }: Props) {
           account,
           accountId: account.id,
           parentId: account.type !== "Account" ? account.parentId : undefined,
+          ...route.params,
         });
       }
     },
-    [minBalance, navigation, next],
+    [minBalance, navigation, next, route.params],
   );
 
   return (

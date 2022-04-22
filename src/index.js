@@ -319,6 +319,15 @@ const linkingOptions = {
               [ScreenName.SendCoin]: "send",
             },
           },
+          [NavigatorName.PayFunds]: {
+            screens: {
+              /**
+               * @params ?currency: string
+               * ie: "ledgerlive://pay?currency=bitcoin&data=..." will open the prefilled search account in the  pay flow
+               */
+              [ScreenName.PaySelectAccount]: "pay",
+            },
+          },
           [NavigatorName.ExchangeBuyFlow]: {
             screens: {
               /**

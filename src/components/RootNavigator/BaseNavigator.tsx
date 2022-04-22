@@ -78,6 +78,8 @@ import BuyDeviceScreen from "../../screens/BuyDeviceScreen";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import Learn from "../../screens/Learn";
 import ManagerMain from "../../screens/Manager/Manager";
+import GetPaidFundsNavigator from "./GetPaidNavigator";
+import PayFundsNavigator from "./PayNavigator";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -114,6 +116,16 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.GetPaidFunds}
+        component={GetPaidFundsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.PayFunds}
+        component={PayFundsNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

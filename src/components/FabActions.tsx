@@ -37,6 +37,7 @@ type FabAccountActionsProps = {
   parentAccount?: Account;
 };
 
+const iconGetPaid = Icons.HandHoldingCoinMedium;
 const iconBuy = Icons.PlusMedium;
 const iconSwap = Icons.BuyCryptoMedium;
 const iconReceive = Icons.ArrowBottomMedium;
@@ -267,6 +268,18 @@ const FabActions = ({ areAccountsEmpty = false }: FabActionsProps) => {
   const hasAccounts = accountsCount > 0;
 
   const actions: ActionButton[] = useMemo(() => {
+    const actionButtonGetPaid: ActionButton = {
+      event: "TransferExchange",
+      label: t("transfer.getPaid.title"),
+      Icon: iconGetPaid,
+      navigationParams: [
+        NavigatorName.GetPaidFunds,
+        {
+          screen: ScreenName.GetPaidSelectAccount,
+        },
+      ],
+    };
+
     const actionButtonBuy: ActionButton = {
       event: "TransferExchange",
       label: t("exchange.buy.tabTitle"),
@@ -321,6 +334,7 @@ const FabActions = ({ areAccountsEmpty = false }: FabActionsProps) => {
     };
 
     return [
+      actionButtonGetPaid,
       ...(hasAccounts && !readOnlyModeEnabled
         ? [actionButtonTransferSwap]
         : []),
