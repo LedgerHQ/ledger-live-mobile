@@ -2675,7 +2675,7 @@
       "title": "계정 추가 취소",
       "desc": "계정 추가를 취소할까요?"
     },
-    "imported": "Asset added successfully",
+    "imported": "자산이 성공적으로 추가되었습니다",
     "sections": {
       "importable": {
         "title": "기존 계정 추가"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "귀하의 계정을 보거나 다른 계정을 추가하세요",
-      "secondaryCTA": "Add new asset",
-      "cta": "See your asset"
+      "secondaryCTA": "새 자산 추가",
+      "cta": "자산 보기"
     },
     "stopScanning": "스캔 중단",
     "retryScanning": "스캔 재시도",
@@ -2791,12 +2791,12 @@
     "title": "새로운 장치 페어링",
     "bluetooth": {
       "title": "블루투스로 연결...",
-      "label": "Automatically detect your Nano"
+      "label": "자동으로 귀하의 Nano 장치 감지"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "블루투스와 페어링",
     "headerDescription": "{{productName}}(이)가 잠금 해제 상태이며 블루투스 기능이 켜져 있는지 확인하세요.",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "... 또는 USB 케이블 연결",
+    "usbLabel": "케이블을 연결하고 장치에 PIN 코드를 입력하십시오",
     "withoutDeviceHeader": "현재 장치를 가지고 있지 않습니다",
     "withoutDevice": "내 장치 없이 계속합니다",
     "steps": {
