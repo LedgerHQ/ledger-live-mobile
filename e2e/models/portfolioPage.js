@@ -10,6 +10,6 @@ export default class PortfolioPage {
   }
 
   static async emptyPortfolioIsVisible() {
-    await testHelpers.verifyTextIsVisible("Install an app on my device");
+    await testHelpers.verifyTextIsVisible("Add asset");
   }
 }

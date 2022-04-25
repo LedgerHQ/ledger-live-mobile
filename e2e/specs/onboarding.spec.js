@@ -14,18 +14,19 @@ describe("Onboarding", () => {
   it("should be able to connect a Nano X", async () => {
     console.log("==============> STARTING ONBOARDING TEST");
     await OnboardingSteps.waitForPageToBeVisible();
-    await OnboardingSteps.getStarted();
+    await OnboardingSteps.startOnboarding();
     // await OnboardingSteps.acceptTerms();
     await OnboardingSteps.chooseToSetupLedger();
-    await OnboardingSteps.selectDevice("nanoX");
-    await OnboardingSteps.connectYourNano();
-    await OnboardingSteps.checkTheContentsOfThisBox();
-    await OnboardingSteps.letsPairMyNano();
+    await OnboardingSteps.selectYourDevice("nanoX");
+    await OnboardingSteps.chooseToConnectYourNano();
+    await OnboardingSteps.verifyContentsOfBoxAreChecked();
+    await OnboardingSteps.chooseToPairMyNano();
     // await OnboardingSteps.addNewNano();
-    await OnboardingSteps.pairWithBluetooth();
+    await OnboardingSteps.selectPairWithBluetooth();
     await OnboardingSteps.addDeviceViaBluetooth();
     await OnboardingSteps.openLedgerLive();
 
+    await PortfolioPage.waitForPageToBeVisible();
     await PortfolioPage.emptyPortfolioIsVisible();
 
     // const image = await device.takeScreenshot("nanoX-onboarding-snapshot");

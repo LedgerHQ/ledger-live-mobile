@@ -6,7 +6,7 @@ export default class OnboardingSteps {
     await testHelpers.waitForElement("Onboarding - Start");
   }
 
-  static async getStarted() {
+  static async startOnboarding() {
     await testHelpers.tap("Onboarding - Start");
   }
 
@@ -19,11 +19,11 @@ export default class OnboardingSteps {
   //   await testHelpers.tap("Proceed");
   // }
 
-  static async selectDevice(device) {
+  static async selectYourDevice(device) {
     await testHelpers.tap(`Onboarding Device - Selection|${device}`);
   }
 
-  static async connectYourNano() {
+  static async chooseToConnectYourNano() {
     // scroll probably not needed now
     // await testHelpers.scrollToElementById(
     //   `Onboarding - Connect|${device}`,
@@ -37,12 +37,12 @@ export default class OnboardingSteps {
     await testHelpers.tap(`Onboarding - Connect`);
   }
 
-  static async checkTheContentsOfThisBox() {
+  static async verifyContentsOfBoxAreChecked() {
     // await testHelpers.delay(1000);
     await testHelpers.tap("Onboarding - Seed warning");
   }
 
-  static async letsPairMyNano() {
+  static async chooseToPairMyNano() {
     await testHelpers.tap("Onboarding - Pair New Nano");
   }
 
@@ -50,7 +50,7 @@ export default class OnboardingSteps {
   //   await testHelpers.tap("Proceed");
   // }
 
-  static async pairWithBluetooth() {
+  static async selectPairWithBluetooth() {
     await testHelpers.tap("Onboarding - Pair with Bluetooth");
   }
 

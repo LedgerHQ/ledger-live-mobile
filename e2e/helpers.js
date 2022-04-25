@@ -99,7 +99,7 @@ export async function verifyTextIsVisible(text) {
 export function delay(ms) {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve();
+      resolve("delay complete");
     }, ms);
   });
 }
