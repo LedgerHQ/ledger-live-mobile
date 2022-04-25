@@ -56,11 +56,11 @@ export default class OnboardingSteps {
 
   static async addDeviceViaBluetooth() {
     console.log(`==================> Adding device`);
-    const [david] = bridge.addDevices();
+    bridge.addDevices();
 
     console.log(`==================> tapping David's device`);
     await testHelpers.delay(5000);
-    await testHelpers.tap(`DeviceItemEnter ${david}`);
+    await testHelpers.tapByText("Nano X de David");
     // await testHelpers.waitAndTap(`DeviceItemEnter ${david}`);
 
     // set globally installed apps on device?
@@ -80,10 +80,10 @@ export default class OnboardingSteps {
 
     // wait for flaky 'device authentication check screen'
     await testHelpers.delay(5000);
-    await testHelpers.tap("Proceed");
   }
 
   static async openLedgerLive() {
-    await testHelpers.tapByText("Open Ledger Live");
+    await testHelpers.tapByText("Continue");
+    // await testHelpers.tapByText("Open Ledger Live");
   }
 }

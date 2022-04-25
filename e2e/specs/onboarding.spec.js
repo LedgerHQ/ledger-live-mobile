@@ -20,7 +20,7 @@ describe("Onboarding", () => {
     await OnboardingSteps.selectDevice("nanoX");
     await OnboardingSteps.connectYourNano();
     await OnboardingSteps.checkTheContentsOfThisBox();
-    await OnboardingSteps.startPairing();
+    await OnboardingSteps.letsPairMyNano();
     // await OnboardingSteps.addNewNano();
     await OnboardingSteps.pairWithBluetooth();
     await OnboardingSteps.addDeviceViaBluetooth();
