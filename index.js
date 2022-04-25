@@ -37,6 +37,8 @@ const excludedErrorName = [
   "DisconnectedDeviceDuringOperation",
 ];
 const excludedErrorDescription = [
+  // networking
+  /timeout of .* exceeded/,
   // base usage of device
   /Device .* was disconnected/,
   "Invalid channel",
