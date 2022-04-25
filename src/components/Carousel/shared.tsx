@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import { urls } from "../../config/urls";
 import Slide from "./Slide";
 import Illustration from "../../images/illustration/Illustration";
+import { width } from "../../helpers/normalizeSize";
 
 const illustrations = {
   dark: {
@@ -25,6 +26,7 @@ const illustrations = {
   },
 };
 
+/*
 const AcademySlide = {
   url: urls.banners.ledgerAcademy,
   name: "takeTour",
@@ -45,6 +47,7 @@ const AcademySlide = {
     height: 93,
   },
 };
+*/
 
 const BuySlide = {
   url: "ledgerlive://buy",
@@ -176,15 +179,10 @@ const FamilyPackXSlide = {
 
 export const SLIDES =
   Platform.OS === "ios"
-    ? [SwapSlide, BuySlide, MarketSlide, FamilyPackXSlide, AcademySlide]
-    : [
-        SwapSlide,
-        LidoSlide,
-        BuySlide,
-        MarketSlide,
-        FamilyPackXSlide,
-        AcademySlide,
-      ];
+    ? [SwapSlide, BuySlide, MarketSlide, FamilyPackXSlide]
+    : [SwapSlide, LidoSlide, BuySlide, MarketSlide, FamilyPackXSlide];
+
+export const WIDTH = width * 0.8;
 
 export const getDefaultSlides = () =>
   SLIDES.map((slide: any) => ({
@@ -199,6 +197,7 @@ export const getDefaultSlides = () =>
         image={slide.image}
         icon={slide.icon}
         position={slide.position}
+        width={WIDTH}
       />
     ),
   }));

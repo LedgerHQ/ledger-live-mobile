@@ -2,8 +2,13 @@ import React, { useCallback } from "react";
 import { Linking, Image } from "react-native";
 import { Flex, Text, Link as TextLink, Icons } from "@ledgerhq/native-ui";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components/native";
 import Touchable from "../Touchable";
 import { track } from "../../analytics";
+
+const StyledTouchable = styled(Touchable)`
+  flex: 1;
+`;
 
 type SlideProps = {
   url: string;
@@ -14,6 +19,7 @@ type SlideProps = {
   image: any;
   icon: any;
   position: any;
+  width: number;
 };
 
 const Slide = ({
@@ -25,6 +31,7 @@ const Slide = ({
   image,
   icon,
   position,
+  width,
 }: SlideProps) => {
   const { t } = useTranslation();
   const onClick = useCallback(() => {
@@ -34,10 +41,10 @@ const Slide = ({
     Linking.openURL(url);
   }, [url]);
   return (
-    <Touchable event={`${name} Carousel`} onPress={onClick}>
+    <StyledTouchable event={`${name} Carousel`} onPress={onClick}>
       <Flex
-        width={"350px"}
-        height={"125px"}
+        width={width}
+        flex={1}
         borderRadius={2}
         borderWidth={"1px"}
         borderColor={"neutral.c40"}
@@ -45,7 +52,7 @@ const Slide = ({
         flexDirection={"row"}
         p={6}
       >
-        <Flex width={"200px"} alignItems="flex-start">
+        <Flex alignItems="flex-start" flex={1}>
           <Text variant={"subtitle"} fontSize={11} color={"neutral.c60"}>
             {t(title)}
           </Text>
@@ -71,11 +78,11 @@ const Slide = ({
               source={image}
             />
           ) : icon ? (
-            <Flex width={"110px"}>{icon}</Flex>
+            <Flex>{icon}</Flex>
           ) : null}
         </Flex>
       </Flex>
-    </Touchable>
+    </StyledTouchable>
   );
 };
 

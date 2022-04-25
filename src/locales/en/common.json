@@ -737,9 +737,9 @@
         "cta": "Buy now"
       },
       "familyPackX": {
-        "title": "Family pack LNX",
+        "title": "Ledger Nano X Family pack",
         "description": "Discounted Nano X 3-pack, perfect for gifts or backups",
-        "cta": "Buy now"
+        "cta": "Save now"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
@@ -785,23 +785,23 @@
   },
   "buyDevice": {
     "0": {
-      "title": "Gain financial freedom",
+      "title": "It's your money. Own it.",
       "desc": "Take charge and unlock the freedom to manage your crypto on your own."
     },
     "1": {
-      "title": "Access a world of Defi",
+      "title": "Access DeFi and NFTs",
       "desc": "Securely interact with our trusted DeFi applications directly from the app."
     },
     "2": {
-      "title": "Your one stop shop for crypto",
+      "title": "Your key to Web3",
       "desc": "You can buy, sell and swap major cryptocurrencies from our partners safely with your Ledger."
     },
     "3": {
-      "title": "Peace of mind with certified security",
+      "title": "Certified security",
       "desc": "Our products are the only hardware wallets certified for their security by national cyber security agencies."
     },
     "title": "GET YOUR LEDGER",
-    "desc": "Protect your cryptocurrencies with industry-leading security",
+    "desc": "Protect your crypto & NFTs with industry-leading security",
     "cta": "Buy your Ledger now",
     "footer": "I already have a device, set it up now"
   },
@@ -812,11 +812,11 @@
     "sections": {
       "learn": {
         "title": "Learn",
-        "desc": "Educate yourself about web3 and stay informed"
+        "desc": "Learn about crypto, NFTs, digital security and more"
       },
       "ledgerApps": {
         "title": "Apps",
-        "desc": "Explore Ledger’s integrated apps all in one place"
+        "desc": "Explore Ledger's partner apps all in one place"
       },
       "earn": {
         "title": "Earn",
@@ -839,13 +839,16 @@
       "and": "and"
     },
     "postWelcomeStep": {
-      "title": "It’s your choice",
-      "subtitle": "You can choose to set up your Ledger now or take a look around the ledger live app first.",
+      "title": "Let’s get started",
+      "subtitle": "Set up your Ledger or buy one now.",
       "noLedgerLink": "I don’t have a Ledger and I would like to buy one",
       "setupLedger": {
         "title": "Set up my Ledger",
-        "subtitle": "Secure your crypto now",
-        "label": "30 mins"
+        "subtitle": "We’ll guide your every step to secure your crypto and NFTs"
+      },
+      "buyNano": {
+        "title": "Buy a Ledger Nano X",
+        "subtitle": "Your key to Web3 — Unlock the freedom to control your assets"
       },
       "discoverLedger": {
         "title": "Discover Ledger Live",
@@ -879,7 +882,7 @@
     "stepSelectDevice": {
       "title": "Select your device",
       "nanoS": "Nano S",
-      "nanoSP": "Nano S+",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "Blue",
       "chooseDevice": "Choose your device"
@@ -890,7 +893,8 @@
       "firstUse": {
         "title": "First time using your Nano?",
         "subTitle": "Set up a new Nano",
-        "desc": "Let’s start and set up your device!"
+        "desc": "Let’s start and set up your device!",
+        "label": "30 mins"
       },
       "devicePairing": {
         "title": "Already have a recovery phrase?",
@@ -1048,7 +1052,7 @@
         "title": "Recovery phrase",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
         "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Recovery phrase",
+        "cta": "Next step",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
@@ -1102,7 +1106,8 @@
             "label": "Never share your 24 words with anyone, not even with Ledger."
           }
         },
-        "cta": "OK, I’m done!",
+        "cta": "Close",
+        "finalCta": "OK, I’m done!",
         "infoModal": {
           "label": "Learn how to hide it",
           "title": "Where should I keep my recovery phrase?",
@@ -1438,8 +1443,9 @@
         "managerSecondary": "Install apps on my device"
       },
       "addAccounts": {
-        "title": "Add assets",
-        "description": "You’re one step away from fully exploring Ledger Live and truly owning your money"
+        "addAccounts": "Add asset",
+        "title": "Get started",
+        "description": "You can either purchase crypto from our partners or setup your wallet"
       }
     },
     "noOpState": {
@@ -1450,8 +1456,8 @@
       "title": "Recommended"
     },
     "topGainers": {
-      "title": "Top gainers (24H)",
-      "seeMarket": "See market"
+      "title": "Market gainers (24H)",
+      "seeMarket": "See all"
     }
   },
   "addAccountsModal": {
@@ -2669,7 +2675,7 @@
       "title": "Cancel add account",
       "desc": "Are you sure you want to cancel adding accounts?"
     },
-    "imported": "Accounts added successfully",
+    "imported": "Asset added successfully",
     "sections": {
       "importable": {
         "title": "Add existing account"
@@ -2686,8 +2692,8 @@
     },
     "success": {
       "desc": "View your accounts or add other accounts",
-      "secondaryCTA": "Add other accounts",
-      "cta": "Go to Accounts"
+      "secondaryCTA": "Add new asset",
+      "cta": "See your asset"
     },
     "stopScanning": "Stop scanning",
     "retryScanning": "Retry scanning",
@@ -2704,18 +2710,23 @@
       "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
       "erc20": {
         "title": "Add token",
-        "disclaimer": "{{tokenName}} is an ERC20 Token.\\nYou can receive tokens directly in an Ethereum account.",
+        "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
         "learnMore": "Learn more about ERC20"
       },
       "trc10": {
         "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC10 Token.\\nYou can receive tokens directly in a Tron account.",
+        "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
         "learnMore": "Learn more about TRC10"
       },
       "trc20": {
         "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC20 Token.\\nYou can receive tokens directly in a Tron account.",
+        "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
         "learnMore": "Learn more about TRC20"
+      },
+      "bep20": {
+        "title": "Add Token",
+        "disclaimer": "{{tokenName}} is a BEP-20 Token.\nYou can receive tokens directly in a BNB account.",
+        "learnMore": "Learn more about BEP-20"
       }
     },
     "showMoreChainType": "More address types",
@@ -2780,12 +2791,12 @@
     "title": "Pair new device",
     "bluetooth": {
       "title": "Connect via Bluetooth...",
-      "label": "Detect your Nano automatically"
+      "label": "Automatically detect your Nano"
     },
-    "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
+    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
-    "usb": "... or connect USB cable",
-    "usbLabel": "Connect USB cable and enter your PIN Code on your device",
+    "usb": "... or plug USB cable",
+    "usbLabel": "Plug your cable and enter your PIN Code on your device",
     "withoutDeviceHeader": "I don't have my device with me",
     "withoutDevice": "Continue without my device",
     "steps": {
@@ -3009,7 +3020,7 @@
         "showAll": "Show apps to uninstall",
         "description": "Apps on your device that need the {{app}} app will be uninstalled too.",
         "description_one": "Some apps are dependent of the {{app}} app.",
-        "description_two": "Some apps are dependent of the {{app}} app.\\nApps on your device that are dependent on the {{app}} app will be uninstalled too."
+        "description_two": "Some apps are dependent of the {{app}} app.\nApps on your device that are dependent on the {{app}} app will be uninstalled too."
       },
       "continueUninstall": "Uninstall {{app}} and other apps"
     },
@@ -4061,7 +4072,7 @@
     "disclaimer": {
       "title": "External Application",
       "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\\n\\nAlways make sure to carefully verify the information displayed on your device.",
+      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
       "legalAdviceShort": "Ledger is not responsible for any loss of funds. Always make sure to verify the information displayed on your device.",
       "checkbox": "Do not remind me again.",
       "CTA": "Continue"

@@ -256,7 +256,11 @@ const FabMarketActionsComponent = ({ currency, accounts, ...props }: Props) => {
   return <FabAccountButtonBar {...props} buttons={actions} />;
 };
 
-const FabActions = () => {
+type FabActionsProps = {
+  areAccountsEmpty?: boolean;
+};
+
+const FabActions = ({ areAccountsEmpty = false }: FabActionsProps) => {
   const { t } = useTranslation();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount: number = useSelector(accountsCountSelector);
@@ -313,35 +317,19 @@ const FabActions = () => {
       ],
       type: "shade",
       outline: true,
+      disabled: areAccountsEmpty,
     };
 
-    const actionButtonTransferAddAccount: ActionButton = {
-      event: "TransferAddAccount",
-      label: t("addAccountsModal.ctaAdd"),
-      Icon: iconAddAccount,
-      navigationParams: [
-        NavigatorName.AddAccounts,
-        {
-          screen: ScreenName.AddAccountsSelectCrypto,
-        },
-      ],
-      type: "shade",
-      outline: true,
-    };
     return [
       ...(hasAccounts && !readOnlyModeEnabled
         ? [actionButtonTransferSwap]
         : []),
       actionButtonBuy,
       ...(hasAccounts && !readOnlyModeEnabled
-        ? [
-            actionButtonTransferReceive,
-            actionButtonTransferSend,
-            actionButtonTransferAddAccount,
-          ]
-        : [actionButtonTransferAddAccount]),
+        ? [actionButtonTransferReceive, actionButtonTransferSend]
+        : []),
     ];
-  }, [hasAccounts, readOnlyModeEnabled, t]);
+  }, [hasAccounts, readOnlyModeEnabled, t, areAccountsEmpty]);
 
   return <FabAccountButtonBar buttons={actions} />;
 };
