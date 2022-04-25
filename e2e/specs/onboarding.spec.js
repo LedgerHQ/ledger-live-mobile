@@ -15,12 +15,14 @@ describe("Onboarding", () => {
     console.log("==============> STARTING ONBOARDING TEST");
     await OnboardingSteps.waitForPageToBeVisible();
     await OnboardingSteps.getStarted();
-    await OnboardingSteps.acceptTerms();
+    // await OnboardingSteps.acceptTerms();
+    await OnboardingSteps.chooseToSetupLedger();
     await OnboardingSteps.selectDevice("nanoX");
-    await OnboardingSteps.connectYourNano("nanoX");
-    await OnboardingSteps.acceptSeedWarning();
+    await OnboardingSteps.connectYourNano();
+    await OnboardingSteps.checkTheContentsOfThisBox();
     await OnboardingSteps.startPairing();
-    await OnboardingSteps.addNewNano();
+    // await OnboardingSteps.addNewNano();
+    await OnboardingSteps.pairWithBluetooth();
     await OnboardingSteps.addDeviceViaBluetooth();
     await OnboardingSteps.openLedgerLive();
 

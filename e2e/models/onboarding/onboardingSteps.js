@@ -3,46 +3,55 @@ import * as testHelpers from "../../helpers";
 
 export default class OnboardingSteps {
   static async waitForPageToBeVisible() {
-    await testHelpers.waitForElement("Proceed");
+    await testHelpers.waitForElement("Onboarding - Start");
   }
 
   static async getStarted() {
-    await testHelpers.tap("Proceed");
+    await testHelpers.tap("Onboarding - Start");
   }
 
-  static async acceptTerms() {
-    await testHelpers.tap("TermsAcceptSwitch");
-    await testHelpers.tap("Proceed");
+  static async chooseToSetupLedger() {
+    await testHelpers.tap("Onboarding PostWelcome - Selection|SetupLedger");
   }
+
+  // static async acceptTerms() {
+  //   await testHelpers.tap("TermsAcceptSwitch");
+  //   await testHelpers.tap("Proceed");
+  // }
 
   static async selectDevice(device) {
     await testHelpers.tap(`Onboarding Device - Selection|${device}`);
   }
 
-  static async connectYourNano(device) {
-    await testHelpers.scrollToElementById(
-      `Onboarding - Connect|${device}`,
-      "UseCaseSelectScrollView",
-      200,
-      "down",
-      NaN,
-      0.5,
-    );
+  static async connectYourNano() {
+    // scroll probably not needed now
+    // await testHelpers.scrollToElementById(
+    //   `Onboarding - Connect|${device}`,
+    //   "UseCaseSelectScrollView",
+    //   200,
+    //   "down",
+    //   NaN,
+    //   0.5,
+    // );
 
-    await testHelpers.tap(`Onboarding - Connect|${device}`);
+    await testHelpers.tap(`Onboarding - Connect`);
   }
 
-  static async acceptSeedWarning() {
-    await testHelpers.delay(1000);
+  static async checkTheContentsOfThisBox() {
+    // await testHelpers.delay(1000);
     await testHelpers.tap("Onboarding - Seed warning");
   }
 
-  static async startPairing() {
-    await testHelpers.tap("OnboardingStemPairNewContinue");
+  static async letsPairMyNano() {
+    await testHelpers.tap("Onboarding - Pair New Nano");
   }
 
-  static async addNewNano() {
-    await testHelpers.tap("Proceed");
+  // static async addNewNano() {
+  //   await testHelpers.tap("Proceed");
+  // }
+
+  static async pairWithBluetooth() {
+    await testHelpers.tap("Onboarding - Pair with Bluetooth");
   }
 
   static async addDeviceViaBluetooth() {
