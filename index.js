@@ -35,6 +35,7 @@ const excludedErrorName = [
   "BleError",
   "CantOpenDevice",
   "DisconnectedDeviceDuringOperation",
+  "PairingFailed",
 ];
 const excludedErrorDescription = [
   // networking
