@@ -5,10 +5,9 @@ import PortfolioPage from "../models/portfolioPage";
 describe("Onboarding", () => {
   beforeAll(async () => {
     console.log("==============> STARTING ONBOARDING DEVICE LAUNCH");
-    // await device.launchApp({ newInstance: false });
     // await device.reloadReactNative();
-    console.log("==============> LAUNCH APP BEFORE ALL");
-    await device.launchApp({ newInstance: true });
+    // await device.launchApp({ newInstance: true });
+    await device.launchApp({ delete: true });
   });
 
   it("should be able to connect a Nano X", async () => {

@@ -13,7 +13,7 @@ describe("Password Lock Screen", () => {
     // await device.launchApp({ newInstance: false });
     // await device.reloadReactNative();
     console.log("==============> LAUNCH APP BEFORE ALL");
-    await device.launchApp({ newInstance: true });
+    await device.launchApp({ delete: true });
   });
 
   it("should be able to enter the correct password", async () => {
