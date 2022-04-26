@@ -33,6 +33,7 @@ const excludedErrorName = [
   "WebsocketConnectionError",
   // bad usage of device
   "BleError",
+  "EthAppPleaseEnableContractData",
   "CantOpenDevice",
   "DisconnectedDeviceDuringOperation",
   "PairingFailed",
