@@ -18,7 +18,7 @@ type Props = {
   // will wait the promise to complete before enabling the button again
   // it also displays a spinner if it takes more than WAIT_TIME_BEFORE_SPINNER
   onPress: ?() => ?Promise<any> | void,
-  onLongPress: ?() => ?Promise<any> | void,
+  onLongPress?: ?() => ?Promise<any> | void,
   children: *,
   event?: string,
   eventProperties?: { [key: string]: any },

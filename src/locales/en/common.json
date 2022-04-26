@@ -1753,7 +1753,8 @@
       "sectionLabel": "Undelegation(s)"
     },
     "nft": {
-      "receiveNft": "Receive NFT"
+      "receiveNft": "Receive NFT",
+      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
     }
   },
   "accounts": {

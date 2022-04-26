@@ -1,23 +1,25 @@
 import React, { useCallback, useMemo, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { Trans, useTranslation } from "react-i18next";
-import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
-import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
-import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, View, FlatList } from "react-native";
-import { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { Box, Text } from "@ledgerhq/native-ui";
+import { Trans, useTranslation } from "react-i18next";
+import { StyleSheet, View, FlatList } from "react-native";
+import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
+import Icon from "react-native-vector-icons/dist/FontAwesome";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import {
   ArrowBottomMedium,
   DroprightMedium,
 } from "@ledgerhq/native-ui/assets/icons";
+import NftCollectionOptionsMenu from "../../components/Nft/NftCollectionOptionsMenu";
+import { hiddenNftCollectionsSelector } from "../../reducers/settings";
 import NftCollectionRow from "../../components/Nft/NftCollectionRow";
 import { NavigatorName, ScreenName } from "../../const";
 import Button from "../../components/wrappedUi/Button";
+import Touchable from "../../components/Touchable";
 import Link from "../../components/wrappedUi/Link";
-import NftCollectionOptionsMenu from "../../components/Nft/NftCollectionOptionsMenu";
-import { hiddenNftCollectionsSelector } from "../../reducers/settings";
 
 const MAX_COLLECTIONS_TO_SHOW = 3;
 
@@ -28,6 +30,7 @@ type Props = {
 export default function NftCollectionsList({ account }: Props) {
   useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
 
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { nfts } = account;
@@ -88,38 +91,88 @@ export default function NftCollectionsList({ account }: Props) {
     });
   }, [account.id, navigation, t]);
 
+  const navigateToReceiveConnectDevice = useCallback(() => {
+    navigation.navigate(NavigatorName.ReceiveFunds, {
+      screen: ScreenName.ReceiveConnectDevice,
+      params: {
+        accountId: account.id,
+      },
+    });
+  }, [account.id, navigation]);
+
   const renderHeader = useCallback(
     () => (
       <View style={styles.header}>
         <Text variant={"h3"}>NFT</Text>
-        <Link
-          type="color"
-          event="AccountReceiveToken"
-          Icon={ArrowBottomMedium}
-          iconPosition={"left"}
-          onPress={navigateToReceive}
-        >
-          <Trans i18nKey="account.nft.receiveNft" />
-        </Link>
+        {data.length ? (
+          <Link
+            type="color"
+            event="AccountReceiveToken"
+            Icon={ArrowBottomMedium}
+            iconPosition={"left"}
+            onPress={navigateToReceive}
+          >
+            <Trans i18nKey="account.nft.receiveNft" />
+          </Link>
+        ) : null}
       </View>
     ),
-    [navigateToReceive],
+    [data.length, navigateToReceive],
   );
 
   const renderFooter = useCallback(
-    () => (
-      <Button
-        type={"shade"}
-        size={"small"}
-        outline
-        onPress={navigateToGallery}
-        Icon={DroprightMedium}
-        mt={3}
-      >
-        <Trans i18nKey="nft.account.seeAllNfts" />
-      </Button>
-    ),
-    [navigateToGallery],
+    () =>
+      data.length ? (
+        <Button
+          type={"shade"}
+          size={"small"}
+          outline
+          onPress={navigateToGallery}
+          Icon={DroprightMedium}
+          mt={3}
+        >
+          <Trans i18nKey="nft.account.seeAllNfts" />
+        </Button>
+      ) : (
+        <Touchable
+          event="AccountReceiveSubAccount"
+          onPress={navigateToReceiveConnectDevice}
+        >
+          <View
+            style={[
+              styles.footer,
+              {
+                borderColor: colors.fog,
+              },
+            ]}
+          >
+            <Icon color={colors.live} size={26} name="plus" />
+            <View style={styles.footerText}>
+              <Text variant={"large"}>
+                <Trans
+                  i18nKey={`account.nft.howTo`}
+                  values={{ currency: account.currency.family }}
+                >
+                  <Text variant={"large"} fontWeight={"semiBold"}>
+                    text
+                  </Text>
+                  <Text variant={"large"} fontWeight={"semiBold"}>
+                    text
+                  </Text>
+                </Trans>
+              </Text>
+            </View>
+          </View>
+        </Touchable>
+      ),
+    [
+      account.currency.family,
+      colors.fog,
+      colors.live,
+      data.length,
+      navigateToGallery,
+      navigateToReceiveConnectDevice,
+    ],
   );
 
   const renderItem = useCallback(
@@ -166,6 +219,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   collectionList: {
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 24,
+  },
+  footer: {
+    borderRadius: 4,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderStyle: "dashed",
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  footerText: {
+    flex: 1,
+    flexShrink: 1,
+    flexWrap: "wrap",
+    paddingLeft: 12,
+    flexDirection: "row",
+  },
+  subAccountList: {
+    paddingTop: 32,
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 24,
