@@ -92,6 +92,8 @@ const getActions = ({ account, colors }: { account: Account, colors: * }) => {
           </LText>
         </View>
       ),
+      type: "main",
+      outline: false,
     },
     {
       disabled: !canVote,
@@ -105,6 +107,8 @@ const getActions = ({ account, colors }: { account: Account, colors: * }) => {
       label: <Trans i18nKey="tron.manage.vote.title" />,
       description: <Trans i18nKey="tron.manage.vote.description" />,
       Icon: VoteIcon,
+      type: "main",
+      outline: false,
     },
   ];
 };
