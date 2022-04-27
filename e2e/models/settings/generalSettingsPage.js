@@ -9,12 +9,31 @@ export default class GeneralSettingsPage {
     //   200,
     // );
 
-    await testHelpers.tap("password-settings-toggle");
+    if (device.getPlatform() === "ios") {
+      await element(by.type("RCTSwitch"))
+        .atIndex(0)
+        .tap();
+    }
+
+    if (device.getPlatform() === "android") {
+      await element(by.type("android.widget.Switch"))
+        .atIndex(0)
+        .tap();
+    }
+
+    // await testHelpers.tap("password-settings-toggle");
   }
 
   static async enterNewPassword(passwordText) {
-    await testHelpers.typeText("password-text-input", passwordText);
-    await testHelpers.tap("Confirm");
+    // await testHelpers.typeText("password-text-input", passwordText);
+    if (device.getPlatform() === "ios") {
+      await element(by.type("RCTUITextField")).typeText(passwordText);
+    }
+
+    if (device.getPlatform() === "android") {
+      await element(by.type("android.widget.TextView")).typeText(passwordText);
+    }
+    await testHelpers.tapByText("Confirm");
   }
 
   static async isVisible() {
