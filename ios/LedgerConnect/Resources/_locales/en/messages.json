@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Ledger Connect",
+        "description": "The display name for the extension."
+    },
+    "extension_description": {
+        "message": "Ledger Safari Extension",
+        "description": "Description of what the extension does."
+    }
+}

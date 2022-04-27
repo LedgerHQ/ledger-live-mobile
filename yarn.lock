@@ -5281,6 +5281,11 @@ base32.js@^0.1.0:
   resolved "https://registry.yarnpkg.com/base32.js/-/base32.js-0.1.0.tgz#b582dec693c2f11e893cf064ee6ac5b6131a2202"
   integrity sha1-tYLexpPC8R6JPPBk7mrFthMaIgI=
 
+base58-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/base58-js/-/base58-js-1.0.0.tgz#08b6d745d811103114cc150f7da517b3c02a24ec"
+  integrity sha512-izVZ4M54gJYRk7VGsiRatRyUVCUaUDF15earKs3u9sUXlawvTwttC9xitGk8Xzlgib5rDL71WPOe4JsyJu9Scg==
+
 base64-js@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
