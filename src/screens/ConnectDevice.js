@@ -1,7 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
@@ -115,6 +115,8 @@ export default function ConnectDevice({ route, navigation }: Props) {
             {...extraProps}
             analyticsPropertyFlow={analyticsPropertyFlow}
           />
+
+          {/* <Text>{JSON.stringify(transaction, null, 2)}</Text> */}
         </SafeAreaView>
       ) : null,
     // prevent rerendering caused by optimistic update (i.e. exclude account related deps)
