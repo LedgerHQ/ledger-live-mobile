@@ -78,7 +78,26 @@ const Drawer = props => {
     provider,
     drawer.validator,
   ]);
-  const onWithdraw = useCallback;
+  const onWithdraw = useCallback(() => {
+    if (drawer.source === "undelegation") {
+      navigation.navigate(NavigatorName.ElrondWithdrawFlow, {
+        screen: ScreenName.ElrondWithdrawMethod,
+        params: {
+          contract: provider,
+          validator: drawer.validator,
+          amount: drawer.amount,
+          account,
+        },
+      });
+    }
+  }, [
+    drawer.amount,
+    navigation,
+    drawer.source,
+    account,
+    provider,
+    drawer.validator,
+  ]);
 
   const data = useMemo(
     () =>

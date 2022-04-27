@@ -1,213 +1,280 @@
-import React, { useMemo, useCallback } from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
-import { useTheme } from "@react-navigation/native";
-import { Trans } from "react-i18next";
-
+// @flow
+import invariant from "invariant";
+import React, { useCallback, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import BigNumber from "bignumber.js";
+import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { BigNumber } from "bignumber.js";
 
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
+import type {
+  CosmosValidatorItem,
+  Transaction,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
+
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
-  getMainAccount,
   getAccountUnit,
+  getMainAccount,
+  getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../../reducers/accounts";
-import { ScreenName } from "../../../../const";
-
+import Button from "../../../../components/Button";
 import LText from "../../../../components/LText";
-import FirstLetterIcon from "../../../../components/FirstLetterIcon";
+import { ScreenName } from "../../../../const";
+import ToggleButton from "../../../../components/ToggleButton";
+
+import InfoModal from "../../../../modals/Info";
+import Info from "../../../../icons/Info";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import ArrowRight from "../../../../icons/ArrowRight";
+import CounterValue from "../../../../components/CounterValue";
+import FirstLetterIcon from "../../../../components/FirstLetterIcon";
+import TranslatedError from "../../../../components/TranslatedError";
+
+const options = [
+  {
+    value: "reDelegateRewards",
+    label: (
+      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewards" />
+    ),
+  },
+  {
+    value: "withdraw",
+    label: <Trans i18nKey="elrond.withdraw.flow.steps.method.withdraw" />,
+  },
+];
+
+const infoModalData = [
+  {
+    title: (
+      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewards" />
+    ),
+    description: (
+      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewardsTooltip" />
+    ),
+  },
+  {
+    title: <Trans i18nKey="elrond.withdraw.flow.steps.method.withdraw" />,
+    description: (
+      <Trans i18nKey="elrond.withdraw.flow.steps.method.withdrawTooltip" />
+    ),
+  },
+];
 
 type RouteParams = {
   accountId: string,
-  transaction: Transaction,
+  transaction?: Transaction,
+  validator: CosmosValidatorItem,
+  value: BigNumber,
 };
 
 type Props = {
   navigation: any,
-  route: { params: RouteParams },
+  route: {
+    params: RouteParams,
+  },
 };
 
 const styles = StyleSheet.create({
-  stack: {
-    root: {
-      flex: 1,
-    },
-    main: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "flex-start",
-    },
-    list: {
-      width: "100%",
-    },
+  root: {
+    flex: 1,
+    padding: 16,
   },
-  item: {
-    wrapper: {
-      flexDirection: "row",
-      alignItems: "center",
-      padding: 16,
-    },
-    iconWrapper: {
-      height: 36,
-      width: 36,
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 5,
-
-      marginRight: 12,
-    },
-    nameWrapper: {
-      flex: 1,
-      paddingRight: 16,
-    },
-    nameText: {
-      fontSize: 15,
-    },
-    subText: {
-      fontSize: 13,
-    },
-    valueContainer: {
-      alignItems: "flex-end",
-    },
-    value: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    valueLabel: {
-      paddingHorizontal: 8,
-      fontSize: 16,
-    },
+  main: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 32,
+  },
+  footer: {
+    alignSelf: "stretch",
+    padding: 16,
+  },
+  spacer: {
+    flex: 1,
+  },
+  info: {
+    flexShrink: 1,
+    marginTop: 8,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  infoLabel: {
+    marginRight: 10,
+  },
+  sectionLabel: {
+    paddingVertical: 12,
+  },
+  label: {
+    fontSize: 18,
+    textAlign: "center",
+    paddingHorizontal: 16,
+  },
+  value: {
+    fontSize: 20,
+    paddingBottom: 8,
+  },
+  subLabel: {
+    fontSize: 14,
+    textAlign: "center",
+    paddingBottom: 8,
+  },
+  row: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  desc: {
+    textAlign: "center",
+  },
+  warning: {
+    textAlign: "center",
+  },
+  warningSection: {
+    padding: 16,
+    height: 80,
   },
 });
 
-function ClaimRewardsSelectValidator({ navigation, route }: Props) {
+function WithdrawAmount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { account } = useSelector(accountScreenSelector(route));
 
-  const delegations = useMemo(
-    () =>
-      route.params.delegations.filter(delegation =>
-        BigNumber(delegation.claimableRewards).gt(0),
-      ),
-    [route.params.delegations],
-  );
-
-  const mainAccount = getMainAccount(account);
+  const account = route.params.account;
   const bridge = getAccountBridge(account);
-  const unit = getAccountUnit(account);
+  const mainAccount = getMainAccount(account);
+  const unit = getAccountUnit(mainAccount);
+  const currency = getAccountCurrency(mainAccount);
 
-  const { transaction } = useBridgeTransaction(() => ({
-    account,
-    transaction: bridge.updateTransaction(
-      bridge.createTransaction(mainAccount),
-      {
-        mode: "claimRewards",
-        recipient: mainAccount.freshAddress,
-      },
-    ),
-  }));
+  const { transaction, status } = useBridgeTransaction(() => {
+    const transaction = route.params.transaction;
 
-  const onSelect = useCallback(
-    (recipient, validator, value) => {
-      navigation.navigate(ScreenName.ElrondClaimRewardsMethod, {
-        ...route.params,
-        transaction: bridge.updateTransaction(transaction, {
-          recipient,
-          amount: BigNumber(value),
-        }),
-        contract: recipient,
-        validator,
-        value,
+    if (!transaction) {
+      return {
         account,
-      });
-    },
-    [navigation, route.params, transaction, bridge, account],
-  );
+        transaction: bridge.updateTransaction(
+          bridge.createTransaction(mainAccount),
+          {
+            mode: "withdraw",
+            recipient: route.params.contract,
+            amount: BigNumber(route.params.amount),
+          },
+        ),
+      };
+    }
 
-  const renderItem = useCallback(
-    props => <Item {...{ ...props, unit, onSelect }} />,
-    [unit, onSelect],
-  );
+    return {
+      account,
+      transaction,
+    };
+  });
+
+  const onNext = useCallback(() => {
+    navigation.navigate(ScreenName.ElrondWithdrawSelectDevice, {
+      ...route.params,
+      transaction,
+    });
+  }, [navigation, transaction, route]);
+
+  const value = route.params.amount;
+  const name = route.params.validator
+    ? route.params.validator.name
+    : route.params.contract || "";
+
+  const error =
+    status.errors &&
+    Object.keys(status.errors).length > 0 &&
+    Object.values(status.errors)[0];
+
+  const warning =
+    status.warnings &&
+    Object.keys(status.warnings).length > 0 &&
+    Object.values(status.warnings)[0];
 
   return (
-    <SafeAreaView
-      style={[styles.stack.root, { backgroundColor: colors.background }]}
-    >
-      <View style={styles.stack.main}>
-        <FlatList
-          style={styles.stack.list}
-          keyExtractor={delegation =>
-            `${delegation.address}-${delegation.userActiveStake}-${delegation.claimableRewards}`
-          }
-          data={delegations}
-          {...{ renderItem }}
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+      <View style={styles.main}>
+        <View style={styles.sectionLabel}>
+          <LText semiBold={true} style={styles.subLabel} color="grey">
+            <Trans i18nKey="elrond.withdraw.flow.steps.method.youEarned" />
+          </LText>
+
+          <LText semiBold={true} style={[styles.label, styles.value]}>
+            <CurrencyUnitValue unit={unit} value={value} showCode={true} />
+          </LText>
+
+          <LText semiBold={true} style={styles.subLabel} color="grey">
+            <CounterValue
+              currency={currency}
+              showCode={true}
+              value={value}
+              withPlaceholder={true}
+            />
+          </LText>
+        </View>
+
+        <View style={styles.sectionLabel}>
+          <LText semiBold={true} style={styles.subLabel} color="grey">
+            <Trans i18nKey="elrond.withdraw.flow.steps.method.byDelegationAssetsTo" />
+          </LText>
+
+          <View style={styles.row}>
+            <FirstLetterIcon label={name} />
+
+            <LText semiBold={true} style={styles.label}>
+              {name}
+            </LText>
+          </View>
+        </View>
+
+        <View style={styles.sectionLabel}>
+          <LText style={styles.desc}>
+            <Trans i18nKey={`elrond.withdraw.flow.steps.method.withdrawInfo`} />
+          </LText>
+        </View>
+
+        <View style={styles.spacer} />
+      </View>
+
+      <View style={[styles.footer, { backgroundColor: colors.background }]}>
+        <View style={styles.warningSection}>
+          {error && error instanceof Error ? (
+            <LText
+              selectable={true}
+              secondary={true}
+              semiBold={true}
+              style={styles.warning}
+              color="alert"
+            >
+              <TranslatedError error={error} />
+            </LText>
+          ) : warning && warning instanceof Error ? (
+            <LText
+              selectable={true}
+              secondary={true}
+              semiBold={true}
+              style={styles.warning}
+              color="alert"
+            >
+              <TranslatedError error={warning} />
+            </LText>
+          ) : null}
+        </View>
+
+        <Button
+          disabled={error instanceof Error}
+          event="Elrond WithdrawAmountContinueBtn"
+          onPress={onNext}
+          title={<Trans i18nKey="elrond.withdraw.flow.steps.method.cta" />}
+          type="primary"
         />
       </View>
     </SafeAreaView>
   );
 }
 
-const Item = props => {
-  const { colors } = useTheme();
-  const { item, unit, onSelect, index } = props;
-  const { validator, contract, claimableRewards } = item;
-
-  return (
-    <TouchableOpacity
-      onPress={() => onSelect(contract, validator, claimableRewards)}
-      style={[styles.item.wrapper]}
-    >
-      <View
-        style={[styles.item.iconWrapper, { backgroundColor: colors.lightLive }]}
-      >
-        <FirstLetterIcon
-          style={{ backgroundColor: colors.lightFog }}
-          label={validator.name || contract}
-        />
-      </View>
-
-      <View style={styles.item.nameWrapper}>
-        <LText semiBold={true} style={[styles.item.nameText]} numberOfLines={1}>
-          {index}. {validator.name || contract}
-        </LText>
-
-        {validator.apr && (
-          <LText style={styles.item.subText} color="grey" numberOfLines={1}>
-            <Trans
-              i18nKey="cosmos.delegation.flow.steps.validator.estYield"
-              values={{
-                amount: validator.apr,
-              }}
-            />
-          </LText>
-        )}
-      </View>
-
-      <View style={styles.item.value}>
-        <View style={styles.item.valueContainer}>
-          <LText
-            semiBold={true}
-            style={[styles.item.valueLabel]}
-            color="darkBlue"
-          >
-            <CurrencyUnitValue
-              value={claimableRewards}
-              unit={unit}
-              showCode={false}
-            />
-          </LText>
-        </View>
-
-        <ArrowRight size={16} color={colors.grey} />
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-export default ClaimRewardsSelectValidator;
+export default WithdrawAmount;

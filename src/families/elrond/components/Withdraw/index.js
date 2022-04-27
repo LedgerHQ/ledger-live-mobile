@@ -4,18 +4,14 @@ import { Platform } from "react-native";
 import { useTranslation } from "react-i18next";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
-import {
-  getStackNavigatorConfig,
-  defaultNavigationOptions,
-} from "../../../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../../../navigation/navigatorConfig";
 import StepHeader from "../../../../components/StepHeader";
 import { ScreenName } from "../../../../const";
-import ClaimRewardsSelectValidator from "./01-SelectValidator";
-import ClaimRewardsMethod from "./02-SelectMethod";
-import ClaimRewardsSelectDevice from "../../../../screens/SelectDevice";
-import ClaimRewardsConnectDevice from "../../../../screens/ConnectDevice";
-import ClaimRewardsValidationError from "./04-ValidationError";
-import ClaimRewardsValidationSuccess from "./04-ValidationSuccess";
+import WithdrawMethod from "./01-SelectValidator";
+import WithdrawSelectDevice from "../../../../screens/SelectDevice";
+import WithdrawConnectDevice from "../../../../screens/ConnectDevice";
+import WithdrawValidationError from "./04-ValidationError";
+import WithdrawValidationSuccess from "./04-ValidationSuccess";
 
 const Stack = createStackNavigator();
 const totalSteps = "3";
@@ -35,43 +31,19 @@ const Claim = () => {
   const stacks = useMemo(
     () => [
       {
-        name: ScreenName.ElrondClaimRewardsValidator,
-        component: ClaimRewardsSelectValidator,
+        name: ScreenName.ElrondWithdrawMethod,
+        component: WithdrawMethod,
         heading: {
-          title: "elrond.claimRewards.stepperHeader.validator",
-          subtitle: {
-            label: "elrond.claimRewards.stepperHeader.stepRange",
-            variables: {
-              currentStep: "1",
-              totalSteps,
-            },
-          },
-        },
-        options: {
-          gestureEnabled: false,
-          headerLeft: () => null,
-          headerStyle: {
-            ...defaultNavigationOptions.headerStyle,
-            elevation: 0,
-            shadowOpacity: 0,
-            borderBottomWidth: 0,
-          },
+          title: "elrond.withdraw.stepperHeader.method",
         },
       },
       {
-        name: ScreenName.ElrondClaimRewardsMethod,
-        component: ClaimRewardsMethod,
+        name: ScreenName.ElrondWithdrawSelectDevice,
+        component: WithdrawSelectDevice,
         heading: {
-          title: "elrond.claimRewards.stepperHeader.method",
-        },
-      },
-      {
-        name: ScreenName.ElrondClaimRewardsSelectDevice,
-        component: ClaimRewardsSelectDevice,
-        heading: {
-          title: "elrond.claimRewards.stepperHeader.selectDevice",
+          title: "elrond.withdraw.stepperHeader.selectDevice",
           subtitle: {
-            label: "elrond.claimRewards.stepperHeader.stepRange",
+            label: "elrond.withdraw.stepperHeader.stepRange",
             variables: {
               currentStep: "2",
               totalSteps,
@@ -80,12 +52,12 @@ const Claim = () => {
         },
       },
       {
-        name: ScreenName.ElrondClaimRewardsConnectDevice,
-        component: ClaimRewardsConnectDevice,
+        name: ScreenName.ElrondWithdrawConnectDevice,
+        component: WithdrawConnectDevice,
         heading: {
-          title: "elrond.claimRewards.stepperHeader.connectDevice",
+          title: "elrond.withdraw.stepperHeader.connectDevice",
           subtitle: {
-            label: "elrond.claimRewards.stepperHeader.stepRange",
+            label: "elrond.withdraw.stepperHeader.stepRange",
             variables: {
               currentStep: "3",
               totalSteps,
@@ -94,8 +66,8 @@ const Claim = () => {
         },
       },
       {
-        name: ScreenName.ElrondClaimRewardsValidationError,
-        component: ClaimRewardsValidationError,
+        name: ScreenName.ElrondWithdrawValidationError,
+        component: WithdrawValidationError,
         options: {
           headerShown: false,
           gestureEnabled: false,
@@ -103,7 +75,7 @@ const Claim = () => {
       },
       {
         name: ScreenName.ElrondClaimRewardsValidationSuccess,
-        component: ClaimRewardsValidationSuccess,
+        component: WithdrawValidationSuccess,
         options: {
           headerLeft: null,
           headerRight: null,

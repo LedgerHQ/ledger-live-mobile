@@ -213,6 +213,12 @@ export const ScreenName = {
   ElrondClaimRewardsValidation: "ElrondClaimRewardsValidation",
   ElrondClaimRewardsValidationError: "ElrondClaimRewardsValidationError",
   ElrondClaimRewardsValidationSuccess: "ElrondClaimRewardsValidationSuccess",
+  ElrondWithdrawMethod: "ElrondWithdrawMethod",
+  ElrondWithdrawSelectDevice: "ElrondWithdrawSelectDevice",
+  ElrondWithdrawConnectDevice: "ElrondWithdrawConnectDevice",
+  ElrondWithdrawValidation: "ElrondWithdrawValidation",
+  ElrondWithdrawValidationError: "ElrondWithdrawValidationError",
+  ElrondWithdrawValidationSuccess: "ElrondWithdrawValidationSuccess",
 
   // crypto_org
   CryptoOrgEditMemo: "CryptoOrgEditMemo",
