@@ -7,7 +7,7 @@ describe("Onboarding", () => {
     console.log("==============> STARTING ONBOARDING DEVICE LAUNCH");
     // await device.reloadReactNative();
     // await device.launchApp({ newInstance: true });
-    await device.launchApp({ delete: true });
+    await device.launchApp();
   });
 
   it("should be able to connect a Nano X", async () => {
