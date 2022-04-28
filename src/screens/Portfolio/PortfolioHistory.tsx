@@ -32,7 +32,7 @@ type Props = {
 
 export function PortfolioHistoryList({
   onEndReached,
-  opCount = 10,
+  opCount = 5,
   navigation,
 }: {
   onEndReached?: () => void,
