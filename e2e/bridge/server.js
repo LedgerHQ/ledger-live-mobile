@@ -82,6 +82,13 @@ export function open() {
   postMessage({ type: "open", payload: null });
 }
 
+export function receive() {
+  postMessage({
+    type: "receive",
+    payload: { address: "1234wtf1234wtfomggggggggggg", path: "mypathlol" },
+  });
+}
+
 function onMessage(messageStr: string) {
   const msg = JSON.parse(messageStr);
   log(`Message\n${JSON.stringify(msg, null, 2)}`);

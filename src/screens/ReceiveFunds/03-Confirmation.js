@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { of } from "rxjs";
-import { delay } from "rxjs/operators";
+import { delay, filter, map } from "rxjs/operators";
 import { View, StyleSheet, Platform } from "react-native";
 import { useSelector } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
@@ -44,6 +44,7 @@ import logger from "../../logger";
 import { rejectionOp } from "../../logic/debugReject";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import GenericErrorView from "../../components/GenericErrorView";
+import { e2eBridgeSubject } from "../../../e2e/bridge/client";
 
 type Props = {
   account: ?(TokenAccount | Account),
@@ -85,7 +86,12 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 
       sub.current = (mainAccount.id.startsWith("mock")
         ? // $FlowFixMe
-          of({}).pipe(delay(1000), rejectionOp())
+          // of({}).pipe(delay(1000), rejectionOp())
+
+          e2eBridgeSubject.pipe(
+            filter(msg => msg.type === "receive"),
+            map(msg => msg.payload),
+          )
         : getAccountBridge(mainAccount).receive(mainAccount, {
             deviceId: device.deviceId,
             verify: true,
