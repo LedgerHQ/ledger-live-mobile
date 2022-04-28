@@ -81,7 +81,7 @@ jobs:
 
       - name: Test iOS app
         timeout-minutes: 15
-        run: yarn e2e:test -c ios.staging e2e/specs/onboarding.spec.js --loglevel trace --record-logs failing --record-timeline all --take-screenshots failing
+        run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
 #  --retries 1 --reuse
         
       - name: Upload test artifacts
@@ -158,7 +158,7 @@ jobs:
             $ANDROID_HOME/platform-tools/adb devices
             adb shell getprop persist.sys.timezone
             adb shell setprop persist.sys.timezone
-            yarn e2e:test -c android.staging e2e/specs/onboarding.spec.js --loglevel trace --record-logs failing --record-timeline all --take-screenshots failing 
+            yarn e2e:test -c android.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing 
         # yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
         # mkdir ./temp
         # curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
