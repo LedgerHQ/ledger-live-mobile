@@ -149,7 +149,7 @@ jobs:
           api-level: 29
           # force-avd-creation: false
           avd-name: Nexus_6_API_30
-          emulator-options: -verbose -no-boot-anim -noaudio -timezone Europe/Paris
+          emulator-options: -verbose -no-boot-anim -noaudio
           ram-size: 2048
           # disable-animations: true
           script: |

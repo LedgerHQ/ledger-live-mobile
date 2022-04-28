@@ -250,7 +250,8 @@
     "react-native-svg": "12.1.1",
     "d3-array": "2.3.3",
     "@polkadot/util": "8.0.6-8",
-    "@polkadot/util-crypto": "8.0.6-8"
+    "@polkadot/util-crypto": "8.0.6-8",
+    "hermes-engine": "0.10.0"
   },
   "react-native": {
     "zlib": "browserify-zlib",
