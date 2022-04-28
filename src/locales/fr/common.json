@@ -1584,7 +1584,7 @@
       "redelegatedAmount": "Montant redélégué",
       "undelegated": "Délégation interrompue ({{amount}})",
       "undelegatedFrom": "Délégation interrompue de",
-      "undelegatedAmount": "Montant de délégation interrompue",
+      "undelegatedAmount": "Montant de la délégation interrompue",
       "rewardFrom": "Récompense de",
       "rewardAmount": "Montant touché",
       "memo": "Mémo",
@@ -3371,7 +3371,7 @@
         "summary": "Récapitulatif",
         "selectDevice": "Sélectionner l'appareil",
         "connectDevice": "Connecter l'appareil",
-        "stepRange": "Étape {{currentStep}} de {{totalSteps}}"
+        "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
       },
       "flow": {
         "steps": {
