@@ -22,6 +22,7 @@ import LText from "../../../components/LText";
 import Warning from "../../../icons/Warning";
 import Check from "../../../icons/Check";
 import KeyboardView from "../../../components/KeyboardView";
+import { nominate } from "../helpers";
 
 type RouteParams = {
   accountId: string,
@@ -89,13 +90,25 @@ function DelegationAmount({ navigation, route }: Props) {
     })),
   );
 
-  const error = useMemo(
-    () =>
-      max.lt(0) ||
-      value.lt(min) ||
-      (route.params.transaction.mode === "redelegate" && value.eq(0)),
-    [value, max, min, route.params.transaction],
-  );
+  const error = useMemo(() => max.lt(0) || value.lt(min), [value, max, min, ,]);
+
+  const minimum = useMemo(() => {
+    if (route.params.transaction.mode === "undelegation") {
+      const total = route.params.transaction.delegations
+        .filter(
+          delegation =>
+            delegation.contract === route.params.transaction.recipient,
+        )
+        .reduce(
+          (total, delegation) => total.plus(delegation.userActiveStake),
+          BigNumber(0),
+        )
+        .minus(route.params.transaction.amount)
+        .lt(BigNumber(nominate("1")));
+
+      return total.lt(BigNumber(nominate("1"))) && !total.isEqualTo(0);
+    }
+  }, [route.params.transaction]);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -164,6 +177,17 @@ function DelegationAmount({ navigation, route }: Props) {
                   }}
                 >
                   <LText semiBold>{""}</LText>
+                </Trans>
+              </LText>
+            </View>
+          )}
+
+          {minimum && (
+            <View style={styles.labelContainer}>
+              <Warning size={16} color={colors.alert} />
+              <LText style={[styles.assetsRemaining]} color="alert">
+                <Trans i18nKey="elrond.delegation.flow.steps.amount.wrongUndelegations">
+                  <LText semiBold={true}>{""}</LText>
                 </Trans>
               </LText>
             </View>

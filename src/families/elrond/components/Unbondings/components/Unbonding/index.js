@@ -56,6 +56,7 @@ const Unbonding = props => {
     amount,
     onDrawer,
     seconds,
+    delegations,
   } = props;
   const { colors } = useTheme();
   const { t } = useTranslation();
@@ -76,11 +77,12 @@ const Unbonding = props => {
         amount,
         validator,
         meta: {
+          delegations,
           seconds,
         },
       });
     }
-  }, [onDrawer, validator, seconds, amount]);
+  }, [onDrawer, validator, seconds, delegations, amount]);
 
   return (
     <View style={[styles.delegationsWrapper, { backgroundColor: colors.card }]}>

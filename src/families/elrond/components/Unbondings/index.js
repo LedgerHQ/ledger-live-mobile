@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 });
 
 const Unbondings = props => {
-  const { unbondings, account, onDrawer } = props;
+  const { unbondings, account, onDrawer, delegations } = props;
   const { t } = useTranslation();
 
   const currency = useMemo(() => getAccountCurrency(getMainAccount(account)), [
@@ -33,7 +33,7 @@ const Unbondings = props => {
         <Unbonding
           key={`unbonding-${index}`}
           last={unbondings.length === index + 1}
-          {...{ ...unbonding, currency, onDrawer }}
+          {...{ ...unbonding, currency, onDrawer, delegations }}
         />
       ))}
     </View>

@@ -63,6 +63,7 @@ const Drawer = props => {
       navigation.navigate(NavigatorName.ElrondUndelegationFlow, {
         screen: ScreenName.ElrondUndelegationAmount,
         params: {
+          delegations: drawer.meta.delegations,
           contract: provider,
           validator: drawer.validator,
           amount: drawer.amount,
@@ -77,6 +78,7 @@ const Drawer = props => {
     account,
     provider,
     drawer.validator,
+    drawer.meta.delegations,
   ]);
   const onWithdraw = useCallback(() => {
     if (drawer.source === "undelegation") {

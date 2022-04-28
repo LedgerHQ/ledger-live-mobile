@@ -1,11 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  SectionList,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, SectionList, TouchableOpacity } from "react-native";
 import { BigNumber } from "bignumber.js";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
@@ -20,19 +14,10 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import estimateMaxSpendable from "@ledgerhq/live-common/lib/families/elrond/js-estimateMaxSpendable";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import {
-  COSMOS_MAX_DELEGATIONS,
-  getMaxDelegationAvailable,
-} from "@ledgerhq/live-common/lib/families/cosmos/logic";
 
-import {
-  useCosmosPreloadData,
-  useSortedValidators,
-} from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../../reducers/accounts";
 import { localeSelector } from "../../../../reducers/settings";
 import { ScreenName } from "../../../../const";
 import Button from "../../../../components/Button";
@@ -42,6 +27,7 @@ import FirstLetterIcon from "../../../../components/FirstLetterIcon";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import ArrowRight from "../../../../icons/ArrowRight";
 import Check from "../../../../icons/Check";
+import { nominate } from "../../helpers";
 
 type RouteParams = {
   accountId: string,
@@ -294,6 +280,18 @@ function DelegationSelectValidator({ navigation, route }: Props) {
   );
 
   const error = status && status.errors && Object.values(status.errors)[0];
+  const minimum = useMemo(
+    () =>
+      delegations
+        .filter(delegation => delegation.contract === transaction.recipient)
+        .reduce(
+          (total, delegation) => total.plus(delegation.userActiveStake),
+          BigNumber(0),
+        )
+        .plus(transaction.amount)
+        .lt(BigNumber(nominate("1"))),
+    [delegations, transaction.amount, transaction.recipient],
+  );
 
   return (
     <SafeAreaView
@@ -349,19 +347,11 @@ function DelegationSelectValidator({ navigation, route }: Props) {
             </View>
           )}
 
-          {max.gt(0) && (
+          {minimum && (
             <View style={styles.stack.labelContainer}>
               <LText style={styles.stack.assetsRemaining}>
-                <Trans
-                  i18nKey="elrond.delegation.flow.steps.validator.totalAvailable"
-                  values={{
-                    amount: formatCurrencyUnit(unit, max, {
-                      showCode: true,
-                      locale,
-                    }),
-                  }}
-                >
-                  <LText semiBold>{""}</LText>
+                <Trans i18nKey="elrond.delegation.flow.steps.validator.insufficientDelegation">
+                  <LText semiBold={true}>{""}</LText>
                 </Trans>
               </LText>
             </View>
@@ -413,7 +403,7 @@ const Item = props => {
         {apr && (
           <LText style={styles.item.subText} color="grey" numberOfLines={1}>
             <Trans
-              i18nKey="elrond.delegation.flow.steps.validator.estYield"
+              i18nKey="elrond.delegation.flow.steps.validator.v"
               values={{
                 amount: apr,
               }}

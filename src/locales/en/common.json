@@ -3470,7 +3470,7 @@
             "validators": "Validators",
             "myDelegations": "My delegations",
             "cta": "Continue",
-            "estYield": "Est. yield: {{amount}}",
+            "apr": "APR: {{amount}}",
             "totalAvailable": "Total available: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "No validator found for <0>{{search}}</0>",
@@ -3481,6 +3481,8 @@
             "allAssetsUsed": "All assets used",
             "minAmount": "Minimum amount: <0>{{min}}</0>",
             "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
+            "insufficientDelegation": "Your total amount of delegations should exceed 1 EGLD.",
+            "wrongUndelegations": "Your total amount of delegated token needs to exceed 1 EGLD, or undelegate the whole delegation.",
             "cta": "Continue"
           },
           "verification": {
