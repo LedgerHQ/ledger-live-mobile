@@ -19,10 +19,14 @@ import {
 } from "../languages";
 import { languageSelector } from "../reducers/settings";
 
-if ("__setDefaultTimeZone" in Intl.DateTimeFormat) {
-  /** https://formatjs.io/docs/polyfills/intl-datetimeformat/#default-timezone */
-  // $FlowFixMe
-  Intl.DateTimeFormat.__setDefaultTimeZone(getTimeZone()); // eslint-disable-line no-underscore-dangle
+try {
+  if ("__setDefaultTimeZone" in Intl.DateTimeFormat) {
+    /** https://formatjs.io/docs/polyfills/intl-datetimeformat/#default-timezone */
+    // $FlowFixMe
+    Intl.DateTimeFormat.__setDefaultTimeZone(getTimeZone()); // eslint-disable-line no-underscore-dangle
+  }
+} catch (error) {
+  console.log(error);
 }
 
 i18next.use(initReactI18next).init({

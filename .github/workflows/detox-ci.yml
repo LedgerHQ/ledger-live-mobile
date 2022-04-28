@@ -157,6 +157,7 @@ jobs:
             adb logcat *:E &
             $ANDROID_HOME/platform-tools/adb devices
             adb shell getprop persist.sys.timezone
+            adb shell setprop persist.sys.timezone "Europe/Paris"
             yarn e2e:test -c android.staging e2e/specs/onboarding.spec.js --loglevel trace --record-logs failing --record-timeline all --take-screenshots failing 
         # yarn start & yarn detox test -c android.debug --loglevel verbose --record-logs failing --record-timeline all --take-screenshots failing
         # mkdir ./temp
