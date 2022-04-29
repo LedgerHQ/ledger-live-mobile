@@ -1,11 +1,8 @@
 const detox = require("detox");
 
 async function globalSetup() {
-  //   console.log(`===============> env: ${process.env.TZ}`);
-  //   console.log("==============> STARTING GLOBAL SETUP");`
-  // process.env.TZ = "UTC";
+  console.log("==============> STARTING GLOBAL SETUP");
   await detox.globalInit();
-  console.log(`===============> env: ${process.env.TZ}`);
 }
 
 module.exports = globalSetup;

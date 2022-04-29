@@ -37,6 +37,6 @@ export default class GeneralSettingsPage {
   }
 
   static async isVisible() {
-    await testHelpers.verifyTextIsVisible("General");
+    await testHelpers.verifyTextIsVisible("Preferred currency");
   }
 }
