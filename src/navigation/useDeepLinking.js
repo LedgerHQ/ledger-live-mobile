@@ -1,7 +1,7 @@
 // @flow
 import { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { useRemoteLiveAppContext } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import { NavigatorName, ScreenName } from "../const";
 
@@ -36,7 +36,8 @@ function getSettingsScreen(pathname) {
 
 export function useDeepLinkHandler() {
   const { navigate } = useNavigation();
-  const { manifests } = usePlatformApp();
+  const { state } = useRemoteLiveAppContext();
+  const manifests = state && state.value ? state.value.liveAppByIndex : {};
 
   const filteredManifests = useMemo(() => {
     const branches = ["stable", "soon"];

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 import FastImage, {
-  OnLoadEvent,
   FastImageProps,
+  OnLoadEvent,
+  ResizeMode,
 } from "react-native-fast-image";
-import { View, StyleSheet, Animated } from "react-native";
-import ImageNotFoundIcon from "../../icons/ImageNotFound";
 import { withTheme } from "../../colors";
+import ImageNotFoundIcon from "../../icons/ImageNotFound";
 import Skeleton from "../Skeleton";
 
 const ImageComponent = ({
@@ -23,7 +24,7 @@ const NotFound = ({
   colors,
   onLayout,
 }: {
-  colors: Object;
+  colors: { [key: string]: string };
   onLayout: () => void;
 }) => {
   const [iconWidth, setIconWidth] = useState(40);
@@ -50,7 +51,7 @@ type Props = {
   style?: Object;
   status: string;
   src: string;
-  resizeMode?: string;
+  resizeMode?: ResizeMode;
   colors: any;
 };
 
