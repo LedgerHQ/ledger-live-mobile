@@ -26,7 +26,7 @@ const getActions = ({
   colors,
 }: {
   account: Account,
-  parentId: Account,
+  parentAccount: Account,
   colors: *,
 }) => {
   if (!account.tronResources) return null;
