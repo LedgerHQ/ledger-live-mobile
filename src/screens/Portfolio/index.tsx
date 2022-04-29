@@ -35,12 +35,11 @@ import Header from "./Header";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
-import { NavigatorName, ScreenName } from "../../const";
+import { NavigatorName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
-import MarketSection from "./MarketSection";
 import { PortfolioHistoryList } from "./PortfolioHistory";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import { useProviders } from "../Swap/SwapEntry";
@@ -242,7 +241,7 @@ function PortfolioScreen({ navigation }: Props) {
         : []),
       ...(showCarousel
         ? [
-            <SectionContainer px={0} minHeight={175}>
+            <SectionContainer px={0}>
               <SectionTitle
                 title={t("portfolio.recommended.title")}
                 containerProps={{ mb: 7, mx: 6 }}
@@ -254,6 +253,10 @@ function PortfolioScreen({ navigation }: Props) {
       ...(showAssets
         ? [
             <SectionContainer px={0} mb={8}>
+              <SectionTitle
+                title={t("analytics.operations.title")}
+                containerProps={{ mx: 6 }}
+              />
               <PortfolioHistoryList navigation={navigation} />
             </SectionContainer>,
           ]

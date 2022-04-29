@@ -26,9 +26,9 @@ import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalance
 import { FabAccountActions } from "../../components/FabActions";
 
 const renderAccountSummary = (
-  account,
-  parentAccount,
-  compoundSummary,
+  account: AccountLike,
+  parentAccount: Account,
+  compoundSummary: CompoundAccountSummary,
 ) => () => {
   const mainAccount = getMainAccount(account, parentAccount);
   const AccountBalanceSummaryFooter =
