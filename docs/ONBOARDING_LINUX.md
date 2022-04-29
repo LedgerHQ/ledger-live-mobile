@@ -64,6 +64,28 @@ Then you need to install [bundler](https://bundler.io/), that will be used to in
 
 `sudo  gem  install  bundler`
 
+#### Udev Rules
+
+You need to set up udev rules :
+
+Go see: [ledger support doc](https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_cantopendevice&support=true)
+
+Or directly do: `wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash`
+
+#### Metro watcher limits
+
+Linux uses the inotify package to observe filesystem events, individual files or directories.
+
+Since React / Angular hot-reloads and recompiles files on save it needs to keep track of all project's files. Increasing the inotify watch limit should hide the warning messages.
+
+```
+# insert the new value into the system config
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+​
+# check that the new value was applied
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
 ### Ledger Live Mobile
 
 #### Android Studio
@@ -144,3 +166,12 @@ Launch these commands inside the ledger-live-desktop repository :
 - `yarn start` to start the process
 
 After a few minutes, you should see Ledger Live Desktop start screen. Congrats !
+
+
+#### (Optional) Setup VSCode for debugging
+
+See [readme](https://github.com/LedgerHQ/ledger-live-desktop#debug) on Launch Configuration.
+
+
+
+*Thanks to Alexandre Magaud for being my test subject for this guide and for writing a good part of it and a huge amount of notes !*
