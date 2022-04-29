@@ -131,7 +131,7 @@ const SectionTitle = ({
   );
 };
 
-const maxAssetsToDisplay = 3;
+const maxAssetsToDisplay = 5;
 
 function PortfolioScreen({ navigation }: Props) {
   const { t } = useTranslation();
@@ -213,7 +213,7 @@ function PortfolioScreen({ navigation }: Props) {
                 balanceHistory={portfolio.balanceHistory}
                 assets={assetsToDisplay}
               />
-              {accounts.length < 3 && (
+              {accounts.length < maxAssetsToDisplay && (
                 <>
                   <Flex
                     mt={6}
@@ -240,22 +240,21 @@ function PortfolioScreen({ navigation }: Props) {
             </SectionContainer>,
           ]
         : []),
-
-      <SectionContainer px={0}>
-        <SectionTitle
-          containerProps={{ mx: 6 }}
-          title={t("analytics.operations.title")}
-        />
-        <PortfolioHistoryList navigation={navigation} />
-      </SectionContainer>,
       ...(showCarousel
         ? [
-            <SectionContainer px={0} mb={8} minHeight={175}>
+            <SectionContainer px={0} minHeight={175}>
               <SectionTitle
                 title={t("portfolio.recommended.title")}
                 containerProps={{ mb: 7, mx: 6 }}
               />
               <Carousel cardsVisibility={carouselVisibility} />
+            </SectionContainer>,
+          ]
+        : []),
+      ...(showAssets
+        ? [
+            <SectionContainer px={0} mb={8}>
+              <PortfolioHistoryList navigation={navigation} />
             </SectionContainer>,
           ]
         : []),

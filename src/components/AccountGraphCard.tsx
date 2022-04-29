@@ -8,10 +8,7 @@ import React, {
 } from "react";
 import { useTheme } from "styled-components/native";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import {
   ValueChange,
   PortfolioRange,
@@ -37,6 +34,10 @@ import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import Graph from "./Graph";
+import Touchable from "./Touchable";
+import TransactionsPendingConfirmationWarning from "./TransactionsPendingConfirmationWarning";
+import { NoCountervaluePlaceholder } from "./CounterValue";
+import DiscreetModeButton from "./DiscreetModeButton";
 
 const { width } = getWindowDimensions();
 
@@ -67,6 +68,7 @@ type Props = {
   counterValueCurrency: Currency;
   useCounterValue?: boolean;
   renderAccountSummary: () => ReactNode;
+  onSwitchAccountCurrency: () => void;
 };
 
 const timeRangeMapped: any = {
@@ -83,6 +85,8 @@ function AccountGraphCard({
   counterValueCurrency,
   useCounterValue,
   renderAccountSummary,
+  onSwitchAccountCurrency,
+  valueChange,
 }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
@@ -108,7 +112,6 @@ function AccountGraphCard({
   const activeRangeIndex = ranges.findIndex(r => r.value === timeRange);
 
   const isAvailable = !useCounterValue || countervalueAvailable;
-  const unit = getAccountUnit(account);
 
   const updateRange = useCallback(
     index => {
@@ -138,20 +141,21 @@ function AccountGraphCard({
   return (
     <Flex
       flexDirection="column"
-      mt={20}
       bg="neutral.c30"
+      mt={20}
       py={6}
       borderRadius={8}
     >
       <GraphCardHeader
         account={account}
-        isLoading={!isAvailable}
-        to={history[history.length - 1]}
-        cryptoCurrencyUnit={unit}
+        countervalueAvailable={countervalueAvailable}
+        onSwitchAccountCurrency={onSwitchAccountCurrency}
+        countervalueChange={countervalueChange}
         counterValueUnit={counterValueCurrency.units[0]}
         useCounterValue={useCounterValue}
-        valueChange={countervalueChange}
-        hoveredItem={hoveredItem}
+        cryptoCurrencyUnit={getAccountUnit(account)}
+        item={hoveredItem || history[history.length - 1]}
+        valueChange={valueChange}
       />
       <Flex height={120} alignItems="center" justifyContent="center">
         {!loading ? (
@@ -176,7 +180,7 @@ function AccountGraphCard({
       <Flex mt={25} px={6}>
         <GraphTabs
           activeIndex={activeRangeIndex}
-          activeBg="neutral.c20"
+          activeBg="background.main"
           onChange={updateRange}
           labels={rangesLabels}
         />
@@ -186,68 +190,71 @@ function AccountGraphCard({
   );
 }
 
-function GraphCardHeader({
-  counterValueUnit,
-  to,
-  hoveredItem,
-  isLoading,
-  valueChange,
-  account,
-}: {
+type HeaderTitleProps = {
   account: AccountLike;
-  isLoading: boolean;
+  countervalueAvailable: boolean;
+  onSwitchAccountCurrency: () => void;
+  valueChange: ValueChange;
+  useCounterValue?: boolean;
   cryptoCurrencyUnit: Unit;
   counterValueUnit: Unit;
-  to: Item;
-  hoveredItem?: Item;
-  useCounterValue?: boolean;
-  valueChange: ValueChange;
-}) {
-  const currency = getAccountCurrency(account);
-  const item = hoveredItem || to;
+  item: Item;
+};
+
+const GraphCardHeader = ({
+  account,
+  countervalueAvailable,
+  onSwitchAccountCurrency,
+  valueChange,
+  useCounterValue,
+  cryptoCurrencyUnit,
+  counterValueUnit,
+  item,
+}: HeaderTitleProps) => {
+  const items = [
+    { unit: cryptoCurrencyUnit, value: item.value },
+    { unit: counterValueUnit, value: item.countervalue },
+  ];
+
+  const shouldUseCounterValue = countervalueAvailable && useCounterValue;
+  if (shouldUseCounterValue) {
+    items.reverse();
+  }
 
   return (
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      alignItems={"center"}
-      px={6}
-    >
-      <Box flexShrink={1}>
-        {hoveredItem ? (
-          <Text
-            variant={"body"}
-            fontWeight={"semiBold"}
-            color="neutral.c100"
-            numberOfLines={1}
-            mr={4}
-          >
+    <Flex flexDirection={"row"} px={6} justifyContent={"space-between"}>
+      <Touchable
+        event="SwitchAccountCurrency"
+        eventProperties={{ useCounterValue: shouldUseCounterValue }}
+        onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
+        style={{ flexShrink: 1 }}
+      >
+        <Flex>
+          <Flex flexDirection={"row"}>
+            <Text variant={"large"} fontWeight={"medium"} color={"neutral.c70"}>
+              {typeof items[1]?.value === "number" ? (
+                <CurrencyUnitValue {...items[1]} />
+              ) : (
+                <NoCountervaluePlaceholder />
+              )}
+            </Text>
+            <TransactionsPendingConfirmationWarning maybeAccount={account} />
+          </Flex>
+          <Text variant={"h1"}>
             <CurrencyUnitValue
-              unit={counterValueUnit}
-              value={item.countervalue}
+              {...items[0]}
+              disableRounding
+              joinFragmentsSeparator=" "
             />
           </Text>
-        ) : (
-          <CurrencyRate currency={currency} />
-        )}
-      </Box>
-      <Box>
-        {isLoading ? (
-          <Placeholder
-            width={50}
-            containerHeight={19}
-            style={{ marginRight: 10 }}
-          />
-        ) : hoveredItem && hoveredItem.date ? (
-          <Text variant={"body"} fontWeight={"medium"}>
-            <FormatDate date={hoveredItem.date} />
-          </Text>
-        ) : valueChange ? (
           <Delta percent valueChange={valueChange} />
-        ) : null}
-      </Box>
+        </Flex>
+      </Touchable>
+      <Flex justifyContent={"flex-start"} ml={4}>
+        <DiscreetModeButton />
+      </Flex>
     </Flex>
   );
-}
+};
 
 export default memo(AccountGraphCard);

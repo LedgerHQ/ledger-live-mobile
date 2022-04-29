@@ -82,7 +82,7 @@ function GraphCard({
       <Flex
         flexDirection={"row"}
         justifyContent={"space-between"}
-        alignItems={"center"}
+        alignItems={"flex-start"}
         p={6}
       >
         <Flex>

@@ -51,14 +51,6 @@ export function PortfolioHistoryList({
   });
 
   function ListEmptyComponent() {
-    if (accounts.length === 0) {
-      return <EmptyStatePortfolio navigation={navigation} />;
-    }
-
-    if (accounts.every(isAccountEmpty)) {
-      return <NoOpStatePortfolio />;
-    }
-
     return null;
   }
 
@@ -129,7 +121,7 @@ export function PortfolioHistoryList({
         ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
           <NoMoreOperationFooter />
         ) : (
-          <NoOperationFooter />
+          null
         )
       }
       ListEmptyComponent={ListEmptyComponent}
