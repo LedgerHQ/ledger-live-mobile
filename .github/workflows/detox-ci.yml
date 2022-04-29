@@ -142,7 +142,7 @@ jobs:
         run: yarn e2e:build -c android.staging 
 
       - name: Run Android tests
-        timeout-minutes: 15
+        timeout-minutes: 10
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
