@@ -2,16 +2,16 @@ import { execSync } from "child_process";
 import * as bridge from "./bridge/server";
 
 beforeAll(() => {
-  console.log("==============> STARTING BRIDGE INIT");
-  bridge.init();
+  // console.log("==============> STARTING BRIDGE INIT");
+  // bridge.init();
 
   console.log("==============> SETTING UP DEMO MODE");
   setupDemoModeForScreenshots();
 });
 
 afterAll(() => {
-  console.log("==============> CLOSING BRIDGE");
-  bridge.close();
+  // console.log("==============> CLOSING BRIDGE");
+  // bridge.close();
 });
 
 function setupDemoModeForScreenshots() {
