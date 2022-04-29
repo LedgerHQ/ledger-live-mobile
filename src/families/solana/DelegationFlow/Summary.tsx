@@ -1,4 +1,3 @@
-/* @flow */
 import {
   getAccountCurrency,
   getAccountName,
@@ -6,7 +5,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
+import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import type {
   SolanaStakeWithMeta,
   TransactionModel,
@@ -14,10 +13,11 @@ import type {
 import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
 import type { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { Trans } from "react-i18next";
 import { Animated, StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -30,14 +30,11 @@ import Button from "../../../components/Button";
 import Circle from "../../../components/Circle";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import DelegatingContainer from "../../tezos/DelegatingContainer";
 import ValidatorImage from "../shared/ValidatorImage";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -68,8 +65,9 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
   invariant(delegationAction, "delegation action must be defined");
   invariant(account, "account must be defined");
+  invariant(account.type === 'Account', 'account type must be Account')
 
-  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validators = useValidators(account.currency);
 
   const chosenValidator = useMemo(() => {
     if (validator !== undefined) {
@@ -86,7 +84,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
       return undefined;
     }
 
-    return validators.find(v => v.voteAccount === stake.delegation.voteAccAddr);
+    return validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
   }, [validators, validator, delegationAction]);
 
   const {
@@ -107,10 +105,11 @@ export default function DelegationSummary({ navigation, route }: Props) {
       family: "solana",
       // TODO: fix amount
       amount: new BigNumber(1),
+      recipient: '',
       model: txModelByDelegationAction(
         delegationAction,
-        chosenValidator,
         validators[0],
+        chosenValidator,
       ),
     });
   }, [delegationAction, chosenValidator, validators, setTransaction]);
@@ -157,6 +156,8 @@ export default function DelegationSummary({ navigation, route }: Props) {
     navigation.navigate(ScreenName.DelegationSelectValidator, route.params);
   }, [rotateAnim, navigation, route.params]);
 
+  const onChangeAmount = () => {};
+
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency);
   const accountName = getAccountName(account);
@@ -173,7 +174,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
+      forceInset={{bottom: 'always'}}
     >
       <TrackScreen category="DelegationFlow" name="Summary" />
 
@@ -196,7 +197,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
               >
                 <Circle
                   size={70}
-                  style={[styles.validatorCircle, { borderColor: colors.grey }]}
+                  style={[styles.validatorCircle, { borderColor: colors.primary }]}
                 >
                   <Animated.View
                     style={{
@@ -220,12 +221,14 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
         <View style={styles.summary}>
           <SummaryWords
+            onChangeValidator={onChangeDelegator}
+            onChangeAmount={onChangeAmount}
             validator={chosenValidator}
             delegationAction={delegationAction}
             account={account}
           />
         </View>
-        {transaction.mode === "undelegate" ? (
+        {transaction.model.kind === "stake.undelegate" ? (
           <Alert type="help">
             <Trans i18nKey="delegation.warnUndelegation" />
           </Alert>
@@ -335,8 +338,8 @@ type StakeAction = "deactivate" | "activate" | "withdraw" | "reactivate";
 
 function txModelByDelegationAction(
   delegationAction: DelegationAction,
-  chosenValidator?: ValidatorsAppValidator,
   defaultValidator: ValidatorsAppValidator,
+  chosenValidator?: ValidatorsAppValidator,
 ): TransactionModel {
   if (delegationAction.kind === "new") {
     return {
@@ -351,12 +354,12 @@ function txModelByDelegationAction(
 
   const {
     stakeAction,
-    stakeWithMeta: { stake, meta },
+    stakeWithMeta: { stake },
   } = delegationAction;
 
   invariant(stake.delegation, "stake delegation must be defined");
 
-  const { stakeAccAddr, voteAccAddr } = stake;
+  const { stakeAccAddr, delegation  } = stake;
 
   switch (stakeAction) {
     case "activate":
@@ -365,7 +368,7 @@ function txModelByDelegationAction(
         kind: "stake.delegate",
         uiState: {
           stakeAccAddr,
-          voteAccAddr: chosenValidator?.voteAccount ?? voteAccAddr,
+          voteAccAddr: chosenValidator?.voteAccount ?? delegation?.voteAccAddr ?? '-',
         },
       };
     case "deactivate":
@@ -406,41 +409,56 @@ function SummaryWords({
   delegationAction,
   validator,
   account,
+  onChangeValidator,
+  onChangeAmount,
 }: {
   delegationAction: DelegationAction,
   validator?: ValidatorsAppValidator,
   account: AccountLike,
+  onChangeValidator: () => void,
+  onChangeAmount: () => void,
 }) {
-  /*
-  const accountName = getAccountName(account);
-  if (delegationAction.kind === "new") {
+  if (
+    delegationAction.kind === "new" ||
+    delegationAction.stakeAction === "activate"
+  ) {
     return (
       <>
         <Line>
-          <Words>
-            delegate from
-          </Words>
-          <Words highlighted style={styles.accountName}>
-            {accountName}
-          </Words>
+          <Words>I delegate</Words>
+          {delegationAction.kind === "new" ? (
+            <Touchable onPress={onChangeAmount}>
+              <ValidatorSelection name={"10 SOL"} />
+            </Touchable>
+          ) : (
+            <ValidatorSelection readOnly name={"10 SOL"} />
+          )}
         </Line>
-            <Line>
-              <Words>
-                <Trans i18nKey="delegation.from" />
-              </Words>
-              <ValidatorSelection
-                readOnly
-                name={chosenValidator?.name ?? chosenValidator?.voteAccount}
-              />
-            </Line>
+        <Line>
+          <Words>to</Words>
+          <Touchable onPress={onChangeValidator}>
+            <ValidatorSelection
+              name={validator?.name ?? validator?.voteAccount ?? "-"}
+            ></ValidatorSelection>
+          </Touchable>
+        </Line>
       </>
     );
   }
-    */
   return (
-    <LText>
-      {JSON.stringify(delegationAction)}, {JSON.stringify(validator)}
-    </LText>
+    <>
+      <Line>
+        <Words>I {delegationAction.stakeAction}</Words>
+        <ValidatorSelection readOnly name={"10 SOL"} />
+      </Line>
+      <Line>
+        <Words>delegated to</Words>
+        <ValidatorSelection
+          readOnly
+          name={validator?.name ?? validator?.voteAccount ?? "-"}
+        ></ValidatorSelection>
+      </Line>
+    </>
   );
 }
 
@@ -451,14 +469,14 @@ const AccountBalanceTag = ({ account }: { account: AccountLike }) => {
     <View
       style={[styles.accountBalanceTag, { backgroundColor: colors.lightFog }]}
     >
-      <LText
-        semiBold
+      <Text
+        fontWeight="semiBold"
         numberOfLines={1}
         style={styles.accountBalanceTagText}
         color="smoke"
       >
         <CurrencyUnitValue showCode unit={unit} value={account.balance} />
-      </LText>
+      </Text>
     </View>
   );
 };
@@ -472,7 +490,7 @@ const ChangeDelegator = () => {
   );
 };
 
-const Line = ({ children }: { children: React$Node }) => (
+const Line = ({ children }: { children: ReactNode }) => (
   <View style={styles.summaryLine}>{children}</View>
 );
 
@@ -481,19 +499,18 @@ const Words = ({
   highlighted,
   style,
 }: {
-  children: React$Node,
+  children: ReactNode,
   highlighted?: boolean,
   style?: any,
 }) => (
-  <LText
+  <Text
     numberOfLines={1}
-    semiBold={!highlighted}
-    bold={highlighted}
+    fontWeight={highlighted ? 'bold' : 'semiBold'}
     style={[styles.summaryWords, style]}
     color={highlighted ? "live" : "smoke"}
   >
     {children}
-  </LText>
+  </Text>
 );
 
 const ValidatorSelection = ({
@@ -511,14 +528,14 @@ const ValidatorSelection = ({
         { backgroundColor: rgba(colors.live, 0.2) },
       ]}
     >
-      <LText
-        bold
+      <Text
+        fontWeight="bold"
         numberOfLines={1}
         style={styles.validatorSelectionText}
         color="live"
       >
         {name}
-      </LText>
+      </Text>
       {readOnly ? null : (
         <View
           style={[

@@ -1,6 +1,6 @@
 /* @flow */
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
+import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
@@ -41,7 +41,7 @@ export default function SelectValidator({ navigation, route }: Props) {
 
   invariant(account, "account must be defined");
 
-  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validators = useValidators(account.currency);
 
   const displayInfos = useCallback(() => {
     setShowInfos(true);
