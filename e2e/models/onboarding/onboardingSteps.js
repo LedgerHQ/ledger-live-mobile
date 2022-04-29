@@ -56,20 +56,28 @@ export default class OnboardingSteps {
 
   static async addDeviceViaBluetooth() {
     console.log(`==================> Adding device`);
+    await device.takeScreenshot("pre add device");
     bridge.addDevices();
+    await device.takeScreenshot("post add device");
 
     console.log(`==================> tapping David's device`);
     await testHelpers.delay(5000);
+    await device.takeScreenshot("pre tap Davids nano");
     await testHelpers.tapByText("Nano X de David");
+    await device.takeScreenshot("post tap Davids nano");
     // await testHelpers.waitAndTap(`DeviceItemEnter ${david}`);
 
     // set globally installed apps on device?
     console.log(`==================> setting installed apps`);
+    await device.takeScreenshot("pre set installed apps");
     bridge.setInstalledApps();
+    await device.takeScreenshot("post set installed apps");
 
     // open ledger manager
     console.log(`==================> opening Ledger manager`);
+    await device.takeScreenshot("pre open ledger manager");
     bridge.open();
+    await device.takeScreenshot("post open ledger manager");
 
     // Continue to welcome screen
     // await waitFor(
