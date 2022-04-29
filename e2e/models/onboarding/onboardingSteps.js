@@ -51,7 +51,7 @@ export default class OnboardingSteps {
   // }
 
   static async selectPairWithBluetooth() {
-    await testHelpers.tapWithText("Pair with bluetooth");
+    await testHelpers.tapByText("Pair with bluetooth");
   }
 
   static async addDeviceViaBluetooth() {
