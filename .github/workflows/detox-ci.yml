@@ -81,7 +81,7 @@ jobs:
 
       - name: Test iOS app
         timeout-minutes: 15
-        run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing 
+        run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles
 #  --retries 1 --reuse
         
       - name: Upload test artifacts
@@ -156,7 +156,7 @@ jobs:
             mkdir ./temp
             curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
             adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
-            yarn e2e:test -c android.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing 
+            yarn e2e:test -c android.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles --forceExit
         # adb logcat -c
         # adb logcat *:E &
         # $ANDROID_HOME/platform-tools/adb devices
