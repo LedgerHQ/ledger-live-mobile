@@ -5,14 +5,11 @@ import GeneralSettingsPage from "../models/settings/generalSettingsPage";
 import PasswordEntryPage from "../models/passwordEntryPage";
 import { delay } from "../helpers";
 
-import * as bridge from "../bridge/server";
-
 const CORRECT_PASSWORD = "passWORD$123!";
 
 describe("Password Lock Screen", () => {
   beforeAll(async () => {
     console.log("==============> STARTING PASSWORD DEVICE LAUNCH");
-    bridge.init();
     // await device.reloadReactNative();
     await device.launchApp({ delete: true });
   });
@@ -40,6 +37,5 @@ describe("Password Lock Screen", () => {
     await PasswordEntryPage.login();
 
     await GeneralSettingsPage.isVisible();
-    bridge.close();
   });
 });

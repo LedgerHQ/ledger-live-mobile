@@ -2,12 +2,9 @@ import OnboardingSteps from "../models/onboarding/onboardingSteps";
 import PortfolioPage from "../models/portfolioPage";
 // import { expectBitmapsToBeEqual } from "../helpers";
 
-import * as bridge from "../bridge/server";
-
 describe("Onboarding", () => {
   beforeAll(async () => {
     console.log("==============> STARTING ONBOARDING DEVICE LAUNCH");
-    bridge.init();
     // await device.reloadReactNative();
     // await device.launchApp({ newInstance: true });
     await device.launchApp();
@@ -34,7 +31,5 @@ describe("Onboarding", () => {
     // const image = await device.takeScreenshot("nanoX-onboarding-snapshot");
     // const snapshottedImagePath = `e2e/specs/snapshots/${device.getPlatform()}-nanoX-onboarding-snapshot.png`;
     // expectBitmapsToBeEqual(image, snapshottedImagePath);
-
-    bridge.close();
   });
 });
