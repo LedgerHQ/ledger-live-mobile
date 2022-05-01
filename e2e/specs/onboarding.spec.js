@@ -2,7 +2,7 @@ import OnboardingSteps from "../models/onboarding/onboardingSteps";
 import PortfolioPage from "../models/portfolioPage";
 // import { expectBitmapsToBeEqual } from "../helpers";
 
-import * as bridge from "./bridge/server";
+import * as bridge from "../bridge/server";
 
 describe("Onboarding", () => {
   beforeAll(async () => {

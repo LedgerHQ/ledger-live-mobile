@@ -5,7 +5,7 @@ import GeneralSettingsPage from "../models/settings/generalSettingsPage";
 import PasswordEntryPage from "../models/passwordEntryPage";
 import { delay } from "../helpers";
 
-import * as bridge from "./bridge/server";
+import * as bridge from "../bridge/server";
 
 const CORRECT_PASSWORD = "passWORD$123!";
 

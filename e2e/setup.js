@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import * as bridge from "./bridge/server";
+// import * as bridge from "./bridge/server";
 
 beforeAll(() => {
   // console.log("==============> STARTING BRIDGE INIT");
