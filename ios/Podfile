@@ -40,7 +40,7 @@ target 'LedgerConnect Extension (iOS)' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :hermes_enabled => false
+    :hermes_enabled => true
   )
 
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
