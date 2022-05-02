@@ -1877,7 +1877,7 @@
         "bullet2": "Версия Ledger Live, язык интерфейса и регион"
       },
       "hideEmptyTokenAccounts": "Скрывать пустые счета",
-      "hideEmptyTokenAccountsDesc": "Скрыть счета с нулевым балансом на странице Cчета."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "Валюты",
