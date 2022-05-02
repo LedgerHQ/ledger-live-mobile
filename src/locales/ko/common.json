@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live 버전, OS 지역, 언어, 지역"
       },
       "hideEmptyTokenAccounts": "빈 토큰 계정 숨기기",
-      "hideEmptyTokenAccountsDesc": "계정 페이지에서 빈 토큰 계정을 숨기세요."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "통화",
