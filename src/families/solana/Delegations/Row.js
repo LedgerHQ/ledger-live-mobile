@@ -45,7 +45,11 @@ export default function DelegationRow({
       onPress={() => onPress(stakeWithMeta)}
     >
       <View style={[styles.icon]}>
-        <ValidatorImage size={32} imgUrl={meta.validator?.img} />
+        <ValidatorImage
+          size={32}
+          imgUrl={meta.validator?.img}
+          name={meta.validator?.name ?? stake.delegation?.voteAccAddr}
+        />
         {/*
           // view extra style = { backgroundColor: colors.lightLive }
 
@@ -59,9 +63,6 @@ export default function DelegationRow({
         <LText semiBold numberOfLines={1}>
           {meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
         </LText>
-        <View>
-          <LText>{stake.activation.state}</LText>
-        </View>
 
         <View style={styles.row}>
           <LText style={styles.seeMore} color="live">

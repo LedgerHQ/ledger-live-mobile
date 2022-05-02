@@ -209,7 +209,9 @@ export default function DelegationSummary({ navigation, route }: Props) {
                       ],
                     }}
                   >
-                    <ValidatorImage imgUrl={chosenValidator?.avatarUrl} />
+                    <ValidatorImage imgUrl={chosenValidator?.avatarUrl} name={
+                      chosenValidator?.name ?? chosenValidator?.voteAccount
+                    } />
                   </Animated.View>
                   <ChangeDelegator />
                 </Circle>

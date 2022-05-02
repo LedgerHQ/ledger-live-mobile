@@ -264,7 +264,7 @@ const ValidatorRow = ({
       onPress={onPressT}
     >
       <View style={styles.validator}>
-        <ValidatorImage size={32} imgUrl={validator.avatarUrl} />
+        <ValidatorImage size={32} imgUrl={validator.avatarUrl} name={validator.name ?? validator.voteAccount} />
         <View style={styles.validatorBody}>
           <Text numberOfLines={1} fontWeight='semiBold' style={styles.validatorName}>
             {validator.name || validator.voteAccount}

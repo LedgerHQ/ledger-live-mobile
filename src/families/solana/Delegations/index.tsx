@@ -267,6 +267,10 @@ function Delegations({ account }: Props) {
         ValidatorImage={({ size }) => (
           <ValidatorImage
             imgUrl={selectedStakeWithMeta?.meta?.validator?.img}
+            name={
+              selectedStakeWithMeta?.meta?.validator?.name ??
+              selectedStakeWithMeta?.stake.delegation?.voteAccAddr
+            }
             size={size}
           />
         )}
@@ -286,7 +290,7 @@ function Delegations({ account }: Props) {
           })}
           infoUrl={urls.cosmosStaking}
           infoTitle={t("cosmos.delegation.info")}
-          onPress={() => {}}
+          onPress={onDelegate}
           ctaTitle={t("account.delegation.info.cta")}
         />
       ) : (
