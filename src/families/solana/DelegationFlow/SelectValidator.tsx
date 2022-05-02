@@ -1,4 +1,3 @@
-/* @flow */
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
@@ -14,7 +13,7 @@ import { TrackScreen } from "../../../analytics";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import ExternalLink from "../../../components/ExternalLink";
 import InfoModal from "../../../components/InfoModal";
-import LText, { getFontStyle } from "../../../components/LText";
+import { Text } from "@ledgerhq/native-ui";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import Info from "../../../icons/Info";
@@ -23,7 +22,7 @@ import ValidatorImage from "../shared/ValidatorImage";
 
 type Props = {
   account: AccountLike,
-  parentAccount: ?Account,
+  parentAccount?: Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -40,6 +39,7 @@ export default function SelectValidator({ navigation, route }: Props) {
   const [showInfos, setShowInfos] = useState(false);
 
   invariant(account, "account must be defined");
+  invariant(account.type === 'Account', 'account must be of type Account')
 
   const validators = useValidators(account.currency);
 
@@ -71,7 +71,7 @@ export default function SelectValidator({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
+      forceInset={{bottom: 'always'}}
     >
       <TrackScreen category="DelegationFlow" name="SelectValidator" />
       <View style={styles.header}>
@@ -91,11 +91,11 @@ export default function SelectValidator({ navigation, route }: Props) {
         confirmLabel={t("common.close")}
       >
         <View style={styles.providedByContainer}>
-          <LText semiBold style={styles.providedByText} color="grey">
+          <Text fontWeight="semiBold" style={styles.providedByText} color="grey">
             <Trans i18nKey="delegation.yieldInfos" />
-          </LText>
+          </Text>
           <ExternalLink
-            text={<LText bold>Baking Bad</LText>}
+            text={<Text fontWeight="bold">Baking Bad</Text>}
             event="SelectValidatorOpen"
             onPress={() => Linking.openURL("https://baking-bad.org/")}
           />
@@ -170,11 +170,6 @@ const styles = StyleSheet.create({
   validatorYieldFull: {
     opacity: 0.5,
   },
-  addressInput: {
-    ...getFontStyle({ semiBold: true }),
-    fontSize: 20,
-    paddingVertical: 16,
-  },
   warningBox: {
     alignSelf: "stretch",
     marginTop: 8,
@@ -203,16 +198,14 @@ const Amount = ({
   const { colors } = useTheme();
   return (
     <View
-      style={[styles.accountBalanceTag, { backgroundColor: colors.lightFog }]}
+      style={[{ backgroundColor: colors.lightFog }]}
     >
-      <LText semiBold numberOfLines={1}>
+      <Text fontWeight="semiBold" numberOfLines={1}>
         <CurrencyUnitValue showCode unit={unit} value={account.balance} />
-      </LText>
+      </Text>
     </View>
   );
 };
-
-const forceInset = { bottom: "always" };
 
 const keyExtractor = (v: ValidatorsAppValidator) => v.voteAccount;
 
@@ -220,23 +213,23 @@ const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
   const { colors } = useTheme();
   return (
     <View style={styles.validatorHead}>
-      <LText
+      <Text
         style={styles.validatorHeadText}
         color="smoke"
         numberOfLines={1}
-        semiBold
+        fontWeight='semiBold'
       >
         Validator
-      </LText>
+      </Text>
       <View style={styles.validatorHeadContainer}>
-        <LText
+        <Text
           style={styles.validatorHeadText}
           color="smoke"
           numberOfLines={1}
-          semiBold
+          fontWeight='semiBold'
         >
           Total Stake
-        </LText>
+        </Text>
         <Touchable
           style={styles.validatorHeadInfo}
           event="StepValidatorShowProvidedBy"
@@ -273,34 +266,33 @@ const ValidatorRow = ({
       <View style={styles.validator}>
         <ValidatorImage size={32} imgUrl={validator.avatarUrl} />
         <View style={styles.validatorBody}>
-          <LText numberOfLines={1} semiBold style={styles.validatorName}>
+          <Text numberOfLines={1} fontWeight='semiBold' style={styles.validatorName}>
             {validator.name || validator.voteAccount}
-          </LText>
+          </Text>
           {true ? (
-            <LText
-              semiBold
+            <Text
+              fontWeight="semiBold"
               numberOfLines={1}
               style={styles.overdelegated}
-              //color="orange"
             >
               commission {validator.commission} %
-            </LText>
+            </Text>
           ) : null}
         </View>
-        <LText
-          semiBold
+        <Text
+          fontWeight="semiBold"
           numberOfLines={1}
           style={[styles.validatorYield]}
           color="smoke"
         >
-          <LText semiBold numberOfLines={1}>
+          <Text fontWeight="semiBold" numberOfLines={1}>
             <CurrencyUnitValue
               showCode
               unit={getAccountUnit(account)}
               value={validator.activeStake}
             />
-          </LText>
-        </LText>
+          </Text>
+        </Text>
       </View>
     </Touchable>
   );

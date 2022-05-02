@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from "react";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -7,18 +6,16 @@ import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
-import LText from "../../../components/LText";
+import { Text } from "@ledgerhq/native-ui";
 import ExternalLink from "../../../components/ExternalLink";
 import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
 import NavigationScrollView from "../../../components/NavigationScrollView";
 import IlluStaking from "../../tezos/IlluStaking";
 import { urls } from "../../../config/urls";
 
-const forceInset = { bottom: "always" };
-
 type Props = {
-  navigation: any,
-  route: { params: any },
+  navigation: any;
+  route: { params: any };
 };
 
 export default function DelegationStarted({ navigation, route }: Props) {
@@ -36,7 +33,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
+      forceInset={{ bottom: "always" }}
     >
       <NavigationScrollView
         style={styles.scroll}
@@ -44,12 +41,12 @@ export default function DelegationStarted({ navigation, route }: Props) {
       >
         <TrackScreen category="DelegationFlow" name="Started" />
         <IlluStaking />
-        <LText semiBold style={styles.title}>
-          <Trans secondary i18nKey="delegation.started.title" />
-        </LText>
-        <LText secondary style={styles.description}>
+        <Text fontWeight="semiBold" style={styles.title}>
+          <Trans i18nKey="delegation.started.title" />
+        </Text>
+        <Text style={styles.description}>
           <Trans i18nKey="delegation.started.description" />
-        </LText>
+        </Text>
         <BulletList
           Bullet={BulletGreenCheck}
           list={[
@@ -57,9 +54,9 @@ export default function DelegationStarted({ navigation, route }: Props) {
             <Trans i18nKey="delegation.started.steps.1" />,
             <Trans i18nKey="delegation.started.steps.2" />,
           ].map(wording => (
-            <LText secondary semiBold style={styles.bulletItem} color="black">
+            <Text fontWeight="semiBold" style={styles.bulletItem} color="black">
               {wording}
-            </LText>
+            </Text>
           ))}
         />
         <View style={[styles.howDelegationWorks, { borderColor: colors.live }]}>
@@ -67,9 +64,6 @@ export default function DelegationStarted({ navigation, route }: Props) {
             event="DelegationStartedHowDelegationWorks"
             onPress={howDelegationWorks}
             text={<Trans i18nKey="delegation.howDelegationWorks" />}
-            ltextProps={{
-              secondary: true,
-            }}
           />
         </View>
       </NavigationScrollView>

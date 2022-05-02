@@ -7,19 +7,17 @@ import ValidateError from "../../../components/ValidateError";
 import { TrackScreen } from "../../../analytics";
 import { urls } from "../../../config/urls";
 
-const forceInset = { bottom: "always" };
-
 type Props = {
-  navigation: any,
-  route: { params: RouteParams },
+  navigation: any;
+  route: { params: RouteParams };
 };
 
 type RouteParams = {
-  accountId: string,
-  parentId: string,
-  deviceId: string,
-  transaction: any,
-  error: Error,
+  accountId: string;
+  parentId: string;
+  deviceId: string;
+  transaction: any;
+  error: Error;
 };
 
 export default function ValidationError({ navigation, route }: Props) {
@@ -41,7 +39,7 @@ export default function ValidationError({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
+      forceInset={{ bottom: "always" }}
     >
       <TrackScreen category="DelegationFlow" name="ValidationError" />
       <ValidateError
