@@ -8,6 +8,7 @@ import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import type {
   SolanaStakeWithMeta,
+  StakeAction,
   TransactionModel,
 } from "@ledgerhq/live-common/lib/families/solana/types";
 import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
@@ -332,9 +333,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 });
-
-// TODO: export stake actions type from live-common (or better move them to types)
-type StakeAction = "deactivate" | "activate" | "withdraw" | "reactivate";
 
 function txModelByDelegationAction(
   delegationAction: DelegationAction,

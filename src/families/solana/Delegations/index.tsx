@@ -3,36 +3,47 @@ import {
   getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import {
   getAddressExplorer,
   getDefaultExplorerView,
 } from "@ledgerhq/live-common/lib/explorers";
-import invariant from "invariant";
-import { stakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
+import {
+  stakeActions,
+  stakeActivePercent,
+} from "@ledgerhq/live-common/lib/families/solana/logic";
 import { useSolanaStakesWithMeta } from "@ledgerhq/live-common/lib/families/solana/react";
-import { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import {
+  SolanaStakeWithMeta,
+  StakeAction,
+} from "@ledgerhq/live-common/lib/families/solana/types";
+import {
+  assertUnreachable,
+  tupleOfUnion,
+} from "@ledgerhq/live-common/lib/families/solana/utils";
 import { Account } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
+import invariant from "invariant";
 import { capitalize } from "lodash/fp";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, StyleSheet, View } from "react-native";
 import AccountDelegationInfo from "../../../components/AccountDelegationInfo";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
-import Button from "../../../components/Button";
 import Circle from "../../../components/Circle";
-import CounterValue from "../../../components/CounterValue";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import { IconProps } from "../../../components/DelegationDrawer";
-import DelegationDrawer from "../../../components/DelegationDrawer";
-import FirstLetterIcon from "../../../components/FirstLetterIcon";
+import DelegationDrawer, {
+  IconProps,
+} from "../../../components/DelegationDrawer";
 import Touchable from "../../../components/Touchable";
 import { urls } from "../../../config/urls";
 import { NavigatorName, ScreenName } from "../../../const";
 import IlluRewards from "../../../icons/images/Rewards";
-import RedelegateIcon from "../../../icons/Redelegate";
+import DelegateIcon from "../../../icons/Delegate";
+import UndelegateIcon from "../../../icons/Undelegate";
+import WalletIcon from "../../../icons/Wallet";
+import ValidatorImage from "../shared/ValidatorImage";
 import DelegationLabelRight from "./LabelRight";
 import DelegationRow from "./Row";
 
@@ -62,8 +73,6 @@ function Delegations({ account }: Props) {
   const [selectedStakeWithMeta, setSelectedStakeWithMeta] = useState<
     SolanaStakeWithMeta | undefined
   >();
-
-  const totalRewardsAvailable = new BigNumber(0);
 
   const onNavigate: any = ({
     route,
@@ -111,6 +120,14 @@ function Delegations({ account }: Props) {
     }
   };
 
+  const formatAmount = (amount: number) => {
+    return formatCurrencyUnit(unit, new BigNumber(amount), {
+      disableRounding: true,
+      alwaysShowSign: false,
+      showCode: true,
+    });
+  };
+
   const data = useMemo<DelegationDrawerProps["data"]>(() => {
     if (selectedStakeWithMeta === undefined) {
       return [];
@@ -152,21 +169,60 @@ function Delegations({ account }: Props) {
           </Text>
         ),
       },
+      {
+        label: "Active",
+        Component: (
+          <Text
+            numberOfLines={1}
+            fontWeight="semiBold"
+            ellipsizeMode="middle"
+            style={[styles.valueText]}
+            color="live"
+          >
+            {stake.delegation === undefined
+              ? 0
+              : stakeActivePercent(stake).toFixed(2)}{" "}
+            %
+          </Text>
+        ),
+      },
+      {
+        label: "Available balance",
+        Component: (
+          <Text
+            numberOfLines={1}
+            fontWeight="semiBold"
+            ellipsizeMode="middle"
+            style={[styles.valueText]}
+            color="live"
+          >
+            {formatAmount(stake.withdrawable)}
+          </Text>
+        ),
+      },
     ];
   }, [selectedStakeWithMeta, t, account]);
 
   const delegationActions = useMemo<DelegationDrawerActions>(() => {
-    const actions =
+    const allStakeActions = tupleOfUnion<StakeAction>()([
+      "activate",
+      "deactivate",
+      "reactivate",
+      "withdraw",
+    ]);
+
+    const availableActions =
       (selectedStakeWithMeta && stakeActions(selectedStakeWithMeta.stake)) ??
       [];
 
-    return actions.map(action => {
+    return allStakeActions.map(action => {
       const drawerAction: DelegationDrawerActions[number] = {
         label: capitalize(action),
         Icon: (props: IconProps) => (
           <Circle {...props}>
-            <RedelegateIcon
-            //color={!redelegateEnabled ? colors.grey : undefined}
+            <DrawerStakeActionIcon
+              stakeAction={action}
+              color={availableActions.includes(action) ? undefined : "grey"}
             />
           </Circle>
         ),
@@ -184,13 +240,11 @@ function Delegations({ account }: Props) {
             },
           });
         },
+        disabled: !availableActions.includes(action),
       };
       return drawerAction;
     });
   }, [t, selectedStakeWithMeta, account, onNavigate]);
-
-  //const delegationDisabled = delegations.length <= 0 || !canDelegate(account);
-  const delegationDisabled = false;
 
   return (
     <View style={styles.root}>
@@ -199,15 +253,9 @@ function Delegations({ account }: Props) {
         onClose={onCloseDrawer}
         account={account}
         ValidatorImage={({ size }) => (
-          <FirstLetterIcon
-            label={
-              //(delegation || undelegation)?.validator?.name ??
-              //(delegation || undelegation)?.validatorAddress ??
-              "some laber here"
-            }
-            round
+          <ValidatorImage
+            imgUrl={selectedStakeWithMeta?.meta?.validator?.img}
             size={size}
-            fontSize={24}
           />
         )}
         amount={
@@ -216,33 +264,6 @@ function Delegations({ account }: Props) {
         data={data}
         actions={delegationActions}
       />
-      {totalRewardsAvailable.gt(0) && (
-        <>
-          <AccountSectionLabel name={t("account.claimReward.sectionLabel")} />
-          <View
-            style={[styles.rewardsWrapper, { backgroundColor: colors.card }]}
-          >
-            <View style={styles.column}>
-              <Text fontWeight="semiBold" style={styles.label}>
-                <CurrencyUnitValue value={totalRewardsAvailable} unit={unit} />
-              </Text>
-              <Text fontWeight="semiBold" style={styles.subLabel} color="grey">
-                <CounterValue
-                  currency={currency}
-                  value={totalRewardsAvailable}
-                  withPlaceholder
-                />
-              </Text>
-            </View>
-            <Button
-              event="Cosmos AccountClaimRewardsBtn Click"
-              onPress={() => {}}
-              type="primary"
-              title={t("account.claimReward.cta")}
-            />
-          </View>
-        </>
-      )}
 
       {stakesWithMeta.length === 0 ? (
         <AccountDelegationInfo
@@ -253,33 +274,24 @@ function Delegations({ account }: Props) {
           })}
           infoUrl={urls.cosmosStaking}
           infoTitle={t("cosmos.delegation.info")}
-          onPress={onDelegate}
+          onPress={() => {}}
           ctaTitle={t("account.delegation.info.cta")}
         />
       ) : (
         <View style={styles.wrapper}>
-          <AccountSectionLabel
-            name={t("account.delegation.sectionLabel")}
-            RightComponent={
-              <DelegationLabelRight
-                disabled={delegationDisabled}
-                onPress={onDelegate}
-              />
-            }
-          />
-          {stakesWithMeta.map((d, i) => (
+          {stakesWithMeta.map((stakeWithMeta, i) => (
             <View
-              key={d.stake.stakeAccAddr}
+              key={stakeWithMeta.stake.stakeAccAddr}
               style={[
                 styles.delegationsWrapper,
                 { backgroundColor: colors.card },
               ]}
             >
               <DelegationRow
-                stakeWithMeta={d}
+                stakeWithMeta={stakeWithMeta}
                 currency={currency}
                 unit={unit}
-                onPress={() => setSelectedStakeWithMeta(d)}
+                onPress={() => setSelectedStakeWithMeta(stakeWithMeta)}
                 isLast={i === stakesWithMeta.length - 1}
               />
             </View>
@@ -288,6 +300,26 @@ function Delegations({ account }: Props) {
       )}
     </View>
   );
+}
+
+function DrawerStakeActionIcon({
+  color,
+  stakeAction,
+}: {
+  color?: string;
+  stakeAction: StakeAction;
+}) {
+  switch (stakeAction) {
+    case "activate":
+    case "reactivate":
+      return <DelegateIcon color={color} />;
+    case "deactivate":
+      return <UndelegateIcon color={color} />;
+    case "withdraw":
+      return <UndelegateIcon color={color} />;
+    default:
+      return assertUnreachable(stakeAction);
+  }
 }
 
 export default function SolanaDelegations({ account }: Props) {
