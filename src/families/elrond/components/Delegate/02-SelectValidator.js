@@ -3,10 +3,8 @@ import { View, StyleSheet, SectionList, TouchableOpacity } from "react-native";
 import { BigNumber } from "bignumber.js";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
-
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   getMainAccount,
@@ -15,10 +13,7 @@ import {
 import estimateMaxSpendable from "@ledgerhq/live-common/lib/families/elrond/js-estimateMaxSpendable";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-
 import { useTheme } from "@react-navigation/native";
-import { localeSelector } from "../../../../reducers/settings";
 import { ScreenName } from "../../../../const";
 import Button from "../../../../components/Button";
 import SelectValidatorSearchBox from "../../../tron/VoteFlow/01-SelectValidator/SearchBox";
@@ -27,6 +22,8 @@ import FirstLetterIcon from "../../../../components/FirstLetterIcon";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import ArrowRight from "../../../../icons/ArrowRight";
 import Check from "../../../../icons/Check";
+
+import { constants } from "../../constants";
 import { nominate } from "../../helpers";
 
 type RouteParams = {
@@ -70,6 +67,12 @@ const styles = StyleSheet.create({
       textAlign: "center",
       lineHeight: 32,
       paddingHorizontal: 10,
+    },
+    insufficientDelegation: {
+      paddingHorizontal: 20,
+      color: "red",
+      textAlign: "center",
+      lineHeight: 20,
     },
     small: {
       fontSize: 12,
@@ -119,7 +122,6 @@ function DelegationSelectValidator({ navigation, route }: Props) {
     route.params.delegations,
   ]);
 
-  const locale = useSelector(localeSelector);
   const mainAccount = getMainAccount(account);
   const bridge = getAccountBridge(account);
   const unit = getAccountUnit(account);
@@ -279,19 +281,23 @@ function DelegationSelectValidator({ navigation, route }: Props) {
     [unit, onSelect, delegations, recipient, amount],
   );
 
-  const error = status && status.errors && Object.values(status.errors)[0];
   const minimum = useMemo(
     () =>
-      delegations
-        .filter(delegation => delegation.contract === transaction.recipient)
-        .reduce(
-          (total, delegation) => total.plus(delegation.userActiveStake),
-          BigNumber(0),
-        )
-        .plus(transaction.amount)
-        .lt(BigNumber(nominate("1"))),
+      transaction.amount.gt(0)
+        ? delegations
+            .filter(delegation => delegation.contract === transaction.recipient)
+            .reduce(
+              (total, delegation) => total.plus(delegation.userActiveStake),
+              BigNumber(0),
+            )
+            .plus(transaction.amount)
+            .lt(BigNumber(nominate("1")))
+        : false,
     [delegations, transaction.amount, transaction.recipient],
   );
+
+  const error = status && status.errors && Object.values(status.errors)[0];
+  const disabled = !!error || minimum;
 
   return (
     <SafeAreaView
@@ -337,7 +343,7 @@ function DelegationSelectValidator({ navigation, route }: Props) {
         ]}
       >
         <View style={styles.stack.paddingBottom}>
-          {max.isZero() && (
+          {!minimum && max.isZero() && (
             <View style={styles.stack.labelContainer}>
               <Check size={16} color={colors.success} />
 
@@ -349,17 +355,18 @@ function DelegationSelectValidator({ navigation, route }: Props) {
 
           {minimum && (
             <View style={styles.stack.labelContainer}>
-              <LText style={styles.stack.assetsRemaining}>
-                <Trans i18nKey="elrond.delegation.flow.steps.validator.insufficientDelegation">
-                  <LText semiBold={true}>{""}</LText>
-                </Trans>
+              <LText style={styles.stack.insufficientDelegation} color="error">
+                <Trans
+                  i18nKey="elrond.delegation.flow.steps.amount.insufficientDelegation"
+                  values={{ label: constants.egldLabel }}
+                />
               </LText>
             </View>
           )}
         </View>
 
         <Button
-          disabled={!!error}
+          disabled={disabled}
           event="Elrond DelegationSelectValidatorContinueBtn"
           onPress={onNext}
           title={<Trans i18nKey="elrond.delegation.flow.steps.validator.cta" />}
@@ -403,7 +410,7 @@ const Item = props => {
         {apr && (
           <LText style={styles.item.subText} color="grey" numberOfLines={1}>
             <Trans
-              i18nKey="elrond.delegation.flow.steps.validator.v"
+              i18nKey="elrond.delegation.flow.steps.validator.apr"
               values={{
                 amount: apr,
               }}

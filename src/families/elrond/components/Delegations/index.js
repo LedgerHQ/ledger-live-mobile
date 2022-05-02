@@ -49,7 +49,15 @@ const Delegations = props => {
   const onDelegate = useCallback(
     (validator, amount, meta) => {
       if (validator && amount && onDrawer) {
-        onDrawer({ source: "delegation", validator, amount, meta });
+        onDrawer({
+          source: "delegation",
+          validator,
+          amount,
+          meta: {
+            ...meta,
+            delegations,
+          },
+        });
       }
 
       if (!validator || !amount) {

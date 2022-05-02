@@ -56,11 +56,15 @@ const Summary = (props: Props) => {
 
   const fetchDelegations = useCallback(() => {
     const fetchData = async () => {
-      const delegations = await axios.get(
-        `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
-      );
+      try {
+        const delegations = await axios.get(
+          `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
+        );
 
-      setDelegationResources(delegations.data);
+        setDelegationResources(delegations.data);
+      } catch {
+        setDelegationResources([]);
+      }
     };
 
     if (account.elrondResources && !account.elrondResources.delegations) {
@@ -93,8 +97,8 @@ const Summary = (props: Props) => {
           value: available,
           modal: {
             Icon: () => <Elrond color={currency.color} size={18} />,
-            title: t("cosmos.info.available.title"),
-            description: t("cosmos.info.available.description"),
+            title: t("elrond.info.available.title"),
+            description: t("elrond.info.available.description"),
           },
         },
         {
@@ -102,8 +106,8 @@ const Summary = (props: Props) => {
           show: delegations.gt(0),
           value: delegations,
           modal: {
-            title: t("cosmos.info.delegated.title"),
-            description: t("cosmos.info.delegated.description"),
+            title: t("elrond.info.delegated.title"),
+            description: t("elrond.info.delegated.description"),
           },
         },
         {
@@ -111,8 +115,8 @@ const Summary = (props: Props) => {
           show: unbondings.gt(0),
           value: unbondings,
           modal: {
-            title: t("cosmos.info.undelegating.title"),
-            description: t("cosmos.info.undelegating.description"),
+            title: t("elrond.info.undelegating.title"),
+            description: t("elrond.info.undelegating.description"),
           },
         },
       ].filter(item => item.show),

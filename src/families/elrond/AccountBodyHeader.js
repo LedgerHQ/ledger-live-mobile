@@ -59,7 +59,12 @@ const withStaking = Component => props =>
   props.account.elrondResources ? <Component {...props} /> : null;
 
 const Staking = (props: Props) => {
-  const { account } = props;
+  // const { account } = props;
+  const account = {
+    ...props.account,
+    freshAddress:
+      "erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex",
+  };
 
   const [drawer, setDrawer] = useState();
   const [validators, setValidators] = useState([]);
@@ -76,17 +81,21 @@ const Staking = (props: Props) => {
 
   const fetchValidators = useCallback(() => {
     const fetchData = async (): Promise<void> => {
-      const providers = await axios.get(constants.identities);
+      try {
+        const providers = await axios.get(constants.identities);
 
-      const randomize = providers =>
-        providers
-          .map(provider => ({ provider, sort: Math.random() }))
-          .sort((alpha, beta) => alpha.sort - beta.sort)
-          .map(item => item.provider);
+        const randomize = providers =>
+          providers
+            .map(provider => ({ provider, sort: Math.random() }))
+            .sort((alpha, beta) => alpha.sort - beta.sort)
+            .map(item => item.provider);
 
-      setValidators(
-        randomize(providers.data.filter(validator => validator.providers)),
-      );
+        setValidators(
+          randomize(providers.data.filter(validator => validator.providers)),
+        );
+      } catch {
+        setValidators([]);
+      }
     };
 
     fetchData();
@@ -96,11 +105,15 @@ const Staking = (props: Props) => {
 
   const fetchDelegations = useCallback(() => {
     const fetchData = async (): Promise<void> => {
-      const delegations = await axios.get(
-        `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
-      );
+      try {
+        const delegations = await axios.get(
+          `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
+        );
 
-      setDelegationResources(delegations.data);
+        setDelegationResources(delegations.data);
+      } catch {
+        setDelegationResources([]);
+      }
     };
 
     if (account.elrondResources && !account.elrondResources.delegations) {

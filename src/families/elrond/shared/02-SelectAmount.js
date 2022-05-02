@@ -1,5 +1,11 @@
 import React, { useCallback, useState, useMemo } from "react";
-import { View, StyleSheet, Keyboard, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Keyboard,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -22,6 +28,8 @@ import LText from "../../../components/LText";
 import Warning from "../../../icons/Warning";
 import Check from "../../../icons/Check";
 import KeyboardView from "../../../components/KeyboardView";
+
+import { constants } from "../constants";
 import { nominate } from "../helpers";
 
 type RouteParams = {
@@ -90,11 +98,9 @@ function DelegationAmount({ navigation, route }: Props) {
     })),
   );
 
-  const error = useMemo(() => max.lt(0) || value.lt(min), [value, max, min, ,]);
-
   const minimum = useMemo(() => {
-    if (route.params.transaction.mode === "undelegation") {
-      const total = route.params.transaction.delegations
+    if (route.params.transaction.mode === "unDelegate") {
+      const total = route.params.delegations
         .filter(
           delegation =>
             delegation.contract === route.params.transaction.recipient,
@@ -103,12 +109,13 @@ function DelegationAmount({ navigation, route }: Props) {
           (total, delegation) => total.plus(delegation.userActiveStake),
           BigNumber(0),
         )
-        .minus(route.params.transaction.amount)
-        .lt(BigNumber(nominate("1")));
+        .minus(value);
 
       return total.lt(BigNumber(nominate("1"))) && !total.isEqualTo(0);
     }
-  }, [route.params.transaction]);
+  }, [route.params.transaction, route.params.delegations, value]);
+
+  const error = useMemo(() => max.lt(0) || value.lt(min), [value, max, min]);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -184,11 +191,11 @@ function DelegationAmount({ navigation, route }: Props) {
 
           {minimum && (
             <View style={styles.labelContainer}>
-              <Warning size={16} color={colors.alert} />
-              <LText style={[styles.assetsRemaining]} color="alert">
-                <Trans i18nKey="elrond.delegation.flow.steps.amount.wrongUndelegations">
-                  <LText semiBold={true}>{""}</LText>
-                </Trans>
+              <LText style={[styles.wrongUndelegations]} color="alert">
+                <Trans
+                  i18nKey="elrond.delegation.flow.steps.amount.wrongUndelegations"
+                  values={{ label: constants.egldLabel }}
+                />
               </LText>
             </View>
           )}
@@ -223,7 +230,7 @@ function DelegationAmount({ navigation, route }: Props) {
           )}
 
           <Button
-            disabled={error}
+            disabled={error || minimum}
             event="Cosmos DelegationAmountContinueBtn"
             onPress={onNext}
             title={<Trans i18nKey="cosmos.delegation.flow.steps.amount.cta" />}
@@ -289,6 +296,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 32,
     paddingHorizontal: 10,
+  },
+  wrongUndelegations: {
+    paddingHorizontal: 10,
+    lineHeight: 20,
+    textAlign: "center",
   },
   small: {
     fontSize: 11,

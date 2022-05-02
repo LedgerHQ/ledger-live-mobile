@@ -3417,6 +3417,24 @@
     }
   },
   "elrond": {
+    "info": {
+      "available": {
+        "title": "EGLD available",
+        "description": "This amount can be transferred."
+      },
+      "delegated": {
+        "title": "Staked assets",
+        "description": "Staked assets are used indirectly by the staking provider to operate validator nodes, process transactions and secure the network by participating in the consensus mechanism."
+      },
+      "undelegating": {
+        "title": "Pending Withdrawals",
+        "description": "Unstaked assets are subject to a 10-day unbonding period, before being able to be withdrawn."
+      },
+      "delegationUnavailable": {
+        "title": "Delegation unavailable",
+        "description": "Not enough available balance in your account to start a new delegation."
+      }
+    },
     "account": {
       "subHeader": {
         "cardTitle": "Powered by Elrond",
@@ -3430,22 +3448,20 @@
       }
     },
     "delegation": {
-      "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
-      "info": "How Delegation works",
+      "delegationEarn": "Stake your EGLD to secure the network and capture your share of the rewards.",
+      "info": "What is staking and how does it work?",
       "claimRewards": "Claim rewards",
       "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Delegation(s)",
+      "header": "My Stake",
       "Amount": "Amount",
       "noRewards": "No rewards available",
-      "delegate": "Delegate",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
+      "delegate": "Restake",
+      "undelegate": "Unstake",
       "reward": "Claim rewards",
-      "estYield": "Est. yield",
       "stepperHeader": {
         "starter": "Earn rewards",
         "validator": "Delegate assets",
-        "amountSubTitle": "Amount to delegate",
+        "amountSubTitle": "Amount to stake",
         "summary": "Summary",
         "verification": "Verification",
         "selectDevice": "Select device",
@@ -3455,20 +3471,20 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards securely, keeping control of your assets.",
+            "description": "You can earn rewards by staking your EGLD assets to a Staking Provider.",
             "steps": {
-              "0": "Delegated assets remain yours.",
-              "1": "You will have to wait 21 days for the undelegation to complete.",
-              "2": "Delegate securely with your Ledger device."
+              "0": "You keep ownership of staked assets.",
+              "1": "Assets will be available 10 days after Unstaking.",
+              "2": "Stake using your Ledger device."
             },
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "Choose your Staking Provider wisely: currently, the only risk is of not getting rewards due to various reasons, therefore you should select a provider based on Reliability, Communication and Economics."
             },
             "cta": "Continue"
           },
           "validator": {
-            "validators": "Validators",
-            "myDelegations": "My delegations",
+            "validators": "Staking Providers",
+            "myDelegations": "My Stake",
             "cta": "Continue",
             "apr": "APR: {{amount}}",
             "totalAvailable": "Total available: <0>{{amount}}</0>",
@@ -3481,13 +3497,13 @@
             "allAssetsUsed": "All assets used",
             "minAmount": "Minimum amount: <0>{{min}}</0>",
             "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
-            "insufficientDelegation": "Your total amount of delegations should exceed 1 EGLD.",
-            "wrongUndelegations": "Your total amount of delegated token needs to exceed 1 EGLD, or undelegate the whole delegation.",
+            "insufficientDelegation": "Your total staking amout must be at least 1 {{label}} per Staking Provider.",
+            "wrongUndelegations": "The remaining amount of staked {{label}} should either be 0 or above 1 {{label}} per Staking Provider.",
             "cta": "Continue"
           },
           "verification": {
             "success": {
-              "title": "You have successfully delegated your assets",
+              "title": "You have successfully staked your assets",
               "text": "Your account balance will be updated once the network confirms the transaction.",
               "cta": "View details"
             },
@@ -3520,20 +3536,20 @@
         "steps": {
           "method": {
             "youEarned": "You earned",
-            "byDelegationAssetsTo": "by delegating assets to",
-            "claimRewards": "Cash in",
-            "reDelegateRewards": "Compound",
+            "byDelegationAssetsTo": "by staking assets to",
+            "claimRewards": "Claim Rewards",
+            "reDelegateRewards": "Stake Rewards",
             "claimRewardsInfo": "They will be claimed now and added to your available balance.",
-            "reDelegateRewardsInfo": "They will be claimed now and automatically delegated to the same validator.",
-            "compoundOrCashIn": "Compound or Cash in?",
+            "reDelegateRewardsInfo": "They will be claimed now and automatically staked to the same Staking Provider.",
+            "compoundOrCashIn": "Stake Rewards or Claim Rewards?",
             "claimRewardsTooltip": "Rewards will be added to the available balance",
-            "reDelegateRewardsTooltip": "Rewards will be added to the delegated amount",
+            "reDelegateRewardsTooltip": "Rewards will be added to the staked amount",
             "cta": "Continue"
           },
           "verification": {
             "success": {
               "title": "You have successfully claimed your rewards. They were added to your available balance.",
-              "titleCompound": "Your rewards were delegated to the same validator.",
+              "titleCompound": "Your rewards were staked to the same Staking Provider.",
               "text": "Your account balance will be updated when the network confirms the transaction.",
               "cta": "View details"
             },
@@ -3547,7 +3563,7 @@
     },
     "undelegation": {
       "stepperHeader": {
-        "amountSubTitle": "Amount to undelegate",
+        "amountSubTitle": "Amount to unstake",
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
@@ -3556,11 +3572,11 @@
       "flow": {
         "steps": {
           "amount": {
-            "allAssetsUsed": "All assets undelegated"
+            "allAssetsUsed": "All assets unstaked"
           },
           "verification": {
             "success": {
-              "title": "You have successfully undelegated your assets",
+              "title": "You have successfully unstaked your assets",
               "text": "Your account balance will be updated when the network confirms the transaction.",
               "cta": "View details"
             },
@@ -3593,7 +3609,7 @@
           "verification": {
             "success": {
               "title": "You have successfully claimed your rewards. They were added to your available balance.",
-              "titleCompound": "Your rewards were delegated to the same validator.",
+              "titleCompound": "Your rewards were staked to the Staking Provider.",
               "text": "Your account balance will be updated when the network confirms the transaction.",
               "cta": "View details"
             },
