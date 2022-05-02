@@ -29,19 +29,19 @@ export async function loadConfig(
     acceptTerms();
   }
 
-  console.log("==========> starting file sync");
+  log("starting file sync");
   const f = fs.readFileSync(path.resolve("e2e", "setups", `${fileName}.json`));
   // $FlowFixMe
-  console.log("==========> parsing JSON");
+  log("parsing JSON");
   const { data } = JSON.parse(f);
 
-  console.log("==========> post message");
+  log("post message");
   postMessage({ type: "importSettngs", payload: data.settings });
 
-  console.log("==========> navigating to portfolio");
+  log("navigating to portfolio");
   navigate(NavigatorName.Base);
 
-  console.log("==========> importing accounts");
+  log("importing accounts");
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
     // await $waitFor("PortfolioAccountsList", -1, 10000);
