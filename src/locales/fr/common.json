@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "The most secure cryptocurrency & NFT wallet",
-      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
+      "title": "Le wallet de cryptomonnaies et NFT le plus sécurisé",
+      "subtitle": "Gérez, achetez et faites fructifier vos cryptos et NFT en toute sécurité sur Ledger Live.",
       "start": "Commencer",
       "noDevice": "Pas encore de wallet Ledger ?",
       "buy": "Achetez un {{fullDeviceName}}.",
