@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live-Version, OS-Region, Sprache und Region"
       },
       "hideEmptyTokenAccounts": "Leere Token-Konten ausblenden",
-      "hideEmptyTokenAccountsDesc": "Leere Token-Konten auf der Seite Konten ausblenden."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "Währungen",
