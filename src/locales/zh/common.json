@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live 版本、操作系统区域、语言和地区"
       },
       "hideEmptyTokenAccounts": "隐藏空的代币帐户",
-      "hideEmptyTokenAccountsDesc": "在账户页面隐藏空的代币帐户。"
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "币种",
