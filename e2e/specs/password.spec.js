@@ -25,7 +25,9 @@ describe("Password Lock Screen", () => {
     await PortfolioPage.waitForPageToBeVisible();
     await PortfolioPage.navigateToSettings();
     await SettingsPage.navigateToGeneralSettings();
+    await delay(1000);
     await GeneralSettingsPage.togglePassword();
+    await delay(1000);
     await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD);
     await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD); // confirm password step
 

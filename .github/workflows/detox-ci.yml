@@ -114,7 +114,7 @@ jobs:
         run: yarn e2e:build -c android.staging-ci 
 
       - name: Run Android tests
-        timeout-minutes: 10
+        timeout-minutes: 20
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29

@@ -1,6 +1,7 @@
 import OnboardingSteps from "../models/onboarding/onboardingSteps";
 import PortfolioPage from "../models/portfolioPage";
 // import { expectBitmapsToBeEqual } from "../helpers";
+import { delay } from "../helpers";
 
 describe("Onboarding", () => {
   beforeAll(async () => {
@@ -22,7 +23,9 @@ describe("Onboarding", () => {
     await OnboardingSteps.chooseToPairMyNano();
     // await OnboardingSteps.addNewNano();
     await OnboardingSteps.selectPairWithBluetooth();
+    await delay(5000);
     await OnboardingSteps.addDeviceViaBluetooth();
+    await delay(5000);
     await OnboardingSteps.openLedgerLive();
 
     await PortfolioPage.waitForPageToBeVisible();
