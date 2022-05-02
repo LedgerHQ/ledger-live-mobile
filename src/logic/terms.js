@@ -2,6 +2,8 @@
 import { useEffect, useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import logger from "../logger";
+
 export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
@@ -18,25 +20,42 @@ const termsUrlLocalized = {
     "https://raw.githubusercontent.com/LedgerHQ/ledger-live-mobile/master/TERMS.ru.md",
 };
 
-const currentTermsRequired = "2019-12-04";
+const currentTermsRequired = "2022-05-10";
 const currentLendingTermsRequired = "2020-11-10";
 
+function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
+  if (!acceptedVersion) {
+    return false;
+  }
+
+  try {
+    const acceptedTermsVersion = new Date(acceptedVersion);
+    const currentTermsVersion = new Date(currentVersion);
+
+    return acceptedTermsVersion >= currentTermsVersion;
+  } catch (error) {
+    logger.error(`Failed to parse terms version's dates: ${error}`);
+
+    return false;
+  }
+}
+
 export async function isAcceptedTerms() {
-  const acceptedTermsVersion = await AsyncStorage.getItem(
-    "acceptedTermsVersion",
+  return isAcceptedVersionUpToDate(
+    await AsyncStorage.getItem("acceptedTermsVersion"),
+    currentTermsRequired,
   );
-  return acceptedTermsVersion === currentTermsRequired;
+}
+
+export async function isAcceptedLendingTerms() {
+  return isAcceptedVersionUpToDate(
+    await AsyncStorage.getItem("acceptedLendingTermsVersion"),
+    currentLendingTermsRequired,
+  );
 }
 
 export async function acceptTerms() {
   await AsyncStorage.setItem("acceptedTermsVersion", currentTermsRequired);
-}
-
-export async function isAcceptedLendingTerms() {
-  const acceptedLendingTermsVersion = await AsyncStorage.getItem(
-    "acceptedLendingTermsVersion",
-  );
-  return acceptedLendingTermsVersion === currentLendingTermsRequired;
 }
 
 export async function acceptLendingTerms() {

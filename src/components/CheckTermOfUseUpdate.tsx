@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback, useMemo } from "react";
 import { Linking } from "react-native";
+import { useTranslation } from "react-i18next";
 import { BottomDrawer, Flex, Icons, Link, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 
@@ -27,6 +28,7 @@ const Update = ({ children }: { children: ReactNode }) => (
 );
 
 const CheckTermOfUseUpdateModal = () => {
+  const { t } = useTranslation();
   const { locale } = useLocale();
   const [accepted, accept] = useTermsAccept();
 
@@ -39,37 +41,27 @@ const CheckTermOfUseUpdateModal = () => {
   return (
     <BottomDrawer
       id="TermOfUseUpdate"
-      title="Terms of use update"
+      title={t("updatedTerms.title")}
       isOpen={!accepted}
       onClose={accept}
     >
       <Flex mb={6}>
-        <Description>
-          {`Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:`}
-        </Description>
+        <Description>{t("updatedTerms.body.intro")}</Description>
         <Flex my={4}>
-          <Update>
-            {"Clarifying what services are available and how they work"}
-          </Update>
-          <Update>{"Explaining how fees for Services work"}</Update>
-          <Update>
-            {
-              "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
-            }
-          </Update>
+          <Update>{t("updatedTerms.body.bulletPoints.0")}</Update>
+          <Update>{t("updatedTerms.body.bulletPoints.1")}</Update>
+          <Update>{t("updatedTerms.body.bulletPoints.2")}</Update>
         </Flex>
-        <Description>
-          {`By clicking on "Continue" you agree that you have read and accept the Terms of Use below.`}
-        </Description>
+        <Description>{t("updatedTerms.body.agreement")}</Description>
       </Flex>
       <Alert type="help" noIcon>
         <Link type="color" onPress={handleLink} Icon={Icons.ExternalLinkMedium}>
-          Terms of use
+          {t("updatedTerms.link")}
         </Link>
       </Alert>
       <Divider />
       <Button type="main" outline={false} onPress={accept}>
-        Continue
+        {t("updatedTerms.cta")}
       </Button>
     </BottomDrawer>
   );
