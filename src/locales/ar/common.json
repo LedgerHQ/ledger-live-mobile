@@ -1877,7 +1877,7 @@
         "bullet2": "إصدار Ledger Live، ومنطقة نظام التشغيل، واللغة والمنطقة"
       },
       "hideEmptyTokenAccounts": "إخفاء حسابات رموز التوكن الفارغة",
-      "hideEmptyTokenAccountsDesc": "إخفاء حسابات رموز التوكن الفارغة في صفحة الحسابات."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "العملات",
