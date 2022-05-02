@@ -133,6 +133,9 @@ function GraphCard({
                       valueChange={countervalueChange}
                       range={portfolio.range}
                     />
+                    <Flex ml={2}>
+                      <Delta unit={unit} valueChange={countervalueChange} />
+                    </Flex>
                     {hoveredItem && hoveredItem.date ? (
                       <Text ml={6} variant={"body"} fontWeight={"medium"}>
                         <FormatDate date={hoveredItem.date} />

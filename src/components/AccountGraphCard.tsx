@@ -247,7 +247,12 @@ const GraphCardHeader = ({
               joinFragmentsSeparator=" "
             />
           </Text>
-          <Delta percent valueChange={valueChange} />
+          <Flex flexDirection="row" alignItems="center">
+            <Delta percent valueChange={valueChange} />
+            <Flex ml={2}>
+              <Delta unit={items[0].unit} valueChange={valueChange} />
+            </Flex>
+          </Flex>
         </Flex>
       </Touchable>
       <Flex justifyContent={"flex-start"} ml={4}>
