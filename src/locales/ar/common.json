@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "مرحبا بكم في Ledger",
-      "subtitle": "تمتع بإمكانية إدارة عملاتك المشفرة بأمان من هاتفك الذكي.",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "لنبدأ",
       "noDevice": "ليس لديك جهاز؟",
       "buy": "اشتري {{fullDeviceName}}",
