@@ -1877,7 +1877,7 @@
         "bullet2": "Versión de Ledger Live, región del SO, idioma y región"
       },
       "hideEmptyTokenAccounts": "Ocultar cuentas de tokens sin saldo",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "Se ocultarán todas las cuentas de token vacías en la página de Activos."
     },
     "currencies": {
       "header": "Divisas",
