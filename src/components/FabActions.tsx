@@ -290,12 +290,12 @@ const FabActions = ({ areAccountsEmpty = false }: FabActionsProps) => {
 
     return [
       ...(hasAccounts && !readOnlyModeEnabled
-        ? [actionButtonTransferReceive, actionButtonTransferSend]
-        : []),
-      ...(hasAccounts && !readOnlyModeEnabled
         ? [actionButtonTransferSwap]
         : []),
       actionButtonBuy,
+      ...(hasAccounts && !readOnlyModeEnabled
+        ? [actionButtonTransferReceive, actionButtonTransferSend]
+        : []),
     ];
   }, [hasAccounts, readOnlyModeEnabled, t, areAccountsEmpty]);
 
