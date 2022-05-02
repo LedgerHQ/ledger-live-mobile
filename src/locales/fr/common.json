@@ -1877,7 +1877,7 @@
         "bullet2": "Version, région du système, langue et région de Ledger Live"
       },
       "hideEmptyTokenAccounts": "Masquer les comptes de tokens vides",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "Tous les comptes de tokens vides de la page Actifs seront masqués."
     },
     "currencies": {
       "header": "Devises",
