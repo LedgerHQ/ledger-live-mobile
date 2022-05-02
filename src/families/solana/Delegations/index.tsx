@@ -17,8 +17,10 @@ import {
   SolanaStakeWithMeta,
   StakeAction,
 } from "@ledgerhq/live-common/lib/families/solana/types";
+import { rgba } from "../../../colors";
 import {
   assertUnreachable,
+  sweetch,
   tupleOfUnion,
 } from "@ledgerhq/live-common/lib/families/solana/utils";
 import { Account } from "@ledgerhq/live-common/lib/types";
@@ -39,10 +41,10 @@ import DelegationDrawer, {
 import Touchable from "../../../components/Touchable";
 import { urls } from "../../../config/urls";
 import { NavigatorName, ScreenName } from "../../../const";
-import IlluRewards from "../../../icons/images/Rewards";
 import DelegateIcon from "../../../icons/Delegate";
+import IlluRewards from "../../../icons/images/Rewards";
 import UndelegateIcon from "../../../icons/Undelegate";
-import WalletIcon from "../../../icons/Wallet";
+import ClaimRewardIcon from "../../../icons/ClaimReward";
 import ValidatorImage from "../shared/ValidatorImage";
 import DelegationLabelRight from "./LabelRight";
 import DelegationRow from "./Row";
@@ -87,18 +89,6 @@ function Delegations({ account }: Props) {
     navigation.navigate(route, {
       screen,
       params: { ...params, accountId: account.id },
-    });
-  };
-
-  const onDelegate = () => {
-    onNavigate({
-      route: NavigatorName.SolanaDelegationFlow,
-      screen: ScreenName.DelegationSummary,
-      params: {
-        delegationAction: {
-          kind: "new",
-        },
-      },
     });
   };
 
@@ -216,13 +206,23 @@ function Delegations({ account }: Props) {
       [];
 
     return allStakeActions.map(action => {
+      const actionEnabled = availableActions.includes(action);
+      const enabledActionCircleBgColor = sweetch(action, {
+        activate: colors.fog,
+        deactivate: rgba(colors.alert, 0.2),
+        reactivate: colors.fog,
+        withdraw: rgba(colors.yellow, 0.2),
+      });
       const drawerAction: DelegationDrawerActions[number] = {
         label: capitalize(action),
         Icon: (props: IconProps) => (
-          <Circle {...props}>
+          <Circle
+            {...props}
+            bg={actionEnabled ? enabledActionCircleBgColor : colors.lightFog}
+          >
             <DrawerStakeActionIcon
               stakeAction={action}
-              color={availableActions.includes(action) ? undefined : "grey"}
+              enabled={actionEnabled}
             />
           </Circle>
         ),
@@ -245,6 +245,18 @@ function Delegations({ account }: Props) {
       return drawerAction;
     });
   }, [t, selectedStakeWithMeta, account, onNavigate]);
+
+  const onDelegate = () => {
+    onNavigate({
+      route: NavigatorName.SolanaDelegationFlow,
+      screen: ScreenName.DelegationSummary,
+      params: {
+        delegationAction: {
+          kind: "new",
+        },
+      },
+    });
+  };
 
   return (
     <View style={styles.root}>
@@ -279,6 +291,12 @@ function Delegations({ account }: Props) {
         />
       ) : (
         <View style={styles.wrapper}>
+          <AccountSectionLabel
+            name={t("account.delegation.sectionLabel")}
+            RightComponent={
+              <DelegationLabelRight disabled={false} onPress={onDelegate} />
+            }
+          />
           {stakesWithMeta.map((stakeWithMeta, i) => (
             <View
               key={stakeWithMeta.stake.stakeAccAddr}
@@ -303,20 +321,22 @@ function Delegations({ account }: Props) {
 }
 
 function DrawerStakeActionIcon({
-  color,
+  enabled,
   stakeAction,
 }: {
-  color?: string;
+  enabled: boolean;
   stakeAction: StakeAction;
 }) {
+  const { colors } = useTheme();
+  const iconColor = enabled ? undefined : colors.grey;
   switch (stakeAction) {
     case "activate":
     case "reactivate":
-      return <DelegateIcon color={color} />;
+      return <DelegateIcon color={iconColor} />;
     case "deactivate":
-      return <UndelegateIcon color={color} />;
+      return <UndelegateIcon color={iconColor} />;
     case "withdraw":
-      return <UndelegateIcon color={color} />;
+      return <ClaimRewardIcon color={iconColor} />;
     default:
       return assertUnreachable(stakeAction);
   }
