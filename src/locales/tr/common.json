@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live sürümü, işletim sistemi bölgesi, dil ve bölge"
       },
       "hideEmptyTokenAccounts": "Boş token hesaplarını gizle",
-      "hideEmptyTokenAccountsDesc": "Hesaplar sayfasında boş token hesaplarını gizleyin."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "Para Birimleri",
