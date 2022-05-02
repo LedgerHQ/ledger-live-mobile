@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Ledger에 오신 것을 환영합니다",
-      "subtitle": "스마트폰으로 암호화폐를 안전하게 관리하세요.",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "시작하기",
       "noDevice": "장치가 없나요?",
       "buy": "{{fullDeviceName}} 구매",
