@@ -2,8 +2,6 @@
 import { useEffect, useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import logger from "../logger";
-
 export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
@@ -34,7 +32,7 @@ function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
 
     return acceptedTermsVersion >= currentTermsVersion;
   } catch (error) {
-    logger.error(`Failed to parse terms version's dates: ${error}`);
+    console.error(`Failed to parse terms version's dates: ${error}`);
 
     return false;
   }
