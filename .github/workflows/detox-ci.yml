@@ -111,7 +111,7 @@ jobs:
       - name: Build Android app for Detox test run
         env:
           NODE_OPTIONS: "--max-old-space-size=7168"
-        run: yarn e2e:build -c android.emulator 
+        run: yarn e2e:build -c android.staging-ci 
 
       - name: Run Android tests
         timeout-minutes: 10
@@ -126,7 +126,7 @@ jobs:
             mkdir ./temp
             curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
             adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
-            yarn e2e:test -c android.emulator --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles
+            yarn e2e:test -c android.staging-ci --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles
 
       - name: Upload test artifacts
         if: always()
