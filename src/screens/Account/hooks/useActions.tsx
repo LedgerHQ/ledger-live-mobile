@@ -14,9 +14,7 @@ import { NavigatorName, ScreenName } from "../../../const";
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import perFamilyAccountActions from "../../../generated/accountActions";
 import { isCurrencySupported } from "../../Exchange/coinifyConfig";
-import Lending from "../../../icons/Lending";
 import WalletConnect from "../../../icons/WalletConnect";
-import useCompoundAccountEnabled from "../../Lending/shared/useCompoundAccountEnabled";
 
 type Props = {
   account: AccountLike;
@@ -39,9 +37,6 @@ export default function useActions({ account, parentAccount, colors }: Props) {
   );
 
   const accountId = account.id;
-
-  // @ts-expect-error issue in typing
-  const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const canBeSold = isCurrencySupported(currency, "sell");
 
