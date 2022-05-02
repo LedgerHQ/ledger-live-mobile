@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "欢迎使用 Ledger",
-      "subtitle": "通过您的手机来安全管理您的加密资产。",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "快速入门",
       "noDevice": "没有设备？",
       "buy": "购买一个 {{fullDeviceName}}",
