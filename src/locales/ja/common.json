@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Liveのバージョンと、OSのリージョン、言語、地域"
       },
       "hideEmptyTokenAccounts": "未使用アカウントを非表示にする",
-      "hideEmptyTokenAccountsDesc": "アカウントページで、未使用アカウントを非表示にする。"
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "通貨",
