@@ -1,24 +1,26 @@
-// @flow
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
-import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
-import type { Currency, Unit } from "@ledgerhq/live-common/lib/types";
+import { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import CounterValue from "../../../components/CounterValue";
 import ArrowRight from "../../../icons/ArrowRight";
-import LText from "../../../components/LText";
-import FirstLetterIcon from "../../../components/FirstLetterIcon";
+import { Text } from "@ledgerhq/native-ui";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import ValidatorImage from "../shared/ValidatorImage";
+import CheckCircle from "../../../icons/CheckCircle";
+import ExclamationCircle from "../../../icons/ExclamationCircle";
+import Clock from "../../../icons/Clock";
+import { sweetch } from "@ledgerhq/live-common/lib/families/solana/utils";
 
 type Props = {
-  stakeWithMeta: SolanaStakeWithMeta,
-  currency: Currency,
-  unit: Unit,
-  onPress: (stakeWithMeta: SolanaStakeWithMeta) => void,
-  isLast?: boolean,
+  stakeWithMeta: SolanaStakeWithMeta;
+  currency: Currency;
+  unit: Unit;
+  onPress: (stakeWithMeta: SolanaStakeWithMeta) => void;
+  isLast?: boolean;
 };
 
 export default function DelegationRow({
@@ -50,30 +52,36 @@ export default function DelegationRow({
           imgUrl={meta.validator?.img}
           name={meta.validator?.name ?? stake.delegation?.voteAccAddr}
         />
-        {/*
-          // view extra style = { backgroundColor: colors.lightLive }
-
-        <FirstLetterIcon
-          label={meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
-        />
-    */}
       </View>
 
       <View style={styles.nameWrapper}>
-        <LText semiBold numberOfLines={1}>
-          {meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
-        </LText>
+        <View style={styles.row}>
+          <Text
+            fontWeight="semiBold"
+            numberOfLines={1}
+            style={{ marginRight: 5 }}
+          >
+            {meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
+          </Text>
+
+          {sweetch(stake.activation.state, {
+            activating: <Clock size={12} color={colors.orange} />,
+            deactivating: <Clock size={12} color={colors.orange} />,
+            active: <CheckCircle size={12} color={colors.green} />,
+            inactive: <ExclamationCircle size={14} color={colors.alert} />,
+          })}
+        </View>
 
         <View style={styles.row}>
-          <LText style={styles.seeMore} color="live">
+          <Text style={styles.seeMore} color="live">
             {t("common.seeMore")}
-          </LText>
+          </Text>
           <ArrowRight color={colors.live} size={14} />
         </View>
       </View>
 
       <View style={styles.rightWrapper}>
-        <LText semiBold>
+        <Text fontWeight="semiBold">
           {formatCurrencyUnit(
             unit,
             new BigNumber(stake.delegation?.stake || 0),
@@ -82,17 +90,17 @@ export default function DelegationRow({
               disableRounding: true,
             },
           )}
-        </LText>
+        </Text>
 
-        <LText color="grey">
+        <Text color="grey">
           <CounterValue
             currency={currency}
-            showCode
+            showCode={true}
             value={stake.delegation?.stake ?? 0}
             alwaysShowSign={false}
             withPlaceholder
           />
-        </LText>
+        </Text>
       </View>
     </TouchableOpacity>
   );
