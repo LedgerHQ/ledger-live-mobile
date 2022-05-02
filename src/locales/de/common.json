@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Willkommen bei Ledger",
-      "subtitle": "Verwalten Sie Ihre Kryptos sicher von Ihrem Smartphone aus.",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "Erste Schritte",
       "noDevice": "Kein Gerät?",
       "buy": "Kaufen Sie ein {{fullDeviceName}}",
