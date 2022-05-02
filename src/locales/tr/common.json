@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Ledger'a Hoş Geldiniz",
-      "subtitle": "Kriptolarınızı akıllı telefonunuzdan güvenle yönetin.",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "Hemen başla",
       "noDevice": "Cihazınız yok mu?",
       "buy": "{{fullDeviceName}} satın alın",
