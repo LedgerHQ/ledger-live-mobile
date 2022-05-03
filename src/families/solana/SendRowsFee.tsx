@@ -1,33 +1,37 @@
-// @flow
 import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import {
+  AccountLike,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 import {
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
-import LText from "../../components/LText";
+import { Text } from "@ledgerhq/native-ui";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
 import ExternalLink from "../../icons/ExternalLink";
 import { urls } from "../../config/urls";
 
 type Props = {
-  account: AccountLike,
-  transaction: Transaction,
+  account: AccountLike;
+  transaction: Transaction;
+  status: TransactionStatus;
 };
 
-export default function SolanaFeeRow({ account, transaction }: Props) {
+export default function SolanaFeeRow({ account, transaction, status }: Props) {
   const { colors } = useTheme();
   const extraInfoFees = useCallback(() => {
     Linking.openURL(urls.solana.supportPage);
   }, []);
 
-  const fees = transaction.feeCalculator?.lamportsPerSignature;
+  const fees = status.estimatedFees;
+
   const unit = getAccountUnit(account);
   const currency = getAccountCurrency(account);
 
@@ -43,17 +47,13 @@ export default function SolanaFeeRow({ account, transaction }: Props) {
     >
       <View style={{ alignItems: "flex-end" }}>
         <View style={styles.accountContainer}>
-          {fees ? (
-            <LText style={styles.valueText}>
-              <CurrencyUnitValue unit={unit} value={fees} />
-            </LText>
-          ) : null}
+          <Text style={styles.valueText}>
+            <CurrencyUnitValue unit={unit} value={fees} />
+          </Text>
         </View>
-        <LText style={styles.countervalue} color="grey">
-          {fees ? (
-            <CounterValue before="≈ " value={fees} currency={currency} />
-          ) : null}
-        </LText>
+        <Text style={styles.countervalue} color="grey">
+          <CounterValue before="≈ " value={fees} currency={currency} />
+        </Text>
       </View>
     </SummaryRow>
   );

@@ -1,13 +1,12 @@
-// @flow
 import React, { useState, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
-import LText from "../../../components/LText";
+import { Text } from "@ledgerhq/native-ui";
 import InfoModal from "../../../modals/Info";
 
 type Props = {
-  disabled?: boolean,
-  onPress: () => void,
+  disabled?: boolean;
+  onPress: () => void;
 };
 
 export default function DelegationLabelRight({ onPress, disabled }: Props) {
@@ -24,9 +23,9 @@ export default function DelegationLabelRight({ onPress, disabled }: Props) {
 
   return (
     <TouchableOpacity onPress={onClick}>
-      <LText semiBold color={disabled ? "grey" : "live"}>
+      <Text fontWeight="semiBold" color={disabled ? "grey" : "live"}>
         {t("account.delegation.addDelegation")}
-      </LText>
+      </Text>
       <InfoModal
         isOpened={!!disabledModalOpen}
         onClose={onCloseModal}
