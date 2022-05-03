@@ -130,7 +130,7 @@ function GraphCard({
                       percent
                       show0Delta
                       valueChange={countervalueChange}
-                      range={portfolio.range}
+                      // range={portfolio.range}
                     />
                     <Flex ml={2}>
                       <Delta unit={unit} valueChange={countervalueChange} />
