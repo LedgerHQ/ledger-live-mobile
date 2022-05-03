@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import * as bridge from "./bridge/server";
 
 beforeAll(() => {
-  // console.log("==============> STARTING BRIDGE INIT");
+  console.log("==============> STARTING BRIDGE INIT");
   bridge.init();
 
   console.log("==============> SETTING UP DEMO MODE");
@@ -10,7 +10,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-  // console.log("==============> CLOSING BRIDGE");
+  console.log("==============> CLOSING BRIDGE");
   bridge.close();
 });
 

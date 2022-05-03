@@ -7,7 +7,7 @@ import { NavigatorName } from "../../src/const";
 
 let wss: Server;
 
-export async function init(port?: number = 8099) {
+export function init(port?: number = 8099) {
   wss = new Server({ port });
   log(`Start listening on localhost:${port}`);
 
@@ -44,7 +44,6 @@ export async function loadConfig(
   log("importing accounts");
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
-    // await $waitFor("PortfolioAccountsList", -1, 10000);
   }
 }
 
@@ -82,13 +81,6 @@ export function open() {
   postMessage({ type: "open", payload: null });
 }
 
-export function receive() {
-  postMessage({
-    type: "receive",
-    payload: { address: "1234wtf1234wtfomggggggggggg", path: "mypathlol" },
-  });
-}
-
 function onMessage(messageStr: string) {
   const msg = JSON.parse(messageStr);
   log(`Message\n${JSON.stringify(msg, null, 2)}`);
@@ -108,7 +100,7 @@ function acceptTerms() {
   postMessage({ type: "acceptTerms", payload: null });
 }
 
-export function postMessage(message: E2EBridgeMessage) {
+function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
   }

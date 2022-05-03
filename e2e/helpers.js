@@ -85,7 +85,6 @@ export async function retryAction(action, timeout) {
   }
 }
 
-// TODO: expects should be in test file
 export async function verifyIsVisible(elementId) {
   await delay(1000);
   await expect(element(by.id(elementId))).toBeVisible();
@@ -104,6 +103,7 @@ export function delay(ms) {
   });
 }
 
+// for future use for screenshot conmparison
 export function expectBitmapsToBeEqual(imagePath, expectedImagePath) {
   const bitmapBuffer = readFileSync(imagePath);
   const expectedBitmapBuffer = readFileSync(expectedImagePath);

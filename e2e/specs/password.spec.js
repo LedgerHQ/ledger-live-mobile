@@ -1,33 +1,26 @@
-import { loadConfig } from "../bridge/server";
 import PortfolioPage from "../models/portfolioPage";
 import SettingsPage from "../models/settings/settingsPage";
 import GeneralSettingsPage from "../models/settings/generalSettingsPage";
 import PasswordEntryPage from "../models/passwordEntryPage";
 import { delay } from "../helpers";
+import { loadConfig } from "../bridge/server";
 
 const CORRECT_PASSWORD = "passWORD$123!";
 
 describe("Password Lock Screen", () => {
   beforeAll(async () => {
     console.log("==============> STARTING PASSWORD DEVICE LAUNCH");
-    // await device.reloadReactNative();
-    await device.launchApp({ delete: true });
+    await device.launchApp();
   });
 
   it("should be able to enter the correct password", async () => {
     console.log("==============> STARTING PASSWORD TEST");
-    try {
-      await loadConfig("1AccountBTC1AccountETH", true);
-    } catch (error) {
-      console.error(error);
-    }
+    await loadConfig("1AccountBTC1AccountETH", true);
 
     await PortfolioPage.waitForPageToBeVisible();
     await PortfolioPage.navigateToSettings();
     await SettingsPage.navigateToGeneralSettings();
-    await delay(1000);
     await GeneralSettingsPage.togglePassword();
-    await delay(1000);
     await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD);
     await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD); // confirm password step
 
