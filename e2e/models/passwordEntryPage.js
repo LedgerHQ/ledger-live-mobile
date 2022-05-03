@@ -2,7 +2,6 @@ import * as testHelpers from "../helpers";
 
 export default class PasswordEntryPage {
   static async enterPassword(password) {
-    // await testHelpers.typeText("password-text-input", password);
     if (device.getPlatform() === "ios") {
       await element(by.type("RCTUITextField")).typeText(password);
     }

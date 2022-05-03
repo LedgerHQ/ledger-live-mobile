@@ -19,16 +19,6 @@ export default class OnboardingSteps {
   }
 
   static async chooseToConnectYourNano() {
-    // scroll probably not needed now
-    // await testHelpers.scrollToElementById(
-    //   `Onboarding - Connect|${device}`,
-    //   "UseCaseSelectScrollView",
-    //   200,
-    //   "down",
-    //   NaN,
-    //   0.5,
-    // );
-
     await testHelpers.tap(`Onboarding - Connect`);
   }
 
@@ -46,15 +36,12 @@ export default class OnboardingSteps {
 
   static async addDeviceViaBluetooth() {
     bridge.addDevices();
-    await testHelpers.delay(5000);
+    await testHelpers.delay(5000); // give time for devices to appear
     await testHelpers.tapByText("Nano X de David");
-    // await testHelpers.waitAndTap(`DeviceItemEnter ${david}`);
 
-    // set globally installed apps on device?
-    bridge.setInstalledApps();
+    bridge.setInstalledApps(); // tell LLM what apps the mock device has
 
-    // open ledger manager
-    bridge.open();
+    bridge.open(); // open ledger manager
 
     // Continue to welcome screen
     // await waitFor(

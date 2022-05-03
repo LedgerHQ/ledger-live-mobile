@@ -3,38 +3,30 @@ import { readFileSync } from "fs";
 const DEFAULT_TIMEOUT = 30000;
 
 export function waitAndTap(elementId, timeout) {
-  console.log(`==================> Waiting for element with id: ${elementId}`);
   waitFor(element(by.id(elementId)))
     .toBeVisible()
     .withTimeout(timeout || DEFAULT_TIMEOUT);
 
-  console.log(`==================> Tapping element with id: ${elementId}`);
   return element(by.id(elementId)).tap();
 }
 
 export function waitForElement(elementId, timeout) {
-  console.log(`==================> Waiting for element with id: ${elementId}`);
   return waitFor(element(by.id(elementId)))
     .toBeVisible()
     .withTimeout(timeout || DEFAULT_TIMEOUT);
 }
 
 export function tap(elementId) {
-  console.log(`==================> Tapping element with id: ${elementId}`);
   return element(by.id(elementId)).tap();
 }
 
 export function tapByText(text, index) {
-  console.log(`==================> Tapping element with text: ${text}`);
   return element(by.text(text))
     .atIndex(index || 0)
     .tap();
 }
 
 export async function typeText(elementId, text, focus = true) {
-  console.log(
-    `==================> Typing text '${text}' into element with id ${elementId}`,
-  );
   if (focus) {
     await tap(elementId);
   }
@@ -42,7 +34,6 @@ export async function typeText(elementId, text, focus = true) {
 }
 
 export function clearField(elementId) {
-  console.log(`==================> Clearing field with id: ${elementId}`);
   element(by.id(elementId)).replaceText("");
 }
 
@@ -54,9 +45,6 @@ export async function scrollToElementById(
   startPositionXAxis = NaN,
   startPositionYAxis = 0.5,
 ) {
-  console.log(
-    `==================> Scrolling to element with id: ${elementToScrollToId}`,
-  );
   await waitFor(element(by.id(elementToScrollToId)))
     .toBeVisible()
     .whileElement(by.id(parentElementId))
