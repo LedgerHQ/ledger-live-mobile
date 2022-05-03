@@ -19,6 +19,7 @@
 		515E9C2C8C0049EC992210D9 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B6982A2E67F482A8069215B /* Inter-Medium.otf */; };
 		7930A1FF82816135F015ED1B /* libPods-ledgerlivemobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 854A3B027231E885CAD3722D /* libPods-ledgerlivemobileTests.a */; };
 		7AA95C7AEB0DB7043A30A16C /* libPods-LedgerConnect Extension (iOS).a in Frameworks */ = {isa = PBXBuildFile; fileRef = F049FBF6E88E5B7D21644B12 /* libPods-LedgerConnect Extension (iOS).a */; };
+		8403C98428211EFA00AB9349 /* LedgerConnect Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8418FFDB2811380C00B0491D /* LedgerConnect Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		841800062811390000B0491D /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418FFFC2811390000B0491D /* Notification+Extensions.swift */; };
 		841800072811390000B0491D /* Logger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418FFFD2811390000B0491D /* Logger+Extensions.swift */; };
 		841800082811390000B0491D /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418FFFE2811390000B0491D /* NSObject+Extensions.swift */; };
@@ -34,7 +35,6 @@
 		8418FFE12811380C00B0491D /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 8418FFE02811380C00B0491D /* _locales */; };
 		8418FFE32811380C00B0491D /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8418FFE22811380C00B0491D /* images */; };
 		8418FFE52811380C00B0491D /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8418FFE42811380C00B0491D /* manifest.json */; };
-		8418FFF32811380C00B0491D /* LedgerConnect Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8418FFDB2811380C00B0491D /* LedgerConnect Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8418FFFA281138E400B0491D /* dist in Resources */ = {isa = PBXBuildFile; fileRef = 8418FFF9281138E400B0491D /* dist */; };
 		9B7ACA23F80A40489C69872B /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEF3655E56C24042B39DF4D3 /* libRNAnalytics.a */; };
 		AD6EE26071FA4673B5C89936 /* FontAwesome5_Pro_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BD106EA37CA467F9525D699 /* FontAwesome5_Pro_Brands.ttf */; };
@@ -78,7 +78,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8418FFF32811380C00B0491D /* LedgerConnect Extension.appex in Embed App Extensions */,
+				8403C98428211EFA00AB9349 /* LedgerConnect Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1183,7 +1183,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
@@ -1236,7 +1236,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1344,7 +1344,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1549,8 +1549,9 @@
 			baseConfigurationReference = 0509DD7A1B3888BE34925F9A /* Pods-LedgerConnect Extension (iOS).debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1585,8 +1586,9 @@
 			baseConfigurationReference = 34DEF24A49AFCB17841061AB /* Pods-LedgerConnect Extension (iOS).release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1627,10 +1629,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 374;
+				CURRENT_PROJECT_VERSION = 375;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = X6LFS5BQKN;
 				ENABLE_BITCODE = NO;
