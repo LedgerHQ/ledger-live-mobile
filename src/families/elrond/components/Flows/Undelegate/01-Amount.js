@@ -5,8 +5,8 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import SelectAmount from "../../shared/02-SelectAmount";
-import { ScreenName } from "../../../../const";
+import SelectAmount from "../../../shared/02-SelectAmount";
+import { ScreenName } from "../../../../../const";
 
 function UndelegationAmount({ navigation, route }) {
   const account = route.params.account;

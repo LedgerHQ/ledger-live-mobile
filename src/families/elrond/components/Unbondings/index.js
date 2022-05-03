@@ -3,12 +3,10 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import {
   getAccountCurrency,
-  getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
 
 import AccountSectionLabel from "../../../../components/AccountSectionLabel";
-
 import Unbonding from "./components/Unbonding";
 
 const styles = StyleSheet.create({

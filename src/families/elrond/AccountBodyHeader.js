@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { BigNumber } from "bignumber.js";
 import axios from "axios";
 
@@ -10,10 +10,6 @@ import Drawer from "./components/Drawer";
 
 import { constants } from "./constants";
 import { denominate } from "./helpers";
-
-type Props = {
-  account: Account,
-};
 
 const styles = StyleSheet.create({
   root: {
@@ -58,7 +54,7 @@ const styles = StyleSheet.create({
 const withStaking = Component => props =>
   props.account.elrondResources ? <Component {...props} /> : null;
 
-const Staking = (props: Props) => {
+const Staking = props => {
   const { account } = props;
 
   const [drawer, setDrawer] = useState();
@@ -69,13 +65,12 @@ const Staking = (props: Props) => {
 
   const onDrawer = useCallback(setDrawer, [setDrawer]);
   const findValidator = useCallback(
-    (needle: string) =>
-      validators.find(item => item.providers.includes(needle)),
+    needle => validators.find(item => item.providers.includes(needle)),
     [validators],
   );
 
   const fetchValidators = useCallback(() => {
-    const fetchData = async (): Promise<void> => {
+    const fetchData = async () => {
       try {
         const providers = await axios.get(constants.identities);
 
@@ -99,7 +94,7 @@ const Staking = (props: Props) => {
   }, []);
 
   const fetchDelegations = useCallback(() => {
-    const fetchData = async (): Promise<void> => {
+    const fetchData = async () => {
       try {
         const delegations = await axios.get(
           `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
@@ -119,7 +114,7 @@ const Staking = (props: Props) => {
   }, [account.freshAddress, account.elrondResources]);
 
   const delegations = useMemo(() => {
-    const transform = (input: string) =>
+    const transform = input =>
       BigNumber(denominate({ input, showLastNonZeroDecimal: true }));
 
     const assignValidator = delegation => ({

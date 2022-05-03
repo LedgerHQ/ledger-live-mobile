@@ -1,5 +1,11 @@
 import React, { useCallback, useState, useMemo, useEffect } from "react";
-import { View, StyleSheet, SectionList, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SectionList,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { BigNumber } from "bignumber.js";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
@@ -14,17 +20,17 @@ import estimateMaxSpendable from "@ledgerhq/live-common/lib/families/elrond/js-e
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { useTheme } from "@react-navigation/native";
-import { ScreenName } from "../../../../const";
-import Button from "../../../../components/Button";
-import SelectValidatorSearchBox from "../../../tron/VoteFlow/01-SelectValidator/SearchBox";
-import LText from "../../../../components/LText";
-import FirstLetterIcon from "../../../../components/FirstLetterIcon";
-import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import ArrowRight from "../../../../icons/ArrowRight";
-import Check from "../../../../icons/Check";
+import { ScreenName } from "../../../../../const";
+import Button from "../../../../../components/Button";
+import SelectValidatorSearchBox from "../../../../tron/VoteFlow/01-SelectValidator/SearchBox";
+import LText from "../../../../../components/LText";
+import FirstLetterIcon from "../../../../../components/FirstLetterIcon";
+import CurrencyUnitValue from "../../../../../components/CurrencyUnitValue";
+import ArrowRight from "../../../../../icons/ArrowRight";
+import Check from "../../../../../icons/Check";
 
-import { constants } from "../../constants";
-import { nominate } from "../../helpers";
+import { constants } from "../../../constants";
+import { nominate } from "../../../helpers";
 
 type RouteParams = {
   accountId: string,
@@ -237,9 +243,13 @@ function DelegationSelectValidator({ navigation, route }: Props) {
 
   useEffect(() => {
     const fetchEstimation = async () => {
-      const estimation = await estimateMaxSpendable({ transaction, account });
+      try {
+        const estimation = await estimateMaxSpendable({ transaction, account });
 
-      setMax(BigNumber(estimation).minus(transaction.amount));
+        setMax(BigNumber(estimation).minus(transaction.amount));
+      } catch (error) {
+        setMax(account.spendableBalance);
+      }
     };
 
     if (estimateMaxSpendable) {
@@ -303,10 +313,7 @@ function DelegationSelectValidator({ navigation, route }: Props) {
     <SafeAreaView
       style={[styles.stack.root, { backgroundColor: colors.background }]}
     >
-      <SelectValidatorSearchBox
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <SelectValidatorSearchBox {...{ searchQuery, setSearchQuery }} />
 
       {sections.length <= 0 && (
         <View style={styles.stack.noResult}>

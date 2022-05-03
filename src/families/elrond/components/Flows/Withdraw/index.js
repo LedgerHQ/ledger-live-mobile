@@ -1,15 +1,14 @@
-// @flow
 import React, { useMemo } from "react";
 import { Platform } from "react-native";
 import { useTranslation } from "react-i18next";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
-import { getStackNavigatorConfig } from "../../../../navigation/navigatorConfig";
-import StepHeader from "../../../../components/StepHeader";
-import { ScreenName } from "../../../../const";
+import { getStackNavigatorConfig } from "../../../../../navigation/navigatorConfig";
+import StepHeader from "../../../../../components/StepHeader";
+import { ScreenName } from "../../../../../const";
 import WithdrawMethod from "./01-SelectValidator";
-import WithdrawSelectDevice from "../../../../screens/SelectDevice";
-import WithdrawConnectDevice from "../../../../screens/ConnectDevice";
+import WithdrawSelectDevice from "../../../../../screens/SelectDevice";
+import WithdrawConnectDevice from "../../../../../screens/ConnectDevice";
 import WithdrawValidationError from "./04-ValidationError";
 import WithdrawValidationSuccess from "./04-ValidationSuccess";
 

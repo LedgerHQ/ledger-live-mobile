@@ -1,15 +1,15 @@
-/* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../../reducers/accounts";
-import { TrackScreen } from "../../../../analytics";
-import { ScreenName } from "../../../../const";
-import PreventNativeBack from "../../../../components/PreventNativeBack";
-import ValidateSuccess from "../../../../components/ValidateSuccess";
+
+import { accountScreenSelector } from "../../../../../reducers/accounts";
+import { TrackScreen } from "../../../../../analytics";
+import { ScreenName } from "../../../../../const";
+import PreventNativeBack from "../../../../../components/PreventNativeBack";
+import ValidateSuccess from "../../../../../components/ValidateSuccess";
 
 type Props = {
   navigation: any,
@@ -43,18 +43,24 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     });
   }, [account, route.params, navigation]);
 
+  const mode = route.params.transaction.mode;
+
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="ElrondsDelegation" name="ValidationSuccess" />
+      <TrackScreen category="ElrondClaimRewards" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
         title={
-          <Trans i18nKey="elrond.delegation.flow.steps.verification.success.title" />
+          <Trans
+            i18nKey={`elrond.claimRewards.flow.steps.verification.success.title${
+              mode !== "claimRewards" ? "reDelegateRewards" : ""
+            }`}
+          />
         }
         description={
-          <Trans i18nKey="elrond.delegation.flow.steps.verification.success.text" />
+          <Trans i18nKey="elrond.claimRewards.flow.steps.verification.success.text" />
         }
       />
     </View>

@@ -1,11 +1,5 @@
 import React, { useCallback, useState, useMemo } from "react";
-import {
-  View,
-  StyleSheet,
-  Keyboard,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, StyleSheet, Keyboard, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -231,9 +225,9 @@ function DelegationAmount({ navigation, route }: Props) {
 
           <Button
             disabled={error || minimum}
-            event="Cosmos DelegationAmountContinueBtn"
+            event="Elrond DelegationAmountContinueBtn"
             onPress={onNext}
-            title={<Trans i18nKey="cosmos.delegation.flow.steps.amount.cta" />}
+            title={<Trans i18nKey="elrond.delegation.flow.steps.amount.cta" />}
             type="primary"
           />
         </View>

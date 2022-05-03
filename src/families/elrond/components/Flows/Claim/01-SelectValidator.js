@@ -15,13 +15,13 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 
-import { accountScreenSelector } from "../../../../reducers/accounts";
-import { ScreenName } from "../../../../const";
+import { accountScreenSelector } from "../../../../../reducers/accounts";
+import { ScreenName } from "../../../../../const";
 
-import LText from "../../../../components/LText";
-import FirstLetterIcon from "../../../../components/FirstLetterIcon";
-import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import ArrowRight from "../../../../icons/ArrowRight";
+import LText from "../../../../../components/LText";
+import FirstLetterIcon from "../../../../../components/FirstLetterIcon";
+import CurrencyUnitValue from "../../../../../components/CurrencyUnitValue";
+import ArrowRight from "../../../../../icons/ArrowRight";
 
 type RouteParams = {
   accountId: string,

@@ -7,14 +7,14 @@ import { useTheme } from "@react-navigation/native";
 import {
   getStackNavigatorConfig,
   defaultNavigationOptions,
-} from "../../../../navigation/navigatorConfig";
-import StepHeader from "../../../../components/StepHeader";
-import { ScreenName } from "../../../../const";
+} from "../../../../../navigation/navigatorConfig";
+import StepHeader from "../../../../../components/StepHeader";
+import { ScreenName } from "../../../../../const";
 import DelegationStarted from "./01-Started";
 import DelegationSelectValidator from "./02-SelectValidator";
-import DelegationAmount from "../../shared/02-SelectAmount";
-import SelectDevice from "../../../../screens/SelectDevice";
-import ConnectDevice from "../../../../screens/ConnectDevice";
+import DelegationAmount from "../../../shared/02-SelectAmount";
+import SelectDevice from "../../../../../screens/SelectDevice";
+import ConnectDevice from "../../../../../screens/ConnectDevice";
 import DelegationValidationError from "./04-ValidationError";
 import DelegationValidationSuccess from "./04-ValidationSuccess";
 

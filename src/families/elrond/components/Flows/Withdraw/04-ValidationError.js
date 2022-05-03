@@ -3,9 +3,9 @@ import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
-import { TrackScreen } from "../../../../analytics";
-import ValidateError from "../../../../components/ValidateError";
-import { urls } from "../../../../config/urls";
+import { TrackScreen } from "../../../../../analytics";
+import ValidateError from "../../../../../components/ValidateError";
+import { urls } from "../../../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
@@ -42,7 +42,7 @@ export default function ValidationError({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen category="ElrondUndelegation" name="ValidationError" />
+      <TrackScreen category="ElrondClaimRewards" name="ValidationError" />
       <ValidateError
         error={error}
         onRetry={retry}

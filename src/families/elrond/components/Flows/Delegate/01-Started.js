@@ -4,19 +4,19 @@ import { View, StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import { ScreenName } from "../../../../const";
-import Button from "../../../../components/Button";
-import LText from "../../../../components/LText";
+import { ScreenName } from "../../../../../const";
+import Button from "../../../../../components/Button";
+import LText from "../../../../../components/LText";
 
-import ExternalLink from "../../../../components/ExternalLink";
+import ExternalLink from "../../../../../components/ExternalLink";
 import BulletList, {
   BulletGreenCheck,
-} from "../../../../components/BulletList";
-import NavigationScrollView from "../../../../components/NavigationScrollView";
-import IlluRewards from "../../../../icons/images/Rewards";
-import { urls } from "../../../../config/urls";
-import { TrackScreen } from "../../../../analytics";
-import Alert from "../../../../components/Alert";
+} from "../../../../../components/BulletList";
+import NavigationScrollView from "../../../../../components/NavigationScrollView";
+import IlluRewards from "../../../../../icons/images/Rewards";
+import { urls } from "../../../../../config/urls";
+import { TrackScreen } from "../../../../../analytics";
+import Alert from "../../../../../components/Alert";
 
 const forceInset = { bottom: "always" };
 

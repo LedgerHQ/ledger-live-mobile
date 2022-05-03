@@ -7,13 +7,13 @@ import { useTheme } from "@react-navigation/native";
 import {
   getStackNavigatorConfig,
   defaultNavigationOptions,
-} from "../../../../navigation/navigatorConfig";
-import StepHeader from "../../../../components/StepHeader";
-import { ScreenName } from "../../../../const";
+} from "../../../../../navigation/navigatorConfig";
+import StepHeader from "../../../../../components/StepHeader";
+import { ScreenName } from "../../../../../const";
 import ClaimRewardsSelectValidator from "./01-SelectValidator";
 import ClaimRewardsMethod from "./02-SelectMethod";
-import ClaimRewardsSelectDevice from "../../../../screens/SelectDevice";
-import ClaimRewardsConnectDevice from "../../../../screens/ConnectDevice";
+import ClaimRewardsSelectDevice from "../../../../../screens/SelectDevice";
+import ClaimRewardsConnectDevice from "../../../../../screens/ConnectDevice";
 import ClaimRewardsValidationError from "./04-ValidationError";
 import ClaimRewardsValidationSuccess from "./04-ValidationSuccess";
 

@@ -1,7 +1,7 @@
-import * as ElrondClaimRewardsFlow from "./components/Claim";
-import * as ElrondDelegationFlow from "./components/Delegate";
-import * as ElrondUndelegationFlow from "./components/Undelegate";
-import * as ElrondWithdrawFlow from "./components/Withdraw";
+import * as ElrondClaimRewardsFlow from "./components/Flows/Claim";
+import * as ElrondDelegationFlow from "./components/Flows/Delegate";
+import * as ElrondUndelegationFlow from "./components/Flows/Undelegate";
+import * as ElrondWithdrawFlow from "./components/Flows/Withdraw";
 
 export {
   ElrondClaimRewardsFlow,

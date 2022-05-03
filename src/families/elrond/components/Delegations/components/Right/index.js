@@ -33,8 +33,8 @@ const Right = (props: Props) => {
         onClose={onClose}
         data={[
           {
-            title: t("cosmos.info.delegationUnavailable.title"),
-            description: t("cosmos.info.delegationUnavailable.description"),
+            title: t("elrond.info.delegationUnavailable.title"),
+            description: t("elrond.info.delegationUnavailable.description"),
           },
         ]}
       />

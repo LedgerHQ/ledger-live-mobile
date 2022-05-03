@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useCallback, useMemo, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -9,17 +7,12 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import { BigNumber } from "bignumber.js";
 import axios from "axios";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import InfoModal from "../../modals/Info";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import InfoItem from "../../components/BalanceSummaryInfoItem";
 
 import { constants } from "./constants";
-
-type Props = {
-  account: Account,
-};
 
 const styles = StyleSheet.create({
   root: {
@@ -31,12 +24,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const withSummary = Component => (props: Props) =>
+const withSummary = Component => props =>
   props.account.elrondResources || props.account.balance.gt(0) ? (
     <Component {...props} />
   ) : null;
 
-const Summary = (props: Props) => {
+const Summary = props => {
   const { account } = props;
   const { colors } = useTheme();
   const { t } = useTranslation();

@@ -135,6 +135,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360012960679?utm_source=ledger_live_mobile&utm_medium=self_referral",
   elrond: {
     website: "https://elrond.com",
+    staking: "https://everstake.one/elrond",
   },
   cryptoOrg: {
     website: "https://crypto.org",

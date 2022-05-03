@@ -1,17 +1,10 @@
-// @flow
-import invariant from "invariant";
 import React, { useCallback, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
-
-import type {
-  CosmosValidatorItem,
-  Transaction,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   getAccountUnit,
@@ -19,64 +12,51 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../../reducers/accounts";
-import Button from "../../../../components/Button";
-import LText from "../../../../components/LText";
-import { ScreenName } from "../../../../const";
-import ToggleButton from "../../../../components/ToggleButton";
+import Button from "../../../../../components/Button";
+import LText from "../../../../../components/LText";
+import { ScreenName } from "../../../../../const";
+import ToggleButton from "../../../../../components/ToggleButton";
 
-import InfoModal from "../../../../modals/Info";
-import Info from "../../../../icons/Info";
-import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import CounterValue from "../../../../components/CounterValue";
-import FirstLetterIcon from "../../../../components/FirstLetterIcon";
-import TranslatedError from "../../../../components/TranslatedError";
+import InfoModal from "../../../../../modals/Info";
+import Info from "../../../../../icons/Info";
+import CurrencyUnitValue from "../../../../../components/CurrencyUnitValue";
+import CounterValue from "../../../../../components/CounterValue";
+import FirstLetterIcon from "../../../../../components/FirstLetterIcon";
+import TranslatedError from "../../../../../components/TranslatedError";
 
 const options = [
   {
     value: "reDelegateRewards",
     label: (
-      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewards" />
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.reDelegateRewards" />
     ),
   },
   {
-    value: "withdraw",
-    label: <Trans i18nKey="elrond.withdraw.flow.steps.method.withdraw" />,
+    value: "claimRewards",
+    label: (
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.claimRewards" />
+    ),
   },
 ];
 
 const infoModalData = [
   {
     title: (
-      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewards" />
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.reDelegateRewards" />
     ),
     description: (
-      <Trans i18nKey="elrond.withdraw.flow.steps.method.reDelegateRewardsTooltip" />
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.reDelegateRewardsTooltip" />
     ),
   },
   {
-    title: <Trans i18nKey="elrond.withdraw.flow.steps.method.withdraw" />,
+    title: (
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.claimRewards" />
+    ),
     description: (
-      <Trans i18nKey="elrond.withdraw.flow.steps.method.withdrawTooltip" />
+      <Trans i18nKey="elrond.claimRewards.flow.steps.method.claimRewardsTooltip" />
     ),
   },
 ];
-
-type RouteParams = {
-  accountId: string,
-  transaction?: Transaction,
-  validator: CosmosValidatorItem,
-  value: BigNumber,
-};
-
-type Props = {
-  navigation: any,
-  route: {
-    params: RouteParams,
-  },
-};
 
 const styles = StyleSheet.create({
   root: {
@@ -141,7 +121,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function WithdrawAmount({ navigation, route }: Props) {
+function ClaimRewardsAmount({ navigation, route }) {
   const { colors } = useTheme();
 
   const account = route.params.account;
@@ -150,40 +130,65 @@ function WithdrawAmount({ navigation, route }: Props) {
   const unit = getAccountUnit(mainAccount);
   const currency = getAccountCurrency(mainAccount);
 
-  const { transaction, status } = useBridgeTransaction(() => {
-    const transaction = route.params.transaction;
+  const { transaction, status, updateTransaction } = useBridgeTransaction(
+    () => {
+      const transaction = route.params.transaction;
 
-    if (!transaction) {
+      if (!transaction) {
+        return {
+          account,
+          transaction: bridge.updateTransaction(
+            bridge.createTransaction(mainAccount),
+            {
+              mode: "claimRewards",
+              recipient: route.params.contract,
+              amount: BigNumber(route.params.value),
+            },
+          ),
+        };
+      }
+
       return {
         account,
-        transaction: bridge.updateTransaction(
-          bridge.createTransaction(mainAccount),
-          {
-            mode: "withdraw",
-            recipient: route.params.contract,
-            amount: BigNumber(route.params.amount),
-          },
-        ),
+        transaction,
       };
-    }
-
-    return {
-      account,
-      transaction,
-    };
-  });
+    },
+  );
 
   const onNext = useCallback(() => {
-    navigation.navigate(ScreenName.ElrondWithdrawSelectDevice, {
+    navigation.navigate(ScreenName.ElrondClaimRewardsSelectDevice, {
       ...route.params,
       transaction,
     });
   }, [navigation, transaction, route]);
 
-  const value = route.params.amount;
+  const onChangeMode = useCallback(
+    mode => {
+      updateTransaction(() =>
+        bridge.updateTransaction(transaction, {
+          mode,
+        }),
+      );
+    },
+    [transaction, bridge, updateTransaction],
+  );
+
+  const [infoModalOpen, setInfoModalOpen] = useState();
+
+  const openInfoModal = useCallback(() => {
+    setInfoModalOpen(true);
+  }, [setInfoModalOpen]);
+
+  const closeInfoModal = useCallback(() => {
+    setInfoModalOpen(false);
+  }, [setInfoModalOpen]);
+
+  const value = route.params.value;
   const name = route.params.validator
     ? route.params.validator.name
     : route.params.contract || "";
+
+  const mode = transaction.mode ? transaction.mode : "";
 
   const error =
     status.errors &&
@@ -198,9 +203,21 @@ function WithdrawAmount({ navigation, route }: Props) {
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.main}>
+        <ToggleButton value={mode} options={options} onChange={onChangeMode} />
+
+        <TouchableOpacity onPress={openInfoModal} style={styles.info}>
+          <LText semiBold={true} style={styles.infoLabel} color="grey">
+            <Trans i18nKey="elrond.claimRewards.flow.steps.method.compoundOrCashIn" />
+          </LText>
+
+          <Info size={16} color={colors.grey} />
+        </TouchableOpacity>
+
+        <View style={styles.spacer} />
+
         <View style={styles.sectionLabel}>
           <LText semiBold={true} style={styles.subLabel} color="grey">
-            <Trans i18nKey="elrond.withdraw.flow.steps.method.youEarned" />
+            <Trans i18nKey="elrond.claimRewards.flow.steps.method.youEarned" />
           </LText>
 
           <LText semiBold={true} style={[styles.label, styles.value]}>
@@ -219,7 +236,7 @@ function WithdrawAmount({ navigation, route }: Props) {
 
         <View style={styles.sectionLabel}>
           <LText semiBold={true} style={styles.subLabel} color="grey">
-            <Trans i18nKey="elrond.withdraw.flow.steps.method.byDelegationAssetsTo" />
+            <Trans i18nKey="elrond.claimRewards.flow.steps.method.byDelegationAssetsTo" />
           </LText>
 
           <View style={styles.row}>
@@ -233,7 +250,9 @@ function WithdrawAmount({ navigation, route }: Props) {
 
         <View style={styles.sectionLabel}>
           <LText style={styles.desc}>
-            <Trans i18nKey={`elrond.withdraw.flow.steps.method.withdrawInfo`} />
+            <Trans
+              i18nKey={`elrond.claimRewards.flow.steps.method.${mode}Info`}
+            />
           </LText>
         </View>
 
@@ -267,14 +286,20 @@ function WithdrawAmount({ navigation, route }: Props) {
 
         <Button
           disabled={error instanceof Error}
-          event="Elrond WithdrawAmountContinueBtn"
+          event="Elrond ClaimRewardsAmountContinueBtn"
           onPress={onNext}
-          title={<Trans i18nKey="elrond.withdraw.flow.steps.method.cta" />}
+          title={<Trans i18nKey="elrond.claimRewards.flow.steps.method.cta" />}
           type="primary"
         />
       </View>
+
+      <InfoModal
+        isOpened={!!infoModalOpen}
+        onClose={closeInfoModal}
+        data={infoModalData}
+      />
     </SafeAreaView>
   );
 }
 
-export default WithdrawAmount;
+export default ClaimRewardsAmount;

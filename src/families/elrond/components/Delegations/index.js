@@ -80,11 +80,11 @@ const Delegations = props => {
       <AccountDelegationInfo
         title={t("account.delegation.info.title")}
         image={<IlluRewards style={styles.illustration} />}
-        description={t("cosmos.delegation.delegationEarn", {
+        description={t("elrond.delegation.delegationEarn", {
           name: account.currency.name,
         })}
-        infoUrl={urls.cosmosStaking}
-        infoTitle={t("cosmos.delegation.info")}
+        infoUrl={urls.elrond.staking}
+        infoTitle={t("elrond.delegation.info")}
         onPress={() => onDelegate()}
         ctaTitle={t("account.delegation.info.cta")}
       />
