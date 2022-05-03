@@ -14,7 +14,7 @@ const LISTEN_TIMEOUT = 15000
 const DERIVATION_PATH_ETH = "44'/60'/0'/0/0";
 const DERIVATION_PATH_SOL = "44'/501'/0'";
 
-const common = new Common({ chain: Chain.Ropsten, hardfork: "london" });
+const common = new Common({ chain: Chain.Mainnet, hardfork: "london" });
 const ensureLeading0x = (input: string) =>
     input.startsWith("0x") ? input : `0x${input}`;
 const trimLeading0x = (input: string) =>

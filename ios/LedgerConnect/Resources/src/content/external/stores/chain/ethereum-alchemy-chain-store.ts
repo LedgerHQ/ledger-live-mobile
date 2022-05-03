@@ -15,7 +15,7 @@ export interface Payload {
   jsonrpc: typeof jsonrpcVersion;
 }
 
-const rpcURL = 'https://eth-ropsten.alchemyapi.io/v2/G5ywN3ywt4S0L-2Ai92Ub1efL3aLQWWb';
+const rpcURL = 'https://eth-mainnet.alchemyapi.io/v2/-kuNbDetSLplTph8eLySef5J8Rww1DEp';
 
 const call = async <T>(payload: Payload): Promise<T> => {
   const response = await fetch(rpcURL, {
