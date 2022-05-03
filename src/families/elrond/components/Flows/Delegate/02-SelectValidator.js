@@ -1,11 +1,5 @@
 import React, { useCallback, useState, useMemo, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  SectionList,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, StyleSheet, SectionList, TouchableOpacity } from "react-native";
 import { BigNumber } from "bignumber.js";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
@@ -119,7 +113,9 @@ const styles = StyleSheet.create({
   },
 });
 
-function DelegationSelectValidator({ navigation, route }: Props) {
+const Validator = (props: Props) => {
+  const { navigation, route } = props;
+
   const account = route.params.account;
   const recipient = route.params.recipient;
   const amount = route.params.amount;
@@ -382,7 +378,7 @@ function DelegationSelectValidator({ navigation, route }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const Item = props => {
   const [provider] = props.item.providers;
@@ -463,4 +459,4 @@ const Item = props => {
   );
 };
 
-export default DelegationSelectValidator;
+export default Validator;

@@ -1,8 +1,8 @@
-/* @flow */
 import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
+
 import { TrackScreen } from "../../../../../analytics";
 import ValidateError from "../../../../../components/ValidateError";
 import { urls } from "../../../../../config/urls";
@@ -21,17 +21,24 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export default function ValidationError({ navigation, route }: Props) {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+const Error = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
   const onClose = useCallback(() => {
     navigation.getParent().pop();
   }, [navigation]);
 
-  const contactUs = useCallback(() => {
+  const onContactUs = useCallback(() => {
     Linking.openURL(urls.contact);
   }, []);
 
-  const retry = useCallback(() => {
+  const onRetry = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
@@ -43,18 +50,10 @@ export default function ValidationError({ navigation, route }: Props) {
       forceInset={forceInset}
     >
       <TrackScreen category="CosmosDelegation" name="ValidationError" />
-      <ValidateError
-        error={error}
-        onRetry={retry}
-        onClose={onClose}
-        onContactUs={contactUs}
-      />
+
+      <ValidateError {...{ error, onRetry, onContactUs, onClose }} />
     </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});
+export default Error;

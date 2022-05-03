@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   },
 });
 
-function ClaimRewardsSelectValidator({ navigation, route }: Props) {
+const Validator = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
 
@@ -151,7 +152,7 @@ function ClaimRewardsSelectValidator({ navigation, route }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const Item = props => {
   const { colors } = useTheme();
@@ -210,4 +211,4 @@ const Item = props => {
   );
 };
 
-export default ClaimRewardsSelectValidator;
+export default Validator;

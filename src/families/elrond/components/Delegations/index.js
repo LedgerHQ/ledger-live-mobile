@@ -83,7 +83,7 @@ const Delegations = props => {
         description={t("elrond.delegation.delegationEarn", {
           name: account.currency.name,
         })}
-        infoUrl={urls.elrond.staking}
+        infoUrl={urls.elrondStaking}
         infoTitle={t("elrond.delegation.info")}
         onPress={() => onDelegate()}
         ctaTitle={t("account.delegation.info.cta")}

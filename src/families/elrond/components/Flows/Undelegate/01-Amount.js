@@ -8,7 +8,9 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import SelectAmount from "../../../shared/02-SelectAmount";
 import { ScreenName } from "../../../../../const";
 
-function UndelegationAmount({ navigation, route }) {
+const Amount = props => {
+  const { navigation, route } = props;
+
   const account = route.params.account;
   const validator = route.params.contract;
   const amount = route.params.amount;
@@ -41,6 +43,6 @@ function UndelegationAmount({ navigation, route }) {
   };
 
   return <SelectAmount navigation={navigation} route={newRoute} />;
-}
+};
 
-export default UndelegationAmount;
+export default Amount;

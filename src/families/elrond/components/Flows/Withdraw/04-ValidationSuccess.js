@@ -1,4 +1,3 @@
-/* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
@@ -24,7 +23,14 @@ type RouteParams = {
   result: Operation,
 };
 
-export default function ValidationSuccess({ navigation, route }: Props) {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+const Success = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
 
@@ -49,7 +55,9 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="ElrondClaimRewards" name="ValidationSuccess" />
+
       <PreventNativeBack />
+
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
@@ -66,10 +74,6 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});
+export default Success;

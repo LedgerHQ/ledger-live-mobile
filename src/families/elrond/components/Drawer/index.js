@@ -80,6 +80,7 @@ const Drawer = props => {
     drawer.validator,
     drawer.meta.delegations,
   ]);
+
   const onWithdraw = useCallback(() => {
     if (drawer.source === "undelegation") {
       navigation.navigate(NavigatorName.ElrondWithdrawFlow, {

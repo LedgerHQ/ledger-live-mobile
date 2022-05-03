@@ -1,10 +1,10 @@
-/* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
+
 import { accountScreenSelector } from "../../../../../reducers/accounts";
 import { TrackScreen } from "../../../../../analytics";
 import { ScreenName } from "../../../../../const";
@@ -23,7 +23,14 @@ type RouteParams = {
   result: Operation,
 };
 
-export default function ValidationSuccess({ navigation, route }: Props) {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+const Success = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
 
@@ -46,7 +53,9 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="ElrondsDelegation" name="ValidationSuccess" />
+
       <PreventNativeBack />
+
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
@@ -59,10 +68,6 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});
+export default Success;

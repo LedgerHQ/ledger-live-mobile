@@ -21,17 +21,24 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export default function ValidationError({ navigation, route }: Props) {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+const Error = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
   const onClose = useCallback(() => {
     navigation.getParent().pop();
   }, [navigation]);
 
-  const contactUs = useCallback(() => {
+  const onContactUs = useCallback(() => {
     Linking.openURL(urls.contact);
   }, []);
 
-  const retry = useCallback(() => {
+  const onRetry = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
@@ -40,21 +47,13 @@ export default function ValidationError({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={forceInset}
+      {...{ forceInset }}
     >
       <TrackScreen category="ElrondClaimRewards" name="ValidationError" />
-      <ValidateError
-        error={error}
-        onRetry={retry}
-        onClose={onClose}
-        onContactUs={contactUs}
-      />
+
+      <ValidateError {...{ error, onClose, onContactUs, onRetry }} />
     </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-});
+export default Error;
