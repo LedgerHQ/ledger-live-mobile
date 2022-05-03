@@ -96,6 +96,10 @@ platform :ios do
     MY_PROFILE = (options[:adhoc] ? "match AdHoc #{MY_APP_BUNDLE_ID}" : "match AppStore #{MY_APP_BUNDLE_ID}")
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
 
+    LEDGER_CONNECT_BUNDLE_ID = "com.ledger.live.ledgerconnect"
+    LEDGER_CONNECT_APP_ID = LEDGER_CONNECT_BUNDLE_ID
+    LEDGER_CONNECT_PROFILE = (options[:adhoc] ? "match AdHoc #{LEDGER_CONNECT_BUNDLE_ID}" : "match AppStore #{LEDGER_CONNECT_BUNDLE_ID}")
+
     settings_to_override = {
       :BUNDLE_IDENTIFIER => MY_APP_ID,
       :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
@@ -104,7 +108,7 @@ platform :ios do
 
     if (options[:ci])
       match(
-        app_identifier: MY_APP_BUNDLE_ID,
+        app_identifier: [MY_APP_BUNDLE_ID, LEDGER_CONNECT_BUNDLE_ID],
         git_url: ENV["GIT_REPO_URL"],
         type: (options[:adhoc] ? "adhoc" : "appstore"),
         username: ENV["APPLE_ID"],
@@ -154,7 +158,8 @@ platform :ios do
           method: export_options_method,
           signingStyle: "manual",
           provisioningProfiles: {
-              MY_APP_ID => MY_PROFILE
+              MY_APP_ID => MY_PROFILE,
+              LEDGER_CONNECT_APP_ID => LEDGER_CONNECT_PROFILE
           }
         },
       )
