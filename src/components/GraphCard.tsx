@@ -125,7 +125,7 @@ function GraphCard({
                     <SmallPlaceholder mt="12px" />
                   </>
                 ) : (
-                  <Flex flexDirection="row">
+                  <Flex flexDirection="row" alignItems="center">
                     <Delta
                       percent
                       show0Delta
