@@ -55,7 +55,7 @@ const Summary = props => {
         );
 
         setDelegationResources(delegations.data);
-      } catch {
+      } catch (error) {
         setDelegationResources([]);
       }
     };

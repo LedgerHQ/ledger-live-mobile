@@ -8,7 +8,6 @@ import CounterValue from "../../../../../../components/CounterValue";
 import ArrowRight from "../../../../../../icons/ArrowRight";
 import LText from "../../../../../../components/LText";
 import FirstLetterIcon from "../../../../../../components/FirstLetterIcon";
-
 import { denominate } from "../../../../helpers";
 import { constants } from "../../../../constants";
 

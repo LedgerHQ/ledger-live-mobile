@@ -4,12 +4,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
-
-import type {
-  CosmosValidatorItem,
-  Transaction,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -26,25 +20,79 @@ import KeyboardView from "../../../components/KeyboardView";
 import { constants } from "../constants";
 import { nominate } from "../helpers";
 
-type RouteParams = {
-  accountId: string,
-  transaction: Transaction,
-  validator: CosmosValidatorItem,
-  validatorSrc?: CosmosValidatorItem,
-  min?: BigNumber,
-  max?: BigNumber,
-  value?: BigNumber,
-  redelegatedBalance?: BigNumber,
-  mode: string,
-  nextScreen: string,
-};
-
 type Props = {
   navigation: any,
-  route: { params: RouteParams },
+  route: { params: any },
 };
 
-function DelegationAmount({ navigation, route }: Props) {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+
+    padding: 16,
+  },
+  main: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 150,
+  },
+  inputStyle: {
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "600",
+  },
+  ratioButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "center",
+    height: 36,
+    marginTop: 16,
+  },
+  ratioButton: {
+    marginHorizontal: 5,
+    width: 60,
+    borderWidth: 1,
+    borderRadius: 4,
+
+    backgroundColor: "rgba(0,0,0,0)",
+    paddingVertical: 8,
+  },
+  ratioPrimaryButton: {},
+  ratioLabel: { textAlign: "center" },
+  footer: {
+    alignSelf: "stretch",
+    padding: 8,
+  },
+  labelContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 16,
+  },
+  labelSmall: {
+    paddingBottom: 4,
+  },
+  assetsRemaining: {
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 32,
+    paddingHorizontal: 10,
+  },
+  wrongUndelegations: {
+    paddingHorizontal: 10,
+    lineHeight: 20,
+    textAlign: "center",
+  },
+  small: {
+    fontSize: 11,
+    lineHeight: 16,
+  },
+});
+
+const Amount = (props: Props) => {
+  const { navigation, route } = props;
   const { colors } = useTheme();
 
   const account = route.params.account;
@@ -234,72 +282,6 @@ function DelegationAmount({ navigation, route }: Props) {
       </KeyboardView>
     </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-
-    padding: 16,
-  },
-  main: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 150,
-  },
-  inputStyle: {
-    textAlign: "center",
-    fontSize: 25,
-    fontWeight: "600",
-  },
-  ratioButtonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignContent: "center",
-    height: 36,
-    marginTop: 16,
-  },
-  ratioButton: {
-    marginHorizontal: 5,
-    width: 60,
-    borderWidth: 1,
-    borderRadius: 4,
-
-    backgroundColor: "rgba(0,0,0,0)",
-    paddingVertical: 8,
-  },
-  ratioPrimaryButton: {},
-  ratioLabel: { textAlign: "center" },
-  footer: {
-    alignSelf: "stretch",
-    padding: 8,
-  },
-  labelContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 16,
-  },
-  labelSmall: {
-    paddingBottom: 4,
-  },
-  assetsRemaining: {
-    fontSize: 14,
-    textAlign: "center",
-    lineHeight: 32,
-    paddingHorizontal: 10,
-  },
-  wrongUndelegations: {
-    paddingHorizontal: 10,
-    lineHeight: 20,
-    textAlign: "center",
-  },
-  small: {
-    fontSize: 11,
-    lineHeight: 16,
-  },
-});
-
-export default DelegationAmount;
+export default Amount;

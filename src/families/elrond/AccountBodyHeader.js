@@ -83,7 +83,7 @@ const Staking = props => {
         setValidators(
           randomize(providers.data.filter(validator => validator.providers)),
         );
-      } catch {
+      } catch (error) {
         setValidators([]);
       }
     };
@@ -101,7 +101,7 @@ const Staking = props => {
         );
 
         setDelegationResources(delegations.data);
-      } catch {
+      } catch (error) {
         setDelegationResources([]);
       }
     };
