@@ -36,19 +36,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version-file: '.nvmrc'
-
-      - name: Get yarn cache
-        id: yarn-cache-dir
-        run: echo "::set-output name=yarn-cache-dir::$(yarn cache dir)"
-
-      - name: Restore cache
-        id: yarn-cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.yarn-cache-dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
+          node-version-file: 14
+          cache: 'yarn'
 
       - name: Has hash commit deps
         uses: ledgerhq/actions/packages/has-hash-commit-deps@main
@@ -56,23 +45,22 @@ jobs:
         with:
           workspace: ${{ github.workspace }}
 
-      - name: Install dependencies 
+      - name: Install dependencies without network concurrency
         if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
         env:
           JOBS: max
         run: yarn --prefer-offline --frozen-lockfile --network-timeout 100000 --network-concurrency 1
 
-      - name: Install dependencies
+      - name: Install dependencies with network concurrency
         if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --prefer-offline --frozen-lockfile --network-timeout 100000    
 
       - name: Rebuild detox
-        if: ${{ steps.yarn-cache.outputs.cache-hit == 'true' }}
         run: yarn detox clean-framework-cache && yarn detox build-framework-cache
 
-      - name: Build iOS app for detox test run`
+      - name: Build iOS app for Detox test run
         env:
           NODE_OPTIONS: "--max-old-space-size=7168"
         run: yarn e2e:build -c ios.staging
