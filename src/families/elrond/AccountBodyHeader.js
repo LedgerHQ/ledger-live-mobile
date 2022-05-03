@@ -59,12 +59,7 @@ const withStaking = Component => props =>
   props.account.elrondResources ? <Component {...props} /> : null;
 
 const Staking = (props: Props) => {
-  // const { account } = props;
-  const account = {
-    ...props.account,
-    freshAddress:
-      "erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex",
-  };
+  const { account } = props;
 
   const [drawer, setDrawer] = useState();
   const [validators, setValidators] = useState([]);
