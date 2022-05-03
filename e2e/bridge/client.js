@@ -36,7 +36,6 @@ async function onMessage(event: { data: mixed }) {
   switch (msg.type) {
     case "add":
     case "open":
-    case "receive":
       e2eBridgeSubject.next(msg);
       break;
     case "setGlobals":
@@ -72,8 +71,7 @@ type Message<T: string, P = any> = {
 
 type E2EBridgeSubjectMessage =
   | Message<"add", { id: string, name: string }>
-  | Message<"open", ?*>
-  | Message<"receive", { address: string, path: string }>;
+  | Message<"open", ?*>;
 
 export type E2EBridgeMessage =
   | E2EBridgeSubjectMessage

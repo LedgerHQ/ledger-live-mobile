@@ -29,19 +29,14 @@ export async function loadConfig(
     acceptTerms();
   }
 
-  log("starting file sync");
   const f = fs.readFileSync(path.resolve("e2e", "setups", `${fileName}.json`));
   // $FlowFixMe
-  log("parsing JSON");
   const { data } = JSON.parse(f);
 
-  log("post message");
   postMessage({ type: "importSettngs", payload: data.settings });
 
-  log("navigating to portfolio");
   navigate(NavigatorName.Base);
 
-  log("importing accounts");
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
   }

@@ -14,6 +14,5 @@ export default class PasswordEntryPage {
 
   static async login() {
     await testHelpers.tapByText("Log in");
-    await testHelpers.delay(5000);
   }
 }
