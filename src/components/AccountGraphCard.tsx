@@ -72,6 +72,7 @@ type Props = {
 };
 
 const timeRangeMapped: any = {
+  "all": "all",
   "1y": "year",
   "30d": "month",
   "7d": "week",
@@ -101,7 +102,7 @@ function AccountGraphCard({
   const ranges = useMemo(
     () =>
       Object.keys(timeRangeMapped).map(r => ({
-        label: t(`market.range.${r}`),
+        label: t(`common:time.${timeRangeMapped[r]}`),
         value: timeRangeMapped[r],
       })),
     [t],

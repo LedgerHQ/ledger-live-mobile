@@ -42,27 +42,10 @@ function Delta({
     </Text>
   ) : null;
 
-  if (
-    percent &&
-    ((valueChange.percentage === 0 && !show0Delta) ||
-      valueChange.percentage === null ||
-      valueChange.percentage === undefined)
-  ) {
-    if (fallbackToPercentPlaceholder) return percentPlaceholder;
-    return null;
-  }
-
   const delta =
     percent && valueChange.percentage
       ? valueChange.percentage * 100
       : valueChange.value;
-
-  if (Number.isNaN(delta)) {
-    if (percent && fallbackToPercentPlaceholder) return percentPlaceholder;
-    return null;
-  }
-
-  const absDelta = Math.abs(delta);
 
   const [color, ArrowIcon, sign] =
     delta !== 0
@@ -70,6 +53,24 @@ function Delta({
         ? ["success.c100", ArrowUpMedium, "+"]
         : ["error.c100", ArrowDownMedium, "-"]
       : ["neutral.c100", () => null, ""];
+
+  if (
+    percent &&
+    ((valueChange.percentage === 0 && !show0Delta) ||
+      valueChange.percentage === null ||
+      valueChange.percentage === undefined)
+  ) {
+    if (fallbackToPercentPlaceholder) return percentPlaceholder;
+    if (percent && ArrowIcon) return <ArrowIcon size={16} color={color} />;
+    return null;
+  }
+
+  if (Number.isNaN(delta)) {
+    if (percent && fallbackToPercentPlaceholder) return percentPlaceholder;
+    return null;
+  }
+
+  const absDelta = Math.abs(delta);
 
   return (
     <View style={[styles.root, style]}>

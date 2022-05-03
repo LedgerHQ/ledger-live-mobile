@@ -129,7 +129,6 @@ function GraphCard({
                     <Delta
                       percent
                       show0Delta
-                      fallbackToPercentPlaceholder
                       valueChange={countervalueChange}
                       range={portfolio.range}
                     />
