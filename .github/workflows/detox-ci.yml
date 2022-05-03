@@ -9,6 +9,8 @@ on:
       prNumber:
         description: pr number to trigger on
         required: true
+  schedule: 
+    - cron: "0 0 * * *"
 
 jobs:
   ios:
@@ -70,7 +72,7 @@ jobs:
         if: ${{ steps.yarn-cache.outputs.cache-hit == 'true' }}
         run: yarn detox clean-framework-cache && yarn detox build-framework-cache
 
-      - name: Build iOS app for detox test run
+      - name: Build iOS app for detox test run`
         env:
           NODE_OPTIONS: "--max-old-space-size=7168"
         run: yarn e2e:build -c ios.staging
