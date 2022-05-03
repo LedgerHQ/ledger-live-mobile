@@ -6,19 +6,25 @@ import {
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
-import type {
+import {
   SolanaStakeWithMeta,
   StakeAction,
   TransactionModel,
 } from "@ledgerhq/live-common/lib/families/solana/types";
 import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
-import type { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
+import { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React, { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Trans } from "react-i18next";
 import { Animated, StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -38,25 +44,25 @@ import DelegatingContainer from "../../tezos/DelegatingContainer";
 import ValidatorImage from "../shared/ValidatorImage";
 
 type Props = {
-  navigation: any,
-  route: { params: RouteParams },
+  navigation: any;
+  route: { params: RouteParams };
 };
 
 type RouteParams = {
-  delegationAction?: DelegationAction,
-  validator?: ValidatorsAppValidator,
-  accountId: string,
-  parentId?: string,
+  delegationAction?: DelegationAction;
+  validator?: ValidatorsAppValidator;
+  accountId: string;
+  parentId?: string;
 };
 
 type DelegationAction =
   | {
-      kind: "new",
+      kind: "new";
     }
   | {
-      kind: "change",
-      stakeWithMeta: SolanaStakeWithMeta,
-      stakeAction: StakeAction,
+      kind: "change";
+      stakeWithMeta: SolanaStakeWithMeta;
+      stakeAction: StakeAction;
     };
 
 export default function DelegationSummary({ navigation, route }: Props) {
@@ -66,7 +72,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
   invariant(delegationAction, "delegation action must be defined");
   invariant(account, "account must be defined");
-  invariant(account.type === 'Account', 'account type must be Account')
+  invariant(account.type === "Account", "account type must be Account");
 
   const validators = useValidators(account.currency);
 
@@ -79,13 +85,15 @@ export default function DelegationSummary({ navigation, route }: Props) {
       return validators[0];
     }
 
-    const { stake, meta } = delegationAction.stakeWithMeta;
+    const { stake } = delegationAction.stakeWithMeta;
 
     if (stake.delegation === undefined) {
       return undefined;
     }
 
-    return validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
+    return validators.find(
+      v => v.voteAccount === stake.delegation?.voteAccAddr,
+    );
   }, [validators, validator, delegationAction]);
 
   const {
@@ -106,7 +114,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
       family: "solana",
       // TODO: fix amount
       amount: new BigNumber(1),
-      recipient: '',
+      recipient: "",
       model: txModelByDelegationAction(
         delegationAction,
         validators[0],
@@ -175,7 +183,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={{bottom: 'always'}}
+      forceInset={{ bottom: "always" }}
     >
       <TrackScreen category="DelegationFlow" name="Summary" />
 
@@ -198,7 +206,10 @@ export default function DelegationSummary({ navigation, route }: Props) {
               >
                 <Circle
                   size={70}
-                  style={[styles.validatorCircle, { borderColor: colors.primary }]}
+                  style={[
+                    styles.validatorCircle,
+                    { borderColor: colors.primary },
+                  ]}
                 >
                   <Animated.View
                     style={{
@@ -209,9 +220,12 @@ export default function DelegationSummary({ navigation, route }: Props) {
                       ],
                     }}
                   >
-                    <ValidatorImage imgUrl={chosenValidator?.avatarUrl} name={
-                      chosenValidator?.name ?? chosenValidator?.voteAccount
-                    } />
+                    <ValidatorImage
+                      imgUrl={chosenValidator?.avatarUrl}
+                      name={
+                        chosenValidator?.name ?? chosenValidator?.voteAccount
+                      }
+                    />
                   </Animated.View>
                   <ChangeDelegator />
                 </Circle>
@@ -359,7 +373,7 @@ function txModelByDelegationAction(
 
   invariant(stake.delegation, "stake delegation must be defined");
 
-  const { stakeAccAddr, delegation  } = stake;
+  const { stakeAccAddr, delegation } = stake;
 
   switch (stakeAction) {
     case "activate":
@@ -368,7 +382,8 @@ function txModelByDelegationAction(
         kind: "stake.delegate",
         uiState: {
           stakeAccAddr,
-          voteAccAddr: chosenValidator?.voteAccount ?? delegation?.voteAccAddr ?? '-',
+          voteAccAddr:
+            chosenValidator?.voteAccount ?? delegation?.voteAccAddr ?? "-",
         },
       };
     case "deactivate":
@@ -412,11 +427,11 @@ function SummaryWords({
   onChangeValidator,
   onChangeAmount,
 }: {
-  delegationAction: DelegationAction,
-  validator?: ValidatorsAppValidator,
-  account: AccountLike,
-  onChangeValidator: () => void,
-  onChangeAmount: () => void,
+  delegationAction: DelegationAction;
+  validator?: ValidatorsAppValidator;
+  account: AccountLike;
+  onChangeValidator: () => void;
+  onChangeAmount: () => void;
 }) {
   if (
     delegationAction.kind === "new" ||
@@ -499,13 +514,13 @@ const Words = ({
   highlighted,
   style,
 }: {
-  children: ReactNode,
-  highlighted?: boolean,
-  style?: any,
+  children: ReactNode;
+  highlighted?: boolean;
+  style?: any;
 }) => (
   <Text
     numberOfLines={1}
-    fontWeight={highlighted ? 'bold' : 'semiBold'}
+    fontWeight={highlighted ? "bold" : "semiBold"}
     style={[styles.summaryWords, style]}
     color={highlighted ? "live" : "smoke"}
   >
@@ -517,8 +532,8 @@ const ValidatorSelection = ({
   name,
   readOnly,
 }: {
-  name: string,
-  readOnly?: boolean,
+  name: string;
+  readOnly?: boolean;
 }) => {
   const { colors } = useTheme();
   return (

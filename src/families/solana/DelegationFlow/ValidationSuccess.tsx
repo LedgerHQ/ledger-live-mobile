@@ -1,26 +1,26 @@
-/* @flow */
-import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
-import type { Operation, Transaction } from "@ledgerhq/live-common/lib/types";
+import { Operation, Transaction } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../../../reducers/accounts";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
-import { ScreenName } from "../../../const";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
+import { ScreenName } from "../../../const";
+import { accountScreenSelector } from "../../../reducers/accounts";
+import invariant from "invariant";
 
 type Props = {
-  navigation: any,
-  route: { params: RouteParams },
+  navigation: any;
+  route: { params: RouteParams };
 };
 
 type RouteParams = {
-  accountId: string,
-  deviceId: string,
-  transaction: Transaction,
-  result: Operation,
+  accountId: string;
+  deviceId: string;
+  transaction: Transaction;
+  result: Operation;
 };
 
 export default function ValidationSuccess({ navigation, route }: Props) {
@@ -44,7 +44,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [account, route.params, navigation]);
 
   const transaction = route.params.transaction;
-  if (transaction.family !== "tezos") return null;
+  invariant(transaction.family === "solana", "solana tx expected");
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
@@ -55,13 +55,15 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         onViewDetails={goToOperationDetails}
         title={
           <Trans
-            i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
+            i18nKey={
+              "delegation.broadcastSuccessTitle." + transaction.model.kind
+            }
           />
         }
         description={
           <Trans
             i18nKey={
-              "delegation.broadcastSuccessDescription." + transaction.mode
+              "delegation.broadcastSuccessDescription." + transaction.model.kind
             }
           />
         }

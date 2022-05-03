@@ -1,17 +1,17 @@
-import React, { useCallback } from "react";
-import { StyleSheet, View, Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
-import { Trans } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
-import { ScreenName } from "../../../const";
-import { TrackScreen } from "../../../analytics";
-import Button from "../../../components/Button";
 import { Text } from "@ledgerhq/native-ui";
-import ExternalLink from "../../../components/ExternalLink";
+import { useTheme } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { Linking, StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { TrackScreen } from "../../../analytics";
 import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
+import Button from "../../../components/Button";
+import ExternalLink from "../../../components/ExternalLink";
 import NavigationScrollView from "../../../components/NavigationScrollView";
-import IlluStaking from "../../tezos/IlluStaking";
 import { urls } from "../../../config/urls";
+import { ScreenName } from "../../../const";
+import IlluStaking from "../../tezos/IlluStaking";
 
 type Props = {
   navigation: any;

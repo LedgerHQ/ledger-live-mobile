@@ -1,22 +1,22 @@
-import React, { useCallback } from "react";
-import { View, StyleSheet, Linking } from "react-native";
+import {
+  getAccountCurrency,
+  getAccountUnit,
+} from "@ledgerhq/live-common/lib/account";
+import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 import {
   AccountLike,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import { Trans } from "react-i18next";
-import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
-import { useTheme } from "@react-navigation/native";
-import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import { Text } from "@ledgerhq/native-ui";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
+import { useTheme } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { Linking, StyleSheet, View } from "react-native";
 import CounterValue from "../../components/CounterValue";
-import ExternalLink from "../../icons/ExternalLink";
+import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import { urls } from "../../config/urls";
+import ExternalLink from "../../icons/ExternalLink";
+import SummaryRow from "../../screens/SendFunds/SummaryRow";
 
 type Props = {
   account: AccountLike;

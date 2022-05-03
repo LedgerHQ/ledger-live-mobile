@@ -17,7 +17,6 @@ import {
   SolanaStakeWithMeta,
   StakeAction,
 } from "@ledgerhq/live-common/lib/families/solana/types";
-import { rgba } from "../../../colors";
 import {
   assertUnreachable,
   sweetch,
@@ -32,6 +31,7 @@ import { capitalize } from "lodash/fp";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, StyleSheet, View } from "react-native";
+import { rgba } from "../../../colors";
 import AccountDelegationInfo from "../../../components/AccountDelegationInfo";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
 import Circle from "../../../components/Circle";
@@ -41,10 +41,10 @@ import DelegationDrawer, {
 import Touchable from "../../../components/Touchable";
 import { urls } from "../../../config/urls";
 import { NavigatorName, ScreenName } from "../../../const";
+import ClaimRewardIcon from "../../../icons/ClaimReward";
 import DelegateIcon from "../../../icons/Delegate";
 import IlluRewards from "../../../icons/images/Rewards";
 import UndelegateIcon from "../../../icons/Undelegate";
-import ClaimRewardIcon from "../../../icons/ClaimReward";
 import ValidatorImage from "../shared/ValidatorImage";
 import DelegationLabelRight from "./LabelRight";
 import DelegationRow from "./Row";
@@ -146,7 +146,7 @@ function Delegations({ account }: Props) {
         ),
       },
       {
-        label: t("cosmos.delegation.drawer.status"),
+        label: t("solana.delegation.stakeActivationState"),
         Component: (
           <Text
             numberOfLines={1}
@@ -285,11 +285,11 @@ function Delegations({ account }: Props) {
         <AccountDelegationInfo
           title={t("account.delegation.info.title")}
           image={<IlluRewards style={styles.illustration} />}
-          description={t("cosmos.delegation.delegationEarn", {
+          description={t("solana.delegation.delegationEarn", {
             name: account.currency.name,
           })}
-          infoUrl={urls.cosmosStaking}
-          infoTitle={t("cosmos.delegation.info")}
+          infoUrl={urls.solana.stakingPage}
+          infoTitle={t("solana.delegation.info")}
           onPress={onDelegate}
           ctaTitle={t("account.delegation.info.cta")}
         />

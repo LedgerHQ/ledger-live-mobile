@@ -1,10 +1,9 @@
-/* @flow */
-import React, { useCallback } from "react";
-import { StyleSheet, Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
-import ValidateError from "../../../components/ValidateError";
+import React, { useCallback } from "react";
+import { Linking, StyleSheet } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { TrackScreen } from "../../../analytics";
+import ValidateError from "../../../components/ValidateError";
 import { urls } from "../../../config/urls";
 
 type Props = {

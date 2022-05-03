@@ -1,19 +1,18 @@
-// @flow
-import React, { useMemo } from "react";
-import { Platform } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { Platform } from "react-native";
 import StepHeader from "../../../components/StepHeader";
 import { ScreenName } from "../../../const";
 import { getStackNavigatorConfig } from "../../../navigation/navigatorConfig";
+import DelegationConnectDevice from "../../../screens/ConnectDevice";
+import DelegationSelectDevice from "../../../screens/SelectDevice";
+import DelegationSelectValidator from "./SelectValidator";
 import DelegationStarted from "./Started";
 import DelegationSummary from "./Summary";
-import DelegationSelectValidator from "./SelectValidator";
-import DelegationSelectDevice from "../../../screens/SelectDevice";
-import DelegationConnectDevice from "../../../screens/ConnectDevice";
-import DelegationValidationSuccess from "./ValidationSuccess";
 import DelegationValidationError from "./ValidationError";
+import DelegationValidationSuccess from "./ValidationSuccess";
 
 const totalSteps = "3";
 

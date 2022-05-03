@@ -1,19 +1,19 @@
-import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useTranslation } from "react-i18next";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import { sweetch } from "@ledgerhq/live-common/lib/families/solana/utils";
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
+import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
+import { BigNumber } from "bignumber.js";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CounterValue from "../../../components/CounterValue";
 import ArrowRight from "../../../icons/ArrowRight";
-import { Text } from "@ledgerhq/native-ui";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { BigNumber } from "bignumber.js";
-import ValidatorImage from "../shared/ValidatorImage";
 import CheckCircle from "../../../icons/CheckCircle";
-import ExclamationCircle from "../../../icons/ExclamationCircle";
 import Clock from "../../../icons/Clock";
-import { sweetch } from "@ledgerhq/live-common/lib/families/solana/utils";
+import ExclamationCircle from "../../../icons/ExclamationCircle";
+import ValidatorImage from "../shared/ValidatorImage";
 
 type Props = {
   stakeWithMeta: SolanaStakeWithMeta;

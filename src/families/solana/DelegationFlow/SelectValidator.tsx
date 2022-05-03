@@ -1,7 +1,8 @@
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
 import invariant from "invariant";
 import React, { useCallback, useState } from "react";
@@ -13,7 +14,6 @@ import { TrackScreen } from "../../../analytics";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import ExternalLink from "../../../components/ExternalLink";
 import InfoModal from "../../../components/InfoModal";
-import { Text } from "@ledgerhq/native-ui";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import Info from "../../../icons/Info";
@@ -21,25 +21,25 @@ import { accountScreenSelector } from "../../../reducers/accounts";
 import ValidatorImage from "../shared/ValidatorImage";
 
 type Props = {
-  account: AccountLike,
-  parentAccount?: Account,
-  navigation: any,
-  route: { params: RouteParams },
+  account: AccountLike;
+  parentAccount?: Account;
+  navigation: any;
+  route: { params: RouteParams };
 };
 
 type RouteParams = {
-  accountId: string,
-  validator?: ValidatorsAppValidator,
+  accountId: string;
+  validator?: ValidatorsAppValidator;
 };
 
 export default function SelectValidator({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const { account } = useSelector(accountScreenSelector(route));
   const [showInfos, setShowInfos] = useState(false);
 
   invariant(account, "account must be defined");
-  invariant(account.type === 'Account', 'account must be of type Account')
+  invariant(account.type === "Account", "account must be of type Account");
 
   const validators = useValidators(account.currency);
 
@@ -71,7 +71,7 @@ export default function SelectValidator({ navigation, route }: Props) {
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
-      forceInset={{bottom: 'always'}}
+      forceInset={{ bottom: "always" }}
     >
       <TrackScreen category="DelegationFlow" name="SelectValidator" />
       <View style={styles.header}>
@@ -91,7 +91,11 @@ export default function SelectValidator({ navigation, route }: Props) {
         confirmLabel={t("common.close")}
       >
         <View style={styles.providedByContainer}>
-          <Text fontWeight="semiBold" style={styles.providedByText} color="grey">
+          <Text
+            fontWeight="semiBold"
+            style={styles.providedByText}
+            color="grey"
+          >
             <Trans i18nKey="delegation.yieldInfos" />
           </Text>
           <ExternalLink
@@ -187,26 +191,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const Amount = ({
-  account,
-  value,
-}: {
-  account: AccountLike,
-  value: number,
-}) => {
-  const unit = getAccountUnit(account);
-  const { colors } = useTheme();
-  return (
-    <View
-      style={[{ backgroundColor: colors.lightFog }]}
-    >
-      <Text fontWeight="semiBold" numberOfLines={1}>
-        <CurrencyUnitValue showCode unit={unit} value={account.balance} />
-      </Text>
-    </View>
-  );
-};
-
 const keyExtractor = (v: ValidatorsAppValidator) => v.voteAccount;
 
 const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
@@ -217,7 +201,7 @@ const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
         style={styles.validatorHeadText}
         color="smoke"
         numberOfLines={1}
-        fontWeight='semiBold'
+        fontWeight="semiBold"
       >
         Validator
       </Text>
@@ -226,7 +210,7 @@ const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
           style={styles.validatorHeadText}
           color="smoke"
           numberOfLines={1}
-          fontWeight='semiBold'
+          fontWeight="semiBold"
         >
           Total Stake
         </Text>
@@ -246,9 +230,9 @@ const ValidatorRow = ({
   validator,
   account,
 }: {
-  onPress: (v: ValidatorsAppValidator) => void,
-  validator: ValidatorsAppValidator,
-  account: AccountLike,
+  onPress: (v: ValidatorsAppValidator) => void;
+  validator: ValidatorsAppValidator;
+  account: AccountLike;
 }) => {
   const { colors } = useTheme();
   const onPressT = useCallback(() => {
@@ -264,9 +248,17 @@ const ValidatorRow = ({
       onPress={onPressT}
     >
       <View style={styles.validator}>
-        <ValidatorImage size={32} imgUrl={validator.avatarUrl} name={validator.name ?? validator.voteAccount} />
+        <ValidatorImage
+          size={32}
+          imgUrl={validator.avatarUrl}
+          name={validator.name ?? validator.voteAccount}
+        />
         <View style={styles.validatorBody}>
-          <Text numberOfLines={1} fontWeight='semiBold' style={styles.validatorName}>
+          <Text
+            numberOfLines={1}
+            fontWeight="semiBold"
+            style={styles.validatorName}
+          >
             {validator.name || validator.voteAccount}
           </Text>
           {true ? (

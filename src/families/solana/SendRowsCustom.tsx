@@ -1,13 +1,13 @@
-import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
-import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
-import { Account } from "@ledgerhq/live-common/lib/types";
 import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import { Account } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
+import { useTheme } from "@react-navigation/native";
+import invariant from "invariant";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, View } from "react-native";
 import { ScreenName } from "../../const";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
-import invariant from "invariant";
 
 type Props = {
   account: Account;

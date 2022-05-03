@@ -1,17 +1,17 @@
-import React, { useCallback, useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
-import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-import { Account } from "@ledgerhq/live-common/lib/types";
-import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import { Account } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
-import KeyboardView from "../../components/KeyboardView";
-import Button from "../../components/Button";
-import { ScreenName } from "../../const";
-import TextInput from "../../components/FocusedTextInput";
+import i18next from "i18next";
 import invariant from "invariant";
+import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import Button from "../../components/Button";
+import TextInput from "../../components/FocusedTextInput";
+import KeyboardView from "../../components/KeyboardView";
+import { ScreenName } from "../../const";
 
 type Props = {
   navigation: any;
