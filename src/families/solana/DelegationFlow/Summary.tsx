@@ -1,6 +1,5 @@
 import {
   getAccountCurrency,
-  getAccountName,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
@@ -11,13 +10,17 @@ import {
   StakeAction,
   TransactionModel,
 } from "@ledgerhq/live-common/lib/families/solana/types";
-import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
+import {
+  assertUnreachable,
+  sweetch,
+} from "@ledgerhq/live-common/lib/families/solana/utils";
 import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
+import { capitalize } from "lodash/fp";
 import React, {
   ReactNode,
   useCallback,
@@ -28,7 +31,7 @@ import React, {
 import { Trans } from "react-i18next";
 import { Animated, StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import Icon from "react-native-vector-icons/dist/Feather";
+import Icon from "react-native-vector-icons/Feather";
 import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
 import { rgba } from "../../../colors";
@@ -169,7 +172,6 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency);
-  const accountName = getAccountName(account);
 
   const onContinue = useCallback(async () => {
     navigation.navigate(ScreenName.DelegationSelectDevice, {
@@ -231,7 +233,10 @@ export default function DelegationSummary({ navigation, route }: Props) {
                 </Circle>
               </Touchable>
             ) : (
-              <ValidatorImage imgUrl={chosenValidator?.avatarUrl} />
+              <ValidatorImage
+                imgUrl={chosenValidator?.avatarUrl}
+                name={chosenValidator?.name ?? chosenValidator?.voteAccount}
+              />
             )
           }
         />
@@ -433,45 +438,46 @@ function SummaryWords({
   onChangeValidator: () => void;
   onChangeAmount: () => void;
 }) {
-  if (
-    delegationAction.kind === "new" ||
-    delegationAction.stakeAction === "activate"
-  ) {
-    return (
-      <>
-        <Line>
-          <Words>I delegate</Words>
-          {delegationAction.kind === "new" ? (
-            <Touchable onPress={onChangeAmount}>
-              <ValidatorSelection name={"10 SOL"} />
-            </Touchable>
-          ) : (
-            <ValidatorSelection readOnly name={"10 SOL"} />
-          )}
-        </Line>
-        <Line>
-          <Words>to</Words>
-          <Touchable onPress={onChangeValidator}>
-            <ValidatorSelection
-              name={validator?.name ?? validator?.voteAccount ?? "-"}
-            ></ValidatorSelection>
-          </Touchable>
-        </Line>
-      </>
-    );
-  }
+  const i18nActionKey =
+    delegationAction.kind === "new"
+      ? "iDelegate"
+      : `i${capitalize(delegationAction.stakeAction)}`;
   return (
     <>
       <Line>
-        <Words>I {delegationAction.stakeAction}</Words>
-        <ValidatorSelection readOnly name={"10 SOL"} />
+        <Words>
+          <Trans i18nKey={`solana.delegation.${i18nActionKey}`} />
+        </Words>
+        {delegationAction.kind === "new" ||
+        delegationAction.stakeAction === "activate" ? (
+          <Touchable onPress={onChangeAmount}>
+            <ValidatorSelection name={"10 SOL"} />
+          </Touchable>
+        ) : (
+          <ValidatorSelection readOnly name={"10 SOL"} />
+        )}
       </Line>
       <Line>
-        <Words>delegated to</Words>
-        <ValidatorSelection
-          readOnly
-          name={validator?.name ?? validator?.voteAccount ?? "-"}
-        ></ValidatorSelection>
+        <Words>
+          {delegationAction.kind === "new" ? (
+            <Trans i18nKey="delegation.to" />
+          ) : (
+            <Trans i18nKey="solana.delegation.delegatedTo" />
+          )}
+        </Words>
+        {delegationAction.kind === "new" ||
+        delegationAction.stakeAction === "activate" ? (
+          <Touchable onPress={onChangeValidator}>
+            <ValidatorSelection
+              name={validator?.name ?? validator?.voteAccount ?? "-"}
+            />
+          </Touchable>
+        ) : (
+          <ValidatorSelection
+            readOnly
+            name={validator?.name ?? validator?.voteAccount ?? "-"}
+          />
+        )}
       </Line>
     </>
   );

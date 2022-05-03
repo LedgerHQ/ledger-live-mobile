@@ -5,18 +5,15 @@ import { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
 import { useTheme } from "@react-navigation/native";
 import invariant from "invariant";
-import React, { useCallback, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
-import { FlatList, Linking, StyleSheet, View } from "react-native";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { FlatList, StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import ExternalLink from "../../../components/ExternalLink";
-import InfoModal from "../../../components/InfoModal";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
-import Info from "../../../icons/Info";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import ValidatorImage from "../shared/ValidatorImage";
 
@@ -34,22 +31,12 @@ type RouteParams = {
 
 export default function SelectValidator({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { t } = useTranslation();
   const { account } = useSelector(accountScreenSelector(route));
-  const [showInfos, setShowInfos] = useState(false);
 
   invariant(account, "account must be defined");
   invariant(account.type === "Account", "account must be of type Account");
 
   const validators = useValidators(account.currency);
-
-  const displayInfos = useCallback(() => {
-    setShowInfos(true);
-  }, []);
-
-  const hideInfos = useCallback(() => {
-    setShowInfos(false);
-  }, []);
 
   const onItemPress = useCallback(
     (validator: ValidatorsAppValidator) => {
@@ -75,7 +62,7 @@ export default function SelectValidator({ navigation, route }: Props) {
     >
       <TrackScreen category="DelegationFlow" name="SelectValidator" />
       <View style={styles.header}>
-        <ValidatorHead onPressHelp={displayInfos} />
+        <ValidatorHead />
       </View>
       <FlatList
         contentContainerStyle={styles.list}
@@ -83,28 +70,6 @@ export default function SelectValidator({ navigation, route }: Props) {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
-
-      <InfoModal
-        id="SelectValidatorInfos"
-        isOpened={showInfos}
-        onClose={hideInfos}
-        confirmLabel={t("common.close")}
-      >
-        <View style={styles.providedByContainer}>
-          <Text
-            fontWeight="semiBold"
-            style={styles.providedByText}
-            color="grey"
-          >
-            <Trans i18nKey="delegation.yieldInfos" />
-          </Text>
-          <ExternalLink
-            text={<Text fontWeight="bold">Baking Bad</Text>}
-            event="SelectValidatorOpen"
-            onPress={() => Linking.openURL("https://baking-bad.org/")}
-          />
-        </View>
-      </InfoModal>
     </SafeAreaView>
   );
 }
@@ -193,8 +158,7 @@ const styles = StyleSheet.create({
 
 const keyExtractor = (v: ValidatorsAppValidator) => v.voteAccount;
 
-const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
-  const { colors } = useTheme();
+const ValidatorHead = () => {
   return (
     <View style={styles.validatorHead}>
       <Text
@@ -203,7 +167,7 @@ const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
         numberOfLines={1}
         fontWeight="semiBold"
       >
-        Validator
+        <Trans i18nKey="delegation.validator" />
       </Text>
       <View style={styles.validatorHeadContainer}>
         <Text
@@ -212,15 +176,8 @@ const ValidatorHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
           numberOfLines={1}
           fontWeight="semiBold"
         >
-          Total Stake
+          <Trans i18nKey="solana.delegation.totalStake" />
         </Text>
-        <Touchable
-          style={styles.validatorHeadInfo}
-          event="StepValidatorShowProvidedBy"
-          onPress={onPressHelp}
-        >
-          <Info color={colors.smoke} size={14} />
-        </Touchable>
       </View>
     </View>
   );
@@ -234,7 +191,6 @@ const ValidatorRow = ({
   validator: ValidatorsAppValidator;
   account: AccountLike;
 }) => {
-  const { colors } = useTheme();
   const onPressT = useCallback(() => {
     onPress(validator);
   }, [validator, onPress]);
@@ -267,7 +223,8 @@ const ValidatorRow = ({
               numberOfLines={1}
               style={styles.overdelegated}
             >
-              commission {validator.commission} %
+              <Trans i18nKey="solana.delegation.commission" />{" "}
+              {validator.commission} %
             </Text>
           ) : null}
         </View>

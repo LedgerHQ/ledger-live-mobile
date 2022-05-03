@@ -3813,11 +3813,19 @@
   },
   "solana": {
     "delegation": {
+      "iDelegate": "I delegate",
+      "iActivate": "I activate",
+      "iReactivate": "I reactivate",
+      "iDeactivate": "I undelegate",
+      "iWithdraw": "I withdraw",
+      "totalStake": "Total stake",
+      "commission": "Commission",
       "stakeActivationState": "State",
       "delegationEarn": "You can earn SOL rewards by delegating your assets.",
       "info": "How Delegation works",
       "broadcastSuccessTitle": "Operation sent",
-      "broadcastSuccessDescription": "The status of the delegation will be updated when the transaction is confirmed."
+      "broadcastSuccessDescription": "The status of the delegation will be updated when the transaction is confirmed.",
+      "delegatedTo": "delegated to"
     }
   },
   "delegation": {
