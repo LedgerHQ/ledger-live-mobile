@@ -15,18 +15,6 @@ export interface EthereumTransactionRequestDappDTO {
   gasLimit: string;
 }
 
-interface EthereumTransactionRequestNativeDTO {
-  data: string;
-  from: string;
-  gas: string;
-  maxFeePerGas: string;
-  maxPriorityFeePerGas: string;
-  to: string;
-  value: string;
-  nonce: string;
-  gasLimit: string;
-}
-
 export function mapDappDTOToDomain(dto: unknown): EthereumTransactionRequest {
   assert(
     isObjectLike<EthereumTransactionRequestDappDTO>(dto),
@@ -55,7 +43,7 @@ export function mapDappDTOToDomain(dto: unknown): EthereumTransactionRequest {
   });
 }
 
-export function mapDomainToNativeDTO(request: EthereumTransactionRequest): EthereumTransactionRequestNativeDTO {
+export function mapDomainToNativeDTO(request: EthereumTransactionRequest): EthereumTransactionRequestDappDTO {
   const tokenValue = request.getValue();
   return {
     data: request.getData(),

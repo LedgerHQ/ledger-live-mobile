@@ -9,6 +9,7 @@ import { TransactionFlow } from './panels/transaction';
 import { ChainProvider } from './hooks/chain-context';
 import { RequestProvider, useRequest } from './hooks/request-context';
 import { RequestType } from '../../use-case/dto/dapp-request';
+import { PersonalMessageFlow } from './panels/personal-message';
 
 Sentry.init({
   dsn: 'https://61343ca99885431bb2360f3ea6ce3443@o1196144.ingest.sentry.io/6319296',
@@ -62,6 +63,7 @@ function RequestConsumer(): JSX.Element | null {
       <ChainProvider chain={chain}>
         <Container>
           {type === RequestType.ConnectDapp && <DappConnectionFlow />}
+          {type === RequestType.SignPersonalMessage && <PersonalMessageFlow />}
           {(type === RequestType.SignAndSendTransaction || type === RequestType.SignTransaction) && <TransactionFlow />}
         </Container>
       </ChainProvider>

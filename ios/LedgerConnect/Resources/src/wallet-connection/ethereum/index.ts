@@ -259,7 +259,7 @@ class Ethereum extends EventEmitter {
         case 'net_version':
           return this.sendResponse(payload.id, this.net_version());
         case 'eth_chainId':
-          return this.sendResponse(payload.id, '0x3');
+          return this.sendResponse(payload.id, this.chainId);
         case 'eth_sign':
           return this.eth_sign(payload);
         case 'personal_sign':
@@ -290,7 +290,7 @@ class Ethereum extends EventEmitter {
         case 'wallet_addEthereumChain':
           return this.wallet_addEthereumChain(payload);
         case 'wallet_switchEthereumChain':
-          return this.sendResponse(payload.id, '0x3');
+          return this.sendResponse(payload.id, this.chainId);
         // return this.wallet_switchEthereumChain(payload);
         case 'eth_newFilter':
         case 'eth_newBlockFilter':
@@ -355,29 +355,35 @@ class Ethereum extends EventEmitter {
   }
 
   eth_sign(payload: Payload) {
-    this.sendError(payload.id, new ProviderRpcError(4100, 'unsupported method'));
-    // const buffer = Utils.messageToBuffer(payload.params[1]);
-    // const hex = Utils.bufferToHex(buffer);
-    // if (isUtf8(buffer)) {
-    //   this.postMessage('signPersonalMessage', payload.id, { data: hex });
-    // } else {
-    //   this.postMessage('signMessage', payload.id, { data: hex });
-    // }
+    const buffer = Utils.messageToBuffer(payload.params[1]);
+    const hex = Utils.bufferToHex(buffer);
+    if (isUtf8(buffer)) {
+      this.postMessage({
+        id: payload.id,
+        type: RequestType.SignPersonalMessage,
+        method: EthereumMethod.SignPersonalMessage,
+        chain: Chain.Ethereum,
+        payload: { data: hex },
+      });
+    } else {
+      this.sendError(payload.id, new ProviderRpcError(4100, 'unsupported method'));
+      // this.postMessage('signMessage', payload.id, { data: hex });
+    }
   }
 
   personal_sign(payload: Payload) {
-    this.sendError(payload.id, new ProviderRpcError(4100, 'unsupported method'));
-    // const message = payload.params[0];
-    // const buffer = Utils.messageToBuffer(message);
-    // if (buffer.length === 0) {
-    //   // hex it
-    //   const hex = Utils.bufferToHex(message);
-    //   this.postMessage('signPersonalMessage', payload.id, { data: hex });
-    // } else {
-    //   this.postMessage('signPersonalMessage', payload.id, {
-    //     data: message,
-    //   });
-    // }
+    const message = payload.params[0];
+    const buffer = Utils.messageToBuffer(message);
+
+    const data = buffer.length === 0 ? Utils.bufferToHex(message) : message;
+
+    this.postMessage({
+      id: payload.id,
+      type: RequestType.SignPersonalMessage,
+      method: EthereumMethod.SignPersonalMessage,
+      chain: Chain.Ethereum,
+      payload: { data },
+    });
   }
 
   personal_ecRecover(payload: Payload) {
@@ -466,16 +472,6 @@ class Ethereum extends EventEmitter {
   wallet_switchEthereumChain(payload: Payload) {
     // this.postMessage('switchEthereumChain', payload.id, payload.params[0]);
     this.sendError(payload.id, new ProviderRpcError(4100, 'unsupported method'));
-  }
-
-  private getMethod(handler: string): string {
-    if (handler === 'eth_requestAccounts') {
-      return 'connectDapp';
-    }
-    if (handler === 'eth_sendTransaction') {
-      return 'sendTransaction';
-    }
-    return '';
   }
 
   // js -> native message handler
@@ -679,10 +675,10 @@ class Ethereum extends EventEmitter {
 
 let config: Config = {
   isDebug: true,
-  // chainId: '0x1',
-  // rpcUrl: 'https://mainnet.infura.io/v3/a523f552bd554805bb896b91fc020b64',
-  chainId: '0x3',
-  rpcUrl: 'https://eth-ropsten.alchemyapi.io/v2/G5ywN3ywt4S0L-2Ai92Ub1efL3aLQWWb',
+  chainId: '0x1',
+  rpcUrl: 'https://mainnet.infura.io/v3/a523f552bd554805bb896b91fc020b64',
+  // chainId: '0x3',
+  // rpcUrl: 'https://eth-ropsten.alchemyapi.io/v2/G5ywN3ywt4S0L-2Ai92Ub1efL3aLQWWb',
   // address: '0x51a4f8419aC902006211786a5648F0cc14aa7074',
 };
 

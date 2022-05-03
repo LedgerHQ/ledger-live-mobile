@@ -42,9 +42,9 @@ export const useTransaction = (): [
   const [error, setError] = useState<string>();
 
   const chain = request.getChain();
-  const processor = transactionStores[chain];
+  const store = transactionStores[chain];
 
-  const transaction = processor.mapTransaction(request);
+  const transaction = store.mapTransaction(request);
 
   const requestType = request.getType();
 
@@ -65,7 +65,7 @@ export const useTransaction = (): [
     setState(TransactionState.WaitingForConfirmation);
 
     try {
-      await processor.processTransaction({
+      await store.processTransaction({
         request,
         onTransactionSigned: handleTransaction,
         onResponse: handleResponse,

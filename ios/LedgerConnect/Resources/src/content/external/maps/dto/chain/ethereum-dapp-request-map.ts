@@ -3,6 +3,7 @@ import { assertEnum, assertUnreachable, isObjectLike } from '../../../../../libr
 import { Chain } from '../../../../domain/chain';
 import { DappRequest, EthereumMethod, RequestType } from '../../../../use-case/dto/dapp-request';
 import * as EthereumTransactionRequestMap from '../../transaction/ethereum/ethereum-transaction-request-map';
+import * as EthereumPersonalMessageMap from '../../personal-message/ethereum/ethereum-personal-message-map';
 
 export type EthereumRawDappRequestDTO =
   | {
@@ -17,6 +18,13 @@ export type EthereumRawDappRequestDTO =
       type: RequestType.SignAndSendTransaction;
       method: EthereumMethod.SignAndSendTransaction;
       payload: EthereumTransactionRequestMap.EthereumTransactionRequestDappDTO;
+      chain: Chain.Ethereum;
+    }
+  | {
+      id: number;
+      type: RequestType.SignPersonalMessage;
+      method: EthereumMethod.SignPersonalMessage;
+      payload: EthereumPersonalMessageMap.EthereumPersonalMessageDappDTO;
       chain: Chain.Ethereum;
     };
 
@@ -49,6 +57,15 @@ export function mapDappDTOToDomain(dto: unknown): DappRequest {
         type: RequestType.SignAndSendTransaction,
         method: EthereumMethod.SignAndSendTransaction,
         payload: EthereumTransactionRequestMap.mapDappDTOToDomain(dto.payload),
+        chain: Chain.Ethereum,
+      });
+      break;
+    case EthereumMethod.SignPersonalMessage:
+      value = DappRequest.create({
+        id: dto.id,
+        type: RequestType.SignPersonalMessage,
+        method: EthereumMethod.SignPersonalMessage,
+        payload: EthereumPersonalMessageMap.mapDappDTOToDomain(dto.payload),
         chain: Chain.Ethereum,
       });
       break;

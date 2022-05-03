@@ -69,7 +69,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
             EventEmitter.shared.personalSign([signData])
 
-        case "eth_requestAccounts", "connectDapp":
+        case "eth_requestAccounts":
             EventEmitter.shared.handleMessage(method)
 
         case "eth_sendTransaction":

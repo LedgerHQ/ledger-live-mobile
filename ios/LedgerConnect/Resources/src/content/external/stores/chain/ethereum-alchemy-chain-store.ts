@@ -38,23 +38,23 @@ export const sendTransaction = async (
   signedTransaction: SignedTransaction,
   requestID: number,
 ): Promise<TransactionHash> => {
-  // const payload: Payload = {
-  //   id: requestID,
-  //   method: AlchemyAPI.SendRawTransaction,
-  //   params: [signedTransaction.getSignedTransactionData()],
-  //   jsonrpc: jsonrpcVersion,
-  // };
-  // const result = await call<TransactionHashMap.TransactionHashAlchemyDTO>(payload);
-
-  await new Promise((resolve) => {
-    setTimeout(resolve, 10000);
-  });
-
-  const result = {
+  const payload: Payload = {
     id: requestID,
-    jsonrpc: '2.0',
-    result: '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+    method: AlchemyAPI.SendRawTransaction,
+    params: [signedTransaction.getSignedTransactionData()],
+    jsonrpc: jsonrpcVersion,
   };
+  const result = await call<TransactionHashMap.TransactionHashAlchemyDTO>(payload);
+
+  // await new Promise((resolve) => {
+  //   setTimeout(resolve, 10000);
+  // });
+
+  // const result = {
+  //   id: requestID,
+  //   jsonrpc: '2.0',
+  //   result: '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+  // };
 
   return TransactionHashMap.mapAlchemyDTOToDomain(result);
 };

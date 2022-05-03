@@ -14,11 +14,6 @@ interface InitiateTransactionPanelProps {
   onContinue: () => void;
 }
 
-interface Account {
-  name: string;
-  icon: JSX.Element;
-}
-
 /**
  * Header
  */
@@ -61,29 +56,10 @@ const HeaderTitle = styled.div`
   margin-bottom: 12px;
 `;
 
-const AccountContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Account = styled.div`
-  padding: 8px 10px 8px 8px;
-  background: #131326;
-  border-radius: 48px;
-  display: flex;
-  align-items: center;
-`;
-
-const AccountIcon = styled.div`
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
-  display: flex;
-`;
-
-const AccountTitle = styled.div`
-  font-size: 15px;
-  line-height: 19px;
+const HeaderSubtitle = styled.div`
+  font-size: 13px;
+  opacity: 80%;
+  margin-bottom: 12px;
 `;
 
 /**
@@ -194,9 +170,10 @@ export function InitiateTransactionPanel({
   const { chainTokenIcon, chainName, chainTokenSymbol, dappInformationStore } = useChain();
 
   const dappInformation = dappInformationStore.getDappInformation();
-  const dappName = dappInformation.getName().toUpperCase();
   const dappIcon = dappInformation.getIconURL();
   const dappApproved = true;
+  const dappName = dappInformation.getName().toUpperCase();
+  const dappHostname = dappInformation.getHostname();
 
   const formattedTransactionValue = transactionValue.getValueDecimalFormatted(9);
 
@@ -214,12 +191,7 @@ export function InitiateTransactionPanel({
           </HeaderIcon>
         </IconContainer>
         <HeaderTitle>{dappName} TRANSACTION</HeaderTitle>
-        <AccountContainer>
-          <Account>
-            <AccountIcon>{chainTokenIcon}</AccountIcon>
-            <AccountTitle>{chainName} Account 1</AccountTitle>
-          </Account>
-        </AccountContainer>
+        <HeaderSubtitle>{dappHostname}</HeaderSubtitle>
       </Header>
       <Body>
         <TransactionType>

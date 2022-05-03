@@ -4,9 +4,11 @@ import { EthereumMethod, RequestType } from '../../../../use-case/dto/dapp-reque
 import { assertArrayOfInstance, assertUnreachable } from '../../../../../library/typeguards';
 import * as AccountsMap from '../../ledger/accounts-map';
 import * as TransactionHashMap from '../../transaction/ethereum/transaction-hash-map';
+import * as PersonalMessageSignatureMap from '../../personal-message/ethereum/personal-message-signature-map';
 import { Account } from '../../../../domain/ledger/account';
 import { Chain } from '../../../../domain/chain';
 import { TransactionHash } from '../../../../domain/transaction/ethereum/transaction-hash';
+import { PersonalMessageSignature } from '../../../../domain/personal-message/ethereum/personal-message-signature';
 
 export type EthereumRawDappResponseDTO =
   | {
@@ -21,6 +23,13 @@ export type EthereumRawDappResponseDTO =
       type: RequestType.SignAndSendTransaction;
       method: EthereumMethod.SignAndSendTransaction;
       payload: string | undefined;
+      chain: Chain.Ethereum;
+    }
+  | {
+      id: number;
+      type: RequestType.SignPersonalMessage;
+      method: EthereumMethod.SignPersonalMessage;
+      payload: string;
       chain: Chain.Ethereum;
     };
 
@@ -57,6 +66,24 @@ export function mapDomainToDappDTO(response: DappResponse): EthereumRawDappRespo
       };
       break;
     }
+    case EthereumMethod.SignPersonalMessage: {
+      const personalMessageSignature = response.getPayload();
+      assert(
+        typeof personalMessageSignature === 'undefined' || personalMessageSignature instanceof PersonalMessageSignature,
+        'payload must be an instance of PersonalMessageSignature or undefined',
+      );
+      value = {
+        id: response.getID(),
+        type: RequestType.SignAndSendTransaction,
+        method: EthereumMethod.SignAndSendTransaction,
+        payload: personalMessageSignature
+          ? PersonalMessageSignatureMap.mapDomainToDappDTO(personalMessageSignature)
+          : undefined,
+        chain: Chain.Ethereum,
+      };
+      break;
+    }
+
     default:
       assertUnreachable(method);
   }

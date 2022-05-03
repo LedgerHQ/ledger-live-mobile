@@ -43,11 +43,11 @@ export const useDappConnection = (): [
   useEffect(() => {
     const requestAccount = async () => {
       const chain = request.getChain();
-      const processor = dappConnectionStores[chain];
+      const store = dappConnectionStores[chain];
 
       try {
         const { account: newAccount, storeAccountAndRespond: newStoreAccountAndRespond } =
-          await processor.requestDefaultAccount(request);
+          await store.requestDefaultAccount(request);
         setAccount(newAccount);
         setStoreAccountAndRespond(() => newStoreAccountAndRespond);
         setState(DappConnectionState.RequireApproval);

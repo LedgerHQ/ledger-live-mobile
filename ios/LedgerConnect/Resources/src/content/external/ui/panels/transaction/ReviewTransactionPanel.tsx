@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { Button } from '../../components/Button';
 import AppIcon from '../../images/app-icon.svg';
-import LedgerScreenReviewTransactionPanel from '../../images/ledger-screen-review-transaction.svg';
+import LedgerScreenReviewTransactionPanel from '../../images/ledger-screen-review-image.svg';
 import SendArrowIcon from '../../images/send-arrow-icon.svg';
 import NetworkFeeSquareIcon from '../../images/network-fee-square-icon.svg';
 import PredictedImpactIcon from '../../images/predicted-impact-icon.svg';
@@ -18,19 +18,6 @@ interface ReviewTransactionPanelProps {
   onCancel: () => void;
   from: string;
   to: string;
-}
-
-interface Dapp {
-  name: string;
-  iconURL: string;
-  approved: boolean;
-}
-
-interface NetworkInformation {
-  networkFeeUSD: string;
-  networkFeeETH: string;
-  processingTime: string;
-  predictedImpact: string;
 }
 
 /**

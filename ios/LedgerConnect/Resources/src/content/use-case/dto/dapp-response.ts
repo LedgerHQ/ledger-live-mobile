@@ -5,6 +5,7 @@ import { Chain } from '../../domain/chain';
 import { Account } from '../../domain/ledger/account';
 import { TransactionHash } from '../../domain/transaction/ethereum/transaction-hash';
 import { Signature } from '../../domain/transaction/solana/signature';
+import { PersonalMessageSignature } from '../../domain/personal-message/ethereum/personal-message-signature';
 
 /* Ethereum */
 
@@ -21,6 +22,14 @@ export type EthereumSignAndSendTransactionDappResponseProps = {
   type: RequestType.SignAndSendTransaction;
   method: EthereumMethod.SignAndSendTransaction;
   payload: TransactionHash | undefined;
+  chain: Chain.Ethereum;
+};
+
+export type EthereumSignPersonalMessageDappResponseProps = {
+  id: number;
+  type: RequestType.SignPersonalMessage;
+  method: EthereumMethod.SignPersonalMessage;
+  payload: PersonalMessageSignature;
   chain: Chain.Ethereum;
 };
 
@@ -61,6 +70,7 @@ export type SolanaSignAllTransactionsDappResponseProps = {
 export type DappResponseProps =
   | EthereumConnectDappDappResponseProps
   | EthereumSignAndSendTransactionDappResponseProps
+  | EthereumSignPersonalMessageDappResponseProps
   | SolanaConnectDappDappResponseProps
   | SolanaSignAndSendTransactionDappResponseProps
   | SolanaSignTransactionDappResponseProps

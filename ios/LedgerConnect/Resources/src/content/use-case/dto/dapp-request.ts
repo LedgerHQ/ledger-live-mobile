@@ -1,5 +1,6 @@
 import { ValueObject } from '../../../library/ddd-core-objects';
 import { Chain } from '../../domain/chain';
+import { EthereumPersonalMessage } from '../../domain/personal-message/ethereum';
 import { EthereumTransactionRequest } from '../../domain/transaction/ethereum/ethereum-transaction-request';
 import { SolanaTransactionRequest } from '../../domain/transaction/solana/solana-transaction-request';
 
@@ -7,6 +8,7 @@ export enum RequestType {
   ConnectDapp = 'connectDapp',
   SignAndSendTransaction = 'signAndSendTransaction',
   SignTransaction = 'signTransaction',
+  SignPersonalMessage = 'signPersonalMessage',
 }
 
 /* Ethereum */
@@ -14,6 +16,7 @@ export enum RequestType {
 export enum EthereumMethod {
   ConnectDapp = 'eth_requestAccounts',
   SignAndSendTransaction = 'eth_sendTransaction',
+  SignPersonalMessage = 'signPersonalMessage',
 }
 
 export type EthereumConnectDappDappRequestProps = {
@@ -29,6 +32,14 @@ export type EthereumSignAndSendTransactionDappRequestProps = {
   type: RequestType.SignAndSendTransaction;
   method: EthereumMethod.SignAndSendTransaction;
   payload: EthereumTransactionRequest;
+  chain: Chain.Ethereum;
+};
+
+export type EthereumSignPersonalMessageDappRequestProps = {
+  id: number;
+  type: RequestType.SignPersonalMessage;
+  method: EthereumMethod.SignPersonalMessage;
+  payload: EthereumPersonalMessage;
   chain: Chain.Ethereum;
 };
 
@@ -76,6 +87,7 @@ export type SolanaSignAllTransactionsDappRequestProps = {
 export type DappRequestProps =
   | EthereumConnectDappDappRequestProps
   | EthereumSignAndSendTransactionDappRequestProps
+  | EthereumSignPersonalMessageDappRequestProps
   | SolanaConnectDappDappRequestProps
   | SolanaSignAndSendTransactionDappRequestProps
   | SolanaSignTransactionDappRequestProps
