@@ -1785,7 +1785,7 @@
     "header": "Распределение активов",
     "list": "Распределение активов ({{count}})",
     "assets": "актив(ов)",
-    "assets_plural": "актива(ов)",
+    "assets_plural": "Активы",
     "total": "Общий баланс:",
     "listAccount": "Распределение активов ({{count}})",
     "title": "Актива(ов)",
@@ -2675,7 +2675,7 @@
       "title": "Отменить добавление счёта",
       "desc": "Уверены, что не хотите добавить счета?"
     },
-    "imported": "Asset added successfully",
+    "imported": "Актив успешно добавлен",
     "sections": {
       "importable": {
         "title": "Добавить существующий счёт"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "Просмотрите счета или добавьте новые",
-      "secondaryCTA": "Add new asset",
-      "cta": "See your asset"
+      "secondaryCTA": "Добавить актив",
+      "cta": "Посмотреть актив"
     },
     "stopScanning": "Остановить сканирование",
     "retryScanning": "Повторить сканирование",
@@ -2791,12 +2791,12 @@
     "title": "Привязка нового устройства",
     "bluetooth": {
       "title": "Подключение по Bluetooth...",
-      "label": "Automatically detect your Nano"
+      "label": "Автоматически определять Nano"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "Подключите посредством Bluetooth",
     "headerDescription": "Обязательно разблокируйте {{productName}} и включите Bluetooth",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "...или USB-кабеля",
+    "usbLabel": "Подключите кабель и введите ПИН-код на устройстве",
     "withoutDeviceHeader": "У меня нет с собой устройства",
     "withoutDevice": "Продолжить без устройства",
     "steps": {
