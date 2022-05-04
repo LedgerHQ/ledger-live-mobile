@@ -1,38 +1,36 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useTranslation } from "react-i18next";
-import SafeAreaView from "react-native-safe-area-view";
-import { useNavigation, useTheme } from "@react-navigation/native";
-
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
-import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
-import { useSelector } from "react-redux";
 import {
-  RampLiveAppCatalogEntry,
   RampCatalogEntry,
+  RampLiveAppCatalogEntry,
 } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
+import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-import AppIcon from "../Platform/AppIcon";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
+import TrackScreen from "../../analytics/TrackScreen";
 import LText from "../../components/LText";
-import { counterValueCurrencySelector } from "../../reducers/settings";
 import { NavigatorName } from "../../const";
-
 import ApplePay from "../../icons/ApplePay";
+import ArrowRight from "../../icons/ArrowRight";
 import GooglePay from "../../icons/GooglePay";
 import Maestro from "../../icons/Maestro";
 import MasterCard from "../../icons/MasterCard";
 import PayPal from "../../icons/PayPal";
 import Sepa from "../../icons/Sepa";
 import Visa from "../../icons/Visa";
-import ArrowRight from "../../icons/ArrowRight";
-import TrackScreen from "../../analytics/TrackScreen";
+import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
+import { counterValueCurrencySelector } from "../../reducers/settings";
+import AppIcon from "../Platform/AppIcon";
 
 const forceInset = { bottom: "always" };
 
@@ -68,7 +66,7 @@ const ProviderItem = ({ provider, onClick }: ProviderItemProps) => {
 
   const onMorePMsClick = useCallback(() => {
     setDisplayedPMs([...provider.paymentProviders]);
-  }, [displayedPMs]);
+  }, [provider.paymentProviders]);
 
   if (!manifest) {
     return null;
@@ -166,7 +164,14 @@ export default function ProviderList({ route }: Props) {
         name,
       });
     },
-    [navigation, route, currency, fiatCurrency],
+    [
+      navigation,
+      accountId,
+      accountAddress,
+      type,
+      currency.id,
+      fiatCurrency.ticker,
+    ],
   );
 
   return (
@@ -246,5 +251,6 @@ const styles = StyleSheet.create({
   },
   pmLabel: {
     fontSize: 12,
+    textTransform: "uppercase",
   },
 });

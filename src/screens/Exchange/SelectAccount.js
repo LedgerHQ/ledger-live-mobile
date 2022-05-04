@@ -37,7 +37,7 @@ type Props = {
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const {
-    mode,
+    mode = "buy",
     currency,
     analyticsPropertyFlow,
     onAccountChange,

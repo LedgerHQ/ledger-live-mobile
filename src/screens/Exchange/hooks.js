@@ -1,23 +1,22 @@
 // @flow
-import { useCallback, useMemo, useState, useEffect } from "react";
+import { makeEmptyTokenAccount } from "@ledgerhq/live-common/lib/account";
 import {
   listCryptoCurrencies,
   listTokens,
 } from "@ledgerhq/live-common/lib/currencies";
-
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
-import { useSelector } from "react-redux";
-import { RampCatalogEntry } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
 import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
-import type {
-  Account,
-  SubAccount,
-} from "@ledgerhq/live-common/lib/types/account";
+import { RampCatalogEntry } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { makeEmptyTokenAccount } from "@ledgerhq/live-common/lib/account";
+import type {
+  Account,
+  SubAccount,
+} from "@ledgerhq/live-common/lib/types/account";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { blacklistedTokenIdsSelector } from "../../reducers/settings";
 
 export const useRampCatalogCurrencies = (entries: RampCatalogEntry[]) => {
@@ -31,13 +30,15 @@ export const useRampCatalogCurrencies = (entries: RampCatalogEntry[]) => {
 
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
 
-  const supportedCurrenciesIds = getAllSupportedCryptoCurrencyIds(entries);
+  return useMemo(() => {
+    const supportedCurrenciesIds = getAllSupportedCryptoCurrencyIds(entries);
 
-  return cryptoCurrencies.filter(
-    currency =>
-      supportedCurrenciesIds.includes(currency.id) &&
-      !blacklistedTokenIds.includes(currency.id),
-  );
+    return cryptoCurrencies.filter(
+      currency =>
+        supportedCurrenciesIds.includes(currency.id) &&
+        !blacklistedTokenIds.includes(currency.id),
+    );
+  }, [blacklistedTokenIds, cryptoCurrencies, entries]);
 };
 
 export type AccountTuple = {

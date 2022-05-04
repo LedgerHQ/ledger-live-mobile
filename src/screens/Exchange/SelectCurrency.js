@@ -1,20 +1,19 @@
 // @flow
-import React from "react";
-import { Trans } from "react-i18next";
-import { StyleSheet, View, FlatList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-
 import { useTheme } from "@react-navigation/native";
-import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { FlatList, StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { track, TrackScreen } from "../../analytics";
+import CurrencyRow from "../../components/CurrencyRow";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
-import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 import { NavigatorName, ScreenName } from "../../const";
 import { useRampCatalogCurrencies } from "./hooks";
@@ -46,9 +45,12 @@ const renderEmptyList = () => (
 
 export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { params } = route;
-  const initialCurrencySelected = params?.currency;
-  const mode = params?.mode || "buy";
+  const { params = {} } = route;
+  const {
+    currency: initialCurrencySelected,
+    mode = "buy",
+    onCurrencyChange,
+  } = params;
 
   const rampCatalog = useRampCatalog();
   const cryptoCurrencies = useRampCatalogCurrencies(
@@ -57,32 +59,50 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
-  const onPressCurrency = (currency: CryptoCurrency) => {
-    track("Buy Crypto Continue Button", { currencyName: currency.name });
-    params?.onCurrencyChange && params.onCurrencyChange(currency);
-    const destinationScreen =
-      params?.mode === "buy" ? ScreenName.ExchangeBuy : ScreenName.ExchangeSell;
-    navigation.navigate(NavigatorName.Exchange, {
-      screen: destinationScreen,
-    });
-  };
+  const onPressCurrency = useCallback(
+    (currency: CryptoCurrency) => {
+      if (onCurrencyChange) {
+        onCurrencyChange(currency);
+      }
 
-  const onPressToken = (token: TokenCurrency) => {
-    params?.onCurrencyChange && params.onCurrencyChange(token);
-    const destinationScreen =
-      params?.mode === "buy" ? ScreenName.ExchangeBuy : ScreenName.ExchangeSell;
-    navigation.navigate(NavigatorName.Exchange, {
-      screen: destinationScreen,
-    });
-  };
+      const destinationScreen =
+        mode === "buy" ? ScreenName.ExchangeBuy : ScreenName.ExchangeSell;
+      navigation.navigate(NavigatorName.Exchange, {
+        screen: destinationScreen,
+      });
+    },
+    [mode, navigation, onCurrencyChange],
+  );
 
-  const onPressItem = (currencyOrToken: CryptoCurrency | TokenCurrency) => {
-    if (currencyOrToken.type === "TokenCurrency") {
-      onPressToken(currencyOrToken);
-    } else {
-      onPressCurrency(currencyOrToken);
-    }
-  };
+  const onPressToken = useCallback(
+    (token: TokenCurrency) => {
+      if (onCurrencyChange) {
+        onCurrencyChange(token);
+      }
+
+      const destinationScreen =
+        mode === "buy" ? ScreenName.ExchangeBuy : ScreenName.ExchangeSell;
+      navigation.navigate(NavigatorName.Exchange, {
+        screen: destinationScreen,
+      });
+    },
+    [mode, navigation, onCurrencyChange],
+  );
+
+  const onPressItem = useCallback(
+    (currencyOrToken: CryptoCurrency | TokenCurrency) => {
+      track("Buy Crypto Continue Button", {
+        currencyName: currencyOrToken.name,
+      });
+
+      if (currencyOrToken.type === "TokenCurrency") {
+        onPressToken(currencyOrToken);
+      } else {
+        onPressCurrency(currencyOrToken);
+      }
+    },
+    [onPressCurrency, onPressToken],
+  );
 
   const renderList = items => (
     <FlatList

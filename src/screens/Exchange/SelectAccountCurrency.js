@@ -69,7 +69,7 @@ export default function SelectAccountCurrency({
   );
 
   const onSelectCurrency = useCallback(() => {
-    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+    navigation.navigate(NavigatorName.ExchangeStack, {
       screen: ScreenName.ExchangeSelectCurrency,
       params: {
         mode: flow,
@@ -79,7 +79,7 @@ export default function SelectAccountCurrency({
   }, [navigation, flow, onCurrencyChange]);
 
   const onSelectAccount = useCallback(() => {
-    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+    navigation.navigate(NavigatorName.ExchangeStack, {
       screen: ScreenName.ExchangeSelectAccount,
       params: {
         currency,

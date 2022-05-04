@@ -64,12 +64,12 @@ function EmptyStateAccount({
     navigation.navigate(NavigatorName.Exchange, {
       screen: ScreenName.ExchangeBuy,
       params: {
-        defaultCurrencyId: account.currency.id,
+        defaultCurrencyId: currency.id,
         defaultAccountId: account.id,
         parentId: parentAccount && parentAccount.id,
       },
     });
-  }, [navigation, account, parentAccount]);
+  }, [navigation, currency.id, account.id, parentAccount]);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
@@ -110,7 +110,7 @@ function EmptyStateAccount({
               </LText>
               {"app is installed so you can buy or receive"}
               <LText semiBold color="darkBlue">
-                {getAccountCurrency(account).ticker}
+                {currency.ticker}
               </LText>
             </Trans>
           ) : (
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
     marginBottom: 16,
     fontSize: 16,
+    textAlign: "center",
   },
   desc: {
     marginHorizontal: 24,

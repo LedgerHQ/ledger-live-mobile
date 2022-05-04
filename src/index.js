@@ -318,23 +318,13 @@ const linkingOptions = {
               [ScreenName.SendCoin]: "send",
             },
           },
-          [NavigatorName.ExchangeBuyFlow]: {
-            screens: {
-              /**
-               * @params currency: string
-               * ie: "ledgerlive://buy/bitcoin" -> will redirect to the prefilled search currency in the buy crypto flow
-               */
-              [ScreenName.ExchangeSelectCurrency]: "buy/:currency",
-            },
-          },
           /**
            * ie: "ledgerlive://buy" -> will redirect to the main exchange page
            */
           [NavigatorName.Exchange]: {
             initialRouteName: "buy",
             screens: {
-              [ScreenName.ExchangeBuy]: "buy",
-              [ScreenName.Coinify]: "buy/coinify",
+              [ScreenName.ExchangeBuy]: "buy/:currency?",
             },
           },
           /**

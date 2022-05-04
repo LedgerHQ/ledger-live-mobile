@@ -1,20 +1,23 @@
 // @flow
 
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
-import { useTheme } from "@react-navigation/native";
+import {
+  currenciesByMarketcap,
+  findCryptoCurrencyByKeyword,
+} from "@ledgerhq/live-common/lib/currencies";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
-import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
+import { useTheme } from "@react-navigation/native";
+import React, { useEffect, useMemo, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import TrackScreen from "../../analytics/TrackScreen";
+import BigSpinner from "../../icons/BigSpinner";
+import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import { useRampCatalogCurrencies } from "./hooks";
 import SelectAccountCurrency from "./SelectAccountCurrency";
-import BigSpinner from "../../icons/BigSpinner";
 
 type Props = {
   navigation: any,
@@ -23,6 +26,7 @@ type Props = {
       defaultAccountId?: string,
       defaultCurrencyId?: string,
       defaultTicker?: string,
+      currency?: string, // Used for the deeplink only
     },
   },
 };
@@ -32,6 +36,9 @@ type State = {
   isLoading: boolean,
 };
 
+// To avoid recreating a ref on each render and triggering hooks
+const emptyArray = [];
+
 export default function OnRamp({ route }: Props) {
   const [currencyState, setCurrencyState] = useState<State>({
     sortedCurrencies: [],
@@ -40,11 +47,19 @@ export default function OnRamp({ route }: Props) {
   const { colors } = useTheme();
   const rampCatalog = useRampCatalog();
   const allCurrencies = useRampCatalogCurrencies(
-    rampCatalog && rampCatalog.value ? rampCatalog.value.onRamp : [],
+    rampCatalog?.value?.onRamp || emptyArray,
   );
 
-  const { defaultAccountId, defaultCurrencyId, defaultTicker } =
-    route.params || {};
+  const { defaultAccountId, defaultTicker, currency } = route.params || {};
+
+  // Check currency for the DeepLinking
+  const defaultCurrencyId = useMemo(() => {
+    const paramsCurrencyId = route.params?.defaultCurrencyId;
+    if (!paramsCurrencyId && currency) {
+      return findCryptoCurrencyByKeyword(currency)?.id;
+    }
+    return paramsCurrencyId;
+  }, [currency, route.params?.defaultCurrencyId]);
 
   useEffect(() => {
     const filteredCurrencies = defaultTicker
@@ -57,6 +72,8 @@ export default function OnRamp({ route }: Props) {
         isLoading: false,
       });
     });
+    // Only get on first render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

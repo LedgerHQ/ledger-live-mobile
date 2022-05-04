@@ -100,7 +100,7 @@ const Rates = ({
   );
   const navigateToBuyFlow = useCallback(
     token => {
-      navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      navigation.navigate(NavigatorName.ExchangeStack, {
         screen: ScreenName.ExchangeSelectAccount,
         params: {
           currency: token,

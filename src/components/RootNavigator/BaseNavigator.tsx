@@ -18,9 +18,7 @@ import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import Account from "../../screens/Account";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
-import Asset, { HeaderTitle } from "../../screens/Asset";
 import BuyDeviceScreen from "../../screens/BuyDeviceScreen";
-import Distribution from "../../screens/Distribution";
 import EditDeviceName from "../../screens/EditDeviceName";
 import ProviderList from "../../screens/Exchange/ProviderList";
 import ProviderView from "../../screens/Exchange/ProviderView";
@@ -54,9 +52,8 @@ import AddAccountsNavigator from "./AddAccountsNavigator";
 import AnalyticsNavigator from "./AnalyticsNavigator";
 import { ErrorHeaderInfo } from "./BaseOnboardingNavigator";
 import ClaimRewardsNavigator from "./ClaimRewardsNavigator";
-import ExchangeBuyFlowNavigator from "./ExchangeBuyFlowNavigator";
 import ExchangeNavigator from "./ExchangeNavigator";
-import ExchangeSellFlowNavigator from "./ExchangeSellFlowNavigator";
+import ExchangeStackNavigator from "./ExchangeStackNavigator";
 import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
 import FreezeNavigator from "./FreezeNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
@@ -330,22 +327,18 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.ProviderList}
         component={ProviderList}
-        options={({ navigation, route }) => ({
-          headerLeft: () => <BackButton navigation={navigation} />,
-          headerRight: null,
-          headerTitle:
+        options={({ route }) => ({
+          headerStyle: styles.headerNoShadow,
+          title:
             route.params.type === "onRamp"
               ? t("exchange.buy.screenTitle")
               : t("exchange.sell.screenTitle"),
-          headerStyle: styles.headerNoShadow,
         })}
       />
       <Stack.Screen
         name={NavigatorName.ProviderView}
         component={ProviderView}
-        options={({ navigation, route }) => ({
-          headerLeft: () => <BackButton navigation={navigation} />,
-          headerRight: null,
+        options={({ route }) => ({
           headerTitle: () => (
             <ScreenHeader icon={route.params.icon} name={route.params.name} />
           ),
@@ -353,18 +346,11 @@ export default function BaseNavigator() {
         })}
       />
       <Stack.Screen
-        name={NavigatorName.ExchangeBuyFlow}
+        name={NavigatorName.ExchangeStack}
         component={
-          readOnlyModeEnabled ? BuyDeviceScreen : ExchangeBuyFlowNavigator
+          readOnlyModeEnabled ? BuyDeviceScreen : ExchangeStackNavigator
         }
         initialParams={{ mode: "buy" }}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={NavigatorName.ExchangeSellFlow}
-        component={
-          readOnlyModeEnabled ? BuyDeviceScreen : ExchangeSellFlowNavigator
-        }
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -455,15 +441,6 @@ export default function BaseNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={ScreenName.Distribution}
-        component={Distribution}
-        options={{
-          ...stackNavigationConfig,
-          title: t("distribution.header"),
-          headerLeft: null,
-        }}
-      />
-      <Stack.Screen
         name={NavigatorName.Analytics}
         component={AnalyticsNavigator}
         options={{
@@ -479,14 +456,6 @@ export default function BaseNavigator() {
           title: t("market.filters.currency"),
           headerLeft: null,
           unmountOnBlur: true,
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.Asset}
-        component={readOnlyModeEnabled ? BuyDeviceScreen : Asset}
-        options={{
-          headerTitle: () => <HeaderTitle />,
-          headerRight: null,
         }}
       />
       <Stack.Screen
