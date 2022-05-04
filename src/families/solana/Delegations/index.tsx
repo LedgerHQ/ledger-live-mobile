@@ -76,6 +76,8 @@ function Delegations({ account }: Props) {
     SolanaStakeWithMeta | undefined
   >();
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const onNavigate: any = ({
     route,
     screen,
@@ -93,7 +95,7 @@ function Delegations({ account }: Props) {
   };
 
   const onCloseDrawer = () => {
-    setSelectedStakeWithMeta(undefined);
+    setIsDrawerOpen(false);
   };
 
   const openValidatorUrl = ({ stake, meta }: SolanaStakeWithMeta) => {
@@ -258,10 +260,15 @@ function Delegations({ account }: Props) {
     });
   };
 
+  const onDelegationSelected = (stakeWithMeta: SolanaStakeWithMeta) => {
+    setIsDrawerOpen(true);
+    setSelectedStakeWithMeta(stakeWithMeta);
+  };
+
   return (
     <View style={styles.root}>
       <DelegationDrawer
-        isOpen={data && data.length > 0}
+        isOpen={data && data.length > 0 && isDrawerOpen}
         onClose={onCloseDrawer}
         account={account}
         ValidatorImage={({ size }) => (
@@ -313,7 +320,7 @@ function Delegations({ account }: Props) {
                 stakeWithMeta={stakeWithMeta}
                 currency={currency}
                 unit={unit}
-                onPress={() => setSelectedStakeWithMeta(stakeWithMeta)}
+                onPress={onDelegationSelected}
                 isLast={i === stakesWithMeta.length - 1}
               />
             </View>

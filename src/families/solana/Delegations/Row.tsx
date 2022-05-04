@@ -59,6 +59,7 @@ export default function DelegationRow({
           <Text
             fontWeight="semiBold"
             numberOfLines={1}
+            ellipsizeMode="middle"
             style={{ marginRight: 5 }}
           >
             {meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-"}
