@@ -116,12 +116,6 @@ const NftViewer = ({ route }: Props) => {
 
   const nftCapabilities = useMemo(() => getNftCapabilities(nft), [nft]);
 
-  const defaultLinks = {
-    opensea: `https://opensea.io/assets/${nft?.contract}/${nft?.tokenId}`,
-    rarible: `https://rarible.com/token/${nft?.contract}:${nft?.tokenId}`,
-    etherscan: `https://etherscan.io/token/${nft?.contract}?a=${nft?.tokenId}`,
-  };
-
   const closeModal = () => {
     setBottomModalOpen(false);
   };
@@ -338,11 +332,7 @@ const NftViewer = ({ route }: Props) => {
         </View>
       </ScrollView>
       <NftLinksPanel
-        links={
-          metadata && Object.keys(metadata?.links)?.length
-            ? metadata.links
-            : defaultLinks
-        }
+        links={metadata?.links}
         isOpen={bottomModalOpen}
         onClose={closeModal}
       />

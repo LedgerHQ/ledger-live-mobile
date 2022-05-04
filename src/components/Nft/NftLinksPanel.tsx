@@ -12,7 +12,7 @@ import { rgba } from "../../colors";
 import LText from "../LText";
 
 type Props = {
-  links: NFTMetadata["links"];
+  links: NFTMetadata["links"] | null;
   isOpen: boolean;
   onClose: () => void;
 };
@@ -62,7 +62,7 @@ const NftLinksPanel = ({ links, isOpen, onClose }: Props) => {
       isOpened={isOpen}
       onClose={onClose}
     >
-      {!links.opensea ? null : (
+      {!links?.opensea ? null : (
         <NftLink
           style={styles.sectionMargin}
           leftIcon={<OpenSeaIcon size={36} />}
@@ -72,7 +72,7 @@ const NftLinksPanel = ({ links, isOpen, onClose }: Props) => {
         />
       )}
 
-      {!links.rarible ? null : (
+      {!links?.rarible ? null : (
         <NftLink
           leftIcon={<RaribleIcon size={36} />}
           title={`${t("nft.viewerModal.viewOn")} Rarible`}
@@ -81,23 +81,27 @@ const NftLinksPanel = ({ links, isOpen, onClose }: Props) => {
         />
       )}
 
-      <View style={styles.hr} />
+      {!links?.explorer ? null : (
+        <>
+          <View style={styles.hr} />
 
-      <NftLink
-        leftIcon={
-          <View
-            style={[
-              styles.roundIconContainer,
-              { backgroundColor: rgba(colors.live, 0.1) },
-            ]}
-          >
-            <GlobeIcon size={16} color={colors.live} />
-          </View>
-        }
-        title={t("nft.viewerModal.viewInExplorer")}
-        rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
-        onPress={() => Linking.openURL(links.etherscan)}
-      />
+          <NftLink
+            leftIcon={
+              <View
+                style={[
+                  styles.roundIconContainer,
+                  { backgroundColor: rgba(colors.live, 0.1) },
+                ]}
+              >
+                <GlobeIcon size={16} color={colors.live} />
+              </View>
+            }
+            title={t("nft.viewerModal.viewInExplorer")}
+            rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
+            onPress={() => Linking.openURL(links.explorer)}
+          />
+        </>
+      )}
     </BottomModal>
   );
 };
