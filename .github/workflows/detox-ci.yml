@@ -9,7 +9,7 @@ on:
       prNumber:
         description: pr number to trigger on
         required: true
-  schedule: 
+  schedule:
     - cron: "0 0 * * *"
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
         if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
-        run: yarn --prefer-offline --frozen-lockfile --network-timeout 100000    
+        run: yarn --prefer-offline --frozen-lockfile --network-timeout 100000
 
       - name: Rebuild detox
         run: yarn detox clean-framework-cache && yarn detox build-framework-cache
@@ -68,7 +68,7 @@ jobs:
       - name: Test iOS app
         timeout-minutes: 15
         run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles
-        
+
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v2

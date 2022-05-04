@@ -26,6 +26,7 @@ try {
     Intl.DateTimeFormat.__setDefaultTimeZone(getTimeZone()); // eslint-disable-line no-underscore-dangle
   }
 } catch (error) {
+  // eslint-disable-next-line no-console
   console.log(error);
 }
 
