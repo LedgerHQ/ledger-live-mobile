@@ -12,7 +12,7 @@ export default class OnboardingSteps {
 
   // change to tap by text
   static async chooseToSetupLedger() {
-    await testHelpers.tapByText("SET UP MY NANO");
+    await testHelpers.tapByText("SET UP MY LEDGER");
     // await testHelpers.tap("Onboarding PostWelcome - Selection|SetupLedger");
   }
 
@@ -30,7 +30,7 @@ export default class OnboardingSteps {
   }
 
   static async chooseToPairMyNano() {
-    await testHelpers.tapByText("Let's pair my Nano");
+    await testHelpers.tap("Onboarding - Pair New Nano");
   }
 
   static async selectPairWithBluetooth() {
@@ -39,7 +39,7 @@ export default class OnboardingSteps {
 
   static async addDeviceViaBluetooth() {
     bridge.addDevices();
-    await testHelpers.delay(5000); // give time for devices to appear
+    await testHelpers.delay(1000); // give time for devices to appear
     await testHelpers.tapByText("Nano X de David");
 
     bridge.setInstalledApps(); // tell LLM what apps the mock device has
@@ -53,8 +53,7 @@ export default class OnboardingSteps {
     // issue here: the 'Pairing Successful' text is 'visible' before it actually is, so it's failing at the continue step as continue isn't actually visible
     // await waitFor(element(by.text("Pairing Successful"))).toBeVisible();
 
-    // wait for flaky 'device authentication check screen'
-    await testHelpers.delay(5000);
+    await testHelpers.delay(5000); // wait for flaky 'device authentication check screen'
   }
 
   static async openLedgerLive() {
