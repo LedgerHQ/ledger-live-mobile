@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import { useNftMetadata, ProtoNFT } from "@ledgerhq/live-common/lib/nft";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import Skeleton from "../Skeleton";
@@ -42,7 +43,7 @@ function NftCollectionRow({ collection, onCollectionPress }: Props) {
               ellipsizeMode="tail"
               numberOfLines={2}
             >
-              {metadata?.tokenName || nft.contract}
+              {metadata?.tokenName || nft?.contract}
             </Text>
           </Skeleton>
         </Flex>
@@ -52,7 +53,7 @@ function NftCollectionRow({ collection, onCollectionPress }: Props) {
           color={"neutral.c70"}
           ml={5}
         >
-          {collection.length}
+          {collection?.length}
         </Text>
       </Flex>
     </RectButton>

@@ -78,8 +78,8 @@ const SendAmountNFT = ({ route }: Props) => {
     () =>
       account?.nfts?.find(
         nft =>
-          nft.contract === transaction?.collection &&
-          nft.tokenId === transaction?.tokenIds[0],
+          nft?.contract === transaction?.collection &&
+          nft?.tokenId === transaction?.tokenIds[0],
       ),
     [account?.nfts, transaction?.collection, transaction?.tokenIds],
   );

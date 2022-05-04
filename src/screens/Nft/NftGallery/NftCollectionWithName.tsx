@@ -41,7 +41,7 @@ const NftCollectionWithNameList = ({
             semiBold
             style={styles.tokenName}
           >
-            {metadata?.tokenName || nft.contract}
+            {metadata?.tokenName || nft?.contract}
           </LText>
         </Skeleton>
       </View>
@@ -68,11 +68,11 @@ const NftCollectionWithName = ({
   collection,
   contentContainerStyle,
 }: Props) => {
-  const nft = collection[0];
+  const nft: ProtoNFT | null = collection[0];
   const { status, metadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
   );
 
   return (
@@ -85,7 +85,7 @@ const NftCollectionWithName = ({
   );
 };
 
-const nftKeyExtractor = (nft: ProtoNFT) => nft.id;
+const nftKeyExtractor = (nft: ProtoNFT) => nft?.id;
 
 const styles = StyleSheet.create({
   title: {

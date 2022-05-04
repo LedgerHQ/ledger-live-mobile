@@ -10,11 +10,11 @@ const NftCollectionHeaderTitle = () => {
   const { params } = useRoute();
   const { colors } = useTheme();
   const { collection } = params;
-  const nft = collection[0];
+  const nft = collection?.[0];
   const { status, metadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
   );
 
   return (
@@ -41,7 +41,7 @@ const NftCollectionHeaderTitle = () => {
           numberOfLines={1}
           style={styles.title}
         >
-          {metadata?.tokenName || collection.contract}
+          {metadata?.tokenName || nft?.contract}
         </LText>
       </View>
     </TouchableWithoutFeedback>

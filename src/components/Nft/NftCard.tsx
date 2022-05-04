@@ -28,7 +28,7 @@ const NftCardView = ({
   status: NFTResource["status"];
   metadata?: Object;
 }) => {
-  const amount = nft.amount.toFixed();
+  const amount = nft?.amount?.toFixed();
   const { colors } = useTheme();
   const navigation = useNavigation();
   const loading = status === "loading";
@@ -71,7 +71,7 @@ const NftCardView = ({
             ellipsizeMode="middle"
             numberOfLines={1}
           >
-            ID {nft.tokenId}
+            ID {nft?.tokenId}
           </LText>
           {amount > 1 ? (
             <LText
@@ -94,9 +94,9 @@ const NftCardMemo = memo(NftCardView);
 // the rerender of all NftCards whenever the NFT cache changes (whenever a new NFT is loaded)
 const NftCard = ({ nft, style }: Props) => {
   const { status, metadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
   );
 
   return (

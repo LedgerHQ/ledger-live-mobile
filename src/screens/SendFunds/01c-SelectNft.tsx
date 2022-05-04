@@ -29,9 +29,9 @@ const NftRow = memo(({ account, nft }: { account: Account; nft: ProtoNFT }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
   const { status, metadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
   );
 
   const nftCapabilities = useMemo(() => getNftCapabilities(nft), [nft]);
@@ -41,11 +41,11 @@ const NftRow = memo(({ account, nft }: { account: Account; nft: ProtoNFT }) => {
 
     let transaction = bridge.createTransaction(account);
     transaction = bridge.updateTransaction(transaction, {
-      tokenIds: [nft.tokenId],
+      tokenIds: [nft?.tokenId],
       // Quantity is set to null first to allow the user to change it on the amount page
-      quantities: [nftCapabilities.hasQuantity ? null : BigNumber(1)],
-      collection: nft.contract,
-      mode: `${nft.standard?.toLowerCase()}.transfer`,
+      quantities: [nftCapabilities.hasQuantity ? null : new BigNumber(1)],
+      collection: nft?.contract,
+      mode: `${nft?.standard?.toLowerCase()}.transfer`,
     });
 
     navigation.navigate(ScreenName.SendSelectRecipient, {
@@ -83,13 +83,13 @@ const NftRow = memo(({ account, nft }: { account: Account; nft: ProtoNFT }) => {
           ellipsizeMode="middle"
           style={[styles.tokenId, { color: colors.grey }]}
         >
-          ID {nft.tokenId}
+          ID {nft?.tokenId}
         </LText>
       </View>
       {nft?.standard === "ERC1155" ? (
         <View style={styles.amount}>
           <LText numberOfLines={1} style={{ color: colors.grey }}>
-            x{nft.amount.toFixed()}
+            x{nft?.amount?.toFixed()}
           </LText>
         </View>
       ) : null}

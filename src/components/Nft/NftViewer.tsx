@@ -100,15 +100,15 @@ const NftViewer = ({ route }: Props) => {
   const { params } = route;
   const { nft } = params;
   const { status, metadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
+    nft?.contract,
+    nft?.tokenId,
+    nft?.currencyId,
   );
   const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
 
-  const { accountId } = decodeNftId(nft.id);
+  const { accountId } = decodeNftId(nft?.id);
   const account = useSelector(state => accountSelector(state, { accountId }));
 
   const [bottomModalOpen, setBottomModalOpen] = useState(false);
@@ -117,9 +117,9 @@ const NftViewer = ({ route }: Props) => {
   const nftCapabilities = useMemo(() => getNftCapabilities(nft), [nft]);
 
   const defaultLinks = {
-    opensea: `https://opensea.io/assets/${nft.contract}/${nft.tokenId}`,
-    rarible: `https://rarible.com/token/${nft.contract}:${nft.tokenId}`,
-    etherscan: `https://etherscan.io/token/${nft.contract}?a=${nft.tokenId}`,
+    opensea: `https://opensea.io/assets/${nft?.contract}/${nft?.tokenId}`,
+    rarible: `https://rarible.com/token/${nft?.contract}:${nft?.tokenId}`,
+    etherscan: `https://etherscan.io/token/${nft?.contract}?a=${nft?.tokenId}`,
   };
 
   const closeModal = () => {
@@ -131,11 +131,11 @@ const NftViewer = ({ route }: Props) => {
 
     let transaction = bridge.createTransaction(account);
     transaction = bridge.updateTransaction(transaction, {
-      tokenIds: [nft.tokenId],
+      tokenIds: [nft?.tokenId],
       // Quantity is set to null first to allow the user to change it on the amount page
-      quantities: [nftCapabilities.hasQuantity ? null : BigNumber(1)],
-      collection: nft.contract,
-      mode: `${nft.standard?.toLowerCase()}.transfer`,
+      quantities: [nftCapabilities.hasQuantity ? null : new BigNumber(1)],
+      collection: nft?.contract,
+      mode: `${nft?.standard?.toLowerCase()}.transfer`,
     });
 
     navigation.navigate(NavigatorName.SendFunds, {
@@ -310,7 +310,7 @@ const NftViewer = ({ route }: Props) => {
 
           <Section
             title={t("nft.viewer.tokenContract")}
-            value={nft.contract}
+            value={nft?.contract}
             copyAvailable
             copiedString={t("nft.viewer.tokenContractCopied")}
           />
@@ -319,18 +319,18 @@ const NftViewer = ({ route }: Props) => {
 
           <Section
             title={t("nft.viewer.tokenId")}
-            value={nft.tokenId}
+            value={nft?.tokenId}
             copyAvailable
             copiedString={t("nft.viewer.tokenIdCopied")}
           />
 
-          {nft.standard === "ERC1155" && (
+          {nft?.standard === "ERC1155" && (
             <>
               <View style={styles.hr} />
               <TouchableOpacity onPress={closeModal}>
                 <Section
                   title={t("nft.viewer.quantity")}
-                  value={nft.amount.toFixed()}
+                  value={nft?.amount?.toFixed()}
                 />
               </TouchableOpacity>
             </>

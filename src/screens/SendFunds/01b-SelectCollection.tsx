@@ -29,11 +29,11 @@ const CollectionRow = memo(
   ({ account, collection }: { account: Account; collection: ProtoNFT[] }) => {
     const navigation = useNavigation();
     const { colors } = useTheme();
-    const nft = collection[0];
+    const nft: ProtoNFT | null = collection[0];
     const { status, metadata } = useNftMetadata(
-      nft.contract,
-      nft.tokenId,
-      nft.currencyId,
+      nft?.contract,
+      nft?.tokenId,
+      nft?.currencyId,
     );
 
     const goToNftSelection = () => {
@@ -57,7 +57,7 @@ const CollectionRow = memo(
             style={[styles.tokenNameSkeleton, styles.tokenName]}
             loading={status === "loading"}
           >
-            <LText>{metadata?.tokenName || nft.contract}</LText>
+            <LText>{metadata?.tokenName || nft?.contract}</LText>
           </Skeleton>
         </View>
         <View style={styles.chevronContainer}>
