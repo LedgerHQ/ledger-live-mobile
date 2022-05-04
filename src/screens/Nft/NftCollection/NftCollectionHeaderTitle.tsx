@@ -1,13 +1,16 @@
 import React, { memo } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
-import { useRoute, useTheme } from "@react-navigation/native";
+import { useRoute, useTheme, RouteProp } from "@react-navigation/native";
+import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { scrollToTop } from "../../../navigation/utils";
 import NftImage from "../../../components/Nft/NftImage";
 import LText from "../../../components/LText";
 
+type RouteParams = RouteProp<{ params: { collection: ProtoNFT[] } }, "params">;
+
 const NftCollectionHeaderTitle = () => {
-  const { params } = useRoute();
+  const { params } = useRoute<RouteParams>();
   const { colors } = useTheme();
   const { collection } = params;
   const nft = collection?.[0];
