@@ -626,6 +626,9 @@
     },
     "SolanaMemoIsTooLong": {
       "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaUseAllAmountStakeWarning": {
+      "title": "Ensure you have enough balance left for future transactions fees"
     }
   },
   "bluetooth": {

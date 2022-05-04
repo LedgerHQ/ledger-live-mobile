@@ -3,17 +3,17 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
+import {
+  formatCurrencyUnit,
+  getCurrencyColor,
+} from "@ledgerhq/live-common/lib/currencies";
 import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import {
   SolanaStakeWithMeta,
   StakeAction,
   TransactionModel,
 } from "@ledgerhq/live-common/lib/families/solana/types";
-import {
-  assertUnreachable,
-  sweetch,
-} from "@ledgerhq/live-common/lib/families/solana/utils";
+import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
 import { ValidatorsAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Text } from "@ledgerhq/native-ui";
@@ -52,10 +52,11 @@ type Props = {
 };
 
 type RouteParams = {
-  delegationAction?: DelegationAction;
-  validator?: ValidatorsAppValidator;
   accountId: string;
   parentId?: string;
+  delegationAction?: DelegationAction;
+  amount?: number;
+  validator?: ValidatorsAppValidator;
 };
 
 type DelegationAction =
@@ -115,8 +116,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   useEffect(() => {
     setTransaction({
       family: "solana",
-      // TODO: fix amount
-      amount: new BigNumber(1),
+      amount: new BigNumber(route.params.amount ?? 0),
       recipient: "",
       model: txModelByDelegationAction(
         delegationAction,
@@ -124,7 +124,13 @@ export default function DelegationSummary({ navigation, route }: Props) {
         chosenValidator,
       ),
     });
-  }, [delegationAction, chosenValidator, validators, setTransaction]);
+  }, [
+    delegationAction,
+    chosenValidator,
+    validators,
+    setTransaction,
+    route.params.amount,
+  ]);
 
   invariant(transaction, "transaction must be defined");
   invariant(transaction.family === "solana", "transaction solana");
@@ -168,7 +174,9 @@ export default function DelegationSummary({ navigation, route }: Props) {
     navigation.navigate(ScreenName.DelegationSelectValidator, route.params);
   }, [rotateAnim, navigation, route.params]);
 
-  const onChangeAmount = () => {};
+  const onChangeAmount = () => {
+    navigation.navigate(ScreenName.SolanaEditAmount, route.params);
+  };
 
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency);
@@ -248,6 +256,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
             validator={chosenValidator}
             delegationAction={delegationAction}
             account={account}
+            amount={transaction.amount.toNumber()}
           />
         </View>
         {transaction.model.kind === "stake.undelegate" ? (
@@ -429,12 +438,14 @@ function SummaryWords({
   delegationAction,
   validator,
   account,
+  amount,
   onChangeValidator,
   onChangeAmount,
 }: {
   delegationAction: DelegationAction;
   validator?: ValidatorsAppValidator;
   account: AccountLike;
+  amount: number;
   onChangeValidator: () => void;
   onChangeAmount: () => void;
 }) {
@@ -442,6 +453,13 @@ function SummaryWords({
     delegationAction.kind === "new"
       ? "iDelegate"
       : `i${capitalize(delegationAction.stakeAction)}`;
+
+  const unit = getAccountUnit(account);
+  const formattedAmount = formatCurrencyUnit(unit, new BigNumber(amount), {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+  });
   return (
     <>
       <Line>
@@ -451,10 +469,10 @@ function SummaryWords({
         {delegationAction.kind === "new" ||
         delegationAction.stakeAction === "activate" ? (
           <Touchable onPress={onChangeAmount}>
-            <ValidatorSelection name={"10 SOL"} />
+            <Selectable name={formattedAmount} />
           </Touchable>
         ) : (
-          <ValidatorSelection readOnly name={"10 SOL"} />
+          <Selectable readOnly name={formattedAmount} />
         )}
       </Line>
       <Line>
@@ -468,12 +486,12 @@ function SummaryWords({
         {delegationAction.kind === "new" ||
         delegationAction.stakeAction === "activate" ? (
           <Touchable onPress={onChangeValidator}>
-            <ValidatorSelection
+            <Selectable
               name={validator?.name ?? validator?.voteAccount ?? "-"}
             />
           </Touchable>
         ) : (
-          <ValidatorSelection
+          <Selectable
             readOnly
             name={validator?.name ?? validator?.voteAccount ?? "-"}
           />
@@ -534,7 +552,7 @@ const Words = ({
   </Text>
 );
 
-const ValidatorSelection = ({
+const Selectable = ({
   name,
   readOnly,
 }: {

@@ -13,6 +13,7 @@ import DelegationStarted from "./Started";
 import DelegationSummary from "./Summary";
 import DelegationValidationError from "./ValidationError";
 import DelegationValidationSuccess from "./ValidationSuccess";
+import DelegationSelectAmount from "./SelectAmount";
 
 const totalSteps = "3";
 
@@ -65,6 +66,18 @@ function DelegationFlow() {
           ),
         }}
       />
+
+      <Stack.Screen
+        name={ScreenName.SolanaEditAmount}
+        component={DelegationSelectAmount}
+        options={{
+          gestureEnabled: false,
+          headerTitle: () => (
+            <StepHeader title={t("send.stepperHeader.selectAmount")} />
+          ),
+        }}
+      />
+
       <Stack.Screen
         name={ScreenName.DelegationConnectDevice}
         component={DelegationConnectDevice}
