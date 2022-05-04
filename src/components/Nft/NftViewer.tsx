@@ -11,6 +11,7 @@ import {
   useNftMetadata,
   decodeNftId,
   getNftCapabilities,
+  useNftCollectionMetadata,
 } from "@ledgerhq/live-common/lib/nft";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
@@ -99,11 +100,15 @@ const Section = ({
 const NftViewer = ({ route }: Props) => {
   const { params } = route;
   const { nft } = params;
-  const { status, metadata } = useNftMetadata(
+  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
     nft?.contract,
     nft?.tokenId,
     nft?.currencyId,
   );
+  const {
+    status: collectionStatus,
+    metadata: collectionMetadata,
+  } = useNftCollectionMetadata(nft?.contract, nft?.currencyId);
   const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -112,7 +117,7 @@ const NftViewer = ({ route }: Props) => {
   const account = useSelector(state => accountSelector(state, { accountId }));
 
   const [bottomModalOpen, setBottomModalOpen] = useState(false);
-  const isLoading = status === "loading";
+  const isLoading = nftStatus === "loading" || collectionStatus === "loading";
 
   const nftCapabilities = useMemo(() => getNftCapabilities(nft), [nft]);
 
@@ -162,14 +167,14 @@ const NftViewer = ({ route }: Props) => {
       );
     }
 
-    if (metadata?.properties?.length) {
+    if (nftMetadata?.properties?.length) {
       return (
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           contentContainerStyle={styles.properties}
         >
-          {metadata?.properties?.map?.((prop, i) => (
+          {nftMetadata?.properties?.map?.((prop, i) => (
             <View
               style={[
                 styles.property,
@@ -190,7 +195,7 @@ const NftViewer = ({ route }: Props) => {
     }
 
     return null;
-  }, [colors, isLoading, metadata]);
+  }, [colors, isLoading, nftMetadata]);
 
   const description = useMemo(() => {
     if (isLoading) {
@@ -203,19 +208,19 @@ const NftViewer = ({ route }: Props) => {
       );
     }
 
-    if (metadata?.description) {
-      return <LText>{metadata.description}</LText>;
+    if (nftMetadata?.description) {
+      return <LText>{nftMetadata.description}</LText>;
     }
 
     return null;
-  }, [isLoading, metadata]);
+  }, [isLoading, nftMetadata]);
 
   const nftImage = (
     <NftImage
       resizeMode="contain"
       style={styles.image}
-      src={metadata?.media}
-      status={status}
+      src={nftMetadata?.media}
+      status={nftStatus}
     />
   );
 
@@ -227,7 +232,9 @@ const NftViewer = ({ route }: Props) => {
             style={[styles.tokenName, styles.tokenNameSkeleton]}
             loading={isLoading}
           >
-            <LText style={styles.tokenName}>{metadata?.tokenName || "-"}</LText>
+            <LText style={styles.tokenName}>
+              {collectionMetadata?.tokenName || "-"}
+            </LText>
           </Skeleton>
 
           <Skeleton
@@ -235,18 +242,18 @@ const NftViewer = ({ route }: Props) => {
             loading={isLoading}
           >
             <LText style={styles.nftName} numberOfLines={3} semiBold>
-              {metadata?.nftName || "-"}
+              {nftMetadata?.nftName || "-"}
             </LText>
           </Skeleton>
 
           <View style={styles.imageContainer}>
-            {metadata?.media ? (
+            {nftMetadata?.media ? (
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate(NavigatorName.NftNavigator, {
                     screen: ScreenName.NftImageViewer,
                     params: {
-                      media: metadata.media,
+                      media: nftMetadata.media,
                     },
                   })
                 }
@@ -269,13 +276,15 @@ const NftViewer = ({ route }: Props) => {
                 <Trans i18nKey="account.send" />
               </Button>
             </View>
-            <View style={styles.ellipsisButtonContainer}>
-              <Button
-                type="main"
-                Icon={Icons.OthersMedium}
-                onPress={() => setBottomModalOpen(true)}
-              />
-            </View>
+            {nftMetadata?.links && (
+              <View style={styles.ellipsisButtonContainer}>
+                <Button
+                  type="main"
+                  Icon={Icons.OthersMedium}
+                  onPress={() => setBottomModalOpen(true)}
+                />
+              </View>
+            )}
           </View>
         </View>
 
@@ -332,7 +341,7 @@ const NftViewer = ({ route }: Props) => {
         </View>
       </ScrollView>
       <NftLinksPanel
-        links={metadata?.links}
+        links={nftMetadata?.links}
         isOpen={bottomModalOpen}
         onClose={closeModal}
       />
