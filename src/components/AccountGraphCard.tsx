@@ -129,7 +129,17 @@ function AccountGraphCard({
 
   const [hoveredItem, setHoverItem] = useState<Item>();
 
-  const mapGraphValue = useCallback(d => d?.value || 0, []);
+  const mapGraphValue = useCallback(d => {
+    console.log("mapGraphValue");
+    return d?.value || 0;
+  }, []);
+  const mapCounterValue = useCallback(d => {
+    console.log("mapCounterValue");
+    return d.countervalue ? d.countervalue : 0;
+  }, []);
+
+  console.log("useCounterValue", useCounterValue);
+  console.log("history", history);
 
   return (
     <Flex
@@ -160,7 +170,7 @@ function AccountGraphCard({
               width={width - 32}
               color={colors.primary.c80}
               data={history}
-              mapValue={mapGraphValue}
+              mapValue={useCounterValue ? mapCounterValue : mapGraphValue}
               onItemHover={setHoverItem}
               verticalRangeRatio={10}
             />
