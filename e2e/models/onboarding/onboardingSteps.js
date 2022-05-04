@@ -30,7 +30,7 @@ export default class OnboardingSteps {
   }
 
   static async chooseToPairMyNano() {
-    await testHelpers.tap("Onboarding - Pair New Nano");
+    await testHelpers.tapByText("Let’s pair my Nano");
   }
 
   static async selectPairWithBluetooth() {
