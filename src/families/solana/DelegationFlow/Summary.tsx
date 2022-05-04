@@ -36,7 +36,6 @@ import Icon from "react-native-vector-icons/Feather";
 import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
 import { rgba } from "../../../colors";
-import Alert from "../../../components/Alert";
 import Button from "../../../components/Button";
 import Circle from "../../../components/Circle";
 import CurrencyIcon from "../../../components/CurrencyIcon";
@@ -294,9 +293,9 @@ function tx({
   return {
     family: "solana",
     amount: new BigNumber(
-      (delegationAction.kind === "new"
-        ? amount
-        : delegationAction.stakeWithMeta.stake.delegation?.stake) ?? 0,
+      delegationAction.kind === "new"
+        ? amount ?? 0
+        : txAmount(delegationAction),
     ),
     recipient: "",
     model: txModelByDelegationAction(
@@ -305,6 +304,21 @@ function tx({
       chosenValidator,
     ),
   };
+}
+
+function txAmount(delegationAction: DelegationAction & { kind: "change" }) {
+  const { stake } = delegationAction.stakeWithMeta;
+  switch (delegationAction.stakeAction) {
+    case "activate":
+      return stake.withdrawable - stake.rentExemptReserve;
+    case "deactivate":
+    case "reactivate":
+      return stake.delegation?.stake ?? 0;
+    case "withdraw":
+      return stake.withdrawable;
+    default:
+      return assertUnreachable(delegationAction.stakeAction);
+  }
 }
 
 const styles = StyleSheet.create({
@@ -489,8 +503,7 @@ function SummaryWords({
         <Words>
           <Trans i18nKey={`solana.delegation.${i18nActionKey}`} />
         </Words>
-        {delegationAction.kind === "new" ||
-        delegationAction.stakeAction === "activate" ? (
+        {delegationAction.kind === "new" ? (
           <Touchable onPress={onChangeAmount}>
             <Selectable name={formattedAmount} />
           </Touchable>

@@ -85,7 +85,7 @@ export default function DelegationRow({
         <Text fontWeight="semiBold">
           {formatCurrencyUnit(
             unit,
-            new BigNumber(stake.delegation?.stake || 0),
+            new BigNumber((stake.delegation?.stake ?? 0) || stake.withdrawable),
             {
               showCode: true,
               disableRounding: true,
