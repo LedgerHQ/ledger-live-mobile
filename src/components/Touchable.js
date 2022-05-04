@@ -63,23 +63,16 @@ export default class Touchable extends Component<
   };
 
   onLongPress = async () => {
-    const { onLongPress, event, eventProperties } = this.props;
-    if (!onLongPress) return;
-    try {
+      const { onLongPress, event, eventProperties } = this.props;
+      if (!onLongPress) return;
       if (event) {
         track(event, eventProperties);
       }
+      
       const res = onLongPress();
-      if (res && res.then) {
-        // it's a promise, we will use pending/spinnerOn state
-        this.setState({ pending: true });
-        await res;
-      }
-    } finally {
-      if (!this.unmounted) {
-        this.setState(({ pending }) => (pending ? { pending: false } : null));
-      }
-    }
+      this.setState({ pending: true });
+      await res;
+      this.setState({ pending: false });
   };
 
   render() {
