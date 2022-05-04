@@ -11,6 +11,7 @@ import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import {
   SolanaStakeWithMeta,
   StakeAction,
+  Transaction,
   TransactionModel,
 } from "@ledgerhq/live-common/lib/families/solana/types";
 import { assertUnreachable } from "@ledgerhq/live-common/lib/families/solana/utils";
@@ -110,20 +111,24 @@ export default function DelegationSummary({ navigation, route }: Props) {
     return {
       account,
       parentAccount,
+      transaction: tx({
+        delegationAction,
+        defaultValidator: validators[0],
+        amount: route.params.amount,
+        chosenValidator,
+      }),
     };
   });
 
   useEffect(() => {
-    setTransaction({
-      family: "solana",
-      amount: new BigNumber(route.params.amount ?? 0),
-      recipient: "",
-      model: txModelByDelegationAction(
+    setTransaction(
+      tx({
         delegationAction,
-        validators[0],
+        defaultValidator: validators[0],
+        amount: route.params.amount,
         chosenValidator,
-      ),
-    });
+      }),
+    );
   }, [
     delegationAction,
     chosenValidator,
@@ -259,15 +264,6 @@ export default function DelegationSummary({ navigation, route }: Props) {
             amount={transaction.amount.toNumber()}
           />
         </View>
-        {transaction.model.kind === "stake.undelegate" ? (
-          <Alert type="help">
-            <Trans i18nKey="delegation.warnUndelegation" />
-          </Alert>
-        ) : (
-          <Alert type="help">
-            <Trans i18nKey="delegation.warnDelegation" />
-          </Alert>
-        )}
       </View>
       <View style={styles.footer}>
         <Button
@@ -282,6 +278,33 @@ export default function DelegationSummary({ navigation, route }: Props) {
       </View>
     </SafeAreaView>
   );
+}
+
+function tx({
+  delegationAction,
+  amount,
+  defaultValidator,
+  chosenValidator,
+}: {
+  delegationAction: DelegationAction;
+  defaultValidator: ValidatorsAppValidator;
+  amount?: number;
+  chosenValidator?: ValidatorsAppValidator;
+}): Transaction {
+  return {
+    family: "solana",
+    amount: new BigNumber(
+      (delegationAction.kind === "new"
+        ? amount
+        : delegationAction.stakeWithMeta.stake.delegation?.stake) ?? 0,
+    ),
+    recipient: "",
+    model: txModelByDelegationAction(
+      delegationAction,
+      defaultValidator,
+      chosenValidator,
+    ),
+  };
 }
 
 const styles = StyleSheet.create({
