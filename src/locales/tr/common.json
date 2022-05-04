@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "The most secure cryptocurrency & NFT wallet",
-      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
+      "title": "En güvenli kripto para ve NFT cüzdanı",
+      "subtitle": "Ledger live'da kriptolarınızı ve NFT'lerinizi güvenle yönetin, satın alın ve artırın.",
       "start": "Hemen başla",
       "noDevice": "Cihazınız yok mu?",
       "buy": "{{fullDeviceName}} satın alın",
@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live sürümü, işletim sistemi bölgesi, dil ve bölge"
       },
       "hideEmptyTokenAccounts": "Boş token hesaplarını gizle",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "Varlıklar sayfasındaki tüm boş token hesapları gizlenecek."
     },
     "currencies": {
       "header": "Para Birimleri",
