@@ -1,6 +1,9 @@
 import React, { memo } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import {
+  useNftMetadata,
+  useNftCollectionMetadata,
+} from "@ledgerhq/live-common/lib/nft";
 import { useRoute, useTheme, RouteProp } from "@react-navigation/native";
 import { ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import { scrollToTop } from "../../../navigation/utils";
@@ -14,9 +17,13 @@ const NftCollectionHeaderTitle = () => {
   const { colors } = useTheme();
   const { collection } = params;
   const nft = collection?.[0];
-  const { status, metadata } = useNftMetadata(
+  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
     nft?.contract,
     nft?.tokenId,
+    nft?.currencyId,
+  );
+  const { metadata: collectionMetadata } = useNftCollectionMetadata(
+    nft?.contract,
     nft?.currencyId,
   );
 
@@ -31,20 +38,18 @@ const NftCollectionHeaderTitle = () => {
         ]}
       >
         <NftImage
-          height={24}
-          width={24}
           style={styles.headerImage}
-          src={metadata?.media}
-          status={status}
+          src={nftMetadata?.media}
+          status={nftStatus}
         />
         <LText
-          ellipsizeMode={metadata?.tokenName ? "tail" : "middle"}
+          ellipsizeMode={collectionMetadata?.tokenName ? "tail" : "middle"}
           semiBold
           secondary
           numberOfLines={1}
           style={styles.title}
         >
-          {metadata?.tokenName || nft?.contract}
+          {collectionMetadata?.tokenName || nft?.contract}
         </LText>
       </View>
     </TouchableWithoutFeedback>
@@ -64,7 +69,10 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     borderRadius: 4,
+    overflow: "hidden",
     marginRight: 12,
+    width: 24,
+    height: 24,
   },
 });
 

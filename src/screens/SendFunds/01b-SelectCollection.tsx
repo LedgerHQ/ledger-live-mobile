@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import {
   nftsByCollections,
+  useNftCollectionMetadata,
   useNftMetadata,
 } from "@ledgerhq/live-common/lib/nft";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -30,9 +31,13 @@ const CollectionRow = memo(
     const navigation = useNavigation();
     const { colors } = useTheme();
     const nft: ProtoNFT | null = collection[0];
-    const { status, metadata } = useNftMetadata(
+    const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
       nft?.contract,
       nft?.tokenId,
+      nft?.currencyId,
+    );
+    const { metadata: collectionMetadata } = useNftCollectionMetadata(
+      nft?.contract,
       nft?.currencyId,
     );
 
@@ -48,16 +53,16 @@ const CollectionRow = memo(
         <View style={styles.nftImageContainer}>
           <NftImage
             style={styles.nftImage}
-            src={metadata?.media}
-            status={status}
+            src={nftMetadata?.media}
+            status={nftStatus}
           />
         </View>
         <View style={styles.tokenNameContainer}>
           <Skeleton
             style={[styles.tokenNameSkeleton, styles.tokenName]}
-            loading={status === "loading"}
+            loading={nftStatus === "loading"}
           >
-            <LText>{metadata?.tokenName || nft?.contract}</LText>
+            <LText>{collectionMetadata?.tokenName || nft?.contract}</LText>
           </Skeleton>
         </View>
         <View style={styles.chevronContainer}>

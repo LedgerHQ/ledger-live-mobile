@@ -13,7 +13,7 @@ import SummaryRow from "./SummaryRow";
 
 type Props = {
   transaction: Transaction,
-  currencyId: CryptoCurrency,
+  currencyId: CryptoCurrency["id"],
 };
 
 const SummaryNft = ({ transaction, currencyId }: Props) => {

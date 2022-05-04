@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { useNftCollectionMetadata } from "@ledgerhq/live-common/lib/nft";
 import { FlatList, View, SafeAreaView, StyleSheet } from "react-native";
 import { ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import { NFTResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider/types";
@@ -69,9 +69,8 @@ const NftCollectionWithName = ({
   contentContainerStyle,
 }: Props) => {
   const nft: ProtoNFT | null = collection[0];
-  const { status, metadata } = useNftMetadata(
+  const { status, metadata } = useNftCollectionMetadata(
     nft?.contract,
-    nft?.tokenId,
     nft?.currencyId,
   );
 

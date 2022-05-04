@@ -22,7 +22,7 @@ import {
   isConfirmedOperation,
   getOperationConfirmationDisplayableNumber,
 } from "@ledgerhq/live-common/lib/operation";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { useNftCollectionMetadata } from "@ledgerhq/live-common/lib/nft";
 import { NavigatorName, ScreenName } from "../../const";
 import LText from "../../components/LText";
 import OperationIcon from "../../components/OperationIcon";
@@ -78,9 +78,8 @@ export default function Content({
   const { t } = useTranslation();
   const [isModalOpened, setIsModalOpened] = useState(false);
   const { currencyId } = decodeAccountId(operation.accountId);
-  const { status, metadata } = useNftMetadata(
+  const { status, metadata } = useNftCollectionMetadata(
     operation.contract,
-    operation.tokenId,
     currencyId,
   );
 
