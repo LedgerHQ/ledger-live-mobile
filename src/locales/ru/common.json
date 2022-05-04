@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "The most secure cryptocurrency & NFT wallet",
-      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
+      "title": "Самый безопасный кошелёк для криптовалют и NFT",
+      "subtitle": "Безопасно управляйте, покупайте и приумножайте криптовалюты и NFT прямо в Ledger Live.",
       "start": "Приступить",
       "noDevice": "Нет устройства Ledger?",
       "buy": "Купите {{fullDeviceName}}",
@@ -1877,7 +1877,7 @@
         "bullet2": "Версия Ledger Live, язык интерфейса и регион"
       },
       "hideEmptyTokenAccounts": "Скрывать пустые счета",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "Спрячьте все пустые счета на странице Счета."
     },
     "currencies": {
       "header": "Валюты",
