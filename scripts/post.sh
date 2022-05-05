@@ -4,7 +4,7 @@ cd $(dirname $0)/..
 
 ./scripts/sync-families-dispatch.sh
 
-npx patch-package
+patch -N -i ./patches/react-native-video+5.2.0.patch node_modules/react-native-video/android-exoplayer/build.gradle
 
 rm -f 'third-party/glog-0.3.5/test-driver'
 
