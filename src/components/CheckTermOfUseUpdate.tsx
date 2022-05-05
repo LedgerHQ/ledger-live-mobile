@@ -1,14 +1,12 @@
-import React, { ReactNode, useCallback, useMemo } from "react";
+import React, { ReactNode, useCallback } from "react";
 import { Linking } from "react-native";
 import { useTranslation } from "react-i18next";
 import { BottomDrawer, Flex, Icons, Link, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 
-import { useTermsAccept } from "../logic/terms";
-import { useLocale } from "../context/Locale";
+import { useLocalizedTermsUrl, useTermsAccept } from "../logic/terms";
 import Button from "./Button";
 import Alert from "./Alert";
-import { urls } from "../config/urls";
 
 const Description = styled(Text).attrs(() => ({
   color: "neutral.c70",
@@ -29,14 +27,12 @@ const Update = ({ children }: { children: ReactNode }) => (
 
 const CheckTermOfUseUpdateModal = () => {
   const { t } = useTranslation();
-  const { locale } = useLocale();
   const [accepted, accept] = useTermsAccept();
-
-  const termsURL = useMemo(() => urls.terms[locale] || urls.terms.en, [locale]);
+  const termsUrl = useLocalizedTermsUrl();
 
   const handleLink = useCallback(() => {
-    Linking.openURL(termsURL);
-  }, [termsURL]);
+    Linking.openURL(termsUrl);
+  }, [termsUrl]);
 
   return (
     <BottomDrawer

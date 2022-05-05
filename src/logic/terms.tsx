@@ -1,17 +1,24 @@
-// @flow
 import { useEffect, useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { useLocale } from "../context/Locale";
+import { urls } from "../config/urls";
+
+// Legacy URL
 export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
+// Legacy URL
 const legacyTermsUrl =
   "https://raw.githubusercontent.com/LedgerHQ/ledger-live-mobile/master/TERMS.md";
 
 const currentTermsRequired = "2022-05-10";
 const currentLendingTermsRequired = "2020-11-10";
 
-function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
+function isAcceptedVersionUpToDate(
+  acceptedVersion: string,
+  currentVersion: string,
+) {
   if (!acceptedVersion) {
     return false;
   }
@@ -29,15 +36,28 @@ function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
 }
 
 export async function isAcceptedTerms() {
-  return isAcceptedVersionUpToDate(
-    await AsyncStorage.getItem("acceptedTermsVersion"),
-    currentTermsRequired,
+  const acceptedTermsVersion = await AsyncStorage.getItem(
+    "acceptedTermsVersion",
   );
+
+  if (!acceptedTermsVersion) {
+    return false;
+  }
+
+  return isAcceptedVersionUpToDate(acceptedTermsVersion, currentTermsRequired);
 }
 
 export async function isAcceptedLendingTerms() {
+  const acceptedLendingTermsVersion = await AsyncStorage.getItem(
+    "acceptedLendingTermsVersion",
+  );
+
+  if (!acceptedLendingTermsVersion) {
+    return false;
+  }
+
   return isAcceptedVersionUpToDate(
-    await AsyncStorage.getItem("acceptedLendingTermsVersion"),
+    acceptedLendingTermsVersion,
     currentLendingTermsRequired,
   );
 }
@@ -53,28 +73,11 @@ export async function acceptLendingTerms() {
   );
 }
 
-export async function load() {
-  const url = legacyTermsUrl;
-  const r = await fetch(url);
-  if (r.status >= 400 && r.status < 600) {
-    throw new Error("");
-  }
-  const markdown = await r.text();
-  return markdown;
+export function useLocalizedTermsUrl() {
+  const { locale } = useLocale();
+
+  return (urls.terms as Record<string, string>)[locale] || urls.terms.en;
 }
-
-export const useTerms = () => {
-  const [terms, setTerms] = useState(null);
-  const [error, setError] = useState(null);
-
-  const loadTerms = () => load().then(setTerms, setError);
-
-  useEffect(() => {
-    loadTerms();
-  }, []);
-
-  return [terms, error, loadTerms];
-};
 
 export const useTermsAccept = () => {
   const [accepted, setAccepted] = useState(true);
@@ -90,4 +93,29 @@ export const useTermsAccept = () => {
   }, []);
 
   return [accepted, accept];
+};
+
+// Legacy code
+export async function load() {
+  const url = legacyTermsUrl;
+  const r = await fetch(url);
+  if (r.status >= 400 && r.status < 600) {
+    throw new Error("");
+  }
+  const markdown = await r.text();
+  return markdown;
+}
+
+// Legacy code
+export const useTerms = () => {
+  const [terms, setTerms] = useState(null);
+  const [error, setError] = useState(null);
+
+  const loadTerms = () => load().then(setTerms, setError);
+
+  useEffect(() => {
+    loadTerms();
+  }, []);
+
+  return [terms, error, loadTerms];
 };
