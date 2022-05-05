@@ -77,13 +77,14 @@ export type SettingsState = {
   readOnlyModeEnabled: boolean,
   experimentalUSBEnabled: boolean,
   countervalueFirst: boolean,
+  graphCountervalueFirst: boolean,
   hideEmptyTokenAccounts: boolean,
   blacklistedTokenIds: string[],
   dismissedBanners: string[],
   hasAvailableUpdate: boolean,
   theme: Theme,
   osTheme: ?string,
-  carouselVisibility: any,
+  carouselVisibility: number | { [slideName: string]: boolean }, // number is the legacy type from LLM V2
   discreetMode: boolean,
   language: string,
   languageIsSetByUser: boolean,
@@ -113,13 +114,15 @@ export const INITIAL_STATE: SettingsState = {
   hasInstalledAnyApp: true,
   readOnlyModeEnabled: !Config.DISABLE_READ_ONLY,
   experimentalUSBEnabled: false,
-  countervalueFirst: false,
+  countervalueFirst: true,
+  graphCountervalueFirst: true,
   hideEmptyTokenAccounts: false,
   blacklistedTokenIds: [],
   dismissedBanners: [],
   hasAvailableUpdate: false,
   theme: "system",
   osTheme: undefined,
+  // $FlowFixMe
   carouselVisibility: Object.fromEntries(
     SLIDES.map(slide => [slide.name, true]),
   ),
@@ -262,7 +265,7 @@ const handlers: Object = {
 
   SETTINGS_SWITCH_COUNTERVALUE_FIRST: state => ({
     ...state,
-    countervalueFirst: !state.countervalueFirst,
+    graphCountervalueFirst: !state.graphCountervalueFirst,
   }),
 
   SETTINGS_HIDE_EMPTY_TOKEN_ACCOUNTS: (state, { hideEmptyTokenAccounts }) => ({
@@ -475,7 +478,7 @@ export const hasInstalledAnyAppSelector = (state: State) =>
   state.settings.hasInstalledAnyApp;
 
 export const countervalueFirstSelector = (state: State) =>
-  state.settings.countervalueFirst;
+  state.settings.graphCountervalueFirst;
 
 export const readOnlyModeEnabledSelector = (state: State) =>
   state.settings.readOnlyModeEnabled;
@@ -511,8 +514,19 @@ export const dismissedBannersSelector = (state: State) =>
 export const hasAvailableUpdateSelector = (state: State) =>
   state.settings.hasAvailableUpdate;
 
-export const carouselVisibilitySelector = (state: State) =>
-  state.settings.carouselVisibility;
+export const carouselVisibilitySelector = (state: State) => {
+  const settingValue = state.settings.carouselVisibility;
+  if (typeof settingValue === "number") {
+    /**
+     * Ensure correct behavior when using the legacy setting value from LLM v2:
+     * We show all the slides as they are different from the ones in V2.
+     * Users will then be able to hide them one by one if they want.
+     */
+    // $FlowFixMe
+    return Object.fromEntries(SLIDES.map(slide => [slide.name, true]));
+  }
+  return settingValue;
+};
 
 export const discreetModeSelector = (state: State): boolean =>
   state.settings.discreetMode === true;
