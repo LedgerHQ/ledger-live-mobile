@@ -400,6 +400,9 @@
     "NotEnoughBalanceInParentAccount": {
       "title": "Недостаточный баланс на основном счёте"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "Quantity needs to be at least 1"
+    },
     "NotEnoughSpendableBalance": {
       "title": "Баланс не может быть ниже {{minimumAmount}}"
     },
@@ -1750,7 +1753,8 @@
       "sectionLabel": "Отозванные средства"
     },
     "nft": {
-      "receiveNft": "Получить NFT"
+      "receiveNft": "Получить NFT",
+      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
     }
   },
   "accounts": {
@@ -1900,6 +1904,13 @@
         "title": "Скрыть токен",
         "desc": "Это действие скроет все токены <1><0>{tokenName}</0></1>. Вы можете снова отобразить их в разделе <3>Настройки > Счета</3>.",
         "confirm": "Скрыть токен"
+      },
+      "hideNFTCollectionCTA": "Hide collection",
+      "hiddenNFTCollections": "Hidden NFT collections",
+      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionModal": {
+        "title": "Hide Collection?",
+        "desc": "You can unhide this collection in the setting options."
       },
       "cryptoAssets": {
         "header": "Криптоактивы",
@@ -3928,6 +3939,20 @@
     "service": "Условия использования",
     "subTitle": "Пожалуйста, изучите наши Условия использования и Политику конфиденциальности"
   },
+  "updatedTerms": {
+    "title": "Terms of Use Update",
+    "body": {
+      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "bulletPoints": [
+        "Clarifying what services are available and how they work",
+        "Explaining how fees for Services work",
+        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+      ],
+      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+    },
+    "link": "Terms of Use",
+    "cta": "Продолжить"
+  },
   "exchange": {
     "buy": {
       "tabTitle": "Купить",
@@ -4183,7 +4208,7 @@
       "title": "Распределение"
     },
     "operations": {
-      "title": "Активность"
+      "title": "Transaction history"
     }
   }
 }
