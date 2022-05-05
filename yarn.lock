@@ -2528,6 +2528,16 @@
     rxjs "6"
     semver "^7.3.5"
 
+"@ledgerhq/devices@^6.27.1":
+  version "6.27.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-6.27.1.tgz#3b13ab1d1ba8201e9e74a08f390560483978c962"
+  integrity sha512-jX++oy89jtv7Dp2X6gwt3MMkoajel80JFWcdc0HCouwDsV1mVJ3SQdwl/bQU0zd8HI6KebvUP95QTwbQLLK/RQ==
+  dependencies:
+    "@ledgerhq/errors" "^6.10.0"
+    "@ledgerhq/logs" "^6.10.0"
+    rxjs "6"
+    semver "^7.3.5"
+
 "@ledgerhq/errors@6.10.0", "@ledgerhq/errors@^6.10.0":
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.10.0.tgz#dda9127b65f653fbb2f74a55e8f0e550d69de6e4"
@@ -2700,6 +2710,15 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
+"@ledgerhq/hw-transport@^6.27.1":
+  version "6.27.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.27.1.tgz#88072278f69c279cb6569352acd4ae2fec33ace3"
+  integrity sha512-hnE4/Fq1YzQI4PA1W0H8tCkI99R3UWDb3pJeZd6/Xs4Qw/q1uiQO+vNLC6KIPPhK0IajUfuI/P2jk0qWcMsuAQ==
+  dependencies:
+    "@ledgerhq/devices" "^6.27.1"
+    "@ledgerhq/errors" "^6.10.0"
+    events "^3.3.0"
+
 "@ledgerhq/hw-transport@~5.11.0":
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-5.11.0.tgz#f5c45a34d9b68d81fd2f6641b49815527720364b"
@@ -2861,14 +2880,14 @@
     styled-system "^5.1.5"
     victory-native "^35.5.5"
 
-"@ledgerhq/react-native-hid@6.24.1":
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-6.24.1.tgz#6a5cf8ed513db6430105be3491e71b3a0250c2a0"
-  integrity sha512-xTwWr7q/kWUNVfMIiLEybSzEdRseWopNeV7X91vfhqvlkoESfU9SvuhvTKh41qrt+TrTfExAkgbML3uVlwRUXg==
+"@ledgerhq/react-native-hid@^6.28.2":
+  version "6.28.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-6.28.2.tgz#4d40326c30f6c99acf66ac63e497418ad4b184bf"
+  integrity sha512-vJpFdZCfdsZ7I+3Xw8rWHxwdfhSVHbukqx8Ph1/7Gd7LJOmiDNiKRvL1ma3yyqFHzplssCDt+D6s28hgCZXHxA==
   dependencies:
-    "@ledgerhq/devices" "^6.24.1"
+    "@ledgerhq/devices" "^6.27.1"
     "@ledgerhq/errors" "^6.10.0"
-    "@ledgerhq/hw-transport" "^6.24.1"
+    "@ledgerhq/hw-transport" "^6.27.1"
     "@ledgerhq/logs" "^6.10.0"
     rxjs "6"
 

@@ -77,7 +77,7 @@
     "@ledgerhq/live-common": "22.0.2",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/native-ui": "^0.7.16",
-    "@ledgerhq/react-native-hid": "6.24.1",
+    "@ledgerhq/react-native-hid": "^6.28.2",
     "@ledgerhq/react-native-hw-transport-ble": "6.25.1",
     "@ledgerhq/react-native-passcode-auth": "^2.1.0",
     "@polkadot/reactnative-identicon": "0.87.5",

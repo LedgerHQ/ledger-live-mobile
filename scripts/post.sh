@@ -4,6 +4,8 @@ cd $(dirname $0)/..
 
 ./scripts/sync-families-dispatch.sh
 
+npx patch-package
+
 rm -f 'third-party/glog-0.3.5/test-driver'
 
 # Had to remove the following because we already have the AsyncSocket lib as a dependency from Flipper 🐬
