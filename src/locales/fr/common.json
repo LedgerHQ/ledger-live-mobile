@@ -401,7 +401,7 @@
       "title": "Solde du compte parent insuffisant"
     },
     "QuantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "Le nombre doit être égal ou supérieur à 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}."
@@ -1754,7 +1754,7 @@
     },
     "nft": {
       "receiveNft": "Recevoir NFT",
-      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+      "howTo": "Pour ajouter des NFT, il vous suffit de <0>les recevoir</0> sur votre <1>adresse {{currency}}</1>."
     }
   },
   "accounts": {
@@ -1905,12 +1905,12 @@
         "desc": "Cette action masquera tous les comptes de <1><0>{tokenName}</0></1>. Vous pouvez restaurer leur visibilité dans <3>Paramètres > Comptes</3>.",
         "confirm": "Masquer le token"
       },
-      "hideNFTCollectionCTA": "Hide collection",
-      "hiddenNFTCollections": "Hidden NFT collections",
-      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionCTA": "Cacher la collection",
+      "hiddenNFTCollections": "Collections de NFT cachées",
+      "hiddenNFTCollectionsDesc": "Pour cacher des NFT, accédez au compte correspondant, faites un appui long sur la collection et choisissez Cacher la collection.",
       "hideNFTCollectionModal": {
-        "title": "Hide Collection?",
-        "desc": "You can unhide this collection in the setting options."
+        "title": "Cacher cette collection ?",
+        "desc": "Vous pourrez afficher à nouveau cette collection à partir des Paramètres."
       },
       "cryptoAssets": {
         "header": "Crypto-actifs",
@@ -3940,17 +3940,17 @@
     "subTitle": "Veuillez prendre connaissance de nos Conditions d'utilisation et Politique de confidentialité."
   },
   "updatedTerms": {
-    "title": "Terms of Use Update",
+    "title": "Mise à jour des Conditions d'utilisation",
     "body": {
-      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "intro": "Les Conditions d'utilisation de Ledger Live ont été mises à jour. Elles ont été simplifiées, et reflètent les nouveaux services et fonctionnalités disponibles via Ledger Live. Les mises à jour comprennent :",
       "bulletPoints": [
-        "Clarifying what services are available and how they work",
-        "Explaining how fees for Services work",
-        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+        "Précisions supplémentaires sur les services disponibles et leur fonctionnement",
+        "Explications sur les frais applicables aux services",
+        "Améliorations du processus de notification, pour vous tenir à jour de toute nouvelle modification de nos Conditions d'utilisation"
       ],
-      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+      "agreement": "En cliquant sur Continuer, vous reconnaissez avoir lu et vous acceptez les Conditions d'utilisation ci-dessous."
     },
-    "link": "Terms of Use",
+    "link": "Conditions d'utilisation",
     "cta": "Continuer"
   },
   "exchange": {
@@ -4208,7 +4208,7 @@
       "title": "Répartition"
     },
     "operations": {
-      "title": "Transaction history"
+      "title": "Historique des transactions"
     }
   }
 }
