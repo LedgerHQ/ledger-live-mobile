@@ -99,7 +99,7 @@ function GraphCard({
             {!areAccountsEmpty && <DiscreetModeButton size={20} />}
           </Flex>
           {areAccountsEmpty ? (
-            <Text variant={"h1"} color={"neutral.c100"}>
+            <Text variant={"h3"} color={"neutral.c100"}>
               <CurrencyUnitValue unit={unit} value={0} />
             </Text>
           ) : (
@@ -108,12 +108,20 @@ function GraphCard({
                 {!balanceAvailable ? (
                   <BigPlaceholder mt="8px" />
                 ) : (
-                  <Text variant={"h1"} color={"neutral.c100"}>
+                  <Text
+                    fontFamily="Inter"
+                    fontWeight="semiBold"
+                    fontSize="30px"
+                    color={"neutral.c100"}
+                    numberOfLines={1}
+                    adjustsFontSizeToFit
+                  >
                     <CurrencyUnitValue
                       unit={unit}
                       value={
                         hoveredItem?.value ? hoveredItem.value : item.value
                       }
+                      joinFragmentsSeparator=" "
                     />
                   </Text>
                 )}

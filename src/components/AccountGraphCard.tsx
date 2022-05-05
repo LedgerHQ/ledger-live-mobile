@@ -26,11 +26,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { useTimeRange } from "../actions/settings";
 import Delta from "./Delta";
-import FormatDate from "./FormatDate";
 import CurrencyUnitValue from "./CurrencyUnitValue";
-import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
-import CurrencyRate from "./CurrencyRate";
 import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import Graph from "./Graph";
@@ -72,7 +69,7 @@ type Props = {
 };
 
 const timeRangeMapped: any = {
-  "all": "all",
+  all: "all",
   "1y": "year",
   "30d": "month",
   "7d": "week",
@@ -213,8 +210,15 @@ const GraphCardHeader = ({
   item,
 }: HeaderTitleProps) => {
   const items = [
-    { unit: cryptoCurrencyUnit, value: item.value },
-    { unit: counterValueUnit, value: item.countervalue },
+    {
+      unit: cryptoCurrencyUnit,
+      value: item.value,
+    },
+    {
+      unit: counterValueUnit,
+      value: item.countervalue,
+      joinFragmentsSeparator: " ",
+    },
   ];
 
   const shouldUseCounterValue = countervalueAvailable && useCounterValue;
@@ -241,12 +245,14 @@ const GraphCardHeader = ({
             </Text>
             <TransactionsPendingConfirmationWarning maybeAccount={account} />
           </Flex>
-          <Text variant={"h1"}>
-            <CurrencyUnitValue
-              {...items[0]}
-              disableRounding
-              joinFragmentsSeparator=" "
-            />
+          <Text
+            fontFamily="Inter"
+            fontWeight="semiBold"
+            fontSize="30px"
+            numberOfLines={1}
+            adjustsFontSizeToFit
+          >
+            <CurrencyUnitValue {...items[0]} disableRounding />
           </Text>
           <Flex flexDirection="row" alignItems="center">
             <Delta percent valueChange={valueChange} />
