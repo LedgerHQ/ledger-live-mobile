@@ -2547,13 +2547,13 @@
     invariant "2"
 
 "@ledgerhq/cryptoassets@^6.28.1":
-  version "6.29.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.29.0.tgz#a6728da26b7af8fb64d6eb2e897aff6f87d09190"
-  integrity sha512-+2y59szSyzgM0j+Ew2pYlNd/ntOMqaKWGXK2W+jk994/ui6Cix8Ub06OhLCMjtG5gYaiLK4s3s+RnYf8DbOh7Q==
+  version "6.28.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.28.2.tgz#fabc77c46830348d121452976cdcc19908e0acb2"
+  integrity sha512-i+33VVNE+54HrC0mHly6JXWO6Th+/7n7vNpxjhUQq+1IL3K/ex1HUCwB61O/siDInjq7OZ1Roq9CEx7tAsED2Q==
   dependencies:
     invariant "2"
 
-"@ledgerhq/devices@6.27.1", "@ledgerhq/devices@^6.24.1", "@ledgerhq/devices@^6.27.1":
+"@ledgerhq/devices@6.27.1", "@ledgerhq/devices@^6.27.1":
   version "6.27.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-6.27.1.tgz#3b13ab1d1ba8201e9e74a08f390560483978c962"
   integrity sha512-jX++oy89jtv7Dp2X6gwt3MMkoajel80JFWcdc0HCouwDsV1mVJ3SQdwl/bQU0zd8HI6KebvUP95QTwbQLLK/RQ==
@@ -2726,8 +2726,8 @@
     "@ledgerhq/hw-transport" "^6.27.1"
     "@ledgerhq/logs" "^6.10.0"
     rxjs "6"
-
-"@ledgerhq/hw-transport@6.27.1", "@ledgerhq/hw-transport@^6.24.1", "@ledgerhq/hw-transport@^6.27.1":
+    
+"@ledgerhq/hw-transport@6.27.1", "@ledgerhq/hw-transport@^6.27.1":
   version "6.27.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.27.1.tgz#88072278f69c279cb6569352acd4ae2fec33ace3"
   integrity sha512-hnE4/Fq1YzQI4PA1W0H8tCkI99R3UWDb3pJeZd6/Xs4Qw/q1uiQO+vNLC6KIPPhK0IajUfuI/P2jk0qWcMsuAQ==
@@ -2777,9 +2777,10 @@
     bignumber.js "^9.0.2"
     json-rpc-2.0 "^1.0.0"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#0ce72dd7976ddb47844e3b2e162dd514a46196dc":
+"@ledgerhq/live-common@22.0.3":
   version "22.0.3"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#0ce72dd7976ddb47844e3b2e162dd514a46196dc"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-22.0.3.tgz#d25ed7de09212fb4be4c139f037070ace78de81b"
+  integrity sha512-ypP6nLopyD/uDh8JqvPTdUkCzsfq/cFDxW8RklULrYch0dm9Fnw2L7qRKrlg63GBbUFOl3w6i7nIctz+n4QStA==
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -2905,25 +2906,25 @@
     styled-system "^5.1.5"
     victory-native "^35.5.5"
 
-"@ledgerhq/react-native-hid@6.24.1":
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-6.24.1.tgz#6a5cf8ed513db6430105be3491e71b3a0250c2a0"
-  integrity sha512-xTwWr7q/kWUNVfMIiLEybSzEdRseWopNeV7X91vfhqvlkoESfU9SvuhvTKh41qrt+TrTfExAkgbML3uVlwRUXg==
+"@ledgerhq/react-native-hid@^6.28.2":
+  version "6.28.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-6.28.2.tgz#4d40326c30f6c99acf66ac63e497418ad4b184bf"
+  integrity sha512-vJpFdZCfdsZ7I+3Xw8rWHxwdfhSVHbukqx8Ph1/7Gd7LJOmiDNiKRvL1ma3yyqFHzplssCDt+D6s28hgCZXHxA==
   dependencies:
-    "@ledgerhq/devices" "^6.24.1"
+    "@ledgerhq/devices" "^6.27.1"
     "@ledgerhq/errors" "^6.10.0"
-    "@ledgerhq/hw-transport" "^6.24.1"
+    "@ledgerhq/hw-transport" "^6.27.1"
     "@ledgerhq/logs" "^6.10.0"
     rxjs "6"
 
-"@ledgerhq/react-native-hw-transport-ble@6.25.1":
-  version "6.25.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hw-transport-ble/-/react-native-hw-transport-ble-6.25.1.tgz#01f16438ff69705dcb0943a76ff14ded1b5b9cc5"
-  integrity sha512-7SZtIciiX44T5rLJSdJ011tT8Fnlx2PHVktzrM5fVEdF1IGDbN4g9S25ppd8nLCsNtoNgwq2TPOWWfmvtEXwIw==
+"@ledgerhq/react-native-hw-transport-ble@6.27.1":
+  version "6.27.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hw-transport-ble/-/react-native-hw-transport-ble-6.27.1.tgz#bfd1a6a61a338e9baf1d4a4da36a88b873c2e369"
+  integrity sha512-tHd9BfqWvCMstfgKiL/nAzJti7PAzCO1jWrvswim3wyV5ItZ+mOnfVM4t+pIGZUMQa309i6NaPcjQ2iUNZGdBA==
   dependencies:
-    "@ledgerhq/devices" "^6.24.1"
+    "@ledgerhq/devices" "^6.27.1"
     "@ledgerhq/errors" "^6.10.0"
-    "@ledgerhq/hw-transport" "^6.24.1"
+    "@ledgerhq/hw-transport" "^6.27.1"
     "@ledgerhq/logs" "^6.10.0"
     invariant "^2.2.4"
     react-native-ble-plx "2.0.3"
@@ -7544,11 +7545,6 @@ detect-node@^2.0.4:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.1.0.tgz#c9c70775a49c3d03bc2c06d9a73be550f978f8b1"
   integrity sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==
-
-detox-recorder@^1.0.151:
-  version "1.0.151"
-  resolved "https://registry.yarnpkg.com/detox-recorder/-/detox-recorder-1.0.151.tgz#5d59775dc01ea58595c749aade0420c5ba73dd43"
-  integrity sha512-a4ZPo7AR5XJJiLy8Xqml8YXxrIz6R7RKfiGmG9u5MBxG2I+w+yGJTj7ZhYDfoi5StpUD+dKHTCdvycZTOQ84Cw==
 
 detox@^19.6.5:
   version "19.6.5"

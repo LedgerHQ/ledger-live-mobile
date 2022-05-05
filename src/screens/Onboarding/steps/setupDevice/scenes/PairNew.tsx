@@ -34,7 +34,7 @@ const Next = ({
       type="main"
       size="large"
       onPress={onNext}
-      testID="Onboarding - Pair New Nano"
+      testID="Onboarding-PairNewNano"
     >
       {t(`onboarding.stepPairNew.${deviceModelId}.cta`)}
     </Button>

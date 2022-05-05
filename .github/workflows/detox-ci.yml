@@ -68,7 +68,6 @@ jobs:
       - name: Test iOS app
         timeout-minutes: 15
         run: yarn e2e:test -c ios.staging --loglevel verbose --record-logs failing --record-timeline all --take-screenshots all --record-videos failing --detectOpenHandles
-
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v2
