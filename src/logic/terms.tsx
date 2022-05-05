@@ -4,14 +4,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocale } from "../context/Locale";
 import { urls } from "../config/urls";
 
-// Legacy URL
-export const url =
-  "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
-
-// Legacy URL
-const legacyTermsUrl =
-  "https://raw.githubusercontent.com/LedgerHQ/ledger-live-mobile/master/TERMS.md";
-
 const currentTermsRequired = "2022-05-10";
 const currentLendingTermsRequired = "2020-11-10";
 
@@ -93,29 +85,4 @@ export const useTermsAccept = () => {
   }, []);
 
   return [accepted, accept];
-};
-
-// Legacy code
-export async function load() {
-  const url = legacyTermsUrl;
-  const r = await fetch(url);
-  if (r.status >= 400 && r.status < 600) {
-    throw new Error("");
-  }
-  const markdown = await r.text();
-  return markdown;
-}
-
-// Legacy code
-export const useTerms = () => {
-  const [terms, setTerms] = useState(null);
-  const [error, setError] = useState(null);
-
-  const loadTerms = () => load().then(setTerms, setError);
-
-  useEffect(() => {
-    loadTerms();
-  }, []);
-
-  return [terms, error, loadTerms];
 };
