@@ -194,6 +194,8 @@ export default function DelegationSummary({ navigation, route }: Props) {
     });
   }, [status, account, parentAccount, navigation, transaction]);
 
+  const hasErrors = Object.keys(status.errors).length > 0;
+
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
@@ -271,7 +273,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
           title={<Trans i18nKey="common.continue" />}
           containerStyle={styles.continueButton}
           onPress={onContinue}
-          disabled={bridgePending || !!bridgeError}
+          disabled={bridgePending || !!bridgeError || hasErrors}
           pending={bridgePending}
         />
       </View>
