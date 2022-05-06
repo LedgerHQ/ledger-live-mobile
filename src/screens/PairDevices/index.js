@@ -44,6 +44,7 @@ type PairDevicesProps = {
 
 type RouteParams = {
   onDone?: (device: Device) => void,
+  onlySelectDeviceWithoutCompletePairing?: Boolean,
 };
 
 type BleDevice = {
@@ -110,6 +111,12 @@ function PairDevicesInner({ navigation, route }: Props) {
         modelId: "nanoX",
         wired: false,
       };
+
+      if (route.params?.onlySelectDeviceWithoutCompletePairing) {
+        onDone(device);
+        return;
+      }
+
       dispatch({ type: "pairing", payload: device });
       try {
         const transport = await TransportBLE.open(bleDevice);
