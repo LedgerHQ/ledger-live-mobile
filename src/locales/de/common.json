@@ -400,6 +400,9 @@
     "NotEnoughBalanceInParentAccount": {
       "title": "Unzureichender Saldo auf dem übergeordneten Konto"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "Menge muss mindestens 1 sein"
+    },
     "NotEnoughSpendableBalance": {
       "title": "Kontostand darf nicht unter {{minimumAmount}} liegen"
     },
@@ -828,8 +831,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "The most secure cryptocurrency & NFT wallet",
-      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
+      "title": "Die sicherste Wallet für Kryptowährungen & NFTs",
+      "subtitle": "Verwalten, kaufen und vermehren Sie Ihre Krypto und NFTs auf Ledger Live.",
       "start": "Erste Schritte",
       "noDevice": "Kein Gerät?",
       "buy": "Kaufen Sie ein {{fullDeviceName}}",
@@ -1750,7 +1753,8 @@
       "sectionLabel": "Aufgehobene Delegierung(en)"
     },
     "nft": {
-      "receiveNft": "NFT erhalten"
+      "receiveNft": "NFT erhalten",
+      "howTo": "Um NFTs hinzuzufügen, müssen Sie sie <0>empfangen</0> mit Ihrer <1>{{currency}} Adresse</1>."
     }
   },
   "accounts": {
@@ -1877,7 +1881,7 @@
         "bullet2": "Ledger Live-Version, OS-Region, Sprache und Region"
       },
       "hideEmptyTokenAccounts": "Leere Token-Konten ausblenden",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "Alle leeren Token-Konten auf der Werte-Seite werden ausgeblendet."
     },
     "currencies": {
       "header": "Währungen",
@@ -1900,6 +1904,13 @@
         "title": "Token ausblenden",
         "desc": "Diese Aktion blendet alle <1><0>{tokenName}</0></1> Konten aus, Sie können sie mit <3>Einstellungen > Konten</3> wieder einblenden.",
         "confirm": "Token ausblenden"
+      },
+      "hideNFTCollectionCTA": "Sammlung ausblenden",
+      "hiddenNFTCollections": "Ausgeblendete NFT-Sammlungen",
+      "hiddenNFTCollectionsDesc": "Sie können Token ausblenden, indem Sie zum Konto gehen und dann lange auf eine Sammlung drücken und \"Sammlung ausblenden\" auswählen.",
+      "hideNFTCollectionModal": {
+        "title": "Sammlung ausblenden?",
+        "desc": "Sie können diese Sammlung in den Einstellungen wiedergeben."
       },
       "cryptoAssets": {
         "header": "Krypto-Vermögenswerte",
@@ -3928,6 +3939,20 @@
     "service": "Allgemeine Geschäftsbedingungen",
     "subTitle": "Bitte nehmen Sie sich etwas Zeit, um unsere Nutzungsbedingungen und Datenschutzrichtlinien zu lesen"
   },
+  "updatedTerms": {
+    "title": "Nutzungsbedingungen Update",
+    "body": {
+      "intro": "Hallo! Wir haben unsere Ledger Live Nutzungsbedingungen mit dem Ziel aktualisiert, sie klarer zu machen und die neu verfügbaren Dienste und Funktionen von Ledger Live zu reflektieren. Schlüsselaktualisierungen sind fokussiert auf:",
+      "bulletPoints": [
+        "Welche Dienste verfügbar sind und wie sie funktionieren",
+        "Erläuterung, wie Gebühren für Services funktionieren",
+        "Verbesserung unseres Benachrichtigungsprozesses, um sicherzustellen, dass Sie über alle neuen Änderungen an unseren Nutzungsbedingungen richtig informiert sind"
+      ],
+      "agreement": "Durch Klicken auf \"Weiter\" erklären Sie sich damit einverstanden, dass Sie die unten aufgeführten Nutzungsbedingungen gelesen und akzeptiert haben."
+    },
+    "link": "Nutzungsbedingungen",
+    "cta": "Weiter"
+  },
   "exchange": {
     "buy": {
       "tabTitle": "Kaufen",
@@ -4183,7 +4208,7 @@
       "title": "Aufteilung"
     },
     "operations": {
-      "title": "Vorgänge"
+      "title": "Transaktionsverlauf"
     }
   }
 }
