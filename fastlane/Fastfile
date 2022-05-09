@@ -158,7 +158,7 @@ platform :ios do
       gym(
         scheme: PROJECT_NAME,
         workspace: XCODE_WORKSPACE,
-        silent: true,
+        silent: false,
         skip_profile_detection: true,
         output_directory: OUTPUT_DIRECTORY,
         output_name: "#{PROJECT_NAME}.ipa",
