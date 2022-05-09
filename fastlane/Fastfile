@@ -96,7 +96,7 @@ platform :ios do
     MY_PROFILE = (options[:adhoc] ? "match AdHoc #{MY_APP_BUNDLE_ID}" : "match AppStore #{MY_APP_BUNDLE_ID}")
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
 
-    LEDGER_CONNECT_BUNDLE_ID = "com.ledger.live.ledgerconnect"
+    LEDGER_CONNECT_BUNDLE_ID = "#{MY_APP_BUNDLE_ID}.ledgerconnect"
     LEDGER_CONNECT_APP_ID = LEDGER_CONNECT_BUNDLE_ID
     LEDGER_CONNECT_PROFILE = (options[:adhoc] ? "match AdHoc #{LEDGER_CONNECT_BUNDLE_ID}" : "match AppStore #{LEDGER_CONNECT_BUNDLE_ID}")
 
@@ -141,9 +141,17 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       path: XCODE_PROJECT,
-      code_sign_identity: code_sign_identity,
-      bundle_identifier: MY_APP_ID,
-      profile_name: MY_PROFILE
+      code_sign_identity: code_sign_identity
+    )
+
+    update_code_signing_settings(
+      targets: 'ledgerlivemobile',
+      profile_name: MY_PROFILE,
+    )
+
+    update_code_signing_settings(
+      targets: 'LedgerConnect Extension (iOS)',
+      profile_name: LEDGER_CONNECT_PROFILE,
     )
 
     begin
@@ -156,11 +164,7 @@ platform :ios do
         output_name: "#{PROJECT_NAME}.ipa",
         export_options: {
           method: export_options_method,
-          signingStyle: "manual",
-          provisioningProfiles: {
-              MY_APP_ID => MY_PROFILE,
-              LEDGER_CONNECT_APP_ID => LEDGER_CONNECT_PROFILE
-          }
+          signingStyle: "manual"
         },
       )
     rescue => e
