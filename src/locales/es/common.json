@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Bienvenidos a Ledger",
-      "subtitle": "Administra de manera segura tus cripto desde tu smartphone.",
+      "title": "La billetera más segura para criptodivisas y NFTs",
+      "subtitle": "Gestiona, compra y haz crecer de forma segura tus criptomonedas y NFTs en Ledger Live.",
       "start": "Comenzar",
       "noDevice": "¿No tienes un dispositivo?",
       "buy": "Compra un {{fullDeviceName}}",
@@ -1877,7 +1877,7 @@
         "bullet2": "Versión de Ledger Live, región del SO, idioma y región"
       },
       "hideEmptyTokenAccounts": "Ocultar cuentas de tokens sin saldo",
-      "hideEmptyTokenAccountsDesc": "Ocultar cuentas de tokens sin saldo en la página de Cuentas."
+      "hideEmptyTokenAccountsDesc": "Se ocultarán todas las cuentas de token vacías en la página de Activos."
     },
     "currencies": {
       "header": "Divisas",
@@ -2675,7 +2675,7 @@
       "title": "Cancelar agregar cuenta",
       "desc": "¿Deseas cancelar la agregación de cuentas?"
     },
-    "imported": "Cuentas agregadas correctamente",
+    "imported": "Activo añadido con éxito",
     "sections": {
       "importable": {
         "title": "Agregar cuenta existente"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "Visualiza tus cuentas o agrega otras cuentas",
-      "secondaryCTA": "Agregar otras cuentas",
-      "cta": "Ir a Cuentas"
+      "secondaryCTA": "Añadir un nuevo activo",
+      "cta": "Ver tu activo"
     },
     "stopScanning": "Detener escaneo",
     "retryScanning": "Volver a intentar el escaneo",
@@ -2791,12 +2791,12 @@
     "title": "Emparejar nuevo dispositivo",
     "bluetooth": {
       "title": "Conectar por Bluetooth...",
-      "label": "Detectar tu Nano automáticamente"
+      "label": "Automatically detect your Nano"
     },
-    "deviceNotFoundPairNewDevice": "Agregar nuevo Ledger Nano X",
+    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
     "headerDescription": "Asegúrate de que tu {{productName}} esté desbloqueado y el Bluetooth habilitado",
-    "usb": "... o conecta el cable USB",
-    "usbLabel": "Conecta el cable USB e ingresa el código PIN en el dispositivo",
+    "usb": "... or plug USB cable",
+    "usbLabel": "Plug your cable and enter your PIN Code on your device",
     "withoutDeviceHeader": "No llevo el dispositivo conmigo",
     "withoutDevice": "Continuar sin mi dispositivo",
     "steps": {

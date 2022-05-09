@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "欢迎使用 Ledger",
-      "subtitle": "通过您的手机来安全管理您的加密资产。",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "快速入门",
       "noDevice": "没有设备？",
       "buy": "购买一个 {{fullDeviceName}}",
@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live 版本、操作系统区域、语言和地区"
       },
       "hideEmptyTokenAccounts": "隐藏空的代币帐户",
-      "hideEmptyTokenAccountsDesc": "在账户页面隐藏空的代币帐户。"
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "币种",
@@ -2675,7 +2675,7 @@
       "title": "取消添加账户",
       "desc": "您确定要取消添加账户？"
     },
-    "imported": "账户已成功添加",
+    "imported": "Asset added successfully",
     "sections": {
       "importable": {
         "title": "添加现有账户"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "查看您的账户或添加其他账户",
-      "secondaryCTA": "添加其他账户",
-      "cta": "前往账户"
+      "secondaryCTA": "Add new asset",
+      "cta": "See your asset"
     },
     "stopScanning": "停止扫描",
     "retryScanning": "重试扫描",
@@ -2791,12 +2791,12 @@
     "title": "配对新设备",
     "bluetooth": {
       "title": "通过蓝牙连接……",
-      "label": "自动检测您的 Nano"
+      "label": "Automatically detect your Nano"
     },
-    "deviceNotFoundPairNewDevice": "添加新的 Ledger Nano X",
+    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
     "headerDescription": "请确保您的 {{productName}} 处于解锁状态并已开启蓝牙",
-    "usb": "……或连接 USB 数据线",
-    "usbLabel": "连接 USB 数据线并在您的设备上输入您的 PIN 识别密码",
+    "usb": "... or plug USB cable",
+    "usbLabel": "Plug your cable and enter your PIN Code on your device",
     "withoutDeviceHeader": "设备不在我身边",
     "withoutDevice": "在不使用我的设备的情况下继续",
     "steps": {

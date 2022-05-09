@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Bienvenue chez Ledger",
-      "subtitle": "Gérez vos cryptos en toute sécurité depuis votre smartphone.",
+      "title": "Le wallet de cryptomonnaies et NFT le plus sécurisé",
+      "subtitle": "Gérez, achetez et faites fructifier vos cryptos et NFT en toute sécurité sur Ledger Live.",
       "start": "Commencer",
       "noDevice": "Pas encore de wallet Ledger ?",
       "buy": "Achetez un {{fullDeviceName}}.",
@@ -1584,7 +1584,7 @@
       "redelegatedAmount": "Montant redélégué",
       "undelegated": "Délégation interrompue ({{amount}})",
       "undelegatedFrom": "Délégation interrompue de",
-      "undelegatedAmount": "Montant de délégation interrompue",
+      "undelegatedAmount": "Montant de la délégation interrompue",
       "rewardFrom": "Récompense de",
       "rewardAmount": "Montant touché",
       "memo": "Mémo",
@@ -1877,7 +1877,7 @@
         "bullet2": "Version, région du système, langue et région de Ledger Live"
       },
       "hideEmptyTokenAccounts": "Masquer les comptes de tokens vides",
-      "hideEmptyTokenAccountsDesc": "Cacher les comptes de tokens vides sur la page Comptes."
+      "hideEmptyTokenAccountsDesc": "Tous les comptes de tokens vides de la page Actifs seront masqués."
     },
     "currencies": {
       "header": "Devises",
@@ -2675,7 +2675,7 @@
       "title": "Annuler l'ajout de compte",
       "desc": "Voulez-vous vraiment annuler l'ajout de comptes ?"
     },
-    "imported": "Comptes bien ajoutés",
+    "imported": "Actif bien ajouté",
     "sections": {
       "importable": {
         "title": "Ajouter un compte existant"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "Accédez à vos comptes ou ajoutez d'autres comptes.",
-      "secondaryCTA": "Ajouter d'autres comptes",
-      "cta": "Accéder aux Comptes"
+      "secondaryCTA": "Ajouter un nouvel actif",
+      "cta": "Afficher votre actif"
     },
     "stopScanning": "Mettre fin au balayage",
     "retryScanning": "Réessayer le balayage",
@@ -2791,11 +2791,11 @@
     "title": "Coupler un nouvel appareil",
     "bluetooth": {
       "title": "Connexion via Bluetooth",
-      "label": "Détectez automatiquement votre Nano."
+      "label": "Détecter automatiquement votre Nano"
     },
-    "deviceNotFoundPairNewDevice": "Ajouter un nouveau Nano X",
+    "deviceNotFoundPairNewDevice": "Coupler via Bluetooth",
     "headerDescription": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé.",
-    "usb": "Connexion avec un câble USB",
+    "usb": "...ou connecter avec un câble USB",
     "usbLabel": "Connectez votre câble USB et entrez votre code PIN sur votre appareil.",
     "withoutDeviceHeader": "Je n'ai pas mon appareil.",
     "withoutDevice": "Continuer sans mon appareil",
@@ -3371,7 +3371,7 @@
         "summary": "Récapitulatif",
         "selectDevice": "Sélectionner l'appareil",
         "connectDevice": "Connecter l'appareil",
-        "stepRange": "Étape {{currentStep}} de {{totalSteps}}"
+        "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
       },
       "flow": {
         "steps": {

@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "ようこそ、Ledgerへ",
-      "subtitle": "スマートフォンで暗号資産を安全に管理しましょう。",
+      "title": "最も安全な暗号資産とNFTのウォレット",
+      "subtitle": "Ledger Liveで、暗号資産とNFTを安全に管理・購入・運用しましょう。",
       "start": "はじめる",
       "noDevice": "デバイスをお持ちでない場合",
       "buy": "{{fullDeviceName}}を購入",
@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Liveのバージョンと、OSのリージョン、言語、地域"
       },
       "hideEmptyTokenAccounts": "未使用アカウントを非表示にする",
-      "hideEmptyTokenAccountsDesc": "アカウントページで、未使用アカウントを非表示にする。"
+      "hideEmptyTokenAccountsDesc": "資産ページでは、全ての空のトークンアカウントが非表示になります。"
     },
     "currencies": {
       "header": "通貨",
@@ -1938,7 +1938,7 @@
       "exportLogs": "ログを保存",
       "exportLogsDesc": "トラブルを解決するために、Ledger Liveログの保存が必要になる場合があります。",
       "hardReset": "Ledger Liveをリセット",
-      "hardResetDesc": "この操作は、資産には影響しません。アカウントデータやトランザクション履歴、設定など、Ledger Live上のすべてのデータを消去します。Ledgerデバイスを使って、初期化されたLedger Liveに暗号資産を再び読み込んで管理することも可能です。",
+      "hardResetDesc": "この操作は、資産には影響しません。アカウントデータやトランザクション履歴、設定など、Ledger Live上の全データを消去します。Ledgerデバイスを使って、初期化されたLedger Liveに暗号資産を再び読み込んで管理することも可能です。",
       "repairDevice": "Ledgerデバイスを修理する",
       "repairDeviceDesc": "デバイスのアップデート中に問題が発生し、アップデートを再開できない場合は、この方法でデバイスの修復を試みてください。"
     },
@@ -2675,7 +2675,7 @@
       "title": "アカウントの追加を取り消す",
       "desc": "アカウントの追加をキャンセルしますか？"
     },
-    "imported": "アカウントが正常に追加されました。",
+    "imported": "資産が正常に追加されました",
     "sections": {
       "importable": {
         "title": "既存のアカウントを追加"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "アカウントを表示、または他のアカウントを追加",
-      "secondaryCTA": "他のアカウントを追加する",
-      "cta": "アカウントに移動"
+      "secondaryCTA": "新しい資産を追加",
+      "cta": "資産を見る"
     },
     "stopScanning": "スキャン停止",
     "retryScanning": "スキャンの再試行",
@@ -2791,12 +2791,12 @@
     "title": "新しいデバイスのペアリング",
     "bluetooth": {
       "title": "Bluetoothで接続...",
-      "label": "Nanoを自動的に検出"
+      "label": "Nanoを自動検出します"
     },
-    "deviceNotFoundPairNewDevice": "新しいLedger Nano Xを追加する",
+    "deviceNotFoundPairNewDevice": "Bluetoothとペアリングする",
     "headerDescription": "{{productName}}のロックが解除され、Bluetoothが有効になっていることを確認してください。",
     "usb": "...またはUSBケーブルで接続",
-    "usbLabel": "USBケーブルを接続し、デバイスにPINコードを入力",
+    "usbLabel": "USBケーブルを接続して、デバイスにPINコードを入力してください",
     "withoutDeviceHeader": "現在、デバイスを持っていません。",
     "withoutDevice": "デバイスを使用せずに続行する",
     "steps": {
@@ -2905,7 +2905,7 @@
     "intallParentApp": "{{appName}}アプリをインストールしてください",
     "readOnly": {
       "title": "Nano X",
-      "description": "Ledger LiveにLedger Nano Xに設定して、いつでも好きな場所からアプリのインストールやアカウントの作成、安全な取引を行いましょう。",
+      "description": "Ledger Nano XにLedger Liveを設定して、時間や場所を問わずアプリのインストールやアカウントの作成、安全な取引を行いましょう。",
       "question": "Ledger Nano Xをお持ちですか？",
       "button": "Nano Xのセットアップを開始",
       "noDevice": "デバイスをお持ちでない場合",

@@ -828,8 +828,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Willkommen bei Ledger",
-      "subtitle": "Verwalten Sie Ihre Kryptos sicher von Ihrem Smartphone aus.",
+      "title": "The most secure cryptocurrency & NFT wallet",
+      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
       "start": "Erste Schritte",
       "noDevice": "Kein Gerät?",
       "buy": "Kaufen Sie ein {{fullDeviceName}}",
@@ -1877,7 +1877,7 @@
         "bullet2": "Ledger Live-Version, OS-Region, Sprache und Region"
       },
       "hideEmptyTokenAccounts": "Leere Token-Konten ausblenden",
-      "hideEmptyTokenAccountsDesc": "Leere Token-Konten auf der Seite Konten ausblenden."
+      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
     },
     "currencies": {
       "header": "Währungen",
@@ -2675,7 +2675,7 @@
       "title": "Konto hinzufügen abbrechen",
       "desc": "Sind Sie sicher, dass Sie das Hinzufügen von Konten abbrechen möchten?"
     },
-    "imported": "Konten erfolgreich hinzugefügt",
+    "imported": "Vermögenswert erfolgreich hinzugefügt",
     "sections": {
       "importable": {
         "title": "Vorhandenes Konto hinzufügen"
@@ -2692,8 +2692,8 @@
     },
     "success": {
       "desc": "Ihre Konten anzeigen oder andere Konten hinzufügen",
-      "secondaryCTA": "Andere Konten hinzufügen",
-      "cta": "Zu Konten gehen"
+      "secondaryCTA": "Neuen Vermögenswert hinzufügen",
+      "cta": "Ihre Vermögenswerte anzeigen"
     },
     "stopScanning": "Scannen stoppen",
     "retryScanning": "Scanversuch wiederholen",
@@ -2791,12 +2791,12 @@
     "title": "Neues Gerät koppeln",
     "bluetooth": {
       "title": "Über Bluetooth verbinden...",
-      "label": "Ihren Nano automatisch erkennen"
+      "label": "Nano automatisch erkennen"
     },
-    "deviceNotFoundPairNewDevice": "Neuen Ledger Nano X hinzufügen",
+    "deviceNotFoundPairNewDevice": "Mit Bluetooth verbinden",
     "headerDescription": "Bitte stellen Sie sicher, dass Ihr {{productName}} entsperrt ist, wenn Bluetooth aktiviert ist",
     "usb": "... oder USB-Kabel anschließen",
-    "usbLabel": "Schließen Sie das USB-Kabel an und geben Sie Ihren PIN-Code auf Ihrem Gerät ein",
+    "usbLabel": "Stecken Sie Ihr Kabel an und geben Sie Ihren PIN-Code auf Ihrem Gerät ein",
     "withoutDeviceHeader": "Ich habe mein Gerät nicht dabei",
     "withoutDevice": "Weiter ohne mein Gerät",
     "steps": {
