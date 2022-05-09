@@ -135,11 +135,16 @@ platform :ios do
     update_info_plist(
       xcodeproj: XCODE_PROJECT,
       plist_path: "ledgerlivemobile/Info.plist",
-      display_name: ENV["APP_NAME"],
-      app_identifier: MY_APP_BUNDLE_ID
+      display_name: ENV["APP_NAME"]
     )
 
-    update_info_plist(
+    update_app_identifier(
+      xcodeproj: XCODE_PROJECT,
+      plist_path: "ledgerlivemobile/Info.plist",
+      display_name: ENV["APP_NAME"]
+    )
+
+    update_app_identifier(
       xcodeproj: XCODE_PROJECT,
       plist_path: "LedgerConnect/Info.plist",
       app_identifier: LEDGER_CONNECT_BUNDLE_ID
