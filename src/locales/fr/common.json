@@ -2801,8 +2801,8 @@
   "SelectDevice": {
     "title": "Coupler un nouvel appareil",
     "bluetooth": {
-      "title": "Connexion via Bluetooth",
-      "label": "Détecter automatiquement votre Nano"
+      "title": "Se connecter en Bluetooth",
+      "label": "Détectez automatiquement votre Nano"
     },
     "deviceNotFoundPairNewDevice": "Coupler via Bluetooth",
     "headerDescription": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé.",
