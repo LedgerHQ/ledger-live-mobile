@@ -136,6 +136,13 @@ platform :ios do
       xcodeproj: XCODE_PROJECT,
       plist_path: "ledgerlivemobile/Info.plist",
       display_name: ENV["APP_NAME"],
+      app_identifier: MY_APP_BUNDLE_ID
+    )
+
+    update_info_plist(
+      xcodeproj: XCODE_PROJECT,
+      plist_path: "LedgerConnect/Info.plist",
+      app_identifier: LEDGER_CONNECT_BUNDLE_ID
     )
 
     update_code_signing_settings(
