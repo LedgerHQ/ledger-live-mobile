@@ -145,11 +145,13 @@ platform :ios do
     )
 
     update_code_signing_settings(
+      path: XCODE_PROJECT,
       targets: 'ledgerlivemobile',
       profile_name: MY_PROFILE,
     )
 
     update_code_signing_settings(
+      path: XCODE_PROJECT,
       targets: 'LedgerConnect Extension (iOS)',
       profile_name: LEDGER_CONNECT_PROFILE,
     )
