@@ -401,7 +401,7 @@
       "title": "Ana hesapta yetersiz bakiye"
     },
     "QuantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "Miktar en az 1 olmalıdır"
     },
     "NotEnoughSpendableBalance": {
       "title": "Bakiye {{minimumAmount}} altında olamaz"
@@ -1754,7 +1754,7 @@
     },
     "nft": {
       "receiveNft": "NFT Al",
-      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+      "howTo": "NFT'leri eklemek için <1>{{currency}} adresinizi</1> kullanarak <0>onları hesabınıza almanız</0> gerekir."
     }
   },
   "accounts": {
@@ -1905,12 +1905,12 @@
         "desc": "Bu işlem tüm <1><0>{tokenName}</0></1> hesaplarını gizler; tekrar görünür kılmak için <3>Ayarlar &gt; Hesaplar</3> kısmını kullanabilirsiniz.",
         "confirm": "Token'ı gizle"
       },
-      "hideNFTCollectionCTA": "Hide collection",
-      "hiddenNFTCollections": "Hidden NFT collections",
-      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionCTA": "Koleksiyonu gizle",
+      "hiddenNFTCollections": "Gizli NFT koleksiyonları",
+      "hiddenNFTCollectionsDesc": "Token'ları gizlemek için hesaba gidip istediğiniz koleksiyona uzun basın ve \"Koleksiyonu Gizle\" seçeneğini seçin.",
       "hideNFTCollectionModal": {
-        "title": "Hide Collection?",
-        "desc": "You can unhide this collection in the setting options."
+        "title": "Koleksiyonu Gizle?",
+        "desc": "Bu koleksiyonu ayarlardaki seçenekleri kullanarak açabilirsiniz."
       },
       "cryptoAssets": {
         "header": "Kripto varlıklar",
@@ -2802,12 +2802,12 @@
     "title": "Yeni cihaz eşleme",
     "bluetooth": {
       "title": "Bluetooth ile bağlanın...",
-      "label": "Automatically detect your Nano"
+      "label": "Nano'nuzu otomatik tespit edin"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "Bluetooth ile eşleştirin",
     "headerDescription": "{{productName}} cihazınızın kilidinin açıldığından ve Bluetooth'un etkin olduğundan emin olun",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "... ya da USB kablosuyla bağlayın",
+    "usbLabel": "Kablonuzu takın ve cihazınıza PIN Kodunuzu girin",
     "withoutDeviceHeader": "Cihazım yanımda değil",
     "withoutDevice": "Cihazım olmadan devam et",
     "steps": {
@@ -3940,17 +3940,17 @@
     "subTitle": "Hizmet Koşulları ve Gizlilik Politikamızı incelemek için lütfen biraz zaman ayırın"
   },
   "updatedTerms": {
-    "title": "Terms of Use Update",
+    "title": "Kullanım Koşullarında Güncelleme",
     "body": {
-      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "intro": "Merhaba! Ledger Live'ın Kullanım Koşullarını daha kolay anlaşılır hale getirmek ve Ledger Live'ın yeni hizmetlerini ve özelliklerini kapsayabilmeleri amacıyla güncelledik. Anahtar güncellemeler bu unsurlara odaklanmaktadır:",
       "bulletPoints": [
-        "Clarifying what services are available and how they work",
-        "Explaining how fees for Services work",
-        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+        "Hangi hizmetlerin mevcut olduğunu ve nasıl çalıştıklarını açıklığa kavuşturma",
+        "Hizmetler için ücretlendirmelerin nasıl çalıştığını açıklama",
+        "Bildirim gönderme sürecimizi, Kullanım Koşullarımızdaki tüm yeni değişiklikler hakkında doğru bir şekilde haberdar olmanızı temin edecek şekilde geliştirme"
       ],
-      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+      "agreement": "\"Devam Et\" butonuna tıklayarak aşağıdaki Kullanım Koşullarını okuduğunuzu ve onayladığınızı kabul etmiş sayılırsınız."
     },
-    "link": "Terms of Use",
+    "link": "Kullanım Koşulları",
     "cta": "Devam"
   },
   "exchange": {
@@ -4208,7 +4208,7 @@
       "title": "Dağılım"
     },
     "operations": {
-      "title": "Transaction history"
+      "title": "İşlem geçmişi"
     }
   }
 }
