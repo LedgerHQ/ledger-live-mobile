@@ -2806,8 +2806,8 @@
     },
     "deviceNotFoundPairNewDevice": "Emparejar con bluetooth",
     "headerDescription": "Asegúrate de que tu {{productName}} esté desbloqueado y el Bluetooth habilitado",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "... o conecta el cable USB",
+    "usbLabel": "Conecta el cable USB e ingresa el código PIN en el dispositivo",
     "withoutDeviceHeader": "No llevo el dispositivo conmigo",
     "withoutDevice": "Continuar sin mi dispositivo",
     "steps": {
@@ -3940,17 +3940,17 @@
     "subTitle": "Por favor, dedica algo de tiempo a revisar nuestros Términos de servicio y Política de privacidad"
   },
   "updatedTerms": {
-    "title": "Terms of Use Update",
+    "title": "Actualización de Términos de Uso",
     "body": {
-      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "intro": "¡Hola! Hemos actualizado nuestros Términos de Ledger Live con el objetivo de hacerlos más claros y reflejar los nuevos servicios y características disponibles de Ledger Live. Las actualizaciones principales se refieren a:",
       "bulletPoints": [
-        "Clarifying what services are available and how they work",
-        "Explaining how fees for Services work",
-        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+        "Aclarar qué servicios están disponibles y cómo funcionan",
+        "Explicar cómo funcionan las tarifas de los servicios",
+        "Mejorar nuestro proceso de notificación para tener la certeza de que estás correctamente informado de cualquier cambio en nuestros Términos de Uso"
       ],
-      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+      "agreement": "Al hacer clic en \"Continuar\", confirmas que has leído y aceptas los términos de uso a continuación."
     },
-    "link": "Terms of Use",
+    "link": "Términos de uso",
     "cta": "Continuar"
   },
   "exchange": {
@@ -4208,7 +4208,7 @@
       "title": "Asignación"
     },
     "operations": {
-      "title": "Transaction history"
+      "title": "Historial de transacciones"
     }
   }
 }
