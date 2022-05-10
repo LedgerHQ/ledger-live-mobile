@@ -141,7 +141,7 @@ platform :ios do
     update_app_identifier(
       xcodeproj: XCODE_PROJECT,
       plist_path: "ledgerlivemobile/Info.plist",
-      display_name: ENV["APP_NAME"]
+      app_identifier: MY_APP_BUNDLE_ID
     )
 
     update_app_identifier(
