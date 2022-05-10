@@ -85,10 +85,9 @@ export default function SelectAccountCurrency({
         currency,
         mode: flow,
         onAccountChange,
-        tuples: availableAccounts,
       },
     });
-  }, [navigation, currency, flow, availableAccounts, onAccountChange]);
+  }, [navigation, currency, flow, onAccountChange]);
 
   const onContinue = useCallback(() => {
     if (account) {

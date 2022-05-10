@@ -8,6 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import React, { useCallback, useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 import { TrackScreen } from "../../analytics";
 import AccountCard from "../../components/AccountCard";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -17,7 +18,8 @@ import { NavigatorName, ScreenName } from "../../const";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import InfoIcon from "../../icons/Info";
-import type { AccountTuple } from "./hooks";
+import { accountsSelector } from "../../reducers/accounts";
+import { getAccountTuplesForCurrency } from "./hooks";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
@@ -28,7 +30,6 @@ type Props = {
       mode: "buy" | "sell",
       currency: CryptoCurrency | TokenCurrency,
       onAccountChange: (selectedAccount: Account | AccountLike) => void,
-      tuples: AccountTuple[],
       analyticsPropertyFlow?: string,
     },
   },
@@ -41,11 +42,17 @@ export default function SelectAccount({ navigation, route }: Props) {
     currency,
     analyticsPropertyFlow,
     onAccountChange,
-    tuples,
   } = route.params;
 
+  const accounts = useSelector(accountsSelector);
+
+  const availableAccounts = useMemo(
+    () => (currency ? getAccountTuplesForCurrency(currency, accounts) : []),
+    [currency, accounts],
+  );
+
   const enhancedAccounts = useMemo(() => {
-    const filteredAccounts = tuples
+    const filteredAccounts = availableAccounts
       .map(t => t.account)
       .filter(
         acc =>
@@ -62,12 +69,12 @@ export default function SelectAccount({ navigation, route }: Props) {
       );
     }
     return filteredAccounts;
-  }, [tuples, currency]);
+  }, [availableAccounts, currency]);
 
   const allAccounts = useMemo(() => {
     const accounts = enhancedAccounts;
     if (currency.type === "TokenCurrency") {
-      const subAccounts = tuples.map(t => t.subAccount);
+      const subAccounts = availableAccounts.map(t => t.subAccount);
 
       for (let i = 0; i < subAccounts.length; i++) {
         accounts.push(subAccounts[i]);
@@ -75,7 +82,7 @@ export default function SelectAccount({ navigation, route }: Props) {
     }
 
     return accounts;
-  }, [enhancedAccounts, currency, tuples]);
+  }, [enhancedAccounts, currency.type, availableAccounts]);
 
   const { t } = useTranslation();
 
