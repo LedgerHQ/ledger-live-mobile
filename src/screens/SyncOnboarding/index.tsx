@@ -6,12 +6,18 @@ import {
   extractOnboardingState,
 } from "@ledgerhq/live-common/lib/hw/extractOnboardingState";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-// import SelectDevice from "../../components/SelectDevice";
-import { from, Subscription, timer } from "rxjs";
+import { from, of, Subscription, throwError, timer } from "rxjs";
+import {
+  mergeMap,
+  concatMap,
+  delayWhen,
+  map,
+  tap,
+  retryWhen,
+} from "rxjs/operators";
 import getVersion from "@ledgerhq/live-common/lib/hw/getVersion";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { TransportStatusError } from "@ledgerhq/errors";
-import { catchError, concatMap, delayWhen, map, tap } from "rxjs/operators";
 import { FirmwareInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { ScreenName } from "../../const";
 
@@ -74,19 +80,32 @@ export const SyncOnboarding = ({
           concatMap(() =>
             withDevice(device.deviceId)(t => from(getVersion(t))),
           ),
-          catchError((error, caught) => {
-            if (
-              error &&
-              error instanceof TransportStatusError &&
-              // @ts-expect-error TransportStatusError is not a class
-              error.statusCode === 0x6d06
-            ) {
-              // Retries with an offset delay
-              return caught.pipe(delayWhen(() => timer(1000)));
-            }
-
-            throw error;
-          }),
+          retryWhen(errors =>
+            errors.pipe(
+              mergeMap(error => {
+                if (
+                  error &&
+                  error instanceof TransportStatusError &&
+                  // @ts-expect-error TransportStatusError is not a class
+                  error.statusCode === 0x6d06
+                ) {
+                  console.log(
+                    `SyncOnboarding: 0x6d06 error 🔨 ${JSON.stringify(error)}`,
+                  );
+                  return of(error);
+                }
+                console.log(
+                  `SyncOnboarding: 💥 Error ${error} -> ${JSON.stringify(
+                    error,
+                  )}`,
+                );
+                return throwError(error);
+              }),
+              tap(() => console.log("Going to retry in 🕐️ ...")),
+              delayWhen(() => timer(2000)),
+              tap(() => console.log("Retrying 🏃️ !")),
+            ),
+          ),
           map((deviceVersion: FirmwareInfo) =>
             extractOnboardingState(deviceVersion.flags),
           ),
@@ -105,8 +124,9 @@ export const SyncOnboarding = ({
             }
           },
           error: error =>
+            // TODO: handle error {"name":"DisconnectedDevice","message":"DisconnectedDevice"}
             console.log(
-              `SyncOnboarding: error while polling ${error} -> ${JSON.stringify(
+              `SyncOnboarding: error ending polling ${error} -> ${JSON.stringify(
                 { error },
               )}`,
             ),
@@ -143,7 +163,7 @@ export const SyncOnboarding = ({
   // it does not matter.
   // So as long as the device is not onboarded, the LLM will ask for a pairing.
   useEffect(() => {
-    console.log("navigate to pairDevice");
+    console.log("SyncOnboarding: navigate to pairDevices");
 
     // TODO: fix onDone only scalar value no function for navigate to work
     // @ts-expect-error navigation issue
