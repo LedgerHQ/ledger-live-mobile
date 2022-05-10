@@ -1,16 +1,28 @@
 import React from "react";
-import { useTheme } from "styled-components/native";
 import { Flex } from "@ledgerhq/native-ui";
-import { TouchableOpacity } from "react-native";
+import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
 import Svg, { Path } from "react-native-svg";
+import { BAR_HEIGHT, HAS_GRADIENT } from "./shared";
+import BackgroundGradient from "./BackgroundGradient";
 
 type SvgProps = {
   color: string;
 };
 
+// const DEBUG_ZONES = true;
+const DEBUG_ZONES = false;
+
+const getBgColor = (colors: any) => colors.neutral.c20;
+
 function TabBarShape({ color }: SvgProps) {
   return (
-    <Svg width={375} height="56" viewBox="0 0 375 56" fill="none">
+    <Svg
+      width={375}
+      height={BAR_HEIGHT}
+      viewBox={`0 0 375 ${BAR_HEIGHT}`}
+      fill="none"
+    >
       <Path d="M0 0H80V56H0V0Z" fill={color} />
       <Path
         d="M80 0H130.836C140.091 0 148.208 6.17679 150.676 15.097L151.848 19.3368C156.369 35.6819 171.243 47 188.202 47C205.439 47 220.484 35.3142 224.748 18.6125L225.645 15.097C227.913 6.21473 235.914 0 245.081 0H295V56H80V0Z"
@@ -21,47 +33,50 @@ function TabBarShape({ color }: SvgProps) {
   );
 }
 
+const BackgroundFiller = styled(Flex).attrs(p => ({
+  position: "absolute",
+  height: BAR_HEIGHT,
+  width: "30%",
+  backgroundColor: DEBUG_ZONES ? "lightgreen" : getBgColor(p.theme.colors),
+}))``;
+
+const BottomFiller = styled(Flex).attrs(p => ({
+  position: "absolute",
+  width: "100%",
+  backgroundColor: DEBUG_ZONES ? "lightblue" : getBgColor(p.theme.colors),
+}))``;
+
 export default function CustomTabBar({
   state,
   descriptors,
   navigation,
   colors,
-}: any) {
+  insets,
+}: any): JSX.Element {
+  const bgColor = getBgColor(colors);
+  const { bottom: bottomInset } = insets;
   return (
     <Flex
-      style={{ backgroundColor: "rgba(0,0,0,0)" }}
       width="100%"
       flexDirection="row"
       height={56}
+      bottom={bottomInset}
       position="absolute"
-      bottom={0}
+      overflow="visible"
     >
-      <Flex
-        position="absolute"
-        bottom={0}
-        left={0}
-        width="30%"
-        bg="neutral.c30"
-        height="56"
-      />
-      <Flex
-        position="absolute"
-        bottom={0}
-        right={0}
-        width="30%"
-        bg="neutral.c30"
-        height="56"
-      />
+      {HAS_GRADIENT && <BackgroundGradient colors={colors} />}
+      <BottomFiller bottom={-bottomInset} height={bottomInset} />
+      <BackgroundFiller left={0} />
+      <BackgroundFiller right={0} />
       <Flex
         flexDirection="row"
         justifyContent="center"
         alignItems="center"
         position="absolute"
-        bottom={0}
         left={-2}
         right={0}
       >
-        <TabBarShape color={colors.neutral.c30} />
+        <TabBarShape color={DEBUG_ZONES ? "lightcoral" : bgColor} />
       </Flex>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -94,6 +109,31 @@ export default function CustomTabBar({
             target: route.key,
           });
         };
+
+        if (index === 2) {
+          return (
+            <>
+              <Flex flex={1} />
+              <Flex
+                pointerEvents="box-none"
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  top: undefined,
+                  bottom: -bottomInset,
+                  height: Dimensions.get("screen").height,
+                  flex: 1,
+                  alignItems: "center",
+                  zIndex: 1,
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Icon
+                  color={isFocused ? colors.primary.c80 : colors.neutral.c80}
+                />
+              </Flex>
+            </>
+          );
+        }
 
         return (
           <TouchableOpacity

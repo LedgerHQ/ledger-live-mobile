@@ -16,7 +16,6 @@ import { Box, Flex, Link as TextLink, Text } from "@ledgerhq/native-ui";
 import styled, { useTheme } from "styled-components/native";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
 import proxyStyled from "@ledgerhq/native-ui/components/styled";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { PlusMedium } from "@ledgerhq/native-ui/assets/icons";
 import { Currency } from "@ledgerhq/live-common/lib/types";
 import { useRefreshAccountsOrdering } from "../../actions/general";
@@ -45,6 +44,7 @@ import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import { useProviders } from "../Swap/SwapEntry";
 import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
 import CheckTermOfUseUpdate from "../../components/CheckTermOfUseUpdate";
+import TabBarSafeAreaView from "../../components/TabBar/TabBarSafeAreaView";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -69,10 +69,7 @@ const StyledTouchableOpacity = proxyStyled.TouchableOpacity.attrs({
   my: -5,
 })``;
 
-const ContentContainer = styled(SafeAreaView).attrs({
-  /** This view doesn't touch the bottom of the screen https://github.com/th3rdwave/react-native-safe-area-context#edges */
-  edges: ["top", "left", "right"],
-})`
+const ContentContainer = styled(TabBarSafeAreaView)`
   flex: 1;
 `;
 
@@ -304,7 +301,7 @@ function PortfolioScreen({ navigation }: Props) {
         </Box>
         <AnimatedFlatListWithRefreshControl
           data={data}
-          style={{ flex: 1, position: "relative" }}
+          style={{ flex: 1, position: "relative", backgroundColor: "transparent" }}
           renderItem={({ item }: { item: React.ReactNode }) => item}
           keyExtractor={(_: any, index: number) => String(index)}
           showsVerticalScrollIndicator={false}
