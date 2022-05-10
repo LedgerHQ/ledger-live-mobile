@@ -401,7 +401,7 @@
       "title": "親アカウントに十分な残高がありません。"
     },
     "QuantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "数量は最低1以上である必要があります"
     },
     "NotEnoughSpendableBalance": {
       "title": "残高が{{minimumAmount}}を下回ることはできません。"
@@ -1754,7 +1754,7 @@
     },
     "nft": {
       "receiveNft": "NFTを受け取る",
-      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+      "howTo": "NFTを追加するには、<1>{{currency}}アドレス</1>を使用して<0>受け取る</0>必要があります。"
     }
   },
   "accounts": {
@@ -1905,12 +1905,12 @@
         "desc": "この操作により、すべての<1><0>{tokenName}</0></1>アカウントが非表示になります。<3>設定 > アカウント</3>から再度表示することができます。",
         "confirm": "トークンを非表示"
       },
-      "hideNFTCollectionCTA": "Hide collection",
-      "hiddenNFTCollections": "Hidden NFT collections",
-      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionCTA": "コレクションを非表示",
+      "hiddenNFTCollections": "非表示のNFTコレクション",
+      "hiddenNFTCollectionsDesc": "NFTを非表示にするには、アカウントで該当するコレクションを長押して「コレクションを非表示」を選択してください。",
       "hideNFTCollectionModal": {
-        "title": "Hide Collection?",
-        "desc": "You can unhide this collection in the setting options."
+        "title": "コレクションを非表示にしますか?",
+        "desc": "設定オプションでコレクションの非表示を解除することができます。"
       },
       "cryptoAssets": {
         "header": "暗号資産",
@@ -3940,17 +3940,17 @@
     "subTitle": "サービス利用規約とプライバシーポリシーをご確認ください。"
   },
   "updatedTerms": {
-    "title": "Terms of Use Update",
+    "title": "利用規約の更新",
     "body": {
-      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "intro": "こんにちは! より明確にLedger Liveの新しいサービスと機能を反映させるため、Ledger Liveの利用規約のアップデートしました。 キーアップデートの内容：",
       "bulletPoints": [
-        "Clarifying what services are available and how they work",
-        "Explaining how fees for Services work",
-        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+        "利用可能なサービスと機能の内容を明確にする",
+        "サービス料金の仕組みを説明する",
+        "利用規約の変更が正しく通知されるように、通知プロセスを改善する"
       ],
-      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+      "agreement": "「続行」をクリックすると、以下の利用規約を読み、同意したことになります。"
     },
-    "link": "Terms of Use",
+    "link": "利用規約",
     "cta": "続行"
   },
   "exchange": {
@@ -4208,7 +4208,7 @@
       "title": "配分"
     },
     "operations": {
-      "title": "Transaction history"
+      "title": "取引履歴"
     }
   }
 }
