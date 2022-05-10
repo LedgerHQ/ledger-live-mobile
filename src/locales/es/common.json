@@ -1754,7 +1754,7 @@
     },
     "nft": {
       "receiveNft": "Recibir NFT",
-      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+      "howTo": "Para agregar NFTs, tienes que <0>recibirlos</0> en tu <1>dirección de {{currency}}</1>."
     }
   },
   "accounts": {
@@ -1905,12 +1905,12 @@
         "desc": "Esta acción ocultará todas las cuentas <1><0>{tokenName}</0></1>, puedes mostrarlas de nuevo mediante <3>Ajustes > Cuentas</3>.",
         "confirm": "Ocultar token"
       },
-      "hideNFTCollectionCTA": "Hide collection",
-      "hiddenNFTCollections": "Hidden NFT collections",
-      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionCTA": "Ocultar Colección",
+      "hiddenNFTCollections": "Colecciones de NFTs ocultas",
+      "hiddenNFTCollectionsDesc": "Puedes ocultar los tokens ingresando a la cuenta, haciendo luego un toque prolongado sobre una colección y seleccionando “Ocultar Colección ”.",
       "hideNFTCollectionModal": {
-        "title": "Hide Collection?",
-        "desc": "You can unhide this collection in the setting options."
+        "title": "¿Ocultar Colección?",
+        "desc": "Puedes elegir mostrar esta colección en las opciones de ajustes."
       },
       "cryptoAssets": {
         "header": "Activos cripto",
@@ -2802,9 +2802,9 @@
     "title": "Emparejar nuevo dispositivo",
     "bluetooth": {
       "title": "Conectar por Bluetooth...",
-      "label": "Automatically detect your Nano"
+      "label": "Detectar automáticamente el Nano"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "Emparejar con bluetooth",
     "headerDescription": "Asegúrate de que tu {{productName}} esté desbloqueado y el Bluetooth habilitado",
     "usb": "... or plug USB cable",
     "usbLabel": "Plug your cable and enter your PIN Code on your device",
