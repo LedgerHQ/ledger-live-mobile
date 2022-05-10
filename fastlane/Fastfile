@@ -96,9 +96,8 @@ platform :ios do
     MY_PROFILE = (options[:adhoc] ? "match AdHoc #{MY_APP_BUNDLE_ID}" : "match AppStore #{MY_APP_BUNDLE_ID}")
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
 
-    LEDGER_CONNECT_BUNDLE_ID = (options[:adhoc] ? MY_APP_BUNDLE_ID : "#{MY_APP_BUNDLE_ID}.ledgerconnect")
-    LEDGER_CONNECT_APP_ID = LEDGER_CONNECT_BUNDLE_ID
-    LEDGER_CONNECT_PROFILE = (options[:adhoc] ? MY_PROFILE : "match AppStore #{LEDGER_CONNECT_BUNDLE_ID}")
+    LEDGER_CONNECT_BUNDLE_ID = 'com.ledger.live.ledgerconnect'
+    LEDGER_CONNECT_PROFILE = (options[:adhoc] ?  "match AdHoc #{LEDGER_CONNECT_BUNDLE_ID}" : "match AppStore #{LEDGER_CONNECT_BUNDLE_ID}")
 
     # settings_to_override = {
     #   :BUNDLE_IDENTIFIER => MY_APP_ID,
@@ -144,11 +143,11 @@ platform :ios do
       app_identifier: MY_APP_BUNDLE_ID
     )
 
-    update_app_identifier(
-      xcodeproj: XCODE_PROJECT,
-      plist_path: "LedgerConnect/Info.plist",
-      app_identifier: LEDGER_CONNECT_BUNDLE_ID
-    )
+    # update_app_identifier(
+    #   xcodeproj: XCODE_PROJECT,
+    #   plist_path: "LedgerConnect/Info.plist",
+    #   app_identifier: LEDGER_CONNECT_BUNDLE_ID
+    # )
 
     update_code_signing_settings(
       use_automatic_signing: false,
