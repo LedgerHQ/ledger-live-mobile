@@ -28,6 +28,7 @@ import Paired from "./Paired";
 import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
+import { ScreenName, NavigatorName } from "../../const";
 
 type Props = {
   navigation: any,
@@ -44,6 +45,7 @@ type PairDevicesProps = {
 
 type RouteParams = {
   onDone?: (device: Device) => void,
+  onDoneNavigateTo: string,
   onlySelectDeviceWithoutCompletePairing?: Boolean,
 };
 
@@ -211,8 +213,17 @@ function PairDevicesInner({ navigation, route }: Props) {
 
   const onDone = useCallback(
     (device: Device) => {
-      navigation.goBack();
-      route.params?.onDone?.(device);
+      // To avoid passing a onDone function param that is not serializable
+      if (route.params?.onDoneNavigateTo === ScreenName.SyncOnboardingWelcome) {
+        console.log("PairDevices: 🦮 navigate directly to SyncOnboarding");
+        navigation.navigate(NavigatorName.SyncOnboarding, {
+          screen: ScreenName.SyncOnboardingWelcome,
+          params: { pairedDevice: device },
+        });
+      } else {
+        navigation.goBack();
+        route.params?.onDone?.(device);
+      }
     },
     [navigation, route],
   );

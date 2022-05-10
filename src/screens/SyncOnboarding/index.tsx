@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, ReactElement } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import {
@@ -20,6 +20,7 @@ import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { TransportStatusError } from "@ledgerhq/errors";
 import { FirmwareInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { ScreenName } from "../../const";
+import { SyncOnboardingStackParamList } from "../../components/RootNavigator/SyncOnboardingNavigator";
 
 // FIXME: Define an initial onboarding state - or cannot have an initial state in our use case ?
 const initialOnboardingState: OnboardingState = {
@@ -31,20 +32,27 @@ const initialOnboardingState: OnboardingState = {
   currentSeedWordIndex: 0,
 };
 
-export const SyncOnboarding = ({
-  navigation,
-}: StackScreenProps<{}>): JSX.Element => {
+type Props = StackScreenProps<
+  SyncOnboardingStackParamList,
+  "SyncOnboardingWelcome"
+>;
+
+export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
   const [device, setDevice] = useState<Device | null>(null);
   const [onboardingState, setOnboardingState] = useState<OnboardingState>(
     initialOnboardingState,
   );
   const [stepIndex, setStepIndex] = useState<number>(0);
 
+  const { pairedDevice } = route.params;
+
+  // WIP: only for demo
   const onboardingSteps = [
     "Pairing device",
     "Setting up pin",
     `Writing seed words ${
-      !onboardingState.isConfirmingSeedWords
+      !onboardingState.isConfirmingSeedWords &&
+      onboardingState.currentSeedWordIndex > 0
         ? onboardingState.currentSeedWordIndex + 1
         : ""
     }`,
@@ -62,6 +70,14 @@ export const SyncOnboarding = ({
 
     setDevice(pairedDevice);
   }, []);
+
+  // Triggered when a new paired device is passed when navigating to this screen
+  // It avoids having a callback function passed to the PairDevices screen
+  useEffect(() => {
+    if (pairedDevice) {
+      handleOnPaired(pairedDevice);
+    }
+  }, [pairedDevice, handleOnPaired]);
 
   // Polls device state to update the onboarding state
   useEffect(() => {
@@ -165,11 +181,10 @@ export const SyncOnboarding = ({
   useEffect(() => {
     console.log("SyncOnboarding: navigate to pairDevices");
 
-    // TODO: fix onDone only scalar value no function for navigate to work
     // @ts-expect-error navigation issue
     navigation.navigate(ScreenName.PairDevices, {
-      onDone: handleOnPaired,
       onlySelectDeviceWithoutCompletePairing: true,
+      onDoneNavigateTo: ScreenName.SyncOnboardingWelcome,
     });
   }, [handleOnPaired, navigation]);
 
