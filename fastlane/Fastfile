@@ -129,7 +129,7 @@ platform :ios do
 
     if (options[:ci])
       match(
-        app_identifier: [MY_APP_BUNDLE_ID, LEDGER_CONNECT_BUNDLE_ID],
+        app_identifier: "com.ledger.live.*",
         git_url: ENV["GIT_REPO_URL"],
         type: (options[:adhoc] ? "adhoc" : "appstore"),
         username: ENV["APPLE_ID"],
