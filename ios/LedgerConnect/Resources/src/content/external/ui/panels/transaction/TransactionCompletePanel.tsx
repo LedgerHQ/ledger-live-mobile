@@ -96,7 +96,7 @@ export function TransactionCompletePanel({ transactionValue, onDone }: Transacti
   const dappInformation = dappInformationStore.getDappInformation();
   const dappName = dappInformation.getName().toUpperCase();
 
-  const formattedTransactionValue = transactionValue.getValueDecimalFormatted(9);
+  const formattedTransactionValue = transactionValue.getValueDecimalFormatted();
 
   return (
     <>

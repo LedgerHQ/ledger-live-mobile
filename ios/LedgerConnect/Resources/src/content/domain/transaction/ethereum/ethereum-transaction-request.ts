@@ -1,5 +1,5 @@
 import { ValueObject } from '../../../../library/ddd-core-objects';
-import { TokenValue } from '../../currency/token-value';
+import { EthereumTokenValue } from '../../currency/ethereum/ethereum-token-value';
 
 interface EthereumTransactionRequestProps {
   data: string;
@@ -10,7 +10,7 @@ interface EthereumTransactionRequestProps {
   to: string;
   nonce: string;
   gasLimit: string;
-  value: TokenValue;
+  value: EthereumTokenValue;
 }
 
 export class EthereumTransactionRequest extends ValueObject<EthereumTransactionRequestProps> {
@@ -46,7 +46,7 @@ export class EthereumTransactionRequest extends ValueObject<EthereumTransactionR
     return this.props.gasLimit;
   }
 
-  public getValue(): TokenValue {
+  public getValue(): EthereumTokenValue {
     return this.props.value;
   }
 
@@ -69,7 +69,7 @@ export class EthereumTransactionRequest extends ValueObject<EthereumTransactionR
 //   to: "0xdef171fe48cf0115b1d80b88dc8eab59176fee57"
 //   value: "0x920947f0cd51a"
 
-// *********************
+// *************************
 // Added by getLatestTxCount (alchemy)
 
 // params:

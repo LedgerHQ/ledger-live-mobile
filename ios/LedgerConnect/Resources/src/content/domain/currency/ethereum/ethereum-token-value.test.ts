@@ -1,8 +1,8 @@
-import { TokenValue } from './token-value';
+import { EthereumTokenValue } from './ethereum-token-value';
 
 describe('Token Value', () => {
   it('returns the value in hex', () => {
-    const tokenValue = TokenValue.create({
+    const tokenValue = EthereumTokenValue.create({
       valueHex: '0x78b45cf9aaf40',
       decimals: 18,
       symbol: 'ETH',
@@ -11,7 +11,7 @@ describe('Token Value', () => {
   });
 
   it('returns the decimal value', () => {
-    const tokenValue = TokenValue.create({
+    const tokenValue = EthereumTokenValue.create({
       valueHex: '0x78b45cf9aaf40',
       decimals: 18,
       symbol: 'ETH',
@@ -20,7 +20,7 @@ describe('Token Value', () => {
   });
 
   it('formats the value', () => {
-    const tokenValue = TokenValue.create({
+    const tokenValue = EthereumTokenValue.create({
       valueHex: '0x78b45cf9aaf40',
       decimals: 18,
       symbol: 'ETH',
@@ -30,7 +30,7 @@ describe('Token Value', () => {
 
   it('throws an error when created with a non-hex number', () => {
     expect(() =>
-      TokenValue.create({
+      EthereumTokenValue.create({
         valueHex: '78b45cf9aaf40',
         decimals: 18,
         symbol: 'ETH',

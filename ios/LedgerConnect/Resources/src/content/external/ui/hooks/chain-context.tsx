@@ -1,13 +1,7 @@
 import React from 'react';
 import { Chain } from '../../../domain/chain';
-import { TokenStore } from '../../../domain/currency/token-store';
 import { DappInformationStore } from '../../../domain/dapp-information/dapp-information-store';
-import { AccountStore } from '../../../domain/ledger/account-store';
-import { EthereumLocalStorageAccountStore } from '../../stores/account/ethereum-local-storage-account-store';
-import { SolanaLocalStorageAccountStore } from '../../stores/account/solana-local-storage-account-store';
 import { DOMDappInformationStore } from '../../stores/dapp/dom-dapp-information-store';
-import { EthereumTokenStore } from '../../stores/token/ethereum-token-store';
-import { SolanaTokenStore } from '../../stores/token/solana-token-store';
 import { EthereumIcon } from '../images/ethereum-icon';
 import { SolanaIcon } from '../images/solana-icon';
 
@@ -16,8 +10,6 @@ interface ChainContext {
   chainTokenSymbol: string;
   chainTokenIcon: JSX.Element;
   chainName: string;
-  accountStore: AccountStore;
-  tokenStore: TokenStore;
   dappInformationStore: DappInformationStore;
 }
 
@@ -32,8 +24,6 @@ const chainContexts: { [key in Chain]: ChainContext } = {
     chainTokenSymbol: 'ETH',
     chainTokenIcon: EthereumIcon,
     chainName: 'Ethereum',
-    accountStore: new EthereumLocalStorageAccountStore(),
-    tokenStore: new EthereumTokenStore(),
     dappInformationStore: new DOMDappInformationStore(),
   },
   solana: {
@@ -41,8 +31,6 @@ const chainContexts: { [key in Chain]: ChainContext } = {
     chainTokenSymbol: 'SOL',
     chainTokenIcon: SolanaIcon,
     chainName: 'Solana',
-    accountStore: new SolanaLocalStorageAccountStore(),
-    tokenStore: new SolanaTokenStore(),
     dappInformationStore: new DOMDappInformationStore(),
   },
 };

@@ -57,6 +57,8 @@ const log = getLogger('ethereum');
 // MARK: - Class
 
 class Ethereum extends EventEmitter {
+  isLedgerConnect: boolean = true;
+  
   private chainId: string;
   private address: string;
   private networkVersion: string;

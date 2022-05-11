@@ -31,9 +31,9 @@ export const usePersonalMessage = (): [
   ResetFunction,
 ] => {
   const { request, handleResponse, handleComplete } = useRequest();
-  assert(request, 'expecting request to be defined in use-dapp-connection');
-  assert(handleResponse, 'expecting handleResponse to be defined in use-dapp-connection');
-  assert(handleComplete, 'expecting handleComplete to be defined in use-dapp-connection');
+  assert(request, 'expecting request to be defined in use-personal-message');
+  assert(handleResponse, 'expecting handleResponse to be defined in use-personal-message');
+  assert(handleComplete, 'expecting handleComplete to be defined in use-personal-message');
   const [state, setState] = useState(PersonalMessageState.Initiated);
   const [error, setError] = useState<string>();
 

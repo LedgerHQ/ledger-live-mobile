@@ -1,17 +1,5 @@
-import { ValueObjectProps } from '../ddd-core-objects/value-object';
-
-export interface CachedTxInfo {
-  hash: string;
-  from: string;
-  to: string;
-  timeStamp: number;
-  blockNumber: number;
-}
-
-interface FindQuery {
-  index: string;
-  values: string | string[];
-}
+import { ValueObjectProps } from '../../../../../library/ddd-core-objects/value-object';
+import { CachedTxInfo, FindQuery } from './types';
 
 export const DB_WEB3SAFETY = 'web3safety';
 

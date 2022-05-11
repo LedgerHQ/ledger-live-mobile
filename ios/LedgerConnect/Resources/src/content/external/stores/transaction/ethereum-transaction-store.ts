@@ -31,8 +31,7 @@ export const processTransaction = async ({
 
   onTransactionSigned();
 
-  const requestID = request.getID();
-  const transactionHash = await sendTransaction(signedTransaction, requestID);
+  const transactionHash = await sendTransaction(signedTransaction);
 
   const response = DappResponse.create({
     id: request.getID(),

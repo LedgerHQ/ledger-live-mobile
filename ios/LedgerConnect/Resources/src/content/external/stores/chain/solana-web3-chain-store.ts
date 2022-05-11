@@ -1,9 +1,21 @@
-import { clusterApiUrl, Connection, sendAndConfirmRawTransaction, Transaction } from '@solana/web3.js';
+import { clusterApiUrl, Connection, PublicKey, sendAndConfirmRawTransaction, Transaction } from '@solana/web3.js';
+import { SolanaTokenValue } from '../../../domain/currency/solana/solana-token-value';
+import { TokenValue } from '../../../domain/currency/token-value';
+import { Account } from '../../../domain/ledger/account';
 import { Signature } from '../../../domain/transaction/solana/signature';
 import * as SignatureMap from '../../maps/transaction/solana/signature-map';
 
+const cluster = 'mainnet-beta';
+
+export async function getNativeTokenValue(account: Account): Promise<TokenValue> {
+  const connection = new Connection(clusterApiUrl(cluster), 'confirmed');
+  const publicKey = new PublicKey(account.getValue());
+  const valueDecimal = await connection.getBalance(publicKey, 'confirmed');
+  return SolanaTokenValue.create({ valueDecimal, decimals: 9, symbol: 'SOL' });
+}
+
 export const sendTransaction = async (transaction: Transaction): Promise<Signature> => {
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+  const connection = new Connection(clusterApiUrl(cluster), 'confirmed');
 
   const serializedTransaction = transaction.serialize();
 

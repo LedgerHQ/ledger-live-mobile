@@ -1,35 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { isContractWhitelisted } from '../../../../library/web3safety/tx-interactions';
+import React from 'react';
+import { Chain } from '../../../domain/chain';
+import { useApiCall } from '../../../hooks/use-api-call';
+import { getWeb3SafetyStore } from '../../stores/web3safety';
+import { useRequest } from '../hooks/request-context';
+import { Web3CheckAlert } from './Web3CheckAlert';
 
-export interface NewContractDomainNamePanelProps {
-  address: string;
-}
+export function NewContractDomainNamePanel(): JSX.Element | null {
+  const { request } = useRequest();
+  const chain = request?.getChain() as Chain;
+  const store = getWeb3SafetyStore(chain);
+  const { hostname } = window.location;
 
-const NewContractDomainNameWarning = styled.div`
-  font-size: 15px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background-color: #30101b;
-`;
+  const { data: whitelisted } = useApiCall(store.isDomainWhitelisted, {
+    args: [hostname, chain],
+  });
 
-export function NewContractDomainNamePanel({ address }: NewContractDomainNamePanelProps): JSX.Element | null {
-  const [isAddressWhitelisted, setIsAddressWhitelisted] = useState<boolean>(false);
-
-  useEffect(() => {
-    const isWhitelisted = isContractWhitelisted(address);
-    setIsAddressWhitelisted(isWhitelisted);
-  }, [address]);
-
-  if (!isAddressWhitelisted) {
+  if (whitelisted) {
     return null;
   }
 
   return (
-    <NewContractDomainNameWarning>
-      <b>Contract Not Recognised</b>
-      <p>This contract isn’t associated with this domain. Make sure you trust the app before proceeding.</p>
-    </NewContractDomainNameWarning>
+    <Web3CheckAlert
+      type="danger"
+      color="#F04F52"
+      bgcolor="#30101B"
+      title="Contract Not Recognised"
+      text="This contract isn’t associated with this domain. Make sure you trust the app before proceeding."
+    />
   );
 }

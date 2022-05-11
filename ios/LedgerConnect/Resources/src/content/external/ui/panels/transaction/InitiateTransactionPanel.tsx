@@ -7,11 +7,13 @@ import NetworkFeeIcon from '../../images/network-fee-speed-icon.svg';
 import SendArrowIcon from '../../images/send-arrow-icon.svg';
 import { TokenValue } from '../../../../domain/currency/token-value';
 import { useChain } from '../../hooks/chain-context';
+import { NetworkInformation } from '../../../../../library/web3safety/types';
 
 interface InitiateTransactionPanelProps {
   transactionValue: TokenValue;
   onCancel: () => void;
   onContinue: () => void;
+  networkInformation: NetworkInformation | null;
 }
 
 /**
@@ -166,6 +168,7 @@ export function InitiateTransactionPanel({
   transactionValue,
   onCancel,
   onContinue,
+  networkInformation,
 }: InitiateTransactionPanelProps): JSX.Element {
   const { chainTokenIcon, chainName, chainTokenSymbol, dappInformationStore } = useChain();
 
@@ -175,7 +178,7 @@ export function InitiateTransactionPanel({
   const dappName = dappInformation.getName().toUpperCase();
   const dappHostname = dappInformation.getHostname();
 
-  const formattedTransactionValue = transactionValue.getValueDecimalFormatted(9);
+  const formattedTransactionValue = transactionValue.getValueDecimalFormatted();
 
   return (
     <>
@@ -218,8 +221,8 @@ export function InitiateTransactionPanel({
           <NetworkInfoText>
             <NetworkFeeIcon /> Network Fee
           </NetworkInfoText>
-          <NetworkInfoText>$32.23</NetworkInfoText>
-          <NetworkInfoText light>~2-3 mins</NetworkInfoText>
+          <NetworkInfoText>{networkInformation?.networkFeeUSD || '...'}</NetworkInfoText>
+          <NetworkInfoText light>{networkInformation?.processingTime || '...'}</NetworkInfoText>
           <NetworkInfoText light>0.01 {chainTokenSymbol}</NetworkInfoText>
         </NetworkInfo>
       </Footer>
