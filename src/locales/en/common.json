@@ -629,6 +629,12 @@
     },
     "SolanaUseAllAmountStakeWarning": {
       "title": "Ensure you have enough balance left for future transactions fees"
+    },
+    "SolanaTxSimulationFailedWhilePendingOp": {
+      "title": "Your previous transaction hasn't been processed yet. Please wait a moment then check the transaction history before trying again."
+    },
+    "SolanaTxConfirmationTimeout": {
+      "title": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
     }
   },
   "bluetooth": {
