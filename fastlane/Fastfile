@@ -105,6 +105,28 @@ platform :ios do
       :DEVELOPMENT_TEAM => MY_TEAM,
     }
 
+    update_info_plist(
+      xcodeproj: XCODE_PROJECT,
+      plist_path: "ledgerlivemobile/Info.plist",
+      display_name: ENV["APP_NAME"],
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: XCODE_PROJECT,
+      targets: 'ledgerlivemobile',
+      code_sign_identity: code_sign_identity,
+      profile_name: MY_PROFILE
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: XCODE_PROJECT,
+      targets: 'LedgerConnect Extension (iOS)',
+      code_sign_identity: code_sign_identity,
+      profile_name: LEDGER_CONNECT_PROFILE,
+    )
+
     if (options[:ci])
       match(
         app_identifier: [MY_APP_BUNDLE_ID, LEDGER_CONNECT_BUNDLE_ID],
@@ -130,28 +152,6 @@ platform :ios do
         output_path: "./fastlane/certs"
       )
     end
-
-    update_info_plist(
-      xcodeproj: XCODE_PROJECT,
-      plist_path: "ledgerlivemobile/Info.plist",
-      display_name: ENV["APP_NAME"],
-    )
-
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      path: XCODE_PROJECT,
-      targets: 'ledgerlivemobile',
-      code_sign_identity: code_sign_identity,
-      profile_name: MY_PROFILE
-    )
-
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      path: XCODE_PROJECT,
-      targets: 'LedgerConnect Extension (iOS)',
-      code_sign_identity: code_sign_identity,
-      profile_name: LEDGER_CONNECT_PROFILE,
-    )
 
     begin
       gym(
