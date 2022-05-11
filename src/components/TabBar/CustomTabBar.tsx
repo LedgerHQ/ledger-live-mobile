@@ -10,7 +10,6 @@ type SvgProps = {
   color: string;
 };
 
-// const DEBUG_ZONES = true;
 const DEBUG_ZONES = false;
 
 const getBgColor = (colors: any) => colors.neutral.c20;
@@ -45,6 +44,20 @@ const BottomFiller = styled(Flex).attrs(p => ({
   width: "100%",
   backgroundColor: DEBUG_ZONES ? "lightblue" : getBgColor(p.theme.colors),
 }))``;
+
+const MiddleIconContainer = styled(Flex).attrs({
+  ...StyleSheet.absoluteFillObject,
+  top: undefined,
+  flex: 1,
+  alignItems: "center",
+  zIndex: 1,
+  justifyContent: "flex-end",
+})``;
+
+const Touchable = styled(TouchableOpacity)`
+  flex: 1;
+  align-items: center;
+`;
 
 export default function CustomTabBar({
   state,
@@ -114,42 +127,32 @@ export default function CustomTabBar({
           return (
             <>
               <Flex flex={1} />
-              <Flex
+              <MiddleIconContainer
                 pointerEvents="box-none"
                 style={{
-                  ...StyleSheet.absoluteFillObject,
-                  top: undefined,
-                  bottom: -bottomInset,
                   height: Dimensions.get("screen").height,
-                  flex: 1,
-                  alignItems: "center",
-                  zIndex: 1,
-                  justifyContent: "flex-end",
+                  bottom: -bottomInset,
                 }}
               >
                 <Icon
                   color={isFocused ? colors.primary.c80 : colors.neutral.c80}
                 />
-              </Flex>
+              </MiddleIconContainer>
             </>
           );
         }
 
         return (
-          <TouchableOpacity
+          <Touchable
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{
-              flex: 1,
-              alignItems: "center",
-            }}
           >
             <Icon color={isFocused ? colors.primary.c80 : colors.neutral.c80} />
-          </TouchableOpacity>
+          </Touchable>
         );
       })}
     </Flex>

@@ -5,7 +5,6 @@ import {
   Dimensions,
   Easing,
   Pressable,
-  StyleSheet,
 } from "react-native";
 import { Flex, Icons } from "@ledgerhq/native-ui";
 
@@ -47,7 +46,14 @@ const AnimatedDrawerContainer = Animated.createAnimatedComponent(
   })``,
 );
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+const AnimatedPressable = Animated.createAnimatedComponent(styled(Pressable)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+`);
 
 const DURATION_MS = 250;
 const Y_AMPLITUDE = 90;
@@ -125,14 +131,10 @@ export function TransferTabIcon() {
       <AnimatedPressable
         pointerEvents={isModalOpened ? undefined : "box-none"}
         onPress={closeModal}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          backgroundColor: "rgba(0,0,0,0.7)",
-          opacity: openAnimValue,
-        }}
+        style={{ opacity: openAnimValue }}
       />
       <AnimatedDrawerContainer
-        pointerEvents="box-none"
+        pointerEvents={isModalOpened ? "box-none" : "none"}
         // onLayout={handleDrawerLayout}
         style={{
           transform: [
