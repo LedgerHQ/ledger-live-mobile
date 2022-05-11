@@ -1,5 +1,12 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Animated, Dimensions, Pressable, StyleSheet } from "react-native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  BackHandler,
+  Dimensions,
+  Easing,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { Flex, Icons } from "@ledgerhq/native-ui";
 
 import proxyStyled from "@ledgerhq/native-ui/components/styled";
@@ -42,17 +49,35 @@ const AnimatedDrawerContainer = Animated.createAnimatedComponent(
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+const DURATION_MS = 250;
+const Y_AMPLITUDE = 90;
+
+const animParams = {
+  duration: DURATION_MS,
+  easing: Easing.inOut(Easing.ease),
+  useNativeDriver: true,
+};
+
 export function TransferTabIcon() {
   const [isModalOpened, setIsModalOpened] = useState(false);
+  // const [drawerHeight, setDrawerHeight] = useState(undefined);
 
   const openAnimValue = useRef(new Animated.Value(isModalOpened ? 1 : 0))
     .current;
 
+  const { width, height: screenHeight } = Dimensions.get("screen");
+  const { bottom: bottomInset } = useSafeAreaInsets();
+
+  const translateY = openAnimValue.interpolate({
+    inputRange: [0, 1],
+    // outputRange: [drawerHeight ?? screenHeight, 0],
+    outputRange: [Y_AMPLITUDE, 0],
+  });
+
   const openModal = useCallback(() => {
     Animated.timing(openAnimValue, {
       toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
+      ...animParams,
     }).start(() => {
       setIsModalOpened(true);
     });
@@ -62,23 +87,38 @@ export function TransferTabIcon() {
     setIsModalOpened(false);
     Animated.timing(openAnimValue, {
       toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
+      ...animParams,
     }).start();
   }, [openAnimValue, setIsModalOpened]);
 
   const onPressButton = useCallback(() => {
-    console.log("isModalOpened", isModalOpened);
     isModalOpened ? closeModal() : openModal();
   }, [isModalOpened, closeModal, openModal]);
 
-  const { width, height } = Dimensions.get("screen");
-  const { bottom: bottomInset, top: topInset } = useSafeAreaInsets();
+  // const handleDrawerLayout = useCallback(
+  //   ({
+  //     nativeEvent: {
+  //       layout: { height },
+  //     },
+  //   }) => {
+  //     setDrawerHeight(height);
+  //   },
+  //   [setDrawerHeight],
+  // );
 
-  const translateY = openAnimValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [height, 0],
-  });
+  const handleBackPress = useCallback(() => {
+    if (!isModalOpened) return false;
+    closeModal();
+    return true;
+  }, [isModalOpened, closeModal]);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      handleBackPress,
+    );
+    return () => backHandler.remove();
+  }, [handleBackPress]);
 
   return (
     <>
@@ -87,12 +127,13 @@ export function TransferTabIcon() {
         onPress={closeModal}
         style={{
           ...StyleSheet.absoluteFillObject,
-          backgroundColor: "rgba(0,0,0,0.6)",
+          backgroundColor: "rgba(0,0,0,0.7)",
           opacity: openAnimValue,
         }}
       />
       <AnimatedDrawerContainer
         pointerEvents="box-none"
+        // onLayout={handleDrawerLayout}
         style={{
           transform: [
             {
@@ -101,7 +142,7 @@ export function TransferTabIcon() {
           ],
           opacity: openAnimValue,
           width,
-          maxHeight: height - bottomInset,
+          maxHeight: screenHeight - bottomInset,
           paddingBottom:
             bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
         }}
