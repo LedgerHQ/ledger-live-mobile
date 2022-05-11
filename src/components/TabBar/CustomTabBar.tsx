@@ -3,7 +3,7 @@ import { Flex } from "@ledgerhq/native-ui";
 import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import Svg, { Path } from "react-native-svg";
-import { BAR_HEIGHT, HAS_GRADIENT } from "./shared";
+import { TAB_BAR_HEIGHT, HAS_GRADIENT } from "./shared";
 import BackgroundGradient from "./BackgroundGradient";
 
 type SvgProps = {
@@ -18,8 +18,8 @@ function TabBarShape({ color }: SvgProps) {
   return (
     <Svg
       width={375}
-      height={BAR_HEIGHT}
-      viewBox={`0 0 375 ${BAR_HEIGHT}`}
+      height={TAB_BAR_HEIGHT}
+      viewBox={`0 0 375 ${TAB_BAR_HEIGHT}`}
       fill="none"
     >
       <Path d="M0 0H80V56H0V0Z" fill={color} />
@@ -34,7 +34,7 @@ function TabBarShape({ color }: SvgProps) {
 
 const BackgroundFiller = styled(Flex).attrs(p => ({
   position: "absolute",
-  height: BAR_HEIGHT,
+  height: TAB_BAR_HEIGHT,
   width: "30%",
   backgroundColor: DEBUG_ZONES ? "lightgreen" : getBgColor(p.theme.colors),
 }))``;
