@@ -93,7 +93,7 @@ platform :ios do
     code_sign_identity = "iPhone Distribution"
     MY_APP_BUNDLE_ID = (options[:adhoc] ? "#{ENV["APP_IDENTIFIER"]}.adhoc" : "#{ENV["APP_IDENTIFIER"]}")
     MY_APP_ID = (options[:adhoc] ? (ENV["SHA"] == nil ? "#{ENV["APP_IDENTIFIER"]}.local" : "#{ENV["APP_IDENTIFIER"]}.#{ENV["SHA"]}") : "#{ENV["APP_IDENTIFIER"]}")
-    MY_PROFILE = (options[:adhoc] ? "match AdHoc #{MY_APP_BUNDLE_ID}" : "match AppStore #{MY_APP_BUNDLE_ID}")
+    MY_PROFILE = (options[:adhoc] ? "match AdHoc #{ENV["APP_IDENTIFIER"]}.*" : "match AppStore #{MY_APP_BUNDLE_ID}")
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
 
     LEDGER_CONNECT_BUNDLE_ID = "#{MY_APP_BUNDLE_ID}.ledgerconnect"
