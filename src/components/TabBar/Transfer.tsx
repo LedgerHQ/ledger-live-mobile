@@ -6,17 +6,21 @@ import {
   Easing,
   Pressable,
 } from "react-native";
-import { Flex, Icons } from "@ledgerhq/native-ui";
+import { Flex } from "@ledgerhq/native-ui";
+import Lottie from "lottie-react-native";
 
 import proxyStyled from "@ledgerhq/native-ui/components/styled";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import Touchable from "../Touchable";
 import CreateModal from "./Create";
 import { lockSubject } from "../RootNavigator/CustomBlockRouterNavigator";
 import { MAIN_BUTTON_BOTTOM, MAIN_BUTTON_SIZE } from "./shared";
 
-const TransferButton = proxyStyled(Touchable).attrs({
+import lightAnimSource from "../../animations/mainButton/light.json";
+import darkAnimSource from "../../animations/mainButton/dark.json";
+
+const MainButton = proxyStyled(Touchable).attrs({
   backgroundColor: "primary.c90",
   height: MAIN_BUTTON_SIZE,
   width: MAIN_BUTTON_SIZE,
@@ -26,6 +30,11 @@ const TransferButton = proxyStyled(Touchable).attrs({
   align-items: center;
   justify-content: center;
 `;
+
+const ButtonAnimation = proxyStyled(Lottie).attrs({
+  height: 35,
+  width: 35,
+})``;
 
 const hitSlop = {
   top: 10,
@@ -46,7 +55,7 @@ const AnimatedDrawerContainer = Animated.createAnimatedComponent(
   })``,
 );
 
-const AnimatedPressable = Animated.createAnimatedComponent(styled(Pressable)`
+const BackdropPressable = Animated.createAnimatedComponent(styled(Pressable)`
   position: absolute;
   top: 0;
   right: 0;
@@ -65,8 +74,10 @@ const animParams = {
 };
 
 export function TransferTabIcon() {
+  const {
+    colors: { type: themeType },
+  } = useTheme();
   const [isModalOpened, setIsModalOpened] = useState(false);
-  // const [drawerHeight, setDrawerHeight] = useState(undefined);
 
   const openAnimValue = useRef(new Animated.Value(isModalOpened ? 1 : 0))
     .current;
@@ -74,10 +85,14 @@ export function TransferTabIcon() {
   const { width, height: screenHeight } = Dimensions.get("screen");
   const { bottom: bottomInset } = useSafeAreaInsets();
 
-  const translateY = openAnimValue.interpolate({
+  const translateYAnimValue = openAnimValue.interpolate({
     inputRange: [0, 1],
-    // outputRange: [drawerHeight ?? screenHeight, 0],
     outputRange: [Y_AMPLITUDE, 0],
+  });
+
+  const lottieProgressAnimValue = openAnimValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [12 / 55, 18 / 55],
   });
 
   const openModal = useCallback(() => {
@@ -101,17 +116,6 @@ export function TransferTabIcon() {
     isModalOpened ? closeModal() : openModal();
   }, [isModalOpened, closeModal, openModal]);
 
-  // const handleDrawerLayout = useCallback(
-  //   ({
-  //     nativeEvent: {
-  //       layout: { height },
-  //     },
-  //   }) => {
-  //     setDrawerHeight(height);
-  //   },
-  //   [setDrawerHeight],
-  // );
-
   const handleBackPress = useCallback(() => {
     if (!isModalOpened) return false;
     closeModal();
@@ -128,18 +132,17 @@ export function TransferTabIcon() {
 
   return (
     <>
-      <AnimatedPressable
+      <BackdropPressable
         pointerEvents={isModalOpened ? undefined : "box-none"}
         onPress={closeModal}
         style={{ opacity: openAnimValue }}
       />
       <AnimatedDrawerContainer
         pointerEvents={isModalOpened ? "box-none" : "none"}
-        // onLayout={handleDrawerLayout}
         style={{
           transform: [
             {
-              translateY,
+              translateY: translateYAnimValue,
             },
           ],
           opacity: openAnimValue,
@@ -151,15 +154,19 @@ export function TransferTabIcon() {
       >
         <CreateModal isOpened={isModalOpened} onClose={closeModal} />
       </AnimatedDrawerContainer>
-      <TransferButton
+      <MainButton
+        activeOpacity={1}
         event="Transfer"
         disabled={lockSubject.getValue()}
         hitSlop={hitSlop}
         onPress={onPressButton}
         bottom={MAIN_BUTTON_BOTTOM + bottomInset}
       >
-        <Icons.TransferMedium size={28} color={"palette.background.main"} />
-      </TransferButton>
+        <ButtonAnimation
+          source={themeType === "light" ? lightAnimSource : darkAnimSource}
+          progress={lottieProgressAnimValue}
+        />
+      </MainButton>
     </>
   );
 }
