@@ -401,7 +401,7 @@
       "title": "상위 계정의 잔액이 부족합니다"
     },
     "QuantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "수량은 1개 이상이어야 합니다"
     },
     "NotEnoughSpendableBalance": {
       "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
@@ -831,8 +831,8 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "The most secure cryptocurrency & NFT wallet",
-      "subtitle": "Securely manage, buy and grow your crypto and NFTs on Ledger Live.",
+      "title": "가장 안전한 암호화폐 및 NFT 지갑",
+      "subtitle": "Ledger Live에서 암호화폐 및 NFT를 안전하게 관리, 구매 및 성장시키세요.",
       "start": "시작하기",
       "noDevice": "장치가 없나요?",
       "buy": "{{fullDeviceName}} 구매",
@@ -1754,7 +1754,7 @@
     },
     "nft": {
       "receiveNft": "NFT 수령",
-      "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+      "howTo": "NFT를 추가하려면 <1>{{currency}} 주소</1>를 사용하여 <0>수령</0>해야 합니다."
     }
   },
   "accounts": {
@@ -1881,7 +1881,7 @@
         "bullet2": "Ledger Live 버전, OS 지역, 언어, 지역"
       },
       "hideEmptyTokenAccounts": "빈 토큰 계정 숨기기",
-      "hideEmptyTokenAccountsDesc": "All empty token accounts in the Assets page will be hidden."
+      "hideEmptyTokenAccountsDesc": "자산 페이지의 모든 빈 토큰 계정은 숨겨집니다."
     },
     "currencies": {
       "header": "통화",
@@ -1905,12 +1905,12 @@
         "desc": "이 작업은 모든 <1><0>{tokenName}</0></1>의 계정을 숨기며 <3>설정 > 계정</3>을 사용하여 다시 표시할 수 있습니다.",
         "confirm": "토큰 숨기기"
       },
-      "hideNFTCollectionCTA": "Hide collection",
-      "hiddenNFTCollections": "Hidden NFT collections",
-      "hiddenNFTCollectionsDesc": "You can hide tokens by going to the account then long-pressing on a collection and selecting \"Hide Collection\".",
+      "hideNFTCollectionCTA": "컬렉션 숨기기",
+      "hiddenNFTCollections": "숨겨진 NFT 컬렉션",
+      "hiddenNFTCollectionsDesc": "계정으로 이동한 다음 컬렉션을 길게 누르고 \"컬렉션 숨기기\"를 선택하여 토큰을 숨길 수 있습니다.",
       "hideNFTCollectionModal": {
-        "title": "Hide Collection?",
-        "desc": "You can unhide this collection in the setting options."
+        "title": "컬렉션을 숨기시겠습니까?",
+        "desc": "설정 옵션에서 이 컬렉션을 숨김 해제할 수 있습니다."
       },
       "cryptoAssets": {
         "header": "암호화폐",
@@ -3940,17 +3940,17 @@
     "subTitle": "시간을 내어 이용 약관과 개인 정보 보호 정책을 살펴보세요"
   },
   "updatedTerms": {
-    "title": "Terms of Use Update",
+    "title": "이용약관 업데이트",
     "body": {
-      "intro": "Hi! We've updated our Ledger Live Terms of Use with the aim to make them clearer and to reflect Ledger Live's newly available services and features. Key updates are focused on:",
+      "intro": "안녕하세요! Ledger Live 사용 약관을 보다 명확하게 하고 Ledger Live의 새로 사용 가능한 서비스 및 기능을 반영하기 위해 Ledger Live 사용 약관을 업데이트했습니다. 주요 업데이트는 다음에 중점을 둡니다:",
       "bulletPoints": [
-        "Clarifying what services are available and how they work",
-        "Explaining how fees for Services work",
-        "Improving our notification process to make sure that you are properly informed of any new changes to our Terms of Use"
+        "어떤 서비스를 사용할 수 있고 어떻게 작동하는지 명확히 하기",
+        "서비스 수수료 작동 방식 설명",
+        "사용 약관에 대한 새로운 변경 사항을 귀하가 적절하게 알 수 있도록 알림 프로세스를 개선합니다"
       ],
-      "agreement": "By clicking on \"Continue\" you agree that you have read and accept the Terms of Use below."
+      "agreement": "\"계속\"을 클릭하면 아래 사용 약관을 읽고 동의하는 것으로 간주됩니다."
     },
-    "link": "Terms of Use",
+    "link": "이용 약관",
     "cta": "계속"
   },
   "exchange": {
@@ -4208,7 +4208,7 @@
       "title": "할당"
     },
     "operations": {
-      "title": "Transaction history"
+      "title": "거래 내역"
     }
   }
 }
