@@ -92,7 +92,7 @@ export function TransferTabIcon() {
 
   const lottieProgressAnimValue = openAnimValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [12 / 55, 18 / 55],
+    outputRange: [12 / 55, 18 / 55], // the animation runs from frame 12 (burger) to 18 (cross) out of 55 frames
   });
 
   const openModal = useCallback(() => {
