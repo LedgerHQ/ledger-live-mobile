@@ -91,10 +91,13 @@ platform :ios do
   private_lane :build do |options|
     export_options_method = (options[:adhoc] ? "ad-hoc" : "app-store")
     code_sign_identity = "iPhone Distribution"
-    MY_APP_BUNDLE_ID = (options[:adhoc] ? "#{ENV["APP_IDENTIFIER"]}.*" : "#{ENV["APP_IDENTIFIER"]}")
-    MY_APP_ID = (options[:adhoc] ? (ENV["SHA"] == nil ? "#{ENV["APP_IDENTIFIER"]}.#{ENV["SHA"]}" : "#{ENV["APP_IDENTIFIER"]}.local") : "#{ENV["APP_IDENTIFIER"]}")
+    MY_APP_BUNDLE_ID = (options[:adhoc] ? "#{ENV["APP_IDENTIFIER"]}.adhoc" : "#{ENV["APP_IDENTIFIER"]}")
+    MY_APP_ID = (options[:adhoc] ? (ENV["SHA"] == nil ? "#{ENV["APP_IDENTIFIER"]}.local" : "#{ENV["APP_IDENTIFIER"]}.#{ENV["SHA"]}") : "#{ENV["APP_IDENTIFIER"]}")
     MY_PROFILE = (options[:adhoc] ? "match AdHoc #{MY_APP_BUNDLE_ID}" : "match AppStore #{MY_APP_BUNDLE_ID}")
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
+
+    LEDGER_CONNECT_BUNDLE_ID = "#{MY_APP_BUNDLE_ID}.ledgerconnect"
+    LEDGER_CONNECT_PROFILE = (options[:adhoc] ? MY_PROFILE : "match AppStore #{LEDGER_CONNECT_BUNDLE_ID}")
 
     settings_to_override = {
       :BUNDLE_IDENTIFIER => MY_APP_ID,
@@ -104,7 +107,7 @@ platform :ios do
 
     if (options[:ci])
       match(
-        app_identifier: MY_APP_BUNDLE_ID,
+        app_identifier: [MY_APP_BUNDLE_ID, LEDGER_CONNECT_BUNDLE_ID],
         git_url: ENV["GIT_REPO_URL"],
         type: (options[:adhoc] ? "adhoc" : "appstore"),
         username: ENV["APPLE_ID"],
@@ -137,9 +140,17 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       path: XCODE_PROJECT,
+      targets: 'ledgerlivemobile',
       code_sign_identity: code_sign_identity,
-      bundle_identifier: MY_APP_ID,
       profile_name: MY_PROFILE
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: XCODE_PROJECT,
+      targets: 'LedgerConnect Extension (iOS)',
+      code_sign_identity: code_sign_identity,
+      profile_name: LEDGER_CONNECT_PROFILE,
     )
 
     begin
@@ -152,10 +163,7 @@ platform :ios do
         output_name: "#{PROJECT_NAME}.ipa",
         export_options: {
           method: export_options_method,
-          signingStyle: "manual",
-          provisioningProfiles: {
-              MY_APP_ID => MY_PROFILE
-          }
+          signingStyle: "manual"
         },
       )
     rescue => e
