@@ -171,9 +171,9 @@ browser.runtime.onMessage.addListener(async (request, sender)=>{
                 $07c03eb40a016611$var$log('receive ETH send transaction', message.request);
                 const result = await $f047d79a9426f7d2$export$61027ddcc22c3df2(message.request);
                 $07c03eb40a016611$var$log('send transaction result', result);
-                await new Promise((resolve)=>{
-                    setTimeout(resolve, 4000);
-                });
+                // await new Promise((resolve) => {
+                //   setTimeout(resolve, 4000);
+                // });
                 // const result = {
                 //   id: 1648642005769,
                 //   method: 'eth_sendTransaction',
