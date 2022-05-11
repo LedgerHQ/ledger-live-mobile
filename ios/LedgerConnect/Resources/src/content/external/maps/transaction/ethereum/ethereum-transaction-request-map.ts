@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { isObjectLike } from '../../../../../library/typeguards';
+import { EthereumTokenValue } from '../../../../domain/currency/ethereum/ethereum-token-value';
 import { TokenValue } from '../../../../domain/currency/token-value';
 import { EthereumTransactionRequest } from '../../../../domain/transaction/ethereum/ethereum-transaction-request';
 
@@ -37,7 +38,7 @@ export function mapDappDTOToDomain(dto: unknown): EthereumTransactionRequest {
     maxPriorityFeePerGas: dto.maxPriorityFeePerGas,
     to: dto.to,
     // TODO: Fix for non-ETH tokens
-    value: TokenValue.create({ valueHex: dto.value, decimals: 18, symbol: 'ETH' }),
+    value: EthereumTokenValue.create({ valueHex: dto.value, decimals: 18, symbol: 'ETH' }),
     nonce: dto.nonce,
     gasLimit: dto.gasLimit,
   });

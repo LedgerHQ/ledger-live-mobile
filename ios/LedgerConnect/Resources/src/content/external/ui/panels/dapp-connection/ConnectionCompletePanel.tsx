@@ -95,7 +95,7 @@ const Buttons = styled.div`
 export function ConnectionCompletePanel({ onDone, account, accountValue }: TransactionCompletePanelProps): JSX.Element {
   const { chainTokenIcon, dappInformationStore } = useChain();
   const accountFormatted = account.getConcatenated() || '';
-  const accountValueFormatted = accountValue.getValueDecimalFormatted(9);
+  const accountValueFormatted = accountValue.getValueDecimalFormatted();
   const dappInformation = dappInformationStore.getDappInformation();
   const dappHostname = dappInformation.getHostname().toLowerCase();
 

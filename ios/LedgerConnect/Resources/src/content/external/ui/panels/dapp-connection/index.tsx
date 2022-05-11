@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAlert } from 'react-alert';
 import { Panel } from '../../components/Panel';
 import { ConnectionCompletePanel } from './ConnectionCompletePanel';
 import { ConnectToDappPanel } from './ConnectToDappPanel';
 import { SelectLedgerPanel } from './SelectLedgerPanel';
-import { TokenValue } from '../../../../domain/currency/token-value';
 import { useChain } from '../../hooks/chain-context';
-import { DappConnectionState, useDappConnection } from '../../hooks/use-dapp-connection';
+import { AccountRequestState, useAccountRequest } from '../../hooks/account-context';
 
 export function DappConnectionFlow(): JSX.Element {
-  const [accountValue, setAccountValue] = useState<TokenValue>();
-  const { tokenStore, chain } = useChain();
-  const [state, account, errorMessage, approveConnection, reset] = useDappConnection();
+  const { chain } = useChain();
+  const {
+    state,
+    accountToApprove: account,
+    accountValue,
+    errorMessage,
+    handleApproveConnection: approveConnection,
+    handleReset: reset,
+  } = useAccountRequest();
   const alert = useAlert();
 
   useEffect(() => {
@@ -20,22 +25,6 @@ export function DappConnectionFlow(): JSX.Element {
       alert.error(errorMessage);
     }
   }, [alert, errorMessage]);
-
-  useEffect(() => {
-    if (!account) {
-      return;
-    }
-    const requestAndStoreAccount = async () => {
-      try {
-        const newAccountValue = await tokenStore.getNativeTokenValue(account);
-        setAccountValue(newAccountValue);
-      } catch (error) {
-        console.error('Caught error in dapp connection ui', error);
-        alert.error((error as Error).message);
-      }
-    };
-    requestAndStoreAccount();
-  }, [account, tokenStore, alert]);
 
   const handleCancel = () => {
     reset();
@@ -47,8 +36,8 @@ export function DappConnectionFlow(): JSX.Element {
 
   return (
     <Panel>
-      {state === DappConnectionState.WaitingForDevice && <SelectLedgerPanel chain={chain} />}
-      {state === DappConnectionState.RequireApproval && account && accountValue && (
+      {state === AccountRequestState.WaitingForDevice && <SelectLedgerPanel chain={chain} />}
+      {state === AccountRequestState.RequireApproval && account && (
         <ConnectToDappPanel
           onCancel={handleCancel}
           onConnect={approveConnection}
@@ -56,7 +45,7 @@ export function DappConnectionFlow(): JSX.Element {
           accountValue={accountValue}
         />
       )}
-      {state === DappConnectionState.Approved && account && accountValue && (
+      {state === AccountRequestState.Approved && account && accountValue && (
         <ConnectionCompletePanel onDone={handleDone} account={account} accountValue={accountValue} />
       )}
     </Panel>

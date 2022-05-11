@@ -8,7 +8,7 @@ import { TransactionCompletePanel } from './TransactionCompletePanel';
 import { TransactionState, useTransaction } from '../../hooks/use-transaction';
 
 export function TransactionFlow(): JSX.Element {
-  const [state, transaction, errorMessage, handleContinue, reset] = useTransaction();
+  const [state, transaction, errorMessage, handleContinue, reset, networkInfo] = useTransaction();
   const alert = useAlert();
 
   useEffect(() => {
@@ -35,6 +35,7 @@ export function TransactionFlow(): JSX.Element {
           transactionValue={transactionValue}
           onCancel={handleCancel}
           onContinue={handleContinue}
+          networkInformation={networkInfo}
         />
       )}
       {state === TransactionState.WaitingForConfirmation && (
@@ -43,6 +44,7 @@ export function TransactionFlow(): JSX.Element {
           onCancel={handleCancel}
           from={transaction.getFrom()}
           to={transaction.getTo()}
+          networkInformation={networkInfo}
         />
       )}
       {state === TransactionState.TransactionInProgress && <TransactionInProgressPanel />}

@@ -37,9 +37,9 @@ browser.runtime.onMessage.addListener(async (request, sender): Promise<any> => {
       const result = await sendNativeMessage(message.request);
       log('send transaction result', result);
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 4000);
-      });
+      // await new Promise((resolve) => {
+      //   setTimeout(resolve, 4000);
+      // });
 
       // const result = {
       //   id: 1648642005769,

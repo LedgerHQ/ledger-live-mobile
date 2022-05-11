@@ -1,50 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import {
-  isFirstTransaction as checkIsFirstTransaction,
-  updateTransactions,
-} from '../../../../library/web3safety/tx-interactions';
+import React, { useEffect } from 'react';
+import { useApiCall } from '../../../hooks/use-api-call';
+import { Chain } from '../../../domain/chain';
+import { useRequest } from '../hooks/request-context';
+import { Web3CheckAlert } from './Web3CheckAlert';
+import { getLogger } from '../../../../logging';
+import { getWeb3SafetyStore } from '../../stores/web3safety';
+
+const log = getLogger('web3safety');
 
 export interface FirstTimeTransactionCheckPanelProps {
   address: string;
   contract: string;
 }
 
-const FirstTimeTransactionWarning = styled.div`
-  font-size: 15px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background-color: #343248;
-`;
-
 export function FirstTimeTransactionCheckPanel({
   address,
   contract,
 }: FirstTimeTransactionCheckPanelProps): JSX.Element | null {
-  const [isFirstTransaction, setIsFirstTransaction] = useState<boolean>(false);
+  const { request } = useRequest();
+  const chain = request?.getChain() as Chain;
+  const store = getWeb3SafetyStore(chain);
+
+  const { data: isFirstTransaction } = useApiCall(store.isFirstTransaction, {
+    args: [address, contract],
+  });
 
   useEffect(() => {
-    if (address) {
-      updateTransactions(address);
+    if (address && chain === Chain.Ethereum) {
+      log(`FirstTimeTransactionCheckPanel: Begin update transactions for address ${address} on ${chain}`);
+      store.updateTransactions(address);
     }
-  }, [address]);
-
-  useEffect(() => {
-    (async () => {
-      const isFirst = await checkIsFirstTransaction(address, contract);
-      setIsFirstTransaction(isFirst);
-    })();
-  }, [address, contract]);
+  }, [address, chain, store]);
 
   if (!isFirstTransaction) {
     return null;
   }
 
   return (
-    <FirstTimeTransactionWarning>
-      <b>First Time Transaction</b>
-      <p>You haven’t interacted with this contract before. Make sure the details are correct.</p>
-    </FirstTimeTransactionWarning>
+    <Web3CheckAlert
+      type="info"
+      color="#D4CCFF"
+      bgcolor="#343248"
+      title="First Time Transaction"
+      text="You haven’t interacted with this contract before. Make sure the details are correct."
+    />
   );
 }

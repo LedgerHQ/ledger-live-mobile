@@ -10,7 +10,7 @@ interface ConnectToDappPanelProps {
   onCancel: () => void;
   onConnect: () => void;
   account: Account;
-  accountValue: TokenValue;
+  accountValue: TokenValue | undefined;
 }
 
 /**
@@ -116,7 +116,7 @@ export function ConnectToDappPanel({
   const { chainTokenIcon, dappInformationStore } = useChain();
 
   const accountFormatted = account.getConcatenated() || '';
-  const accountValueFormatted = accountValue.getValueDecimalFormatted(9);
+  const accountValueFormatted = accountValue?.getValueDecimalFormatted() || '';
   const dappInformation = dappInformationStore.getDappInformation();
   const dappName = dappInformation.getName().toUpperCase();
   const dappHostname = dappInformation.getHostname().toLowerCase();
@@ -141,7 +141,7 @@ export function ConnectToDappPanel({
       </WalletStack>
       <Buttons>
         <Button onTouch={onCancel}>Cancel</Button>
-        <Button primary onTouch={onConnect}>
+        <Button primary disabled={!accountValue} onTouch={onConnect}>
           Continue
         </Button>
       </Buttons>

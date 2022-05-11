@@ -878,7 +878,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ". ~/.zprofile\n. ~/.zshrc\n\necho \"running yarn parcel build --no-optimize --no-cache\"\ncd \"${PROJECT_DIR}/LedgerConnect/Resources\"\nyarn parcel build --no-optimize --no-cache\n\n";
+			shellScript = ". ~/.zprofile\n. ~/.zshrc\n\necho \"running yarn build:dev\"\ncd \"${PROJECT_DIR}/LedgerConnect/Resources\"\nyarn build:dev\n";
 		};
 		849861A728169992002902F5 /* Start packager */ = {
 			isa = PBXShellScriptBuildPhase;

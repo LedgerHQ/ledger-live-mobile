@@ -1,4 +1,4 @@
-import { PublicKey, Transaction } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, PublicKey, Transaction } from '@solana/web3.js';
 import assert from 'assert';
 import { Transaction as UITransaction } from '../../../domain/transaction';
 import { DappRequest, SolanaMethod } from '../../../use-case/dto/dapp-request';
@@ -6,8 +6,8 @@ import { ProcessTransactionProps } from '../../../domain/transaction/transaction
 import { signTransaction } from '../device/solana-background-device-store';
 import { sendTransaction } from '../chain/solana-web3-chain-store';
 import { SolanaTransactionRequest } from '../../../domain/transaction/solana/solana-transaction-request';
-import { TokenValue } from '../../../domain/currency/token-value';
 import * as SolanaTransactionResponseMap from '../../maps/transaction/solana/solana-transaction-response-map';
+import { SolanaTokenValue } from '../../../domain/currency/solana/solana-token-value';
 
 export function mapTransaction(request: DappRequest): UITransaction {
   const payload = request.getPayload() as SolanaTransactionRequest;
@@ -16,8 +16,8 @@ export function mapTransaction(request: DappRequest): UITransaction {
   return UITransaction.create({
     from: '0x0',
     to: '0x0',
-    value: TokenValue.create({
-      valueHex: '0x78b45cf9',
+    value: SolanaTokenValue.create({
+      valueDecimal: 1.23 * LAMPORTS_PER_SOL,
       decimals: 9,
       symbol: 'SOL',
     }),

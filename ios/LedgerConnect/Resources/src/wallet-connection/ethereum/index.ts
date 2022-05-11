@@ -57,6 +57,8 @@ const log = getLogger('ethereum');
 // MARK: - Class
 
 class Ethereum extends EventEmitter {
+  isLedgerConnect: boolean = true;
+  
   private chainId: string;
   private address: string;
   private networkVersion: string;
@@ -74,7 +76,7 @@ class Ethereum extends EventEmitter {
     log(`Ethereum constructed with config: ${JSON.stringify(config)}`);
 
     this.networkVersion = '' + config.chainId;
-    this.chainId = '0x' + (config.chainId || 3).toString(16);
+    this.chainId = '0x' + (config.chainId || 1).toString(16);
     this.address = '';
 
     this.ready = false;
@@ -676,7 +678,7 @@ class Ethereum extends EventEmitter {
 let config: Config = {
   isDebug: true,
   chainId: '0x1',
-  rpcUrl: 'https://mainnet.infura.io/v3/a523f552bd554805bb896b91fc020b64',
+  rpcUrl: 'https://eth-mainnet.alchemyapi.io/v2/-kuNbDetSLplTph8eLySef5J8Rww1DEp',
   // chainId: '0x3',
   // rpcUrl: 'https://eth-ropsten.alchemyapi.io/v2/G5ywN3ywt4S0L-2Ai92Ub1efL3aLQWWb',
   // address: '0x51a4f8419aC902006211786a5648F0cc14aa7074',

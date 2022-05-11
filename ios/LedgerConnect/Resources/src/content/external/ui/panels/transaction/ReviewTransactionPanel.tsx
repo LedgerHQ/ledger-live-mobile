@@ -12,12 +12,15 @@ import { FirstTimeTransactionCheckPanel } from '../../components/FirstTimeTransa
 import { NewContractDomainNamePanel } from '../../components/NewContractDomainNamePanel';
 import { ContractAgePanel } from '../../components/ContractAgePanel';
 import { useChain } from '../../hooks/chain-context';
+import { useTransaction } from '../../hooks/use-transaction';
+import { NetworkInformation } from '../../../../../library/web3safety/types';
 
 interface ReviewTransactionPanelProps {
   transactionValue: TokenValue;
   onCancel: () => void;
   from: string;
   to: string;
+  networkInformation: NetworkInformation | null;
 }
 
 /**
@@ -97,12 +100,13 @@ export function ReviewTransactionPanel({
   onCancel,
   from,
   to,
+  networkInformation,
 }: ReviewTransactionPanelProps): JSX.Element {
   const { dappInformationStore } = useChain();
   const dappInformation = dappInformationStore.getDappInformation();
   const dappName = dappInformation.getName().toUpperCase();
 
-  const formattedTransactionValue = transactionValue.getValueDecimalFormatted(9);
+  const formattedTransactionValue = transactionValue.getValueDecimalFormatted();
 
   return (
     <>
@@ -114,9 +118,9 @@ export function ReviewTransactionPanel({
         <HeaderMessage>Confirm the transaction details on your device.</HeaderMessage>
       </Header>
       <Body>
-        <FirstTimeTransactionCheckPanel address={from} contract={to} />
-        <NewContractDomainNamePanel address={to} />
+        <NewContractDomainNamePanel />
         <ContractAgePanel address={to} />
+        <FirstTimeTransactionCheckPanel address={from} contract={to} />
 
         <TransactionDetails>
           <TransactionDetailsText light>
@@ -130,12 +134,12 @@ export function ReviewTransactionPanel({
           <TransactionDetailsText light>
             <NetworkFeeSquareIcon /> Network Fee
           </TransactionDetailsText>
-          <TransactionDetailsText>$32.23</TransactionDetailsText>
+          <TransactionDetailsText>{networkInformation?.networkFeeUSD}</TransactionDetailsText>
           <TransactionDetailsText light>
             <PredictedImpactIcon />
             Predicted Impact
           </TransactionDetailsText>
-          <TransactionDetailsText>- $12.76</TransactionDetailsText>
+          <TransactionDetailsText>{networkInformation?.predictedImpact}</TransactionDetailsText>
         </TransactionDetails>
       </Body>
       <Buttons>
