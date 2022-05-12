@@ -158,7 +158,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     const device = route.params.device;
 
     if (device && !verified) {
-      setAllowNavigation(false);
       verifyOnDevice(device);
     }
     setAllowNavigation(true);
