@@ -1,7 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Dimensions, Pressable } from "react-native";
+import React, { useCallback, useEffect } from "react";
+import { BackHandler, Dimensions, Pressable } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import Lottie from "lottie-react-native";
+
+import Animated, {
+  interpolate,
+  useAnimatedProps,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import proxyStyled from "@ledgerhq/native-ui/components/styled";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,10 +34,12 @@ const MainButton = proxyStyled(Touchable).attrs({
   justify-content: center;
 `;
 
-const ButtonAnimation = proxyStyled(Lottie).attrs({
-  height: MAIN_BUTTON_SIZE,
-  width: MAIN_BUTTON_SIZE,
-})``;
+const ButtonAnimation = Animated.createAnimatedComponent(
+  proxyStyled(Lottie).attrs({
+    height: MAIN_BUTTON_SIZE,
+    width: MAIN_BUTTON_SIZE,
+  })``,
+);
 
 const hitSlop = {
   top: 10,
@@ -64,15 +74,7 @@ const BackdropPressable = Animated.createAnimatedComponent(styled(Pressable)`
 const DURATION_MS = 250;
 const Y_AMPLITUDE = 90;
 
-const animParams = {
-  duration: DURATION_MS,
-  useNativeDriver: true,
-};
-
-const noAnimParams = {
-  ...animParams,
-  duration: 0,
-};
+const animParams = { duration: DURATION_MS };
 
 /** Just for debugging */
 const initialIsModalOpened = false;
@@ -81,55 +83,63 @@ export function TransferTabIcon() {
   const {
     colors: { type: themeType },
   } = useTheme();
-  const [isModalOpened, setIsModalOpened] = useState(initialIsModalOpened);
 
-  const openAnimValue = useRef(new Animated.Value(initialIsModalOpened ? 1 : 0))
-    .current;
+  const openAnimValue = useSharedValue(initialIsModalOpened ? 1 : 0);
 
-  const { width: screenWidth, height: screenHeight } = Dimensions.get("screen");
-  const { bottom: bottomInset, top: topInset } = useSafeAreaInsets();
+  const getIsModalOpened = useCallback(() => openAnimValue.value === 1, [
+    openAnimValue,
+  ]);
 
-  const translateYAnimValue = openAnimValue.interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [Y_AMPLITUDE, 0, Y_AMPLITUDE],
-  });
+  const backdropProps = useAnimatedProps(() => ({
+    pointerEvents: openAnimValue.value === 1 ? "auto" : "box-none",
+  }));
 
-  const lottieProgressAnimValue = openAnimValue.interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [0, 0.5, 1],
-  });
+  const drawerContainerProps = useAnimatedProps(() => ({
+    pointerEvents: openAnimValue.value === 1 ? "auto" : "none",
+  }));
 
-  const opacityAnimValue = openAnimValue.interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [0, 1, 0],
-  });
+  const translateYStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          openAnimValue.value,
+          [0, 1, 2],
+          [Y_AMPLITUDE, 0, Y_AMPLITUDE],
+        ),
+      },
+    ],
+  }));
+
+  const lottieProps = useAnimatedProps(() => ({
+    progress: interpolate(openAnimValue.value, [0, 1, 2], [0, 0.5, 1]),
+  }));
+
+  const opacityStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(openAnimValue.value, [0, 1, 2], [0, 1, 0]),
+  }));
 
   const openModal = useCallback(() => {
-    Animated.sequence([
-      Animated.timing(openAnimValue, { toValue: 0, ...noAnimParams }),
-      Animated.timing(openAnimValue, { toValue: 1, ...animParams }),
-    ]).start(() => {
-      setIsModalOpened(true);
-    });
-  }, [openAnimValue, setIsModalOpened]);
+    openAnimValue.value = 0;
+    openAnimValue.value = withTiming(1, animParams);
+  }, [openAnimValue]);
 
   const closeModal = useCallback(() => {
-    setIsModalOpened(false);
-    Animated.sequence([
-      Animated.timing(openAnimValue, { toValue: 2, ...animParams }),
-      Animated.timing(openAnimValue, { toValue: 0, ...noAnimParams }),
-    ]).start();
-  }, [openAnimValue, setIsModalOpened]);
+    openAnimValue.value = withTiming(2, animParams, finished => {
+      if (finished) {
+        openAnimValue.value = 0;
+      }
+    });
+  }, [openAnimValue]);
 
   const onPressButton = useCallback(() => {
-    isModalOpened ? closeModal() : openModal();
-  }, [isModalOpened, closeModal, openModal]);
+    getIsModalOpened() ? closeModal() : openModal();
+  }, [getIsModalOpened, closeModal, openModal]);
 
   const handleBackPress = useCallback(() => {
-    if (!isModalOpened) return false;
+    if (!getIsModalOpened()) return false;
     closeModal();
     return true;
-  }, [isModalOpened, closeModal]);
+  }, [getIsModalOpened, closeModal]);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -139,29 +149,30 @@ export function TransferTabIcon() {
     return () => backHandler.remove();
   }, [handleBackPress]);
 
+  const { width: screenWidth, height: screenHeight } = Dimensions.get("screen");
+  const { bottom: bottomInset, top: topInset } = useSafeAreaInsets();
+
   return (
     <>
       <BackdropPressable
-        pointerEvents={isModalOpened ? undefined : "box-none"}
+        animatedProps={backdropProps}
         onPress={closeModal}
-        style={{ opacity: opacityAnimValue }}
+        style={opacityStyle}
       />
       <AnimatedDrawerContainer
-        pointerEvents={isModalOpened ? undefined : "none"}
-        style={{
-          transform: [
-            {
-              translateY: translateYAnimValue,
-            },
-          ],
-          opacity: opacityAnimValue,
-          width: screenWidth,
-          maxHeight: screenHeight - bottomInset - topInset,
-          paddingBottom:
-            bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
-        }}
+        animatedProps={drawerContainerProps}
+        style={[
+          {
+            width: screenWidth,
+            maxHeight: screenHeight - bottomInset - topInset,
+            paddingBottom:
+              bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
+          },
+          opacityStyle,
+          translateYStyle,
+        ]}
       >
-        <TransferDrawer isOpened={isModalOpened} onClose={closeModal} />
+        <TransferDrawer onClose={closeModal} />
       </AnimatedDrawerContainer>
       <MainButton
         activeOpacity={1}
@@ -173,7 +184,7 @@ export function TransferTabIcon() {
       >
         <ButtonAnimation
           source={themeType === "light" ? lightAnimSource : darkAnimSource}
-          progress={lottieProgressAnimValue}
+          animatedProps={lottieProps}
           loop={false}
         />
       </MainButton>
