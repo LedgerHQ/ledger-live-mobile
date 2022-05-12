@@ -40,14 +40,14 @@ PODS:
     - React-Core (= 0.67.3)
     - React-jsi (= 0.67.3)
     - ReactCommon/turbomodule/core (= 0.67.3)
-  - Firebase/CoreOnly (8.15.0):
-    - FirebaseCore (= 8.15.0)
-  - Firebase/RemoteConfig (8.15.0):
+  - Firebase/CoreOnly (8.11.0):
+    - FirebaseCore (= 8.11.0)
+  - Firebase/RemoteConfig (8.11.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 8.15.0)
+    - FirebaseRemoteConfig (~> 8.11.0)
   - FirebaseABTesting (8.15.0):
     - FirebaseCore (~> 8.0)
-  - FirebaseCore (8.15.0):
+  - FirebaseCore (8.11.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
@@ -61,7 +61,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseRemoteConfig (8.15.0):
+  - FirebaseRemoteConfig (8.11.0):
     - FirebaseABTesting (~> 8.0)
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
@@ -129,9 +129,9 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - GoogleDataTransport (9.1.2):
-    - GoogleUtilities/Environment (~> 7.2)
-    - nanopb (~> 2.30908.0)
+  - GoogleDataTransport (9.1.4):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/Environment (7.7.0):
     - PromisesObjC (< 3.0, >= 1.2)
@@ -395,10 +395,10 @@ PODS:
     - React
   - react-native-fingerprint-scanner (6.0.0):
     - React
-  - react-native-flipper-performance-plugin (0.2.1):
+  - react-native-flipper-performance-plugin (0.2.0):
     - React-Core
-    - react-native-flipper-performance-plugin/FBDefines (= 0.2.1)
-  - react-native-flipper-performance-plugin/FBDefines (0.2.1):
+    - react-native-flipper-performance-plugin/FBDefines (= 0.2.0)
+  - react-native-flipper-performance-plugin/FBDefines (0.2.0):
     - React-Core
   - react-native-netinfo (6.2.1):
     - React-Core
@@ -406,7 +406,7 @@ PODS:
     - React-Core
   - react-native-randombytes (3.6.1):
     - React-Core
-  - react-native-safe-area-context (4.2.5):
+  - react-native-safe-area-context (4.2.4):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -418,7 +418,7 @@ PODS:
     - InputMask (~> 6.1.0)
     - React-Core
     - React-RCTText
-  - react-native-udp (4.1.5):
+  - react-native-udp (4.1.3):
     - CocoaAsyncSocket
     - React-Core
   - react-native-version-number (0.3.6):
@@ -428,7 +428,7 @@ PODS:
     - react-native-video/Video (= 5.2.0)
   - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.18.2):
+  - react-native-webview (11.17.1):
     - React-Core
   - React-perflogger (0.67.3)
   - React-RCTActionSheet (0.67.3):
@@ -497,10 +497,10 @@ PODS:
     - React-perflogger (= 0.67.3)
   - ReactNativeART (1.2.0):
     - React
-  - RNAnalytics (1.5.2):
+  - RNAnalytics (1.5.0):
     - Analytics
     - React-Core
-  - RNCAsyncStorage (1.17.3):
+  - RNCAsyncStorage (1.15.17):
     - React-Core
   - RNCClipboard (1.5.1):
     - React-Core
@@ -510,11 +510,11 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNFBApp (14.9.1):
-    - Firebase/CoreOnly (= 8.15.0)
+  - RNFBApp (14.3.1):
+    - Firebase/CoreOnly (= 8.11.0)
     - React-Core
-  - RNFBRemoteConfig (14.9.1):
-    - Firebase/RemoteConfig (= 8.15.0)
+  - RNFBRemoteConfig (14.3.1):
+    - Firebase/RemoteConfig (= 8.11.0)
     - React-Core
     - RNFBApp
   - RNGestureHandler (1.10.3):
@@ -525,7 +525,7 @@ PODS:
     - React-Core
   - RNOS (1.2.6):
     - React
-  - RNReanimated (2.8.0):
+  - RNReanimated (2.4.1):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -533,6 +533,7 @@ PODS:
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
+    - React
     - React-callinvoker
     - React-Core
     - React-Core/DevSupport
@@ -552,7 +553,7 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.13.1):
+  - RNScreens (3.12.0):
     - React-Core
     - React-RCTImage
   - RNSentry (3.4.1):
@@ -560,8 +561,8 @@ PODS:
     - Sentry (= 7.11.0)
   - RNShare (6.5.0):
     - React-Core
-  - RNSVG (12.3.0):
-    - React-Core
+  - RNSVG (12.1.1):
+    - React
   - RNVectorIcons (8.1.0):
     - React-Core
   - SDWebImage (5.11.1):
@@ -910,12 +911,12 @@ SPEC CHECKSUMS:
   ExpoModulesCore: c9438f6add0fb7b04b7c64eb97a833d2752a7834
   FBLazyVector: 808f741ddb0896a20e5b98cc665f5b3413b072e2
   FBReactNativeSpec: 94473205b8741b61402e8c51716dea34aa3f5b2f
-  Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
+  Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   FirebaseABTesting: 10cbce8db9985ae2e3847ea44e9947dd18f94e10
-  FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
+  FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
   FirebaseCoreDiagnostics: 92e07a649aeb66352b319d43bdd2ee3942af84cb
   FirebaseInstallations: 40bd9054049b2eae9a2c38ef1c3dd213df3605cd
-  FirebaseRemoteConfig: 2d6e2cfdb49af79535c8af8a80a4a5009038ec2b
+  FirebaseRemoteConfig: a6a1ce9dabf404817ae2a44e8421d276660d9091
   Flipper: 30e8eeeed6abdc98edaf32af0cda2f198be4b733
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 57ffbe81ef95306cc9e69c4aa3aeeeeb58a6a28c
@@ -927,7 +928,7 @@ SPEC CHECKSUMS:
   FlipperKit: d8d346844eca5d9120c17d441a2f38596e8ed2b9
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
-  GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
+  GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   hermes-engine: bf7577d12ac6ccf53ab8b5af3c6ccf0dd8458c5c
   InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
@@ -958,17 +959,17 @@ SPEC CHECKSUMS:
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
   react-native-fast-crypto: 5943c42466b86ad70be60d3a5f64bd22251e5d9e
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
-  react-native-flipper-performance-plugin: ab280430bbdd17deffb7a30d94b604738cd04150
+  react-native-flipper-performance-plugin: fccda3ebbcee11cda4e5dee85b335835e9c7e714
   react-native-netinfo: 3d3769f0d65de15c83a9bf1346f8be71de5a24bf
   react-native-performance: f4b6604a9d5a8a7407e34a82fab6c641d9a3ec12
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
-  react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  react-native-safe-area-context: f98b0b16d1546d208fc293b4661e3f81a895afd9
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-text-input-mask: 36a546b378fadd2efe1b7484a859d34bc2c80395
-  react-native-udp: 8864b1211857e9d8224ae5cbaf8580970fb99de1
+  react-native-udp: f0fbf5386c45af5523dc143a86afe2cbf29f764e
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
-  react-native-webview: 8ec7ddf9eb4ddcd92b32cee7907efec19a9ec7cb
+  react-native-webview: 162b6453d074e0b1c7025242bb7a939b6f72b9e7
   React-perflogger: 93d3f142d6d9a46e635f09ba0518027215a41098
   React-RCTActionSheet: 87327c3722203cc79cf79d02fb83e7332aeedd18
   React-RCTAnimation: 009c87c018d50e0b38692699405ebe631ff4872d
@@ -982,22 +983,22 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: af1946623656f9c5fd64ca6f36f3863516193446
   ReactCommon: 650e33cde4fb7d36781cd3143f5276da0abb2f96
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
-  RNAnalytics: fcf308eeac6d34a74c158ec74d733c877f26fb96
-  RNCAsyncStorage: 005c0e2f09575360f142d0d1f1f15e4ec575b1af
+  RNAnalytics: a6dc48511d5d99b1ecaaf7157d8b5c618d15337e
+  RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
-  RNFBApp: fd23737680ed2bdde41ca27d8bfb171b6d668c6b
-  RNFBRemoteConfig: 32b35cf031733539c6b433d19c55ca1b90b88f84
+  RNFBApp: 227358730432d119d9b76ed33eba9e2306a9d85a
+  RNFBRemoteConfig: 64d3a17b53c865cdb6a7af5fe28084d1b964a9fb
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNKeychain: f75b8c8b2f17d3b2aa1f25b4a0ac5b83d947ff8f
   RNLocalize: cbcb55d0e19c78086ea4eea20e03fe8000bbbced
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
-  RNReanimated: 46cdb89ca59ab7181334f4ed05a70e82ddb36751
-  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
+  RNReanimated: 32c91e28f5780937b8efc07ddde1bab8d373fe0b
+  RNScreens: 2559f98b0835103cbef3b26ba77fa61d4bb37ae7
   RNSentry: fbbdcd7213058e3de5fbaa452b25a06a16b4b382
   RNShare: 047d42214f875d731bde73a2b67418638af85ad9
-  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
+  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
