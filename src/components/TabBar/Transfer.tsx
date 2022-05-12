@@ -13,7 +13,7 @@ import proxyStyled from "@ledgerhq/native-ui/components/styled";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled, { useTheme } from "styled-components/native";
 import Touchable from "../Touchable";
-import CreateModal from "./Create";
+import TransferDrawer from "./TransferDrawer";
 import { lockSubject } from "../RootNavigator/CustomBlockRouterNavigator";
 import { MAIN_BUTTON_BOTTOM, MAIN_BUTTON_SIZE } from "./shared";
 
@@ -152,7 +152,7 @@ export function TransferTabIcon() {
             bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
         }}
       >
-        <CreateModal isOpened={isModalOpened} onClose={closeModal} />
+        <TransferDrawer isOpened={isModalOpened} onClose={closeModal} />
       </AnimatedDrawerContainer>
       <MainButton
         activeOpacity={1}
