@@ -1,12 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Animated,
-  BackHandler,
-  Dimensions,
-  Easing,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { Animated, BackHandler, Dimensions, Pressable } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import Lottie from "lottie-react-native";
 
@@ -73,17 +66,24 @@ const Y_AMPLITUDE = 90;
 
 const animParams = {
   duration: DURATION_MS,
-  easing: Easing.inOut(Easing.ease),
   useNativeDriver: true,
 };
+
+const noAnimParams = {
+  ...animParams,
+  duration: 0,
+};
+
+/** Just for debugging */
+const initialIsModalOpened = false;
 
 export function TransferTabIcon() {
   const {
     colors: { type: themeType },
   } = useTheme();
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(initialIsModalOpened);
 
-  const openAnimValue = useRef(new Animated.Value(isModalOpened ? 1 : 0))
+  const openAnimValue = useRef(new Animated.Value(initialIsModalOpened ? 1 : 0))
     .current;
 
   const { width: screenWidth, height: screenHeight } = Dimensions.get("screen");
@@ -105,22 +105,20 @@ export function TransferTabIcon() {
   });
 
   const openModal = useCallback(() => {
-    openAnimValue.setValue(0);
-    Animated.timing(openAnimValue, {
-      toValue: 1,
-      ...animParams,
-    }).start(() => {
+    Animated.sequence([
+      Animated.timing(openAnimValue, { toValue: 0, ...noAnimParams }),
+      Animated.timing(openAnimValue, { toValue: 1, ...animParams }),
+    ]).start(() => {
       setIsModalOpened(true);
     });
   }, [openAnimValue, setIsModalOpened]);
 
   const closeModal = useCallback(() => {
     setIsModalOpened(false);
-    openAnimValue.setValue(1);
-    Animated.timing(openAnimValue, {
-      toValue: 2,
-      ...animParams,
-    }).start();
+    Animated.sequence([
+      Animated.timing(openAnimValue, { toValue: 2, ...animParams }),
+      Animated.timing(openAnimValue, { toValue: 0, ...noAnimParams }),
+    ]).start();
   }, [openAnimValue, setIsModalOpened]);
 
   const onPressButton = useCallback(() => {
@@ -176,6 +174,7 @@ export function TransferTabIcon() {
         <ButtonAnimation
           source={themeType === "light" ? lightAnimSource : darkAnimSource}
           progress={lottieProgressAnimValue}
+          loop={false}
         />
       </MainButton>
     </>
