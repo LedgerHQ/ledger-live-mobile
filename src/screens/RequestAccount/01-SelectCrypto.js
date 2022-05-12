@@ -10,6 +10,7 @@ import {
   useCurrenciesByMarketcap,
   findCryptoCurrencyById,
 } from "@ledgerhq/live-common/lib/currencies";
+import { useCurrencies } from "@ledgerhq/live-common/lib/currencies/react";
 
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
@@ -30,6 +31,7 @@ type Props = {
 type RouteParams = {
   currencies: string[],
   allowAddAccount?: boolean,
+  includeTokens?: boolean,
   accounts: AccountLike[],
 };
 
@@ -48,11 +50,12 @@ export default function RequestAccountsSelectCrypto({
   route,
 }: Props) {
   const { colors } = useTheme();
-  const { currencies } = route.params;
+  const { currencies, includeTokens } = route.params;
+  const allCurrencies = useCurrencies(includeTokens);
 
   const cryptoCurrencies = useMemo(
-    () => currencies.map(findCryptoCurrencyById).filter(Boolean),
-    [currencies],
+    () => allCurrencies.filter(c => currencies.includes(c.id)),
+    [currencies, allCurrencies],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
