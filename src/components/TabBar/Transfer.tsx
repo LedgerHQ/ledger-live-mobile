@@ -26,6 +26,7 @@ const MainButton = proxyStyled(Touchable).attrs({
   height: MAIN_BUTTON_SIZE,
   width: MAIN_BUTTON_SIZE,
   borderRadius: MAIN_BUTTON_SIZE / 2,
+  overflow: "hidden",
 })`
   border-radius: 40px;
   align-items: center;
@@ -33,8 +34,8 @@ const MainButton = proxyStyled(Touchable).attrs({
 `;
 
 const ButtonAnimation = proxyStyled(Lottie).attrs({
-  height: 35,
-  width: 35,
+  height: MAIN_BUTTON_SIZE,
+  width: MAIN_BUTTON_SIZE,
 })``;
 
 const hitSlop = {
@@ -53,6 +54,8 @@ const AnimatedDrawerContainer = Animated.createAnimatedComponent(
     position: "absolute",
     bottom: 0,
     backgroundColor: "background.main",
+    borderTopRightRadius: "24px",
+    borderTopLeftRadius: "24px",
   })``,
 );
 
@@ -83,20 +86,26 @@ export function TransferTabIcon() {
   const openAnimValue = useRef(new Animated.Value(isModalOpened ? 1 : 0))
     .current;
 
-  const { width, height: screenHeight } = Dimensions.get("screen");
+  const { width: screenWidth, height: screenHeight } = Dimensions.get("screen");
   const { bottom: bottomInset, top: topInset } = useSafeAreaInsets();
 
   const translateYAnimValue = openAnimValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [Y_AMPLITUDE, 0],
+    inputRange: [0, 1, 2],
+    outputRange: [Y_AMPLITUDE, 0, Y_AMPLITUDE],
   });
 
   const lottieProgressAnimValue = openAnimValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [12 / 55, 18 / 55], // the animation runs from frame 12 (burger) to 18 (cross) out of 55 frames
+    inputRange: [0, 1, 2],
+    outputRange: [0, 0.5, 1],
+  });
+
+  const opacityAnimValue = openAnimValue.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: [0, 1, 0],
   });
 
   const openModal = useCallback(() => {
+    openAnimValue.setValue(0);
     Animated.timing(openAnimValue, {
       toValue: 1,
       ...animParams,
@@ -107,8 +116,9 @@ export function TransferTabIcon() {
 
   const closeModal = useCallback(() => {
     setIsModalOpened(false);
+    openAnimValue.setValue(1);
     Animated.timing(openAnimValue, {
-      toValue: 0,
+      toValue: 2,
       ...animParams,
     }).start();
   }, [openAnimValue, setIsModalOpened]);
@@ -136,7 +146,7 @@ export function TransferTabIcon() {
       <BackdropPressable
         pointerEvents={isModalOpened ? undefined : "box-none"}
         onPress={closeModal}
-        style={{ opacity: openAnimValue }}
+        style={{ opacity: opacityAnimValue }}
       />
       <AnimatedDrawerContainer
         pointerEvents={isModalOpened ? undefined : "none"}
@@ -146,8 +156,8 @@ export function TransferTabIcon() {
               translateY: translateYAnimValue,
             },
           ],
-          opacity: openAnimValue,
-          width,
+          opacity: opacityAnimValue,
+          width: screenWidth,
           maxHeight: screenHeight - bottomInset - topInset,
           paddingBottom:
             bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
