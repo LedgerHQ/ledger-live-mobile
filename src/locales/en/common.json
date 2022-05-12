@@ -807,7 +807,12 @@
     "title": "GET YOUR LEDGER",
     "desc": "Protect your crypto & NFTs with industry-leading security",
     "cta": "Buy your Ledger now",
-    "footer": "I already have a device, set it up now"
+    "footer": "I already have a device, set it up now",
+    "bannerTitle": "Keep your crypto and NFTs safe",
+    "bannerTitle2": "You'll need a Nano to trade",
+    "bannerSubtitle": "with a Ledger Device",
+    "bannerButtonTitle": "Discover the Nano",
+    "bannerButtonTitle2": "Buy a device"
   },
   "discover": {
     "title": "Discover",

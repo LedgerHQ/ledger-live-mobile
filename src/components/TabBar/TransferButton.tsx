@@ -10,7 +10,8 @@ type Props = {
   description: string;
   tag?: string;
   Icon: IconType;
-  onPress: () => any;
+  onPress: () => any | null;
+  disabled?: boolean;
   event?: string;
   eventProperties?: any;
   style?: StyleProp<ViewStyle>;
@@ -68,6 +69,7 @@ export default function TransferButton({
   tag,
   Icon,
   onPress,
+  disabled,
   event,
   eventProperties,
   style,
@@ -78,7 +80,7 @@ export default function TransferButton({
   }, [onPress, event, eventProperties]);
 
   return (
-    <TouchableOpacity onPress={handlePress} style={[style]}>
+    <TouchableOpacity disabled={disabled} onPress={handlePress} style={[style]}>
       <Flex flexDirection="row" justifyContent="flex-start" alignItems="center">
         <CircledIcon Icon={Icon} />
         <Flex
