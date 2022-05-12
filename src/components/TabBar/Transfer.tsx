@@ -21,7 +21,7 @@ import lightAnimSource from "../../animations/mainButton/light.json";
 import darkAnimSource from "../../animations/mainButton/dark.json";
 
 const MainButton = proxyStyled(Touchable).attrs({
-  backgroundColor: "primary.c90",
+  backgroundColor: "primary.c80",
   height: MAIN_BUTTON_SIZE,
   width: MAIN_BUTTON_SIZE,
   borderRadius: MAIN_BUTTON_SIZE / 2,

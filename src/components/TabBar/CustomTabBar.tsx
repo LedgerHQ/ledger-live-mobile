@@ -3,7 +3,7 @@ import { Flex } from "@ledgerhq/native-ui";
 import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import Svg, { Path } from "react-native-svg";
-import { TAB_BAR_HEIGHT, HAS_GRADIENT } from "./shared";
+import { TAB_BAR_HEIGHT, HAS_GRADIENT, GRADIENT_HEIGHT } from "./shared";
 import BackgroundGradient from "./BackgroundGradient";
 
 type SvgProps = {
@@ -12,7 +12,8 @@ type SvgProps = {
 
 const DEBUG_ZONES = false;
 
-const getBgColor = (colors: any) => colors.neutral.c20;
+const getBgColor = (colors: any) =>
+  colors.type === "light" ? colors.neutral.c00 : colors.neutral.c20;
 
 function TabBarShape({ color }: SvgProps) {
   return (
@@ -59,6 +60,36 @@ const Touchable = styled(TouchableOpacity)`
   align-items: center;
 `;
 
+const darkGradients = [
+  {
+    height: GRADIENT_HEIGHT,
+    opacity: 0.8,
+    stop0: { stopOpacity: 0, stopColor: "#131214" },
+    stop100: { stopOpacity: 1, stopColor: "#131214" },
+  },
+  {
+    height: 85,
+    opacity: 0.8,
+    stop0: { stopOpacity: 0, stopColor: "#131214" },
+    stop100: { stopOpacity: 1, stopColor: "#131214" },
+  },
+];
+
+const lightGradients = [
+  {
+    height: GRADIENT_HEIGHT,
+    opacity: 1,
+    stop0: { stopOpacity: 0, stopColor: "#ffffff" },
+    stop100: { stopOpacity: 0.8, stopColor: "#ffffff" },
+  },
+  {
+    height: 85,
+    opacity: 0.8,
+    stop0: { stopOpacity: 0, stopColor: "#ffffff" },
+    stop100: { stopOpacity: 0.12, stopColor: "#000000" },
+  },
+];
+
 export default function CustomTabBar({
   state,
   descriptors,
@@ -67,6 +98,7 @@ export default function CustomTabBar({
   insets,
 }: any): JSX.Element {
   const bgColor = getBgColor(colors);
+  const gradients = colors.type === "light" ? lightGradients : darkGradients;
   const { bottom: bottomInset } = insets;
   return (
     <Flex
@@ -77,7 +109,12 @@ export default function CustomTabBar({
       position="absolute"
       overflow="visible"
     >
-      {HAS_GRADIENT && <BackgroundGradient colors={colors} />}
+      {HAS_GRADIENT && (
+        <>
+          <BackgroundGradient {...gradients[0]} />
+          <BackgroundGradient {...gradients[1]} />
+        </>
+      )}
       <BottomFiller bottom={-bottomInset} height={bottomInset} />
       <BackgroundFiller left={0} />
       <BackgroundFiller right={0} />
@@ -86,7 +123,7 @@ export default function CustomTabBar({
         justifyContent="center"
         alignItems="center"
         position="absolute"
-        left={-2}
+        left={-1}
         right={0}
       >
         <TabBarShape color={DEBUG_ZONES ? "lightcoral" : bgColor} />
