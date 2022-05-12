@@ -1,0 +1,12 @@
+.eslintrc.js
+
+dist
+node_modules
+
+jest.config.js
+jest.setup.js
+
+// TODO: Fix the lint for these
+src/old/*
+src/wallet-connection/ethereum/*
+src/wallet-connection/solana/*

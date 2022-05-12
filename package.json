@@ -100,6 +100,7 @@
     "async": "^3.2.1",
     "asyncstorage-down": "^4.2.0",
     "axios": "^0.26.0",
+    "base58-js": "^1.0.0",
     "bignumber.js": "^9.0.1",
     "browserify-zlib": "~0.2.0",
     "buffer": "6.0.3",
