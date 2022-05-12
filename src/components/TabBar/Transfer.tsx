@@ -5,6 +5,7 @@ import {
   Dimensions,
   Easing,
   Pressable,
+  ScrollView,
 } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import Lottie from "lottie-react-native";
@@ -83,7 +84,7 @@ export function TransferTabIcon() {
     .current;
 
   const { width, height: screenHeight } = Dimensions.get("screen");
-  const { bottom: bottomInset } = useSafeAreaInsets();
+  const { bottom: bottomInset, top: topInset } = useSafeAreaInsets();
 
   const translateYAnimValue = openAnimValue.interpolate({
     inputRange: [0, 1],
@@ -138,7 +139,7 @@ export function TransferTabIcon() {
         style={{ opacity: openAnimValue }}
       />
       <AnimatedDrawerContainer
-        pointerEvents={isModalOpened ? "box-none" : "none"}
+        pointerEvents={isModalOpened ? undefined : "none"}
         style={{
           transform: [
             {
@@ -147,7 +148,7 @@ export function TransferTabIcon() {
           ],
           opacity: openAnimValue,
           width,
-          maxHeight: screenHeight - bottomInset,
+          maxHeight: screenHeight - bottomInset - topInset,
           paddingBottom:
             bottomInset + 16 + MAIN_BUTTON_SIZE + MAIN_BUTTON_BOTTOM,
         }}
