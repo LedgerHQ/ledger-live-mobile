@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Flex, Icons, Text } from "@ledgerhq/native-ui";
+import { ScrollView } from "react-native";
 import { NavigatorName, ScreenName } from "../../const";
 import {
   accountsCountSelector,
@@ -15,7 +16,6 @@ import { Props as ModalProps } from "../BottomModal";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import TransferButton from "./TransferButton";
 import BuyDeviceBanner, { IMAGE_PROPS_SMALL_NANO } from "../BuyDeviceBanner";
-import { ScrollView } from "react-native";
 
 export default function TransferDrawer({ onClose }: ModalProps) {
   const navigation = useNavigation();
@@ -156,21 +156,31 @@ export default function TransferDrawer({ onClose }: ModalProps) {
   );
 
   return (
-    <Flex flexDirection="column" alignItems="flex-start" p="24px" pt="40px" flex={1}>
-      <ScrollView style={{opacity: readOnlyModeEnabled ? 0.3 : 1}}>
+    <Flex flexDirection="column" alignItems="flex-start" p="24px" pt="40px">
+      <ScrollView
+        style={{ opacity: readOnlyModeEnabled ? 0.3 : 1, width: "100%" }}
+      >
         {buttons}
       </ScrollView>
-      {readOnlyModeEnabled && <BuyDeviceBanner
-        topLeft={(
-          <Text color="#6358B7" uppercase mb="8px" fontSize="11px" fontWeight="semiBold">
-            {t("buyDevice.bannerTitle2")}
-          </Text>
-        )}
-        style={{marginTop: 36, paddingTop: 13.5, paddingBottom: 13.5}}
-        buttonLabel={t("buyDevice.bannerButtonTitle2")}
-        buttonSize="small"
-        {...IMAGE_PROPS_SMALL_NANO}
-      />}
+      {readOnlyModeEnabled && (
+        <BuyDeviceBanner
+          topLeft={
+            <Text
+              color="#6358B7"
+              uppercase
+              mb="8px"
+              fontSize="11px"
+              fontWeight="semiBold"
+            >
+              {t("buyDevice.bannerTitle2")}
+            </Text>
+          }
+          style={{ marginTop: 36, paddingTop: 13.5, paddingBottom: 13.5 }}
+          buttonLabel={t("buyDevice.bannerButtonTitle2")}
+          buttonSize="small"
+          {...IMAGE_PROPS_SMALL_NANO}
+        />
+      )}
     </Flex>
   );
 }
