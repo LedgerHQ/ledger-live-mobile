@@ -32,6 +32,8 @@ const initialOnboardingState: OnboardingState = {
   currentSeedWordIndex: 0,
 };
 
+const pollingFrequencyMs = 1000;
+
 type Props = StackScreenProps<
   SyncOnboardingStackParamList,
   "SyncOnboardingWelcome"
@@ -88,7 +90,7 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
         `SyncOnboarding: 🧑‍💻 new device: ${JSON.stringify(device)}`,
       );
 
-      onboardingStatePollingSubscription = timer(0, 1000)
+      onboardingStatePollingSubscription = timer(0, pollingFrequencyMs)
         .pipe(
           tap(i => {
             console.log(`SyncOnboarding: ▶️ Polling ${i}`);
@@ -99,6 +101,7 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
           retryWhen(errors =>
             errors.pipe(
               mergeMap(error => {
+                // Transport error: retry polling
                 if (
                   error &&
                   error instanceof TransportStatusError &&
@@ -110,6 +113,20 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
                   );
                   return of(error);
                 }
+                // Disconnection error: retry polling
+                if (
+                  error &&
+                  error instanceof Error &&
+                  error.name === "DisconnectedDevice"
+                ) {
+                  console.log(
+                    `SyncOnboarding: disconnection error 🔌 ${JSON.stringify(
+                      error,
+                    )}`,
+                  );
+                  return of(error);
+                }
+
                 console.log(
                   `SyncOnboarding: 💥 Error ${error} -> ${JSON.stringify(
                     error,
@@ -118,7 +135,7 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
                 return throwError(error);
               }),
               tap(() => console.log("Going to retry in 🕐️ ...")),
-              delayWhen(() => timer(2000)),
+              delayWhen(() => timer(pollingFrequencyMs)),
               tap(() => console.log("Retrying 🏃️ !")),
             ),
           ),
