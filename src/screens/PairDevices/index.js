@@ -4,8 +4,11 @@ import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useDispatch, useSelector } from "react-redux";
 import { timeout, tap } from "rxjs/operators";
+import { from } from "rxjs";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
+import getVersion from "@ledgerhq/live-common/lib/hw/getVersion";
+import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { delay } from "@ledgerhq/live-common/lib/promise";
@@ -46,7 +49,7 @@ type PairDevicesProps = {
 type RouteParams = {
   onDone?: (device: Device) => void,
   onDoneNavigateTo: string,
-  onlySelectDeviceWithoutCompletePairing?: Boolean,
+  onlySelectDeviceWithoutFullAppPairing?: Boolean,
 };
 
 type BleDevice = {
@@ -114,12 +117,25 @@ function PairDevicesInner({ navigation, route }: Props) {
         wired: false,
       };
 
-      if (route.params?.onlySelectDeviceWithoutCompletePairing) {
+      // Pairing state for a known or unknown bluetooth device
+      dispatch({ type: "pairing", payload: device });
+
+      if (route.params?.onlySelectDeviceWithoutFullAppPairing) {
+        // Sends a first request to trigger the native bluetooth pairing step
+        // (if the device is unknown to the phone) and make sure that the device
+        // is correctly paired to the phone
+        try {
+          await withDevice(device.deviceId)(t =>
+            from(getVersion(t)),
+          ).toPromise();
+        } catch (_) {
+          // Silently swwallowing error, we only want to trigger the native ble pairing step
+        }
+
         onDone(device);
         return;
       }
 
-      dispatch({ type: "pairing", payload: device });
       try {
         const transport = await TransportBLE.open(bleDevice);
         if (unmounted.current) return;

@@ -200,10 +200,10 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
 
     // @ts-expect-error navigation issue
     navigation.navigate(ScreenName.PairDevices, {
-      onlySelectDeviceWithoutCompletePairing: true,
+      onlySelectDeviceWithoutFullAppPairing: true,
       onDoneNavigateTo: ScreenName.SyncOnboardingWelcome,
     });
-  }, [handleOnPaired, navigation]);
+  }, [navigation]);
 
   return (
     <Flex
