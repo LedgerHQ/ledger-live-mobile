@@ -1,12 +1,8 @@
 // @flow
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
-import {
-  CryptoCurrency,
-  TokenCurrency,
-  Currency,
-} from "@ledgerhq/live-common/lib/types";
+import { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import {
   isCurrencySupported,
   listTokens,
@@ -56,9 +52,7 @@ export default function AddAccountsSelectCrypto({ navigation, route }: Props) {
     [filterCurrencyIds],
   );
 
-  const { loading, error, currencies } = useCurrenciesByMarketcapWithStatus(
-    cryptoCurrencies,
-  );
+  const { currencies } = useCurrenciesByMarketcapWithStatus(cryptoCurrencies);
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     navigation.navigate(ScreenName.AddAccountsSelectDevice, {

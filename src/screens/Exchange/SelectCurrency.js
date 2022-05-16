@@ -10,7 +10,7 @@ import type {
 import {
   isCurrencySupported,
   listTokens,
-  useCurrenciesByMarketcap,
+  useCurrenciesByMarketcapWithStatus,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
 
@@ -64,11 +64,15 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
     [],
   );
 
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
+  const {
+    currencies: sortedCryptoCurrencies,
+  } = useCurrenciesByMarketcapWithStatus(cryptoCurrencies);
 
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
-    getSupportedCurrencies(mode).includes(currency.id),
-  );
+  const supportedCryptoCurrencies = sortedCryptoCurrencies
+    ? sortedCryptoCurrencies.filter(currency =>
+        getSupportedCurrencies(mode).includes(currency.id),
+      )
+    : [];
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     track("Buy Crypto Continue Button", { currencyName: currency.name });

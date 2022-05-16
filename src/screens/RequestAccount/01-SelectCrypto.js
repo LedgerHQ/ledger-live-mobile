@@ -7,7 +7,7 @@ import type {
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import {
-  useCurrenciesByMarketcap,
+  useCurrenciesByMarketcapWithStatus,
   findCryptoCurrencyById,
 } from "@ledgerhq/live-common/lib/currencies";
 
@@ -55,7 +55,9 @@ export default function RequestAccountsSelectCrypto({
     [currencies],
   );
 
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
+  const {
+    currencies: sortedCryptoCurrencies,
+  } = useCurrenciesByMarketcapWithStatus(cryptoCurrencies);
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     navigation.navigate(ScreenName.RequestAccountsSelectAccount, {
@@ -85,7 +87,7 @@ export default function RequestAccountsSelectCrypto({
           <FilteredSearchBar
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.filteredSearchInputWrapperStyle}
-            list={sortedCryptoCurrencies}
+            list={sortedCryptoCurrencies || []}
             renderList={renderList}
             renderEmptySearch={renderEmptyList}
           />
