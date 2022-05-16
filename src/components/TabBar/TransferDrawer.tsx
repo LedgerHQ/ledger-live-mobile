@@ -16,10 +16,13 @@ import { Props as ModalProps } from "../BottomModal";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import TransferButton from "./TransferButton";
 import BuyDeviceBanner, { IMAGE_PROPS_SMALL_NANO } from "../BuyDeviceBanner";
+import { useAnalytics } from "../../analytics";
 
 export default function TransferDrawer({ onClose }: ModalProps) {
   const navigation = useNavigation();
   const { t } = useTranslation();
+
+  const { page } = useAnalytics();
 
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount: number = useSelector(accountsCountSelector);
@@ -83,7 +86,11 @@ export default function TransferDrawer({ onClose }: ModalProps) {
     () =>
       [
         {
-          event: "TransferSend",
+          eventProperties: {
+            button: "transfer_send",
+            page,
+            drawer: "trade",
+          },
           title: t("transfer.send.title"),
           description: t("transfer.send.description"),
           onPress:
@@ -93,28 +100,44 @@ export default function TransferDrawer({ onClose }: ModalProps) {
           Icon: Icons.ArrowTopMedium,
         },
         {
-          event: "TransferReceive",
+          eventProperties: {
+            button: "transfer_receive",
+            page,
+            drawer: "trade",
+          },
           title: t("transfer.receive.title"),
           description: t("transfer.receive.description"),
           onPress: accountsCount > 0 ? onReceiveFunds : null,
           Icon: Icons.ArrowBottomMedium,
         },
         {
-          event: "TransferBuy",
+          eventProperties: {
+            button: "transfer_buy",
+            page,
+            drawer: "trade",
+          },
           title: t("transfer.buy.title"),
           description: t("transfer.buy.description"),
           Icon: Icons.PlusMedium,
           onPress: onBuy,
         },
         {
-          event: "TransferSell",
+          eventProperties: {
+            button: "transfer_sell",
+            page,
+            drawer: "trade",
+          },
           title: t("transfer.sell.title"),
           description: t("transfer.sell.description"),
           Icon: Icons.MinusMedium,
           onPress: onSell,
         },
         {
-          event: "TransferSwap",
+          eventProperties: {
+            button: "transfer_swap",
+            page,
+            drawer: "trade",
+          },
           title: t("transfer.swap.title"),
           description: t("transfer.swap.description"),
           Icon: Icons.BuyCryptoMedium,
@@ -123,7 +146,11 @@ export default function TransferDrawer({ onClose }: ModalProps) {
         ...(lendingEnabled
           ? [
               {
-                event: "TransferLending",
+                eventProperties: {
+                  button: "transfer_lending",
+                  page,
+                  drawer: "trade",
+                },
                 title: t("transfer.lending.titleTransferTab"),
                 description: t("transfer.lending.descriptionTransferTab"),
                 tag: t("common.popular"),
@@ -152,7 +179,18 @@ export default function TransferDrawer({ onClose }: ModalProps) {
       onSwap,
       readOnlyModeEnabled,
       t,
+      page,
     ],
+  );
+
+  const bannerEventProperties = useMemo(
+    () => ({
+      banner: "You'll need a nano",
+      button: "Buy a device",
+      drawer: "transfer",
+      page,
+    }),
+    [page],
   );
 
   return (
@@ -178,6 +216,8 @@ export default function TransferDrawer({ onClose }: ModalProps) {
           style={{ marginTop: 36, paddingTop: 13.5, paddingBottom: 13.5 }}
           buttonLabel={t("buyDevice.bannerButtonTitle2")}
           buttonSize="small"
+          event="button_clicked"
+          eventProperties={bannerEventProperties}
           {...IMAGE_PROPS_SMALL_NANO}
         />
       )}

@@ -2,15 +2,14 @@ import React, { useCallback, useEffect } from "react";
 import { BackHandler, Dimensions, Pressable } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import Lottie from "lottie-react-native";
-
 import Animated, {
   interpolate,
+  runOnJS,
   useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-
 import proxyStyled from "@ledgerhq/native-ui/components/styled";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled, { useTheme } from "styled-components/native";
@@ -18,6 +17,7 @@ import Touchable from "../Touchable";
 import TransferDrawer from "./TransferDrawer";
 import { lockSubject } from "../RootNavigator/CustomBlockRouterNavigator";
 import { MAIN_BUTTON_BOTTOM, MAIN_BUTTON_SIZE } from "./shared";
+import { useTrack } from "../../analytics";
 
 import lightAnimSource from "../../animations/mainButton/light.json";
 import darkAnimSource from "../../animations/mainButton/dark.json";
@@ -84,6 +84,8 @@ export function TransferTabIcon() {
     colors: { type: themeType },
   } = useTheme();
 
+  const track = useTrack();
+
   const openAnimValue = useSharedValue(initialIsModalOpened ? 1 : 0);
 
   const getIsModalOpened = useCallback(() => openAnimValue.value === 1, [
@@ -119,9 +121,16 @@ export function TransferTabIcon() {
   }));
 
   const openModal = useCallback(() => {
+    const animCallback = () => {
+      track("drawer_viewed", { drawer: "trade" });
+    };
     openAnimValue.value = 0;
-    openAnimValue.value = withTiming(1, animParams);
-  }, [openAnimValue]);
+    openAnimValue.value = withTiming(1, animParams, finished => {
+      if (finished) {
+        runOnJS(animCallback)();
+      }
+    });
+  }, [openAnimValue, track]);
 
   const closeModal = useCallback(() => {
     openAnimValue.value = withTiming(2, animParams, finished => {
@@ -132,8 +141,14 @@ export function TransferTabIcon() {
   }, [openAnimValue]);
 
   const onPressButton = useCallback(() => {
-    getIsModalOpened() ? closeModal() : openModal();
-  }, [getIsModalOpened, closeModal, openModal]);
+    if (getIsModalOpened()) {
+      closeModal();
+      track("button_clicked", { button: "close_trade" });
+    } else {
+      openModal();
+      track("button_clicked", { button: "trade", drawer: "trade" });
+    }
+  }, [track, getIsModalOpened, closeModal, openModal]);
 
   const handleBackPress = useCallback(() => {
     if (!getIsModalOpened()) return false;
@@ -176,7 +191,6 @@ export function TransferTabIcon() {
       </AnimatedDrawerContainer>
       <MainButton
         activeOpacity={1}
-        event="Transfer"
         disabled={lockSubject.getValue()}
         hitSlop={hitSlop}
         onPress={onPressButton}

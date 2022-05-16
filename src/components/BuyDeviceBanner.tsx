@@ -10,18 +10,18 @@ import { Flex, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { ButtonProps } from "@ledgerhq/native-ui/components/cta/Button";
 import Button from "./wrappedUi/Button";
 import { ScreenName } from "../const";
 
 import imgSource from "../images/illustration/Shared/_NanoXTop.png";
-import { ButtonProps } from "@ledgerhq/native-ui/components/cta/Button";
 
 type Props = {
   topLeft?: JSX.Element | null;
   buttonLabel?: string;
   buttonSize?: ButtonProps["size"];
   event?: string;
-  eventProperties?: string;
+  eventProperties?: Record<string, any>;
   style?: StyleProp<ViewStyle>;
   imageScale?: number;
   imageContainerStyle?: StyleProp<ViewStyle>;

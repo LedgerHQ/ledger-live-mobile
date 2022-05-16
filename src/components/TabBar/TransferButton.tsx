@@ -70,7 +70,7 @@ export default function TransferButton({
   Icon,
   onPress,
   disabled,
-  event,
+  event = "button_clicked",
   eventProperties,
   style,
 }: Props) {
