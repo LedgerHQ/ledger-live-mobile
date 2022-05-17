@@ -2,8 +2,8 @@ import React from "react";
 import { Flex } from "@ledgerhq/native-ui";
 import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import Svg, { Path } from "react-native-svg";
-import { TAB_BAR_HEIGHT, HAS_GRADIENT, GRADIENT_HEIGHT } from "./shared";
+import Svg, { Path, Stop } from "react-native-svg";
+import { TAB_BAR_HEIGHT, GRADIENT_HEIGHT } from "./shared";
 import BackgroundGradient from "./BackgroundGradient";
 
 type SvgProps = {
@@ -64,14 +64,18 @@ const darkGradients = [
   {
     height: GRADIENT_HEIGHT,
     opacity: 0.8,
-    stop0: { stopOpacity: 0, stopColor: "#131214" },
-    stop100: { stopOpacity: 1, stopColor: "#131214" },
+    stops: [
+      <Stop offset="0%" stopOpacity={0} stopColor="#131214" />,
+      <Stop offset="100%" stopOpacity={1} stopColor="#131214" />,
+    ],
   },
   {
     height: 85,
     opacity: 0.8,
-    stop0: { stopOpacity: 0, stopColor: "#131214" },
-    stop100: { stopOpacity: 1, stopColor: "#131214" },
+    stops: [
+      <Stop offset="0%" stopOpacity={0} stopColor="#131214" />,
+      <Stop offset="100%" stopOpacity={1} stopColor="#131214" />,
+    ],
   },
 ];
 
@@ -79,14 +83,19 @@ const lightGradients = [
   {
     height: GRADIENT_HEIGHT,
     opacity: 1,
-    stop0: { stopOpacity: 0, stopColor: "#ffffff" },
-    stop100: { stopOpacity: 0.8, stopColor: "#ffffff" },
+    stops: [
+      <Stop key="0%" offset="0" stopOpacity={0} stopColor="#ffffff" />,
+      <Stop key="100%" offset="100%" stopOpacity={0.8} stopColor="#ffffff" />,
+    ],
   },
   {
     height: 85,
     opacity: 0.8,
-    stop0: { stopOpacity: 0, stopColor: "#ffffff" },
-    stop100: { stopOpacity: 0.12, stopColor: "#000000" },
+    stops: [
+      <Stop key="0%" offset="0" stopOpacity={0} stopColor="#ffffff" />,
+      <Stop offset="57%" stopOpacity={0.15} stopColor="#000000" />,
+      <Stop key="100%" offset="100%" stopOpacity={0.15} stopColor="#000000" />,
+    ],
   },
 ];
 
@@ -109,12 +118,8 @@ export default function CustomTabBar({
       position="absolute"
       overflow="visible"
     >
-      {HAS_GRADIENT && (
-        <>
-          <BackgroundGradient {...gradients[0]} />
-          <BackgroundGradient {...gradients[1]} />
-        </>
-      )}
+      <BackgroundGradient {...gradients[0]} />
+      <BackgroundGradient {...gradients[1]} />
       <BottomFiller bottom={-bottomInset} height={bottomInset} />
       <BackgroundFiller left={0} />
       <BackgroundFiller right={0} />

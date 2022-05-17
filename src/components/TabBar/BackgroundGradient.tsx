@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import Svg, { Defs, LinearGradient, Stop, Rect } from "react-native-svg";
+import Svg, { Defs, LinearGradient, Rect } from "react-native-svg";
 
 const StyledSVG = styled(Svg)`
   position: absolute;
@@ -9,6 +9,7 @@ const StyledSVG = styled(Svg)`
 `;
 
 type StopType = {
+  offset: string;
   stopOpacity: number;
   stopColor: string;
 };
@@ -16,11 +17,10 @@ type StopType = {
 type Props = {
   height: number;
   opacity: number;
-  stop0: StopType;
-  stop100: StopType;
+  stops: JSX.Element[];
 };
 
-const BackgroundGradient = ({ height, opacity, stop0, stop100 }: Props) => (
+const BackgroundGradient = ({ height, opacity, stops }: Props) => (
   <StyledSVG style={{ height }}>
     <Defs>
       <LinearGradient
@@ -31,8 +31,7 @@ const BackgroundGradient = ({ height, opacity, stop0, stop100 }: Props) => (
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <Stop offset="0" {...stop0} />
-        <Stop offset="100%" {...stop100} />
+        {stops}
       </LinearGradient>
     </Defs>
     <Rect
