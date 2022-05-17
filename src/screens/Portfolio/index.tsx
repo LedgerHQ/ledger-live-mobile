@@ -299,7 +299,7 @@ function PortfolioScreen({ navigation }: Props) {
         </Box>
         <AnimatedFlatListWithRefreshControl
           data={data}
-          style={{ flex: 1, position: "relative", backgroundColor: "transparent" }}
+          style={{ flex: 1, position: "relative" }}
           contentContainerStyle={{ paddingBottom: TAB_BAR_SAFE_HEIGHT }}
           renderItem={({ item }: { item: React.ReactNode }) => item}
           keyExtractor={(_: any, index: number) => String(index)}
