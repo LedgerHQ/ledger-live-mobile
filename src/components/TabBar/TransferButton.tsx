@@ -10,7 +10,7 @@ type Props = {
   description: string;
   tag?: string;
   Icon: IconType;
-  onPress: () => any | null;
+  onPress?: (() => any) | null;
   disabled?: boolean;
   event?: string;
   eventProperties?: any;
