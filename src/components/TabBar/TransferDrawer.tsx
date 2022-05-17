@@ -103,6 +103,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
             : null
         }
         Icon={Icons.ArrowTopMedium}
+        disabled={readOnlyModeEnabled}
       />
       <StyledTransferButton
         eventProperties={{
@@ -114,6 +115,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
         description={t("transfer.receive.description")}
         onPress={accountsCount > 0 ? onReceiveFunds : null}
         Icon={Icons.ArrowBottomMedium}
+        disabled={readOnlyModeEnabled}
       />
       <StyledTransferButton
         eventProperties={{
@@ -125,6 +127,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
         description={t("transfer.buy.description")}
         Icon={Icons.PlusMedium}
         onPress={onBuy}
+        disabled={readOnlyModeEnabled}
       />
       <StyledTransferButton
         eventProperties={{
@@ -136,6 +139,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
         description={t("transfer.sell.description")}
         Icon={Icons.MinusMedium}
         onPress={onSell}
+        disabled={readOnlyModeEnabled}
       />
       <StyledTransferButton
         eventProperties={{
@@ -148,6 +152,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
         Icon={Icons.BuyCryptoMedium}
         onPress={accountsCount > 0 && !readOnlyModeEnabled ? onSwap : null}
         noMargin={!lendingEnabled}
+        disabled={readOnlyModeEnabled}
       />
       {lendingEnabled ? (
         <StyledTransferButton
@@ -162,6 +167,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
           Icon={Icons.LendMedium}
           onPress={accountsCount > 0 && !readOnlyModeEnabled ? onLending : null}
           noMargin
+          disabled={readOnlyModeEnabled}
         />
       ) : null}
     </>
@@ -180,7 +186,6 @@ export default function TransferDrawer({ onClose }: ModalProps) {
   return (
     <Flex flexDirection="column" alignItems="flex-start" p="24px" pt="40px">
       <ScrollView
-        pointerEvents={readOnlyModeEnabled ? "none" : "auto"}
         alwaysBounceVertical={false}
         style={{ opacity: readOnlyModeEnabled ? 0.3 : 1, width: "100%" }}
       >
