@@ -10,8 +10,6 @@ type SvgProps = {
   color: string;
 };
 
-const DEBUG_ZONES = false;
-
 const getBgColor = (colors: any) =>
   colors.type === "light" ? colors.neutral.c00 : colors.neutral.c20;
 
@@ -37,13 +35,13 @@ const BackgroundFiller = styled(Flex).attrs(p => ({
   position: "absolute",
   height: TAB_BAR_HEIGHT,
   width: "30%",
-  backgroundColor: DEBUG_ZONES ? "lightgreen" : getBgColor(p.theme.colors),
+  backgroundColor: getBgColor(p.theme.colors),
 }))``;
 
 const BottomFiller = styled(Flex).attrs(p => ({
   position: "absolute",
   width: "100%",
-  backgroundColor: DEBUG_ZONES ? "lightblue" : getBgColor(p.theme.colors),
+  backgroundColor: getBgColor(p.theme.colors),
 }))``;
 
 const MiddleIconContainer = styled(Flex).attrs({
@@ -131,7 +129,7 @@ export default function CustomTabBar({
         left={-1}
         right={0}
       >
-        <TabBarShape color={DEBUG_ZONES ? "lightcoral" : bgColor} />
+        <TabBarShape color={bgColor} />
       </Flex>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
