@@ -196,6 +196,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
   return (
     <Flex flexDirection="column" alignItems="flex-start" p="24px" pt="40px">
       <ScrollView
+        alwaysBounceVertical={false}
         style={{ opacity: readOnlyModeEnabled ? 0.3 : 1, width: "100%" }}
       >
         {buttons}
