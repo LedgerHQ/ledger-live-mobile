@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, ReactElement } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Flex, Text } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
 import {
   OnboardingState,
   extractOnboardingState,
@@ -40,6 +41,7 @@ type Props = StackScreenProps<
 >;
 
 export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
+  const { colors } = useTheme();
   const [device, setDevice] = useState<Device | null>(null);
   const [onboardingState, setOnboardingState] = useState<OnboardingState>(
     initialOnboardingState,
@@ -211,9 +213,11 @@ export const SyncOnboarding = ({ navigation, route }: Props): ReactElement => {
       alignItems="center"
       flexDirection="column"
       height="100%"
+      flex={1}
+      bg={colors.background}
     >
       {onboardingSteps.map((label, i) => (
-        <Text key={i} variant="h2" textAlign="left" color="constant.white">
+        <Text key={i} variant="h2" textAlign="left" color={colors.primary}>
           {label} {stepIndex === i ? "✏️" : stepIndex > i ? "✅" : "🦧"}
         </Text>
       ))}
