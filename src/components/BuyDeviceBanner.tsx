@@ -80,7 +80,7 @@ export default function BuyDeviceBanner({
               variant="h5"
               fontWeight="semiBold"
               color="constant.black"
-              mb="8px"
+              mb={3}
             >
               {t("buyDevice.bannerTitle")}
             </Text>
@@ -110,7 +110,7 @@ export default function BuyDeviceBanner({
         position="absolute"
         right={0}
         bottom={0}
-        borderRadius="8px"
+        borderRadius={2}
         overflow="hidden"
         imageContainerStyle={imageContainerStyle}
       >

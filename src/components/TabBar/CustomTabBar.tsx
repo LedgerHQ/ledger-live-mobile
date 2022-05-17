@@ -111,7 +111,7 @@ export default function CustomTabBar({
     <Flex
       width="100%"
       flexDirection="row"
-      height={56}
+      height={TAB_BAR_HEIGHT}
       bottom={bottomInset}
       position="absolute"
       overflow="visible"

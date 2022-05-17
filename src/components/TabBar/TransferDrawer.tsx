@@ -184,7 +184,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
   );
 
   return (
-    <Flex flexDirection="column" alignItems="flex-start" p="24px" pt="40px">
+    <Flex flexDirection="column" alignItems="flex-start" p={7} pt={9}>
       <ScrollView
         alwaysBounceVertical={false}
         style={{ opacity: readOnlyModeEnabled ? 0.3 : 1, width: "100%" }}
@@ -197,7 +197,7 @@ export default function TransferDrawer({ onClose }: ModalProps) {
             <Text
               color="#6358B7"
               uppercase
-              mb="8px"
+              mb={3}
               fontSize="11px"
               fontWeight="semiBold"
             >
