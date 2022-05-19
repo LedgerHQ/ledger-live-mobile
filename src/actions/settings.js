@@ -128,14 +128,24 @@ export const showToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
+export const hideNftCollection = (collectionId: string) => ({
+  type: "HIDE_NFT_COLLECTION",
+  payload: collectionId,
+});
+
+export const unhideNftCollection = (collectionId: string) => ({
+  type: "UNHIDE_NFT_COLLECTION",
+  payload: collectionId,
+});
+
 export const dismissBanner = (bannerId: string) => ({
   type: "SETTINGS_DISMISS_BANNER",
   payload: bannerId,
 });
 
-export const setCarouselVisibility = (nonce: number) => ({
+export const setCarouselVisibility = (cardsVisibility: any) => ({
   type: "SETTINGS_SET_CAROUSEL_VISIBILITY",
-  payload: nonce,
+  payload: cardsVisibility,
 });
 
 export const setAvailableUpdate = (enabled: boolean) => ({
@@ -226,7 +236,7 @@ export function useTimeRange() {
     },
     [dispatch],
   );
-  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
+  const ranges: PortfolioRange[] = ["all", "year", "month", "week", "day"];
   const options = ranges.map<PortfolioRangeOption>(key => ({
     key,
     value: t(`common:time.${key}`),

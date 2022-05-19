@@ -7,30 +7,30 @@ import {
   SyncSkipUnderPriority,
 } from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { isNftTransaction } from "@ledgerhq/live-common/lib/nft";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useRef, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Platform, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Clipboard from "@react-native-community/clipboard";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
-import Paste from "../../icons/Paste";
 import { track, TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
-import LText, { getFontStyle } from "../../components/LText";
-import TextInput from "../../components/TextInput";
+import LText from "../../components/LText";
 import Alert from "../../components/Alert";
 import TranslatedError from "../../components/TranslatedError";
 import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
+import RecipientInput from "../../components/RecipientInput";
 
 const withoutHiddenError = error =>
   error instanceof RecipientRequired ? null : error;
@@ -64,9 +64,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
 
   const shouldSkipAmount =
     transaction.family === "ethereum" && transaction.mode === "erc721.transfer";
-  const isNftSend = ["erc721.transfer", "erc1155.transfer"].includes(
-    transaction.mode,
-  );
+  const isNftSend = isNftTransaction(transaction);
 
   // handle changes from camera qr code
   const initialTransaction = useRef(transaction);
@@ -202,39 +200,17 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
                 ]}
               />
             </View>
-            <TouchableOpacity
-              style={styles.pasteContainer}
-              onPress={async () => {
-                const text = await Clipboard.getString();
-                onChangeText(text);
-              }}
-            >
-              <Paste size={16} color={colors.live} />
-              <LText style={styles.pasteTitle} semiBold color="live">
-                <Trans i18nKey="common.paste" />
-              </LText>
-            </TouchableOpacity>
             <View style={styles.inputWrapper}>
-              {/* make this a recipient component */}
-              <TextInput
-                placeholder={t("send.recipient.input")}
-                placeholderTextColor={colors.fog}
-                style={[
-                  styles.addressInput,
-                  { color: colors.darkBlue },
-                  error && { color: colors.alert },
-                  warning && { color: colors.orange },
-                ]}
+              <RecipientInput
+                onPaste={async () => {
+                  const text = await Clipboard.getString();
+                  onChangeText(text);
+                }}
                 onFocus={onRecipientFieldFocus}
                 onChangeText={onChangeText}
                 onInputCleared={clear}
                 value={transaction.recipient}
                 ref={input}
-                scrollEnabled={false}
-                multiline
-                blurOnSubmit
-                autoCapitalize="none"
-                clearButtonMode="always"
               />
             </View>
             {(error || warning) && (
@@ -300,15 +276,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: "transparent",
   },
-  pasteContainer: {
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: 8,
-    marginTop: 32,
-  },
-  pasteTitle: {
-    marginLeft: 8,
-  },
   infoBox: {
     marginBottom: 24,
   },
@@ -323,12 +290,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginHorizontal: 8,
   },
-  addressInput: {
-    flex: 1,
-    ...getFontStyle({ semiBold: true }),
-    fontSize: 20,
-    paddingVertical: 16,
-  },
   warningBox: {
     marginTop: 8,
     ...Platform.select({
@@ -338,6 +299,7 @@ const styles = StyleSheet.create({
     }),
   },
   inputWrapper: {
+    marginTop: 32,
     flexDirection: "row",
     alignItems: "center",
   },

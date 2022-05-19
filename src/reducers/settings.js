@@ -1,7 +1,6 @@
 // @flow
 /* eslint import/no-cycle: 0 */
 import { handleActions } from "redux-actions";
-import { Platform } from "react-native";
 import merge from "lodash/merge";
 import {
   findCurrencyByTicker,
@@ -23,6 +22,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
+import { SLIDES } from "../components/Carousel/shared";
 import { getDefaultLanguageLocale, getDefaultLocale } from "../languages";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");
@@ -77,13 +77,15 @@ export type SettingsState = {
   readOnlyModeEnabled: boolean,
   experimentalUSBEnabled: boolean,
   countervalueFirst: boolean,
+  graphCountervalueFirst: boolean,
   hideEmptyTokenAccounts: boolean,
   blacklistedTokenIds: string[],
+  hiddenNftCollections: string[],
   dismissedBanners: string[],
   hasAvailableUpdate: boolean,
   theme: Theme,
   osTheme: ?string,
-  carouselVisibility: number,
+  carouselVisibility: number | { [slideName: string]: boolean }, // number is the legacy type from LLM V2
   discreetMode: boolean,
   language: string,
   languageIsSetByUser: boolean,
@@ -113,14 +115,19 @@ export const INITIAL_STATE: SettingsState = {
   hasInstalledAnyApp: true,
   readOnlyModeEnabled: !Config.DISABLE_READ_ONLY,
   experimentalUSBEnabled: false,
-  countervalueFirst: false,
+  countervalueFirst: true,
+  graphCountervalueFirst: true,
   hideEmptyTokenAccounts: false,
   blacklistedTokenIds: [],
+  hiddenNftCollections: [],
   dismissedBanners: [],
   hasAvailableUpdate: false,
   theme: "system",
   osTheme: undefined,
-  carouselVisibility: 0,
+  // $FlowFixMe
+  carouselVisibility: Object.fromEntries(
+    SLIDES.map(slide => [slide.name, true]),
+  ),
   discreetMode: false,
   language: getDefaultLanguageLocale(),
   languageIsSetByUser: false,
@@ -260,7 +267,7 @@ const handlers: Object = {
 
   SETTINGS_SWITCH_COUNTERVALUE_FIRST: state => ({
     ...state,
-    countervalueFirst: !state.countervalueFirst,
+    graphCountervalueFirst: !state.graphCountervalueFirst,
   }),
 
   SETTINGS_HIDE_EMPTY_TOKEN_ACCOUNTS: (state, { hideEmptyTokenAccounts }) => ({
@@ -279,6 +286,20 @@ const handlers: Object = {
     return {
       ...state,
       blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
+  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: [...ids, collectionId],
+    };
+  },
+  UNHIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: ids.filter(id => id !== collectionId),
     };
   },
   SETTINGS_DISMISS_BANNER: (state, { payload }) => ({
@@ -473,13 +494,16 @@ export const hasInstalledAnyAppSelector = (state: State) =>
   state.settings.hasInstalledAnyApp;
 
 export const countervalueFirstSelector = (state: State) =>
-  state.settings.countervalueFirst;
+  state.settings.graphCountervalueFirst;
 
 export const readOnlyModeEnabledSelector = (state: State) =>
-  Platform.OS !== "android" && state.settings.readOnlyModeEnabled;
+  state.settings.readOnlyModeEnabled;
 
 export const blacklistedTokenIdsSelector = (state: State) =>
   state.settings.blacklistedTokenIds;
+
+export const hiddenNftCollectionsSelector = (state: State) =>
+  state.settings.hiddenNftCollections;
 
 // $FlowFixMe
 export const exportSettingsSelector = createSelector(
@@ -509,8 +533,19 @@ export const dismissedBannersSelector = (state: State) =>
 export const hasAvailableUpdateSelector = (state: State) =>
   state.settings.hasAvailableUpdate;
 
-export const carouselVisibilitySelector = (state: State) =>
-  state.settings.carouselVisibility;
+export const carouselVisibilitySelector = (state: State) => {
+  const settingValue = state.settings.carouselVisibility;
+  if (typeof settingValue === "number") {
+    /**
+     * Ensure correct behavior when using the legacy setting value from LLM v2:
+     * We show all the slides as they are different from the ones in V2.
+     * Users will then be able to hide them one by one if they want.
+     */
+    // $FlowFixMe
+    return Object.fromEntries(SLIDES.map(slide => [slide.name, true]));
+  }
+  return settingValue;
+};
 
 export const discreetModeSelector = (state: State): boolean =>
   state.settings.discreetMode === true;

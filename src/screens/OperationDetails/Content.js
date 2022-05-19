@@ -1,27 +1,30 @@
 /* @flow */
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import type {
+import {
   Account,
   Operation,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  getOperationAmountNumber,
-  isConfirmedOperation,
-  getOperationConfirmationDisplayableNumber,
-} from "@ledgerhq/live-common/lib/operation";
 import {
   getMainAccount,
   getAccountCurrency,
   getAccountUnit,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import {
+  getOperationAmountNumber,
+  isConfirmedOperation,
+  getOperationConfirmationDisplayableNumber,
+} from "@ledgerhq/live-common/lib/operation";
+import {
+  useNftCollectionMetadata,
+  useNftMetadata,
+} from "@ledgerhq/live-common/lib/nft";
 import { NavigatorName, ScreenName } from "../../const";
 import LText from "../../components/LText";
 import OperationIcon from "../../components/OperationIcon";
@@ -76,17 +79,10 @@ export default function Content({
   const navigation = useNavigation();
   const { t } = useTranslation();
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const { status, metadata } = useNftMetadata(
-    operation.contract,
-    operation.tokenId,
-  );
 
   const onPress = useCallback(() => {
     navigation.navigate(NavigatorName.Accounts, {
       screen: ScreenName.Account,
-      initial: false,
-      // Set to false so it still adds `Accounts` as the previous route in the stack history
-      // even if you're targeting another navigation stack from your current one
       params: {
         accountId: account.id,
         parentId: parentAccount?.id,
@@ -145,6 +141,19 @@ export default function Content({
     ["NFT_IN", "NFT_OUT"].includes(type) &&
     operation.contract &&
     operation.tokenId;
+  const {
+    status: collectionStatus,
+    metadata: collectionMetadata,
+  } = useNftCollectionMetadata(operation.contract, currency.id);
+  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
+    operation.contract,
+    operation.tokenId,
+    currency.id,
+  );
+  const status = useMemo(
+    () => nftStatus === "loading" || collectionStatus === "loading",
+    [nftStatus, collectionStatus],
+  );
 
   return (
     <>
@@ -165,8 +174,8 @@ export default function Content({
           currency={currency}
           unit={unit}
           isNftOperation={isNftOperation}
-          status={status}
-          metadata={metadata}
+          status={nftStatus}
+          metadata={nftMetadata}
           styles={styles}
         />
 
@@ -234,15 +243,17 @@ export default function Content({
             if (!opAccount) return null;
 
             return (
-              <OperationRow
-                isSubOperation
-                key={op.id}
-                operation={op}
-                parentAccount={account}
-                account={opAccount}
-                multipleAccounts
-                isLast={subOperations.length - 1 === i}
-              />
+              <View style={{ marginHorizontal: 16 }}>
+                <OperationRow
+                  isSubOperation
+                  key={op.id}
+                  operation={op}
+                  parentAccount={account}
+                  account={opAccount}
+                  multipleAccounts
+                  isLast={subOperations.length - 1 === i}
+                />
+              </View>
             );
           })}
         </>
@@ -289,7 +300,7 @@ export default function Content({
               style={styles.tokenNameSkeleton}
               loading={status === "loading"}
             >
-              <LText semiBold>{metadata?.tokenName || "-"}</LText>
+              <LText semiBold>{collectionMetadata?.tokenName || "-"}</LText>
             </Skeleton>
           </Section>
           <Section

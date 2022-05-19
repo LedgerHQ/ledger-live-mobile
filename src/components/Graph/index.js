@@ -9,7 +9,7 @@ import * as d3scale from "d3-scale";
 import maxBy from "lodash/maxBy";
 import minBy from "lodash/minBy";
 import Svg, { Path, Defs } from "react-native-svg";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import DefGraph from "./DefGrad";
 import BarInteraction from "./BarInteraction";
 import type { Item, ItemArray } from "./types";
@@ -35,20 +35,18 @@ function Graph({
   data = [],
   color: initialColor,
   isInteractive = false,
-  shape = "curveLinear",
+  shape = "curveMonotoneX",
   mapValue,
   onItemHover,
   verticalRangeRatio = 2,
 }: Props) {
   const { colors } = useTheme();
 
-  const color = initialColor || colors.live;
+  const color = initialColor || colors.primary.c80;
 
   const maxY = mapValue(maxBy(data, mapValue));
   const minY = mapValue(minBy(data, mapValue));
   const paddedMinY = minY - (maxY - minY) / verticalRangeRatio;
-
-  const yExtractor = d => y(mapValue(d));
 
   const curve = d3shape[shape];
   const x = d3scale
@@ -61,11 +59,15 @@ function Graph({
     .domain([paddedMinY, maxY])
     .range([height - STROKE_WIDTH, STROKE_WIDTH + FOCUS_RADIUS]);
 
+  const yExtractor = d => y(mapValue(d));
+
   const area = d3shape
     .area()
     .x(d => x(d.date))
     .y0(d => yExtractor(d))
-    .y1(d => yExtractor(d) + Math.max((maxY - minY) / verticalRangeRatio, 200))
+    .y1(
+      d => yExtractor(d) + Math.min((maxY - minY) / verticalRangeRatio, height),
+    )
     .curve(curve)(data);
 
   const line = d3shape
@@ -75,7 +77,12 @@ function Graph({
     .curve(curve)(data);
 
   const content = (
-    <Svg height={height} width={width}>
+    <Svg
+      height={height}
+      width={width}
+      viewBox={`0 -10 ${width} ${height + 20}`}
+      preserveAspectRatio="none"
+    >
       <Defs>
         <DefGraph height={height} color={color} />
       </Defs>
