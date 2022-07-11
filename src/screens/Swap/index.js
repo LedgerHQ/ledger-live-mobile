@@ -37,7 +37,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { useDispatch, useSelector } from "react-redux";
-import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import { useCurrenciesByMarketcapWithStatus } from "@ledgerhq/live-common/lib/currencies";
 import AccountAmountRow from "./FormSelection/AccountAmountRow";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
@@ -107,10 +107,10 @@ function SwapForm({
     ? selectableCurrencies.filter(c => c !== getAccountCurrency(defaultAccount))
     : selectableCurrencies;
 
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(
+  const { currencies } = useCurrenciesByMarketcapWithStatus(
     maybeFilteredCurrencies,
   );
-
+  const sortedCryptoCurrencies = useMemo(() => currencies || [], [currencies]);
   const defaultCurrency = route?.params?.swap?.from.account
     ? sortedCryptoCurrencies.find(
         c => c !== getAccountCurrency(route?.params?.swap?.from.account),

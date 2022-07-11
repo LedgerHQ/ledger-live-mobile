@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
-import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import { useCurrenciesByMarketcapWithStatus } from "@ledgerhq/live-common/lib/currencies";
 import { getSupportedCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
 import { useTheme } from "@react-navigation/native";
@@ -49,9 +49,9 @@ export default function SwapFormSelectCurrencyScreen({
         c => c !== getAccountCurrency(swap.from.account),
       )
     : selectableCurrencies;
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(
-    maybeFilteredCurrencies,
-  );
+  const {
+    currencies: sortedCryptoCurrencies,
+  } = useCurrenciesByMarketcapWithStatus(maybeFilteredCurrencies);
 
   const onPressCurrency = useCallback(
     (currency: CryptoCurrency) => {
